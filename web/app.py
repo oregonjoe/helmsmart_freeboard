@@ -48,7 +48,7 @@ from flask import (
 )
 
 
-import db
+#import db
 
 
 from psycopg2.pool import ThreadedConnectionPool
