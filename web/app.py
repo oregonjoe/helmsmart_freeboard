@@ -35,6 +35,12 @@ requests_log.setLevel(logging.INFO)
 logging.basicConfig(level=logging.INFO)
 log = logging
 
+#added 032315 jlb
+#from influxdb import client as influxdb
+#from influxdb.influxdb08 import InfluxDBClient as influxdb
+from influxdb.influxdb08 import InfluxDBClient
+
+
 
 from flask import (
   Flask,
