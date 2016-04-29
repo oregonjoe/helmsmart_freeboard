@@ -14,6 +14,8 @@ import datetime
 import time
 from time import mktime
 
+import urlparse
+
 import logging
 # *******************************************************************
 # Debug Output defines
