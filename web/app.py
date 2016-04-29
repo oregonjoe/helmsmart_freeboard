@@ -48,6 +48,7 @@ from flask import (
 )
 
 
+
 #import db
 
 """
@@ -58,6 +59,11 @@ db_pool = ThreadedConnectionPool(
   **connection_from(os.environ['DATABASE_URL'])
 )
 """
+
+
+app = Flask(__name__)
+
+
 
 @app.route('/')
 def index():
