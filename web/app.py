@@ -4,7 +4,7 @@ import json
 #import csv
 import requests
 from requests.exceptions import HTTPError
-import nmea
+#import nmea
 import urlparse
 import urllib
 import md5
