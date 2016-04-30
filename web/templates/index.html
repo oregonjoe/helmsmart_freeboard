@@ -85,7 +85,7 @@
 
     <!-- <body onload="initialize()"> -->
     <body  style="color: #FFFFFF; width: 933px; height: 600px; background-color: #336699" >
-      <table cellpadding="2" style="width: 935px">
+      <table cellpadding="2" style="width: 100%">
         <tr>
           <td>
 
@@ -125,7 +125,7 @@
         <tr>
           <td class="auto-style5">
 		  <a href="http://www.helmsmart.com/freeboard/index.html">
-		  <img alt="" class="auto-style19" height="200" src="{{ url_for('static', filename='img/HemSmartLogos_HelmSmart_200W.jpg' ) }}" width="200"></a>
+		  <img alt="" class="auto-style19" height="200" src="{{ url_for('static', filename='img/SeaDreamBoard200W.jpg' ) }}" width="200"></a>
 		  <a href="http://www.freeboard.io">
 		  <img alt="" class="auto-style19" height="200" src="{{ url_for('static', filename='img/freeboard_logo_200HW.jpg' ) }}" width="200"></a></td>
         </tr>
@@ -196,7 +196,7 @@
 		  True North and Apparent</strong><br><br>FORMAT: 
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
-		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=3eb47245004194f67393477c28ec9c07">
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=3eb47245004194f67393477c28ec9c07">
 		  <span class="auto-style15">
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
         </tr>
@@ -206,7 +206,7 @@
 		  Barometric pressure, and Humidity<br></strong><br>FORMAT: 
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmential?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
-		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=3eb47245004194f67393477c28ec9c07">
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=3eb47245004194f67393477c28ec9c07">
 		  <span class="auto-style15">
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
         </tr>
@@ -216,9 +216,37 @@
 		  Course over Ground, and Heading<br></strong><br>FORMAT: 
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
-		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=3eb47245004194f67393477c28ec9c07">
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=3eb47245004194f67393477c28ec9c07">
 		  <span class="auto-style15">
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
+        </tr>
+		        <tr>
+          <td class="auto-style18"><strong>Battery - Volts, 
+		  Amps, and Temperature<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=3eb47245004194f67393477c28ec9c07">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
+        </tr>
+		
+		        <tr>
+          <td class="auto-style18"><strong>Engine - RPM, Water Temperature, 
+		  Oil Pressure, Fuel Rate, Alt Volts, Fuel Level, Boost, Hours<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Instance=[Number]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=3eb47245004194f67393477c28ec9c07">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
+        </tr>
+		
+		        <tr>
+          <td class="auto-style18"><strong>Switch Status - Open or closed - 16 switches<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=3eb47245004194f67393477c28ec9c07">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
         </tr>
 
         <tr>
