@@ -29,17 +29,42 @@
           }
 
           .auto-style12 {
-          font-size: x-small;
-          font-family: Verdana, Geneva, Tahoma, sans-serif;
-          }
-          .auto-style13 {
-          font-family: Verdana, Geneva, Tahoma, sans-serif;
-          font-size: small;
-          }
-
-          .auto-style14 {
-          border-width: 0px;
-          }
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	text-align: left;
+}
+.auto-style14 {
+	color: #C626C6;
+}
+.auto-style15 {
+	color: #FAC4FA;
+}
+.auto-style16 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	text-align: left;
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+.auto-style17 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	text-align: center;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+.auto-style18 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	text-align: left;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+.auto-style19 {
+	border-width: 0px;
+}
 
         </style>
         <title>HelmSmart_Freeboard</title>
@@ -59,10 +84,10 @@
       </head>
 
     <!-- <body onload="initialize()"> -->
-    <body  style="color: #FFFFFF; width: 800px; height: 600px; background-color: #336699" >
-      <table cellpadding="2" style="width: 600px">
+    <body  style="color: #FFFFFF; width: 933px; height: 600px; background-color: #336699" >
+      <table cellpadding="2" style="width: 935px">
         <tr>
-          <td colspan="3">
+          <td>
 
             <!-- <img alt="" height="50" src="images/ShipSymbol50W.png" style="float: left" width="50" class="auto-style12"><span class="auto-style13">&nbsp; 
 				login</span></td>
@@ -88,9 +113,9 @@
 -->
         </tr>
         <tr>
-          <td class="auto-style8" colspan="3">
+          <td class="auto-style8">
             <span class="auto-style4">
-              <span class="auto-style9">HelmSmart Freeboard</span>
+              <span class="auto-style9">HelmSmart-Freeboard</span>
             </span>
             <br>
               <span class="auto-style11">Cloud-base Vessel Monitoring using Freeboard.io dashboards</span>
@@ -98,10 +123,141 @@
         </tr>
 
         <tr>
-          <td class="auto-style5" colspan="3">www.chetcodigital.com&nbsp; www.seasmart.net www.netgauges.net www.digitalmarinegauges.com 				</td>
+          <td class="auto-style5">
+		  <a href="http://www.helmsmart.com/freeboard/index.html">
+		  <img alt="" class="auto-style19" height="200" src="{{ url_for('static', filename='img/HemSmartLogos_HelmSmart_200W.jpg' ) }}" width="200"></a>
+		  <a href="http://www.freeboard.io">
+		  <img alt="" class="auto-style19" height="200" src="{{ url_for('static', filename='img/freeboard_logo_200HW.jpg' ) }}" width="200"></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">RESTful API for accessing sensor data provided 
+		  by SeaSmart and netGauges gateways</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style12">Sensor data is posted by gateways to the 
+		  HelmSmart temporal database where it is parsed and stored. The 
+		  HelmSmart-Freeboard API allows retreival of sensor data by using a set 
+		  of HTTP GET URLs with specified device API keys and parameters. The 
+		  selected sensor data is returned in JSON format where it can used by 
+		  any requestor including the Freeboard.io dashboard.</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style12">To use the API with the Freeboard.io 
+		  dashboards simply enter the URL with parameters as described below in 
+		  the JSON Datasource. Be sure to enter a update interval and select the 
+		  THINGPROXY option to enable cross-domain access. EXAMPLE</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style12">Most APIs take a device key and resolution 
+		  parameter. <br><br>The device key is issued by HelmSmart to link a 
+		  device to a user account. <br><br>Resolution is a optional numerical 
+		  value in seconds for which a average is calculated and a single value 
+		  is returned. If no Interval parameter is used, the default is 5 
+		  minutes from the current time.<br><br>Some APIs take additional 
+		  optional parameters<br><br>INSTANCE is used to identify multiple 
+		  sensors belonging to the same class - For example Fuel Level or engine 
+		  speed. It is a numerical value from&nbsp; 0 to 255 with 0 common for 
+		  single devices or PORT and 1 for STARBOARD. Not all APIs will have a 
+		  INSTANCE parameter<br><br>UNITS can be used to convert to Metric [IM] 
+		  or US Customary [US] units of measure. If IM is used temperature will 
+		  be in degrees celsius while US will be fahrenheit. The default is US 
+		  if no parameter is specified. Not all APIs will have a UNITS 
+		  parameter.</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style17">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style18"><strong>GPS Location - Lat/Lng in degrees</strong><br>
+		  <br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=[deviceAPIkey]&amp;Interval=[seconds]<br>
+		  <br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=3eb47245004194f67393477c28ec9c07">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=3eb47245004194f67393477c28ec9c07</span></a><br class="auto-style14"> 				</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style16"><strong>Wind Data - Speed and direction both 
+		  True North and Apparent</strong><br><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=3eb47245004194f67393477c28ec9c07">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style12"><strong>Environmential - Air temperature, 
+		  Barometric pressure, and Humidity<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmential?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=3eb47245004194f67393477c28ec9c07">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style12"><strong>Navigation - Speed over Ground, 
+		  Course over Grund, and Heading<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=3eb47245004194f67393477c28ec9c07">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=3eb47245004194f67393477c28ec9c07</span></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">www.chetcodigital.com&nbsp; www.seasmart.net www.netgauges.net www.digitalmarinegauges.com 				</td>
         </tr>
 		 <tr>
-          <td class="auto-style5" colspan="3"><center> copyright 2016</center>			</td>
+          <td class="auto-style5"><center> copyright 2016</center>			</td>
         </tr>
 		
 
