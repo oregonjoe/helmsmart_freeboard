@@ -804,7 +804,7 @@ def freeboard_winddata():
         myjson = jsonify(date_time=mydatetime, update=True, truewindspeed=truewindspeed, appwindspeed=appwindspeed, truewinddir=truewinddir, appwinddir=appwinddir)
         #return jsonify(date_time=mydatetime, update=True, truewindspeed=truewindspeed, appwindspeed=appwindspeed, truewinddir=truewinddir, appwinddir=appwinddir)
         #return '{0}({1})'.format(callback, myjson)
-        return '{0}({1})'.format(callback, {'date_time':mydatetime, 'update':True,'truewindspeed':truewindspeed,'appwindspeed':appwindspeed,'truewinddir':truewinddir, 'appwinddir':appwinddir})
+        return '{0}({1})'.format(callback, {'date_time':mydatetime, 'update':'True','truewindspeed':truewindspeed,'appwindspeed':appwindspeed,'truewinddir':truewinddir, 'appwinddir':appwinddir})
 
     
     except:
