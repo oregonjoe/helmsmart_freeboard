@@ -796,7 +796,7 @@ def freeboard_winddata():
         log.info('freeboard: freeboard got data values %s:  ', strvalue)
 
         callback = request.args.get('callback')
-        log.info('freeboard: callback %s:  ', callback)
+        log.info('freeboard: callback %s:  ', callback)  
 
         
     try:
