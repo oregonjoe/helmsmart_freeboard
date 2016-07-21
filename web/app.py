@@ -805,7 +805,7 @@ def freeboard_winddata():
         #myjson = jsonify(date_time=mydatetime)
         #log.info('freeboard: datetime %s:  ', myjson) 
         myjsondate = mydatetime.strftime("%B %d, %Y")
-        log.info('freeboard: datetime %s:  ', myjson) 
+        log.info('freeboard: datetime %s:  ', myjsondate) 
         #return jsonify(date_time=mydatetime, update=True, truewindspeed=truewindspeed, appwindspeed=appwindspeed, truewinddir=truewinddir, appwinddir=appwinddir)
         #return '{0}({1})'.format(callback, myjson)
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','truewindspeed':truewindspeed,'appwindspeed':appwindspeed,'truewinddir':truewinddir, 'appwinddir':appwinddir})
