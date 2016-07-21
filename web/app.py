@@ -800,8 +800,12 @@ def freeboard_winddata():
 
         
     try:
-        log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
-        return jsonify(date_time=mydatetime, update=True, truewindspeed=truewindspeed, appwindspeed=appwindspeed, truewinddir=truewinddir, appwinddir=appwinddir)
+        log.info('freeboard: freeboard returning data values %s:  ', strvalue)
+        myjson = jsonify(date_time=mydatetime, update=True, truewindspeed=truewindspeed, appwindspeed=appwindspeed, truewinddir=truewinddir, appwinddir=appwinddir)
+        #return jsonify(date_time=mydatetime, update=True, truewindspeed=truewindspeed, appwindspeed=appwindspeed, truewinddir=truewinddir, appwinddir=appwinddir)
+        return '{0}({1})'.format(callback, myjson)
+
+
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
