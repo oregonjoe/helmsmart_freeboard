@@ -1498,10 +1498,7 @@ def freeboard_engine():
     if not response:
         log.info('freeboard_engine: InfluxDB Query has no data ')
         mydatetime = datetime.datetime.now()
-        #return jsonify(date_time=mydatetime, update=False, status='missing', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
-        callback = request.args.get('callback')
-        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'boost':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
+        return jsonify(date_time=mydatetime, update=False, status='missing', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
 
         #return jsonify(update=False, status='missing' )
     #for point in response.points:
@@ -1569,24 +1566,31 @@ def freeboard_engine():
         #print 'freeboard processing data points:', strvalue
         log.info('freeboard: freeboard_engine got data values %s:  ', strvalue)
 
+
         
     try:
         log.info('freeboard: freeboard_engine returning data values %s:  ', strvalue)    
-        return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
-    
+        #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'boost':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
+   
     except:
         log.info('freeboard: Error in geting freeboard_engine  %s:  ', strvalue)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting freeboard_engine  %s:  ' % e)
         #return jsonify(status='error' , update=False)
         mydatetime = datetime.datetime.now()
-        return jsonify(date_time=mydatetime, update=False, status='error', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
-
+        #return jsonify(date_time=mydatetime, update=False, status='error', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False','status'='error', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'boost':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
 
     mydatetime = datetime.datetime.now()
-    return jsonify(date_time=mydatetime, update=False, status='error', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
-  
-    #return jsonify(status='error',  update=False )
+    #return jsonify(date_time=mydatetime, update=False, status='error', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
+    callback = request.args.get('callback')
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S") 
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False','status'='error', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'boost':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
 
 @app.route('/freeboard_status')
 def freeboard_status():
