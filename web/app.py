@@ -795,6 +795,9 @@ def freeboard_winddata():
         #print 'freeboard processing data points:', strvalue
         log.info('freeboard: freeboard got data values %s:  ', strvalue)
 
+        callback = request.args.get('callback')
+        log.info('freeboard: callback %s:  ', callback)
+
         
     try:
         log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
