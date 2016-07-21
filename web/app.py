@@ -1171,7 +1171,10 @@ def freeboard_nav():
         
     try:
         log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
-        return jsonify(date_time=mydatetime, update=True, cog=value1, sog=value2, heading_true=value3, heading_mag=value4)
+        #return jsonify(date_time=mydatetime, update=True, cog=value1, sog=value2, heading_true=value3, heading_mag=value4)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','cog':value1, 'sog':value2, 'heading_true':value3, 'heading_mag':value4})
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
@@ -1345,7 +1348,10 @@ def freeboard_battery():
         
     try:
         log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
-        return jsonify(date_time=mydatetime, update=True, voltage=value1, current=value2, temperature=value3)
+        #return jsonify(date_time=mydatetime, update=True, voltage=value1, current=value2, temperature=value3)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':value1, 'current':value2, 'temperature':value3})
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
@@ -1492,7 +1498,10 @@ def freeboard_engine():
     if not response:
         log.info('freeboard_engine: InfluxDB Query has no data ')
         mydatetime = datetime.datetime.now()
-        return jsonify(date_time=mydatetime, update=False, status='missing', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
+        #return jsonify(date_time=mydatetime, update=False, status='missing', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'boost':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
 
         #return jsonify(update=False, status='missing' )
     #for point in response.points:
@@ -1789,8 +1798,11 @@ def freeboard_status():
         
     try:
         log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
-        return jsonify(date_time=mydatetime, update=True, bank0=value1, status0=status0, status1=status1, status2=status2, status3=status3, status4=status4, status5=status5, status6=status6, status7=status7, status8=status8, status9=status9, status10=status10, status11=status11)
-    
+        #return jsonify(date_time=mydatetime, update=True, bank0=value1, status0=status0, status1=status1, status2=status2, status3=status3, status4=status4, status5=status5, status6=status6, status7=status7, status8=status8, status9=status9, status10=status10, status11=status11)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11})
+   
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
