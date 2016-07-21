@@ -613,7 +613,11 @@ def freeboard_location():
     try:
         #jsondata = sorted(jsondata,key=itemgetter('epoch'))
         log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
-        return jsonify(date_time=mydatetime, update=True, lat=lat, lng=lng)
+        #return jsonify(date_time=mydatetime, update=True, lat=lat, lng=lng)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':lat, 'lng':lng})
+      
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
@@ -795,8 +799,8 @@ def freeboard_winddata():
         #print 'freeboard processing data points:', strvalue
         log.info('freeboard: freeboard got data values %s:  ', strvalue)
 
-        callback = request.args.get('callback')
-        log.info('freeboard: callback %s:  ', callback) 
+        #callback = request.args.get('callback')
+        #log.info('freeboard: callback %s:  ', callback) 
 
         
     try:
@@ -804,10 +808,12 @@ def freeboard_winddata():
         #myjson = jsonify(date_time=mydatetime, update=True, truewindspeed=truewindspeed, appwindspeed=appwindspeed, truewinddir=truewinddir, appwinddir=appwinddir)
         #myjson = jsonify(date_time=mydatetime)
         #log.info('freeboard: datetime %s:  ', myjson) 
-        myjsondate = mydatetime.strftime("%B %d, %Y %H %M, %S")
-        log.info('freeboard: datetime %s:  ', myjsondate) 
+        #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+        #log.info('freeboard: datetime %s:  ', myjsondate) 
         #return jsonify(date_time=mydatetime, update=True, truewindspeed=truewindspeed, appwindspeed=appwindspeed, truewinddir=truewinddir, appwinddir=appwinddir)
         #return '{0}({1})'.format(callback, myjson)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','truewindspeed':truewindspeed,'appwindspeed':appwindspeed,'truewinddir':truewinddir, 'appwinddir':appwinddir})
 
     
@@ -984,7 +990,11 @@ def freeboard_environmental():
         
     try:
         log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
-        return jsonify(date_time=mydatetime, update=True, temperature=value1, baro=value2, humidity=value3)
+        #return jsonify(date_time=mydatetime, update=True, temperature=value1, baro=value2, humidity=value3)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
+     
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
