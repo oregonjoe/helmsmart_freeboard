@@ -477,8 +477,9 @@ def freeboard_location():
     log.info("freeboard deviceid %s", deviceid)
 
     if deviceid == "":
-         return jsonify(update=False, status='deviceid error' )
-
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
 
     host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
@@ -557,8 +558,11 @@ def freeboard_location():
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        return jsonify(status = 'DB Query error', update=False)
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
+      
     jsondata=[]
     #jsonkey=[]
     #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
@@ -623,8 +627,9 @@ def freeboard_location():
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
-        return jsonify(update=False )
-
+        #return jsonify(update=False )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
 
 
@@ -635,8 +640,9 @@ def freeboard_location():
     #log.info('freeboard_io:  keys %s:%s  ', deviceapikey, serieskey)
 
   
-    return jsonify(status='error', update=False )
-
+    #return jsonify(status='error', update=False )
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
 @app.route('/freeboard_winddata')
 def freeboard_winddata():
@@ -658,8 +664,9 @@ def freeboard_winddata():
     log.info("freeboard deviceid %s", deviceid)
 
     if deviceid == "":
-         return jsonify(status="deviceid error", update=False )
-
+         #return jsonify(status="deviceid error", update=False )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
 
     host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
@@ -747,8 +754,12 @@ def freeboard_winddata():
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        return jsonify(update=False )
+        #return jsonify(update=False )
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
+      
     strvalue = ""
     truewindspeed = '---'
     appwindspeed = '---'
@@ -821,12 +832,14 @@ def freeboard_winddata():
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
-        return jsonify( update=False )
-
+        #return jsonify( update=False )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
   
-    return jsonify(update=False)
-
+    #return jsonify(update=False)
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
 @app.route('/freeboard_environmental')
 def freeboard_environmental():
@@ -848,8 +861,8 @@ def freeboard_environmental():
     log.info("freeboard deviceid %s", deviceid)
 
     if deviceid == "":
-         return jsonify(update=False, status='deviceid error' )
-
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
 
     host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
@@ -937,8 +950,11 @@ def freeboard_environmental():
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        return jsonify(update=False, status='missing' )
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
+      
     strvalue = ""
     value1 = '---'
     value2 = '---'
@@ -1000,12 +1016,14 @@ def freeboard_environmental():
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
-        return jsonify(status='error' , update=False)
-
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
   
-    return jsonify(status='error',  update=False )
-
+    #return jsonify(status='error',  update=False )
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
 @app.route('/freeboard_nav')
 def freeboard_nav():
@@ -1027,7 +1045,9 @@ def freeboard_nav():
     log.info("freeboard deviceid %s", deviceid)
 
     if deviceid == "":
-         return jsonify(update=False, status='deviceid error' )
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
 
 
@@ -1116,7 +1136,9 @@ def freeboard_nav():
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        return jsonify(update=False, status='missing' )
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
     strvalue = ""
     value1 = '---'
@@ -1180,12 +1202,16 @@ def freeboard_nav():
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
-        return jsonify(status='error' , update=False)
-
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
   
-    return jsonify(status='error',  update=False )
+    #return jsonify(update=False, status='missing' )
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
+  
 @app.route('/freeboard_battery')
 def freeboard_battery():
 
@@ -1206,8 +1232,9 @@ def freeboard_battery():
     log.info("freeboard deviceid %s", deviceid)
 
     if deviceid == "":
-         return jsonify(update=False, status='deviceid error' )
-
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
 
     host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
@@ -1295,8 +1322,12 @@ def freeboard_battery():
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        return jsonify(update=False, status='missing' )
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
+
+      
     strvalue = ""
     value1 = '---'
     value2 = '---'
@@ -1384,7 +1415,9 @@ def freeboard_engine():
 
     if deviceid == "":
          return jsonify(update=False, status='deviceid error' )
-
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
 
     host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
@@ -1612,8 +1645,10 @@ def freeboard_status():
     log.info("freeboard deviceid %s", deviceid)
 
     if deviceid == "":
-         return jsonify(update=False, status='deviceid error' )
-
+         #return jsonify(update=False, status='deviceid error' )
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
 
     host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
@@ -1697,7 +1732,11 @@ def freeboard_status():
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        return jsonify(update=False, status='missing' )
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+
 
     strvalue = ""
     value1 = '---'
