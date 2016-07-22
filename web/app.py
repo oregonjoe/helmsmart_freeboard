@@ -1716,7 +1716,7 @@ def freeboard_status():
     log.info("freeboard data Query %s", query)
 
     try:
-        response= db.query(query)
+        response= db.query(query) 
         
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
