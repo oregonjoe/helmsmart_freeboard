@@ -1538,7 +1538,7 @@ def freeboard_engine():
         #return jsonify(date_time=mydatetime, update=False, status='missing', rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
         callback = request.args.get('callback')
         myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, status='missing','update':'False', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'boost':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'boost':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
 
 
 
