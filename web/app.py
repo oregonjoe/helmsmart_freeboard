@@ -57,8 +57,6 @@ from flask import (
 
 from flask.ext.cors import CORS
 
-app = Flask(__name__)
-CORS(app) 
 
 
 #import db
@@ -84,6 +82,8 @@ db_pool = ThreadedConnectionPool(
 
 
 app = Flask(__name__)
+CORS(app) 
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 #Convert Units used for freeboard numerical displays
 def convertfbunits(value, units):
@@ -450,6 +450,7 @@ def getedeviceid(deviceapikey):
 
 
 @app.route('/')
+@cross_origin()
 def index():
 
     response = make_response(render_template('index.html', features = []))
@@ -462,6 +463,7 @@ def index():
 
 
 @app.route('/freeboard_location')
+@cross_origin()
 def freeboard_location():
 
     deviceapikey = request.args.get('apikey','')
@@ -649,6 +651,7 @@ def freeboard_location():
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
 @app.route('/freeboard_winddata')
+@cross_origin()
 def freeboard_winddata():
 
     deviceapikey = request.args.get('apikey','')
@@ -846,6 +849,7 @@ def freeboard_winddata():
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
 @app.route('/freeboard_environmental')
+@cross_origin()
 def freeboard_environmental():
 
     deviceapikey = request.args.get('apikey','')
@@ -1030,6 +1034,7 @@ def freeboard_environmental():
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
 @app.route('/freeboard_nav')
+@cross_origin()
 def freeboard_nav():
 
     deviceapikey = request.args.get('apikey','')
@@ -1217,6 +1222,7 @@ def freeboard_nav():
 
   
 @app.route('/freeboard_battery')
+@cross_origin()
 def freeboard_battery():
 
     deviceapikey = request.args.get('apikey','')
@@ -1403,6 +1409,7 @@ def freeboard_battery():
 
       
 @app.route('/freeboard_engine')
+@cross_origin()
 def freeboard_engine():
 
     deviceapikey = request.args.get('apikey','')
@@ -1640,6 +1647,7 @@ def freeboard_engine():
     return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False','status':'error', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'boost':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
 
 @app.route('/freeboard_status')
+@cross_origin()
 def freeboard_status():
 
     deviceapikey = request.args.get('apikey','')
