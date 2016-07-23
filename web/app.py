@@ -55,6 +55,10 @@ from flask import (
   jsonify
 )
 
+from flask.ext.cors import CORS
+
+app = Flask(__name__)
+CORS(app)
 
 
 #import db
