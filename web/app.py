@@ -257,8 +257,12 @@ def convertunits(value, units):
                 return float("{0:.2f}".format(value * 0.1 ) )
 
 
-            #case 20: //="20">Liters</option>
-            #case 21: //="21">Gallons</option>
+            elif units == 20:# //="20">Liters</option>
+                 return float("{0:.2f}".format(value * 0.1 ) )
+                
+            elif units == 21:# //="21">Gallons</option>
+                return float("{0:.2f}".format(value * 0.264172052 ) )
+              
             #case 22: //="22">CubicMeter</option>
             #case 23: //="23">- - -</option>
             #case 24: //="24">RPM</option>
@@ -1480,7 +1484,9 @@ def freeboard_engine():
     influxdb_keys.append(SERIES_KEY3)
     SERIES_KEY4 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:alternator_potential.HelmSmart'
     influxdb_keys.append(SERIES_KEY4)
-    SERIES_KEY5 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:' + Instance + '.type:NULL.parameter:boost_pressure.HelmSmart'
+    #SERIES_KEY5 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:' + Instance + '.type:NULL.parameter:boost_pressure.HelmSmart'
+    #influxdb_keys.append(SERIES_KEY5)
+    SERIES_KEY5 = 'deviceid:' + deviceid + '.sensor:trip_parameters_engine.source:*.instance:' + Instance + '.type:NULL.parameter:trip_fuel_used.HelmSmart'
     influxdb_keys.append(SERIES_KEY5)    
     SERIES_KEY6 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:fuel_rate.HelmSmart'
     influxdb_keys.append(SERIES_KEY6)
@@ -1599,6 +1605,11 @@ def freeboard_engine():
         elif  seriesparameter[1] == 'boost_pressure':
             value5=  convertfbunits(fields['mean'], 8)
             strvalue = strvalue + ':' + str(value5)
+
+        elif  seriesparameter[1] == 'trip_fuel_used':
+            value5=  convertfbunits(fields['mean'], 8)
+            strvalue = strvalue + ':' + str(value5)
+            
             
         elif  seriesparameter[1] == 'fuel_rate':
             value6 =  convertfbunits(fields['mean'], 18)
