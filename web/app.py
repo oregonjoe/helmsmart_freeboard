@@ -55,7 +55,7 @@ from flask import (
   jsonify
 )
 
-from flask.ext.cors import CORS
+from flask.ext.cors import CORS, cross_origin
 
 
 
