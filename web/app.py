@@ -465,7 +465,8 @@ def index():
 
 @app.route('/freeboard_InfluxDB')
 @cross_origin()
-
+def freeboard_InfluxDB():
+  
   host = 'hilldale-670d9ee3.influxcloud.net' 
   port = 8086
   username = 'helmsmart'
@@ -476,7 +477,8 @@ def index():
 
 @app.route('/freeboard_createInfluxDB')
 @cross_origin()
-
+def freeboard_createInfluxDB():
+  
   host = 'hilldale-670d9ee3.influxcloud.net' 
   port = 8086
   username = 'helmsmart'
