@@ -493,10 +493,10 @@ def freeboard_createInfluxDB():
     #log.info("freeboard Create InfluxDB database%s", database)
     #db.create_database(database)
 
-    #log.info("freeboard List InfluxDB database%s", database)
-    #dbs=db.get_list_database()
+    log.info("freeboard List InfluxDB database%s", database)
+    dbs=db.get_list_database()
 
-    #return dbs
+    return dbs
 
   except TypeError, e:
     #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
