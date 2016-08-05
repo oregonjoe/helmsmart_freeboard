@@ -526,6 +526,14 @@ def freeboard_createInfluxDB():
     db.write_points(json_body)
 
     #return dbs
+
+
+    log.info("freeboard Get InfluxDB points%s", database)
+
+    query = 'select value from SeaDream;'
+    result = db.query(query)
+
+    log.info("freeboard Get InfluxDB points%s", result)   
     return jsonify( message='freeboard_createInfluxDB', status='success')
 
   except TypeError, e:
