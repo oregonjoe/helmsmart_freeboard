@@ -463,7 +463,7 @@ def index():
     return response
 
 
-@app.route('/freeboard_InfluxDB)
+@app.route('/freeboard_InfluxDB')
 @cross_origin()
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -474,7 +474,7 @@ def index():
   
     db = InfluxDBCloud(host, port, username, password, database)
 
-@app.route('/freeboard_createInfluxDB)
+@app.route('/freeboard_createInfluxDB')
 @cross_origin()
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
