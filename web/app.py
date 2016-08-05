@@ -466,56 +466,56 @@ def index():
 @app.route('/freeboard_InfluxDB')
 @cross_origin()
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+  host = 'hilldale-670d9ee3.influxcloud.net' 
+  port = 8086
+  username = 'helmsmart'
+  password = 'Salm0n16'
+  database = 'pushsmart-cloud'
   
-    db = InfluxDBCloud(host, port, username, password, database)
+  db = InfluxDBCloud(host, port, username, password, database)
 
 @app.route('/freeboard_createInfluxDB')
 @cross_origin()
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+  host = 'hilldale-670d9ee3.influxcloud.net' 
+  port = 8086
+  username = 'helmsmart'
+  password = 'Salm0n16'
+  database = 'pushsmart-cloud'
 
-    log.info("freeboard Create InfluxDB %s", database)
+  log.info("freeboard Create InfluxDB %s", database)
 
-    try:
-      db = InfluxDBCloud(host, port, username, password)
+  try:
+    db = InfluxDBCloud(host, port, username, password)
 
-      db.create_database(dbname)
+    db.create_database(dbname)
 
 
-      dbs.get_list_database()
+    dbs.get_list_database()
 
-      return dbs
+    return dbs
 
-    except TypeError, e:
-        #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard_createInfluxDB: Type Error in InfluxDB  %s:  ' % str(e))
+  except TypeError, e:
+    #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Type Error in InfluxDB  %s:  ' % str(e))
+
+  except KeyError, e:
+    #log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Key Error in InfluxDB  %s:  ' % str(e))
+
+  except NameError, e:
+    #log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Name Error in InfluxDB  %s:  ' % str(e))
             
-    except KeyError, e:
-        #log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard_createInfluxDB: Key Error in InfluxDB  %s:  ' % str(e))
-
-    except NameError, e:
-        #log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard_createInfluxDB: Name Error in InfluxDB  %s:  ' % str(e))
+  except IndexError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Index Error in InfluxDB  %s:  ' % str(e))  
             
-    except IndexError, e:
-        #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard_createInfluxDB: Index Error in InfluxDB  %s:  ' % str(e))  
-            
-    except:
-        #log.info('freeboard: Error in InfluxDB mydata append %s:', response)
-        e = sys.exc_info()[0]
-        log.info("freeboard_createInfluxDB: Error: %s" % e)
-        pass
+  except:
+    #log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+    e = sys.exc_info()[0]
+    log.info("freeboard_createInfluxDB: Error: %s" % e)
+    pass
            
 
            
