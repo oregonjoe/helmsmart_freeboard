@@ -496,7 +496,8 @@ def freeboard_createInfluxDB():
     log.info("freeboard List InfluxDB database%s", database)
     dbs=db.get_list_database()
 
-    return dbs
+    #return dbs
+    return jsonify( message='freeboard_createInfluxDB', status='success')
 
   except TypeError, e:
     #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
