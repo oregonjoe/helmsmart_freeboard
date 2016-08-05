@@ -507,7 +507,7 @@ def freeboard_createInfluxDB():
   log.info("freeboard Create InfluxDB %s", database)
 
   try:
-    db = InfluxDBCloud(host, port, username, password,  ssl=True)
+    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
     
     #log.info("freeboard Create InfluxDB database%s", database)
     #db.create_database(database)
@@ -540,7 +540,7 @@ def freeboard_createInfluxDB():
     #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
     log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))  
 
-  #except influxdb.exceptions.InfluxDBClientError, e:
+  #except InfluxDBCloud.exceptions.InfluxDBClientError, e:
     #log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
 
 
