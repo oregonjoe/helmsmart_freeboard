@@ -488,7 +488,7 @@ def freeboard_createInfluxDB():
   log.info("freeboard Create InfluxDB %s", database)
 
   try:
-    db = InfluxDBCloud(host, port, username, password)
+    db = InfluxDBCloud(host, port, username, password, database)
 
     db.create_database(database)
 
