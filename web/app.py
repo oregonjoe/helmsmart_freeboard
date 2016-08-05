@@ -543,7 +543,7 @@ def freeboard_createInfluxDB():
   #except InfluxDBCloud.exceptions.InfluxDBClientError, e:
     #log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
 
-  except db.exceptions.InfluxDBClientError, e:
+  except InfluxDBCloud.exceptions.InfluxDBClientError, e:
     log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
 
   except:
