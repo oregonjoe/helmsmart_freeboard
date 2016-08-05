@@ -493,8 +493,8 @@ def freeboard_createInfluxDB():
     log.info("freeboard Create InfluxDB database%s", database)
     db.create_database(database)
 
-
-    dbs.get_list_database()
+    log.info("freeboard List InfluxDB database%s", database)
+    dbs=db.get_list_database()
 
     return dbs
 
