@@ -513,11 +513,17 @@ def freeboard_createInfluxDB():
     #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
     log.info('freeboard_createInfluxDB: Index Error in InfluxDB  %s:  ' % str(e))  
             
+  except ValueError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))  
+
+
   except:
     #log.info('freeboard: Error in InfluxDB mydata append %s:', response)
     e = sys.exc_info()[0]
     log.info("freeboard_createInfluxDB: Error: %s" % e)
-    pass
+
+  return jsonify( message='freeboard_createInfluxDB', status='error')
            
 
            
