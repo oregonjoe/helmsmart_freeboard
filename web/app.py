@@ -512,7 +512,14 @@ def freeboard_createInfluxDB():
     
     #log.info("freeboard Create InfluxDB database%s", database)
     #db.create_database(database)
-
+    try:
+      db.create_database(database)
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+      # Drop and create
+      db.drop_database(database)
+      db.create_database(database)
+        
     log.info("freeboard List InfluxDB database%s", database)
     #dbs=db.get_list_database()
 
