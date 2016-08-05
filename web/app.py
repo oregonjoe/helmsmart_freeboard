@@ -485,6 +485,25 @@ def freeboard_createInfluxDB():
   password = 'Salm0n16'
   database = 'pushsmart-cloud'
 
+  json_body = [
+        {
+            "measurement": "SeaDream",
+            
+            "tags": {
+                "deviceid": " 001EC0B415C2",
+                "sensor": "engine_parameters_rapid_update",
+                "source": "0F",
+                "instance": "0",
+                "type": "NULL",
+                "parameter": "speed"
+            },
+            #"time": "2009-11-10T23:00:00Z",
+            "fields": {
+                "value": 0.64
+            }
+        }
+    ]
+
   log.info("freeboard Create InfluxDB %s", database)
 
   try:
@@ -494,7 +513,9 @@ def freeboard_createInfluxDB():
     #db.create_database(database)
 
     log.info("freeboard List InfluxDB database%s", database)
-    dbs=db.get_list_database()
+    #dbs=db.get_list_database()
+
+    db.write_points(json_body)
 
     #return dbs
     return jsonify( message='freeboard_createInfluxDB', status='success')
