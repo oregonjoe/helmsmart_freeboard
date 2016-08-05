@@ -41,6 +41,7 @@ log = logging
 from influxdb.influxdb08 import InfluxDBClient
 
 from influxdb import InfluxDBClient as InfluxDBCloud
+from influxdb.client import InfluxDBClientError
 
 from flask import (
   Flask,
@@ -543,7 +544,7 @@ def freeboard_createInfluxDB():
   #except InfluxDBCloud.exceptions.InfluxDBClientError, e:
     #log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
 
-  except InfluxDBCloud.exceptions.InfluxDBClientError, e:
+  except InfluxDBClientError, e:
     log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
 
   except:
