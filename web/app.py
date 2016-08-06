@@ -404,22 +404,22 @@ def convert_influxdbcloud_json(key, mytime, value):
   try:
 
     
-    #mydtt = datetime.strptime(mytime, "%Y-%m-%d %H:%M:%S")
+    mydtt = datetime.strptime(mytime, "%Y-%m-%d %H:%M:%S")
     #"2009-11-10T23:00:00Z"
     #dtt = mytime.timetuple()
-    #ts = int(mktime(dtt) * 1000)
-    ts = mytime.replace(' ','T')
-    ts = ts + 'Z'
+    ts = int(mktime(mydtt) * 1000)
+    #ts = mytime.replace(' ','T')
+    #ts = ts + 'Z'
 
 
     
 
     tagpairs = key.split(".")
 
-    jsonkey = { tagpairs[0], tagpairs[1], tagpairs[2], tagpairs[3], tagpairs[4]}
+    jsonkey = { tagpairs[0], tagpairs[1], tagpairs[2], tagpairs[3], tagpairs[4], tagpairs[5]}
 
 
-    ifluxjson ={"measurement":tagpairs[5], "time": ts, "tags":jsonkey, "value": value}
+    ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":jsonkey, "value": value}
     log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
 
     return ifluxjson
