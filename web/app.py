@@ -418,7 +418,7 @@ def convert_influxdbcloud_json(key, mytime, value):
     tagpairs = key.split(".")
     log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
 
-    myjsonkeys{}
+    myjsonkeys={}
 
     tag0 = tagpairs[0].split(":")
     tag1 = tagpairs[1].split(":")
