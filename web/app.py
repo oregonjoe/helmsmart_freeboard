@@ -561,9 +561,9 @@ def freeboard_createInfluxDB():
   Key3="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:atmospheric_pressure.HelmSmart"
 
   
-  json_body.append(convert_influxdbcloud_json(Key1, timestamp, 100.0)
-  json_body.append(convert_influxdbcloud_json(Key2, timestamp, 40.0)
-  json_body.append(convert_influxdbcloud_json(Key3, timestamp, 1234.0)
+  json_body.append(convert_influxdbcloud_json(Key1, timestamp, 100.0))
+  json_body.append(convert_influxdbcloud_json(Key2, timestamp, 40.0))
+  json_body.append(convert_influxdbcloud_json(Key3, timestamp, 1234.0))
 
   log.info("freeboard Create InfluxDB json_body:%s", json_body)
   log.info("freeboard Create InfluxDB %s", database)
