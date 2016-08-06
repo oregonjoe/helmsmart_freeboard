@@ -431,8 +431,9 @@ def convert_influxdbcloud_json(key, mytime, value):
     myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
     log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
 
+    values = {'value':value}
 
-    ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "value": value}
+    ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
     log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
 
     return ifluxjson
