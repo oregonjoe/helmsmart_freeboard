@@ -535,12 +535,13 @@ def freeboard_createInfluxDB():
 
     log.info("freeboard Get InfluxDB points%s", result)
 
-    
+    points=list(result.get_points(tags={"deviceid": " 001EC0B415C2"}))
     #series = db.get_list_series(database)
-
-    #log.info("freeboard Get InfluxDB series%s", series)
+    log.info("freeboard Get InfluxDB series%s", points)
     
-    return jsonify( results=json.dumps(result), status='success')
+    #log.info("freeboard Get InfluxDB series%s", series)
+    return jsonify( status='success')    
+    #return jsonify( results=json.dumps(result), status='success')
 
   except TypeError, e:
     #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
