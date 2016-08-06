@@ -405,9 +405,14 @@ def convert_influxdbcloud_json(key, mytime, value):
 
     
     #mydtt = datetime.strptime(mytime, "%Y-%m-%d %H:%M:%S")
+    #"2009-11-10T23:00:00Z"
+    #dtt = mytime.timetuple()
+    #ts = int(mktime(dtt) * 1000)
+    ts = mytime.replace(' ','T')
+    ts = ts + 'Z'
 
-    dtt = mytime.timetuple()
-    ts = int(mktime(dtt) * 1000)
+
+    
 
     tagpairs = key.split(".")
 
