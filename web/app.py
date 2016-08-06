@@ -500,7 +500,7 @@ def freeboard_createInfluxDB():
             },
             #"time": "2009-11-10T23:00:00Z",
             "fields": {
-                "value": 0.64
+                "value": 1.26
             }
         }
     ]
@@ -534,7 +534,7 @@ def freeboard_createInfluxDB():
     result = db.query(query)
 
     log.info("freeboard Get InfluxDB points%s", result)   
-    return jsonify( message='freeboard_createInfluxDB', status='success')
+    return jsonify( results=result, status='success')
 
   except TypeError, e:
     #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
