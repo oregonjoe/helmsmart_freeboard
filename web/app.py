@@ -533,8 +533,14 @@ def freeboard_createInfluxDB():
     query = 'select value from SeaDream;'
     result = db.query(query)
 
-    log.info("freeboard Get InfluxDB points%s", result)   
-    return jsonify( results=result, status='success')
+    log.info("freeboard Get InfluxDB points%s", result)
+
+    
+    series = db..get_list_series(database)
+
+    log.info("freeboard Get InfluxDB series%s", series)
+    
+    return jsonify( results=json.dumps(result), status='success')
 
   except TypeError, e:
     #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
