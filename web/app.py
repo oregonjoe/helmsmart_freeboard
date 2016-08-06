@@ -416,11 +416,14 @@ def convert_influxdbcloud_json(key, mytime, value):
     
 
     tagpairs = key.split(".")
+    log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
 
-    jsonkey = { tagpairs[0], tagpairs[1], tagpairs[2], tagpairs[3], tagpairs[4], tagpairs[5]}
+    
+    myjsonkeys = { tagpairs[0], tagpairs[1], tagpairs[2], tagpairs[3], tagpairs[4], tagpairs[5]}
+    log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
 
 
-    ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":jsonkey, "value": value}
+    ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "value": value}
     log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
 
     return ifluxjson
