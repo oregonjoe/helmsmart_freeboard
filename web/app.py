@@ -404,8 +404,8 @@ def convert_influxdbcloud_json(key, mytime, value):
 
   try:
 
-    
-    mydtt = datetime.strptime(mytime, "%Y-%m-%d %H:%M:%S")
+    mydtt = time.strptime(mytime, "%Y-%m-%d %H:%M:%S")    
+    #mydtt = datetime.strptime(mytime, "%Y-%m-%d %H:%M:%S")
     #"2009-11-10T23:00:00Z"
     #dtt = mytime.timetuple()
     ts = int(mktime(mydtt) * 1000)
