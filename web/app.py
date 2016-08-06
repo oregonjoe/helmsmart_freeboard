@@ -603,7 +603,7 @@ def freeboard_createInfluxDB():
     log.info("freeboard List InfluxDB database%s", database)
     #dbs=db.get_list_database()
 
-    db.write_points(json_body)
+    db.write_points(json_body, time_precision='ms')
 
     #return dbs
 
