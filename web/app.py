@@ -528,16 +528,17 @@ def freeboard_createInfluxDB():
     #return dbs
 
 
-    log.info("freeboard Get InfluxDB points%s", database)
+    log.info("freeboard Get InfluxDB points %s", database)
 
     query = 'select * from SeaDream;'
     result = db.query(query)
 
-    log.info("freeboard Get InfluxDB points%s", result)
+    log.info("freeboard Get InfluxDB results %s", result)
 
-    points=list(result.get_points(tags={"deviceid": " 001EC0B415C2"}))
+    points=list(result.get_points(tags={'deviceid':' 001EC0B415C2'}))
     #series = db.get_list_series(database)
-    log.info("freeboard Get InfluxDB series%s", points)
+    for point in points:
+      log.info("freeboard Get InfluxDB series points%s", point)
     
     #log.info("freeboard Get InfluxDB series%s", series)
     return jsonify( status='success')    
