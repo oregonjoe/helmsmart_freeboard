@@ -536,7 +536,7 @@ def freeboard_createInfluxDB():
     log.info("freeboard Get InfluxDB points%s", result)
 
     
-    series = db..get_list_series(database)
+    series = db.get_list_series(database)
 
     log.info("freeboard Get InfluxDB series%s", series)
     
