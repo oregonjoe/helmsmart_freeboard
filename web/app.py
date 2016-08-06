@@ -589,7 +589,7 @@ def freeboard_createInfluxDB():
   try:
     db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
     
-    #log.info("freeboard Create InfluxDB database%s", database)
+    log.info("freeboard InfluxDBCloud - connected to %s", database)
     #db.create_database(database)
     try:
       db.create_database(database)
@@ -609,7 +609,7 @@ def freeboard_createInfluxDB():
 
     log.info("freeboard Get InfluxDB points %s", database)
 
-    query = 'select * from SeaDream;'
+    query = 'select * from HelmSmart;'
     result = db.query(query)
 
     log.info("freeboard Get InfluxDB results %s", result)
