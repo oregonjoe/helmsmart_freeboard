@@ -573,16 +573,16 @@ def freeboard_createInfluxDB():
     ]
   """
   json_body=[]
-  timestamp = "2016-08-06 17:35:24"
+  timestamp = "2016-08-06 17:45:24"
 
   Key1="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:temperature.HelmSmart"
   Key2="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:humidity.HelmSmart"
   Key3="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:atmospheric_pressure.HelmSmart"
 
   
-  json_body.append(convert_influxdbcloud_json(Key1, timestamp, 100.0))
-  json_body.append(convert_influxdbcloud_json(Key2, timestamp, 40.0))
-  json_body.append(convert_influxdbcloud_json(Key3, timestamp, 1234.0))
+  json_body.append(convert_influxdbcloud_json(Key1, timestamp, 110.0))
+  json_body.append(convert_influxdbcloud_json(Key2, timestamp, 50.0))
+  json_body.append(convert_influxdbcloud_json(Key3, timestamp, 2234.0))
 
   log.info("freeboard Create InfluxDB json_body:%s", json_body)
   log.info("freeboard Create InfluxDB %s", database)
@@ -615,7 +615,9 @@ def freeboard_createInfluxDB():
 
     log.info("freeboard Get InfluxDB results %s", result)
 
-    points=list(result.get_points(tags={'deviceid':' 001EC0B415C2'}))
+    points=list(result.get_points(tags={'deviceid':'001EC010AD69'}))
+    log.info("freeboard Get InfluxDB series points%s", points)
+    
     #series = db.get_list_series(database)
     for point in points:
       log.info("freeboard Get InfluxDB series points%s", point)
