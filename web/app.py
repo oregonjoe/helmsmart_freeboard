@@ -629,7 +629,11 @@ def freeboard_createInfluxDB():
             
   except ValueError, e:
     #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
-    log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))  
+    log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+  except AttributeError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
 
   #except InfluxDBCloud.exceptions.InfluxDBClientError, e:
     #log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
