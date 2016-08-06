@@ -418,8 +418,17 @@ def convert_influxdbcloud_json(key, mytime, value):
     tagpairs = key.split(".")
     log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
 
-    
-    myjsonkeys = { tagpairs[0], tagpairs[1], tagpairs[2], tagpairs[3], tagpairs[4], tagpairs[5]}
+    myjsonkeys{}
+
+    tag0 = tagpairs[0].split(":")
+    tag1 = tagpairs[1].split(":")
+    tag2 = tagpairs[2].split(":")
+    tag3 = tagpairs[3].split(":")
+    tag4 = tagpairs[4].split(":")
+    tag5 = tagpairs[5].split(":")
+
+    #"deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:temperature.HelmSmart"
+    myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
     log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
 
 
