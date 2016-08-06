@@ -533,7 +533,7 @@ def freeboard_createInfluxDB():
   password = 'Salm0n16'
   database = 'pushsmart-cloud'
 
-"""  
+  """  
   json_body = [
         {
             "measurement": "SeaDream",
