@@ -2294,7 +2294,7 @@ def freeboard_environmental2():
       mydatetimestr = str(point['time'])
       #mydatetime = mydatetime.replace("T", " ")
       #mydatetime = mydatetime.replace("Z", "")
-      mydatetime = datetime.strfptime(mydatetimestr, ,'%Y-%m-%dT%H:%M:%SZ')
+      mydatetime = datetime.strfptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
     callback = request.args.get('callback')
     myjsondate = mydatetime.strfptime("%B %d, %Y %H:%M:%S")        
