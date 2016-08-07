@@ -2292,7 +2292,8 @@ def freeboard_environmental2():
       value2 = convertfbunits(point['atmospheric_pressure'], 10)
       value3 = convertfbunits(point['humidity'], 26)
       mydatetime = str(point['time'])
-
+      mydatetime = mydatetime.replace("T", " ")
+      mydatetime = mydatetime.replace("Z", "")
       #mydatetime = datetime.datetime.fromtimestamp(float(point['time']))
 
     callback = request.args.get('callback')
