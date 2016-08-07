@@ -624,7 +624,7 @@ def freeboard_createInfluxDB():
     query = "select value from HelmSmart WHERE parameter='temperature'"
 
     query = ("select mean(value) from HelmSmart "
-             "where parameter='temperature' AND time > {}s and time < {}s "
+             "where  time > {}s and time < {}s "
              "group by time({}s)") \
         .format(
                 startepoch, endepoch,
