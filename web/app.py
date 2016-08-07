@@ -630,6 +630,11 @@ def freeboard_createInfluxDB():
                 startepoch, endepoch,
                 resolution)
 
+    query = ("select * from HelmSmart "
+           "where  time > {}s )") \
+        .format(
+              startepoch)
+
     log.info("freeboard Get InfluxDB query %s", query)
 
     
