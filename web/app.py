@@ -631,7 +631,7 @@ def freeboard_createInfluxDB():
                 resolution)
 
     query = ("select * from HelmSmart "
-           "where  time > {}s )") \
+           "where  time > {}s ") \
         .format(
               startepoch)
 
