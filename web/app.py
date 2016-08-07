@@ -200,7 +200,7 @@ def convertunits(value, units):
             units = int(units)
 
             
-            if not None:
+            if not value:
               return "---"
             
             if value is None:
