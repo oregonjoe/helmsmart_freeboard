@@ -2291,13 +2291,13 @@ def freeboard_environmental2():
       value1 = convertfbunits(point['temperature'], 0)
       value2 = convertfbunits(point['atmospheric_pressure'], 10)
       value3 = convertfbunits(point['humidity'], 26)
-      mydatetime = point['time']
+      mydatetime = str(point['time'])
 
       #mydatetime = datetime.datetime.fromtimestamp(float(point['time']))
 
     callback = request.args.get('callback')
-    myjsondate = mydatetime.strfptime("%B %d, %Y %H:%M:%S")        
-    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
+    #myjsondate = mydatetime.strfptime("%B %d, %Y %H:%M:%S")        
+    return '{0}({1})'.format(callback, {'date_time':mydatetime, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
       
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
