@@ -2252,16 +2252,21 @@ def freeboard_environmental2():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
-    log.info('freeboard:  InfluxDB-Cloud %s:', response)
+    log.info('freeboard:  InfluxDB-Cloud response %s:', response)
 
-    callback = request.args.get('callback')
-    return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
     
     strvalue = ""
     value1 = '---'
     value2 = '---'
     value3 = '---'
     value4 = '---'
+
+    points = list(response.get_points())
+
+    log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
     
     #for point in response.points:
     for series in response:
