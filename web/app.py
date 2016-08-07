@@ -545,12 +545,21 @@ def freeboard_InfluxDB():
 @app.route('/freeboard_createInfluxDB')
 @cross_origin()
 def freeboard_createInfluxDB():
+
+  Interval = request.args.get('Interval',"5min")
+
   
   host = 'hilldale-670d9ee3.influxcloud.net' 
   port = 8086
   username = 'helmsmart'
   password = 'Salm0n16'
   database = 'pushsmart-cloud'
+
+
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  resolution = epochtimes[2]
 
   """  
   json_body = [
@@ -611,7 +620,19 @@ def freeboard_createInfluxDB():
     log.info("freeboard Get InfluxDB points %s", database)
 
     #query = 'select * from HelmSmart;'
+    #query = "select value from HelmSmart WHERE parameter='temperature'"
     query = "select value from HelmSmart WHERE parameter='temperature'"
+
+    query = ("select mean(value) from HelmSmart "
+             "where parameter='temperature' AND time > {}s and time < {}s "
+             "group by time({}s)") \
+        .format(
+                startepoch, endepoch,
+                resolution)
+
+    log.info("freeboard Get InfluxDB query %s", query)
+
+    
     result = db.query(query)
 
     log.info("freeboard Get InfluxDB results %s", result)
@@ -2092,3 +2113,188 @@ def freeboard_status():
     #return jsonify(status='error',  update=False )
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+
+
+@app.route('/freeboard_environmental2')
+@cross_origin()
+def freeboard_environmental2():
+
+    deviceapikey = request.args.get('apikey','')
+    serieskey = request.args.get('datakey','')
+    Interval = request.args.get('Interval',"5min")
+
+    starttime = 0
+
+    epochtimes = getepochtimes(Interval)
+    startepoch = epochtimes[0]
+    endepoch = epochtimes[1]
+    resolution = epochtimes[2]
+
+
+    deviceid = getedeviceid(deviceapikey)
+    
+    log.info("freeboard deviceid %s", deviceid)
+
+    if deviceid == "":
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+    measurement = "HelmSmart"
+
+    #serieskeys={'deviceid'=deviceid, 'sensor'='environmental_data', 'instance'='0', 'type'='Outside_Temperature'}
+
+    serieskeys="'deviceid'"
+    serieskeys= serieskeys + deviceid + " AND "
+    serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND type='Outside_Temperature'"
+
+    
+    Key2="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:humidity.HelmSmart"
+    Key3="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:atmospheric_pressure.HelmSmart"
+
+
+
+    log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
+    log.info("freeboard Create InfluxDB %s", database)
+
+
+    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+
+      
+
+    if serieskeys.find("*") > 0:
+        serieskeys = serieskeys.replace("*", ".*")
+
+        query = ('select mean(value) from /{}/ '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+    else:
+        query = ('select mean(value) from "{}" '
+                     'where{} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+
+    log.info("freeboard data Query %s", query)
+
+    try:
+        response= db.query(query)
+        
+    except TypeError, e:
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+            
+    except:
+        log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+        e = sys.exc_info()[0]
+        log.info("freeboard: Error: %s" % e)
+        pass
+
+    if not response:
+        log.info('freeboard: InfluxDB Query has no data ')
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+    log.info('freeboard:  InfluxDB-Cloud %s:', response)
+
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
+    
+    strvalue = ""
+    value1 = '---'
+    value2 = '---'
+    value3 = '---'
+    value4 = '---'
+    
+    #for point in response.points:
+    for series in response:
+      #log.info("influxdb results..%s", series )
+      for point in series['points']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
+
+
+        seriesname = series['name']
+        seriestags = seriesname.split(".")
+        seriessourcetag = seriestags[2]
+        seriessource = seriessourcetag.split(":")
+
+        seriestypetag = seriestags[4]
+        seriestype = seriestypetag.split(":")
+
+        seriesparametertag = seriestags[5]
+        seriesparameter = seriesparametertag.split(":")
+        
+        mydatetime = datetime.datetime.fromtimestamp(float(fields['time']))
+        #strvalue = {'datetime': datetime.datetime.fromtimestamp(float(fields['time'])), 'epoch': fields['time'], 'source':seriessource[1], 'True_'+seriesparameter: fields['mean']}
+
+        log.info('freeboard: freeboard got data seriesname %s:  ', seriesname)
+
+        if seriestype[1] == 'Outside Temperature' and seriesparameter[1] == 'temperature':
+            value1 = convertfbunits(fields['mean'], 0)
+            strvalue = strvalue + ':' + str(value1)
+            
+        elif seriestype[1] == 'Outside Temperature' and seriesparameter[1] == 'atmospheric_pressure':
+            value2 = convertfbunits(fields['mean'], 10)
+            strvalue = strvalue + ':' + str(value2)
+            
+        elif seriestype[1] == 'Outside Humidity' and seriesparameter[1] == 'humidity':
+            value3=  convertfbunits(fields['mean'], 26)
+            strvalue = strvalue + ':' + str(value3)
+            
+
+
+        #print 'freeboard processing data points:', strvalue
+        log.info('freeboard: freeboard got data values %s:  ', strvalue)
+
+        
+    try:
+        log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
+        #return jsonify(date_time=mydatetime, update=True, temperature=value1, baro=value2, humidity=value3)
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
+     
+    
+    except:
+        log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+  
+    #return jsonify(status='error',  update=False )
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+  
