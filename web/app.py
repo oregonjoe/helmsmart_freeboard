@@ -640,7 +640,7 @@ def freeboard_createInfluxDB():
         .format(
               startepoch)
 
-    query = ("select  mean(temperature), mean(atmospheric_pressure)  from HelmSmart "
+    query = ("select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from HelmSmart "
            "where deviceid='001EC010AD69' and sensor='environmental_data' AND  time > {}s ") \
         .format(
               startepoch)
