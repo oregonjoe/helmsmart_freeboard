@@ -2267,7 +2267,17 @@ def freeboard_environmental2():
 
     for point in points:
       log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+      value1 = point['temperature']
+      value2 = point['atmospheric_pressure']
+      value3 = point['humidity']
+      value4 = point['time']
 
+      mydatetime = datetime.datetime.fromtimestamp(float(point['time']))
+
+    callback = request.args.get('callback')
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
+      
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
     
