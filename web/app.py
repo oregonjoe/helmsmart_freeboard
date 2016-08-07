@@ -641,9 +641,9 @@ def freeboard_createInfluxDB():
               startepoch)
 
     query = ("select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from HelmSmart "
-           "where deviceid='001EC010AD69' and sensor='environmental_data' AND  time > {}s group by time(300s)") \
+           "where deviceid='001EC010AD69' and sensor='environmental_data' AND  time > {}s AND  time < {}s group by time(300s)") \
         .format(
-              startepoch)
+              startepoch, endepoch)
 
     log.info("freeboard Get InfluxDB query %s", query)
 
@@ -2169,7 +2169,8 @@ def freeboard_environmental2():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
     #serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND type='Outside_Temperature'"
-    serieskeys= serieskeys +  " sensor='environmental_data'  AND type='Outside_Temperature'"
+    #serieskeys= serieskeys +  " sensor='environmental_data'  AND type='Outside_Temperature'"
+    serieskeys= serieskeys +  " sensor='environmental_data'  "
     
     Key2="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:humidity.HelmSmart"
     Key3="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:atmospheric_pressure.HelmSmart"
