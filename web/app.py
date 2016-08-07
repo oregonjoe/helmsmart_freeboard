@@ -2168,9 +2168,9 @@ def freeboard_environmental2():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    #serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND type='Outside_Temperature'"
+    serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND type='Outside Temperature'"
     #serieskeys= serieskeys +  " sensor='environmental_data'  AND type='Outside_Temperature'"
-    serieskeys= serieskeys +  " sensor='environmental_data'  "
+    #serieskeys= serieskeys +  " sensor='environmental_data'  "
     
     Key2="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:humidity.HelmSmart"
     Key3="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:atmospheric_pressure.HelmSmart"
@@ -2196,21 +2196,14 @@ def freeboard_environmental2():
                         startepoch, endepoch,
                         resolution)
     else:
-      """
+      
       query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
-      """  
-      query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
-                     'where {} AND time > {}s and time < {}s '
-                     ) \
-                .format( measurement, serieskeys,
-                        startepoch, endepoch
-                       )
-
+ 
 
 
     log.info("freeboard data Query %s", query)
