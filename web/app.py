@@ -199,7 +199,11 @@ def convertfbunits(value, units):
 def convertunits(value, units):
             units = int(units)
 
-            if value == None:
+            
+            if not None:
+              return "---"
+            
+            if value is None:
               return "---"
 
             if value == 'None':
