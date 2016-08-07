@@ -2189,7 +2189,7 @@ def freeboard_environmental2():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND type='Outside Temperature'"
+    serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity')"
     #serieskeys= serieskeys +  " sensor='environmental_data'  AND type='Outside_Temperature'"
     #serieskeys= serieskeys +  " sensor='environmental_data'  "
     
