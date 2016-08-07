@@ -91,6 +91,17 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def convertfbunits(value, units):
             units = int(units)
 
+            if not value:
+              return "---"
+            
+            if value is None:
+              return "---"
+
+            if value == 'None':
+              return "---"
+
+
+
             if units == 0: #//="0">Fahrenheit</option>
                 return float("{0:.0f}".format((value * 1.8) - 459) )
             
