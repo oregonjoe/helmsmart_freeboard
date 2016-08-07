@@ -199,6 +199,12 @@ def convertfbunits(value, units):
 def convertunits(value, units):
             units = int(units)
 
+            if value == None:
+              return "---"
+
+            if value == 'None':
+              return "---"
+
             if units == 0: #//="0">Fahrenheit</option>
                 return float("{0:.2f}".format((value * 1.8) - 459) )
             
