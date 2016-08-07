@@ -635,6 +635,12 @@ def freeboard_createInfluxDB():
         .format(
               startepoch)
 
+    query = ("select * from HelmSmart "
+           "where deviceid='001EC010AD69' and sensor='environmental_data' AND  time > {}s ") \
+        .format(
+              startepoch)
+
+
     log.info("freeboard Get InfluxDB query %s", query)
 
     
