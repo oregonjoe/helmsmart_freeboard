@@ -2166,7 +2166,7 @@ def freeboard_environmental2():
 
     #serieskeys={'deviceid'=deviceid, 'sensor'='environmental_data', 'instance'='0', 'type'='Outside_Temperature'}
 
-    serieskeys="'deviceid'"
+    serieskeys=" deviceid= "
     serieskeys= serieskeys + deviceid + " AND "
     serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND type='Outside_Temperature'"
 
@@ -2180,7 +2180,7 @@ def freeboard_environmental2():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
 
       
@@ -2206,7 +2206,7 @@ def freeboard_environmental2():
     log.info("freeboard data Query %s", query)
 
     try:
-        response= db.query(query)
+        response= dbc.query(query)
         
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
@@ -2223,6 +2223,19 @@ def freeboard_environmental2():
     except IndexError, e:
         log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
         log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+
             
     except:
         log.info('freeboard: Error in InfluxDB mydata append %s:', response)
