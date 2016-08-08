@@ -636,9 +636,9 @@ def freeboard_createInfluxDB():
     #db.write_points(json_body, time_precision='ms')
 
     #return dbs
+    series = db.get_list_series(database)
 
-
-    log.info("freeboard Get InfluxDB points %s", database)
+    log.info("freeboard Get InfluxDB points %s", series)
 
     #query = 'select * from HelmSmart;'
     #query = "select value from HelmSmart WHERE parameter='temperature'"
@@ -695,6 +695,9 @@ def freeboard_createInfluxDB():
     result = db.query(query)
 
     log.info("freeboard Get InfluxDB results %s", result)
+
+    keys = list(result.keys)
+    log.info("freeboard Get InfluxDB series keys%s", keys)
 
     points=list(result.get_points(tags={'deviceid':'001EC010AD69'}))
     log.info("freeboard Get InfluxDB series points%s", points)
