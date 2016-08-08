@@ -2297,7 +2297,7 @@ def freeboard_environmental2():
       mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
     callback = request.args.get('callback')
-    myjsondate = mydatetime.strptime("%B %d, %Y %H:%M:%S")        
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
     return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
       
     callback = request.args.get('callback')
