@@ -636,7 +636,7 @@ def freeboard_createInfluxDB():
     #db.write_points(json_body, time_precision='ms')
 
     #return dbs
-    series = db.get_list_series(database)
+    #series = db.get_list_series(database)
 
     log.info("freeboard Get InfluxDB points %s", series)
 
