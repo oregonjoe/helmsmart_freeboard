@@ -708,6 +708,7 @@ def freeboard_createInfluxDB():
     for key in keys:
       log.info("freeboard Get InfluxDB series key %s", key)
       log.info("freeboard Get InfluxDB series key %s ", key['tags'])
+      log.info("freeboard Get InfluxDB series key %s ", key['values'])
       #for tags in key:
       #  log.info("freeboard Get InfluxDB series tag %s", tags)
 
