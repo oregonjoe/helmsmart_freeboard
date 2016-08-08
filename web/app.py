@@ -690,7 +690,7 @@ def freeboard_createInfluxDB():
 
 
     query = ("select  mean(value)  from HelmSmart "
-           "where deviceid='001EC010AD69'   Group by * limit 100") \
+           "where deviceid='001EC010AD69' and sensor='environmental_data'  Group by * limit 100") \
         .format(
               startepoch, endepoch)      
 
