@@ -638,7 +638,7 @@ def freeboard_createInfluxDB():
     #return dbs
     #series = db.get_list_series(database)
 
-    log.info("freeboard Get InfluxDB points %s", series)
+    #log.info("freeboard Get InfluxDB points %s", series)
 
     #query = 'select * from HelmSmart;'
     #query = "select value from HelmSmart WHERE parameter='temperature'"
