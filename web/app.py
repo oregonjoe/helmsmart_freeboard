@@ -729,7 +729,7 @@ def freeboard_createInfluxDB():
 
       for point in series['values']:
         fields = {}
-        for key, val in zip(series['columns'], point)
+        for key, val in zip(series['columns'], point):
           fields[key] = val
           
       log.info("freeboard Get InfluxDB series points %s", fields['time'], fields['mean'])
