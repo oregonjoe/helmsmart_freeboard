@@ -687,7 +687,13 @@ def freeboard_createInfluxDB():
            "where deviceid='001EC010AD69'  AND  time > {}s AND  time < {}s Group by * limit 1") \
         .format(
               startepoch, endepoch)      
-    
+
+
+    query = ("select  mean(value)  from HelmSmart "
+           "where deviceid='001EC010AD69'   Group by * limit 100") \
+        .format(
+              startepoch, endepoch)      
+
 
     log.info("freeboard Get InfluxDB query %s", query)
 
