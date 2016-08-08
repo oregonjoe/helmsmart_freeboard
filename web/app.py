@@ -700,7 +700,7 @@ def freeboard_createInfluxDB():
     log.info("freeboard Get InfluxDB series keys%s", keys)
 
     for key in keys:
-      log.info("freeboard Get InfluxDB series points%s", key)
+      log.info("freeboard Get InfluxDB series key%s", key)
 
 
     points=list(result.get_points(tags={'deviceid':'001EC010AD69'}))
