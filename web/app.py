@@ -2355,7 +2355,7 @@ def freeboard_winddataTrue():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " sensor=wind_data'' AND instance='0' AND type='TWIND True North' "
+    serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND type='TWIND True North' "
 
 
 
@@ -2365,7 +2365,7 @@ def freeboard_winddataTrue():
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
-
+  
 
       
     query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed from {} '
