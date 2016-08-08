@@ -2438,8 +2438,8 @@ def freeboard_winddataTrue():
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        value1 = convertfbunits(point['wind_speed'], 0)
-        value2 = convertfbunits(point['wind_direction'], 10)
+        value1 = convertfbunits(point['wind_speed'], 4)
+        value2 = convertfbunits(point['wind_direction'], 16)
 
         mydatetimestr = str(point['time'])
 
