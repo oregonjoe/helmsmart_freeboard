@@ -705,9 +705,22 @@ def freeboard_createInfluxDB():
     keys = result.raw.get('series',[])
     #log.info("freeboard Get InfluxDB series keys %s", keys)
 
+    """
+    for series in response:
+      #log.info("influxdb results..%s", series )
+      for point in series['points']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
+    """  
+
+
+
+
     for key in keys:
       log.info("freeboard Get InfluxDB series key %s", key)
       log.info("freeboard Get InfluxDB series tags %s ", key['tags'])
+      log.info("freeboard Get InfluxDB series columns %s ", key['columns'])
       log.info("freeboard Get InfluxDB series values %s ", key['values'])
       values = key['values']
       for value in values:
