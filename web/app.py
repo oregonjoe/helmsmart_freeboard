@@ -2269,89 +2269,39 @@ def freeboard_environmental2():
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        #return jsonify(update=False, status='missing' )
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
     log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
-
     
-    strvalue = ""
-    value1 = '---'
-    value2 = '---'
-    value3 = '---'
-    value4 = '---'
-
-    points = list(response.get_points())
-
-    log.info('freeboard:  InfluxDB-Cloud points%s:', points)
-
-    for point in points:
-      log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-      value1 = convertfbunits(point['temperature'], 0)
-      value2 = convertfbunits(point['atmospheric_pressure'], 10)
-      value3 = convertfbunits(point['humidity'], 26)
-      mydatetimestr = str(point['time'])
-      #mydatetime = mydatetime.replace("T", " ")
-      #mydatetime = mydatetime.replace("Z", "")
-      mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-
-    callback = request.args.get('callback')
-    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
-      
-    callback = request.args.get('callback')
-    return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
-    
-    #for point in response.points:
-    for series in response:
-      #log.info("influxdb results..%s", series )
-      for point in series['points']:
-        fields = {}
-        for key, val in zip(series['columns'], point):
-          fields[key] = val
-
-
-        seriesname = series['name']
-        seriestags = seriesname.split(".")
-        seriessourcetag = seriestags[2]
-        seriessource = seriessourcetag.split(":")
-
-        seriestypetag = seriestags[4]
-        seriestype = seriestypetag.split(":")
-
-        seriesparametertag = seriestags[5]
-        seriesparameter = seriesparametertag.split(":")
-        
-        mydatetime = datetime.datetime.fromtimestamp(float(fields['time']))
-        #strvalue = {'datetime': datetime.datetime.fromtimestamp(float(fields['time'])), 'epoch': fields['time'], 'source':seriessource[1], 'True_'+seriesparameter: fields['mean']}
-
-        log.info('freeboard: freeboard got data seriesname %s:  ', seriesname)
-
-        if seriestype[1] == 'Outside Temperature' and seriesparameter[1] == 'temperature':
-            value1 = convertfbunits(fields['mean'], 0)
-            strvalue = strvalue + ':' + str(value1)
-            
-        elif seriestype[1] == 'Outside Temperature' and seriesparameter[1] == 'atmospheric_pressure':
-            value2 = convertfbunits(fields['mean'], 10)
-            strvalue = strvalue + ':' + str(value2)
-            
-        elif seriestype[1] == 'Outside Humidity' and seriesparameter[1] == 'humidity':
-            value3=  convertfbunits(fields['mean'], 26)
-            strvalue = strvalue + ':' + str(value3)
-            
-
-
-        #print 'freeboard processing data points:', strvalue
-        log.info('freeboard: freeboard got data values %s:  ', strvalue)
-
-        
     try:
-        log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
-        #return jsonify(date_time=mydatetime, update=True, temperature=value1, baro=value2, humidity=value3)
-        callback = request.args.get('callback')
-        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
+    
+      strvalue = ""
+      value1 = '---'
+      value2 = '---'
+      value3 = '---'
+      value4 = '---'
+
+      points = list(response.get_points())
+
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+      for point in points:
+        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = convertfbunits(point['temperature'], 0)
+        value2 = convertfbunits(point['atmospheric_pressure'], 10)
+        value3 = convertfbunits(point['humidity'], 26)
+        mydatetimestr = str(point['time'])
+
+        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+      log.info('freeboard: freeboard returning data values temperature:%s, baro:%s, humidity:%s  ', value1,value2,value3)            
+
+      callback = request.args.get('callback')
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
+      
+
      
     
     except:
