@@ -748,15 +748,20 @@ def freeboard_createInfluxDB():
     keys = result.keys()
     log.info("freeboard Get InfluxDB series keys %s", keys)
 
+    jsondata=[]
     for series in keys:
       log.info("freeboard Get InfluxDB series key %s", series)
       log.info("freeboard Get InfluxDB series tag %s ", series[1])
       log.info("freeboard Get InfluxDB series tag deviceid %s ", series[1]['deviceid'])
+      #strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch': fields['time']}
+      strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch':endepoch}
+
+      jsondata.append(strvalue)
       #for tags in series[1]:
       #  log.info("freeboard Get InfluxDB tags %s ", tags)
  
-    return jsonify( message='freeboard_createInfluxDB', status='error')
-
+    #return jsonify( message='freeboard_createInfluxDB', status='error')
+    return jsonify(series = jsondata)
 
     strvalue=""
     
