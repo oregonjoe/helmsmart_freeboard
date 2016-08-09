@@ -731,7 +731,7 @@ def freeboard_createInfluxDB():
 
     
     query = ("select  * from HelmSmart "
-           "where  time > {}s AND  time < {}s group by * limit 1") \
+           "where deviceid='001EC010AD69'  AND  time > {}s AND  time < {}s group by parameter limit 1") \
         .format(
               startepoch, endepoch)
     
