@@ -771,7 +771,7 @@ def freeboard_createInfluxDB():
 
 
 
-    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%fZ')
+    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S.fZ')
 
     callback = request.args.get('callback')
     myjsondate =""
