@@ -750,7 +750,9 @@ def freeboard_createInfluxDB():
 
     for series in keys:
       log.info("freeboard Get InfluxDB series key %s", series)
-      log.info("freeboard Get InfluxDB series deviceID %s ", series['deviceid'])
+      #log.info("freeboard Get InfluxDB series deviceID %s ", series['deviceid'])
+       for tags in series:
+         log.info("freeboard Get InfluxDB tags %s ", tags)
  
     return jsonify( message='freeboard_createInfluxDB', status='error')
 
