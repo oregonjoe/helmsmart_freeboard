@@ -568,7 +568,26 @@ def freeboard_InfluxDB():
 @cross_origin()
 def freeboard_GetSeries():
 
+  deviceapikey = request.args.get('apikey','')
+  serieskey = request.args.get('datakey','')
   Interval = request.args.get('Interval',"5min")
+
+  starttime = 0
+
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  resolution = epochtimes[2]
+
+
+  deviceid = getedeviceid(deviceapikey)
+  
+  log.info("freeboard deviceid %s", deviceid)
+
+  if deviceid == "":
+      #return jsonify(update=False, status='missing' )
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
   
   host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -604,8 +623,8 @@ def freeboard_GetSeries():
 
     
     query = ("select  * from HelmSmart "
-           "where deviceid='001EC010AD69'  AND  time > {}s AND  time < {}s group by * limit 1") \
-        .format(
+           "where deviceid='{}'  AND  time > {}s AND  time < {}s group by * limit 1") \
+        .format(deviceid,
               startepoch, endepoch)
     
 
