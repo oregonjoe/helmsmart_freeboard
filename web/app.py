@@ -1185,9 +1185,9 @@ def freeboard_location():
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
-@app.route('/freeboard_winddata')
+@app.route('/freeboard_winddataXX')
 @cross_origin()
-def freeboard_winddata():
+def freeboard_winddataXX():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
@@ -2590,13 +2590,14 @@ def freeboard_environmental():
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
-@app.route('/freeboard_winddata_true')
+@app.route('/freeboard_winddata')
 @cross_origin()
-def freeboard_winddata_true():
+def freeboard_winddata():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
+    windtype = request.args.get('type',"true")
 
     starttime = 0
 
@@ -2624,11 +2625,15 @@ def freeboard_winddata_true():
     measurement = "HelmSmart"
 
     
-
-
-    serieskeys=" deviceid='"
-    serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND type='TWIND True North' "
+    if  windtype =="apparent":
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + deviceid + "' AND "
+      serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND type='Apparent Wind' "
+    else  :
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + deviceid + "' AND "
+      serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND type='TWIND True North' "
+  
     #serieskeys= serieskeys +  " sensor='wind_data'  "
 
 
@@ -3081,6 +3086,7 @@ def freeboard_winddataTrue():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
+    windtype = request.args.get('type',"true")
     Interval = request.args.get('Interval',"5min")
 
     starttime = 0
@@ -3259,7 +3265,7 @@ def freeboard_winddataTrue():
 
 
 
-  @app.route('/freeboard_location2')
+@app.route('/freeboard_location2')
 @cross_origin()
 def freeboard_location2():
 
