@@ -769,9 +769,12 @@ def freeboard_createInfluxDB():
       log.info("freeboard Get InfluxDB series tags3 %s ", strvalue)
 
 
+    mydatetimestr = mydatetimestr.split(".")
+    log.info("freeboard Get InfluxDB time string%s ", mydatetimestr)
 
 
-    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S.%fZ')
+    #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S.%fZ')
+    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S')
 
     callback = request.args.get('callback')
     myjsondate =""
