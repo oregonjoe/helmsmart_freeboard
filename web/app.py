@@ -633,18 +633,18 @@ def freeboard_GetSeries():
     
     result = db.query(query)
 
-    log.info("freeboard Get InfluxDB results %s", result)
+    #log.info("freeboard Get InfluxDB results %s", result)
 
  
     #keys = result.raw.get('series',[])
     keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
     jsondata=[]
     for series in keys:
-      log.info("freeboard Get InfluxDB series key %s", series)
-      log.info("freeboard Get InfluxDB series tag %s ", series[1])
-      log.info("freeboard Get InfluxDB series tag deviceid %s ", series[1]['deviceid'])
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      #log.info("freeboard Get InfluxDB series tag %s ", series[1])
+      #log.info("freeboard Get InfluxDB series tag deviceid %s ", series[1]['deviceid'])
       strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch':endepoch}
 
       jsondata.append(strvalue)
@@ -2628,8 +2628,8 @@ def freeboard_winddata2():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND type='TWIND True North' "
-
+    #serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND type='TWIND True North' "
+    serieskeys= serieskeys +  " sensor='wind_data'  "
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
