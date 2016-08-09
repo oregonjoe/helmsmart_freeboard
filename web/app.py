@@ -2428,9 +2428,9 @@ def freeboard_environmental3():
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
-@app.route('/freeboard_winddataTrue')
+@app.route('/freeboard_winddata2')
 @cross_origin()
-def freeboard_winddataTrue():
+def freeboard_winddata2():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
@@ -2753,9 +2753,9 @@ def freeboard_environmental2():
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
-@app.route('/freeboard_winddata2')
+@app.route('/freeboard_winddataTrue')
 @cross_origin()
-def freeboard_winddata2():
+def freeboard_winddataTrue():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
