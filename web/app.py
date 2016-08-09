@@ -743,20 +743,15 @@ def freeboard_createInfluxDB():
 
     log.info("freeboard Get InfluxDB results %s", result)
 
-    return jsonify( message='freeboard_createInfluxDB', status='error')
-
+ 
     keys = result.raw.get('series',[])
     #log.info("freeboard Get InfluxDB series keys %s", keys)
 
-    """
-    for series in response:
-      #log.info("influxdb results..%s", series )
-      for point in series['points']:
-        fields = {}
-        for key, val in zip(series['columns'], point):
-          fields[key] = val
-    """  
-
+    for series in keys:
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+ 
+    return jsonify( message='freeboard_createInfluxDB', status='error')
 
 
     strvalue=""
