@@ -694,6 +694,12 @@ def freeboard_createInfluxDB():
         .format(
               startepoch, endepoch)      
 
+    query = ("select mean(value) from HelmSmart "
+             "where  deviceid='001EC010AD69' and sensor='environmental_data' and time > {}s and time < {}s "
+             "group by time({}s)") \
+        .format(
+                startepoch, endepoch,
+                resolution)
 
     log.info("freeboard Get InfluxDB query %s", query)
 
@@ -716,7 +722,8 @@ def freeboard_createInfluxDB():
 
 
 
-
+    strvalue=""
+    
     for series in keys:
       #log.info("freeboard Get InfluxDB series key %s", series)
       #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
@@ -737,7 +744,7 @@ def freeboard_createInfluxDB():
       tag = series['tags']
       log.info("freeboard Get InfluxDB series tags %s ", tag)
 
-      strvalue=""
+      mydatetimestr = str(fields['time'])
       
       if tag['type'] == 'Outside Temperature' and tag['parameter']== 'temperature':
           value1 = convertfbunits(fields['mean'], 0)
@@ -752,6 +759,15 @@ def freeboard_createInfluxDB():
           strvalue = strvalue + ':' + str(value3)
 
       log.info("freeboard Get InfluxDB series tags %s ", strvalue)
+
+
+
+
+    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+    callback = request.args.get('callback')
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
 
       
 
