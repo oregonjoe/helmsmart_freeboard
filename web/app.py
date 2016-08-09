@@ -2731,8 +2731,13 @@ def freeboard_winddata():
       log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','wind_speed':value1, 'wind_direction':value2,})
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+      
+      if  windtype =="apparent":
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','apparentwindspeed':value1, 'apparentwinddirection':value2,})
+      else:
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','truewindspeed':value1, 'truewinddir':value2,})
       
 
      
