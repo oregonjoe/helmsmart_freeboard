@@ -730,6 +730,10 @@ def freeboard_createInfluxDB():
               startepoch, endepoch)
 
     
+    query = ("select  * from HelmSmart "
+           "where  time > {}s AND  time < {}s group by * limit 1") \
+        .format(
+              startepoch, endepoch)
     
 
     log.info("freeboard Get InfluxDB query %s", query)
