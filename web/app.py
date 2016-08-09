@@ -707,6 +707,22 @@ def freeboard_createInfluxDB():
         .format(
                 startepoch, endepoch
                 )
+
+    
+    query = ("select mean(value) from HelmSmart "
+             "where  deviceid='001EC010AD69' and sensor='environmental_data' and time > {}s and time < {}s "
+             "group by * limit 1") \
+        .format(
+                startepoch, endepoch
+                )
+
+    startepoch = 1470675813
+    endepoch = 1470679413
+    
+    query = ("select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from HelmSmart "
+           "where deviceid='001EC010AD69' and sensor='environmental_data' AND  time > {}s AND  time < {}s group by time(300s)") \
+        .format(
+              startepoch, endepoch)
     
 
     log.info("freeboard Get InfluxDB query %s", query)
@@ -715,6 +731,8 @@ def freeboard_createInfluxDB():
     result = db.query(query)
 
     log.info("freeboard Get InfluxDB results %s", result)
+
+    return jsonify( message='freeboard_createInfluxDB', status='error')
 
     keys = result.raw.get('series',[])
     #log.info("freeboard Get InfluxDB series keys %s", keys)
