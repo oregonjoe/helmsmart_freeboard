@@ -563,6 +563,116 @@ def freeboard_InfluxDB():
   
   db = InfluxDBCloud(host, port, username, password, database)
 
+
+@app.route('/freeboard_GetSeries')
+@cross_origin()
+def freeboard_GetSeries():
+
+  Interval = request.args.get('Interval',"5min")
+
+  
+  host = 'hilldale-670d9ee3.influxcloud.net' 
+  port = 8086
+  username = 'helmsmart'
+  password = 'Salm0n16'
+  database = 'pushsmart-cloud'
+
+
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  resolution = epochtimes[2]
+
+
+
+
+  try:
+    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    
+    log.info("freeboard InfluxDBCloud - connected to %s", database)
+    #db.create_database(database)
+    try:
+      db.create_database(database)
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+      # Drop and create
+      db.drop_database(database)
+      db.create_database(database)
+        
+    log.info("freeboard List InfluxDB database%s", database)
+
+
+    
+    query = ("select  * from HelmSmart "
+           "where deviceid='001EC010AD69'  AND  time > {}s AND  time < {}s group by * limit 1") \
+        .format(
+              startepoch, endepoch)
+    
+
+    log.info("freeboard Get InfluxDB query %s", query)
+
+    
+    result = db.query(query)
+
+    log.info("freeboard Get InfluxDB results %s", result)
+
+ 
+    #keys = result.raw.get('series',[])
+    keys = result.keys()
+    log.info("freeboard Get InfluxDB series keys %s", keys)
+
+    jsondata=[]
+    for series in keys:
+      log.info("freeboard Get InfluxDB series key %s", series)
+      log.info("freeboard Get InfluxDB series tag %s ", series[1])
+      log.info("freeboard Get InfluxDB series tag deviceid %s ", series[1]['deviceid'])
+      strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch':endepoch}
+
+      jsondata.append(strvalue)
+      #for tags in series[1]:
+      #  log.info("freeboard Get InfluxDB tags %s ", tags)
+ 
+    #return jsonify( message='freeboard_createInfluxDB', status='error')
+    return jsonify(series = jsondata,  status='success')
+
+  
+  except TypeError, e:
+    #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Type Error in InfluxDB  %s:  ' % str(e))
+
+  except KeyError, e:
+    #log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Key Error in InfluxDB  %s:  ' % str(e))
+
+  except NameError, e:
+    #log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Name Error in InfluxDB  %s:  ' % str(e))
+            
+  except IndexError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Index Error in InfluxDB  %s:  ' % str(e))  
+            
+  except ValueError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+  except AttributeError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+  #except InfluxDBCloud.exceptions.InfluxDBClientError, e:
+    #log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+  except InfluxDBClientError, e:
+    log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+  except:
+    #log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+    e = sys.exc_info()[0]
+    log.info("freeboard_createInfluxDB: Error: %s" % e)
+
+  return jsonify( message='freeboard_GetSeries', status='error')
+
 @app.route('/freeboard_createInfluxDB')
 @cross_origin()
 def freeboard_createInfluxDB():
