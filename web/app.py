@@ -752,7 +752,7 @@ def freeboard_createInfluxDB():
       tag = series['tags']
       log.info("freeboard Get InfluxDB series tags2 %s ", tag)
 
-      #mydatetimestr = str(fields['time'])
+      mydatetimestr = str(fields['time'])
       
       if tag['type'] == 'Outside Temperature' and tag['parameter']== 'temperature':
           value1 = convertfbunits(fields['mean'], 0)
@@ -771,11 +771,11 @@ def freeboard_createInfluxDB():
 
 
 
-    #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
     callback = request.args.get('callback')
     myjsondate =""
-    #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
     
     return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
 
