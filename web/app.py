@@ -718,14 +718,14 @@ def freeboard_createInfluxDB():
 
 
     for series in keys:
-      log.info("freeboard Get InfluxDB series key %s", series)
-      log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
-      log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
-      log.info("freeboard Get InfluxDB series values %s ", series['values'])
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+      #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+      #log.info("freeboard Get InfluxDB series values %s ", series['values'])
       values = series['values']
       for value in values:
-        log.info("freeboard Get InfluxDB series time %s", value[0])
-        log.info("freeboard Get InfluxDB series mean %s", value[1])
+        #log.info("freeboard Get InfluxDB series time %s", value[0])
+        #log.info("freeboard Get InfluxDB series mean %s", value[1])
 
       for point in series['values']:
         fields = {}
@@ -733,6 +733,27 @@ def freeboard_createInfluxDB():
           fields[key] = val
           
       log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['mean'])
+
+      tag = series['tags']
+      log.info("freeboard Get InfluxDB series tags %s ", tag)
+
+      strvalue=""
+      
+      if tag['type'] == 'Outside Temperature' and tag['parameter']== 'temperature':
+          value1 = convertfbunits(fields['mean'], 0)
+          strvalue = strvalue + ':' + str(value1)
+          
+      elif tag['type']  == 'Outside Temperature' and tag['parameter'] == 'atmospheric_pressure':
+          value2 = convertfbunits(fields['mean'], 10)
+          strvalue = strvalue + ':' + str(value2)
+          
+      elif tag['type']  == 'Outside Humidity' and tag['parameter'] == 'humidity':
+          value3=  convertfbunits(fields['mean'], 26)
+          strvalue = strvalue + ':' + str(value3)
+
+      log.info("freeboard Get InfluxDB series tags %s ", strvalue)
+
+      
 
     points=list(result.get_points(tags={'deviceid':'001EC010AD69'}))
     log.info("freeboard Get InfluxDB series points%s", points)
