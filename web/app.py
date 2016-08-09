@@ -724,8 +724,8 @@ def freeboard_createInfluxDB():
       #log.info("freeboard Get InfluxDB series values %s ", series['values'])
       values = series['values']
       for value in values:
-        #log.info("freeboard Get InfluxDB series time %s", value[0])
-        #log.info("freeboard Get InfluxDB series mean %s", value[1])
+        log.info("freeboard Get InfluxDB series time %s", value[0])
+        log.info("freeboard Get InfluxDB series mean %s", value[1])
 
       for point in series['values']:
         fields = {}
