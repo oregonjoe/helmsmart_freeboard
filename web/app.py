@@ -744,7 +744,8 @@ def freeboard_createInfluxDB():
     log.info("freeboard Get InfluxDB results %s", result)
 
  
-    keys = result.raw.get('series',[])
+    #keys = result.raw.get('series',[])
+    keys = result.keys()
     log.info("freeboard Get InfluxDB series keys %s", keys)
 
     for series in keys:
