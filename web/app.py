@@ -2696,6 +2696,11 @@ def freeboard_winddata2():
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
     log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+
+
+    keys = result.raw.get('series',[])
+    #keys = result.keys()
+    log.info("freeboard Get InfluxDB series keys %s", keys)
     
     try:
     
