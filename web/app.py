@@ -2579,7 +2579,7 @@ def freeboard_winddataTrue():
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
 
-  @app.route('/freeboard_environmental2')
+@app.route('/freeboard_environmental2')
 @cross_origin()
 def freeboard_environmental2():
 
