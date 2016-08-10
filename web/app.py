@@ -3401,74 +3401,45 @@ def freeboard_location2():
     #print 'freeboard start processing data points:'
     
     #log.info("freeboard jsonkey..%s", jsonkey )
-    strvalue = ""
-    lat = 'missing'
-    lng = 'missing'
-
-    
-    #for point in response.points:
-    for series in response:
-      #log.info("influxdb results..%s", series )
-      for point in series['points']:
-        fields = {}
-        for key, val in zip(series['columns'], point):
-          fields[key] = val
-
-
-        seriesname = series['name']
-        #seriestags = seriesname.split(".")
-        #seriessourcetag = seriestags[2]
-        #seriessource = seriessourcetag.split(":")
-
-        #seriestypetag = seriestags[4]
-        #seriestype = seriestypetag.split(":")
-
-        #seriesparametertag = seriestags[5]
-        #seriesparameter = seriesparametertag.split(":")
-        
-        mydatetime = datetime.datetime.fromtimestamp(float(fields['time']))
-        #strvalue = {'datetime': datetime.datetime.fromtimestamp(float(fields['time'])), 'epoch': fields['time'], 'source':seriessource[1], 'True_'+seriesparameter: fields['mean']}
-
-        log.info('freeboard: freeboard got data seriesname %s:  ', seriesname)
-
-        lat =  fields['lat']
-        strvalue = strvalue + ':' + str(lat)
-            
-        lng =  fields['lng']
-        strvalue = strvalue + ':' + str(lng)
-
-
-            
-        #print 'freeboard processing data points:', strvalue
-        log.info('freeboard: freeboard got data values %s:  ', strvalue)
-
-         
-        #jsondata.append(strvalue)
-        
     try:
-        #jsondata = sorted(jsondata,key=itemgetter('epoch'))
-        log.info('freeboard: freeboard returning data values %s:  ', strvalue)    
-        #return jsonify(date_time=mydatetime, update=True, lat=lat, lng=lng)
-        callback = request.args.get('callback')
-        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':lat, 'lng':lng})
-      
+    
+      strvalue = ""
+      value1 = '---'
+      value2 = '---'
+      value3 = '---'
+      value4 = '---'
+ 
+      points = list(response.get_points())
+
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+      for point in points:
+        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = convertfbunits(point['lat'], 16)
+        value2 = convertfbunits(point['lng'], 16)
+
+        mydatetimestr = str(point['time'])
+
+        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+      log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
+
+      callback = request.args.get('callback')
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+        
+
+     
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
-        #return jsonify(update=False )
+        #return jsonify(update=False, status='missing' )
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
-
-
-
-  
-
-    #jasondata = {'datatime':nowtime}
-
-    #log.info('freeboard_io:  keys %s:%s  ', deviceapikey, serieskey)
 
   
     #return jsonify(status='error', update=False )
