@@ -3291,10 +3291,8 @@ def freeboard_location2():
     log.info("freeboard deviceid %s", deviceid)
 
     if deviceid == "":
-        #return jsonify(update=False, status='missing' )
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
-
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -3305,53 +3303,46 @@ def freeboard_location2():
 
     measurement = "HelmSmart"
 
+    #serieskeys={'deviceid'=deviceid, 'sensor'='environmental_data', 'instance'='0', 'type'='Outside_Temperature'}
+
+    serieskeys=" deviceid='"
+    serieskeys= serieskeys + deviceid + "' AND "
+    serieskeys= serieskeys +  " sensor='position_rapid' "
+ 
+
+    log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
+    log.info("freeboard Create InfluxDB %s", database)
+
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
 
-
-
-
-    influxdb_keys=[]
-    influxdb_gpskeys=[]
-
-    SERIES_KEYS=[]
-    SERIES_KEY1 = ""
-
-    series_elements = 0
-
-    SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:position_rapid.source:*.instance:0.type:NULL.parameter:latlng.HelmSmart'
-    influxdb_keys.append(SERIES_KEY1)
-     
-
-    #SERIES_KEY = 'deviceid:001EC0B415C2.sensor:wind_data.source:*.instance:0.type:Apparent Wind.parameter:wind_speed.HelmSmart'
-
-    if influxdb_keys != []:
-        serieskeys = '|'.join(influxdb_keys)
       
 
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
-        query = ('select median(valuelat) as lat, median(valuelng) as lng from /({})/ '
-                           'where time > {}s and time < {}s '
-                           'group by time({}s)') \
-                .format( serieskeys,
+        query = ('select  mean(lat) AS lat, mean(lng) AS  lng,  from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
     else:
-        query = ('select median(valuelat) as lat, median(valuelng) as lng from "{}" '
-                     'where time > {}s and time < {}s '
+      
+      query = ('select  mean(lat) AS lat, mean(lng) AS  lng,  from {} '
+                     'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
-                .format( serieskeys,
+                .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
+ 
 
 
-    log.info("freeboard location Query %s", query)
+    log.info("freeboard data Query %s", query)
 
     try:
-        response= db.query(query)
+        response= dbc.query(query)
         
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
@@ -3368,6 +3359,19 @@ def freeboard_location2():
     except IndexError, e:
         log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
         log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+
             
     except:
         log.info('freeboard: Error in InfluxDB mydata append %s:', response)
@@ -3377,11 +3381,14 @@ def freeboard_location2():
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        #return jsonify(update=False, status='missing' )
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
-      
+    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
+     
     jsondata=[]
     #jsonkey=[]
     #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
