@@ -3516,7 +3516,7 @@ def freeboard_nav2():
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
-                        resolution)
+                        resolution) 
  
 
 
