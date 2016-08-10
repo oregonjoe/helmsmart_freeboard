@@ -3386,6 +3386,11 @@ def freeboard_location2():
 
     log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
+    keys = result.raw.get('series',[])
+    #keys = result.keys()
+    log.info("freeboard Get InfluxDB series keys %s", keys)
+
+
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
      
