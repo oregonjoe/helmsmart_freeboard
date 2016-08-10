@@ -1568,9 +1568,9 @@ def freeboard_environmentalXX():
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
-@app.route('/freeboard_nav')
+@app.route('/freeboard_navXX')
 @cross_origin()
-def freeboard_nav():
+def freeboard_navXX():
 
     deviceapikey = request.args.get('apikey','')
     Instance = request.args.get('instance','0')
@@ -3449,9 +3449,9 @@ def freeboard_location():
 
 
 
-@app.route('/freeboard_nav2')
+@app.route('/freeboard_nav')
 @cross_origin()
-def freeboard_nav2():
+def freeboard_nav():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
