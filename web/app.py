@@ -3501,7 +3501,7 @@ def freeboard_nav2():
       
 
     if serieskeys.find("*") > 0:
-        serieskeys = serieskeys.replace("*", ".*")
+      serieskeys = serieskeys.replace("*", ".*")
 
       query = ('select  mean(cog) AS cog, mean(sog) AS  sog, mean(heading) AS heading  from {} '
                      'where {} AND time > {}s and time < {}s '
