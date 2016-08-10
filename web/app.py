@@ -3503,7 +3503,7 @@ def freeboard_nav2():
     if serieskeys.find("*") > 0:
       serieskeys = serieskeys.replace("*", ".*")
 
-      query = ('select  mean(cog) AS cog, mean(sog) AS  sog, mean(heading) AS heading  from {} '
+      query = ('select  mean(course_over_ground) AS cog, mean(speed_over_ground) AS  sog, mean(heading) AS heading  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
