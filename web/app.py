@@ -3322,7 +3322,7 @@ def freeboard_location2():
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
-        query = ('select  mean(lat) AS lat, mean(lng) AS  lng,  from {} '
+        query = ('select  mean(lat) AS lat, mean(lng) AS  lng  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
