@@ -754,7 +754,7 @@ def freeboard_ImportSeries():
         
     for tags in keys:
       log.info('freeboard: delete tags %s:  ', tags['tags'])
-      #dbc.delete_series(tags)
+      dbc.delete_series(tags)
         
     
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
