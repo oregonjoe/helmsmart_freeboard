@@ -638,7 +638,7 @@ def freeboard_ImportSeries():
   value6 = '---'
   value7 = '---'
   value8 = '---'
-
+  """
   SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:' + Instance + '.type:NULL.parameter:speed.HelmSmart'
   influxdb_keys.append(SERIES_KEY1)
   SERIES_KEY2 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:engine_temp.HelmSmart'
@@ -658,7 +658,10 @@ def freeboard_ImportSeries():
 
   if influxdb_keys != []:
       serieskeys = '|'.join(influxdb_keys)
-    
+  """
+  
+  SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:*.type:NULL.parameter:*.HelmSmart'
+  influxdb_keys.append(SERIES_KEY1)  
 
   if serieskeys.find("*") > 0:
       serieskeys = serieskeys.replace("*", ".*")
@@ -685,7 +688,12 @@ def freeboard_ImportSeries():
 
   log.info("freeboard Get InfluxDB response %s", response)
 
-  #return jsonify(series = response,  status='success')
+  keys=[]
+  for series in response:
+    log.info("influxdb response..%s", series )
+    keys.appand[series]
+
+  return jsonify(series = keys,  status='success')
 
   for series in response:
     log.info("influxdb response..%s", series )
