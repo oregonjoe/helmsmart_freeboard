@@ -691,12 +691,14 @@ def freeboard_ImportSeries():
   log.info("freeboard Get InfluxDB response %s", response)
 
   keys=[]
+  """
   for series in response:
     log.info("influxdb response..%s", series )
     keys.append(series['name'])
 
   return jsonify(series = keys,  status='success')
-
+  """
+  
   for series in response:
     log.info("influxdb response..%s", series )
     for point in series['points']:
@@ -705,6 +707,41 @@ def freeboard_ImportSeries():
         fields[key] = val
 
 
+      mytime = fields['time']
+      mydtt = mytime.timetuple()
+      ts = int(mktime(mydtt) * 1000)
+      #ts = mytime.replace(' ','T')
+      #ts = ts + 'Z'
+
+
+      
+
+      tagpairs = series['name'].split(".")
+      log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
+
+      myjsonkeys={}
+
+      tag0 = tagpairs[0].split(":")
+      tag1 = tagpairs[1].split(":")
+      tag2 = tagpairs[2].split(":")
+      tag3 = tagpairs[3].split(":")
+      tag4 = tagpairs[4].split(":")
+      tag5 = tagpairs[5].split(":")
+
+      myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
+      log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
+
+      #values = {'value':value}
+      values = {tag5[1]:value}
+
+      ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
+      log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
+
+      keys.append(ifluxjson)
+      
+  return jsonify(series = keys,  status='success')
+
+      """
       seriesname = series['name']
       seriestags = seriesname.split(".")
       seriessourcetag = seriestags[2]
@@ -753,7 +790,7 @@ def freeboard_ImportSeries():
 
       elif  seriesparameter[1] == 'total_engine_hours':
           value8 = fields['mean']
-
+      """    
           
   callback = request.args.get('callback')
   myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
