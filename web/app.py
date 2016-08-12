@@ -751,15 +751,15 @@ def freeboard_ImportSeries():
   try:
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
     
-        
+    """        
     for tags in keys:
       log.info('freeboard: delete tags %s:  ', tags['tags'])
       #dbc.delete_series(tags)
-        
-    
+    """          
+    dbc.drop_database(dcdatabase)
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
     #db.write_points_with_precision(mydata, time_precision='ms')
-    dbc.write_points(keys, time_precision='ms')
+    #dbc.write_points(keys, time_precision='ms')
     #shim.write_multi(mydata)
 
   #except influxdb.InfluxDBClientError as e:   
