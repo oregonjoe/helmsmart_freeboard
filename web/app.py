@@ -781,7 +781,7 @@ def freeboard_ImportSeries():
     if debug_all: log.info("Error: %s" % e)
 
 
-    return jsonify(series = keys,  status='success')
+  return jsonify(series = keys,  status='success')
 
   """
       seriesname = series['name']
