@@ -787,10 +787,8 @@ def freeboard_ImportSeries():
     if debug_all: log.info("Error: %s" % e)
 
 
-  query = ("select mean(speed) from HelmSmart "
-           "where deviceid='001EC010AD69'  AND sensor='engine_parameters_rapid_update' AND  time > {}s AND  time < {}s group by time(60s)") \
-        .format(
-              startepoch, endepoch)
+  query = ("select mean(speed) from HelmSmart where deviceid='001EC010AD69' and sensor='engine_parameters_rapid_update' and time > {}s and time < {}s group by time(60s)") \
+        .format( startepoch, endepoch)
     
 
   log.info("freeboard Get InfluxDB query %s", query)
