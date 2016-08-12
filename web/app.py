@@ -746,11 +746,13 @@ def freeboard_ImportSeries():
 
   try:
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
-
+    
+    """
     for tags in keys:
       log.info('freeboard: import tags %s:  ', tags)
       dbc.delete_series(tags)
-
+    """
+    
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
     #db.write_points_with_precision(mydata, time_precision='ms')
     dbc.write_points(keys, time_precision='ms')
@@ -783,6 +785,21 @@ def freeboard_ImportSeries():
     if debug_all: log.info('freeboard_ImportSeries: Error in InfluxDB-Cloud write %s:  ', keys)
     e = sys.exc_info()[0]
     if debug_all: log.info("Error: %s" % e)
+
+
+  query = ("select  * from HelmSmart "
+           "where deviceid='001EC010AD69'  AND sensor='engine_parameters_rapid_update' AND  time > {}s AND  time < {}s ") \
+        .format(
+              startepoch, endepoch)
+    
+
+  log.info("freeboard Get InfluxDB query %s", query)
+
+    
+  result = dbc.query(query)
+
+  log.info("freeboard Get InfluxDB results %s", result)
+
 
 
   return jsonify(series = keys,  status='success')
@@ -893,6 +910,9 @@ def freeboard_ImportSeries():
       jsondata.append(strvalue)
       #for tags in series[1]:
       #  log.info("freeboard Get InfluxDB tags %s ", tags)
+
+
+      
  
     #return jsonify( message='freeboard_createInfluxDB', status='error')
     return jsonify(series = jsondata,  status='success')
