@@ -695,59 +695,59 @@ def freeboard_ImportSeries():
         fields[key] = val
 
 
-        seriesname = series['name']
-        seriestags = seriesname.split(".")
-        seriessourcetag = seriestags[2]
-        seriessource = seriessourcetag.split(":")
+      seriesname = series['name']
+      seriestags = seriesname.split(".")
+      seriessourcetag = seriestags[2]
+      seriessource = seriessourcetag.split(":")
 
-        seriestypetag = seriestags[4]
-        seriestype = seriestypetag.split(":")
+      seriestypetag = seriestags[4]
+      seriestype = seriestypetag.split(":")
 
-        seriesparametertag = seriestags[5]
-        seriesparameter = seriesparametertag.split(":")
-        
-        mydatetime = datetime.datetime.fromtimestamp(float(fields['time']))
-        #strvalue = {'datetime': datetime.datetime.fromtimestamp(float(fields['time'])), 'epoch': fields['time'], 'source':seriessource[1], 'True_'+seriesparameter: fields['mean']}
+      seriesparametertag = seriestags[5]
+      seriesparameter = seriesparametertag.split(":")
+      
+      mydatetime = datetime.datetime.fromtimestamp(float(fields['time']))
+      #strvalue = {'datetime': datetime.datetime.fromtimestamp(float(fields['time'])), 'epoch': fields['time'], 'source':seriessource[1], 'True_'+seriesparameter: fields['mean']}
 
-        log.info('freeboard: freeboard_engine got data seriesname %s:  ', seriesname)
+      log.info('freeboard: freeboard_engine got data seriesname %s:  ', seriesname)
 
-        if  seriesparameter[1] == 'speed':
-            value1 =  fields['mean']
-
-            
-        elif  seriesparameter[1] == 'engine_temp':
-            value2 =  fields['mean']
-
-            
-        elif  seriesparameter[1] == 'oil_pressure':
-            value3=   fields['mean']
-
-
-        elif  seriesparameter[1] == 'alternator_potential':
-            value4 =  fields['mean']
-
-            
-        elif  seriesparameter[1] == 'boost_pressure':
-            value5=  fields['mean']
-
-
-        elif  seriesparameter[1] == 'trip_fuel_used':
-            value5=  fields['mean']
-            
-        elif  seriesparameter[1] == 'fuel_rate':
-            value6 =  fields['mean']
-
-        elif  seriesparameter[1] == 'level':
-            value7=  fields['mean']
-
-
-        elif  seriesparameter[1] == 'total_engine_hours':
-            value8 = fields['mean']
+      if  seriesparameter[1] == 'speed':
+          value1 =  fields['mean']
 
           
-    callback = request.args.get('callback')
-    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
+      elif  seriesparameter[1] == 'engine_temp':
+          value2 =  fields['mean']
+
+          
+      elif  seriesparameter[1] == 'oil_pressure':
+          value3=   fields['mean']
+
+
+      elif  seriesparameter[1] == 'alternator_potential':
+          value4 =  fields['mean']
+
+          
+      elif  seriesparameter[1] == 'boost_pressure':
+          value5=  fields['mean']
+
+
+      elif  seriesparameter[1] == 'trip_fuel_used':
+          value5=  fields['mean']
+          
+      elif  seriesparameter[1] == 'fuel_rate':
+          value6 =  fields['mean']
+
+      elif  seriesparameter[1] == 'level':
+          value7=  fields['mean']
+
+
+      elif  seriesparameter[1] == 'total_engine_hours':
+          value8 = fields['mean']
+
+          
+  callback = request.args.get('callback')
+  myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+  return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
 
 
           
