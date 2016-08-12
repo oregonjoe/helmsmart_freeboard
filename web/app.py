@@ -688,7 +688,7 @@ def freeboard_ImportSeries():
   #return jsonify(series = response,  status='success')
 
   for series in response:
-    #log.info("influxdb results..%s", series )
+    log.info("influxdb response..%s", series )
     for point in series['points']:
       fields = {}
       for key, val in zip(series['columns'], point):
