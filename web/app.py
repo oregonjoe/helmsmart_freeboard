@@ -605,69 +605,69 @@ def freeboard_ImportSeries():
   #resolution = epochtimes[2]
 
 
-    host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
-    port = 8086
-    username = 'root'
-    password = 'c73d5a8b1b07d17b'
-    database = 'pushsmart-final'
-  
-    db = InfluxDBClient(host, port, username, password, database)
+  host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
+  port = 8086
+  username = 'root'
+  password = 'c73d5a8b1b07d17b'
+  database = 'pushsmart-final'
 
-    influxdb_keys=[]
+  db = InfluxDBClient(host, port, username, password, database)
 
-    SERIES_KEYS=[]
-    SERIES_KEY1 = ""
-    SERIES_KEY2 = ""
-    SERIES_KEY3 = ""
-    SERIES_KEY4 = ""
-    SERIES_KEY5 = ""
-    SERIES_KEY6 = ""
-    SERIES_KEY7 = ""  
-    SERIES_KEY8 = ""
+  influxdb_keys=[]
 
-    series_elements = 0
+  SERIES_KEYS=[]
+  SERIES_KEY1 = ""
+  SERIES_KEY2 = ""
+  SERIES_KEY3 = ""
+  SERIES_KEY4 = ""
+  SERIES_KEY5 = ""
+  SERIES_KEY6 = ""
+  SERIES_KEY7 = ""  
+  SERIES_KEY8 = ""
 
-    SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Temperature.parameter:temperature.HelmSmart'
-    influxdb_keys.append(SERIES_KEY1)
-    SERIES_KEY2 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Temperature.parameter:atmospheric_pressure.HelmSmart'
-    influxdb_keys.append(SERIES_KEY2)    
-    SERIES_KEY3 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Humidity.parameter:humidity.HelmSmart'
-    influxdb_keys.append(SERIES_KEY3)   
-    #SERIES_KEY4 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Apparent Wind.parameter:wind_direction.HelmSmart'
-    #influxdb_keys.append(SERIES_KEY4)       
+  series_elements = 0
 
-    #SERIES_KEY = 'deviceid:001EC0B415C2.sensor:wind_data.source:*.instance:0.type:Apparent Wind.parameter:wind_speed.HelmSmart'
+  SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Temperature.parameter:temperature.HelmSmart'
+  influxdb_keys.append(SERIES_KEY1)
+  SERIES_KEY2 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Temperature.parameter:atmospheric_pressure.HelmSmart'
+  influxdb_keys.append(SERIES_KEY2)    
+  SERIES_KEY3 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Humidity.parameter:humidity.HelmSmart'
+  influxdb_keys.append(SERIES_KEY3)   
+  #SERIES_KEY4 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Apparent Wind.parameter:wind_direction.HelmSmart'
+  #influxdb_keys.append(SERIES_KEY4)       
 
-    if influxdb_keys != []:
-        serieskeys = '|'.join(influxdb_keys)
-      
+  #SERIES_KEY = 'deviceid:001EC0B415C2.sensor:wind_data.source:*.instance:0.type:Apparent Wind.parameter:wind_speed.HelmSmart'
 
-    if serieskeys.find("*") > 0:
-        serieskeys = serieskeys.replace("*", ".*")
+  if influxdb_keys != []:
+      serieskeys = '|'.join(influxdb_keys)
+    
 
-        query = ('select mean(value) from /{}/ '
-                     'where time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format( serieskeys,
-                        startepoch, endepoch,
-                        resolution)
-    else:
-        query = ('select mean(value) from "{}" '
-                     'where time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format( serieskeys,
-                        startepoch, endepoch,
-                        resolution)
+  if serieskeys.find("*") > 0:
+      serieskeys = serieskeys.replace("*", ".*")
 
-
-    log.info("freeboard data Query %s", query)
+      query = ('select mean(value) from /{}/ '
+                   'where time > {}s and time < {}s '
+                   'group by time({}s)') \
+              .format( serieskeys,
+                      startepoch, endepoch,
+                      resolution)
+  else:
+      query = ('select mean(value) from "{}" '
+                   'where time > {}s and time < {}s '
+                   'group by time({}s)') \
+              .format( serieskeys,
+                      startepoch, endepoch,
+                      resolution)
 
 
-    response= db.query(query)
+  log.info("freeboard data Query %s", query)
 
-    log.info("freeboard Get InfluxDB response %s", response)
 
-    return jsonify(series = response,  status='success')
+  response= db.query(query)
+
+  log.info("freeboard Get InfluxDB response %s", response)
+
+  return jsonify(series = response,  status='success')
 
 
   
