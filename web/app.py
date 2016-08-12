@@ -742,7 +742,42 @@ def freeboard_ImportSeries():
 
       keys.append(ifluxjson)
       
-  return jsonify(series = keys,  status='success')
+  #return jsonify(series = keys,  status='success')
+
+  try:
+
+    if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
+    #db.write_points_with_precision(mydata, time_precision='ms')
+    dbc.write_points(keys, time_precision='ms')
+    #shim.write_multi(mydata)
+
+  #except influxdb.InfluxDBClientError as e:   
+  except InfluxDBClientError as e:
+    if debug_all: log.info('freeboard_ImportSeries: inFlux error in InfluxDB-Cloud write %s:  ' % str(e))
+    
+  except TypeError, e:
+    if debug_all: log.info('freeboard_ImportSeries: TypeError in InfluxDB-Cloud write %s:  ', keys)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.info('freeboard_ImportSeries: TypeError in InfluxDB-Cloud write %s:  ' % str(e))
+    
+  except KeyError, e:
+    if debug_all: log.info('freeboard_ImportSeries: KeyError in InfluxDB-Cloud write %s:  ', keys)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.info('freeboard_ImportSeries: KeyError in InfluxDB-Cloud write %s:  ' % str(e))
+
+  except NameError, e:
+    if debug_all: log.info('freeboard_ImportSeries: NameError in InfluxDB-Cloud write %s:  ', keys)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.info('freeboard_ImportSeries: NameError in InfluxDB-Cloud write %s:  ' % str(e))   
+    
+    
+  except:
+    if debug_all: log.info('freeboard_ImportSeries: Error in InfluxDB-Cloud write %s:  ', keys)
+    e = sys.exc_info()[0]
+    if debug_all: log.info("Error: %s" % e)
 
   """
       seriesname = series['name']
