@@ -563,6 +563,201 @@ def freeboard_InfluxDB():
   
   db = InfluxDBCloud(host, port, username, password, database)
 
+@app.route('/freeboard_ImportSeries')
+@cross_origin()
+def freeboard_ImportSeries():
+
+  deviceapikey = request.args.get('apikey','')
+  serieskey = request.args.get('datakey','')
+  Interval = request.args.get('Interval',"1day")
+
+  starttime = 0
+
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  resolution = epochtimes[2]
+  
+  resolution = 60*60*24
+  resolution = 60*24
+    
+
+  deviceid = getedeviceid(deviceapikey)
+  
+  log.info("freeboard deviceid %s", deviceid)
+
+  if deviceid == "":
+      #return jsonify(update=False, status='missing' )
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+  
+  dchost = 'hilldale-670d9ee3.influxcloud.net' 
+  dcport = 8086
+  dcusername = 'helmsmart'
+  dcpassword = 'Salm0n16'
+  dcdatabase = 'pushsmart-cloud'
+
+
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  #resolution = epochtimes[2]
+
+
+    host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
+    port = 8086
+    username = 'root'
+    password = 'c73d5a8b1b07d17b'
+    database = 'pushsmart-final'
+  
+    db = InfluxDBClient(host, port, username, password, database)
+
+    influxdb_keys=[]
+
+    SERIES_KEYS=[]
+    SERIES_KEY1 = ""
+    SERIES_KEY2 = ""
+    SERIES_KEY3 = ""
+    SERIES_KEY4 = ""
+    SERIES_KEY5 = ""
+    SERIES_KEY6 = ""
+    SERIES_KEY7 = ""  
+    SERIES_KEY8 = ""
+
+    series_elements = 0
+
+    SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Temperature.parameter:temperature.HelmSmart'
+    influxdb_keys.append(SERIES_KEY1)
+    SERIES_KEY2 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Temperature.parameter:atmospheric_pressure.HelmSmart'
+    influxdb_keys.append(SERIES_KEY2)    
+    SERIES_KEY3 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Outside Humidity.parameter:humidity.HelmSmart'
+    influxdb_keys.append(SERIES_KEY3)   
+    #SERIES_KEY4 = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:0.type:Apparent Wind.parameter:wind_direction.HelmSmart'
+    #influxdb_keys.append(SERIES_KEY4)       
+
+    #SERIES_KEY = 'deviceid:001EC0B415C2.sensor:wind_data.source:*.instance:0.type:Apparent Wind.parameter:wind_speed.HelmSmart'
+
+    if influxdb_keys != []:
+        serieskeys = '|'.join(influxdb_keys)
+      
+
+    if serieskeys.find("*") > 0:
+        serieskeys = serieskeys.replace("*", ".*")
+
+        query = ('select mean(value) from /{}/ '
+                     'where time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+    else:
+        query = ('select mean(value) from "{}" '
+                     'where time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+
+    log.info("freeboard data Query %s", query)
+
+
+    response= db.query(query)
+
+    log.info("freeboard Get InfluxDB response %s", response)
+
+    return jsonify(series = response,  status='success')
+
+
+  
+  try:
+    dcdb = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
+    
+    log.info("freeboard InfluxDBCloud - connected to %s", dcdatabase)
+    #db.create_database(database)
+    try:
+      dcdb.create_database(database)
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+      # Drop and create
+      dcdb.drop_database(database)
+      dcdb.create_database(database)
+        
+    log.info("freeboard List InfluxDB database%s", dcdatabase)
+
+
+    
+    dcquery = ("select  * from HelmSmart "
+           "where deviceid='{}'  AND  time > {}s AND  time < {}s group by * limit 1") \
+        .format(deviceid,
+              startepoch, endepoch)
+    
+
+    log.info("freeboard Get InfluxDB query %s", dcquery)
+
+    
+    result = dcdb.query(dcquery)
+
+    #log.info("freeboard Get InfluxDB results %s", result)
+
+ 
+    #keys = result.raw.get('series',[])
+    keys = result.keys()
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
+
+    jsondata=[]
+    for series in keys:
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      #log.info("freeboard Get InfluxDB series tag %s ", series[1])
+      #log.info("freeboard Get InfluxDB series tag deviceid %s ", series[1]['deviceid'])
+      strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch':endepoch}
+
+      jsondata.append(strvalue)
+      #for tags in series[1]:
+      #  log.info("freeboard Get InfluxDB tags %s ", tags)
+ 
+    #return jsonify( message='freeboard_createInfluxDB', status='error')
+    return jsonify(series = jsondata,  status='success')
+
+  
+  except TypeError, e:
+    #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Type Error in InfluxDB  %s:  ' % str(e))
+
+  except KeyError, e:
+    #log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Key Error in InfluxDB  %s:  ' % str(e))
+
+  except NameError, e:
+    #log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Name Error in InfluxDB  %s:  ' % str(e))
+            
+  except IndexError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Index Error in InfluxDB  %s:  ' % str(e))  
+            
+  except ValueError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+  except AttributeError, e:
+    #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+  #except InfluxDBCloud.exceptions.InfluxDBClientError, e:
+    #log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+  except InfluxDBClientError, e:
+    log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+  except:
+    #log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+    e = sys.exc_info()[0]
+    log.info("freeboard_createInfluxDB: Error: %s" % e)
+
+  return jsonify( message='freeboard_GetSeries', status='error')
+
 
 @app.route('/freeboard_GetSeries')
 @cross_origin()
