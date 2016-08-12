@@ -3946,7 +3946,7 @@ def freeboard_engine2():
     serieskeys= serieskeys +  " (type='True') "
 
 
-    influxdb_keys[]
+    influxdb_keys=[]
     SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:' + Instance + '.type:NULL.parameter:speed.HelmSmart'
     influxdb_keys.append(SERIES_KEY1)
     SERIES_KEY2 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:engine_temp.HelmSmart'
