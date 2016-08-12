@@ -741,7 +741,7 @@ def freeboard_ImportSeries():
       
   return jsonify(series = keys,  status='success')
 
-      """
+  """
       seriesname = series['name']
       seriestags = seriesname.split(".")
       seriessourcetag = seriestags[2]
@@ -790,7 +790,7 @@ def freeboard_ImportSeries():
 
       elif  seriesparameter[1] == 'total_engine_hours':
           value8 = fields['mean']
-      """    
+  """    
           
   callback = request.args.get('callback')
   myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
