@@ -693,7 +693,7 @@ def freeboard_ImportSeries():
   keys=[]
   for series in response:
     log.info("influxdb response..%s", series )
-    keys.appand[series]
+    keys.append[series]
 
   return jsonify(series = keys,  status='success')
 
