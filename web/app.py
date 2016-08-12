@@ -692,7 +692,7 @@ def freeboard_ImportSeries():
 
   response= db.query(query)
 
-  log.info("freeboard Get InfluxDB response %s", response)
+  #log.info("freeboard Get InfluxDB response %s", response)
 
   keys=[]
   """
@@ -724,7 +724,7 @@ def freeboard_ImportSeries():
       
 
       tagpairs = series['name'].split(".")
-      log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
+      #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
 
       myjsonkeys={}
 
@@ -742,7 +742,7 @@ def freeboard_ImportSeries():
       values = {tag5[1]:float(fields['mean'])}
 
       ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
-      log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
+      #log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
 
       keys.append(ifluxjson)
       
@@ -753,8 +753,8 @@ def freeboard_ImportSeries():
     
         
     for tags in keys:
-      log.info('freeboard: delete tags %s:  ', tags)
-      dbc.delete_series(tags)
+      log.info('freeboard: delete tags %s:  ', tags['tags'])
+      #dbc.delete_series(tags)
         
     
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
@@ -800,7 +800,7 @@ def freeboard_ImportSeries():
     
   result = dbc.query(query)
 
-  log.info("freeboard Get InfluxDB results %s", result)
+  #log.info("freeboard Get InfluxDB results %s", result)
 
 
 
