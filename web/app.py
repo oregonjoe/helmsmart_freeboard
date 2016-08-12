@@ -708,7 +708,7 @@ def freeboard_ImportSeries():
 
           
       elif  seriesparameter[1] == 'oil_pressure':
-          value3=  'mean']
+          value3=   fields['mean']
 
 
       elif  seriesparameter[1] == 'alternator_potential':
