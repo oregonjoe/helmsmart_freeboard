@@ -739,7 +739,7 @@ def freeboard_ImportSeries():
       #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
 
       #values = {'value':value}
-      values = {tag5[1]:float(fields['mean'])}
+      values = {tag5[1]:int(fields['mean'])}
 
       ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
       #log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
@@ -756,10 +756,10 @@ def freeboard_ImportSeries():
       log.info('freeboard: delete tags %s:  ', tags['tags'])
       #dbc.delete_series(tags)
     """          
-    dbc.drop_database(dcdatabase)
+    #dbc.drop_database(dcdatabase)
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
     #db.write_points_with_precision(mydata, time_precision='ms')
-    #dbc.write_points(keys, time_precision='ms')
+    dbc.write_points(keys, time_precision='ms')
     #shim.write_multi(mydata)
 
   #except influxdb.InfluxDBClientError as e:   
