@@ -570,7 +570,8 @@ def freeboard_ImportSeries():
   deviceapikey = request.args.get('apikey','')
   serieskey = request.args.get('datakey','')
   Interval = request.args.get('Interval',"1day")
-
+  Instance = request.args.get('instance','0')
+  
   starttime = 0
 
   epochtimes = getepochtimes(Interval)
