@@ -707,9 +707,12 @@ def freeboard_ImportSeries():
         fields[key] = val
 
 
-      mytime = fields['time']
-      mydtt = mytime.timetuple()
-      ts = int(mktime(mydtt) * 1000)
+      mytime = int(fields['time'])
+      #mydatetime = datetime.datetime.fromtimestamp(float(fields['time']))
+      
+      #mydtt = mytime.timetuple()
+      #ts = int(mktime(mydtt) * 1000)
+      ts = int(mytime * 1000)
       #ts = mytime.replace(' ','T')
       #ts = ts + 'Z'
 
