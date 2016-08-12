@@ -747,11 +747,11 @@ def freeboard_ImportSeries():
   try:
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
     
-    
+"""    
     for tags in keys:
       log.info('freeboard: import tags %s:  ', tags)
       dbc.delete_series(tags)
-    
+"""    
     
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
     #db.write_points_with_precision(mydata, time_precision='ms')
@@ -787,7 +787,7 @@ def freeboard_ImportSeries():
     if debug_all: log.info("Error: %s" % e)
 
 
-  query = ("select mean(speed) from HelmSmart where deviceid='001EC010AD69' and sensor='engine_parameters_rapid_update' and time > {}s and time < {}s group by time(60s)") \
+  query = ("select mean(speed) as speed from HelmSmart where deviceid='001EC010AD69' and sensor='engine_parameters_rapid_update' and time > {}s and time < {}s group by time(60s)") \
         .format( startepoch, endepoch)
     
 
