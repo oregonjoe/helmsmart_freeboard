@@ -747,11 +747,11 @@ def freeboard_ImportSeries():
   try:
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
     
-  """    
+    """    
     for tags in keys:
       log.info('freeboard: import tags %s:  ', tags)
       dbc.delete_series(tags)
-  """    
+    """    
     
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
     #db.write_points_with_precision(mydata, time_precision='ms')
