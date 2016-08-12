@@ -379,6 +379,10 @@ def getepochtimes(Interval):
                 resolution = 60*60*24
                 startepoch = endepoch - (resolution * 1)
                 oldtime = datetime.datetime.now() - datetime.timedelta(days=1)
+            elif Interval == "2day":
+                resolution = 60*60*24*2
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(days=2)                
             elif Interval== "7day":
                 resolution = 60*60*24*7
                 startepoch = endepoch - (resolution * 1)
@@ -569,7 +573,7 @@ def freeboard_ImportSeries():
 
   deviceapikey = request.args.get('apikey','')
   serieskey = request.args.get('datakey','')
-  Interval = request.args.get('Interval',"1day")
+  Interval = request.args.get('Interval',"2day")
   Instance = request.args.get('instance','0')
   
   starttime = 0
@@ -747,15 +751,15 @@ def freeboard_ImportSeries():
   try:
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
     
-    """    
+        
     for tags in keys:
-      log.info('freeboard: import tags %s:  ', tags)
+      log.info('freeboard: delete tags %s:  ', tags)
       dbc.delete_series(tags)
-    """    
+        
     
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
     #db.write_points_with_precision(mydata, time_precision='ms')
-    dbc.write_points(keys, time_precision='ms')
+    #dbc.write_points(keys, time_precision='ms')
     #shim.write_multi(mydata)
 
   #except influxdb.InfluxDBClientError as e:   
