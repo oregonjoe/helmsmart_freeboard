@@ -736,7 +736,7 @@ def freeboard_ImportSeries():
       tag5 = tagpairs[5].split(":")
 
       myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
-      log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
+      #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
 
       #values = {'value':value}
       values = {tag5[1]:float(fields['mean'])}
@@ -754,12 +754,12 @@ def freeboard_ImportSeries():
         
     for tags in keys:
       log.info('freeboard: delete tags %s:  ', tags['tags'])
-      dbc.delete_series(tags)
+      #dbc.delete_series(tags)
         
     
     if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
     #db.write_points_with_precision(mydata, time_precision='ms')
-    #dbc.write_points(keys, time_precision='ms')
+    dbc.write_points(keys, time_precision='ms')
     #shim.write_multi(mydata)
 
   #except influxdb.InfluxDBClientError as e:   
