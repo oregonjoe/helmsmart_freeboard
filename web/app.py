@@ -787,8 +787,8 @@ def freeboard_ImportSeries():
     if debug_all: log.info("Error: %s" % e)
 
 
-  query = ("select  speed from HelmSmart "
-           "where deviceid='001EC010AD69'  AND sensor='engine_parameters_rapid_update' AND  time > {}s AND  time < {}s ") \
+  query = ("select  mean(speed) from HelmSmart "
+           "where deviceid='001EC010AD69'  AND sensor='engine_parameters_rapid_update' AND  time > {}s AND  time < {}s group by time(60s)") \
         .format(
               startepoch, endepoch)
     
