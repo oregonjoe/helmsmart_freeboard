@@ -662,7 +662,9 @@ def freeboard_ImportSeries():
   
   SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:*.type:NULL.parameter:*.HelmSmart'
   influxdb_keys.append(SERIES_KEY1)  
+  serieskeys = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:*.type:NULL.parameter:*.HelmSmart'
 
+      
   if serieskeys.find("*") > 0:
       serieskeys = serieskeys.replace("*", ".*")
 
