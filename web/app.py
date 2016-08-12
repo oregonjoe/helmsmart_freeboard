@@ -628,6 +628,17 @@ def freeboard_ImportSeries():
 
   series_elements = 0
 
+
+  strvalue = ""
+  value1 = '---'
+  value2 = '---'
+  value3 = '---'
+  value4 = '---'
+  value5 = '---'
+  value6 = '---'
+  value7 = '---'
+  value8 = '---'
+
   SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:' + Instance + '.type:NULL.parameter:speed.HelmSmart'
   influxdb_keys.append(SERIES_KEY1)
   SERIES_KEY2 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:engine_temp.HelmSmart'
