@@ -4070,7 +4070,7 @@ def freeboard_engine2():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
       
-    query = ('select  mean(speed) AS rpm, mean(engine_temp) AS  eng_temp, mean(oil_pressure) AS oil_pressure, mean(alternator_potential) AS alternator, mean(level) AS fuel_level from, max(total_engine_hours) AS eng_hours from {} '
+    query = ('select  mean(speed) AS rpm, mean(engine_temp) AS  eng_temp, mean(oil_pressure) AS oil_pressure, mean(alternator_potential) AS alternator, mean(level) AS fuel_level , max(total_engine_hours) AS eng_hours from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
