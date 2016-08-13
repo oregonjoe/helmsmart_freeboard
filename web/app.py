@@ -575,7 +575,10 @@ def freeboard_ImportSeries():
   serieskey = request.args.get('datakey','')
   Interval = request.args.get('Interval',"1day")
   Instance = request.args.get('instance','0')
-  
+  Repeat = int(request.args.get('repeat','1'))
+  Sensor = request.args.get('sensor','environmental_data')
+
+    
   starttime = 0
 
   epochtimes = getepochtimes(Interval)
@@ -585,7 +588,9 @@ def freeboard_ImportSeries():
   
   resolution = 60*60*24
   resolution = 60
-    
+  resolution = 60*60*24
+  endepoch =  int(time.time())
+  startepoch = endepoch - (resolution * 1)   
 
   deviceid = getedeviceid(deviceapikey)
   
@@ -604,9 +609,9 @@ def freeboard_ImportSeries():
   dcdatabase = 'pushsmart-cloud'
 
 
-  epochtimes = getepochtimes(Interval)
-  startepoch = epochtimes[0]
-  endepoch = epochtimes[1]
+  #epochtimes = getepochtimes(Interval)
+  #startepoch = epochtimes[0]
+  #endepoch = epochtimes[1]
   #resolution = epochtimes[2]
 
 
@@ -617,192 +622,157 @@ def freeboard_ImportSeries():
   database = 'pushsmart-final'
 
   db = InfluxDBClient(host, port, username, password, database)
+  dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
 
-  influxdb_keys=[]
+  days = 0
 
-  SERIES_KEYS=[]
-  SERIES_KEY1 = ""
-  SERIES_KEY2 = ""
-  SERIES_KEY3 = ""
-  SERIES_KEY4 = ""
-  SERIES_KEY5 = ""
-  SERIES_KEY6 = ""
-  SERIES_KEY7 = ""  
-  SERIES_KEY8 = ""
+  while (days < Repeat):
 
-  series_elements = 0
+    #serieskeys = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:*.type:*.parameter:*.HelmSmart'
+    serieskeys = 'deviceid:' + deviceid + '.sensor:' + Sensor + ':*.instance:*.type:*.parameter:*.HelmSmart'
+        
+    if serieskeys.find("*") > 0:
+        serieskeys = serieskeys.replace("*", ".*")
 
-
-  strvalue = ""
-  value1 = '---'
-  value2 = '---'
-  value3 = '---'
-  value4 = '---'
-  value5 = '---'
-  value6 = '---'
-  value7 = '---'
-  value8 = '---'
-  """
-  SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:' + Instance + '.type:NULL.parameter:speed.HelmSmart'
-  influxdb_keys.append(SERIES_KEY1)
-  SERIES_KEY2 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:engine_temp.HelmSmart'
-  influxdb_keys.append(SERIES_KEY2)    
-  SERIES_KEY3 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:oil_pressure.HelmSmart'
-  influxdb_keys.append(SERIES_KEY3)
-  SERIES_KEY4 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:alternator_potential.HelmSmart'
-  influxdb_keys.append(SERIES_KEY4)
-  SERIES_KEY5 = 'deviceid:' + deviceid + '.sensor:trip_parameters_engine.source:*.instance:' + Instance + '.type:NULL.parameter:trip_fuel_used.HelmSmart'
-  influxdb_keys.append(SERIES_KEY5)    
-  SERIES_KEY6 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:fuel_rate.HelmSmart'
-  influxdb_keys.append(SERIES_KEY6)
-  SERIES_KEY7 = 'deviceid:' + deviceid + '.sensor:fluid_level.source:*.instance:' + Instance + '.type:0.parameter:level.HelmSmart'
-  influxdb_keys.append(SERIES_KEY7)    
-  SERIES_KEY8 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:total_engine_hours.HelmSmart'
-  influxdb_keys.append(SERIES_KEY8)
-
-  if influxdb_keys != []:
-      serieskeys = '|'.join(influxdb_keys)
-  """
-  
-  SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:*.type:NULL.parameter:*.HelmSmart'
-  influxdb_keys.append(SERIES_KEY1)  
-  #serieskeys = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:*.type:NULL.parameter:*.HelmSmart'
-  serieskeys = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:*.type:*.parameter:*.HelmSmart'
-
-      
-  if serieskeys.find("*") > 0:
-      serieskeys = serieskeys.replace("*", ".*")
-
-      query = ('select mean(value) from /{}/ '
-                   'where time > {}s and time < {}s '
-                   'group by time({}s)') \
-              .format( serieskeys,
-                      startepoch, endepoch,
-                      resolution)
-  else:
-      query = ('select mean(value) from "{}" '
-                   'where time > {}s and time < {}s '
-                   'group by time({}s)') \
-              .format( serieskeys,
-                      startepoch, endepoch,
-                      resolution)
+        query = ('select mean(value) from /{}/ '
+                     'where time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+    else:
+        query = ('select mean(value) from "{}" '
+                     'where time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( serieskeys,
+                        startepoch, endepoch,
+                        resolution)
 
 
-  log.info("freeboard data Query %s", query)
+    log.info("freeboard data Query %s", query)
 
 
-  response= db.query(query)
+    response= db.query(query)
 
-  #log.info("freeboard Get InfluxDB response %s", response)
+    #log.info("freeboard Get InfluxDB response %s", response)
 
-  keys=[]
-  """
-  for series in response:
-    log.info("influxdb response..%s", series )
-    keys.append(series['name'])
+    keys=[]
+    """
+    for series in response:
+      log.info("influxdb response..%s", series )
+      keys.append(series['name'])
 
-  return jsonify(series = keys,  status='success')
-  """
-  
-  for series in response:
-    log.info("influxdb response..%s", series )
-    for point in series['points']:
-      fields = {}
-      for key, val in zip(series['columns'], point):
-        fields[key] = val
-
-
-      mytime = int(fields['time'])
-      #mydatetime = datetime.datetime.fromtimestamp(float(fields['time']))
-      
-      #mydtt = mytime.timetuple()
-      #ts = int(mktime(mydtt) * 1000)
-      ts = int(mytime * 1000)
-      #ts = mytime.replace(' ','T')
-      #ts = ts + 'Z'
+    return jsonify(series = keys,  status='success')
+    """
+    
+    for series in response:
+      log.info("influxdb response..%s", series )
+      for point in series['points']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
 
 
-      
+        mytime = int(fields['time'])
+        #mydatetime = datetime.datetime.fromtimestamp(float(fields['time']))
+        
+        #mydtt = mytime.timetuple()
+        #ts = int(mktime(mydtt) * 1000)
+        ts = int(mytime * 1000)
+        #ts = mytime.replace(' ','T')
+        #ts = ts + 'Z'
 
-      tagpairs = series['name'].split(".")
-      #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
 
-      myjsonkeys={}
+        
 
-      tag0 = tagpairs[0].split(":")
-      tag1 = tagpairs[1].split(":")
-      tag2 = tagpairs[2].split(":")
-      tag3 = tagpairs[3].split(":")
-      tag4 = tagpairs[4].split(":")
-      tag5 = tagpairs[5].split(":")
+        tagpairs = series['name'].split(".")
+        #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
 
-      myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
-      #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
+        myjsonkeys={}
 
-      #values = {'value':value}
-      values = {tag5[1]:float(fields['mean'])}
+        tag0 = tagpairs[0].split(":")
+        tag1 = tagpairs[1].split(":")
+        tag2 = tagpairs[2].split(":")
+        tag3 = tagpairs[3].split(":")
+        tag4 = tagpairs[4].split(":")
+        tag5 = tagpairs[5].split(":")
 
-      ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
-      #log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
+        myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
+        #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
 
-      keys.append(ifluxjson)
-      
-  #return jsonify(series = keys,  status='success')
+        #values = {'value':value}
+        values = {tag5[1]:float(fields['mean'])}
 
-  try:
-    dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
+        ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
+        #log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
 
-    """    
+        keys.append(ifluxjson)
+        
+    #return jsonify(series = keys,  status='success')
+
     try:
-      dbc.create_database(dcdatabase)
+      #dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
+
+      """    
+      try:
+        dbc.create_database(dcdatabase)
+        #dbc.drop_database(dcdatabase)
+      except InfluxDBClientError, e:
+        log.info('freeboard_ImportInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+        # Drop and create
+        dbc.drop_database(dcdatabase)
+        dbc.create_database(dcdatabase)
+      """          
+      #return jsonify(series = keys,  status='success')    
+      """        
+      for tags in keys:
+        log.info('freeboard: delete tags %s:  ', tags['tags'])
+        #dbc.delete_series(tags)
+      """          
       #dbc.drop_database(dcdatabase)
-    except InfluxDBClientError, e:
-      log.info('freeboard_ImportInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
-      # Drop and create
-      dbc.drop_database(dcdatabase)
-      dbc.create_database(dcdatabase)
-    """          
-    #return jsonify(series = keys,  status='success')    
-    """        
-    for tags in keys:
-      log.info('freeboard: delete tags %s:  ', tags['tags'])
-      #dbc.delete_series(tags)
-    """          
-    #dbc.drop_database(dcdatabase)
-    if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
-    #db.write_points_with_precision(mydata, time_precision='ms')
-    dbc.write_points(keys, time_precision='ms')
-    #shim.write_multi(mydata)
+      if debug_all: log.info('freeboard_ImportSeries:  InfluxDB-Cloud write ')
+      #db.write_points_with_precision(mydata, time_precision='ms')
+      dbc.write_points(keys, time_precision='ms')
+      #shim.write_multi(mydata)
 
-  #except influxdb.InfluxDBClientError as e:   
-  except InfluxDBClientError as e:
-    if debug_all: log.info('freeboard_ImportSeries: inFlux error in InfluxDB-Cloud write %s:  ' % str(e))
+    #except influxdb.InfluxDBClientError as e:   
+    except InfluxDBClientError as e:
+      if debug_all: log.info('freeboard_ImportSeries: inFlux error in InfluxDB-Cloud write %s:  ' % str(e))
+      return jsonify(count = days,  status='error')
     
-  except TypeError, e:
-    if debug_all: log.info('freeboard_ImportSeries: TypeError in InfluxDB-Cloud write %s:  ', keys)
-    #e = sys.exc_info()[0]
+    except TypeError, e:
+      if debug_all: log.info('freeboard_ImportSeries: TypeError in InfluxDB-Cloud write %s:  ', keys)
+      #e = sys.exc_info()[0]
 
-    if debug_all: log.info('freeboard_ImportSeries: TypeError in InfluxDB-Cloud write %s:  ' % str(e))
+      if debug_all: log.info('freeboard_ImportSeries: TypeError in InfluxDB-Cloud write %s:  ' % str(e))
+      return jsonify(count = days,  status='error')
     
-  except KeyError, e:
-    if debug_all: log.info('freeboard_ImportSeries: KeyError in InfluxDB-Cloud write %s:  ', keys)
-    #e = sys.exc_info()[0]
+    except KeyError, e:
+      if debug_all: log.info('freeboard_ImportSeries: KeyError in InfluxDB-Cloud write %s:  ', keys)
+      #e = sys.exc_info()[0]
 
-    if debug_all: log.info('freeboard_ImportSeries: KeyError in InfluxDB-Cloud write %s:  ' % str(e))
-
-  except NameError, e:
-    if debug_all: log.info('freeboard_ImportSeries: NameError in InfluxDB-Cloud write %s:  ', keys)
-    #e = sys.exc_info()[0]
-
-    if debug_all: log.info('freeboard_ImportSeries: NameError in InfluxDB-Cloud write %s:  ' % str(e))   
+      if debug_all: log.info('freeboard_ImportSeries: KeyError in InfluxDB-Cloud write %s:  ' % str(e))
+      return jsonify(count = days,  status='error')
     
-    
-  except:
-    if debug_all: log.info('freeboard_ImportSeries: Error in InfluxDB-Cloud write %s:  ', keys)
-    e = sys.exc_info()[0]
-    if debug_all: log.info("Error: %s" % e)
+    except NameError, e:
+      if debug_all: log.info('freeboard_ImportSeries: NameError in InfluxDB-Cloud write %s:  ', keys)
+      #e = sys.exc_info()[0]
 
-  return jsonify(series = keys,  status='success')
+      if debug_all: log.info('freeboard_ImportSeries: NameError in InfluxDB-Cloud write %s:  ' % str(e))   
+      return jsonify(count = days,  status='error')      
+      
+    except:
+      if debug_all: log.info('freeboard_ImportSeries: Error in InfluxDB-Cloud write %s:  ', keys)
+      e = sys.exc_info()[0]
+      if debug_all: log.info("Error: %s" % e)
+      return jsonify(count = days,  status='error')
+
+    days = days + 1
+
+    endepoch = startepoch
+    startepoch = endepoch - (resolution * 1)   
+
+  return jsonify(count = days,  status='success')
 
   query = ("select mean(speed) as speed from HelmSmart where deviceid='001EC010AD69' and sensor='engine_parameters_rapid_update' and time > {}s and time < {}s group by time(60s)") \
         .format( startepoch, endepoch)
