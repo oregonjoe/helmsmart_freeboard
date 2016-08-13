@@ -667,7 +667,7 @@ def freeboard_ImportSeries():
     seriescount=0
     
     for series in response:
-      log.info("influxdb response..%s", series )
+      log.info("influxdb response..%s", series['name'] )
       seriescount = seriescount + 1
       for point in series['points']:
         fields = {}
