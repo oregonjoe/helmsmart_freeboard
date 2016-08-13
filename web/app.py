@@ -587,7 +587,7 @@ def freeboard_ImportSeries():
   resolution = epochtimes[2]
   
   resolution = 60*60*24
-  resolution = 60
+  qresolution = 60
   resolution = 60*60*24
   endepoch =  int(time.time())
   startepoch = endepoch - (resolution * 1)   
@@ -639,14 +639,14 @@ def freeboard_ImportSeries():
                      'group by time({}s)') \
                 .format( serieskeys,
                         startepoch, endepoch,
-                        resolution)
+                        qresolution)
     else:
         query = ('select mean(value) from "{}" '
                      'where time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( serieskeys,
                         startepoch, endepoch,
-                        resolution)
+                        qresolution)
 
 
     log.info("freeboard data Query %s", query)
@@ -664,9 +664,11 @@ def freeboard_ImportSeries():
 
     return jsonify(series = keys,  status='success')
     """
+    seriescount=0
     
     for series in response:
       log.info("influxdb response..%s", series )
+      seriescount = seriescount + 1
       for point in series['points']:
         fields = {}
         for key, val in zip(series['columns'], point):
@@ -709,6 +711,8 @@ def freeboard_ImportSeries():
         keys.append(ifluxjson)
         
     #return jsonify(series = keys,  status='success')
+        
+    log.info("freeboard Import InfluxDB series %s", seriescount)
 
     try:
       #dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
