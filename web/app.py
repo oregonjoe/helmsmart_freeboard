@@ -751,6 +751,7 @@ def freeboard_ImportSeries():
   try:
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
 
+    """
     try:
       #dbc.create_database(dcdatabase)
       dbc.drop_database(dcdatabase)
@@ -759,8 +760,8 @@ def freeboard_ImportSeries():
       # Drop and create
       dbc.drop_database(dcdatabase)
       dbc.create_database(dcdatabase)
-      
-    return jsonify(series = keys,  status='success')    
+    """      
+    #return jsonify(series = keys,  status='success')    
     """        
     for tags in keys:
       log.info('freeboard: delete tags %s:  ', tags['tags'])
@@ -814,7 +815,7 @@ def freeboard_ImportSeries():
 
 
 
-  return jsonify(series = keys,  status='success')
+  return jsonify(series = result,  status='success')
 
   """
       seriesname = series['name']
