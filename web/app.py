@@ -808,7 +808,7 @@ def freeboard_ImportSeries():
     
   result = dbc.query(query)
 
-  #log.info("freeboard Get InfluxDB results %s", result)
+  log.info("freeboard Get InfluxDB results %s", result)
 
 
 
