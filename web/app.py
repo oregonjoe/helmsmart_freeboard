@@ -4161,13 +4161,13 @@ def freeboard_engine2():
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
 
-        value1 = convertfbunits( fields['speed'], 24)
-        value2 =  convertfbunits(fields['engine_temp'], 0)
-        value3=  convertfbunits(fields['oil_pressure'], 8)
-        value4 =  convertfbunits(fields['alternator_potential'], 27)
-        value6 =  convertfbunits(fields['fuel_rate'], 18)
-        value7=  convertfbunits(fields['level'], 26)
-        value8 = convertfbunits(fields['total_engine_hours'], 37)
+        value1 = convertfbunits( point['speed'], 24)
+        value2 =  convertfbunits(point['engine_temp'], 0)
+        value3=  convertfbunits(point['oil_pressure'], 8)
+        value4 =  convertfbunits(point['alternator_potential'], 27)
+        value6 =  convertfbunits(point['fuel_rate'], 18)
+        value7=  convertfbunits(point['level'], 26)
+        value8 = convertfbunits(point['total_engine_hours'], 37)
         mydatetimestr = str(point['time'])
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
