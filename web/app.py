@@ -751,16 +751,16 @@ def freeboard_ImportSeries():
   try:
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
 
-    """
+    
     try:
-      #dbc.create_database(dcdatabase)
-      dbc.drop_database(dcdatabase)
+      dbc.create_database(dcdatabase)
+      #dbc.drop_database(dcdatabase)
     except InfluxDBClientError, e:
       log.info('freeboard_ImportInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
       # Drop and create
       dbc.drop_database(dcdatabase)
       dbc.create_database(dcdatabase)
-    """      
+          
     #return jsonify(series = keys,  status='success')    
     """        
     for tags in keys:
