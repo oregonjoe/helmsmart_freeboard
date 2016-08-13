@@ -666,7 +666,8 @@ def freeboard_ImportSeries():
   
   SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:*.type:NULL.parameter:*.HelmSmart'
   influxdb_keys.append(SERIES_KEY1)  
-  serieskeys = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:*.type:NULL.parameter:*.HelmSmart'
+  #serieskeys = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:*.type:NULL.parameter:*.HelmSmart'
+  serieskeys = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:*.type:*.parameter:*.HelmSmart'
 
       
   if serieskeys.find("*") > 0:
@@ -751,7 +752,7 @@ def freeboard_ImportSeries():
   try:
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
 
-    
+    """    
     try:
       dbc.create_database(dcdatabase)
       #dbc.drop_database(dcdatabase)
@@ -760,7 +761,7 @@ def freeboard_ImportSeries():
       # Drop and create
       dbc.drop_database(dcdatabase)
       dbc.create_database(dcdatabase)
-          
+    """          
     #return jsonify(series = keys,  status='success')    
     """        
     for tags in keys:
@@ -801,6 +802,7 @@ def freeboard_ImportSeries():
     e = sys.exc_info()[0]
     if debug_all: log.info("Error: %s" % e)
 
+  return jsonify(series = keys,  status='success')
 
   query = ("select mean(speed) as speed from HelmSmart where deviceid='001EC010AD69' and sensor='engine_parameters_rapid_update' and time > {}s and time < {}s group by time(60s)") \
         .format( startepoch, endepoch)
@@ -815,7 +817,7 @@ def freeboard_ImportSeries():
 
 
 
-  return jsonify(series = result,  status='success')
+  return jsonify(series = keys,  status='success')
 
   """
       seriesname = series['name']
