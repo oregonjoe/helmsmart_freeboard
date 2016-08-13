@@ -4085,19 +4085,19 @@ def freeboard_engine():
         response= dbc.query(query)
         
     except TypeError, e:
-        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', query)
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
             
     except KeyError, e:
-        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', query)
         log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
 
     except NameError, e:
-        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', query)
         log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
             
     except IndexError, e:
-        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', query)
         log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
 
     except ValueError, e:
@@ -4106,7 +4106,11 @@ def freeboard_engine():
 
     except AttributeError, e:
       #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
-      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))
+
+    except UnboundLocalError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))  
 
     except InfluxDBClientError, e:
       log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
@@ -4114,7 +4118,7 @@ def freeboard_engine():
 
             
     except:
-        log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+        log.info('freeboard: Error in InfluxDB mydata append %s:', query)
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
         pass
