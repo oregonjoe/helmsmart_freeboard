@@ -4172,7 +4172,7 @@ def freeboard_engine():
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
         
-      log.info('freeboard: freeboard_engine returning data values %s:  ', value1)    
+      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value4, point['alternator_potential'])    
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
