@@ -739,7 +739,7 @@ def freeboard_ImportSeries():
       #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
 
       #values = {'value':value}
-      values = {tag5[1]:int(fields['mean'])}
+      values = {tag5[1]:float(fields['mean'])}
 
       ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
       #log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
@@ -752,13 +752,15 @@ def freeboard_ImportSeries():
     dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
 
     try:
-      dbc.create_database(dcdatabase)
+      #dbc.create_database(dcdatabase)
+      dbc.drop_database(dcdatabase)
     except InfluxDBClientError, e:
-      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+      log.info('freeboard_ImportInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
       # Drop and create
       dbc.drop_database(dcdatabase)
       dbc.create_database(dcdatabase)
-    
+      
+    return jsonify(series = keys,  status='success')    
     """        
     for tags in keys:
       log.info('freeboard: delete tags %s:  ', tags['tags'])
