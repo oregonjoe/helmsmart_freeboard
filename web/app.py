@@ -91,8 +91,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def convertfbunits(value, units):
             units = int(units)
 
-            if not value:
-              return "---"
+            #if not value:
+            #  return "---"
             
             if value is None:
               return "---"
@@ -4164,6 +4164,7 @@ def freeboard_engine():
         value1 = convertfbunits( point['speed'], 24)
         value2 =  convertfbunits(point['engine_temp'], 0)
         value3=  convertfbunits(point['oil_pressure'], 8)
+        #value4 =  convertfbunits(point['alternator_potential'], 27)
         value4 =  convertfbunits(point['alternator_potential'], 27)
         value6 =  convertfbunits(point['fuel_rate'], 18)
         value7=  convertfbunits(point['level'], 26)
