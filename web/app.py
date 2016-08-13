@@ -4056,29 +4056,9 @@ def freeboard_engine2():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " (sensor='cogsog' OR sensor='heading') AND "
-    serieskeys= serieskeys +  " (type='True') "
+    serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='fluid_level') AND "
+    serieskeys= serieskeys +  " (instance='" + instance + "') "
 
-
-    influxdb_keys=[]
-    SERIES_KEY1 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:' + Instance + '.type:NULL.parameter:speed.HelmSmart'
-    influxdb_keys.append(SERIES_KEY1)
-    SERIES_KEY2 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:engine_temp.HelmSmart'
-    influxdb_keys.append(SERIES_KEY2)    
-    SERIES_KEY3 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:oil_pressure.HelmSmart'
-    influxdb_keys.append(SERIES_KEY3)
-    SERIES_KEY4 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:alternator_potential.HelmSmart'
-    influxdb_keys.append(SERIES_KEY4)
-    #SERIES_KEY5 = 'deviceid:' + deviceid + '.sensor:engine_parameters_rapid_update.source:*.instance:' + Instance + '.type:NULL.parameter:boost_pressure.HelmSmart'
-    #influxdb_keys.append(SERIES_KEY5)
-    SERIES_KEY5 = 'deviceid:' + deviceid + '.sensor:trip_parameters_engine.source:*.instance:' + Instance + '.type:NULL.parameter:trip_fuel_used.HelmSmart'
-    influxdb_keys.append(SERIES_KEY5)    
-    SERIES_KEY6 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:fuel_rate.HelmSmart'
-    influxdb_keys.append(SERIES_KEY6)
-    SERIES_KEY7 = 'deviceid:' + deviceid + '.sensor:fluid_level.source:*.instance:' + Instance + '.type:0.parameter:level.HelmSmart'
-    influxdb_keys.append(SERIES_KEY7)    
-    SERIES_KEY8 = 'deviceid:' + deviceid + '.sensor:engine_parameters_dynamic.source:*.instance:' + Instance + '.type:NULL.parameter:total_engine_hours.HelmSmart'
-    influxdb_keys.append(SERIES_KEY8)
 
 
 
@@ -4089,21 +4069,8 @@ def freeboard_engine2():
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
-
       
-
-    if serieskeys.find("*") > 0:
-      serieskeys = serieskeys.replace("*", ".*")
-
-      query = ('select  mean(course_over_ground) AS cog, mean(speed_over_ground) AS  sog, mean(heading) AS heading  from {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format( measurement, serieskeys,
-                        startepoch, endepoch,
-                        resolution)
-    else:
-      
-      query = ('select  mean(course_over_ground) AS cog, mean(speed_over_ground) AS  sog, mean(heading) AS heading  from {} '
+    query = ('select  mean(speed) AS rpm, mean(engine_temp) AS  eng_temp, mean(oil_pressure) AS oil_pressure, mean(alternator_potential) AS alternator, mean(level) AS fuel_level from, max(total_engine_hours) AS eng_hours from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -4181,7 +4148,12 @@ def freeboard_engine2():
       value2 = '---'
       value3 = '---'
       value4 = '---'
- 
+      value5 = '---'
+      value6 = '---'
+      value7 = '---'
+      value8 = '---'
+
+      
       points = list(response.get_points())
 
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
@@ -4189,22 +4161,22 @@ def freeboard_engine2():
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
 
-        value1 = convertfbunits(point['cog'], 16)
-        value2 = convertfbunits(point['sog'], 4)
-        value3 = convertfbunits(point['heading'], 16)
+        value1 = convertfbunits( fields['rpm'], 24)
+        value2 =  convertfbunits(fields['engine_temp'], 0)
+        value3=  convertfbunits(fields['oil_pressure'], 8)
+        value4 =  convertfbunits(fields['alternator_potential'], 27)
+        value6 =  convertfbunits(fields['fuel_rate'], 18)
+        value7=  convertfbunits(fields['fuel_level'], 26)
+        value8 = convertfbunits(fields['eng_hours'], 37)
         mydatetimestr = str(point['time'])
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-
-      log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
-
+        
+      log.info('freeboard: freeboard_engine returning data values %s:  ', value1)    
+      #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-
-
-      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','cog':value1, 'sog':value2, 'heading_true':value3, 'heading_mag':value4})
-        
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
 
      
     
