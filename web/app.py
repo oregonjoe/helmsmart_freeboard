@@ -2324,9 +2324,9 @@ def freeboard_battery():
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
       
-@app.route('/freeboard_engine')
+@app.route('/freeboard_engineXX')
 @cross_origin()
-def freeboard_engine():
+def freeboard_engineXX():
 
     deviceapikey = request.args.get('apikey','')
     Instance = request.args.get('instance','0')
@@ -4015,9 +4015,9 @@ def freeboard_nav():
 
 
 
-@app.route('/freeboard_engine2')
+@app.route('/freeboard_engine')
 @cross_origin()
-def freeboard_engine2():
+def freeboard_engine():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
