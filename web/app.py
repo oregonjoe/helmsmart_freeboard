@@ -629,7 +629,7 @@ def freeboard_ImportSeries():
   while (days < Repeat):
 
     #serieskeys = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:*.type:*.parameter:*.HelmSmart'
-    serieskeys = 'deviceid:' + deviceid + '.sensor:' + Sensor + ':*.instance:*.type:*.parameter:*.HelmSmart'
+    serieskeys = 'deviceid:' + deviceid + '.sensor:' + Sensor + '.source:*.instance:*.type:*.parameter:*.HelmSmart'
         
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
