@@ -4070,7 +4070,7 @@ def freeboard_engine2():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
       
-    query = ('select  mean(speed) AS rpm, mean(engine_temp) AS  eng_temp, mean(oil_pressure) AS oil_pressure, mean(alternator_potential) AS alternator, mean(level) AS fuel_level , max(total_engine_hours) AS eng_hours from {} '
+    query = ('select  mean(speed) AS speed, mean(engine_temp) AS  engine_temp, mean(oil_pressure) AS oil_pressure, mean(alternator_potential) AS alternator_potential, mean(fuel_rate) AS fuel_rate ,  mean(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -4153,7 +4153,7 @@ def freeboard_engine2():
       value7 = '---'
       value8 = '---'
 
-      
+       
       points = list(response.get_points())
 
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
@@ -4161,13 +4161,13 @@ def freeboard_engine2():
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
 
-        value1 = convertfbunits( fields['rpm'], 24)
+        value1 = convertfbunits( fields['speed'], 24)
         value2 =  convertfbunits(fields['engine_temp'], 0)
         value3=  convertfbunits(fields['oil_pressure'], 8)
         value4 =  convertfbunits(fields['alternator_potential'], 27)
         value6 =  convertfbunits(fields['fuel_rate'], 18)
-        value7=  convertfbunits(fields['fuel_level'], 26)
-        value8 = convertfbunits(fields['eng_hours'], 37)
+        value7=  convertfbunits(fields['level'], 26)
+        value8 = convertfbunits(fields['total_engine_hours'], 37)
         mydatetimestr = str(point['time'])
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
