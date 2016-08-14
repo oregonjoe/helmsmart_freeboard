@@ -4948,7 +4948,7 @@ def get_influxdbcloud_data():
       #jsonkey.append(strvaluekey)
       print 'inFluxDB start processing data points:'
 
-      keys = result.raw.get('series',[])
+      keys = response.raw.get('series',[])
       #log.info("freeboard Get InfluxDB series keys %s", keys)
 
       """
