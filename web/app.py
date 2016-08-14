@@ -2137,9 +2137,9 @@ def freeboard_navXX():
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
   
-@app.route('/freeboard_battery')
+@app.route('/freeboard_batteryXX')
 @cross_origin()
-def freeboard_battery():
+def freeboard_batteryXX():
 
     deviceapikey = request.args.get('apikey','')
     Instance = request.args.get('instance','0')
@@ -2569,9 +2569,9 @@ def freeboard_engineXX():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S") 
     return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False','status':'error', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
 
-@app.route('/freeboard_status')
+@app.route('/freeboard_statusXX')
 @cross_origin()
-def freeboard_status():
+def freeboard_statusXX():
 
     deviceapikey = request.args.get('apikey','')
     Instance = request.args.get('instance','0')
@@ -2942,9 +2942,14 @@ def freeboard_environmental():
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        value1 = convertfbunits(point['temperature'], 0)
-        value2 = convertfbunits(point['atmospheric_pressure'], 10)
-        value3 = convertfbunits(point['humidity'], 26)
+        if point['temperature'] is not None: 
+          value1 = convertfbunits(point['temperature'], 0)
+        if point['atmospheric_pressure'] is not None:         
+          value2 = convertfbunits(point['atmospheric_pressure'], 10)
+        if point['humidity'] is not None:         
+          value3 = convertfbunits(point['humidity'], 26)
+
+          
         mydatetimestr = str(point['time'])
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
@@ -3102,8 +3107,10 @@ def freeboard_winddata():
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        value1 = convertfbunits(point['wind_speed'], 4)
-        value2 = convertfbunits(point['wind_direction'], 16)
+        if point['wind_speed'] is not None:       
+          value1 = convertfbunits(point['wind_speed'], 4)
+        if point['wind_direction'] is not None:       
+          value2 = convertfbunits(point['wind_direction'], 16)
 
         mydatetimestr = str(point['time'])
 
@@ -3796,8 +3803,10 @@ def freeboard_location():
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        value1 = convertfbunits(point['lat'], 16)
-        value2 = convertfbunits(point['lng'], 16)
+        if point['lat'] is not None:
+          if point['lng'] is not None:          
+            value1 = convertfbunits(point['lat'], 16)
+            value2 = convertfbunits(point['lng'], 16)
 
         mydatetimestr = str(point['time'])
 
@@ -3977,10 +3986,15 @@ def freeboard_nav():
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-
-        value1 = convertfbunits(point['cog'], 16)
-        value2 = convertfbunits(point['sog'], 4)
-        value3 = convertfbunits(point['heading'], 16)
+        if point['cog'] is not None: 
+          value1 = convertfbunits(point['cog'], 16)
+          
+        if point['sog'] is not None:         
+          value2 = convertfbunits(point['sog'], 4)
+          
+        if point['heading'] is not None:         
+          value3 = convertfbunits(point['heading'], 16)
+       
         mydatetimestr = str(point['time'])
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
@@ -3993,6 +4007,183 @@ def freeboard_nav():
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','cog':value1, 'sog':value2, 'heading_true':value3, 'heading_mag':value4})
+        
+
+     
+    
+    except:
+        log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+  
+    #return jsonify(status='error', update=False )
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+
+
+
+
+@app.route('/freeboard_battery')
+@cross_origin()
+def freeboard_battery():
+
+    deviceapikey = request.args.get('apikey','')
+    serieskey = request.args.get('datakey','')
+    Interval = request.args.get('Interval',"5min")
+    Instance = request.args.get('instance','0')
+
+    
+    starttime = 0
+
+    epochtimes = getepochtimes(Interval)
+    startepoch = epochtimes[0]
+    endepoch = epochtimes[1]
+    resolution = epochtimes[2]
+
+
+    deviceid = getedeviceid(deviceapikey)
+    
+    log.info("freeboard deviceid %s", deviceid)
+
+    if deviceid == "":
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+    measurement = "HelmSmart"
+
+
+
+    serieskeys=" deviceid='"
+    serieskeys= serieskeys + deviceid + "' AND "
+    serieskeys= serieskeys +  " sensor='battery_status'  "
+    serieskeys= serieskeys +  " (instance='" + Instance + "') "
+
+    log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
+    log.info("freeboard Create InfluxDB %s", database)
+
+
+    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+      
+    query = ('select  mean(voltage) AS voltage, mean(current) AS  current, mean(temperature) AS temperature  from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution) 
+ 
+
+
+    log.info("freeboard data Query %s", query)
+
+    try:
+        response= dbc.query(query)
+        
+    except TypeError, e:
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+
+            
+    except:
+        log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+        e = sys.exc_info()[0]
+        log.info("freeboard: Error: %s" % e)
+        pass
+
+    if not response:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+
+    keys = response.raw.get('series',[])
+    #keys = result.keys()
+    log.info("freeboard Get InfluxDB series keys %s", keys)
+
+
+    #callback = request.args.get('callback')
+    #return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
+     
+    jsondata=[]
+    #jsonkey=[]
+    #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+    #jsonkey.append(strvaluekey)
+    #print 'freeboard start processing data points:'
+    
+    #log.info("freeboard jsonkey..%s", jsonkey )
+    try:
+    
+      strvalue = ""
+      value1 = '---'
+      value2 = '---'
+      value3 = '---'
+      value4 = '---'
+ 
+      points = list(response.get_points())
+
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+      for point in points:
+        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        if point['voltage'] is not None: 
+          value1 = convertfbunits(point['cog'], 27)
+          
+        if point['current'] is not None:         
+          value2 = convertfbunits(point['sog'], 28)
+          
+        if point['temperature'] is not None:         
+          value3 = convertfbunits(point['heading'], 0)
+       
+        mydatetimestr = str(point['time'])
+
+        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+      log.info('freeboard: freeboard returning data values voltage:%s, current:%s  ', value1,value2)            
+
+      callback = request.args.get('callback')
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':value1, 'current':value2, 'temperature':value3})
         
 
      
@@ -4245,6 +4436,272 @@ def freeboard_engine():
     #return jsonify(status='error', update=False )
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+
+@app.route('/freeboard_status')
+@cross_origin()
+def freeboard_status():
+
+    deviceapikey = request.args.get('apikey','')
+    serieskey = request.args.get('datakey','')
+    Interval = request.args.get('Interval',"5min")
+    Instance = request.args.get('instance','0')
+
+    
+    starttime = 0
+
+    epochtimes = getepochtimes(Interval)
+    startepoch = epochtimes[0]
+    endepoch = epochtimes[1]
+    resolution = epochtimes[2]
+
+
+    deviceid = getedeviceid(deviceapikey)
+    
+    log.info("freeboard deviceid %s", deviceid)
+
+    if deviceid == "":
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+    measurement = "HelmSmart"
+
+
+    serieskeys=" deviceid='"
+    serieskeys= serieskeys + deviceid + "' AND "
+    serieskeys= serieskeys +  " sensor='seasmartswitch'  AND "
+    serieskeys= serieskeys +  " (instance='" + Instance + "') "
+
+
+
+
+
+    log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
+    log.info("freeboard Create InfluxDB %s", database)
+
+
+    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+      
+    query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution) 
+ 
+
+
+    log.info("freeboard data Query %s", query)
+
+    try:
+        response= dbc.query(query)
+        
+    except TypeError, e:
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', query)
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', query)
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', query)
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', query)
+        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))
+
+    except UnboundLocalError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))  
+
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Client Error in InfluxDB  %s:  ' % str(e))
+
+
+    except InfluxDBServerError, e:
+      log.info('freeboard_createInfluxDB: Exception Client Error in InfluxDB  %s:  ' % str(e))
+
+      
+    except:
+        log.info('freeboard: Error in InfluxDB mydata append %s:', query)
+        e = sys.exc_info()[0]
+        log.info("freeboard: Error: %s" % e)
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+    if not response:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+
+    keys = response.raw.get('series',[])
+    #keys = result.keys()
+    log.info("freeboard Get InfluxDB series keys %s", keys)
+
+
+    #callback = request.args.get('callback')
+    #return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
+     
+    jsondata=[]
+    #jsonkey=[]
+    #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+    #jsonkey.append(strvaluekey)
+    #print 'freeboard start processing data points:'
+    
+    #log.info("freeboard jsonkey..%s", jsonkey )
+    try:
+    
+      strvalue = ""
+      value1 = '---'
+      value2 = '---'
+
+
+      status0=False
+      status1=False
+      status2=False
+      status3=False
+      status4=False
+      status5=False
+      status6=False
+      status7=False
+      status8=False
+      status9=False
+      status10=False
+      status11=False
+
+       
+      points = list(response.get_points())
+
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+      for point in points:
+        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+
+        if point['bank0'] is not None:
+          value1 =  fields['bank0']
+
+          if value1 != '---':
+            if value1 & 0x1 == 0x1:
+              status0 = True
+
+            if value1 & 0x2 == 0x2:
+              status1 = True
+
+            if value1 & 0x4 == 0x4:
+              status2 = True
+
+            if value1 & 0x8 == 0x8:
+              status3 = True
+
+            if value1 & 0x10 == 0x10:
+              status4 = True
+
+            if value1 & 0x20 == 0x20:
+              status5 = True
+
+            if value1 & 0x40 == 0x40:
+              status6 = True
+
+            if value1 & 0x80 == 0x80:
+              status7 = True
+
+
+        if point['bank1'] is not None:
+          value2 =  fields['bank1']
+            
+          if value2 != '---':
+            if value1 & 0x1 == 0x01:
+              status8 = True
+
+            if value2 & 0x2 == 0x02:
+              status9 = True
+
+            if value2 & 0x4 == 0x04:
+              status10 = True
+
+            if value2 & 0x8 == 0x08:
+              status11 = True
+
+            
+ 
+
+        
+        mydatetimestr = str(point['time'])
+
+        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+        
+      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value4, point['alternator_potential'])    
+      #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
+      callback = request.args.get('callback')
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11})
+
+    except TypeError, e:
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))     
+    
+    except:
+        log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+  
+    #return jsonify(status='error', update=False )
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
 
 
 
