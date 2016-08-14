@@ -4958,89 +4958,41 @@ def get_influxdbcloud_data():
       strvalue=""
       
       for series in keys:
-        log.info("freeboard Get InfluxDB series key %s", series)
-        log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
-        log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
-        log.info("freeboard Get InfluxDB series values %s ", series['values'])
+        #log.info("freeboard Get InfluxDB series key %s", series)
+        #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+        #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+        #log.info("freeboard Get InfluxDB series values %s ", series['values'])
 
       """        
         values = series['values']
         for value in values:
           log.info("freeboard Get InfluxDB series time %s", value[0])
           log.info("freeboard Get InfluxDB series mean %s", value[1])
+      """
 
+        tag = series['tags']
+        log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+
+        #mydatetimestr = str(fields['time'])
+        strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch, 'resolution': resolution}
+        jsonkey.append(strvaluekey)        
+
+        log.info("freeboard Get InfluxDB series tags3 %s ", tag['source'])
+
+        
         for point in series['values']:
           fields = {}
           for key, val in zip(series['columns'], point):
             fields[key] = val
             
           log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
-
-        #tag = series['tags']
-        #log.info("freeboard Get InfluxDB series tags2 %s ", tag)
-
-        mydatetimestr = str(fields['time'])
-        
-
-        #log.info("freeboard Get InfluxDB series tags3 %s ", tag['source'])
-
-
-      mydatetimestr = mydatetimestr.split(".")
-      log.info("freeboard Get InfluxDB time string%s ", mydatetimestr[0])
-
-      
-      
-      #log.info("influxdb jsonkey..%s", jsonkey )
-      keys = response.keys()
-      log.info("freeboard Get InfluxDB series keys %s", keys)
-
-      jsondata=[]
-      for series in keys:
-        log.info("freeboard Get InfluxDB series key %s", series)
-        log.info("freeboard Get InfluxDB series tag %s ", series[1])
-        log.info("freeboard Get InfluxDB series tag deviceid %s ", series[1]['deviceid'])
-        #strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch': fields['time']}
-        #strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch':endepoch}
-        source = series[1]['source']
-        strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter']}
-
-        strvaluekey = {'Series': strvalue, 'start': startepoch,  'end': endepoch, 'resolution': resolution}
-        jsonkey.append(strvaluekey)
-
-
-        #jsondata.append(strvalue)
-        #for tags in series[1]:
-        #  log.info("freeboard Get InfluxDB tags %s ", tags)
-   
-      #return jsonify( message='freeboard_createInfluxDB', status='error')
-      #return jsonify(series = jsondata)
-      log.info("freeboard Get InfluxDB sjsonkey %s ", jsonkey)
-      jsonkey=[]
-      #for point in response.points:
-      for series in response:
-        #log.info("influxdb results..%s", series )
-        strvaluekey = {'Series': series['name'], 'start': startepoch,  'end': endepoch, 'resolution': resolution}
-        jsonkey.append(strvaluekey)
-      """
-
-      strvaluekey = {'Series': seriesname, 'start': startepoch,  'end': endepoch, 'resolution': resolution}
-      jsonkey.append(strvaluekey)
-        
-      log.info("freeboard Get InfluxDB sjsonkey %s ", jsonkey)
-      
-      points = list(response.get_points())
-
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
-
-      for point in points:
-        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        
-        if point[parameter] is not None:
-          value1 = point[parameter]
-          
-          strvalue = {'epoch': point['time'], 'source':seriessource[1], 'value': value1}
+          strvalue = {'epoch': point['time'], 'source':tag['source'], 'value': fields[parameter]}
           
           jsondata.append(strvalue)
+
+
+
+
 
       jsondata = sorted(jsondata,key=itemgetter('epoch'))
       print 'inFluxDB returning data points:'
