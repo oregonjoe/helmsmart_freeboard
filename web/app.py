@@ -4107,8 +4107,8 @@ def freeboard_battery():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " sensor='battery_status'  "
-    serieskeys= serieskeys +  " (instance='" + Instance + "') "
+    serieskeys= serieskeys +  " sensor='battery_status'  AND "
+    serieskeys= serieskeys +  " instance='" + Instance + "' "
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
     log.info("freeboard Create InfluxDB %s", database)
