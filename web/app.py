@@ -4699,7 +4699,7 @@ def freeboard_status():
             if value2 & 0x8 == 0x08:
               status11 = True
 
-             if value2 & 0x10 == 0x10:
+            if value2 & 0x10 == 0x10:
               status12 = True
 
             if value2 & 0x20 == 0x20:
