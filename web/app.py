@@ -4891,7 +4891,7 @@ def get_influxdbcloud_data():
       serieskeys=" deviceid='"
       serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
       serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
-      serieskeys= serieskeys +  " source='" +  seriessource[1] + "'  AND "
+      #serieskeys= serieskeys +  " source='" +  seriessource[1] + "'  AND "
       serieskeys= serieskeys +  " instance='" +  seriesinstance[1] + "'  AND "
       serieskeys= serieskeys +  " type='" +  seriestype[1] + "'  AND "
       serieskeys= serieskeys +  " parameter='" +  seriesparameter[1] + "'   "
@@ -4979,7 +4979,7 @@ def get_influxdbcloud_data():
           for key, val in zip(series['columns'], point):
             fields[key] = val
             
-        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
+          log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
 
         #tag = series['tags']
         #log.info("freeboard Get InfluxDB series tags2 %s ", tag)
