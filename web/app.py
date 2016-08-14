@@ -578,6 +578,7 @@ def freeboard_ImportSeries():
   Repeat = int(request.args.get('repeat','1'))
   Sensor = request.args.get('sensor','environmental_data')
 
+  response = None
     
   starttime = 0
 
@@ -953,6 +954,8 @@ def freeboard_GetSeries():
   serieskey = request.args.get('datakey','')
   Interval = request.args.get('Interval',"5min")
 
+  response = None
+
   starttime = 0
 
   epochtimes = getepochtimes(Interval)
@@ -1086,6 +1089,7 @@ def freeboard_createInfluxDB():
   password = 'Salm0n16'
   database = 'pushsmart-cloud'
 
+  response = None
 
   epochtimes = getepochtimes(Interval)
   startepoch = epochtimes[0]
@@ -2813,6 +2817,9 @@ def freeboard_environmental():
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
+    
+    response = None
+
 
     starttime = 0
 
@@ -2921,6 +2928,12 @@ def freeboard_environmental():
         log.info("freeboard: Error: %s" % e)
         pass
 
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+      
+
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
@@ -2984,6 +2997,9 @@ def freeboard_winddata():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
     windtype = request.args.get('type',"true")
+
+    response = None
+
 
     starttime = 0
 
@@ -3080,6 +3096,12 @@ def freeboard_winddata():
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
         pass
+
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
@@ -3666,6 +3688,8 @@ def freeboard_location():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
 
+    response = None
+
     starttime = 0
 
     epochtimes = getepochtimes(Interval)
@@ -3767,6 +3791,12 @@ def freeboard_location():
         log.info("freeboard: Error: %s" % e)
         pass
 
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
@@ -3846,6 +3876,8 @@ def freeboard_nav():
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
+    
+    response = None
 
     starttime = 0
 
@@ -3950,6 +3982,12 @@ def freeboard_nav():
         log.info("freeboard: Error: %s" % e)
         pass
 
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
@@ -4038,6 +4076,7 @@ def freeboard_battery():
     Interval = request.args.get('Interval',"5min")
     Instance = request.args.get('instance','0')
 
+    response = None
     
     starttime = 0
 
@@ -4127,6 +4166,12 @@ def freeboard_battery():
         log.info("freeboard: Error: %s" % e)
         pass
 
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
@@ -4215,6 +4260,7 @@ def freeboard_engine():
     Interval = request.args.get('Interval',"5min")
     Instance = request.args.get('instance','0')
 
+    response = None
     
     starttime = 0
 
@@ -4448,6 +4494,8 @@ def freeboard_status():
     Interval = request.args.get('Interval',"5min")
     Instance = request.args.get('instance','0')
 
+    response = None
+
     
     starttime = 0
 
@@ -4491,7 +4539,7 @@ def freeboard_status():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
       
-    query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 {} '
+    query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
