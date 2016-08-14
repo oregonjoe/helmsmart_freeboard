@@ -4947,6 +4947,53 @@ def get_influxdbcloud_data():
       #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
       #jsonkey.append(strvaluekey)
       print 'inFluxDB start processing data points:'
+
+      keys = result.raw.get('series',[])
+      #log.info("freeboard Get InfluxDB series keys %s", keys)
+
+      """
+      for series in response:
+        #log.info("influxdb results..%s", series )
+        for point in series['points']:
+          fields = {}
+          for key, val in zip(series['columns'], point):
+            fields[key] = val
+      """  
+
+
+
+      strvalue=""
+      
+      for series in keys:
+        log.info("freeboard Get InfluxDB series key %s", series)
+        log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+        log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+        log.info("freeboard Get InfluxDB series values %s ", series['values'])
+        values = series['values']
+        for value in values:
+          log.info("freeboard Get InfluxDB series time %s", value[0])
+          log.info("freeboard Get InfluxDB series mean %s", value[1])
+
+        for point in series['values']:
+          fields = {}
+          for key, val in zip(series['columns'], point):
+            fields[key] = val
+            
+        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
+
+        tag = series['tags']
+        log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+
+        mydatetimestr = str(fields['time'])
+        
+
+        log.info("freeboard Get InfluxDB series tags3 %s ", tag['source'])
+
+
+      mydatetimestr = mydatetimestr.split(".")
+      log.info("freeboard Get InfluxDB time string%s ", mydatetimestr[0])
+
+      
       
       #log.info("influxdb jsonkey..%s", jsonkey )
       keys = response.keys()
