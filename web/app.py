@@ -4437,7 +4437,7 @@ def freeboard_engine():
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
         
-      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value4, point['alternator_potential'])    
+      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['speed'])    
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
@@ -4642,7 +4642,10 @@ def freeboard_status():
       status9=False
       status10=False
       status11=False
-
+      status12=False
+      status13=False
+      status12=False
+      status15=False
        
       points = list(response.get_points())
 
@@ -4652,7 +4655,7 @@ def freeboard_status():
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
 
         if point['bank0'] is not None:
-          value1 =  fields['bank0']
+          value1 =  point['bank0']
 
           if value1 != '---':
             if value1 & 0x1 == 0x1:
@@ -4681,10 +4684,10 @@ def freeboard_status():
 
 
         if point['bank1'] is not None:
-          value2 =  fields['bank1']
+          value2 =  point['bank1']
             
           if value2 != '---':
-            if value1 & 0x1 == 0x01:
+            if value2 & 0x1 == 0x01:
               status8 = True
 
             if value2 & 0x2 == 0x02:
@@ -4696,7 +4699,17 @@ def freeboard_status():
             if value2 & 0x8 == 0x08:
               status11 = True
 
-            
+             if value2 & 0x10 == 0x10:
+              status12 = True
+
+            if value2 & 0x20 == 0x20:
+              status13 = True
+
+            if value2 & 0x40 == 0x40:
+              status14 = True
+
+            if value2 & 0x80 == 0x80:
+              status15 = True           
  
 
         
@@ -4704,11 +4717,11 @@ def freeboard_status():
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
         
-      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value4, point['alternator_potential'])    
+      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['bank0'])    
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
