@@ -4986,7 +4986,7 @@ def get_influxdbcloud_data():
             fields[key] = val
             
           log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
-          strvalue = {'epoch': point['time'], 'source':tag['source'], 'value': fields[parameter]}
+          strvalue = {'epoch': fields['time'], 'source':tag['source'], 'value': fields[parameter]}
           
           jsondata.append(strvalue)
 
