@@ -4209,13 +4209,13 @@ def freeboard_battery():
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         if point['voltage'] is not None: 
-          value1 = convertfbunits(point['cog'], 27)
+          value1 = convertfbunits(point['voltage'], 27)
           
         if point['current'] is not None:         
-          value2 = convertfbunits(point['sog'], 28)
+          value2 = convertfbunits(point['current'], 28)
           
         if point['temperature'] is not None:         
-          value3 = convertfbunits(point['heading'], 0)
+          value3 = convertfbunits(point['temperature'], 0)
        
         mydatetimestr = str(point['time'])
 
