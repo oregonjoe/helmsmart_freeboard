@@ -4113,15 +4113,24 @@ def freeboard_engine():
       log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))  
 
     except InfluxDBClientError, e:
-      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+      log.info('freeboard_createInfluxDB: Exception Client Error in InfluxDB  %s:  ' % str(e))
 
 
-            
+    except InfluxDBServerError, e:
+      log.info('freeboard_createInfluxDB: Exception Client Error in InfluxDB  %s:  ' % str(e))
+
+      
     except:
         log.info('freeboard: Error in InfluxDB mydata append %s:', query)
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
-        pass
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
