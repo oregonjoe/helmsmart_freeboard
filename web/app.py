@@ -4901,7 +4901,7 @@ def get_influxdbcloud_data():
     log.info("inFlux-cloud serieskeys %s", serieskeys)
 
 
-    query = ('select {}({}) AS{} FROM {} '
+    query = ('select {}({}) AS {} FROM {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format(rollup, parameter, parameter, measurement, serieskeys,
