@@ -5006,11 +5006,41 @@ def get_influxdbcloud_data():
       
       #response.headers['content-type'] = "application/json"
       #return response
-  
+
+    except TypeError, e:
+        log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+        log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+    except InfluxDBClientError, e:
+      log.info('get_influxdbcloud_data: Exception Error in InfluxDB  %s:  ' % str(e))     
+    
     except:
-      #print 'inFluxDB Exception3:', response.response.successful, response.response.reason 
-      return jsonify( message='error processing data 3' , status='error')
+      log.info('get_influxdbcloud_data: Error in geting freeboard response %s:  ', strvalue)
+      e = sys.exc_info()[0]
+      log.info('get_influxdbcloud_data: Error in geting freeboard ststs %s:  ' % e)
+      return jsonify( message='error processing data 3' , status='error')        
   
+    
 
     #return jsonify(result = data.data)
     #return datasets[0].data
