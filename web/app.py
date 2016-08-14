@@ -4924,7 +4924,7 @@ def get_influxdbcloud_data():
       #raise
 
     
-    return jsonify(results=response)
+    #return jsonify(results=response)
     
     #response =  shim.read_multi(keys=[SERIES_KEY], start=start, end=end, period=resolutionstr, rollup="mean" )
     
@@ -4949,42 +4949,50 @@ def get_influxdbcloud_data():
       print 'inFluxDB start processing data points:'
       
       #log.info("influxdb jsonkey..%s", jsonkey )
-      
-      #for point in response.points:
-      for series in response:
-        #log.info("influxdb results..%s", series )
-        strvaluekey = {'Series': series['name'], 'start': start,  'end': end, 'resolution': resolution}
+      keys = response.keys()
+      log.info("freeboard Get InfluxDB series keys %s", keys)
+
+      jsondata=[]
+      for series in keys:
+        log.info("freeboard Get InfluxDB series key %s", series)
+        log.info("freeboard Get InfluxDB series tag %s ", series[1])
+        log.info("freeboard Get InfluxDB series tag deviceid %s ", series[1]['deviceid'])
+        #strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch': fields['time']}
+        #strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter'], 'epoch':endepoch}
+        source = series[1]['source']
+        strvalue = {'deviceid':series[1]['deviceid'], 'sensor':series[1]['sensor'], 'source': series[1]['source'], 'instance':series[1]['instance'], 'type':series[1]['type'], 'parameter': series[1]['parameter']}
+
+        strvaluekey = {'Series': strvalue, 'start': startepoch,  'end': endepoch, 'resolution': resolution}
         jsonkey.append(strvaluekey)
 
 
-        try:
-          name = series['name']
-          device, sensor, source, instance, ptype, parameter, tag = name.split('.')
-          device = device.replace("deviceid:","")
-          sensor = sensor.replace("sensor:","")
-          source = source.replace("source:","")
-          instance = instance.replace("instance:","")
-          ptype = ptype.replace("type:","")
-          parameter = parameter.replace("parameter:","")
-          
-          #strvalue = {'deviceid':device, 'sensor':sensor, 'source': source, 'instance':instance, 'type':ptype, 'parameter': parameter, 'epoch': fields['time']}
-          #strvalue = {'key':series['name'], 'epoch': fields['time']}
-          #print 'inFluxDB processing series data:', strvalue
-          #jsondata.append(strvalue)
-        except:
-          pass
+        #jsondata.append(strvalue)
+        #for tags in series[1]:
+        #  log.info("freeboard Get InfluxDB tags %s ", tags)
+   
+      #return jsonify( message='freeboard_createInfluxDB', status='error')
+      #return jsonify(series = jsondata)
+      log.info("freeboard Get InfluxDB sjsonkey %s ", jsonkey)
+      jsonkey=[]
+      #for point in response.points:
+      for series in response:
+        #log.info("influxdb results..%s", series )
+        strvaluekey = {'Series': series['name'], 'start': startepoch,  'end': endepoch, 'resolution': resolution}
+        jsonkey.append(strvaluekey)
 
+      log.info("freeboard Get InfluxDB sjsonkey %s ", jsonkey)
+      
+      points = list(response.get_points())
 
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
-
-
+      for point in points:
+        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         
-        for point in series['points']:
-          fields = {}
-          for key, val in zip(series['columns'], point):
-            fields[key] = val
-          strvalue = {'epoch': fields['time'], 'source':source, 'value': fields[rollup]}
-          #print 'inFluxDB processing data points:', strvalue
+        if point[parameter] is not None:
+          value1 = point[parameter]
+          
+          strvalue = {'epoch': point['time'], 'source':source, 'value': value1}
           
           jsondata.append(strvalue)
 
