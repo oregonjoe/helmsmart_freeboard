@@ -4891,7 +4891,7 @@ def get_influxdbcloud_data():
       serieskeys=" deviceid='"
       serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
       serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
-      #serieskeys= serieskeys +  " source='" +  seriessource[1] + "'  AND "
+      serieskeys= serieskeys +  " source='" +  seriessource[1] + "'  AND "
       serieskeys= serieskeys +  " instance='" +  seriesinstance[1] + "'  AND "
       serieskeys= serieskeys +  " type='" +  seriestype[1] + "'  AND "
       serieskeys= serieskeys +  " parameter='" +  seriesparameter[1] + "'   "
@@ -4948,17 +4948,10 @@ def get_influxdbcloud_data():
       #jsonkey.append(strvaluekey)
       print 'inFluxDB start processing data points:'
 
+      """
       keys = response.raw.get('series',[])
       #log.info("freeboard Get InfluxDB series keys %s", keys)
 
-      """
-      for series in response:
-        #log.info("influxdb results..%s", series )
-        for point in series['points']:
-          fields = {}
-          for key, val in zip(series['columns'], point):
-            fields[key] = val
-      """  
 
 
 
@@ -5026,7 +5019,11 @@ def get_influxdbcloud_data():
         #log.info("influxdb results..%s", series )
         strvaluekey = {'Series': series['name'], 'start': startepoch,  'end': endepoch, 'resolution': resolution}
         jsonkey.append(strvaluekey)
+      """
 
+      strvaluekey = {'Series': seriesname, 'start': startepoch,  'end': endepoch, 'resolution': resolution}
+      jsonkey.append(strvaluekey)
+        
       log.info("freeboard Get InfluxDB sjsonkey %s ", jsonkey)
       
       points = list(response.get_points())
@@ -5039,7 +5036,7 @@ def get_influxdbcloud_data():
         if point[parameter] is not None:
           value1 = point[parameter]
           
-          strvalue = {'epoch': point['time'], 'source':source, 'value': value1}
+          strvalue = {'epoch': point['time'], 'source':seriessource[1], 'value': value1}
           
           jsondata.append(strvalue)
 
