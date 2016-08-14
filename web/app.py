@@ -4963,12 +4963,12 @@ def get_influxdbcloud_data():
         #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
         #log.info("freeboard Get InfluxDB series values %s ", series['values'])
 
-      """        
+        """        
         values = series['values']
         for value in values:
           log.info("freeboard Get InfluxDB series time %s", value[0])
           log.info("freeboard Get InfluxDB series mean %s", value[1])
-      """
+        """
 
         tag = series['tags']
         log.info("freeboard Get InfluxDB series tags2 %s ", tag)
