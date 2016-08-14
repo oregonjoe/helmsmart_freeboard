@@ -4879,7 +4879,7 @@ def get_influxdbcloud_data():
     seriesparameter = seriesparametertag.split(":")    
     parameter = seriesparameter[1]
 
-    if seriessource[1] == "*"
+    if seriessource[1] == "*":
       serieskeys=" deviceid='"
       serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
       serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
