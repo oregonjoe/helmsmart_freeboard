@@ -4903,7 +4903,7 @@ def get_influxdbcloud_data():
 
     query = ('select {}({}) AS {} FROM {} '
                      'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
+                     'group by *, time({}s)') \
                 .format(rollup, parameter, parameter, measurement, serieskeys,
                         startepoch, endepoch,
                         resolution) 
@@ -5031,7 +5031,7 @@ def get_influxdbcloud_data():
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         
         if point[parameter] is not None:
           value1 = point[parameter]
