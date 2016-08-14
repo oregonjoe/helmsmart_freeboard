@@ -4644,7 +4644,7 @@ def freeboard_status():
       status11=False
       status12=False
       status13=False
-      status12=False
+      status14=False
       status15=False
        
       points = list(response.get_points())
