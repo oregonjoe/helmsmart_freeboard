@@ -4173,15 +4173,29 @@ def freeboard_engine():
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        
+        if point['speed'] is not None:
+          value1 = convertfbunits( point['speed'], 24)
+        
+        if point['engine_temp'] is not None:
+          value2 =  convertfbunits(point['engine_temp'], 0)
+        
+        if point['oil_pressure'] is not None:
+          value3=  convertfbunits(point['oil_pressure'], 8)
+        
+        if point['alternator_potential'] is not None:
+          value4 =  convertfbunits(point['alternator_potential'], 27)
+        
+        if point['fuel_rate'] is not None:
+          value6 =  convertfbunits(point['fuel_rate'], 18)
+        
+        if point['level'] is not None:
+          value7=  convertfbunits(point['level'], 26)
+        
+        if point['total_engine_hours'] is not None:
+          value8 = convertfbunits(point['total_engine_hours'], 37)
 
-        value1 = convertfbunits( point['speed'], 24)
-        value2 =  convertfbunits(point['engine_temp'], 0)
-        value3=  convertfbunits(point['oil_pressure'], 8)
-        #value4 =  convertfbunits(point['alternator_potential'], 27)
-        value4 =  convertfbunits(point['alternator_potential'], 27)
-        value6 =  convertfbunits(point['fuel_rate'], 18)
-        value7=  convertfbunits(point['level'], 26)
-        value8 = convertfbunits(point['total_engine_hours'], 37)
+        
         mydatetimestr = str(point['time'])
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
