@@ -4765,5 +4765,248 @@ def freeboard_status():
 
 
 
+@app.route('/get_influxdbcloud_data')
+@cross_origin()
+def get_influxdbcloud_data():
+  conn = db_pool.getconn()
+
+
+
+  pgnnumber = request.args.get('pgnnumber', '000000')
+  userid = request.args.get('userid', '4d231fb3a164c5eeb1a8634d34c578eb')
+  deviceid = request.args.get('deviceid', '000000000000')
+  startepoch = request.args.get('startepoch', 0)
+  endepoch = request.args.get('endepoch', 0)
+  resolution = request.args.get('resolution', 60)
+  SERIES_KEY = request.args.get('serieskey', 0)
+
+  response = None
+  
+  measurement = "HelmSmart"
+
+    
+  query = "select devicename from user_devices where userid = %s AND deviceid = %s"
+  sqlstr = 'select * from getpgn' + pgnnumber + '(%s,%s,%s,%s,%s,%s,%s);'
+
+
+  try:
+    ## first check db to see if user id is matched to device id
+    cursor = conn.cursor()
+    #cursor.execute(query, (userid, deviceid))
+    #i = cursor.fetchone()
+    ## if not then just exit
+    #if cursor.rowcount == 0:
+    #    return jsonify( message='No Userid = deviceid match', status='error')
+        
+    ## else run the query
+  
+
+    # Modify these with your settings found at: http://tempo-db.com/manage/
+    #API_KEY = '7be1d82569414dceaa82fd93fadd7940'
+    #API_SECRET = '0447ec319c3148cb98d96bfc96c787e1'
+    #SERIES_KEY = '4775fc8040fa4378841570d73ff853ab'
+    #SERIES_KEY = 'interval:6sec.series:2.' 
+    #SERIES_KEY = 'instance:0.PGN:127488.Parameter:2.Source:0.'
+    #SERIES_KEY = 'deviceid:000000000000.source:0.PGN:127488.instance:0.Parameter:3.HelmSmart'
+    # SeaDream Enviromentail outside temperature
+    #SERIES_KEY = 'd0a36adb1b834860b1bd24bf3a341891'
+    #SERIES_KEY = 'deviceid:00204ac0e9ba.sensor:environmental_data.source:0D.instance:0.type:Outside Temperature.parameter:temperature.HelmSmart'
+    #SERIES_KEY = 'deviceid:00204ac0e9ba.sensor:environmental_data.source:0D.instance:0.type:Outside Temperature.parameter:temperature.HelmSmart'
+    #SERIES_KEY = 'deviceid:00204ac0e9ba.sensor:environmental_data.source:0D.instance:0.type:Outside Temperature.parameter:temperature.HelmSmart'
+
+    #API_KEY = '7be1d82569414dceaa82fd93fadd7940'
+    #API_SECRET = '0447ec319c3148cb98d96bfc96c787e1'
+    #client = Client(API_KEY, API_KEY, API_SECRET)
+
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+
+
+
+  
+    #db = influxdb.InfluxDBClient(host, port, username, password, database)
+    db = InfluxDBClient(host, port, username, password, database)
+     
+    #shim = Shim(host, port, username, password, database)
+    
+    #start = datetime.date(2014, 2, 24)
+    #start = datetime.date(startepoch)
+    #start = datetime.datetime.utcfromtimestamp(float(startepoch))
+
+    #startepoch = 1393257600
+    #endepoch = 1393804800
+    #resolution="60"
+    
+    start = datetime.datetime.fromtimestamp(float(startepoch))
+    
+
+    end = datetime.datetime.fromtimestamp(float(endepoch))
+    resolutionstr = "PT" + resolution + "S"
+
+    rollup = "mean"
+
+    #print 'inFlux Series Key:', SERIES_KEY
+    log.info("inFlux SERIES_KEY %s", SERIES_KEY)
+    #attrs = key_to_attributes(SERIES_KEY)  
+    #name = "{}.{}.{}.{}.{}".format(attrs['deviceid'], attrs['sensor'], attrs['instance'], attrs['type'], attrs['parameter'])
+    
+    #query = 'select MEAN(value) from "001EC0B415BF.environmental_data.0.Outside Temperature.temperature" where time > now() - 1d group by time(10m);'
+
+    seriesname = SERIES_KEY
+    seriestags = seriesname.split(".")
+
+    seriesdeviceidtag = seriestags[0]
+    seriesdeviceid = seriesdeviceidtag.split(":")
+
+    seriessensortag = seriestags[1]
+    seriessensor = seriessensortag.split(":")
+    
+    seriessourcetag = seriestags[2]
+    seriessource = seriessourcetag.split(":")
+
+    seriesinstancetag = seriestags[3]
+    seriesinstance = seriesinstancetag.split(":")
+
+    seriestypetag = seriestags[4]
+    seriestype = seriestypetag.split(":")
+
+    seriesparametertag = seriestags[5]
+    seriesparameter = seriesparametertag.split(":")    
+    parameter = seriesparameter[1]
+
+    if seriessource[1] == "*"
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
+      serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
+      serieskeys= serieskeys +  " instance='" +  seriesinstance[1] + "'  AND "
+      serieskeys= serieskeys +  " type='" +  seriestype[1] + "'  AND "
+      serieskeys= serieskeys +  " parameter='" +  seriesparameter[1] + "'   "
+      
+    else:
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
+      serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
+      serieskeys= serieskeys +  " source='" +  seriessource[1] + "'  AND "
+      serieskeys= serieskeys +  " instance='" +  seriesinstance[1] + "'  AND "
+      serieskeys= serieskeys +  " type='" +  seriestype[1] + "'  AND "
+      serieskeys= serieskeys +  " parameter='" +  seriesparameter[1] + "'   "
+      
+
+
+    log.info("inFlux-cloud serieskeys %s", serieskeys)
+
+
+    query = ('select {}({}) AS{} FROM {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format(rollup, parameter, parameter, measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution) 
+
+      
+      
+    
+    log.info("inFlux-cloud Query %s", query)
+    
+
+    try:
+      response= db.query(query)
+    except:
+      e = sys.exc_info()[0]
+      log.info('inFluxDB: Error in geting inFluxDB data %s:  ' % e)
+        
+      return jsonify( message='Error in inFluxDB query 2', status='error')
+      #raise
+
+    
+    return jsonify(results=response)
+    
+    #response =  shim.read_multi(keys=[SERIES_KEY], start=start, end=end, period=resolutionstr, rollup="mean" )
+    
+    #print 'inFluxDB read :', response.response.successful
+
+    
+    if not response:
+      #print 'inFluxDB Exception1:', response.response.successful, response.response.reason 
+      return jsonify( message='No response to return 1' , status='error')
+
+    try:
+  
+      #if not response.points:
+      #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
+      #  return jsonify( message='No data to return 2', status='error')
+
+      print 'inFluxDB processing data headers:'
+      jsondata=[]
+      jsonkey=[]
+      #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+      #jsonkey.append(strvaluekey)
+      print 'inFluxDB start processing data points:'
+      
+      #log.info("influxdb jsonkey..%s", jsonkey )
+      
+      #for point in response.points:
+      for series in response:
+        #log.info("influxdb results..%s", series )
+        strvaluekey = {'Series': series['name'], 'start': start,  'end': end, 'resolution': resolution}
+        jsonkey.append(strvaluekey)
+
+
+        try:
+          name = series['name']
+          device, sensor, source, instance, ptype, parameter, tag = name.split('.')
+          device = device.replace("deviceid:","")
+          sensor = sensor.replace("sensor:","")
+          source = source.replace("source:","")
+          instance = instance.replace("instance:","")
+          ptype = ptype.replace("type:","")
+          parameter = parameter.replace("parameter:","")
+          
+          #strvalue = {'deviceid':device, 'sensor':sensor, 'source': source, 'instance':instance, 'type':ptype, 'parameter': parameter, 'epoch': fields['time']}
+          #strvalue = {'key':series['name'], 'epoch': fields['time']}
+          #print 'inFluxDB processing series data:', strvalue
+          #jsondata.append(strvalue)
+        except:
+          pass
+
+
+
+
+
+        
+        for point in series['points']:
+          fields = {}
+          for key, val in zip(series['columns'], point):
+            fields[key] = val
+          strvalue = {'epoch': fields['time'], 'source':source, 'value': fields[rollup]}
+          #print 'inFluxDB processing data points:', strvalue
+          
+          jsondata.append(strvalue)
+
+      jsondata = sorted(jsondata,key=itemgetter('epoch'))
+      print 'inFluxDB returning data points:'
+      #return jsonify( results = jsondata)      
+      return jsonify(serieskey = jsonkey, results = jsondata)
+      #result = json.dumps(data.data, cls=DateEncoder)
+    
+      #response = make_response(result) 
+      
+      #response.headers['content-type'] = "application/json"
+      #return response
+  
+    except:
+      #print 'inFluxDB Exception3:', response.response.successful, response.response.reason 
+      return jsonify( message='error processing data 3' , status='error')
+  
+
+    #return jsonify(result = data.data)
+    #return datasets[0].data
+  finally:
+    db_pool.putconn(conn)
 
 
