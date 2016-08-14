@@ -4947,21 +4947,23 @@ def get_influxdbcloud_data():
       #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
       #jsonkey.append(strvaluekey)
       print 'inFluxDB start processing data points:'
-      log.info("freeboard Get InfluxDB response %s", response)
+      #log.info("freeboard Get InfluxDB response %s", response)
 
       keys = response.raw.get('series',[])
-      log.info("freeboard Get InfluxDB series keys %s", keys)
+      #log.info("freeboard Get InfluxDB series keys %s", keys)
 
-      """
+
 
 
       strvalue=""
       
       for series in keys:
         log.info("freeboard Get InfluxDB series key %s", series)
-        #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+        log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
         log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
         log.info("freeboard Get InfluxDB series values %s ", series['values'])
+
+      """        
         values = series['values']
         for value in values:
           log.info("freeboard Get InfluxDB series time %s", value[0])
