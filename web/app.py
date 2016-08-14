@@ -4830,7 +4830,7 @@ def get_influxdbcloud_data():
 
   
     #db = influxdb.InfluxDBClient(host, port, username, password, database)
-    db = InfluxDBClient(host, port, username, password, database)
+    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
      
     #shim = Shim(host, port, username, password, database)
     
