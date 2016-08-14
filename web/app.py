@@ -4966,7 +4966,7 @@ def get_influxdbcloud_data():
       
       for series in keys:
         log.info("freeboard Get InfluxDB series key %s", series)
-        log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+        #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
         log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
         log.info("freeboard Get InfluxDB series values %s ", series['values'])
         values = series['values']
@@ -4981,13 +4981,13 @@ def get_influxdbcloud_data():
             
         log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
 
-        tag = series['tags']
-        log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+        #tag = series['tags']
+        #log.info("freeboard Get InfluxDB series tags2 %s ", tag)
 
         mydatetimestr = str(fields['time'])
         
 
-        log.info("freeboard Get InfluxDB series tags3 %s ", tag['source'])
+        #log.info("freeboard Get InfluxDB series tags3 %s ", tag['source'])
 
 
       mydatetimestr = mydatetimestr.split(".")
