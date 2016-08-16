@@ -150,6 +150,9 @@ def convertfbunits(value, units):
             #//   case 13: //="13">MAGNETIC</option>
             #//   case 14: //="14">- - -</option>
             #//   case 15: //="15">- - -</option>
+            elif units == 15:            #//   case 15: //="15">Lat/Lng</option>
+              return float("{0:.8f}".format(value * 1.0 ) )
+
             elif units == 16:            #//   case 16: //="16">DEGREES</option>
               return float("{0:.0f}".format(value * 1.0 ) )
             
@@ -3835,14 +3838,14 @@ def freeboard_location():
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         if point['lat'] is not None:
           if point['lng'] is not None:          
-            value1 = convertfbunits(point['lat'], 16)
-            value2 = convertfbunits(point['lng'], 16)
+            value1 = convertfbunits(point['lat'], 15)
+            value2 = convertfbunits(point['lng'], 15)
 
         mydatetimestr = str(point['time'])
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
-      log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
+      log.info('freeboard: freeboard returning data values lat:%s, lng:%s  ', value1,value2)            
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
