@@ -5146,22 +5146,36 @@ def getgpsseriesbydeviceid():
       seriesparameter = seriesparametertag.split(":")    
       parameter = seriesparameter[1]
 
-      if seriessource[1] == "*":
-        serieskeys=" deviceid='"
-        serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
-        serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
-        serieskeys= serieskeys +  " instance='" +  seriesinstance[1] + "'  AND "
-        serieskeys= serieskeys +  " type='" +  seriestype[1] + "'  AND "
-        serieskeys= serieskeys +  " parameter='" +  seriesparameter[1] + "'   "
-        
-      else:
-        serieskeys=" deviceid='"
-        serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
-        serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
-        serieskeys= serieskeys +  " source='" +  seriessource[1] + "'  AND "
-        serieskeys= serieskeys +  " instance='" +  seriesinstance[1] + "'  AND "
-        serieskeys= serieskeys +  " type='" +  seriestype[1] + "'  AND "
-        serieskeys= serieskeys +  " parameter='" +  seriesparameter[1] + "'   "
+      if parameter == 'latlng':
+            serieskeys="( deviceid='"
+            serieskeys= serieskeys + seriesdeviceid[1] 
+            serieskeys= serieskeys +  "' AND sensor='" +  seriessensor[1]
+            if seriessource[1] != "*":
+                serieskeys= serieskeys +  "' AND source='" +  seriessource[1] 
+            serieskeys= serieskeys +  "' AND instance='" +  seriesinstance[1] 
+            serieskeys= serieskeys +  "' AND type='" +  seriestype[1] 
+            serieskeys= serieskeys +  "' AND parameter='lat') OR " 
+
+            serieskeys=serieskeys + "( deviceid='"
+            serieskeys= serieskeys + seriesdeviceid[1] 
+            serieskeys= serieskeys +  "' AND sensor='" +  seriessensor[1]
+            if seriessource[1] != "*":
+                serieskeys= serieskeys +  "' AND source='" +  seriessource[1] 
+            serieskeys= serieskeys +  "' AND instance='" +  seriesinstance[1] 
+            serieskeys= serieskeys +  "' AND type='" +  seriestype[1] 
+            serieskeys= serieskeys +  "' AND parameter='lng') "  
+
+                
+        else:
+            serieskeys="( deviceid='"
+            serieskeys= serieskeys + seriesdeviceid[1] 
+            serieskeys= serieskeys +  "' AND sensor='" +  seriessensor[1]
+            if seriessource[1] != "*":
+                serieskeys= serieskeys +  "' AND source='" +  seriessource[1] 
+            serieskeys= serieskeys +  "' AND instance='" +  seriesinstance[1] 
+            serieskeys= serieskeys +  "' AND type='" +  seriestype[1] 
+            serieskeys= serieskeys +  "' AND parameter='" +  seriesparameter[1] + "'   )"
+
         
 
 
