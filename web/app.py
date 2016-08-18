@@ -5178,12 +5178,18 @@ def getgpsseriesbydeviceid():
 
       if overlaykey == "":
       # Just get lat/lng
-
-
-
+      """
         query = ('select median(lat) as lat, median(lng) as lng from {} '
                         'where {} AND time > {}s and time < {}s '
                        'group by *, time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+      """
+
+        query = ('select median(lat) as lat, median(lng) as lng from {} '
+                        'where {} AND time > {}s and time < {}s '
+                       'time({}s)') \
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
@@ -5510,8 +5516,28 @@ def getgpsseriesbydeviceid():
                 jsondata.append(strvalue)
                 
               jsondataarray.append(jsondata)
+
+            jsondata = sorted(jsondata,key=itemgetter('epoch'))
+
+            series_lat_value = None
+            series_lng_value = None
+            
+            for series in jsondata:
+              series_tag = series['tag']
+              series_epoch=series['epoch']
+
+              if series_tag['parameter'] == 'lat':
+                  if series['value'] != None:                     
+                      series_lat_value = series['value']
+
+              if series_tag['parameter'] == 'lng':
+                  if series['value'] != None:                     
+                      series_lng_value = series['value']
+
+                        
+              log.info('inFluxDB_GPS_JSON latlng tag = %s:%s', series_lat_value, series_lng_value)
               
-            return jsonify( message=jsondataarray, status='success')
+            return jsonify( message=jsondata, status='success')
           
           else:
           # Get lat/lng and overlay
