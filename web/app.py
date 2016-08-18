@@ -5178,22 +5178,22 @@ def getgpsseriesbydeviceid():
 
       if overlaykey == "":
       # Just get lat/lng
-        """
+
         query = ('select median(lat) as lat, median(lng) as lng from {} '
                         'where {} AND time > {}s and time < {}s '
                        'group by *, time({}s)') \
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
-        """
 
+        """
         query = ('select median(lat) as lat, median(lng) as lng from {} '
                         'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
-
+        """
         
         log.info("inFlux-cloud gps: Position Query %s", query)
         
@@ -5508,17 +5508,29 @@ def getgpsseriesbydeviceid():
               
               for point in  series['values']:
                 fields = {}
+                fields[parameter] = None
                 for key, val in zip(series['columns'], point):
                   fields[key] = val
-                strvalue = {'epoch': fields['time'], 'source':source, 'lat': fields['lat'], 'lng': fields['lng']}
-                #print 'GetGPSJSON processing data points:', strvalue
+                  
+                #strvalue = {'epoch': fields['time'], 'tag':seriesname, 'lat': fields['lat'], 'lng': fields['lng']}
+                log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
+
+                mydatetimestr = str(fields['time'])
+
+                #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+                mydatetime =  int(time.mktime(time.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')))
                 
-                jsondata.append(strvalue)
+                #strvalue = {'epoch': fields['time'], 'source':tag['source'], 'value': fields[parameter]}
+                if fields[parameter] is not None:
+                  strvalue = {'epoch': mydatetime, 'tag':seriesname, 'value': fields[parameter]}
+          
+                  jsondata.append(strvalue)
                 
-              jsondataarray.append(jsondata)
+
 
             jsondata = sorted(jsondata,key=itemgetter('epoch'))
 
+            
             series_lat_value = None
             series_lng_value = None
             
@@ -5537,7 +5549,14 @@ def getgpsseriesbydeviceid():
                         
               log.info('inFluxDB_GPS_JSON latlng tag = %s:%s', series_lat_value, series_lng_value)
               
-            return jsonify( message=jsondata, status='success')
+              if series_lat_value != None and series_lng_value != None:
+                #distance = process_gpsdistance( "series_1", parameters,  series_lat_value, series_lng_value)
+                strvalue = {'epoch':series_epoch, 'source':series_tag['source'], 'lat': series_lat_value, 'lng': series_lng_value}
+
+                
+            jsondataarray.append(strvalue)
+            
+            return jsonify( message=jsondataarray, status='success')
           
           else:
           # Get lat/lng and overlay
