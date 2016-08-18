@@ -5522,7 +5522,7 @@ def getgpsseriesbydeviceid():
                 mydatetime =  int(time.mktime(time.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')))
                 
                 #strvalue = {'epoch': fields['time'], 'source':tag['source'], 'value': fields[parameter]}
-                if fields[parameter] is not None:
+                if fields[parameter] != None:
                   strvalue = {'epoch': mydatetime, 'tag':seriesname, 'value': fields[parameter]}
           
                   jsondata.append(strvalue)
@@ -5530,7 +5530,7 @@ def getgpsseriesbydeviceid():
 
 
             jsondata = sorted(jsondata,key=itemgetter('epoch'))
-
+            log.info("freeboard Get InfluxDB series points  %s",jsondata)
             
             series_lat_value = None
             series_lng_value = None
