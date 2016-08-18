@@ -5154,16 +5154,9 @@ def getgpsseriesbydeviceid():
           serieskeys= serieskeys +  "' AND source='" +  seriessource[1] 
         serieskeys= serieskeys +  "' AND instance='" +  seriesinstance[1] 
         serieskeys= serieskeys +  "' AND type='" +  seriestype[1] 
-        serieskeys= serieskeys +  "' AND parameter='lat') OR " 
+        serieskeys= serieskeys +  "'  ) " 
 
-        serieskeys=serieskeys + "( deviceid='"
-        serieskeys= serieskeys + seriesdeviceid[1] 
-        serieskeys= serieskeys +  "' AND sensor='" +  seriessensor[1]
-        if seriessource[1] != "*":
-            serieskeys= serieskeys +  "' AND source='" +  seriessource[1] 
-        serieskeys= serieskeys +  "' AND instance='" +  seriesinstance[1] 
-        serieskeys= serieskeys +  "' AND type='" +  seriestype[1] 
-        serieskeys= serieskeys +  "' AND parameter='lng') "  
+ 
 
                 
       else:
@@ -5507,7 +5500,7 @@ def getgpsseriesbydeviceid():
               source= seriesname['source']
               log.info("inFluxDB_GPS_JSON source %s", source )
               
-              for point in series['points']:
+              for point in  series['values']:
                 fields = {}
                 for key, val in zip(series['columns'], point):
                   fields[key] = val
