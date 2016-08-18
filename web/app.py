@@ -5528,7 +5528,7 @@ def getgpsseriesbydeviceid():
                 if fields[parameter] != None:
                   #strvalues = []
                   strvalue = {'epoch': mydatetime, 'tag':seriesname, 'value': fields[parameter]}
-                  strvalues = (mydatetime,source, parameter, fields[parameter] )
+                  strvalues = (mydatetime, source,  parameter, fields[parameter] )
 
                   
                   jsondata.append(strvalues)
@@ -5541,10 +5541,19 @@ def getgpsseriesbydeviceid():
 
             for key, group in groupby(jsondata, lambda x: x[0]):
               for thing in group:
-                strvalues=  {'epoch': key, 'source':thing[1], 'value': thing[2]}
-                log.info("freeboard  jsondata group   %s",strvalues)
-            
-            return jsonify( message=jsondata, status='success')
+                if thing[2] == 'lat':
+                  valuelat = thing[3]
+                  
+                if thing[2] == 'lng':
+                  valuelng = thing[3]
+                  
+                valuesource = thing[1]
+                
+              #strvalues=  {'epoch': key, 'source':thing[1], 'value': thing[3]}                
+              strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, , 'lng': valuelng}
+              log.info("freeboard  jsondata group   %s",strvalues)
+              jsondataarray.append(strvalue)            
+            return jsonify( message=jsondataarray, status='success')
 
             
             series_lat_value = None
