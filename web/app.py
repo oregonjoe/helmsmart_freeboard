@@ -4862,6 +4862,9 @@ def get_influxdbcloud_data():
     
     #query = 'select MEAN(value) from "001EC0B415BF.environmental_data.0.Outside Temperature.temperature" where time > now() - 1d group by time(10m);'
 
+    if SERIES_KEY.find(".*.") > 0:  
+        SERIES_KEY = SERIES_KEY.replace(".*.","*.")
+
     seriesname = SERIES_KEY
     seriestags = seriesname.split(".")
 
@@ -5116,6 +5119,10 @@ def getgpsseriesbydeviceid():
       gpskey =SERIES_KEY1
 
       overlaykey =SERIES_KEY2
+
+      if SERIES_KEY1.find(".*.") > 0:  
+        SERIES_KEY1 = SERIES_KEY1.replace(".*.","*.")
+
 
       seriesname = SERIES_KEY1
       seriestags = seriesname.split(".")
@@ -5610,6 +5617,33 @@ def getgpsseriesbydeviceid():
         response.headers['content-type'] = "application/json"
         return response
   
+  except AttributeError, e:
+    log.info('inFluxDB_GPS: AttributeError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+
+    log.info('inFluxDB_GPS: AttributeError in convert_influxdb_gpsjson %s:  ' % str(e))
+    
+  except TypeError, e:
+    log.info('inFluxDB_GPS: TypeError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+
+    log.info('inFluxDB_GPS: TypeError in convert_influxdb_gpsjson %s:  ' % str(e))
+    
+  except ValueError, e:
+    log.info('inFluxDB_GPS: ValueError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+
+    log.info('inFluxDB_GPS: ValueError in convert_influxdb_gpsjson %s:  ' % str(e))            
+    
+  except NameError, e:
+    log.info('inFluxDB_GPS: NameError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+
+  except IndexError, e:
+    log.info('inFluxDB_GPS: IndexError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+
+
   except:
     e = sys.exc_info()[0]
     log.info('inFluxDB_GPS: Error read_data exception data.points %s:  ' % e)
