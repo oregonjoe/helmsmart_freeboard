@@ -5508,7 +5508,7 @@ def getgpsseriesbydeviceid():
               #seriessource = seriessourcetag.split(":")
               source= seriesname['source']
               parameter = seriesname['parameter']
-              log.info("inFluxDB_GPS_JSON values %s", series['values'] )
+              #log.info("inFluxDB_GPS_JSON values %s", series['values'] )
               
               for point in  series['values']:
                 fields = {}
@@ -5517,7 +5517,7 @@ def getgpsseriesbydeviceid():
                   fields[key] = val
                   
                 #strvalue = {'epoch': fields['time'], 'tag':seriesname, 'lat': fields['lat'], 'lng': fields['lng']}
-                log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
+                #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
 
                 mydatetimestr = str(fields['time'])
 
@@ -5537,22 +5537,30 @@ def getgpsseriesbydeviceid():
 
             #jsondata = sorted(jsondata,key=itemgetter('epoch'))
             jsondata = sorted(jsondata, key=lambda latlng: latlng[0])
-            log.info("freeboard  jsondata   %s",jsondata)
+            #log.info("freeboard  jsondata   %s",jsondata)
 
-            for key, group in groupby(jsondata, lambda x: x[0]):
-              for thing in group:
-                if thing[2] == 'lat':
-                  valuelat = thing[3]
+            for key, latlnggroup in groupby(jsondata, lambda x: x[0]):
+
+              valuelat = None
+              valuelng = None
+              
+              for latlng_values in latlnggroup:
+                if latlng_values[2] == 'lat':
+                  valuelat = latlng_values[3]
                   
-                if thing[2] == 'lng':
-                  valuelng = thing[3]
+                if latlng_values[2] == 'lng':
+                  valuelng = latlng_values[3]
                   
-                valuesource = thing[1]
+                valuesource = latlng_values[1]
                 
-              #strvalues=  {'epoch': key, 'source':thing[1], 'value': thing[3]}                
-              strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, 'lng': valuelng}
-              log.info("freeboard  jsondata group   %s",strvalues)
-              jsondataarray.append(strvalues)            
+              #strvalues=  {'epoch': key, 'source':thing[1], 'value': thing[3]}
+
+              if  valuelat != None and valuelng != None:
+                strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, 'lng': valuelng}
+                #log.info("freeboard  jsondata group   %s",strvalues)
+                jsondataarray.append(strvalues)
+
+              
             return jsonify( message=jsondataarray, status='success')
 
             
