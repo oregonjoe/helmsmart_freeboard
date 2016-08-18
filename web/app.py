@@ -5247,13 +5247,13 @@ def getgpsseriesbydeviceid():
         return jsonify( message='Error in inFluxDB query 2', status='error')
         #raise
       
-      return jsonify(results=data)
-  
+      #return jsonify(results=data)
+      log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
 
       if not data:
         return jsonify( message='No data object to return 1', status='error')
 
-
+      return jsonify( message='data object to return 1', status='success')
       # return csv formated data
       
       if dataformat == 'csv':
