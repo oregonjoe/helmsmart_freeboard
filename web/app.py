@@ -5535,17 +5535,17 @@ def getgpsseriesbydeviceid():
             series_lat_value = None
             series_lng_value = None
             
-            for series in jsondata:
-              series_tag = series['tag']
-              series_epoch=series['epoch']
+            for seriesvalues in jsondata:
+              series_tag = seriesvalues['tag']
+              series_epoch=seriesvalues['epoch']
 
               if series_tag['parameter'] == 'lat':
-                  if series['value'] != None:                     
-                      series_lat_value = series['value']
+                  if seriesvalues['value'] != None:                     
+                      series_lat_value = seriesvalues['value']
 
               if series_tag['parameter'] == 'lng':
-                  if series['value'] != None:                     
-                      series_lng_value = series['value']
+                  if seriesvalues['value'] != None:                     
+                      series_lng_value = seriesvalues['value']
 
                         
               log.info('inFluxDB_GPS_JSON latlng tag = %s:%s', series_lat_value, series_lng_value)
@@ -5555,7 +5555,7 @@ def getgpsseriesbydeviceid():
                 strvalue = {'epoch':series_epoch, 'source':series_tag['source'], 'lat': series_lat_value, 'lng': series_lng_value}
 
                 
-            jsondataarray.append(strvalue)
+              jsondataarray.append(strvalue)
             
             return jsonify( message=jsondataarray, status='success')
           
