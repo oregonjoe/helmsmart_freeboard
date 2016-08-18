@@ -5504,7 +5504,8 @@ def getgpsseriesbydeviceid():
               #seriessourcetag = seriestags[2]
               #seriessource = seriessourcetag.split(":")
               source= seriesname['source']
-              log.info("inFluxDB_GPS_JSON source %s", series['values'] )
+              parameter = seriesname['parameter']
+              log.info("inFluxDB_GPS_JSON values %s", series['values'] )
               
               for point in  series['values']:
                 fields = {}
