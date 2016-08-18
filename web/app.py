@@ -5204,6 +5204,34 @@ def getgpsseriesbydeviceid():
 
       try:
         data= db.query(query)
+        
+      except TypeError, e:
+        log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ' % str(e))
+              
+      except KeyError, e:
+        log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+      except NameError, e:
+        log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ' % str(e))
+              
+      except IndexError, e:
+        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+      except ValueError, e:
+        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Value Error in InfluxDB  %s:  ' % str(e))
+
+      except AttributeError, e:
+        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+      except InfluxDBClientError, e:
+        log.info('get_influxdbcloud_data: Exception Error in InfluxDB  %s:  ' % str(e))     
+        
       except:
         #log.info('Telemetrypost: Error in geting Telemetry parameters %s:  ', posttype)
         e = sys.exc_info()[0]
