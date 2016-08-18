@@ -5267,7 +5267,7 @@ def getgpsseriesbydeviceid():
       if not data:
         return jsonify( message='No data object to return 1', status='error')
 
-      return jsonify( message='data object to return 1', status='success')
+      #return jsonify( message='data object to return 1', status='success')
       # return csv formated data
       
       if dataformat == 'csv':
@@ -5490,17 +5490,21 @@ def getgpsseriesbydeviceid():
 
           if overlaykey == "":
           # Just get lat/lng
+            keys = data.raw.get('series',[])
+            
             for series in data:
               #log.info("influxdb results..%s", series )
               #log.info("influxdb results..%s", series )
               jsondata=[]
-              name = series['name']
+
+              #name = series['name']
+              name = series['tags']            
               log.info("inFluxDB_GPS_JSON name %s", name )
-              seriesname = series['name']
-              seriestags = seriesname.split(".")
-              seriessourcetag = seriestags[2]
-              seriessource = seriessourcetag.split(":")
-              source= seriessource[1]
+              seriesname = series['tags'] 
+              #seriestags = seriesname.split(".")
+              #seriessourcetag = seriestags[2]
+              #seriessource = seriessourcetag.split(":")
+              source= seriesname['source']
               log.info("inFluxDB_GPS_JSON source %s", source )
               
               for point in series['points']:
@@ -5513,7 +5517,9 @@ def getgpsseriesbydeviceid():
                 jsondata.append(strvalue)
                 
               jsondataarray.append(jsondata)
-                
+              
+            return jsonify( message=jsondataarray, status='success')
+          
           else:
           # Get lat/lng and overlay
             for series in data:
