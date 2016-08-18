@@ -5490,11 +5490,11 @@ def getgpsseriesbydeviceid():
           if overlaykey == "":
           # Just get lat/lng
             keys = data.raw.get('series',[])
-            
+            jsondata=[]
             for series in keys:
               #log.info("influxdb results..%s", series )
               #log.info("influxdb results..%s", series )
-              jsondata=[]
+              strvalue ={}
 
               #name = series['name']
               name = series['tags']            
@@ -5525,7 +5525,7 @@ def getgpsseriesbydeviceid():
                 if fields[parameter] != None:
                   strvalue = {'epoch': mydatetime, 'tag':seriesname, 'value': fields[parameter]}
           
-                  jsondata.append(strvalue)
+                jsondata.append(strvalue)
                 
 
 
