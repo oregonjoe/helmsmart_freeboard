@@ -5255,7 +5255,7 @@ def getgpsseriesbydeviceid():
         #raise
       
       #return jsonify(results=data)
-      #log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
+      log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
 
       if not data:
         return jsonify( message='No data object to return 1', status='error')
@@ -5498,7 +5498,7 @@ def getgpsseriesbydeviceid():
               #seriessourcetag = seriestags[2]
               #seriessource = seriessourcetag.split(":")
               source= seriesname['source']
-              log.info("inFluxDB_GPS_JSON source %s", source )
+              log.info("inFluxDB_GPS_JSON source %s", series['values'] )
               
               for point in  series['values']:
                 fields = {}
