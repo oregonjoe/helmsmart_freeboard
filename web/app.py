@@ -5552,7 +5552,7 @@ def getgpsseriesbydeviceid():
               #strvalues=  {'epoch': key, 'source':thing[1], 'value': thing[3]}                
               strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, 'lng': valuelng}
               log.info("freeboard  jsondata group   %s",strvalues)
-              jsondataarray.append(strvalue)            
+              jsondataarray.append(strvalues)            
             return jsonify( message=jsondataarray, status='success')
 
             
