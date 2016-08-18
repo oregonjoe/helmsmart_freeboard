@@ -5262,7 +5262,7 @@ def getgpsseriesbydeviceid():
         #raise
       
       #return jsonify(results=data)
-      log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
+      #log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
 
       if not data:
         return jsonify( message='No data object to return 1', status='error')
@@ -5492,7 +5492,7 @@ def getgpsseriesbydeviceid():
           # Just get lat/lng
             keys = data.raw.get('series',[])
             
-            for series in data:
+            for series in keys:
               #log.info("influxdb results..%s", series )
               #log.info("influxdb results..%s", series )
               jsondata=[]
