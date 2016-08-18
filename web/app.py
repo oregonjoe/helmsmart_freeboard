@@ -5530,7 +5530,7 @@ def getgpsseriesbydeviceid():
 
 
             jsondata = sorted(jsondata,key=itemgetter('epoch'))
-            log.info("freeboard Get InfluxDB series points  %s",jsondata)
+            log.info("freeboard  jsondata   %s",jsondata)
             
             series_lat_value = None
             series_lng_value = None
