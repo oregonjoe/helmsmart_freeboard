@@ -5496,6 +5496,7 @@ def getgpsseriesbydeviceid():
               #log.info("influxdb results..%s", series )
               strvalue ={}
 
+
               #name = series['name']
               name = series['tags']            
               log.info("inFluxDB_GPS_JSON name %s", name )
@@ -5523,14 +5524,26 @@ def getgpsseriesbydeviceid():
                 
                 #strvalue = {'epoch': fields['time'], 'source':tag['source'], 'value': fields[parameter]}
                 if fields[parameter] != None:
+                  #strvalues = []
                   strvalue = {'epoch': mydatetime, 'tag':seriesname, 'value': fields[parameter]}
-          
-                jsondata.append(strvalue)
+                  strvalues = (mydatetime,source, parameter, fields[parameter] )
+
+                  
+                  jsondata.append(strvalues)
                 
 
 
-            jsondata = sorted(jsondata,key=itemgetter('epoch'))
+            #jsondata = sorted(jsondata,key=itemgetter('epoch'))
+            jsondata = sorted(jsondata, key=lambda latlng: latlng[0])
             log.info("freeboard  jsondata   %s",jsondata)
+
+            for key, group in groupby(jsondata, lambda x: x[0]):
+              for thing in group:
+                strvalues=  {'epoch': key, 'source':thing[1], 'value': thing[2]}
+                log.info("freeboard  jsondata group   %s",strvalues)
+            
+            return jsonify( message=jsondata, status='success')
+
             
             series_lat_value = None
             series_lng_value = None
