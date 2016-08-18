@@ -5074,6 +5074,10 @@ def getgpsseriesbydeviceid():
   
   query = "select deviceid from user_devices where deviceapikey = %s"
 
+  response = None
+  
+  measurement = "HelmSmart"
+
   try:
   #if dataformat == 'json':
       # first check db to see if deviceapikey is matched to device id
@@ -5092,16 +5096,14 @@ def getgpsseriesbydeviceid():
       API_KEY = '7be1d82569414dceaa82fd93fadd7940'
       API_SECRET = '0447ec319c3148cb98d96bfc96c787e1'
 
-      host = 'pinheads-wedontneedroads-1.c.influxdb.com' 
+      host = 'hilldale-670d9ee3.influxcloud.net' 
       port = 8086
-      username = 'root'
-      password = 'c73d5a8b1b07d17b'
-      database = 'pushsmart-final'
+      username = 'helmsmart'
+      password = 'Salm0n16'
+      database = 'pushsmart-cloud'
 
 
-    
-      #db = influxdb.InfluxDBClient(host, port, username, password, database)
-      db = InfluxDBClient(host, port, username, password, database)      
+      db = InfluxDBCloud(host, port, username, password, database,  ssl=True)    
 
 
       #rollup = "mean"
@@ -5109,55 +5111,71 @@ def getgpsseriesbydeviceid():
 
       #print 'TempoDB Series Key:', SERIES_KEY
 
-      """
-      if SERIES_KEY.find("*") > 0:
-        SERIES_KEY = SERIES_KEY.replace("*", ".*")
 
-        query = ('select {}(value) from /{}/ '
-                     'where time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format(rollup, SERIES_KEY,
-                        startepoch, endepoch,
-                        resolution)
-      else:
-        query = ('select {}(value) from "{}" '
-                     'where time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format(rollup, SERIES_KEY,
-                        startepoch, endepoch,
-                        resolution)
-      """
       
       gpskey =SERIES_KEY1
 
       overlaykey =SERIES_KEY2
 
+      seriesname = SERIES_KEY1
+      seriestags = seriesname.split(".")
+
+      seriesdeviceidtag = seriestags[0]
+      seriesdeviceid = seriesdeviceidtag.split(":")
+
+      seriessensortag = seriestags[1]
+      seriessensor = seriessensortag.split(":")
+
+      seriessourcetag = seriestags[2]
+      seriessource = seriessourcetag.split(":")
+
+      seriesinstancetag = seriestags[3]
+      seriesinstance = seriesinstancetag.split(":")
+
+      seriestypetag = seriestags[4]
+      seriestype = seriestypetag.split(":")
+
+      seriesparametertag = seriestags[5]
+      seriesparameter = seriesparametertag.split(":")    
+      parameter = seriesparameter[1]
+
+      if seriessource[1] == "*":
+        serieskeys=" deviceid='"
+        serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
+        serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
+        serieskeys= serieskeys +  " instance='" +  seriesinstance[1] + "'  AND "
+        serieskeys= serieskeys +  " type='" +  seriestype[1] + "'  AND "
+        serieskeys= serieskeys +  " parameter='" +  seriesparameter[1] + "'   "
+        
+      else:
+        serieskeys=" deviceid='"
+        serieskeys= serieskeys + seriesdeviceid[1] + "' AND "
+        serieskeys= serieskeys +  " sensor='" +  seriessensor[1] + "'  AND "
+        serieskeys= serieskeys +  " source='" +  seriessource[1] + "'  AND "
+        serieskeys= serieskeys +  " instance='" +  seriesinstance[1] + "'  AND "
+        serieskeys= serieskeys +  " type='" +  seriestype[1] + "'  AND "
+        serieskeys= serieskeys +  " parameter='" +  seriesparameter[1] + "'   "
+        
+
+
+      log.info("inFlux-cloud serieskeys %s", serieskeys)
+
+      
+
       if overlaykey == "":
       # Just get lat/lng
 
-        if gpskey.find("*") > 0:
-          gpskey = gpskey.replace("*", ".*")
-          
-          query = ('select median(valuelat) as lat, median(valuelng) as lng from /{}/ '
-                       'where time > {}s and time < {}s '
-                       'group by time({}s)') \
-                  .format( gpskey,
-                          startepoch, endepoch,
-                          resolution)
 
-          
 
-        else:
-
-          query = ('select median(valuelat) as lat, median(valuelng) as lng from "{}" '
-                       'where time > {}s and time < {}s '
-                       'group by time({}s)') \
-                  .format( gpskey,
+        query = ('select median(lat) as lat, median(lng) as lng from {} '
+                        'where {} AND time > {}s and time < {}s '
+                       'group by *, time({}s)') \
+                  .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
 
         
-        log.info("inFlux gps: Position Query %s", query)
+        log.info("inFlux-cloud gps: Position Query %s", query)
         
       else:
       # get lat/lng plus overlay series
@@ -5194,7 +5212,7 @@ def getgpsseriesbydeviceid():
         return jsonify( message='Error in inFluxDB query 2', status='error')
         #raise
       
-      #return jsonify(results=data)
+      return jsonify(results=data)
   
 
       if not data:
