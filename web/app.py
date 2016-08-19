@@ -5623,7 +5623,7 @@ def getgpsseriesbydeviceid():
 
 
             
-          return jsonify( message=jsondataarray, status='success')
+          #return jsonify( message=jsondataarray, status='success')
 
             
 
@@ -5686,7 +5686,7 @@ def getgpsseriesbydeviceid():
                 speed = float((delta/(float(deltatime)))*60*60)
               #distance = {'distance':delta}
 
-              if overlaykey == "":
+              if SERIES_KEY2 == "":
                 gpsjson = {'epoch': jsondata[i]['epoch'], 'source':jsondata[i]['source'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'interval':deltatime}
               else:
                 gpsjson = {'epoch': jsondata[i]['epoch'], 'source':jsondata[i]['source'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'overlay': jsondata[i]['overlay']}
