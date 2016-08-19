@@ -5248,10 +5248,10 @@ def getgpsseriesbydeviceid():
         serieskeys   =    serieskeys  + " OR " +   overlaykey
         log.info("inFlux-cloud gps: serieskeys Query %s", serieskeys)
       
-        query = ('select median(lat) as lat, median(lng) as lng, mean({}) as overlay from {} '
+        query = ('select median(lat) as lat, median(lng) as lng, mean({}) as {} from {} '
                         'where {} AND time > {}s and time < {}s '
                        'group by *, time({}s)') \
-                  .format( overlayparameter[1], measurement, serieskeys,
+                  .format( overlayparameter[1], overlayparameter[1], measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
 
@@ -5584,7 +5584,7 @@ def getgpsseriesbydeviceid():
           # sort based on epoch times
           jsondata = sorted(jsondata, key=lambda latlng: latlng[0])
           #log.info("freeboard  jsondata   %s",jsondata)
-          return jsonify( message=jsondata, status='success')
+          #return jsonify( message=jsondata, status='success')
 
         
           # group lat and lng values based on epoch times and get rid of repeated epoch times
@@ -5600,10 +5600,10 @@ def getgpsseriesbydeviceid():
                 valuesource = latlng_values[1]
                 
                 
-              if latlng_values[2] == 'lng':
+              elif latlng_values[2] == 'lng':
                 valuelng = latlng_values[3]
 
-              if latlng_values[2] == 'overlay':
+              elif latlng_values[2] != None:
                 valueoverlay = latlng_values[3]              
                 
 
