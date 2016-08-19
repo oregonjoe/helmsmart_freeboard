@@ -5430,7 +5430,7 @@ def getgpsseriesbydeviceid():
           strvalue ='TimeStamp, serieskey1: ' + SERIES_KEY1 + ', serieskey2: ' + SERIES_KEY2 +', start: ' + startepoch + ', end: ' + endepoch +  ', resolution: ' + resolution  + ' \r\n'
 
           # create header row
-          strvalue = strvalue + 'epoch, time, source, lat, lng, distance, speed, delta, overlay \r\n'
+          strvalue = strvalue + 'epoch, time, source, lat, lng, seg distance, speed, delta time, overlay \r\n'
        
           #get all other rows
           #for dataset in data:
@@ -5458,9 +5458,9 @@ def getgpsseriesbydeviceid():
               mytime = datetime.datetime.fromtimestamp(float(jsondata[i]['epoch'])).strftime('%Y-%m-%d %H:%M:%SZ')
                 
               if SERIES_KEY2 == "":                
-                strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ' \r\n'
+                strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ', ' + str(deltatime) ' \r\n'
               else:
-                strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ', ' + str(jsondata[i]['overlay'])+ ' \r\n'
+                strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ', ' + str(deltatime)', ' + str(jsondata[i]['overlay'])+ ' \r\n'
 
           response = make_response(strvalue)
           response.headers['Content-Type'] = 'text/csv'
@@ -5493,23 +5493,8 @@ def getgpsseriesbydeviceid():
           strvalue = strvalue + '<name>Track001</name>' + '\r\n'
           strvalue = strvalue + '<trkseg>' + '\r\n'
           #get all other rows
-          #for dataset in data:
-          #for point in data.points:
-          #First get all the points and put into a JSON array
-          for series in data:
-            #log.info("influxdb results..%s", series )
-            for point in series['points']:
-              fields = {}
-              for key, val in zip(series['columns'], point):
-                fields[key] = val
+          gpxpoints = jsondataarray
 
-              #mytime = datetime.datetime.fromtimestamp(float(fields['time'])).strftime('%Y-%m-%dT%H:%M:%SZ')
-
-              #gpxpoints.append({'epoch': jsondata[i]['epoch'], 'source':jsondata[i]['source'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng']})
-              gpxpoints.append({'epoch': float(fields['time']), 'lat': float(fields['lat']), 'lng': float(fields['lng'])})
-
-          #Now sort array based on time
-          gpxpoints = sorted(gpxpoints,key=itemgetter('epoch'))
 
           #Next go through array and calculate the distance and speed vectors.
           list_length = len(gpxpoints)
