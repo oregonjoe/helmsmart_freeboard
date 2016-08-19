@@ -5571,35 +5571,10 @@ def getgpsseriesbydeviceid():
                 jsondataarray.append(strvalues)
 
               
-            return jsonify( message=jsondataarray, status='success')
-
-            
-            series_lat_value = None
-            series_lng_value = None
-            
-            for seriesvalues in jsondata:
-              series_tag = seriesvalues['tag']
-              series_epoch=seriesvalues['epoch']
-
-              if series_tag['parameter'] == 'lat':
-                  if seriesvalues['value'] != None:                     
-                      series_lat_value = seriesvalues['value']
-
-              if series_tag['parameter'] == 'lng':
-                  if seriesvalues['value'] != None:                     
-                      series_lng_value = seriesvalues['value']
-
-                        
-              log.info('inFluxDB_GPS_JSON latlng tag = %s:%s', series_lat_value, series_lng_value)
-              
-              if series_lat_value != None and series_lng_value != None:
-                #distance = process_gpsdistance( "series_1", parameters,  series_lat_value, series_lng_value)
-                strvalue = {'epoch':series_epoch, 'source':series_tag['source'], 'lat': series_lat_value, 'lng': series_lng_value}
-
-                
-              jsondataarray.append(strvalue)
-            
             #return jsonify( message=jsondataarray, status='success')
+
+            
+
           
           else:
           # Get lat/lng and overlay
