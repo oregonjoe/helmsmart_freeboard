@@ -5584,7 +5584,7 @@ def getgpsseriesbydeviceid():
           # sort based on epoch times
           jsondata = sorted(jsondata, key=lambda latlng: latlng[0])
           #log.info("freeboard  jsondata   %s",jsondata)
-          #return jsonify( message=jsondata, status='success')
+          return jsonify( message=jsondata, status='success')
 
         
           # group lat and lng values based on epoch times and get rid of repeated epoch times
