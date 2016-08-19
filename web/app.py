@@ -5217,7 +5217,7 @@ def getgpsseriesbydeviceid():
         overlaysensortag = overlaytags[1]
         overlaysensor =overlaysensortag.split(":")
 
-        overlaysourcetag = seriestags[2]
+        overlaysourcetag = overlaytags[2]
         overlaysource = overlaysourcetag.split(":")
 
         overlayinstancetag = overlaytags[3]
@@ -5233,7 +5233,7 @@ def getgpsseriesbydeviceid():
         overlaykey="( deviceid='"
         overlaykey= overlaykey + overlaydeviceid[1] 
         overlaykey= overlaykey +  "' AND sensor='" +  overlaysensor[1]
-        if seriessource[1] != "*":
+        if overlaysource[1] != "*":
           overlaykey= overlaykey +  "' AND source='" +  overlaysource[1] 
         overlaykey= overlaykey +  "' AND instance='" +  overlayinstance[1] 
         overlaykey= overlaykey +  "' AND type='" +  overlaytype[1] 
@@ -5260,27 +5260,27 @@ def getgpsseriesbydeviceid():
         data= db.query(query)
         
       except TypeError, e:
-        log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', query)
         log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ' % str(e))
               
       except KeyError, e:
-        log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ', query)
         log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ' % str(e))
 
       except NameError, e:
-        log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ', query)
         log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ' % str(e))
               
       except IndexError, e:
-        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', query)
         log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))  
 
       except ValueError, e:
-        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', query)
         log.info('get_influxdbcloud_data: Value Error in InfluxDB  %s:  ' % str(e))
 
       except AttributeError, e:
-        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', data)
+        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', query)
         log.info('get_influxdbcloud_data: AttributeError in InfluxDB  %s:  ' % str(e))     
 
       except InfluxDBClientError, e:
