@@ -5263,7 +5263,7 @@ def getgpsseriesbydeviceid():
         #raise
       
       #return jsonify(results=data)
-      log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
+      #log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
 
       if not data:
         return jsonify( message='No data object to return 1', status='error')
@@ -5501,7 +5501,7 @@ def getgpsseriesbydeviceid():
 
               #name = series['name']
               name = series['tags']            
-              log.info("inFluxDB_GPS_JSON name %s", name )
+              #log.info("inFluxDB_GPS_JSON name %s", name )
               seriesname = series['tags'] 
               #seriestags = seriesname.split(".")
               #seriessourcetag = seriestags[2]
@@ -5533,12 +5533,21 @@ def getgpsseriesbydeviceid():
                   
                   jsondata.append(strvalues)
                 
-
+            # here we have an array of seperated lat and lng values taged with epoch times and series tags
+            # Like 
+            #'(u'HelmSmart', {u'instance': u'0', u'parameter': u'lat', u'deviceid': u'001EC010AD69', u'source': u'06', u'sensor': u'position_rapid', u'type': u'NULL'})':
+            # [{u'time': u'2016-08-18T11:00:00Z', u'lng': None, u'lat': 42.012865}],
+            # '(u'HelmSmart', {u'instance': u'0', u'parameter': u'lng', u'deviceid': u'001EC010AD69', u'source': u'06', u'sensor': u'position_rapid', u'type': u'NULL'})':
+            # [{u'time': u'2016-08-18T11:00:00Z', u'lng': -124.13088, u'lat': None}],
+            #
+            # We need to reorder this into joined lat and lng based on same epoch times
 
             #jsondata = sorted(jsondata,key=itemgetter('epoch'))
+            # sort based on epoch times
             jsondata = sorted(jsondata, key=lambda latlng: latlng[0])
             #log.info("freeboard  jsondata   %s",jsondata)
 
+            # group lat and lng values based on epoch times and get rid of repeated epoch times
             for key, latlnggroup in groupby(jsondata, lambda x: x[0]):
 
               valuelat = None
@@ -5555,6 +5564,7 @@ def getgpsseriesbydeviceid():
                 
               #strvalues=  {'epoch': key, 'source':thing[1], 'value': thing[3]}
 
+              # if we have valid lat and lng - make a json array
               if  valuelat != None and valuelng != None:
                 strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, 'lng': valuelng}
                 #log.info("freeboard  jsondata group   %s",strvalues)
