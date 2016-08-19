@@ -5430,7 +5430,11 @@ def getgpsseriesbydeviceid():
           strvalue ='TimeStamp, serieskey1: ' + SERIES_KEY1 + ', serieskey2: ' + SERIES_KEY2 +', start: ' + startepoch + ', end: ' + endepoch +  ', resolution: ' + resolution  + ' \r\n'
 
           # create header row
-          strvalue = strvalue + 'epoch, time, source, lat, lng, seg distance, speed, delta time, overlay \r\n'
+          if SERIES_KEY2 != "":      
+            strvalue = strvalue + 'epoch, time, source, lat, lng, seg distance, speed, delta time, ' + overlayparameter[1] + ' \r\n'
+          else
+            strvalue = strvalue + 'epoch, time, source, lat, lng, seg distance, speed, delta time \r\n'
+
        
           #get all other rows
           #for dataset in data:
