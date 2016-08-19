@@ -5607,7 +5607,8 @@ def getgpsseriesbydeviceid():
 
 
           jsondata = jsondataarray
-
+          log.info("freeboard  jsondata  %s:  %s",len(jsondata),  jsondata)
+          
           list_length = len(jsondata)
           for i in range(list_length-1):
             oldvector = (jsondata[i]['lat'], jsondata[i]['lng'])
