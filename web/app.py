@@ -5208,7 +5208,7 @@ def getgpsseriesbydeviceid():
       else:
       # get lat/lng plus overlay series
 
-        overlayname = SERIES_KEY21
+        overlayname = SERIES_KEY2
         overlaytags = overlayname.split(".")
 
         overlaydeviceidtag = overlaytags[0]
@@ -5229,7 +5229,8 @@ def getgpsseriesbydeviceid():
         overlayparametertag = overlaytags[5]
         overlayparameter = overlayparametertag.split(":")    
 
-
+        log.info("inFlux-cloud gps: overlayname Query %s", overlayname)
+        
         overlaykey="( deviceid='"
         overlaykey= overlaykey + overlaydeviceid[1] 
         overlaykey= overlaykey +  "' AND sensor='" +  overlaysensor[1]
@@ -5239,10 +5240,10 @@ def getgpsseriesbydeviceid():
         overlaykey= overlaykey +  "' AND type='" +  overlaytype[1] 
         overlaykey= overlaykey +  "' AND parameter='" +  overlayparameter[1] + "'   )"
 
-
+        log.info("inFlux-cloud gps: overlaykey Query %s", overlaykey)
 
         serieskeys   =    serieskeys  + " AND " +   overlaykey
-
+        log.info("inFlux-cloud gps: serieskeys Query %s", serieskeys)
       
         query = ('select median(lat) as lat, median(lng) as lng, mean({}) as {} from {} '
                         'where {} AND time > {}s and time < {}s '
