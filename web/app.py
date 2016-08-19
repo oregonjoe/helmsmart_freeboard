@@ -582,6 +582,7 @@ def freeboard_ImportSeries():
   serieskey = request.args.get('datakey','')
   Interval = request.args.get('Interval',"1day")
   Instance = request.args.get('instance','0')
+  StartTime = request.args.get('start','0')
   Repeat = int(request.args.get('repeat','1'))
   Sensor = request.args.get('sensor','environmental_data')
 
@@ -597,9 +598,15 @@ def freeboard_ImportSeries():
   resolution = 60*60*24
   qresolution = 60
   resolution = 60*60*24
-  endepoch =  int(time.time())
-  startepoch = endepoch - (resolution * 1)   
 
+  if StartTime == 0:
+    endepoch =  int(time.time())
+    startepoch = endepoch - (resolution * 1)
+  else:
+    endepoch =  int(StartTime)
+    startepoch = endepoch - (resolution * 1)
+
+    
   deviceid = getedeviceid(deviceapikey)
   
   log.info("freeboard deviceid %s", deviceid)
