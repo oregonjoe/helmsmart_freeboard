@@ -5248,10 +5248,10 @@ def getgpsseriesbydeviceid():
         serieskeys   =    serieskeys  + " OR " +   overlaykey
         log.info("inFlux-cloud gps: serieskeys Query %s", serieskeys)
       
-        query = ('select median(lat) as lat, median(lng) as lng, mean({}) as {} from {} '
+        query = ('select median(lat) as lat, median(lng) as lng, mean({}) as overlay from {} '
                         'where {} AND time > {}s and time < {}s '
                        'group by *, time({}s)') \
-                  .format( overlayparameter[1], overlayparameter[1], measurement, serieskeys,
+                  .format( overlayparameter[1], measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
 
@@ -5584,32 +5584,44 @@ def getgpsseriesbydeviceid():
           # sort based on epoch times
           jsondata = sorted(jsondata, key=lambda latlng: latlng[0])
           #log.info("freeboard  jsondata   %s",jsondata)
-          return jsonify( message=jsondata, status='success')
+          #return jsonify( message=jsondata, status='success')
+
+        
           # group lat and lng values based on epoch times and get rid of repeated epoch times
           for key, latlnggroup in groupby(jsondata, lambda x: x[0]):
 
             valuelat = None
             valuelng = None
+            valueoverlay = None
             
             for latlng_values in latlnggroup:
               if latlng_values[2] == 'lat':
                 valuelat = latlng_values[3]
+                valuesource = latlng_values[1]
+                
                 
               if latlng_values[2] == 'lng':
                 valuelng = latlng_values[3]
+
+              if latlng_values[2] == 'overlay':
+                valueoverlay = latlng_values[3]              
                 
-              valuesource = latlng_values[1]
+
               
             #strvalues=  {'epoch': key, 'source':thing[1], 'value': thing[3]}
 
             # if we have valid lat and lng - make a json array
-            if  valuelat != None and valuelng != None:
+            if  valuelat != None and valuelng != None and valueoverlay != None:
+              strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, 'lng': valuelng,  'overlay':valueoverlay}
+            elif  valuelat != None and valuelng != None:
               strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, 'lng': valuelng}
+
+              
               #log.info("freeboard  jsondata group   %s",strvalues)
               jsondataarray.append(strvalues)
 
             
-          #return jsonify( message=jsondataarray, status='success')
+          return jsonify( message=jsondataarray, status='success')
 
             
 
