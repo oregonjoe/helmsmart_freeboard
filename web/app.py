@@ -596,7 +596,7 @@ def freeboard_ImportSeries():
   resolution = epochtimes[2]
   
   resolution = 60*60*24
-  qresolution = 60
+  qresolution = 60*60
   resolution = 60*60*24
 
   if StartTime == 0:
@@ -680,7 +680,7 @@ def freeboard_ImportSeries():
 
     response= db.query(query)
 
-    #log.info("freeboard Get InfluxDB response %s", response)
+    log.info("freeboard Get InfluxDB response %s", response)
 
     keys=[]
     """
