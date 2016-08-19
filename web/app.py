@@ -5430,30 +5430,40 @@ def getgpsseriesbydeviceid():
           strvalue ='TimeStamp, serieskey1: ' + SERIES_KEY1 + ', serieskey2: ' + SERIES_KEY2 +', start: ' + startepoch + ', end: ' + endepoch +  ', resolution: ' + resolution  + ' \r\n'
 
           # create header row
-          strvalue = strvalue + 'epoch, time, lat, lng \r\n'
+          strvalue = strvalue + 'epoch, time, source, lat, lng, distance, speed, delta, overlay \r\n'
        
           #get all other rows
           #for dataset in data:
-          """
-          for point in data.points:
-                
-              #strvalue = str(point.t) + "," + str(point.get(SERIES_KEY1))+ "," + str(point.get(SERIES_KEY2)) + "," + str(point.get(SERIES_KEY3)) + "," + str(point.get(SERIES_KEY4))  
-              #yield strvalue + '\r\n'
-              strvalue = strvalue + str(point.t) + "," + str(point.get(SERIES_KEY1))+ "," + str(point.get(SERIES_KEY2)) + "," + str(point.get(SERIES_KEY3)) + "," + str(point.get(SERIES_KEY4))   + '\r\n'
-              #yield strvalue + '\r\n'
+          jsondata = jsondataarray
 
-          """
-          
-          for series in data:
-            #log.info("influxdb results..%s", series )
-            for point in series['points']:
-              fields = {}
-              for key, val in zip(series['columns'], point):
-                fields[key] = val
-                
-              mytime = datetime.datetime.fromtimestamp(float(fields['time'])).strftime('%Y-%m-%d %H:%M:%SZ')  
-              strvalue = strvalue + str(fields['time'])+ ', ' + str(mytime) + ', ' + str(fields['lat']) + ', ' + str(fields['lng']) + ' \r\n'
+          list_length = len(jsondata)
+          for i in range(list_length-1):
+            oldvector = (jsondata[i]['lat'], jsondata[i]['lng'])
+            oldsource = jsondata[i]['source']
+            newvector = (jsondata[i+1]['lat'], jsondata[i+1]['lng'])
+            newsource = jsondata[i+1]['source']
+            
+            if (newsource == oldsource) and (newvector != oldvector):
+              oldtime = jsondata[i]['epoch']
+              newtime = jsondata[i+1]['epoch']
 
+              deltatime = abs(newtime - oldtime)
+              
+              delta = vincenty(oldvector, newvector).miles
+              if deltatime == 0:
+                speed = float(0)
+              else:
+                speed = float((delta/(float(deltatime)))*60*60)
+
+              mytime = datetime.datetime.fromtimestamp(float(jsondata[i]['epoch'])).strftime('%Y-%m-%d %H:%M:%SZ')
+                gpsjson = {'epoch': jsondata[i]['epoch'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'interval':deltatime}
+              else:
+                gpsjson = {'epoch': jsondata[i]['epoch'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'overlay': jsondata[i]['overlay']}
+                
+              if SERIES_KEY2 == "":                
+                strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ' \r\n'
+              else
+                strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ', ' + str(jsondata[i]['overlay'])+ ' \r\n'
 
           response = make_response(strvalue)
           response.headers['Content-Type'] = 'text/csv'
@@ -5556,62 +5566,42 @@ def getgpsseriesbydeviceid():
           strvaluekey = {'Series1': SERIES_KEY1, 'Series2': SERIES_KEY2,'start': startepoch,  'end': endepoch, 'resolution': resolution}
           jsonkey.append(strvaluekey)
 
-          if overlaykey == "":
-          # Just get lat/lng
-            for series in data:
-              #log.info("influxdb results..%s", series )
-              for point in series['points']:
-                fields = {}
-                for key, val in zip(series['columns'], point):
-                  fields[key] = val
-                strvalue = {'epoch': fields['time'], 'lat': fields['lat'], 'lng': fields['lng']}
-                print 'inFluxDB processing data points:', strvalue
-                
-                jsondata.append(strvalue)
-                
-          else:
-          # Get lat/lng and overlay
-            for series in data:
-              #log.info("influxdb results..%s", series )
-              for point in series['points']:
-                fields = {}
-                for key, val in zip(series['columns'], point):
-                  fields[key] = val
-
-                strvalue = {'epoch': fields['time'], 'lat': fields['lat'], 'lng': fields['lng'], 'overlay': fields['overlay']}
-                print 'inFluxDB processing data points:', strvalue
-                
-                jsondata.append(strvalue)
-
-                
-          jsondata = sorted(jsondata,key=itemgetter('epoch'))
-
           gpsdata=[]
+          jsondata=[]
+          #for jsondata in jsondataarray:
+
+
+          jsondata = jsondataarray
+
+
           list_length = len(jsondata)
           for i in range(list_length-1):
             oldvector = (jsondata[i]['lat'], jsondata[i]['lng'])
+            oldsource = jsondata[i]['source']
             newvector = (jsondata[i+1]['lat'], jsondata[i+1]['lng'])
-
-            oldtime = jsondata[i]['epoch']
-            newtime = jsondata[i+1]['epoch']
-
-            deltatime = abs(newtime - oldtime)
+            newsource = jsondata[i+1]['source']
             
-            delta = vincenty(oldvector, newvector).miles
-            if deltatime == 0:
-              speed = float(0)
-            else:
-              speed = float((delta/(float(deltatime)))*60*60)
+            if (newsource == oldsource) and (newvector != oldvector):
+              oldtime = jsondata[i]['epoch']
+              newtime = jsondata[i+1]['epoch']
 
-            if overlaykey == "":
-              gpsjson = {'epoch': jsondata[i]['epoch'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'interval':deltatime}
-            else:
-              gpsjson = {'epoch': jsondata[i]['epoch'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'overlay': jsondata[i]['overlay']}
+              deltatime = abs(newtime - oldtime)
+              
+              delta = vincenty(oldvector, newvector).miles
+              if deltatime == 0:
+                speed = float(0)
+              else:
+                speed = float((delta/(float(deltatime)))*60*60)
 
-            #mininterval
-            if deltatime <  float(maxinterval) * 60:
-              if speed < float(maxthreshold)/100:
-                gpsdata.append(gpsjson)
+              if SERIES_KEY2 == "":
+                gpsjson = {'epoch': jsondata[i]['epoch'], 'source':jsondata[i]['source'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'interval':deltatime}
+              else:
+                gpsjson = {'epoch': jsondata[i]['epoch'],  'source':jsondata[i]['source'],'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'overlay': jsondata[i]['overlay']}
+
+              #mininterval
+              if deltatime <  float(maxinterval) * 60:
+                if speed < float(maxthreshold)/100:
+                  gpsdata.append(gpsjson)
           
           print 'inFluxDB_GPS JSONF returning data points:'
 
