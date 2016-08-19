@@ -5599,7 +5599,7 @@ def getgpsseriesbydeviceid():
                 
               jsondataarray.append(strvalue)
             
-            return jsonify( message=jsondataarray, status='success')
+            #return jsonify( message=jsondataarray, status='success')
           
           else:
           # Get lat/lng and overlay
