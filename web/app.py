@@ -5612,9 +5612,11 @@ def getgpsseriesbydeviceid():
           list_length = len(jsondata)
           for i in range(list_length-1):
             oldvector = (jsondata[i]['lat'], jsondata[i]['lng'])
+            oldsource = jsondata[i]['source']
             newvector = (jsondata[i+1]['lat'], jsondata[i+1]['lng'])
-
-            if newvector != oldvector:
+            newsource = jsondata[i+1]['source']
+            
+            if (newsource == oldsource) and (newvector != oldvector):
 
               oldtime = jsondata[i]['epoch']
               newtime = jsondata[i+1]['epoch']
