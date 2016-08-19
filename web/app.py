@@ -5459,13 +5459,15 @@ def getgpsseriesbydeviceid():
                 
               if SERIES_KEY2 == "":                
                 strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ' \r\n'
-              else
+              else:
                 strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ', ' + str(jsondata[i]['overlay'])+ ' \r\n'
 
           response = make_response(strvalue)
           response.headers['Content-Type'] = 'text/csv'
           response.headers["Content-Disposition"] = "attachment; filename=HelmSmart.csv"
           return response
+
+        
         except:
           #log.info('Telemetrypost: Error in geting Telemetry parameters %s:  ', posttype)
           e = sys.exc_info()[0]
