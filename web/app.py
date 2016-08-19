@@ -5603,47 +5603,43 @@ def getgpsseriesbydeviceid():
 
           gpsdata=[]
           jsondata=[]
-          for jsondata in jsondataarray:
-          #try:
-            #jsondata = jsondataarray[0]
+          #for jsondata in jsondataarray:
+
+
+          jsondata = jsondataarray
+
+          list_length = len(jsondata)
+          for i in range(list_length-1):
+            oldvector = (jsondata[i]['lat'], jsondata[i]['lng'])
+            newvector = (jsondata[i+1]['lat'], jsondata[i+1]['lng'])
+
+            if newvector != oldvector:
+
+              oldtime = jsondata[i]['epoch']
+              newtime = jsondata[i+1]['epoch']
+
+              deltatime = abs(newtime - oldtime)
               
-            jsondata = sorted(jsondata,key=itemgetter('epoch'))
-            print 'inFluxDB returning data points:'
+              delta = vincenty(oldvector, newvector).miles
+              #print 'GetGPSJSON processing dalta points:', delta
 
+              #speed = {'speed':float(delta/(float(deltatime)*60*60))} 
+              if deltatime == 0:
+                speed = float(0)
+   
+              else:
+                speed = float((delta/(float(deltatime)))*60*60)
+              #distance = {'distance':delta}
 
-
-            list_length = len(jsondata)
-            for i in range(list_length-1):
-              oldvector = (jsondata[i]['lat'], jsondata[i]['lng'])
-              newvector = (jsondata[i+1]['lat'], jsondata[i+1]['lng'])
-
-              if newvector != oldvector:
-
-                oldtime = jsondata[i]['epoch']
-                newtime = jsondata[i+1]['epoch']
-
-                deltatime = abs(newtime - oldtime)
-                
-                delta = vincenty(oldvector, newvector).miles
-                #print 'GetGPSJSON processing dalta points:', delta
-
-                #speed = {'speed':float(delta/(float(deltatime)*60*60))} 
-                if deltatime == 0:
-                  speed = float(0)
-     
-                else:
-                  speed = float((delta/(float(deltatime)))*60*60)
-                #distance = {'distance':delta}
-
-                if overlaykey == "":
-                  gpsjson = {'epoch': jsondata[i]['epoch'], 'source':jsondata[i]['source'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'interval':deltatime}
-                else:
-                  gpsjson = {'epoch': jsondata[i]['epoch'], 'source':jsondata[i]['source'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'overlay': jsondata[i]['overlay']}
-                
-                #if delta < float(maxthreshold)/1000:
-                if deltatime <  float(maxinterval) * 60:
-                  if speed < float(maxthreshold)/100:
-                    gpsdata.append(gpsjson)
+              if overlaykey == "":
+                gpsjson = {'epoch': jsondata[i]['epoch'], 'source':jsondata[i]['source'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'interval':deltatime}
+              else:
+                gpsjson = {'epoch': jsondata[i]['epoch'], 'source':jsondata[i]['source'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'overlay': jsondata[i]['overlay']}
+              
+              #if delta < float(maxthreshold)/1000:
+              if deltatime <  float(maxinterval) * 60:
+                if speed < float(maxthreshold)/100:
+                  gpsdata.append(gpsjson)
                 
           #except:
           #  e = sys.exc_info()[0]
