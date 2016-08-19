@@ -5116,14 +5116,17 @@ def getgpsseriesbydeviceid():
 
       #print 'TempoDB Series Key:', SERIES_KEY
 
+      if SERIES_KEY1.find(".*.") > 0:  
+        SERIES_KEY1 = SERIES_KEY1.replace(".*.","*.")
 
+      if SERIES_KEY2.find(".*.") > 0:  
+        SERIES_KEY2 = SERIES_KEY2.replace(".*.","*.")        
       
       gpskey =SERIES_KEY1
 
       overlaykey =SERIES_KEY2
 
-      if SERIES_KEY1.find(".*.") > 0:  
-        SERIES_KEY1 = SERIES_KEY1.replace(".*.","*.")
+
 
 
       seriesname = SERIES_KEY1
@@ -5176,9 +5179,12 @@ def getgpsseriesbydeviceid():
 
       log.info("inFlux-cloud serieskeys %s", serieskeys)
 
+
+ 
+
       
 
-      if overlaykey == "":
+      if SERIES_KEY2 == "":
       # Just get lat/lng
 
         query = ('select median(lat) as lat, median(lng) as lng from {} '
@@ -5201,24 +5207,50 @@ def getgpsseriesbydeviceid():
         
       else:
       # get lat/lng plus overlay series
-        if gpskey.find("*") > 0 or overlaykey.find("*") > 0:
-          gpskey = gpskey.replace("*", ".*")
-          overlaykey = overlaykey.replace("*", ".*")
-          
-          query = ('select median("{}.valuelat") as lat, median("{}.valuelng") as lng, {}("{}.value") as overlay from /{}/ inner join /{}/ '
-                       'where time > {}s and time < {}s '
-                       'group by time({}s)') \
-                  .format(gpskey,  gpskey, rollup, overlaykey,  gpskey, overlaykey,
+
+        overlayname = SERIES_KEY21
+        overlaytags = overlayname.split(".")
+
+        overlaydeviceidtag = overlaytags[0]
+        overlaydeviceid = overlaysdeviceidtag.split(":")
+
+        overlaysensortag = overlaytags[1]
+        overlaysensor =overlaysensortag.split(":")
+
+        overlaysourcetag = seriestags[2]
+        overlaysource = overlaysourcetag.split(":")
+
+        overlayinstancetag = overlaytags[3]
+        overlayinstance = overlayinstancetag.split(":")
+
+        overlaytypetag = overlaytags[4]
+        overlaytype = overlaytypetag.split(":")
+
+        overlayparametertag = overlaytags[5]
+        overlayparameter = overlayparametertag.split(":")    
+
+
+        overlaykey="( deviceid='"
+        overlaykey= overlaykey + overlaydeviceid[1] 
+        overlaykey= overlaykey +  "' AND sensor='" +  overlaysensor[1]
+        if seriessource[1] != "*":
+          overlaykey= overlaykey +  "' AND source='" +  overlaysource[1] 
+        overlaykey= overlaykey +  "' AND instance='" +  overlayinstance[1] 
+        overlaykey= overlaykey +  "' AND type='" +  overlaytype[1] 
+        overlaykey= overlaykey +  "' AND parameter='" +  overlayparameter[1] + "'   )"
+
+
+
+        serieskeys   =    serieskeys  + " AND "    overlaykey
+
+      
+        query = ('select median(lat) as lat, median(lng) as lng, mean({}) as {} from {} '
+                        'where {} AND time > {}s and time < {}s '
+                       'group by *, time({}s)') \
+                  .format( overlayparameter, overlayparameter, measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
-        else:
-          
-          query = ('select median("{}.valuelat") as lat, median("{}.valuelng") as lng, {}("{}.value") as overlay from "{}" inner join "{}" '
-                       'where time > {}s and time < {}s '
-                       'group by time({}s)') \
-                  .format( gpskey,  gpskey, rollup, overlaykey,  gpskey, overlaykey,
-                          startepoch, endepoch,
-                          resolution)
+
    
         log.info("inFlux gps: Overlay Query %s", query)
 
@@ -5263,12 +5295,12 @@ def getgpsseriesbydeviceid():
         #raise
       
       #return jsonify(results=data)
-      #log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
+      log.info('getgpsseriesbydeviceid: datad %s:  ', data)  
 
       if not data:
         return jsonify( message='No data object to return 1', status='error')
 
-      #return jsonify( message='data object to return 1', status='success')
+      return jsonify( message='data object to return 1', status='success')
       # return csv formated data
       
       if dataformat == 'csv':
