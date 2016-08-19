@@ -5245,7 +5245,7 @@ def getgpsseriesbydeviceid():
 
         log.info("inFlux-cloud gps: overlaykey Query %s", overlaykey)
 
-        serieskeys   =    serieskeys  + " AND " +   overlaykey
+        serieskeys   =    serieskeys  + " OR " +   overlaykey
         log.info("inFlux-cloud gps: serieskeys Query %s", serieskeys)
       
         query = ('select median(lat) as lat, median(lng) as lng, mean({}) as {} from {} '
