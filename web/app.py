@@ -596,7 +596,7 @@ def freeboard_ImportSeries():
   resolution = epochtimes[2]
   
   resolution = 60*60*24
-  qresolution = 60*60
+  qresolution = 60
   resolution = 60*60*24
 
   if StartTime == 0:
@@ -680,7 +680,7 @@ def freeboard_ImportSeries():
 
     response= db.query(query)
 
-    log.info("freeboard Get InfluxDB response %s", response)
+    #log.info("freeboard Get InfluxDB response %s", response)
 
     keys=[]
     """
@@ -749,7 +749,7 @@ def freeboard_ImportSeries():
           log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
           keys.append(ifluxjson)
         
-    return jsonify(series = keys,  status='success')
+    #return jsonify(series = keys,  status='success')
         
     log.info("freeboard Import InfluxDB series %s", seriescount)
 
