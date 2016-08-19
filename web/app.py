@@ -648,7 +648,7 @@ def freeboard_ImportSeries():
 
     if Sensor == 'position_rapid':
       
-      gpskey = 'deviceid:' + deviceid + '.sensor:position_rapid.source:*.instance:0.type:NULL.parameter:latlng.HelmSmart'
+      gpskey = 'deviceid:' + deviceid + '.sensor:position_rapid.source:.*.instance:0.type:NULL.parameter:latlng.HelmSmart'
       
       query = ('select median(valuelat) as lat, median(valuelng) as lng from /{}/ '
                    'where time > {}s and time < {}s '
