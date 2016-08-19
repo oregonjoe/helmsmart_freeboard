@@ -5209,10 +5209,13 @@ def getgpsseriesbydeviceid():
       # get lat/lng plus overlay series
 
         overlayname = SERIES_KEY2
+        log.info("inFlux-cloud gps: overlayname Query %s", overlayname)
+        
         overlaytags = overlayname.split(".")
-
+        log.info("inFlux-cloud gps: overlaytags Query %s", overlaytags)
+        
         overlaydeviceidtag = overlaytags[0]
-        overlaydeviceid = overlaysdeviceidtag.split(":")
+        overlaydeviceid = overlaydeviceidtag.split(":")
 
         overlaysensortag = overlaytags[1]
         overlaysensor =overlaysensortag.split(":")
@@ -5229,7 +5232,7 @@ def getgpsseriesbydeviceid():
         overlayparametertag = overlaytags[5]
         overlayparameter = overlayparametertag.split(":")    
 
-        log.info("inFlux-cloud gps: overlayname Query %s", overlayname)
+        log.info("inFlux-cloud gps: overlayparameter Query %s", overlayparameter)
         
         overlaykey="( deviceid='"
         overlaykey= overlaykey + overlaydeviceid[1] 
