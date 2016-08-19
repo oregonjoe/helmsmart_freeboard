@@ -5251,7 +5251,7 @@ def getgpsseriesbydeviceid():
         query = ('select median(lat) as lat, median(lng) as lng, mean({}) as {} from {} '
                         'where {} AND time > {}s and time < {}s '
                        'group by *, time({}s)') \
-                  .format( overlayparameter, overlayparameter, measurement, serieskeys,
+                  .format( overlayparameter[1], overlayparameter[1], measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
 
