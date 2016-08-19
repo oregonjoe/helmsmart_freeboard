@@ -5613,12 +5613,14 @@ def getgpsseriesbydeviceid():
             # if we have valid lat and lng - make a json array
             if  valuelat != None and valuelng != None and valueoverlay != None:
               strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, 'lng': valuelng,  'overlay':valueoverlay}
+              jsondataarray.append(strvalues)
+              
             elif  valuelat != None and valuelng != None:
               strvalues=  {'epoch': key, 'source':valuesource, 'lat': valuelat, 'lng': valuelng}
-
+              jsondataarray.append(strvalues)
               
               #log.info("freeboard  jsondata group   %s",strvalues)
-              jsondataarray.append(strvalues)
+
 
             
           return jsonify( message=jsondataarray, status='success')
