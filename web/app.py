@@ -5571,7 +5571,7 @@ def getgpsseriesbydeviceid():
                 jsondataarray.append(strvalues)
 
               
-            return jsonify( message=jsondataarray, status='success')
+            #return jsonify( message=jsondataarray, status='success')
 
             
 
