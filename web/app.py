@@ -5432,7 +5432,7 @@ def getgpsseriesbydeviceid():
           # create header row
           if SERIES_KEY2 != "":      
             strvalue = strvalue + 'epoch, time, source, lat, lng, seg distance, speed, delta time, ' + overlayparameter[1] + ' \r\n'
-          else
+          else:
             strvalue = strvalue + 'epoch, time, source, lat, lng, seg distance, speed, delta time \r\n'
 
        
