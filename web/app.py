@@ -5456,9 +5456,6 @@ def getgpsseriesbydeviceid():
                 speed = float((delta/(float(deltatime)))*60*60)
 
               mytime = datetime.datetime.fromtimestamp(float(jsondata[i]['epoch'])).strftime('%Y-%m-%d %H:%M:%SZ')
-                gpsjson = {'epoch': jsondata[i]['epoch'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'interval':deltatime}
-              else:
-                gpsjson = {'epoch': jsondata[i]['epoch'], 'lat':jsondata[i]['lat'], 'lng': jsondata[i]['lng'], 'distance':delta, 'speed':speed, 'overlay': jsondata[i]['overlay']}
                 
               if SERIES_KEY2 == "":                
                 strvalue = strvalue + str(jsondata[i]['epoch'])+ ', ' + str(mytime) + ', ' + str(jsondata[i]['source']) + ', ' + str(jsondata[i]['lat']) + ', ' + str(jsondata[i]['lng']) + ', ' + str(delta)+ ', ' + str(speed)+ ' \r\n'
