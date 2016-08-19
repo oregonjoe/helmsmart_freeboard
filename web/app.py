@@ -5241,7 +5241,7 @@ def getgpsseriesbydeviceid():
 
 
 
-        serieskeys   =    serieskeys  + " AND "    overlaykey
+        serieskeys   =    serieskeys  + " AND " +   overlaykey
 
       
         query = ('select median(lat) as lat, median(lng) as lng, mean({}) as {} from {} '
