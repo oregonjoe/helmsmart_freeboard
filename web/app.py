@@ -2883,7 +2883,8 @@ def freeboard_environmental():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
-
+    measurement = deviceid
+    
     #serieskeys={'deviceid'=deviceid, 'sensor'='environmental_data', 'instance'='0', 'type'='Outside_Temperature'}
 
     serieskeys=" deviceid='"
@@ -3063,6 +3064,7 @@ def freeboard_winddata():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
+    measurement = deviceid
 
     
     if  windtype =="apparent":
@@ -3752,7 +3754,7 @@ def freeboard_location():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
-
+    measurement = deviceid
     #serieskeys={'deviceid'=deviceid, 'sensor'='environmental_data', 'instance'='0', 'type'='Outside_Temperature'}
 
     serieskeys=" deviceid='"
@@ -3941,7 +3943,7 @@ def freeboard_nav():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
-
+    measurement = deviceid
 
 
 
@@ -4140,7 +4142,7 @@ def freeboard_battery():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
-
+    measurement = deviceid
 
 
     serieskeys=" deviceid='"
@@ -4324,7 +4326,7 @@ def freeboard_engine():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
-
+    measurement = deviceid
 
 
 
@@ -4559,7 +4561,7 @@ def freeboard_status():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
-
+    measurement = deviceid
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
@@ -4812,7 +4814,7 @@ def get_influxdbcloud_data():
 
   pgnnumber = request.args.get('pgnnumber', '000000')
   userid = request.args.get('userid', '4d231fb3a164c5eeb1a8634d34c578eb')
-  deviceid = request.args.get('deviceid', '000000000000')
+  deviceid = request.args.get('deviceid', 'HelmSmart')
   startepoch = request.args.get('startepoch', 0)
   endepoch = request.args.get('endepoch', 0)
   resolution = request.args.get('resolution', 60)
@@ -4821,7 +4823,7 @@ def get_influxdbcloud_data():
   response = None
   
   measurement = "HelmSmart"
-
+  measurement = deviceid
     
   query = "select devicename from user_devices where userid = %s AND deviceid = %s"
   sqlstr = 'select * from getpgn' + pgnnumber + '(%s,%s,%s,%s,%s,%s,%s);'
@@ -5113,6 +5115,7 @@ def getgpsseriesbydeviceid():
   response = None
   
   measurement = "HelmSmart"
+  measurement = deviceid
 
   try:
   #if dataformat == 'json':
