@@ -4823,7 +4823,7 @@ def get_influxdbcloud_data():
   response = None
   
   measurement = "HelmSmart"
-    measurement = 'HS_' + str(deviceid)
+  measurement = 'HS_' + str(deviceid)
     
   query = "select devicename from user_devices where userid = %s AND deviceid = %s"
   sqlstr = 'select * from getpgn' + pgnnumber + '(%s,%s,%s,%s,%s,%s,%s);'
