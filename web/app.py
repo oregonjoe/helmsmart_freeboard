@@ -2883,7 +2883,7 @@ def freeboard_environmental():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
-    measurement = deviceid
+    measurement = str(deviceid)
     
     #serieskeys={'deviceid'=deviceid, 'sensor'='environmental_data', 'instance'='0', 'type'='Outside_Temperature'}
 
