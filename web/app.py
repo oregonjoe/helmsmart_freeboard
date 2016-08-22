@@ -587,10 +587,10 @@ def freeboard_ImportSeries():
   #Sensor = request.args.get('sensor','environmental_data')
 
   deviceid = request.args.get('deviceid', '')
-  startepoch = request.args.get('startepoch', 0)
-  endepoch = request.args.get('endepoch', 0)
+  startepoch = int(request.args.get('startepoch', 0))
+  endepoch = int(request.args.get('endepoch', 0))
   #query samle interval
-  resolution = request.args.get('resolution', 60)
+  resolution = int(request.args.get('resolution', 60))
 
   response = None
   Sensor = None
@@ -600,10 +600,10 @@ def freeboard_ImportSeries():
   days = 0
   
   #maximum period to get points for = 1 day max
-  period = 60*60*24
+  period = int(60*60*24)
 
 
-  periodstartepoch = endepoch - (period)
+  periodstartepoch = endepoch - period
 
   tagpairs = series['name'].split(".")
   #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
@@ -836,7 +836,7 @@ def freeboard_ImportSeries():
     days = days + 1
 
     periodendepoch = periodstartepoch
-    periodstartepoch = periodendepoch - (period )   
+    periodstartepoch = periodendepoch - period 
 
   return jsonify(count = days,  status='success')
   """
