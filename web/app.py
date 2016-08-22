@@ -579,43 +579,63 @@ def freeboard_InfluxDB():
 def freeboard_ImportSeries():
 
   deviceapikey = request.args.get('apikey','')
-  serieskey = request.args.get('datakey','')
-  Interval = request.args.get('Interval',"1day")
-  Instance = request.args.get('instance','0')
-  StartTime = request.args.get('start','0')
-  Repeat = int(request.args.get('repeat','1'))
-  Sensor = request.args.get('sensor','environmental_data')
+  serieskey = request.args.get('serieskey','')
+  #Interval = request.args.get('Interval',"1day")
+  #Instance = request.args.get('instance','0')
+  #StartTime = request.args.get('start','0')
+  #Repeat = int(request.args.get('repeat','1'))
+  #Sensor = request.args.get('sensor','environmental_data')
+
+  deviceid = request.args.get('deviceid', '')
+  startepoch = request.args.get('startepoch', 0)
+  endepoch = request.args.get('endepoch', 0)
+  #query samle interval
+  resolution = request.args.get('resolution', 60)
 
   response = None
+  Sensor = None
     
   starttime = 0
 
-  epochtimes = getepochtimes(Interval)
-  startepoch = epochtimes[0]
-  endepoch = epochtimes[1]
-  resolution = epochtimes[2]
+  days = 0
   
-  resolution = 60*60*24
-  qresolution = 60
-  resolution = 60*60*24
+  #maximum period to get points for = 1 day max
+  period = 60*60*24
 
-  if StartTime == 0:
-    endepoch =  int(time.time())
-    startepoch = endepoch - (resolution * 1)
-  else:
-    endepoch =  int(StartTime)
-    startepoch = endepoch - (resolution * 1)
 
+  periodstartepoch = endepoch - (period)
+
+  tagpairs = series['name'].split(".")
+  #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
+
+  #DeviceID
+  tag0 = tagpairs[0].split(":")
+  #Sensor
+  tag1 = tagpairs[1].split(":")
+  #Source
+  tag2 = tagpairs[2].split(":")
+  #Instance
+  tag3 = tagpairs[3].split(":")
+  #Type
+  tag4 = tagpairs[4].split(":")
+  #Parameter
+  tag5 = tagpairs[5].split(":")
+
+  Sensor = tag1[1]
     
-  deviceid = getedeviceid(deviceapikey)
+  #deviceid = getedeviceid(deviceapikey)
   
-  log.info("freeboard deviceid %s", deviceid)
+  log.info("freeboard deviceid %s : Sensor $s", deviceid, Sensor)
 
   if deviceid == "":
       #return jsonify(update=False, status='missing' )
       callback = request.args.get('callback')
       return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
+  if Sensor == None:
+      #return jsonify(update=False, status='missing' )
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'Sensor error' })
   
   dchost = 'hilldale-670d9ee3.influxcloud.net' 
   dcport = 8086
@@ -623,7 +643,7 @@ def freeboard_ImportSeries():
   dcpassword = 'Salm0n16'
   dcdatabase = 'pushsmart-cloud'
 
-
+  measurement = "HS_" + str(deviceid)
   #epochtimes = getepochtimes(Interval)
   #startepoch = epochtimes[0]
   #endepoch = epochtimes[1]
@@ -639,9 +659,9 @@ def freeboard_ImportSeries():
   db = InfluxDBClient(host, port, username, password, database)
   dbc = InfluxDBCloud(dchost, dcport, dcusername, dcpassword, dcdatabase,  ssl=True)
 
-  days = 0
+  periodendepoch = endepoch
 
-  while (days < Repeat):
+  while (periodstartepoch > startepoch):
 
     #serieskeys = 'deviceid:' + deviceid + '.sensor:environmental_data.source:*.instance:*.type:*.parameter:*.HelmSmart'
     serieskeys = 'deviceid:' + deviceid + '.sensor:' + Sensor + '.source:*.instance:*.type:*.parameter:*.HelmSmart'
@@ -654,8 +674,8 @@ def freeboard_ImportSeries():
                    'where time > {}s and time < {}s '
                    'group by time({}s)') \
               .format( gpskey,
-                      startepoch, endepoch,
-                      qresolution)
+                      periodstartepoch, periodendepoch,
+                      resolution)
         
     elif serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
@@ -664,15 +684,15 @@ def freeboard_ImportSeries():
                      'where time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( serieskeys,
-                        startepoch, endepoch,
-                        qresolution)
+                        periodstartepoch, periodendepoch,
+                        resolution)
     else:
         query = ('select mean(value) from "{}" '
                      'where time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( serieskeys,
-                        startepoch, endepoch,
-                        qresolution)
+                        periodstartepoch, periodendepoch,
+                        resolution)
 
 
     log.info("freeboard data Query %s", query)
@@ -731,13 +751,15 @@ def freeboard_ImportSeries():
         if Sensor == 'position_rapid':
           myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':'lat'}
           values ={'lat':float(fields['lat'])}
-          ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
+          #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
+          ifluxjson ={"measurement":tag0[1], "time": ts, "tags":myjsonkeys, "fields": values}          
           log.info('freeboard: convert_influxdbcloud_json_gps_lat %s:  ', ifluxjson)
           keys.append(ifluxjson)
           
           myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':'lng'}
           values ={'lng':float(fields['lng'])}
-          ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
+          #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
+          ifluxjson ={"measurement":tag0[1], "time": ts, "tags":myjsonkeys, "fields": values}          
           log.info('freeboard: convert_influxdbcloud_json_gps_lng %s:  ', ifluxjson)
           keys.append(ifluxjson)
 
@@ -745,7 +767,8 @@ def freeboard_ImportSeries():
         else:
           myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
           values = {tag5[1]:float(fields['mean'])}
-          ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
+          #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
+          ifluxjson ={"measurement":tag0[1], "time": ts, "tags":myjsonkeys, "fields": values}          
           log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
           keys.append(ifluxjson)
         
@@ -766,7 +789,7 @@ def freeboard_ImportSeries():
         dbc.drop_database(dcdatabase)
         dbc.create_database(dcdatabase)
       """          
-      #return jsonify(series = keys,  status='success')    
+      return jsonify(series = keys,  status='success')    
       """        
       for tags in keys:
         log.info('freeboard: delete tags %s:  ', tags['tags'])
@@ -812,11 +835,11 @@ def freeboard_ImportSeries():
 
     days = days + 1
 
-    endepoch = startepoch
-    startepoch = endepoch - (resolution * 1)   
+    periodendepoch = periodstartepoch
+    periodstartepoch = periodendepoch - (period )   
 
   return jsonify(count = days,  status='success')
-
+  """
   query = ("select mean(speed) as speed from HelmSmart where deviceid='001EC010AD69' and sensor='engine_parameters_rapid_update' and time > {}s and time < {}s group by time(60s)") \
         .format( startepoch, endepoch)
     
@@ -831,7 +854,7 @@ def freeboard_ImportSeries():
 
 
   return jsonify(series = keys,  status='success')
-
+  """
   """
       seriesname = series['name']
       seriestags = seriesname.split(".")
@@ -1017,7 +1040,7 @@ def freeboard_GetSeries():
   username = 'helmsmart'
   password = 'Salm0n16'
   database = 'pushsmart-cloud'
-
+  measurement = "HS" + str(deviceid)
 
   epochtimes = getepochtimes(Interval)
   startepoch = epochtimes[0]
@@ -1044,9 +1067,9 @@ def freeboard_GetSeries():
 
 
     
-    query = ("select  * from HelmSmart "
+    query = ("select  * from {} "
            "where deviceid='{}'  AND  time > {}s AND  time < {}s group by * limit 1") \
-        .format(deviceid,
+        .format(measurement, deviceid,
               startepoch, endepoch)
     
 
@@ -1287,6 +1310,11 @@ def freeboard_createInfluxDB():
         .format(
               startepoch, endepoch)
     
+    measurement = "HS_" + str(deviceid)
+    query = ("select  * from {} "
+           "where deviceid='001EC010AD69'  AND  time > {}s AND  time < {}s group by * limit 1") \
+        .format(measurement,
+              startepoch, endepoch)  
 
     log.info("freeboard Get InfluxDB query %s", query)
 
