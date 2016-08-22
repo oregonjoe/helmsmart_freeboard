@@ -605,7 +605,7 @@ def freeboard_ImportSeries():
 
   periodstartepoch = endepoch - period
 
-  tagpairs = series['name'].split(".")
+  tagpairs = serieskey.split(".")
   #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', tagpairs)
 
   #DeviceID
