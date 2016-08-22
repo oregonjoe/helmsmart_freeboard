@@ -753,14 +753,14 @@ def freeboard_ImportSeries():
           values ={'lat':float(fields['lat'])}
           #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
           ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}          
-          log.info('freeboard: convert_influxdbcloud_json_gps_lat %s:  ', ifluxjson)
+          #log.info('freeboard: convert_influxdbcloud_json_gps_lat %s:  ', ifluxjson)
           keys.append(ifluxjson)
           
           myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':'lng'}
           values ={'lng':float(fields['lng'])}
           #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
           ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}          
-          log.info('freeboard: convert_influxdbcloud_json_gps_lng %s:  ', ifluxjson)
+          #log.info('freeboard: convert_influxdbcloud_json_gps_lng %s:  ', ifluxjson)
           keys.append(ifluxjson)
 
           
@@ -769,7 +769,7 @@ def freeboard_ImportSeries():
           values = {tag5[1]:float(fields['mean'])}
           #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
           ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}          
-          log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
+          #log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
           keys.append(ifluxjson)
         
     #return jsonify(series = keys,  status='success')
@@ -789,7 +789,7 @@ def freeboard_ImportSeries():
         dbc.drop_database(dcdatabase)
         dbc.create_database(dcdatabase)
       """          
-      return jsonify(series = keys,  status='success')    
+      #return jsonify(series = keys,  status='success')    
       """        
       for tags in keys:
         log.info('freeboard: delete tags %s:  ', tags['tags'])
