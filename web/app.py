@@ -4876,7 +4876,7 @@ def get_dbstats():
     
 
     end = datetime.datetime.fromtimestamp(float(endepoch))
-    resolutionstr = "PT" + resolution + "S"
+    resolutionstr = "PT" + str(resolution) + "S"
 
     rollup = "mean"
 
