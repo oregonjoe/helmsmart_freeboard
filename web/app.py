@@ -625,7 +625,7 @@ def freeboard_ImportSeries():
     
   #deviceid = getedeviceid(deviceapikey)
   
-  log.info("freeboard deviceid %s : Sensor $s", deviceid, Sensor)
+  log.info("freeboard deviceid %s : Sensor %s", deviceid, Sensor)
 
   if deviceid == "":
       #return jsonify(update=False, status='missing' )
