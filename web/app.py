@@ -4994,6 +4994,11 @@ def get_dbstats():
 
       jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
 
+      total = 0
+
+      for stat in jsondata:
+        total = total + float(stat['value'])
+
       if len(jsondata) > 0:
         mydatetimestr = str(jsondata[0]['epoch'])
         stat0 = str(jsondata[0]['source']) + " = " +  str(jsondata[0]['value'])
@@ -5004,6 +5009,33 @@ def get_dbstats():
       if len(jsondata) > 2:
         stat2 = str(jsondata[2]['source']) + " = " +  str(jsondata[2]['value'])       
 
+      if len(jsondata) > 3:
+        stat3 = str(jsondata[3]['source']) + " = " +  str(jsondata[3]['value'])       
+
+      if len(jsondata) > 4:
+        stat4 = str(jsondata[4]['source']) + " = " +  str(jsondata[4]['value'])       
+
+      if len(jsondata) > 5:
+        stat5 = str(jsondata[5]['source']) + " = " +  str(jsondata[5]['value'])       
+
+      if len(jsondata) > 6:
+        stat6 = str(jsondata[6]['source']) + " = " +  str(jsondata[6]['value'])       
+
+      if len(jsondata) > 7:
+        stat7 = str(jsondata[7]['source']) + " = " +  str(jsondata[7]['value'])       
+
+      if len(jsondata) > 8:
+        stat8 = str(jsondata[8]['source']) + " = " +  str(jsondata[8]['value'])       
+
+      if len(jsondata) > 9:
+        stat9 = str(jsondata[9]['source']) + " = " +  str(jsondata[9]['value'])       
+
+      if len(jsondata) > 10:
+        stat10 = str(jsondata[10]['source']) + " = " +  str(jsondata[10]['value'])       
+
+      if len(jsondata) > 11:
+        stat11 = str(jsondata[11]['source']) + " = " +  str(jsondata[11]['value'])       
+
       mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
       #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', stat1,stat2)            
@@ -5013,7 +5045,7 @@ def get_dbstats():
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10})
 
 
       
