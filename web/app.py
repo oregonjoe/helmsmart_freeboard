@@ -4933,8 +4933,7 @@ def get_dbstats():
       #print 'inFluxDB Exception1:', response.response.successful, response.response.reason 
       return jsonify( message='No response to return 1' , status='error')
 
-    try:
-  
+
       #if not response.points:
       #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
       #  return jsonify( message='No data to return 2', status='error')
