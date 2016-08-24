@@ -5108,15 +5108,6 @@ def get_dbstats():
       e = sys.exc_info()[0]
       log.info('get_influxdbcloud_data: Error in geting freeboard ststs %s:  ' % e)
       return jsonify( message='error processing data 3' , status='error')        
-  
-    
-
-    #return jsonify(result = data.data)
-    #return datasets[0].data
-  #finally:
-  #   log.info('get_influxdbcloud_stats: completed freeboard response :  ')
-
-
 
 @app.route('/get_influxdbcloud_data')
 @cross_origin()
