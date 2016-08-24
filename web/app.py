@@ -5033,10 +5033,25 @@ def get_dbstats():
         stat9 = str(jsondata[9]['source']) + " = " +  str(jsondata[9]['value'])       
 
       if len(jsondata) > 10:
-        stat10 = str(jsondata[10]['source']) + " = " +  str(jsondata[10]['value'])       
+        stat10 = str(jsondata[10]['source']) + " = " +  str(jsondata[10]['value'])            
 
-      if len(jsondata) > 11:
+     if len(jsondata) > 11:
         stat11 = str(jsondata[11]['source']) + " = " +  str(jsondata[11]['value'])       
+
+      if len(jsondata) > 12:
+        stat12 = str(jsondata[12]['source']) + " = " +  str(jsondata[12]['value'])       
+
+      if len(jsondata) > 13:
+        stat13 = str(jsondata[13]['source']) + " = " +  str(jsondata[13]['value'])       
+
+      if len(jsondata) > 14:
+        stat14 = str(jsondata[14]['source']) + " = " +  str(jsondata[14]['value'])       
+
+      if len(jsondata) > 15:
+        stat15 = str(jsondata[15]['source']) + " = " +  str(jsondata[15]['value'])       
+
+      if len(jsondata) > 16:
+        stat16 = str(jsondata[16]['source']) + " = " +  str(jsondata[16]['value'])       
 
       mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
@@ -5047,7 +5062,7 @@ def get_dbstats():
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':Interval,'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
 
 
       
