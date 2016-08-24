@@ -5065,16 +5065,6 @@ def get_dbstats():
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
 
 
-      
-      print 'inFluxDB returning data points:'
-      #return jsonify( results = jsondata)      
-      return jsonify(serieskey = jsonkey, results = jsondata)
-      #result = json.dumps(data.data, cls=DateEncoder)
-    
-      #response = make_response(result) 
-      
-      #response.headers['content-type'] = "application/json"
-      #return response
 
     except TypeError, e:
         log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', response)
@@ -5108,6 +5098,11 @@ def get_dbstats():
       e = sys.exc_info()[0]
       log.info('get_influxdbcloud_data: Error in geting freeboard ststs %s:  ' % e)
       return jsonify( message='error processing data 3' , status='error')        
+
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+  
 
 @app.route('/get_influxdbcloud_data')
 @cross_origin()
