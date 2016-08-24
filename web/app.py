@@ -4901,7 +4901,7 @@ def get_dbstats():
 
     query = ('select {}(records) AS records FROM {} '
                      'where time > {}s and time < {}s '
-                     'group by *, time({}s limit 1)') \
+                     'group by *, time({}s) LIMIT 1') \
                 .format(rollup,  measurement, 
                         startepoch, endepoch,
                         resolution) 
