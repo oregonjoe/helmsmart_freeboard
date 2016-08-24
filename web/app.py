@@ -5065,41 +5065,41 @@ def get_dbstats():
 
 
 
-    except TypeError, e:
-        log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', response)
-        log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ' % str(e))
-            
-    except KeyError, e:
-        log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ', response)
-        log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ' % str(e))
+  except TypeError, e:
+      log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ' % str(e))
+          
+  except KeyError, e:
+      log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ' % str(e))
 
-    except NameError, e:
-        log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ', response)
-        log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ' % str(e))
-            
-    except IndexError, e:
-        log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
-        log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))  
-
-    except ValueError, e:
+  except NameError, e:
+      log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ' % str(e))
+          
+  except IndexError, e:
       log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
-      log.info('get_influxdbcloud_data: Value Error in InfluxDB  %s:  ' % str(e))
+      log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))  
 
-    except AttributeError, e:
-      log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
-      log.info('get_influxdbcloud_data: AttributeError in InfluxDB  %s:  ' % str(e))     
+  except ValueError, e:
+    log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('get_influxdbcloud_data: Value Error in InfluxDB  %s:  ' % str(e))
 
-    except InfluxDBClientError, e:
-      log.info('get_influxdbcloud_data: Exception Error in InfluxDB  %s:  ' % str(e))     
-    
-    except:
-      log.info('get_influxdbcloud_data: Error in geting freeboard response %s:  ', strvalue)
-      e = sys.exc_info()[0]
-      log.info('get_influxdbcloud_data: Error in geting freeboard ststs %s:  ' % e)
-      return jsonify( message='error processing data 3' , status='error')        
+  except AttributeError, e:
+    log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('get_influxdbcloud_data: AttributeError in InfluxDB  %s:  ' % str(e))     
 
-    callback = request.args.get('callback')
-    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+  except InfluxDBClientError, e:
+    log.info('get_influxdbcloud_data: Exception Error in InfluxDB  %s:  ' % str(e))     
+  
+  except:
+    log.info('get_influxdbcloud_data: Error in geting freeboard response %s:  ', strvalue)
+    e = sys.exc_info()[0]
+    log.info('get_influxdbcloud_data: Error in geting freeboard ststs %s:  ' % e)
+    return jsonify( message='error processing data 3' , status='error')        
+
+  callback = request.args.get('callback')
+  return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
   
 
