@@ -5062,7 +5062,7 @@ def get_dbstats():
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':Interval,'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
 
 
       
@@ -5113,8 +5113,8 @@ def get_dbstats():
 
     #return jsonify(result = data.data)
     #return datasets[0].data
-  finally:
-    log.info('get_influxdbcloud_stats: Error in geting freeboard response :  ')
+  #finally:
+  #   log.info('get_influxdbcloud_stats: completed freeboard response :  ')
 
 
 
