@@ -4889,7 +4889,7 @@ def get_dbstats():
                         startepoch, endepoch,
                         resolution) 
 
-    query =(' select records as records from HelmSmartDB')      
+    #query =(' select records as records from HelmSmartDB')      
       
     
     log.info("inFlux-cloud Query %s", query)
