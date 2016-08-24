@@ -5035,7 +5035,7 @@ def get_dbstats():
       if len(jsondata) > 10:
         stat10 = str(jsondata[10]['source']) + " = " +  str(jsondata[10]['value'])            
 
-     if len(jsondata) > 11:
+      if len(jsondata) > 11:
         stat11 = str(jsondata[11]['source']) + " = " +  str(jsondata[11]['value'])       
 
       if len(jsondata) > 12:
