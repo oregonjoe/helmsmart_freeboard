@@ -4984,9 +4984,10 @@ def get_dbstats():
             fields[key] = val
             
           log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
-          strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'value': fields['records']}
           
-          jsondata.append(strvalue)
+          if fields['records'] != None:
+            strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'value': fields['records']}
+            jsondata.append(strvalue)
 
 
 
@@ -4997,7 +4998,8 @@ def get_dbstats():
       total = 0
 
       for stat in jsondata:
-        total = total + float(stat['value'])
+        if stat['value'] != None:
+          total = total + float(stat['value'])
 
       if len(jsondata) > 0:
         mydatetimestr = str(jsondata[0]['epoch'])
