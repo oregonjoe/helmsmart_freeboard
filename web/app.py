@@ -4934,134 +4934,134 @@ def get_dbstats():
       return jsonify( message='No response to return 1' , status='error')
 
 
-      #if not response.points:
-      #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
-      #  return jsonify( message='No data to return 2', status='error')
+    #if not response.points:
+    #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
+    #  return jsonify( message='No data to return 2', status='error')
 
-      print 'inFluxDB processing data headers:'
-      jsondata=[]
-      jsonkey=[]
-      #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
-      #jsonkey.append(strvaluekey)
-      print 'inFluxDB start processing data points:'
-      #log.info("freeboard Get InfluxDB response %s", response)
+    print 'inFluxDB processing data headers:'
+    jsondata=[]
+    jsonkey=[]
+    #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+    #jsonkey.append(strvaluekey)
+    print 'inFluxDB start processing data points:'
+    #log.info("freeboard Get InfluxDB response %s", response)
 
-      keys = response.raw.get('series',[])
-      #log.info("freeboard Get InfluxDB series keys %s", keys)
-
-
+    keys = response.raw.get('series',[])
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
-      strvalue=""
+
+
+    strvalue=""
+    
+    for series in keys:
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+      #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+      #log.info("freeboard Get InfluxDB series values %s ", series['values'])
+
+      """        
+      values = series['values']
+      for value in values:
+        log.info("freeboard Get InfluxDB series time %s", value[0])
+        log.info("freeboard Get InfluxDB series mean %s", value[1])
+      """
+
+      tag = series['tags']
+      log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+
+      #mydatetimestr = str(fields['time'])
+      strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
+      jsonkey.append(strvaluekey)        
+
+      log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
+
       
-      for series in keys:
-        #log.info("freeboard Get InfluxDB series key %s", series)
-        #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
-        #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
-        #log.info("freeboard Get InfluxDB series values %s ", series['values'])
-
-        """        
-        values = series['values']
-        for value in values:
-          log.info("freeboard Get InfluxDB series time %s", value[0])
-          log.info("freeboard Get InfluxDB series mean %s", value[1])
-        """
-
-        tag = series['tags']
-        log.info("freeboard Get InfluxDB series tags2 %s ", tag)
-
-        #mydatetimestr = str(fields['time'])
-        strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
-        jsonkey.append(strvaluekey)        
-
-        log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
-
-        
-        for point in series['values']:
-          fields = {}
-          for key, val in zip(series['columns'], point):
-            fields[key] = val
-            
-          log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+      for point in series['values']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
           
-          if fields['records'] != None:
-            strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'value': fields['records']}
-            jsondata.append(strvalue)
+        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+        
+        if fields['records'] != None:
+          strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'value': fields['records']}
+          jsondata.append(strvalue)
 
 
 
 
 
-      jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+    jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
 
-      total = 0
+    total = 0
 
-      for stat in jsondata:
-        if stat['value'] != None:
-          total = total + float(stat['value'])
+    for stat in jsondata:
+      if stat['value'] != None:
+        total = total + float(stat['value'])
 
-      if len(jsondata) > 0:
-        mydatetimestr = str(jsondata[0]['epoch'])
-        stat0 = str(jsondata[0]['source']) + " = " +  str(jsondata[0]['value'])
+    if len(jsondata) > 0:
+      mydatetimestr = str(jsondata[0]['epoch'])
+      stat0 = str(jsondata[0]['source']) + " = " +  str(jsondata[0]['value'])
 
-      if len(jsondata) > 1:
-        stat1 = str(jsondata[1]['source']) + " = " +  str(jsondata[1]['value'])       
+    if len(jsondata) > 1:
+      stat1 = str(jsondata[1]['source']) + " = " +  str(jsondata[1]['value'])       
 
-      if len(jsondata) > 2:
-        stat2 = str(jsondata[2]['source']) + " = " +  str(jsondata[2]['value'])       
+    if len(jsondata) > 2:
+      stat2 = str(jsondata[2]['source']) + " = " +  str(jsondata[2]['value'])       
 
-      if len(jsondata) > 3:
-        stat3 = str(jsondata[3]['source']) + " = " +  str(jsondata[3]['value'])       
+    if len(jsondata) > 3:
+      stat3 = str(jsondata[3]['source']) + " = " +  str(jsondata[3]['value'])       
 
-      if len(jsondata) > 4:
-        stat4 = str(jsondata[4]['source']) + " = " +  str(jsondata[4]['value'])       
+    if len(jsondata) > 4:
+      stat4 = str(jsondata[4]['source']) + " = " +  str(jsondata[4]['value'])       
 
-      if len(jsondata) > 5:
-        stat5 = str(jsondata[5]['source']) + " = " +  str(jsondata[5]['value'])       
+    if len(jsondata) > 5:
+      stat5 = str(jsondata[5]['source']) + " = " +  str(jsondata[5]['value'])       
 
-      if len(jsondata) > 6:
-        stat6 = str(jsondata[6]['source']) + " = " +  str(jsondata[6]['value'])       
+    if len(jsondata) > 6:
+      stat6 = str(jsondata[6]['source']) + " = " +  str(jsondata[6]['value'])       
 
-      if len(jsondata) > 7:
-        stat7 = str(jsondata[7]['source']) + " = " +  str(jsondata[7]['value'])       
+    if len(jsondata) > 7:
+      stat7 = str(jsondata[7]['source']) + " = " +  str(jsondata[7]['value'])       
 
-      if len(jsondata) > 8:
-        stat8 = str(jsondata[8]['source']) + " = " +  str(jsondata[8]['value'])       
+    if len(jsondata) > 8:
+      stat8 = str(jsondata[8]['source']) + " = " +  str(jsondata[8]['value'])       
 
-      if len(jsondata) > 9:
-        stat9 = str(jsondata[9]['source']) + " = " +  str(jsondata[9]['value'])       
+    if len(jsondata) > 9:
+      stat9 = str(jsondata[9]['source']) + " = " +  str(jsondata[9]['value'])       
 
-      if len(jsondata) > 10:
-        stat10 = str(jsondata[10]['source']) + " = " +  str(jsondata[10]['value'])            
+    if len(jsondata) > 10:
+      stat10 = str(jsondata[10]['source']) + " = " +  str(jsondata[10]['value'])            
 
-      if len(jsondata) > 11:
-        stat11 = str(jsondata[11]['source']) + " = " +  str(jsondata[11]['value'])       
+    if len(jsondata) > 11:
+      stat11 = str(jsondata[11]['source']) + " = " +  str(jsondata[11]['value'])       
 
-      if len(jsondata) > 12:
-        stat12 = str(jsondata[12]['source']) + " = " +  str(jsondata[12]['value'])       
+    if len(jsondata) > 12:
+      stat12 = str(jsondata[12]['source']) + " = " +  str(jsondata[12]['value'])       
 
-      if len(jsondata) > 13:
-        stat13 = str(jsondata[13]['source']) + " = " +  str(jsondata[13]['value'])       
+    if len(jsondata) > 13:
+      stat13 = str(jsondata[13]['source']) + " = " +  str(jsondata[13]['value'])       
 
-      if len(jsondata) > 14:
-        stat14 = str(jsondata[14]['source']) + " = " +  str(jsondata[14]['value'])       
+    if len(jsondata) > 14:
+      stat14 = str(jsondata[14]['source']) + " = " +  str(jsondata[14]['value'])       
 
-      if len(jsondata) > 15:
-        stat15 = str(jsondata[15]['source']) + " = " +  str(jsondata[15]['value'])       
+    if len(jsondata) > 15:
+      stat15 = str(jsondata[15]['source']) + " = " +  str(jsondata[15]['value'])       
 
-      if len(jsondata) > 16:
-        stat16 = str(jsondata[16]['source']) + " = " +  str(jsondata[16]['value'])       
+    if len(jsondata) > 16:
+      stat16 = str(jsondata[16]['source']) + " = " +  str(jsondata[16]['value'])       
 
-      mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
-      #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', stat1,stat2)            
+    #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', stat1,stat2)            
 
-      callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+    callback = request.args.get('callback')
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
 
-      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
+    #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
 
 
 
