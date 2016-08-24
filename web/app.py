@@ -4995,7 +4995,7 @@ def get_dbstats():
       jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
 
       if len(jsondata) > 0:
-        mydatetimestr = str(jsondata[0]['time'])
+        mydatetimestr = str(jsondata[0]['epoch'])
         stat0 = jsondata[0]['source'] + " = " +  jsondata[0]['value']
 
       if len(jsondata) > 1:
