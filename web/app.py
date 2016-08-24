@@ -4854,6 +4854,23 @@ def get_dbstats():
   response = None
   
   measurement = "HelmSmartDB"
+  stat0 = '---'
+  stat1 = '---'
+  stat2 = '---'
+  stat3 = '---'
+  stat4 = '---'
+  stat5 = '---'
+  stat6 = '---'
+  stat7 = '---'
+  stat8 = '---'
+  stat9 = '---'
+  stat10 = '---'
+  stat11 = '---'
+  stat12 = '---'
+  stat13 = '---'
+  stat14 = '---'
+  stat15 = '---'
+  stat16 = '---'
 
 
 
@@ -4975,7 +4992,31 @@ def get_dbstats():
 
 
 
-      jsondata = sorted(jsondata,key=itemgetter('epoch'))
+      jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+
+      if len(jsondata) > 0:
+        mydatetimestr = str(jsondata[0]['time'])
+        stat0 = jsondata[0]['source'] + " = " +  jsondata[0]['value']
+
+      if len(jsondata) > 1:
+        stat1 = jsondata[1]['source'] + " = " +  jsondata[1]['value']       
+
+      if len(jsondata) > 2:
+        stat2 = jsondata[2]['source'] + " = " +  jsondata[2]['value']       
+
+      mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+      #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', stat1,stat2)            
+
+      callback = request.args.get('callback')
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10})
+
+
+      
       print 'inFluxDB returning data points:'
       #return jsonify( results = jsondata)      
       return jsonify(serieskey = jsonkey, results = jsondata)
