@@ -4834,7 +4834,7 @@ def freeboard_status():
 @app.route('/get_dbstats')
 @cross_origin()
 def get_dbstats():
-  conn = db_pool.getconn()
+
 
   Interval = request.args.get('Interval',"5min")
 
@@ -4889,7 +4889,7 @@ def get_dbstats():
                         startepoch, endepoch,
                         resolution) 
 
-      
+    query =(' select * from HelmSmartDB')      
       
     
     log.info("inFlux-cloud Query %s", query)
