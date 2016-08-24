@@ -4837,7 +4837,7 @@ def get_dbstats():
 
 
   Interval = request.args.get('Interval',"5min")
-
+  rollup = request.args.get('rollup',"sum")
 
   response = None
 
@@ -4895,7 +4895,7 @@ def get_dbstats():
     end = datetime.datetime.fromtimestamp(float(endepoch))
     resolutionstr = "PT" + str(resolution) + "S"
 
-    rollup = "mean"
+    #rollup = "mean"
 
  
 
