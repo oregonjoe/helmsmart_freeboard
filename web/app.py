@@ -4996,13 +4996,13 @@ def get_dbstats():
 
       if len(jsondata) > 0:
         mydatetimestr = str(jsondata[0]['epoch'])
-        stat0 = jsondata[0]['source'] + " = " +  jsondata[0]['value']
+        stat0 = str(jsondata[0]['source']) + " = " +  str(jsondata[0]['value'])
 
       if len(jsondata) > 1:
-        stat1 = jsondata[1]['source'] + " = " +  jsondata[1]['value']       
+        stat1 = str(jsondata[1]['source']) + " = " +  str(jsondata[1]['value'])       
 
       if len(jsondata) > 2:
-        stat2 = jsondata[2]['source'] + " = " +  jsondata[2]['value']       
+        stat2 = str(jsondata[2]['source']) + " = " +  str(jsondata[2]['value'])       
 
       mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
