@@ -4835,7 +4835,7 @@ def freeboard_status():
 @cross_origin()
 def get_dbstats():
 
-
+  deviceid = request.args.get('deviceid','')
   Interval = request.args.get('Interval',"5min")
   rollup = request.args.get('rollup',"sum")
 
@@ -4874,9 +4874,10 @@ def get_dbstats():
 
 
 
-
   try:
    
+
+
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -4898,13 +4899,31 @@ def get_dbstats():
     #rollup = "mean"
 
  
+    if deviceid != "":
 
-    query = ('select {}(records) AS records FROM {} '
-                     'where time > {}s and time < {}s '
-                     'group by *, time({}s) LIMIT 1') \
-                .format(rollup,  measurement, 
-                        startepoch, endepoch,
-                        resolution) 
+      measurement = 'HS_' + str(deviceid)
+
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + deviceid + "' AND "
+      serieskeys= serieskeys +  " sensor='helmsmartstat'   "
+
+
+
+      
+      query = ('select {}(write_records) AS records FROM {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by *, time({}s) LIMIT 1') \
+                  .format(rollup,  measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+      
+    else:
+      query = ('select {}(records) AS records FROM {} '
+                   'where time > {}s and time < {}s '
+                   'group by *, time({}s) LIMIT 1') \
+              .format(rollup,  measurement, 
+                      startepoch, endepoch,
+                      resolution) 
 
     #query =(' select records as records from HelmSmartDB')      
       
