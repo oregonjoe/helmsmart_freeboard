@@ -550,7 +550,15 @@ def getedeviceid(deviceapikey):
 
     return ""
 
-
+@app.route('/devices/<device_id>/PushCache/<partition>', methods=['POST'])
+@cross_origin()
+def events_endpoint(device_id, partition):
+  #log.info("partition: %s", partition )
+  #log.info("content_type: %s", request.content_type )
+  #log.info("data: %s", request.data)
+  log.info("Que SQS:device_id %s: %s ", device_id, partition)
+  #log.info("data: %s", request.data)
+  
 
 @app.route('/')
 @cross_origin()
@@ -4835,7 +4843,7 @@ def freeboard_status():
 @cross_origin()
 def get_dbstats():
 
-  deviceid = request.args.get('deviceid','')
+
   Interval = request.args.get('Interval',"5min")
   rollup = request.args.get('rollup',"sum")
 
@@ -4874,10 +4882,9 @@ def get_dbstats():
 
 
 
+
   try:
    
-
-
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -4899,31 +4906,13 @@ def get_dbstats():
     #rollup = "mean"
 
  
-    if deviceid != "":
 
-      measurement = 'HS_' + str(deviceid)
-
-      serieskeys=" deviceid='"
-      serieskeys= serieskeys + deviceid + "' AND "
-      serieskeys= serieskeys +  " sensor='helmsmartstat'   "
-
-
-
-      
-      query = ('select {}(write_records) AS records FROM {} '
-                       'where {} AND time > {}s and time < {}s '
-                       'group by *, time({}s) LIMIT 1') \
-                  .format(rollup,  measurement, serieskeys,
-                          startepoch, endepoch,
-                          resolution)
-      
-    else:
-      query = ('select {}(records) AS records FROM {} '
-                   'where time > {}s and time < {}s '
-                   'group by *, time({}s) LIMIT 1') \
-              .format(rollup,  measurement, 
-                      startepoch, endepoch,
-                      resolution) 
+    query = ('select {}(records) AS records FROM {} '
+                     'where time > {}s and time < {}s '
+                     'group by *, time({}s) LIMIT 1') \
+                .format(rollup,  measurement, 
+                        startepoch, endepoch,
+                        resolution) 
 
     #query =(' select records as records from HelmSmartDB')      
       
