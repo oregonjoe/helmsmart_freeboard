@@ -556,8 +556,38 @@ def events_endpoint(device_id, partition):
   #log.info("partition: %s", partition )
   #log.info("content_type: %s", request.content_type )
   #log.info("data: %s", request.data)
-  log.info("Que SQS:device_id %s: %s ", device_id, partition)
+  try:
+    
+    log.info("Que SQS:device_id %s: %s ", device_id, partition)
   #log.info("data: %s", request.data)
+    epochtime =  int(time.time())
+    return jsonify(result="OK", epochtime=epochtime)
+
+  except TypeError, e:
+    log.info('freeboard: TypeError in geting deviceid  %s:  ', device_id)
+    log.info('freeboard: TypeError in geting deviceid  %s:  ' % str(e))
+
+  except ValueError, e:
+    log.info('freeboard: ValueError in geting deviceid  %s:  ', device_id)
+    log.info('freeboard: ValueError in geting deviceid  %s:  ' % str(e))
+    
+  except KeyError, e:
+    log.info('freeboard: KeyError in geting deviceid  %s:  ', device_id)
+    log.info('freeboard: KeyError in geting deviceid  %s:  ' % str(e))
+
+  except NameError, e:
+    log.info('freeboard: NameError in geting deviceid  %s:  ', device_id)
+    log.info('freeboard: NameError in geting deviceid  %s:  ' % str(e))
+        
+  except IndexError, e:
+    log.info('freeboard: IndexError in geting deviceid  %s:  ', device_id)
+    log.info('freeboard: IndexError in geting deviceid  %s:  ' % str(e))  
+
+
+  except:
+    log.info('freeboard: Error in geting  deviceid %s:  ', device_id)
+    e = sys.exc_info()[0]
+    log.info('freeboard: Error in geting deviceid  %s:  ' % str(e))
   
 
 @app.route('/')
