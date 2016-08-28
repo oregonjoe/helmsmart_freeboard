@@ -559,7 +559,7 @@ def events_endpoint(device_id, partition):
   try:
     
     log.info("Que SQS:device_id %s: %s ", device_id, partition)
-    log.info("Que SQS:data  %s ", request.data)
+    log.info("Que SQS:data recieved %s ", len(request.data))
   #log.info("data: %s", request.data)
     epochtime =  int(time.time())
     return jsonify(result="OK", epochtime=epochtime)
