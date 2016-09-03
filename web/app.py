@@ -4023,7 +4023,7 @@ def freeboard_location():
       latMM = float("{0:.4f}".format(60*(value1 - latDD)) )
       lngMM = float("{0:.4f}".format(60*(value2 - lngDD)) )
 
-      latlng = str((latDD*10) + latMM) + "_" + str((lngDD*10) + lngMM)
+      latlng = str((latDD*100) + latMM) + "_" + str((lngDD*100) + lngMM)
       
       val_to_write =str(latlng)
       log.info('freeboard: after exosite latlng:%s', val_to_write)
