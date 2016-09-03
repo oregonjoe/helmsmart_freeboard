@@ -3077,7 +3077,7 @@ def freeboard_environmental():
       log.info('freeboard: freeboard returning data values temperature:%s, baro:%s, humidity:%s  ', value1,value2,value3)
 
 
-      log.info('freeboard: before exosite write:")
+      log.info('freeboard: before exosite write:')
       o = onep.OnepV1()
 
       cik = '5b38da024d8a1f252e575202afb431ef22d3eb66'
