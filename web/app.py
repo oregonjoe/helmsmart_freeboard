@@ -3084,11 +3084,12 @@ def freeboard_environmental():
       #dataport_alias = 'Device'
       #val_to_write = 'Data'
       dataport_alias = 'air_temperature'
-      val_to_write =value1
+      val_to_write =float(value1)
 
-      testvar = o.write(cik, {"alias": dataport_alias}, val_to_write,{})
-      log.info('freeboard: fter exosite write:%s', testvar)
-
+      #testvar = o.write(cik, {"alias": dataport_alias}, val_to_write,{})
+      #log.info('freeboard: fter exosite write:%s', testvar)
+      o.write(cik, {"alias": dataport_alias}, val_to_write,{})
+      log.info('freeboard: after exosite write:')
 
       
 
@@ -3125,10 +3126,14 @@ def freeboard_environmental():
       #e = sys.exc_info()[0]
       log.info('inFluxDB_GPS: ValueError in freeboard_environmental %s:  ' % str(e))
       
-    except JsonRPCRequestException, e:
-      #log.info('inFluxDB_GPS: IndexError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
-      #e = sys.exc_info()[0]
-       log.info('inFluxDB_GPS: JsonRPCRequestException in freeboard_environmental %s:  ' % str(e))
+    except pyonep.exceptions.JsonRPCRequestException as ex:
+        print('JsonRPCRequestException: {0}'.format(ex))
+        
+    except pyonep.exceptions.JsonRPCResponseException as ex:
+        print('JsonRPCResponseException: {0}'.format(ex))
+        
+    except pyonep.exceptions.OnePlatformException as ex:
+        print('OnePlatformException: {0}'.format(ex))
        
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
