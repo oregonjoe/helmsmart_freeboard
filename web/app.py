@@ -4003,7 +4003,39 @@ def freeboard_location():
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
-      log.info('freeboard: freeboard returning data values lat:%s, lng:%s  ', value1,value2)            
+      log.info('freeboard: freeboard returning data values lat:%s, lng:%s  ', value1,value2)
+
+
+
+      log.info('freeboard: before exosite write:')
+      o = onep.OnepV1()
+
+      cik = '5b38da024d8a1f252e575202afb431ef22d3eb66'
+      #dataport_alias = 'Device'
+      #val_to_write = 'Data'
+      dataport_alias = 'GPDdata'
+      
+      latDD=int(value1)
+      lngDD=int(value2)
+      #latMM = 60*(value1 - latDD)
+      #lngMM = 60*(value2 - lngDD)
+      
+      latMM = float("{0:.2f}".format(60*(value1 - latDD)) )
+      lngMM = float("{0:.2f}".format(60*(value2 - lngDD)) )
+
+      latlng = str(latDD + latMM) + "_" + str(lngDD + lngMM)
+      
+      val_to_write =str(latlng)
+      log.info('freeboard: after exosite latlng:%s', val_to_write)
+
+      
+      #testvar = o.write(cik, {"alias": dataport_alias}, val_to_write,{})
+      #log.info('freeboard: fter exosite write:%s', testvar)
+      o.write(cik, {"alias": dataport_alias}, val_to_write,{})
+      log.info('freeboard: after exosite write:')
+
+
+      
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
