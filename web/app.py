@@ -17,8 +17,7 @@ import time
 from time import mktime
 #from datetime import datetime
 from itertools import groupby
-
-
+from pyonep import onep
 import urlparse
 
 import logging
@@ -90,6 +89,8 @@ db_pool = ThreadedConnectionPool(
 app = Flask(__name__)
 CORS(app) 
 app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['DEBUG'] = True
+
 
 #Convert Units used for freeboard numerical displays
 def convertfbunits(value, units):
@@ -3073,7 +3074,23 @@ def freeboard_environmental():
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
-      log.info('freeboard: freeboard returning data values temperature:%s, baro:%s, humidity:%s  ', value1,value2,value3)            
+      log.info('freeboard: freeboard returning data values temperature:%s, baro:%s, humidity:%s  ', value1,value2,value3)
+
+
+      log.info('freeboard: before exosite write:")
+      o = onep.OnepV1()
+
+      cik = '5b38da024d8a1f252e575202afb431ef22d3eb66'
+      #dataport_alias = 'Device'
+      #val_to_write = 'Data'
+      dataport_alias = 'air_temperature'
+      val_to_write =value1
+
+      testvar = o.write(cik, {"alias": dataport_alias}, val_to_write,{})
+      log.info('freeboard: fter exosite write:%s', testvar)
+
+
+      
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
