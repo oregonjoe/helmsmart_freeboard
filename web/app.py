@@ -4020,8 +4020,8 @@ def freeboard_location():
       #latMM = 60*(value1 - latDD)
       #lngMM = 60*(value2 - lngDD)
       
-      latMM = float("{0:.2f}".format(60*(value1 - latDD)) )
-      lngMM = float("{0:.2f}".format(60*(value2 - lngDD)) )
+      latMM = float("{0:.4f}".format(60*(value1 - latDD)) )
+      lngMM = float("{0:.4f}".format(60*(value2 - lngDD)) )
 
       latlng = str((latDD*10) + latMM) + "_" + str((lngDD*10) + lngMM)
       
