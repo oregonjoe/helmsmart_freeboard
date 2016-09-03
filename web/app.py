@@ -3077,7 +3077,7 @@ def freeboard_environmental():
 
       log.info('freeboard: freeboard returning data values temperature:%s, baro:%s, humidity:%s  ', value1,value2,value3)
 
-
+      """
       log.info('freeboard: before exosite write:')
       o = onep.OnepV1()
 
@@ -3092,7 +3092,7 @@ def freeboard_environmental():
       o.write(cik, {"alias": dataport_alias}, val_to_write,{})
       log.info('freeboard: after exosite write:')
 
-      
+       """     
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
@@ -4005,7 +4005,7 @@ def freeboard_location():
 
       log.info('freeboard: freeboard returning data values lat:%s, lng:%s  ', value1,value2)
 
-
+      """
 
       log.info('freeboard: before exosite write:')
       o = onep.OnepV1()
@@ -4034,7 +4034,7 @@ def freeboard_location():
       o.write(cik, {"alias": dataport_alias}, val_to_write,{})
       log.info('freeboard: after exosite write:')
 
-
+      """
       
 
       callback = request.args.get('callback')
