@@ -3097,8 +3097,39 @@ def freeboard_environmental():
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
       
 
-     
-    
+    except AttributeError, e:
+      #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+
+      log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ' % str(e))
+      
+    except TypeError, e:
+      l#og.info('inFluxDB_GPS: TypeError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+
+      log.info('inFluxDB_GPS: TypeError in freeboard_environmental %s:  ' % str(e))
+      
+    except ValueError, e:
+      #log.info('inFluxDB_GPS: ValueError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+
+      log.info('inFluxDB_GPS: ValueError in freeboard_environmental %s:  ' % str(e))            
+      
+    except NameError, e:
+      #log.info('inFluxDB_GPS: NameError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+      log.info('inFluxDB_GPS: ValueError in freeboard_environmental %s:  ' % str(e))           
+
+    except IndexError, e:
+      #log.info('inFluxDB_GPS: IndexError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+      log.info('inFluxDB_GPS: ValueError in freeboard_environmental %s:  ' % str(e))
+      
+    except JsonRPCRequestException, e:
+      #log.info('inFluxDB_GPS: IndexError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+       log.info('inFluxDB_GPS: JsonRPCRequestException in freeboard_environmental %s:  ' % str(e))
+       
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
