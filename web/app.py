@@ -6398,13 +6398,15 @@ def freeboard_tcp():
 
         log.info('freeboard: freeboard returning data values tcp:%s,   ', value1)            
         """
-      callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      #callback = request.args.get('callback')
+      #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':value1})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':jsondata})       
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':jsondata})
+
+      return jsonify(results = jsondata)
 
     except TypeError, e:
       #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
