@@ -6206,7 +6206,7 @@ def freeboard_tcp():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"5min")
+    Interval = request.args.get('Interval',"1min")
     
     response = None
 
@@ -6313,7 +6313,7 @@ def freeboard_tcp():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
-    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
@@ -6337,31 +6337,74 @@ def freeboard_tcp():
       value2 = '---'
       value3 = '---'
       value4 = '---'
+
+      for series in keys:
+        #log.info("influxdb results..%s", series )
+        #log.info("influxdb results..%s", series )
+        strvalue ={}
  
-      points = list(response.get_points())
+        #points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+        #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
-      for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        if point['raw'] is not None: 
-          value1 = point['raw']
-          
+        #name = series['name']
+        name = series['tags']            
+        #log.info("inFluxDB_GPS_JSON name %s", name )
+        seriesname = series['tags'] 
+        #seriestags = seriesname.split(".")
+        #seriessourcetag = seriestags[2]
+        #seriessource = seriessourcetag.split(":")
+        source= seriesname['source']
+        PGN= seriesname['type']
+        parameter = seriesname['parameter']
+        #log.info("inFluxDB_GPS_JSON values %s", series['values'] )
 
-       
-        mydatetimestr = str(point['time'])
 
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          for point in  series['values']:
+            fields = {}
+            fields[parameter] = None
+            for key, val in zip(series['columns'], point):
+              fields[key] = val
+              
+            #strvalue = {'epoch': fields['time'], 'tag':seriesname, 'lat': fields['lat'], 'lng': fields['lng']}
+            #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
 
-      log.info('freeboard: freeboard returning data values tcp:%s,   ', value1)            
+            mydatetimestr = str(fields['time'])
 
+            #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+            mydatetime =  int(time.mktime(time.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')))
+            
+            #strvalue = {'epoch': fields['time'], 'source':tag['source'], 'value': fields[parameter]}
+            if fields[parameter] != None:
+              #strvalues = []
+              strvalue = {'epoch': mydatetime, 'tag':seriesname, 'PGN':PGN, 'value': fields[parameter]}
+              strvalues = (mydatetime, source,  parameter, fields[parameter] )
+
+              
+              jsondata.append(strvalues)
+
+
+        """
+        for point in points:
+          log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+          if point['raw'] is not None: 
+            value1 = point['raw']
+            
+
+         
+          mydatetimestr = str(point['time'])
+
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+        log.info('freeboard: freeboard returning data values tcp:%s,   ', value1)            
+        """
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':value1})
-        
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':value1})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':jsondata})       
 
      
     
