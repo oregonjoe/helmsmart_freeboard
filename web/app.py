@@ -6360,28 +6360,28 @@ def freeboard_tcp():
         #log.info("inFluxDB_GPS_JSON values %s", series['values'] )
 
 
-          for point in  series['values']:
-            fields = {}
-            fields[parameter] = None
-            for key, val in zip(series['columns'], point):
-              fields[key] = val
-              
-            #strvalue = {'epoch': fields['time'], 'tag':seriesname, 'lat': fields['lat'], 'lng': fields['lng']}
-            #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
-
-            mydatetimestr = str(fields['time'])
-
-            #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-            mydatetime =  int(time.mktime(time.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')))
+        for point in  series['values']:
+          fields = {}
+          fields[parameter] = None
+          for key, val in zip(series['columns'], point):
+            fields[key] = val
             
-            #strvalue = {'epoch': fields['time'], 'source':tag['source'], 'value': fields[parameter]}
-            if fields[parameter] != None:
-              #strvalues = []
-              strvalue = {'epoch': mydatetime, 'tag':seriesname, 'PGN':PGN, 'value': fields[parameter]}
-              strvalues = (mydatetime, source,  parameter, fields[parameter] )
+          #strvalue = {'epoch': fields['time'], 'tag':seriesname, 'lat': fields['lat'], 'lng': fields['lng']}
+          #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields[parameter])
 
-              
-              jsondata.append(strvalues)
+          mydatetimestr = str(fields['time'])
+
+          #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          mydatetime =  int(time.mktime(time.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')))
+          
+          #strvalue = {'epoch': fields['time'], 'source':tag['source'], 'value': fields[parameter]}
+          if fields[parameter] != None:
+            #strvalues = []
+            strvalue = {'epoch': mydatetime, 'tag':seriesname, 'PGN':PGN, 'value': fields[parameter]}
+            strvalues = (mydatetime, source,  parameter, fields[parameter] )
+
+            
+            jsondata.append(strvalues)
 
 
         """
