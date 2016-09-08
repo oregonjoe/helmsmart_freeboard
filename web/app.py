@@ -6253,9 +6253,9 @@ def freeboard_tcp():
 
 
       
-    query = ('select  LAST(raw) AS raw  from {} '
+    query = ('select  DISTINCT(raw) AS raw  from {} '
                      'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
+                     'group by *, time({}s)') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution) 
