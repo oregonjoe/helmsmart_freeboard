@@ -6378,10 +6378,10 @@ def freeboard_tcp():
           if fields[parameter] != None:
             #strvalues = []
             strvalue = {'epoch': mydatetime, 'tag':seriesname, 'PGN':PGN, 'value': fields[parameter]}
-            strvalues = (mydatetime, source,  parameter, fields[parameter] )
+            strvalues = (mydatetime, PGN,  parameter, fields[parameter] )
 
             
-            jsondata.append(strvalues)
+        jsondata.append(strvalues)
 
 
         """
