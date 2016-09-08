@@ -6253,7 +6253,7 @@ def freeboard_tcp():
 
 
       
-    query = ('select  raw AS raw  from {} '
+    query = ('select  LAST(raw) AS raw  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
