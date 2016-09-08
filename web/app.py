@@ -6328,7 +6328,7 @@ def freeboard_tcp():
     #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
     #jsonkey.append(strvaluekey)
     #print 'freeboard start processing data points:'
-    
+    PGNValues=""
     #log.info("freeboard jsonkey..%s", jsonkey )
     try:
     
@@ -6358,8 +6358,8 @@ def freeboard_tcp():
         PGN= seriesname['type']
         parameter = seriesname['parameter']
         #log.info("inFluxDB_GPS_JSON values %s", series['values'] )
-
-
+        pgnpoints = series['values']
+        """
         for point in  series['values']:
           fields = {}
           fields[parameter] = None
@@ -6382,7 +6382,8 @@ def freeboard_tcp():
 
             
         jsondata.append(strvalues)
-
+        """
+        PGNValues= PGNValues + pgnpoints['raw'] + "\r\n"
 
         """
         for point in points:
