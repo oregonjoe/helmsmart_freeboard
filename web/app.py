@@ -6407,7 +6407,7 @@ def freeboard_tcp():
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':value1})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':jsondata})
 
-      return jsonify(results = jsondata)
+      return jsonify(results = PGNValues)
 
     except TypeError, e:
       #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
