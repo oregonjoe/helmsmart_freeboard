@@ -6406,7 +6406,29 @@ def freeboard_tcp():
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':value1})
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':jsondata})       
 
-     
+    except TypeError, e:
+      #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except KeyError, e:
+      #log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+    except NameError, e:
+      #log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except IndexError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))          
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
