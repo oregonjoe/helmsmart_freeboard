@@ -6284,7 +6284,7 @@ def freeboard_tcp(apikey):
 
 
     log.info("freeboard data Query %s", query)
-    return jsonify(result="OK")
+    #return jsonify(result="OK")
 
     try:
         response= dbc.query(query)
