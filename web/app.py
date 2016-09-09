@@ -6365,7 +6365,7 @@ def freeboard_tcp():
           for key, val in zip(series['columns'], point):
             fields[key] = val
             
-        PGNValues= PGNValues + fields['raw'] + "\r\n"        
+        PGNValues= PGNValues + fields['raw'] + '\r\n'        
         """
         for point in  series['values']:
           fields = {}
@@ -6413,8 +6413,10 @@ def freeboard_tcp():
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':value1})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':jsondata})
-
-      return jsonify(results = PGNValues)
+      response = make_response(PGNValues)
+      response.headers['Content-Type'] = 'text/txt'
+      return response
+      #return jsonify(results = PGNValues)
 
     except TypeError, e:
       #log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
