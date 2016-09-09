@@ -91,7 +91,7 @@ app = Flask(__name__)
 CORS(app) 
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['DEBUG'] = True
-
+app.debug = True
 
 #Convert Units used for freeboard numerical displays
 def convertfbunits(value, units):
@@ -6200,7 +6200,7 @@ def getgpsseriesbydeviceid():
 
 
 
-@app.route('/freeboard_tcp')
+@app.route('/freeboard_tcp', methods=['GET','POST'])
 @cross_origin()
 def freeboard_tcp():
 
@@ -6317,7 +6317,7 @@ def freeboard_tcp():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
