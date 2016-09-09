@@ -552,6 +552,20 @@ def getedeviceid(deviceapikey):
 
     return ""
 
+@app.route('/freeboard_test/<apikey>', methods=['GET','POST'])
+@cross_origin()
+def freeboard_test(apikey):
+
+    deviceapikey =apikey
+    Interval = "1min"
+     
+    #deviceapikey = request.args.get('apikey','')
+    #serieskey = request.args.get('datakey','')
+    #Interval = request.args.get('Interval',"1min")
+
+    return jsonify(result="OK")
+
+
 @app.route('/devices/<device_id>/PushCache/<partition>', methods=['POST'])
 @cross_origin()
 def events_endpoint(device_id, partition):
