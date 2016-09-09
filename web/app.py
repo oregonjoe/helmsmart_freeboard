@@ -6360,7 +6360,7 @@ def freeboard_tcp():
         #log.info("inFluxDB_GPS_JSON values %s", series['values'] )
         #pgnpoints = series['values']
         for point in  series['values']:
-          pgnpoints = point['raw']
+          #pgnpoints = point['raw']
           fields = {}
           for key, val in zip(series['columns'], point):
             fields[key] = val
