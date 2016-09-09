@@ -6334,7 +6334,8 @@ def freeboard_tcp(apikey):
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-
+      
+    return jsonify(result="OK"
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
