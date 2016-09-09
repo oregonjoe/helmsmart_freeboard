@@ -6202,15 +6202,18 @@ def getgpsseriesbydeviceid():
 #@cross_origin()
 #def events_endpoint(device_id, partition):
 
-@app.route('/freeboard_tcp', methods=['GET','POST'])
+@app.route('/freeboard_tcp/<apikey>', methods=['GET','POST'])
 @cross_origin()
-def freeboard_tcp():
+def freeboard_tcp(apikey):
 
-    deviceapikey = request.args.get('apikey','')
-    serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"1min")
+    deviceapikey =apikey
+    Interval = "1min"
+     
+    #deviceapikey = request.args.get('apikey','')
+    #serieskey = request.args.get('datakey','')
+    #Interval = request.args.get('Interval',"1min")
 
-    return jsonify(result="OK")
+    #return jsonify(result="OK")
     
     response = None
 
@@ -6267,6 +6270,7 @@ def freeboard_tcp():
 
 
     log.info("freeboard data Query %s", query)
+    return jsonify(result="OK")
 
     try:
         response= dbc.query(query)
