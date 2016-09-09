@@ -6440,7 +6440,8 @@ def freeboard_tcp(apikey):
       #response.headers['Content-Type'] = 'text/txt'
       #return response
       #return jsonify(result="OK", PGNValues='$PCDIN,01F010,69BEO231,06,C6F09D42309D3926*5F\r\n$PCDIN,01F112,69BEO22M,06,EAE2090000390AFD*2A\r\n$PCDIN,01F119,69BEO23E,06,C1FF7FE9FE3BFEFF*25\r\n$PCDIN,01F11A,69BEO23D,06,C1F59D42390AFFFF*53\r\n$PCDIN,01F801,69BEO22K,06,20A80A191C2103B6*20\r\n$PCDIN,01F802,69BEO22L,06,C6FCD8BC0A00FFFF*5C\r\n')
-      return jsonify(result="OK", PGNValues=PGNValues[0:1024])
+      #return jsonify(result="OK", PGNValues=PGNValues[0:1024])
+      return PGNValues[0:1024]
       #return jsonify(results = PGNValues)
 
     except TypeError, e:
