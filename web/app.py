@@ -6198,7 +6198,9 @@ def getgpsseriesbydeviceid():
   finally:
     db_pool.putconn(conn)
 
-
+#@app.route('/devices/<device_id>/PushCache/<partition>', methods=['POST'])
+#@cross_origin()
+#def events_endpoint(device_id, partition):
 
 @app.route('/freeboard_tcp', methods=['GET','POST'])
 @cross_origin()
@@ -6207,6 +6209,8 @@ def freeboard_tcp():
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"1min")
+
+    return jsonify(result="OK")
     
     response = None
 
