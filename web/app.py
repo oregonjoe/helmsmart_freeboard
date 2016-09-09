@@ -6227,7 +6227,7 @@ def freeboard_tcp(apikey):
     #serieskey = request.args.get('datakey','')
     #Interval = request.args.get('Interval',"1min")
 
-    return jsonify(result="OK")
+    #return jsonify(result="OK")
     
     response = None
 
