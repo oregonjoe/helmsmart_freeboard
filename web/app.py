@@ -6413,9 +6413,10 @@ def freeboard_tcp():
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':value1})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','raw':jsondata})
-      response = make_response(PGNValues)
-      response.headers['Content-Type'] = 'text/txt'
-      return response
+      #response = make_response(PGNValues)
+      #response.headers['Content-Type'] = 'text/txt'
+      #return response
+      return jsonify(result="OK", PGNValues=PGNValues)
       #return jsonify(results = PGNValues)
 
     except TypeError, e:
