@@ -6439,7 +6439,7 @@ def freeboard_tcp(apikey):
       #response = make_response(PGNValues)
       #response.headers['Content-Type'] = 'text/txt'
       #return response
-      return jsonify(result="OK")
+      return jsonify(result="OK", PGNValues='$PCDIN,sadsad,asdsadsad,asdsadsadsa\r\n')
       #return jsonify(result="OK", PGNValues=PGNValues)
       #return jsonify(results = PGNValues)
 
