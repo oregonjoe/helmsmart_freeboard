@@ -4838,21 +4838,21 @@ def freeboard_status():
 
 
       status0=0
-      status1='False'
-      status2='False'
-      status3='False'
-      status4='False'
-      status5='False'
-      status6='False'
-      status7='False'
-      status8='False'
-      status9='False'
-      status10='False'
-      status11='False'
-      status12='False'
-      status13='False'
-      status14='False'
-      status15='False'
+      status1=0
+      status2=0
+      status3=0
+      status4=0
+      status5=0
+      status6=0
+      status7=0
+      status8=0
+      status9=0
+      status10=0
+      status11=0
+      status12=0
+      status13=0
+      status14=0
+      status15=0
        
       points = list(response.get_points())
 
@@ -4869,25 +4869,25 @@ def freeboard_status():
               status0 = 1
 
             if value1 & 0x2 == 0x2:
-              status1 = 'True'
+              status1 = 1
 
             if value1 & 0x4 == 0x4:
-              status2 = 'True'
+              status2 = 1
 
             if value1 & 0x8 == 0x8:
-              status3 = 'True'
+              status3 = 1
 
             if value1 & 0x10 == 0x10:
-              status4 = 'True'
+              status4 = 1
 
             if value1 & 0x20 == 0x20:
-              status5 = 'True'
+              status5 = 1
 
             if value1 & 0x40 == 0x40:
-              status6 = 'True'
+              status6 = 1
 
             if value1 & 0x80 == 0x80:
-              status7 = 'True'
+              status7 = 1
 
 
         if point['bank1'] is not None:
@@ -4895,28 +4895,28 @@ def freeboard_status():
             
           if value2 != '---':
             if value2 & 0x1 == 0x01:
-              status8 = 'True'
+              status8 = 1
 
             if value2 & 0x2 == 0x02:
-              status9 = 'True'
+              status9 = 1
 
             if value2 & 0x4 == 0x04:
-              status10 = 'True'
+              status10 = 1
 
             if value2 & 0x8 == 0x08:
-              status11 = 'True'
+              status11 =1
 
             if value2 & 0x10 == 0x10:
-              status12 = 'True'
+              status12 = 1
 
             if value2 & 0x20 == 0x20:
-              status13 = 'True'
+              status13 =1
 
             if value2 & 0x40 == 0x40:
-              status14 = 'True'
+              status14 = 1
 
             if value2 & 0x80 == 0x80:
-              status15 = 'True'       
+              status15 = 1      
  
 
         
