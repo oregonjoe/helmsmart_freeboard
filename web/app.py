@@ -4837,7 +4837,7 @@ def freeboard_status():
       value2 = '---'
 
 
-      status0='False'
+      status0=0
       status1='False'
       status2='False'
       status3='False'
@@ -4866,7 +4866,7 @@ def freeboard_status():
 
           if value1 != '---':
             if value1 & 0x1 == 0x1:
-              status0 = 'True'
+              status0 = 1
 
             if value1 & 0x2 == 0x2:
               status1 = 'True'
