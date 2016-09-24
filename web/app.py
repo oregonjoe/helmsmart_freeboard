@@ -4837,22 +4837,22 @@ def freeboard_status():
       value2 = '---'
 
 
-      status0=False
-      status1=False
-      status2=False
-      status3=False
-      status4=False
-      status5=False
-      status6=False
-      status7=False
-      status8=False
-      status9=False
-      status10=False
-      status11=False
-      status12=False
-      status13=False
-      status14=False
-      status15=False
+      status0='False'
+      status1='False'
+      status2='False'
+      status3='False'
+      status4='False'
+      status5='False'
+      status6='False'
+      status7='False'
+      status8='False'
+      status9='False'
+      status10='False'
+      status11='False'
+      status12='False'
+      status13='False'
+      status14='False'
+      status15='False'
        
       points = list(response.get_points())
 
@@ -4866,28 +4866,28 @@ def freeboard_status():
 
           if value1 != '---':
             if value1 & 0x1 == 0x1:
-              status0 = True
+              status0 = 'True'
 
             if value1 & 0x2 == 0x2:
-              status1 = True
+              status1 = 'True'
 
             if value1 & 0x4 == 0x4:
-              status2 = True
+              status2 = 'True'
 
             if value1 & 0x8 == 0x8:
-              status3 = True
+              status3 = 'True'
 
             if value1 & 0x10 == 0x10:
-              status4 = True
+              status4 = 'True'
 
             if value1 & 0x20 == 0x20:
-              status5 = True
+              status5 = 'True'
 
             if value1 & 0x40 == 0x40:
-              status6 = True
+              status6 = 'True'
 
             if value1 & 0x80 == 0x80:
-              status7 = True
+              status7 = 'True'
 
 
         if point['bank1'] is not None:
@@ -4895,28 +4895,28 @@ def freeboard_status():
             
           if value2 != '---':
             if value2 & 0x1 == 0x01:
-              status8 = True
+              status8 = 'True'
 
             if value2 & 0x2 == 0x02:
-              status9 = True
+              status9 = 'True'
 
             if value2 & 0x4 == 0x04:
-              status10 = True
+              status10 = 'True'
 
             if value2 & 0x8 == 0x08:
-              status11 = True
+              status11 = 'True'
 
             if value2 & 0x10 == 0x10:
-              status12 = True
+              status12 = 'True'
 
             if value2 & 0x20 == 0x20:
-              status13 = True
+              status13 = 'True'
 
             if value2 & 0x40 == 0x40:
-              status14 = True
+              status14 = 'True'
 
             if value2 & 0x80 == 0x80:
-              status15 = True           
+              status15 = 'True'       
  
 
         
