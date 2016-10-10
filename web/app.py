@@ -6651,7 +6651,7 @@ def freeboard_raw():
 
       for series in keys:
         #log.info("influxdb results..%s", series )
-        #log.info("influxdb results..%s", series )
+        log.info("influxdb results..%s", series )
         strvalue ={}
  
         #points = list(response.get_points())
