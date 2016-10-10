@@ -6491,7 +6491,7 @@ def freeboard_tcp(apikey):
 
 
 
-@app.route('/freeboard_raw)
+@app.route('/freeboard_raw')
 @cross_origin()
 def freeboard_raw():
 
