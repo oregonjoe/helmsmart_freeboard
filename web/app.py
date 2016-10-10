@@ -6551,10 +6551,18 @@ def freeboard_raw():
 
 
 
-      
+    """      
     query = ('select  DISTINCT(raw) AS raw  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by *, time({}s) LIMIT 1') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution) 
+    """     
+      
+    query = ('select  DISTINCT(raw) AS raw  from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by *, time({}s) ') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution) 
