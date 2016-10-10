@@ -6493,10 +6493,10 @@ def freeboard_tcp(apikey):
 
 @app.route('/freeboard_raw)
 @cross_origin()
-def freeboard_raw(apikey):
+def freeboard_raw():
 
-    deviceapikey =apikey
-    Interval = "1min"
+    #deviceapikey =apikey
+    #Interval = "1min"
      
     devicekey = request.args.get('devicekey', '4d231fb3a164c5eeb1a8634d34c578eb')
     #deviceid = request.args.get('deviceid', '')
@@ -6516,7 +6516,7 @@ def freeboard_raw(apikey):
     #resolution = epochtimes[2]
 
 
-    deviceid = getedeviceid(deviceapikey)
+    deviceid = getedeviceid(devicekey)
     
     log.info("freeboard deviceid %s", deviceid)
 
