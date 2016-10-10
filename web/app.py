@@ -6676,7 +6676,7 @@ def freeboard_raw():
           for key, val in zip(series['columns'], point):
             fields[key] = val
             
-          PGNValues= PGNValues + fields['raw'] + '\r\n'        
+            PGNValues= PGNValues + fields['raw'] + '\r\n'        
         """
         for point in  series['values']:
           fields = {}
