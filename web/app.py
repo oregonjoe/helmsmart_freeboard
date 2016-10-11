@@ -6659,15 +6659,15 @@ def freeboard_raw():
         #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
         #name = series['name']
-        name = series['tags']            
+        #name = series['tags']            
         #log.info("inFluxDB_GPS_JSON name %s", name )
-        seriesname = series['tags'] 
+        #seriesname = series['tags'] 
         #seriestags = seriesname.split(".")
         #seriessourcetag = seriestags[2]
         #seriessource = seriessourcetag.split(":")
-        source= seriesname['source']
-        PGN= seriesname['type']
-        parameter = seriesname['parameter']
+        #source= seriesname['source']
+        #PGN= seriesname['type']
+        #parameter = seriesname['parameter']
         #log.info("inFluxDB_GPS_JSON values %s", series['values'] )
         #pgnpoints = series['values']
         for point in  series['values']:
