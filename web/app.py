@@ -6562,7 +6562,7 @@ def freeboard_raw():
       
     query = ('select  DISTINCT(raw) AS raw  from {} '
                      'where {} AND time > {}s and time < {}s '
-                     'group by *, time({}s) ') \
+                      time({}s) ') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution) 
