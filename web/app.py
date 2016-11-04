@@ -735,14 +735,14 @@ def freeboard_ImportSeries():
     elif serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
-        query = ('select mean(value) from /{}/ '
+        query = ('select median(value) from /{}/ '
                      'where time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( serieskeys,
                         periodstartepoch, periodendepoch,
                         resolution)
     else:
-        query = ('select mean(value) from "{}" '
+        query = ('select median(value) from "{}" '
                      'where time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( serieskeys,
@@ -804,15 +804,19 @@ def freeboard_ImportSeries():
         #log.info('freeboard: convert_influxdbcloud_json tagpairs %s:  ', myjsonkeys)
 
         if Sensor == 'position_rapid':
+          #myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':'lat'}
           myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':'lat'}
-          values ={'lat':float(fields['lat'])}
+          #values ={'lat':float(fields['lat'])}
+          values ={'lat':float(fields['lat']), 'source':tag2[1]}
           #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
           ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}          
           #log.info('freeboard: convert_influxdbcloud_json_gps_lat %s:  ', ifluxjson)
           keys.append(ifluxjson)
           
-          myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':'lng'}
-          values ={'lng':float(fields['lng'])}
+          #myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':'lng'}
+          myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':'lng'}
+          #values ={'lng':float(fields['lng'])}
+          values ={'lng':float(fields['lng']), 'source':tag2[1]}
           #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
           ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}          
           #log.info('freeboard: convert_influxdbcloud_json_gps_lng %s:  ', ifluxjson)
@@ -820,8 +824,10 @@ def freeboard_ImportSeries():
 
           
         else:
-          myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
-          values = {tag5[1]:float(fields['mean'])}
+          #myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
+          myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1],  'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
+          #values = {tag5[1]:float(fields['mean'])}
+          values = {tag5[1]:float(fields['mean']),'source':tag2[1]}
           #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
           ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}          
           #log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
@@ -6533,7 +6539,7 @@ def freeboard_raw():
     database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
-    measurement = 'HS_' + str(deviceid)
+    measurement = 'HS_' + str(deviceid) + '_raw'
 
 
 
