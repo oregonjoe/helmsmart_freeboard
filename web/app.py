@@ -827,7 +827,7 @@ def freeboard_ImportSeries():
           #myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'source':tag2[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
           myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1],  'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
           #values = {tag5[1]:float(fields['mean'])}
-          values = {tag5[1]:float(fields['mean']),'source':tag2[1]}
+          values = {tag5[1]:float(fields['median']),'source':tag2[1]}
           #ifluxjson ={"measurement":tagpairs[6], "time": ts, "tags":myjsonkeys, "fields": values}
           ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}          
           #log.info('freeboard: convert_influxdbcloud_json %s:  ', ifluxjson)
