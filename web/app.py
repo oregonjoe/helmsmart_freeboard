@@ -4878,7 +4878,7 @@ def freeboard_ac_status():
 
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
         
-      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['speed'])    
+      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['volts'])    
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
