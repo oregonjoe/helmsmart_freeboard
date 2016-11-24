@@ -326,7 +326,7 @@ def convertunits(value, units):
             
             
             else:
-                return float("{0:.2f}".formatvalue)
+                return float("{0:.2f}".format(value * 1.0))
 
 def getepochtimes(Interval):
 
@@ -4742,7 +4742,7 @@ def freeboard_ac_status():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
     #serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='fluid_level') AND "
-    serieskeys= serieskeys +  " (sensor='ac_basic' OR sensor='ac_total_energy'  ) AND type = 'GEN' AND "
+    serieskeys= serieskeys +  " (sensor='ac_basic' OR sensor='ac_watthours'  ) AND type = 'GEN' AND "
     serieskeys= serieskeys +  " (instance='" + Instance + "') "
 
 
@@ -4756,7 +4756,7 @@ def freeboard_ac_status():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
       
-    query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(import_kwatt_hours) AS energy FROM {} '
+    query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(ac_kwatt_hours) AS energy FROM {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
