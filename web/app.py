@@ -4872,7 +4872,7 @@ def freeboard_ac_status():
         if point['energy'] is not None:
           value4 =  convertfbunits(point['alternator_potential'], 40)
         
-
+ 
         
         mydatetimestr = str(point['time'])
 
