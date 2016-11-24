@@ -4861,16 +4861,16 @@ def freeboard_ac_status():
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         
         if point['volts'] is not None:
-          value1 = convertfbunits( point['speed'], 40)
+          value1 = convertfbunits( point['volts'], 40)
         
         if point['amps'] is not None:
-          value2 =  convertfbunits(point['engine_temp'],40)
+          value2 =  convertfbunits(point['amps'],40)
         
         if point['power'] is not None:
-          value3=  convertfbunits(point['oil_pressure'], 40)
+          value3=  convertfbunits(point['power'], 40)
         
         if point['energy'] is not None:
-          value4 =  convertfbunits(point['alternator_potential'], 40)
+          value4 =  convertfbunits(point['energy'], 40)
         
  
         
