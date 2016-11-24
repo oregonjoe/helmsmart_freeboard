@@ -4701,7 +4701,7 @@ def freeboard_engine():
 
 @app.route('/freeboard_ac_status')
 @cross_origin()
-def freeboard_gen_status():
+def freeboard_ac_status():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
@@ -4756,7 +4756,7 @@ def freeboard_gen_status():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
       
-    query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(import_kwatt_hours) AS energy {} '
+    query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(import_kwatt_hours) AS energy FROM {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
