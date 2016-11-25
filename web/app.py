@@ -7049,6 +7049,6 @@ def freeboard_chart_test():
   #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
   #return '{0}({1})'.format(callback, {'values':values})
   #return '{0}({1})'.format(callback, values)
-  return {'values':values}
+  return jsonify({'values':values})
 
 
