@@ -4707,7 +4707,8 @@ def freeboard_ac_status():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
     Instance = request.args.get('instance','0')
-
+    actype = request.args.get('type','GEN')
+    
     response = None
     
     starttime = 0
@@ -4743,6 +4744,7 @@ def freeboard_ac_status():
     serieskeys= serieskeys + deviceid + "' AND "
     #serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='fluid_level') AND "
     serieskeys= serieskeys +  " (sensor='ac_basic' OR sensor='ac_watthours'  ) AND type = 'GEN' AND "
+    serieskeys= serieskeys +  "  AND type = '" + actype + "' AND "
     serieskeys= serieskeys +  " (instance='" + Instance + "') "
 
 
