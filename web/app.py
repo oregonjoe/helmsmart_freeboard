@@ -7047,4 +7047,4 @@ def freeboard_chart_test():
   callback = request.args.get('callback')
   #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
   #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
-  return '{0}({1})'.format(callback, {'volts':values})
+  return '{0}({1})'.format(callback, {'values':values})
