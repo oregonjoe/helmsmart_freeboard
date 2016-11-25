@@ -4756,7 +4756,7 @@ def freeboard_ac_status():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
       
-    query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(ac_kwatt_hours) AS energy FROM {} '
+    query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(ac_kwatthours) AS energy FROM {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
