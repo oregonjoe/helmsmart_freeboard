@@ -7014,4 +7014,37 @@ def freeboard_raw():
     return 'error'
 
 
+@app.route('/freeboard_chart_test')
+@cross_origin()
+def freeboard_chart_test():
 
+  values=[]
+  
+  value = 1.1
+  values.append({"volts":value})
+  
+  value = 2.3
+  values.append({"volts":value})
+  
+  value = 3.4
+  values.append({"volts":value})
+  
+  value = 2.8
+  values.append({"volts":value})
+  
+  value = 3.8
+  values.append({"volts":value})
+  
+  value = 1.6
+  values.append({"volts":value})
+  
+  value = 1.1
+  values.append({"volts":value})
+  
+
+  #log.info('freeboard: freeboard_chart_test returning data values %s:%s  ', value1, point['volts'])    
+  #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
+  callback = request.args.get('callback')
+  #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+  #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
+  return '{0}({1})'.format(callback, {'volts':values})
