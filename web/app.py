@@ -7064,5 +7064,5 @@ def freeboard_chart_test():
   #return '{0}({1})'.format(callback, {'values':values})
   #return '{0}({1})'.format(callback, values)
   #return jsonify({  "this": "succeeded", "by": "getting", "the": "dweets","with":values})
-  return jsonify({"values":[1,2,3,4,5,6]})
+  return jsonify({"values":["volt":1,"volt":2,"volt":3,"volt":4,"volt":5,"volt":6]})
 
