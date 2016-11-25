@@ -7049,8 +7049,6 @@ def freeboard_chart_test():
   #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
   #return '{0}({1})'.format(callback, {'values':values})
   #return '{0}({1})'.format(callback, values)
-
-  return '{"this":"succeeded","by":"getting","the":"stored_dweets","with":[{"thing":"SEASWITCH_ENETG2_A17","created":"2016-11-25T19:55:28.399Z","content":{"amps":0,"volts":0,"power":0,"update":"True","date_time":"November 25, 2016 19:40:00","energy":13.77}},{"thing":"SEASWITCH_ENETG2_A17","created":"2016-11-25T19:55:59.118Z","content":{"amps":1,"volts":1,"power":1,"update":"True","date_time":"November 25, 2016 19:40:00","energy":12.77}},{"thing":"SEASWITCH_ENETG2_A17","created":"2016-11-25T19:56:20.796Z","content":{"amps":2,"volts":2,"power":2,"update":"True","date_time":"November 25, 2016 19:40:00","energy":15.77}},{"thing":"SEASWITCH_ENETG2_A17","created":"2016-11-25T20:52:31.092Z","content":{"amps":5,"volts":5,"power":5,"update":"True","date_time":"November 25, 2016 19:40:00","energy":15.77}}]}'
-
+  return {'values':values}
 
 
