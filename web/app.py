@@ -7021,25 +7021,39 @@ def freeboard_chart_test():
   values=[]
   
   value = 1.1
-  values.append({"volts":value})
+  values.append({"thing": "SEASWITCH_ENETG2_A17",
+      "created": "2016-11-25T19:56:20.796Z",
+      "content": {"amps":1.0, "volts":value}})
   
   value = 2.3
-  values.append({"volts":value})
+  values.append({"thing": "SEASWITCH_ENETG2_A17",
+      "created": "2016-11-25T19:56:20.796Z",
+      "content": {"amps":1.0, "volts":value}})
   
   value = 3.4
-  values.append({"volts":value})
+  values.append({"thing": "SEASWITCH_ENETG2_A17",
+      "created": "2016-11-25T19:56:20.796Z",
+      "content": {"amps":1.0, "volts":value}})
   
   value = 2.8
-  values.append({"volts":value})
+  values.append({"thing": "SEASWITCH_ENETG2_A17",
+      "created": "2016-11-25T19:56:20.796Z",
+      "content": {"amps":1.0, "volts":value}})
   
   value = 3.8
-  values.append({"volts":value})
+  values.append({"thing": "SEASWITCH_ENETG2_A17",
+      "created": "2016-11-25T19:56:20.796Z",
+      "content": {"amps":1.0, "volts":value}})
   
   value = 1.6
-  values.append({"volts":value})
+  values.append({"thing": "SEASWITCH_ENETG2_A17",
+      "created": "2016-11-25T19:56:20.796Z",
+      "content": {"amps":1.0, "volts":value}})
   
   value = 1.1
-  values.append({"volts":value})
+  values.append({"thing": "SEASWITCH_ENETG2_A17",
+      "created": "2016-11-25T19:56:20.796Z",
+      "content": {"amps":1.0, "volts":value}})
   
 
   #log.info('freeboard: freeboard_chart_test returning data values %s:%s  ', value1, point['volts'])    
@@ -7049,6 +7063,6 @@ def freeboard_chart_test():
   #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
   #return '{0}({1})'.format(callback, {'values':values})
   #return '{0}({1})'.format(callback, values)
-  return jsonify({'values':values})
+  return jsonify({'with':values})
 
 
