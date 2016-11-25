@@ -4743,7 +4743,7 @@ def freeboard_ac_status():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
     #serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='fluid_level') AND "
-    serieskeys= serieskeys +  " (sensor='ac_basic' OR sensor='ac_watthours'  ) AND type = 'GEN' AND "
+    serieskeys= serieskeys +  " (sensor='ac_basic' OR sensor='ac_watthours'  ) "
     serieskeys= serieskeys +  "  AND type = '" + actype + "' AND "
     serieskeys= serieskeys +  " (instance='" + Instance + "') "
 
