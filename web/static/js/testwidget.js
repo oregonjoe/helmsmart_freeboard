@@ -22,8 +22,8 @@
 	freeboard.loadWidgetPlugin({
 		// Same stuff here as with datasource plugin.
 		"type_name"   : "my_widget_plugin",
-		"display_name": "Widget Plugin Example",
-        "description" : "Some sort of description <strong>with optional html!</strong>",
+		"display_name": "HelmSmart Chart",
+        "description" : "Plots time series data",
 		// **external_scripts** : Any external scripts that should be loaded before the plugin instance is created.
 		"external_scripts": [
 			//"http://mydomain.com/myscript1.js", "http://mydomain.com/myscript2.js"
@@ -48,6 +48,10 @@
 					},
 					{
 						"name" : "Big",
+						"value": "big"
+					},
+					{
+						"name" : "Really Big",
 						"value": "big"
 					}
 				]
