@@ -3137,7 +3137,7 @@ def freeboard_environmental():
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':reversed(temperature), 'atmospheric_pressure':reversed(atmospheric_pressure), 'humidity':reversed(humidity)})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity))})     
 
     except AttributeError, e:
       #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
