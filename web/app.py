@@ -4729,7 +4729,7 @@ def freeboard_engine():
           
         if point['speed'] is not None:
           value1 = convertfbunits( point['speed'], 24)
-           speed.append({'epoch':ts, 'value':value1})
+          speed.append({'epoch':ts, 'value':value1})
           
         
         if point['engine_temp'] is not None:
@@ -4739,7 +4739,7 @@ def freeboard_engine():
         
         if point['oil_pressure'] is not None:
           value3=  convertfbunits(point['oil_pressure'], 8)
-           oil_pressure.append({'epoch':ts, 'value':value3})
+          oil_pressure.append({'epoch':ts, 'value':value3})
           
         
         if point['alternator_potential'] is not None:
