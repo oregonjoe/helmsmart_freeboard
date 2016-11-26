@@ -3902,8 +3902,8 @@ def freeboard_location():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"5min")
-
+    Interval = request.args.get('interval',"5min")
+    resolution = request.args.get('resolution',"")
     response = None
 
     starttime = 0
@@ -3911,7 +3911,8 @@ def freeboard_location():
     epochtimes = getepochtimes(Interval)
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -3939,7 +3940,7 @@ def freeboard_location():
  
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", database)
 
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
@@ -4018,11 +4019,11 @@ def freeboard_location():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
-    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
-    keys = response.raw.get('series',[])
+    #keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    l#og.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -4042,24 +4043,33 @@ def freeboard_location():
       value2 = '---'
       value3 = '---'
       value4 = '---'
+
+      lat=[]
+      lng=[]
+
  
       points = list(response.get_points())
 
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+       # log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+       if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          dtt = mydatetime.timetuple()
+          ts = int(mktime(dtt)*1000)
+
+        
         if point['lat'] is not None:
           if point['lng'] is not None:          
             value1 = convertfbunits(point['lat'], 15)
+            lat.append({'epoch':ts, 'value':value1})
+            
             value2 = convertfbunits(point['lng'], 15)
+            lng.append({'epoch':ts, 'value':value2})
 
-        mydatetimestr = str(point['time'])
-
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-
-      log.info('freeboard: freeboard returning data values lat:%s, lng:%s  ', value1,value2)
-
+ 
       """
 
       log.info('freeboard: before exosite write:')
@@ -4096,7 +4106,8 @@ def freeboard_location():
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
 
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':list(reversed(lat)), 'lng':list(reversed(lng))})     
         
 
      
@@ -4123,7 +4134,9 @@ def freeboard_nav():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"5min")
+    Interval = request.args.get('interval',"5min")
+    resolution = request.args.get('resolution',"")
+    navtype = request.args.get('type',"true")
     
     response = None
 
@@ -4132,7 +4145,8 @@ def freeboard_nav():
     epochtimes = getepochtimes(Interval)
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -4154,12 +4168,18 @@ def freeboard_nav():
     measurement = 'HS_' + str(deviceid)
 
 
+    if navtype == "magnetic":
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + deviceid + "' AND "
+      serieskeys= serieskeys +  " (sensor='cogsog' OR sensor='heading') AND "
+      serieskeys= serieskeys +  " (type='Magnetic') " 
 
+    else:
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + deviceid + "' AND "
+      serieskeys= serieskeys +  " (sensor='cogsog' OR sensor='heading') AND "
+      serieskeys= serieskeys +  " (type='True') " 
 
-    serieskeys=" deviceid='"
-    serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " (sensor='cogsog' OR sensor='heading') AND "
-    serieskeys= serieskeys +  " (type='True') " 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
     log.info("freeboard Create InfluxDB %s", database)
@@ -4241,11 +4261,11 @@ def freeboard_nav():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
-    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
-    keys = response.raw.get('series',[])
+    #keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -4265,34 +4285,50 @@ def freeboard_nav():
       value2 = '---'
       value3 = '---'
       value4 = '---'
+      
+      cog=[]
+      sog=[]
+      heading=[]
  
       points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          dtt = mydatetime.timetuple()
+          ts = int(mktime(dtt)*1000)
+
+        
         if point['cog'] is not None: 
           value1 = convertfbunits(point['cog'], 16)
+          cog.append({'epoch':ts, 'value':value1})
           
         if point['sog'] is not None:         
           value2 = convertfbunits(point['sog'], 4)
+          sog.append({'epoch':ts, 'value':value2})
           
         if point['heading'] is not None:         
           value3 = convertfbunits(point['heading'], 16)
-       
-        mydatetimestr = str(point['time'])
+          heading.append({'epoch':ts, 'value':value3})
+          
 
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
-      log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
+      #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','cog':value1, 'sog':value2, 'heading_true':value3, 'heading_mag':value4})
+      if navtype == "magnetic":
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','cog':list(reversed(cog)), 'sog':list(reversed(sog)), 'heading_mag':list(reversed(heading))})     
+      else:
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','cog':list(reversed(cog)), 'sog':list(reversed(sog)), 'heading_true':list(reversed(heading))})     
         
 
      
@@ -4321,9 +4357,10 @@ def freeboard_battery():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"5min")
+    Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
-
+    resolution = request.args.get('resolution',"")
+    
     response = None
     
     starttime = 0
@@ -4331,7 +4368,8 @@ def freeboard_battery():
     epochtimes = getepochtimes(Interval)
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -4449,34 +4487,46 @@ def freeboard_battery():
       value2 = '---'
       value3 = '---'
       value4 = '---'
- 
+      
+      voltage=[]
+      current=[]
+      temperature=[]
+
       points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          dtt = mydatetime.timetuple()
+          ts = int(mktime(dtt)*1000)
+
+        
+
         if point['voltage'] is not None: 
           value1 = convertfbunits(point['voltage'], 27)
+          voltage.append({'epoch':ts, 'value':value1})
           
         if point['current'] is not None:         
           value2 = convertfbunits(point['current'], 28)
+          current.append({'epoch':ts, 'value':value2})
           
         if point['temperature'] is not None:         
           value3 = convertfbunits(point['temperature'], 0)
-       
-        mydatetimestr = str(point['time'])
-
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-
-      log.info('freeboard: freeboard returning data values voltage:%s, current:%s  ', value1,value2)            
+          temperature.append({'epoch':ts, 'value':value3})
+               
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':value1, 'current':value2, 'temperature':value3})
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':value1, 'current':value2, 'temperature':value3})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature))})     
         
 
      
@@ -4505,9 +4555,10 @@ def freeboard_engine():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"5min")
+    Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
-
+    resolution = request.args.get('resolution',"")
+    
     response = None
     
     starttime = 0
@@ -4515,7 +4566,8 @@ def freeboard_engine():
     epochtimes = getepochtimes(Interval)
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -4651,45 +4703,72 @@ def freeboard_engine():
       value7 = '---'
       value8 = '---'
 
+
+      speed=[]
+      engine_temp=[]
+      oil_pressure=[]
+      alternator_potential=[]
+      tripfuel=[]
+      fuel_rate=[]
+      level=[]
+      total_engine_hours=[]
+
        
       points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          dtt = mydatetime.timetuple()
+          ts = int(mktime(dtt)*1000)
+          
         if point['speed'] is not None:
           value1 = convertfbunits( point['speed'], 24)
+           speed.append({'epoch':ts, 'value':value1})
+          
         
         if point['engine_temp'] is not None:
           value2 =  convertfbunits(point['engine_temp'], 0)
+          engine_temp.append({'epoch':ts, 'value':value2})
+          
         
         if point['oil_pressure'] is not None:
           value3=  convertfbunits(point['oil_pressure'], 8)
+           oil_pressure.append({'epoch':ts, 'value':value3})
+          
         
         if point['alternator_potential'] is not None:
           value4 =  convertfbunits(point['alternator_potential'], 27)
+          alternator_potential.append({'epoch':ts, 'value':value4})
+          
         
         if point['fuel_rate'] is not None:
           value6 =  convertfbunits(point['fuel_rate'], 18)
-        
+          fuel_rate.append({'epoch':ts, 'value':value6})
+          
+       
         if point['level'] is not None:
           value7=  convertfbunits(point['level'], 26)
+          level.append({'epoch':ts, 'value':value7})
+          
         
         if point['total_engine_hours'] is not None:
           value8 = convertfbunits(point['total_engine_hours'], 37)
+          total_engine_hours.append({'epoch':ts, 'value':value8})
+          
 
-        
-        mydatetimestr = str(point['time'])
-
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-        
-      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['speed'])    
-      #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','rpm':list(reversed(speed)), 'eng_temp':list(reversed(eng_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(fuel_level)), 'eng_hours':list(reversed(eng_hours))})     
+
+
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
@@ -4740,8 +4819,9 @@ def freeboard_ac_status():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"5min")
+    Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
+    resolution = request.args.get('resolution',"")
     actype = request.args.get('type','GEN')
     
     response = None
@@ -4751,7 +4831,8 @@ def freeboard_ac_status():
     epochtimes = getepochtimes(Interval)
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -4889,37 +4970,52 @@ def freeboard_ac_status():
       value7 = '---'
       value8 = '---'
 
+      volts=[]
+      amps=[]
+      power=[]
+      energy=[]
+
+
        
       points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          dtt = mydatetime.timetuple()
+          ts = int(mktime(dtt)*1000)
+          
         
         if point['volts'] is not None:
           value1 = convertfbunits( point['volts'], 40)
+          volts.append({'epoch':ts, 'value':value1})    
         
         if point['amps'] is not None:
           value2 =  convertfbunits(point['amps'],40)
+          amps.append({'epoch':ts, 'value':value1})
+          
         
         if point['power'] is not None:
           value3=  convertfbunits(point['power'], 40)
+          power.append({'epoch':ts, 'value':value1})
+          
         
         if point['energy'] is not None:
           value4 =  convertfbunits(point['energy'], 40)
+          energy.append({'epoch':ts, 'value':value1})
+          
         
- 
-        
-        mydatetimestr = str(point['time'])
 
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-        
-      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['volts'])    
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','volts':list(reversed(volts)), 'amps':list(reversed(amps)), 'power':list(reversed(power)), 'energy':list(reversed(energy))})     
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
@@ -4974,9 +5070,9 @@ def freeboard_status():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"5min")
+    Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
-
+    resolution = request.args.get('resolution',"")
     response = None
 
     
@@ -4985,7 +5081,8 @@ def freeboard_status():
     epochtimes = getepochtimes(Interval)
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
