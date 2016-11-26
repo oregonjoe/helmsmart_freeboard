@@ -7255,7 +7255,7 @@ def freeboard_ac_status_array():
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
         dtt = mydatetime.timetuple()
-        ts = int(mktime(dtt))
+        ts = int(mktime(dtt)*1000)
         
         myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
         ac_points.append({'epoch':ts, 'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
