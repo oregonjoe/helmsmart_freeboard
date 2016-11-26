@@ -4023,7 +4023,7 @@ def freeboard_location():
 
     #keys = response.raw.get('series',[])
     #keys = result.keys()
-    l#og.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
