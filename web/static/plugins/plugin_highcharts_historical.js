@@ -429,6 +429,7 @@
 						var plotMqtt = [x, Number(myamps)]; //create the array+ "Y"
 					
 						myDataArray[i] = plotMqtt;
+						}
 					}
 				}
 
