@@ -7225,6 +7225,10 @@ def freeboard_ac_status_array():
       value8 = '---'
 
       ac_points = []
+      volts=[]
+      amps=[]
+      power=[]
+      energy=[]
       
       points = list(response.get_points())
 
@@ -7232,40 +7236,49 @@ def freeboard_ac_status_array():
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        
+
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          dtt = mydatetime.timetuple()
+          ts = int(mktime(dtt)*1000)
+
         if point['volts'] is not None:
-          value1 = convertfbunits( point['volts'], 40)
+          value = convertfbunits( point['volts'], 40)
+          volts.append({'epoch':ts, 'value':value})
         
         if point['amps'] is not None:
-          value2 =  convertfbunits(point['amps'],40)
+          value = convertfbunits( point['amps'], 40)
+          amps.append({'epoch':ts, 'value':value})
         
         if point['power'] is not None:
-          value3=  convertfbunits(point['power'], 40)
+          value = convertfbunits( point['power'], 40)
+          power.append({'epoch':ts, 'value':value})
         
         if point['energy'] is not None:
-          value4 =  convertfbunits(point['energy'], 40)
+          value = convertfbunits( point['energy'], 40)
+          energy.append({'epoch':ts, 'value':value})
 
-        mydatetimestr = str(point['time'])
+
 
 
 
 
         
 
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
-        dtt = mydatetime.timetuple()
-        ts = int(mktime(dtt)*1000)
         
-        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-        ac_points.append({'epoch':ts, 'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
+      #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      #ac_points.append({'epoch':ts, 'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
+      #ac_points.append({'epoch':ts, 'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
         
       #log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['volts'])    
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
-      return '{0}({1})'.format(callback, {'ac_points':ac_points})
+      #return '{0}({1})'.format(callback, {'ac_points':ac_points})
+      return '{0}({1})'.format(callback, {'volts':volts, 'amps':amps, 'power':power, 'energy':energy})
     
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
