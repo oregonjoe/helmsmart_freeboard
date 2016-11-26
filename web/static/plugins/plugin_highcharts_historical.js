@@ -418,8 +418,9 @@
 				{
 					for(i=0; i< newarrayValue.length; i++)
 					{
-						myvalue=newarrayValue[i];
-						myDataArray[i] = myvalue.content.amps;
+						myvalues=newarrayValue[i];
+						 myvalue = myvalues.content
+						myDataArray[i] = myvalue.amps;
 					}
 				}
 
