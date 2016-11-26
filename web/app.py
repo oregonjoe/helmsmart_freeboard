@@ -7247,9 +7247,18 @@ def freeboard_ac_status_array():
 
         mydatetimestr = str(point['time'])
 
+
+
+
+        
+
         mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+        dtt = mydatetime.timetuple()
+        ts = int(mktime(dtt))
+        
         myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-        ac_points.append({'epoch':mydatetime, 'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
+        ac_points.append({'epoch':ts, 'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
         
       #log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['volts'])    
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
