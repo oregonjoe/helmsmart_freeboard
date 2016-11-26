@@ -2943,8 +2943,9 @@ def freeboard_environmental():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"5min")
-    
+    #Interval = request.args.get('Interval',"5min")
+    Interval = request.args.get('Interval',"1hour")
+        
     response = None
 
 
@@ -2954,7 +2955,7 @@ def freeboard_environmental():
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     resolution = epochtimes[2]
-
+    resolution = 60
 
     deviceid = getedeviceid(deviceapikey)
     
