@@ -3077,25 +3077,42 @@ def freeboard_environmental():
       value3 = '---'
       value4 = '---'
 
+      temperature=[]
+      atmospheric_pressure=[]
+      humidity=[]
+
+
       points = list(response.get_points())
 
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          dtt = mydatetime.timetuple()
+          ts = int(mktime(dtt)*1000)
+          
         if point['temperature'] is not None: 
           value1 = convertfbunits(point['temperature'], 0)
+          temperature.append({'epoch':ts, 'value':value1})
+          
         if point['atmospheric_pressure'] is not None:         
           value2 = convertfbunits(point['atmospheric_pressure'], 10)
+          atmospheric_pressure.append({'epoch':ts, 'value':value2})
+                    
         if point['humidity'] is not None:         
           value3 = convertfbunits(point['humidity'], 26)
+          humidity.append({'epoch':ts, 'value':value3})
 
           
-        mydatetimestr = str(point['time'])
+        #mydatetimestr = str(point['time'])
 
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+        #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
-      log.info('freeboard: freeboard returning data values temperature:%s, baro:%s, humidity:%s  ', value1,value2,value3)
+      #log.info('freeboard: freeboard returning data values temperature:%s, baro:%s, humidity:%s  ', value1,value2,value3)
 
       """
       log.info('freeboard: before exosite write:')
@@ -3116,8 +3133,8 @@ def freeboard_environmental():
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
-      
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':temperature, 'baro':baro, 'humidity':humidity})     
 
     except AttributeError, e:
       #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
