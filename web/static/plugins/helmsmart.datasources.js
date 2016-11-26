@@ -50,7 +50,7 @@
 			
 			var hsinstance = currentSettings.instance;
 			if(hsinstance != "")
-				requestURL = requestURL + "&instanceinstance=" + hsinstance;			
+				requestURL = requestURL + "&instance=" + hsinstance;			
 			
 			
 			var hstype = currentSettings.type;
@@ -141,12 +141,35 @@
 					},
 					{
 						name: "Wind Data",
-						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental"
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata"
+					},					
+					
+					{
+						name: "GPS Location",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_location"
+					},
+					{
+						name: "Navigation",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_nav"
+					},
+					
+					{
+						name: "Engine Status",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_engine"
+					},				
+					{
+						name: "DC Status",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_battery"
 					},					
 					
 					{
 						name: "AC Status",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status"
+					},
+
+					{
+						name: "Switches and Indicators",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_status"
 					}
 
 				]
@@ -331,6 +354,10 @@
 				display_name: "Instance",
 				type: "option",
 				options: [
+					{
+						name: "---",
+						value: ""
+					},
 					{
 						name: "0",
 						value: "0"
