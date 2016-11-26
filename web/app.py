@@ -7071,7 +7071,7 @@ def freeboard_chart_test():
 
 @app.route('/freeboard_ac_status_array')
 @cross_origin()
-def freeboard_ac_status():
+def freeboard_ac_status_array():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
