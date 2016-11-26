@@ -143,7 +143,7 @@
 				type: "text"
 			},	
 			
-			
+			/*
 			
 					{
 				name: "url",
