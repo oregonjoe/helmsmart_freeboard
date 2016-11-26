@@ -4054,7 +4054,7 @@ def freeboard_location():
 
       for point in points:
        # log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-       if point['time'] is not None:
+        if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
           dtt = mydatetime.timetuple()
