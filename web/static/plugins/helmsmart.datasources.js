@@ -36,11 +36,11 @@
 				return; // TODO: Report an error
 			}
 
-			var requestURL = currentSettings.url;
+			var hsurl = currentSettings.url;
 			var hsapikey = currentSettings.apikey;
 			var hsinterval = currentSettings.span;
 			var hsresolution = currentSettings.resolution;
-			var hsurl= requestURL + "?apikey=" + hsapikey + "&interval=" + hsinterval + "&resolution=" + hsresolution
+			var requestURL= hsurl + "?apikey=" + hsapikey + "&interval=" + hsinterval + "&resolution=" + hsresolution
 
 			if (errorStage == 2 && use_thingproxy) {
 				requestURL = (location.protocol == "https:" ? "https:" : "http:") + "//thingproxy.freeboard.io/fetch/" + encodeURI(currentSettings.url);
@@ -120,23 +120,29 @@
 				options: [
 					{
 						name: "Environmental",
-						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=2c76ae5a6f20125071a988b23cd4a6c8"
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental"
 					},
 					{
 						name: "Wind Data",
-						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=2c76ae5a6f20125071a988b23cd4a6c8"
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental"
 					},					
 					
 					{
 						name: "AC Status",
-						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status?apikey=2c76ae5a6f20125071a988b23cd4a6c8&instance=2&type=GEN"
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status"
 					}
 
 				]
 			},	
 			
 			
-			/*
+			
+			{
+				name: "apikey",
+				display_name: "API KEY",
+				type: "text"
+			},	
+			
 			
 			
 					{
