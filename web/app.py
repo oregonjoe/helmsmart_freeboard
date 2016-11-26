@@ -5186,11 +5186,11 @@ def freeboard_status():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
-    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -5206,103 +5206,176 @@ def freeboard_status():
     try:
     
       strvalue = ""
-      value1 = '---'
-      value2 = '---'
+      bankvalue1 = '---'
+      bankvalue2 = '---'
+
+      bank0=[]
+      bank1=[]
+      
+      status0=[]
+      status1=[]
+      status2=[]
+      status3=[]
+      status4=[]
+      status5=[]
+      status6=[]
+      status7=[]
+      status8=[]
+      status9=[]
+      status10=[]
+      status11=[]
+      status12=[]
+      status13=[]
+      status14=[]
+      status15=[]
 
 
-      status0=0
-      status1=0
-      status2=0
-      status3=0
-      status4=0
-      status5=0
-      status6=0
-      status7=0
-      status8=0
-      status9=0
-      status10=0
-      status11=0
-      status12=0
-      status13=0
-      status14=0
-      status15=0
+      value0=0
+      value1=0
+      value2=0
+      value3=0
+      value4=0
+      value5=0
+      value6=0
+      value7=0
+      value8=0
+      value9=0
+      value10=0
+      value11=0
+      value12=0
+      value13=0
+      value14=0
+      value15=0
        
       points = list(response.get_points())
 
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          dtt = mydatetime.timetuple()
+          ts = int(mktime(dtt)*1000)
+  
 
         if point['bank0'] is not None:
-          value1 =  point['bank0']
+          bankvalue1 =  point['bank0']
+          bank0.append({'epoch':ts, 'value':bankvalue1})
+          
+          if bankvalue1 != '---':
+            if bankvalue1 & 0x1 == 0x1:
+              status0.append({'epoch':ts, 'value':1})
+            else:
+              status0.append({'epoch':ts, 'value':0})
 
-          if value1 != '---':
-            if value1 & 0x1 == 0x1:
-              status0 = 1
+              
+            if bankvalue1 & 0x2 == 0x2:
+              status1.append({'epoch':ts, 'value':1})
+            else:
+              status1.append({'epoch':ts, 'value':0})
 
-            if value1 & 0x2 == 0x2:
-              status1 = 1
 
-            if value1 & 0x4 == 0x4:
-              status2 = 1
+            if bankvalue1 & 0x4 == 0x4:
+              status2.append({'epoch':ts, 'value':1})
+            else:
+              status2.append({'epoch':ts, 'value':0})
 
-            if value1 & 0x8 == 0x8:
-              status3 = 1
 
-            if value1 & 0x10 == 0x10:
-              status4 = 1
+            if bankvalue1 & 0x8 == 0x8:
+              status3.append({'epoch':ts, 'value':1})
+            else:
+              status3.append({'epoch':ts, 'value':0})
 
-            if value1 & 0x20 == 0x20:
-              status5 = 1
 
-            if value1 & 0x40 == 0x40:
-              status6 = 1
+            if bankvalue1 & 0x10 == 0x10:
+              status4.append({'epoch':ts, 'value':1})
+            else:
+              status4.append({'epoch':ts, 'value':0})
 
-            if value1 & 0x80 == 0x80:
-              status7 = 1
+
+            if bankvalue1 & 0x20 == 0x20:
+              status5.append({'epoch':ts, 'value':1})
+            else:
+              status5.append({'epoch':ts, 'value':0})
+
+
+            if bankvalue1 & 0x40 == 0x40:
+              status6.append({'epoch':ts, 'value':1})
+            else:
+              status6.append({'epoch':ts, 'value':0})
+
+
+            if bankvalue1 & 0x80 == 0x80:
+              status7.append({'epoch':ts, 'value':1})
+            else:
+              status7.append({'epoch':ts, 'value':0})
+
 
 
         if point['bank1'] is not None:
-          value2 =  point['bank1']
-            
-          if value2 != '---':
-            if value2 & 0x1 == 0x01:
-              status8 = 1
+          bankvalue2 =  point['bank1']
+          bank1.append({'epoch':ts, 'value':bankvalue2})
+          
+          if bankvalue2 != '---':
+            if bankvalue2 & 0x1 == 0x1:
+              status8.append({'epoch':ts, 'value':1})
+            else:
+              status8.append({'epoch':ts, 'value':0})
 
-            if value2 & 0x2 == 0x02:
-              status9 = 1
+              
+            if bankvalue2 & 0x2 == 0x2:
+              status9.append({'epoch':ts, 'value':1})
+            else:
+              status9.append({'epoch':ts, 'value':0})
 
-            if value2 & 0x4 == 0x04:
-              status10 = 1
 
-            if value2 & 0x8 == 0x08:
-              status11 =1
+            if bankvalue2 & 0x4 == 0x4:
+              status10.append({'epoch':ts, 'value':1})
+            else:
+              status10.append({'epoch':ts, 'value':0})
 
-            if value2 & 0x10 == 0x10:
-              status12 = 1
 
-            if value2 & 0x20 == 0x20:
-              status13 =1
+            if bankvalue2 & 0x8 == 0x8:
+              status11.append({'epoch':ts, 'value':1})
+            else:
+              status11.append({'epoch':ts, 'value':0})
 
-            if value2 & 0x40 == 0x40:
-              status14 = 1
 
-            if value2 & 0x80 == 0x80:
-              status15 = 1      
- 
+            if bankvalue2 & 0x10 == 0x10:
+              status12.append({'epoch':ts, 'value':1})
+            else:
+              status12.append({'epoch':ts, 'value':0})
 
-        
-        mydatetimestr = str(point['time'])
 
-        mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-        
-      log.info('freeboard: freeboard_engine returning data values %s:%s  ', value1, point['bank0'])    
+            if bankvalue2 & 0x20 == 0x20:
+              status13.append({'epoch':ts, 'value':1})
+            else:
+              status13.append({'epoch':ts, 'value':0})
+
+
+            if bankvalue2 & 0x40 == 0x40:
+              status146.append({'epoch':ts, 'value':1})
+            else:
+              status14.append({'epoch':ts, 'value':0})
+
+
+            if bankvalue2 & 0x80 == 0x80:
+              status15.append({'epoch':ts, 'value':1})
+            else:
+              status15.append({'epoch':ts, 'value':0})
+
+
+
+
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(status0)), 'status1':list(reversed(status1)), 'status2':list(reversed(status2)),'status3':list(reversed(status3)), 'status4':list(reversed(status4)), 'status5':list(reversed(status5)),'status6':list(reversed(status6)), 'status7':list(reversed(status7)), 'status8':list(reversed(status8)),'status9':list(reversed(status9)), 'status10':list(reversed(status10)), 'status11':list(reversed(status11)),'status12':list(reversed(status12)), 'status13':list(reversed(status13)), 'status14':list(reversed(status14)), 'status15':list(reversed(status15))})     
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True',  'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7})
 
