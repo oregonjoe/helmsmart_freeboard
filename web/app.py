@@ -7075,7 +7075,7 @@ def freeboard_ac_status_array():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    Interval = request.args.get('Interval',"30min")
+    Interval = request.args.get('Interval',"1hour")
     Instance = request.args.get('instance','0')
     actype = request.args.get('type','GEN')
     
