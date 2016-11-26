@@ -40,8 +40,16 @@
 			var hsapikey = currentSettings.apikey;
 			var hsinterval = currentSettings.span;
 			var hsresolution = currentSettings.resolution;
-			var requestURL= hsurl + "?apikey=" + hsapikey + "&interval=" + hsinterval + "&resolution=" + hsresolution
 
+			var hsinstance = currentSettings.instance;
+			var hstype = currentSettings.type;
+			if(hstype == "")			
+				var requestURL= hsurl + "?apikey=" + hsapikey + "&interval=" + hsinterval + "&resolution=" + hsresolution + "&instance=" + hsinterval ;
+			else
+				var requestURL= hsurl + "?apikey=" + hsapikey + "&interval=" + hsinterval + "&resolution=" + hsresolution + "&instance=" + hsinterval + "&type=" + hstype;
+						
+						
+						
 			if (errorStage == 2 && use_thingproxy) {
 				requestURL = (location.protocol == "https:" ? "https:" : "http:") + "//thingproxy.freeboard.io/fetch/" + encodeURI(currentSettings.url);
 			}
@@ -117,6 +125,7 @@
 			{
 				name: "url",
 				display_name: "URL",
+				type: "option",
 				options: [
 					{
 						name: "Environmental",
@@ -238,7 +247,7 @@
 				]
 			},
 			
-						{
+				{
 				name: "resolution",
 				display_name: "Resolution",
 				type: "option",
@@ -304,7 +313,82 @@
 						value: "1month"
 					}
 				]
+			},
+			{
+				name: "instance",
+				display_name: "Instance",
+				type: "option",
+				options: [
+					{
+						name: "0",
+						value: "0"
+					},
+					{
+						name: "1",
+						value: "1"
+					},
+					{
+						name: "2",
+						value: "2"
+					},					
+					{
+						name: "3",
+						value: "3"
+					},					
+					{
+						name: "4",
+						value: "4"
+					},					
+					{
+						name: "5",
+						value: "5"
+					},					
+					{
+						name: "6",
+						value: "6"
+					},					
+					{
+						name: "7",
+						value: "7"
+					},					
+					{
+						name: "8",
+						value: "8"
+					},					
+					{
+						name: "9",
+						value: "9"
+					}
+				]
+			},
+			{
+				name: "type",
+				display_name: "Type",
+				type: "option",
+				options: [
+					{
+						name: "---",
+						value: ""
+					},
+					{
+						name: "Apparent Direction",
+						value: "apparent"
+					},
+					{
+						name: "True Direction",
+						value: "true"
+					},
+					{
+						name: "UTIL",
+						value: "UTIL"
+					},					
+					{
+						name: "GEN",
+						value: "GEN"
+					}
+				]
 			}
+					
 			/*
 			{
 				name: "method",
