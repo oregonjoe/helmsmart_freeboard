@@ -417,9 +417,10 @@
 			if(newarrayValue.length != 0)
 				{
 					for(i=0; i< newarrayValue.length; i++)
-					myvalue=newarrayValue[i];
-					myDataArray[i] = myvalue.content.amps;
-					
+					{
+						myvalue=newarrayValue[i];
+						myDataArray[i] = myvalue.content.amps;
+					}
 				}
 
 			var chart = thisWidgetContainer.highcharts();
