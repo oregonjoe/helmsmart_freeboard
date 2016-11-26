@@ -54,7 +54,7 @@ window.dyngaugeID = 0;
 				if(newValue.length != 0)
 				{
 					myvalue=newValue[0];
-					mynumber = myvalue.amps;
+					mynumber = myvalue.content.amps;
 						
 					gaugeObject.refresh(Number(mynumber));
 				
