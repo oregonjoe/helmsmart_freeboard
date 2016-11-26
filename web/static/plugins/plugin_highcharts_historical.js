@@ -419,14 +419,14 @@
 					for(i=0; i< newarrayValue.length; i++)
 					{
 						myvalues=newarrayValue[i];
-						 myvalue = myvalues.content
-						 myamps = myvalue.amps;
+						// myvalue = myvalues.content
+						 myamps = myvalues.amps;
 
 						
 						if (isNumber(myamps)) { //check if it is a real number and not text
 						var x = (new Date()).getTime();
 						// console.log('addPoint:', x,currentSettings[seriesno], Number(newValue));
-						var plotMqtt = [x, Number(myamps)]; //create the array+ "Y"
+						var plotMqtt = [ myvalues.epoch, Number(myamps)]; //create the array+ "Y"
 					
 						myDataArray[i] = plotMqtt;
 						}
