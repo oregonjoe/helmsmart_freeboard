@@ -38,16 +38,24 @@
 
 			var hsurl = currentSettings.url;
 			var hsapikey = currentSettings.apikey;
+			var requestURL = hsurl + "?apikey=" + hsapikey;
+			
 			var hsinterval = currentSettings.span;
+			if(hsinterval != "")
+				requestURL = requestURL + "&interval=" + hsinterval;
+			
 			var hsresolution = currentSettings.resolution;
-
+			if(hsresolution != "")
+				requestURL = requestURL + "&resolution=" + hsresolution;		
+			
 			var hsinstance = currentSettings.instance;
+			if(hsinstance != "")
+				requestURL = requestURL + "&instanceinstance=" + hsinstance;			
+			
+			
 			var hstype = currentSettings.type;
-			if(hstype == "")			
-				var requestURL= hsurl + "?apikey=" + hsapikey + "&interval=" + hsinterval + "&resolution=" + hsresolution + "&instance=" + hsinterval ;
-			else
-				var requestURL= hsurl + "?apikey=" + hsapikey + "&interval=" + hsinterval + "&resolution=" + hsresolution + "&instance=" + hsinterval + "&type=" + hstype;
-						
+			if(hstype != "")			
+				requestURL = requestURL + "&type=" + hstype;						
 						
 						
 			if (errorStage == 2 && use_thingproxy) {
@@ -253,64 +261,68 @@
 				type: "option",
 				options: [
 					{
+						name: "---",
+						value: ""
+					},
+					{
 						name: "1 min",
-						value: "1min"
+						value: "60"
 					},
 					{
 						name: "2 min",
-						value: "2min"
+						value: "120"
 					},
 					{
 						name: "5 min",
-						value: "5min"
+						value: "300"
 					},
 					{
 						name: "10 min",
-						value: "10min"
+						value: "600"
 					},
 					{
 						name: "15 min",
-						value: "15min"
+						value: "900"
 					},
 					{
 						name: "30 min",
-						value: "30min"
+						value: "1200"
 					},
 					{
 						name: "1 hour",
-						value: "1hour"
+						value: "3600"
 					},
 					{
 						name: "4 hour",
-						value: "4hour"
+						value: "14400"
 					},
 					{
 						name: "6 hour",
-						value: "6hour"
+						value: "21600"
 					},
 					{
 						name: "8 hour",
-						value: "8hour"
+						value: "28800"
 					},
 					{
 						name: "12 hour",
-						value: "12hour"
+						value: "43200"
 					},
 					{
 						name: "1 day",
-						value: "1day"
+						value: "86400"
 					},
 					{
 						name: "2 day",
-						value: "2day"
+						value: "172800"
 					},
 					{
 						name: "1 week",
-						value: "7day"
+						value: "604800"
 					},
 					{
 						name: "1 month",
-						value: "1month"
+						value: "2419200"
 					}
 				]
 			},
