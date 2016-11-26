@@ -82,7 +82,7 @@ window.dyngaugeID = 0;
           //  "https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
           //  "https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/justgage.1.0.1.js"
 			 "https://helmsmart-freeboard.herokuapp.com/static/js/highcharts.js"
-			highcharts.js
+			
         ],
         settings: [
             {
