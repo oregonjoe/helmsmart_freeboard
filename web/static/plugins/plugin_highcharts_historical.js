@@ -413,7 +413,7 @@
 
 		self.onCalculatedValueChanged = function(settingName, newarrayValue) {
 			// console.log(settingName, 'newValue:', newValue);
-			var myDataArray;
+			var myDataArray =[];
 			if(newarrayValue.length != 0)
 				{
 					for(i=0; i< newarrayValue.length; i++)
