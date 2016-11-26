@@ -18,7 +18,7 @@ window.dyngaugeID = 0;
 
             gaugeElement.empty();
 
-			 gaugeObject = new Highcharts.Chart(chartoptions[graphindex] );
+			// gaugeObject = new Highcharts.Chart(chartoptions[graphindex] );
 			 
 			 
             gaugeObject = new JustGage({
@@ -79,9 +79,9 @@ window.dyngaugeID = 0;
         type_name: "dyngauge",
         display_name: "PlotGauge",
         "external_scripts" : [
-          //  "https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
-          //  "https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/justgage.1.0.1.js"
-			 "https://helmsmart-freeboard.herokuapp.com/static/js/highcharts.js"
+            "https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
+            "https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/justgage.1.0.1.js"
+			// "https://helmsmart-freeboard.herokuapp.com/static/js/highcharts.js"
 			
         ],
         settings: [
