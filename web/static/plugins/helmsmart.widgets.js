@@ -493,6 +493,7 @@
         var sparklineElement = $('<div class="sparkline"></div>');
 		var sparklineLegend = $('<div></div>');
 		var currentSettings = settings;
+		var arrayvalues = [];
 
         this.render = function (element) {
             $(element).append(titleElement).append(sparklineElement).append(sparklineLegend);
@@ -508,14 +509,23 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
-			arrayvalues = newValue[0];
-			if (currentSettings.legend) {
-				for(i=0; i< arrayvalues.length; i++)
-				addValueToSparkline(sparklineElement,  arrayvalues[i].value, currentSettings.legend.split(","));
-			} else {
-				for(i=0; i< arrayvalues.length; i++)
-                    addValueToSparkline(sparklineElement, arrayvalues[i].value);
+			length=newValue[0].length;
+			
+			for(i=0; i< length; i++)
+			{
+				arrayvalues = [];
+				for(j=0; < newValue.length; j++)
+					arrayvalues.push(newValue[j][i].value);
+					
 				
+					if (currentSettings.legend) {
+					
+						addValueToSparkline(sparklineElement,  arrayvalues, currentSettings.legend.split(","));
+					} else {
+						
+							addValueToSparkline(sparklineElement, arrayvalues);
+						
+					}
 			}
         }
 
