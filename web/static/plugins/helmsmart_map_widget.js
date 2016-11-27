@@ -394,10 +394,13 @@
 			{
 				valueFontSize = 75;
 
-				if(newSettings.sparkline)
-				{
-					valueFontSize = 60;
-				}
+				
+			}
+			else if(newSettings.size == "huge")
+			{
+				valueFontSize = 125;
+
+				
 			}
 
 			valueElement.css({"font-size" : valueFontSize + "px"});
@@ -420,9 +423,9 @@
                     valueElement.text(newValue);
                 }
 
-                if (currentSettings.sparkline) {
-                    addValueToSparkline(sparklineElement, newValue);
-                }
+                //if (currentSettings.sparkline) {
+                //    addValueToSparkline(sparklineElement, newValue);
+                //}
             }
         }
 
@@ -431,7 +434,10 @@
         }
 
         this.getHeight = function () {
-            if (currentSettings.size == "big" || currentSettings.sparkline) {
+			if (currentSettings.size == "huge" ) {
+                return 3;
+            }
+            else if (currentSettings.size == "big" ) {
                 return 2;
             }
             else {
@@ -467,6 +473,10 @@
                     {
                         name: "Big",
                         value: "big"
+                    },
+					{
+                        name: "Huge",
+                        value: "huge"
                     }
                 ]
             },
