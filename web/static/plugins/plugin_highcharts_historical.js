@@ -149,8 +149,8 @@
 	freeboard
 		.loadWidgetPlugin({
 			"type_name": "highcharts-timeseries",
-			"display_name": "Time series Historical",
-			"description": "Historical Time series line chart.",
+			"display_name": "HelmSmart Array HighChart",
+			"description": "Time series charts using array of data points - uses HelmSmart Data source to grab selected span",
 			"external_scripts": [
 				"https://code.highcharts.com/highcharts.js",
 				"https://code.highcharts.com/modules/exporting.js"

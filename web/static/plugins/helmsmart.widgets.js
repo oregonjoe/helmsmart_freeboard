@@ -309,6 +309,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "text_widget",
         display_name: "HelmSmart Array Text",
+		description: "Text Box - uses HelmSmart Data source to grab selected array span - plots first point in array",
         "external_scripts" : [
             //"plugins/thirdparty/jquery.sparkline.min.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
@@ -436,6 +437,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "gauge",
         display_name: "HelmSmart Array Gauge",
+		description: "Gauge - uses HelmSmart Data source to grab selected array span - plots all first point in array",
         "external_scripts" : [
             //"plugins/thirdparty/raphael.2.1.0.min.js",
             //"plugins/thirdparty/justgage.1.0.1.js"
@@ -529,6 +531,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "sparkline",
         display_name: "HelmSmart Array Sparkline",
+		description: "Historical Sparkline- uses HelmSmart Data source to grab selected array span - plots all points in array",
         "external_scripts" : [
             //"plugins/thirdparty/jquery.sparkline.min.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
@@ -643,6 +646,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "pointer",
         display_name: "HelmSmart Array Pointer",
+		description: "Radial Pointer Gauge - uses HelmSmart Data source to grab selected array span - plots first point in array",
         "external_scripts" : [
             //"plugins/thirdparty/raphael.2.1.0.min.js"
 						"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
@@ -672,101 +676,6 @@
         }
     });
 
-    var pictureWidget = function(settings)
-    {
-        var self = this;
-        var widgetElement;
-        var timer;
-        var imageURL;
-
-        function stopTimer()
-        {
-            if(timer)
-            {
-                clearInterval(timer);
-                timer = null;
-            }
-        }
-
-        function updateImage()
-        {
-            if(widgetElement && imageURL)
-            {
-                var cacheBreakerURL = imageURL + (imageURL.indexOf("?") == -1 ? "?" : "&") + Date.now();
-
-                $(widgetElement).css({
-                    "background-image" :  "url(" + cacheBreakerURL + ")"
-                });
-            }
-        }
-
-        this.render = function(element)
-        {
-            $(element).css({
-                width : "100%",
-                height: "100%",
-                "background-size" : "cover",
-                "background-position" : "center"
-            });
-
-            widgetElement = element;
-        }
-
-        this.onSettingsChanged = function(newSettings)
-        {
-            stopTimer();
-
-            if(newSettings.refresh && newSettings.refresh > 0)
-            {
-                timer = setInterval(updateImage, Number(newSettings.refresh) * 1000);
-            }
-        }
-
-        this.onCalculatedValueChanged = function(settingName, newValue)
-        {
-            if(settingName == "src")
-            {
-                imageURL = newValue;
-            }
-
-            updateImage();
-        }
-
-        this.onDispose = function()
-        {
-            stopTimer();
-        }
-
-        this.getHeight = function()
-        {
-            return 4;
-        }
-
-        this.onSettingsChanged(settings);
-    };
-
-    freeboard.loadWidgetPlugin({
-        type_name: "picture",
-        display_name: "HelmSmart Array Picture",
-        fill_size: true,
-        settings: [
-            {
-                name: "src",
-                display_name: "Image URL",
-                type: "calculated"
-            },
-            {
-                "type": "number",
-                "display_name": "Refresh every",
-                "name": "refresh",
-                "suffix": "seconds",
-                "description":"Leave blank if the image doesn't need to be refreshed"
-            }
-        ],
-        newInstance: function (settings, newInstanceCallback) {
-            newInstanceCallback(new pictureWidget(settings));
-        }
-    });
 
 	freeboard.addStyle('.indicator-light', "border-radius:50%;width:22px;height:22px;border:2px solid #3d3d3d;margin-top:5px;float:left;background-color:#222;margin-right:10px;");
 	freeboard.addStyle('.indicator-light.on', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;");
@@ -829,6 +738,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "indicator",
         display_name: "HelmSmart Array Indicator Light",
+		description: "Indicator light for HelmSmart Status - uses HelmSmart Data source to grab selected span - plots first point in array",
         settings: [
 	        {
 	            name: "title",
@@ -1060,6 +970,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "google_map",
         display_name: "HelmSmart Array Google Map",
+		description: "Map with historical path from data point array - uses HelmSmart Data source to grab selected span",
         fill_size: true,
         settings: [
             {
