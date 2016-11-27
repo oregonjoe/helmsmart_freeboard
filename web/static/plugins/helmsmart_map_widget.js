@@ -237,6 +237,7 @@
 
             updatePosition();
         }
+		}
 
         this.onDispose = function () {
         }
