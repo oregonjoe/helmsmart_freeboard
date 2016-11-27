@@ -416,6 +416,21 @@
 			var myDataArray =[];
 			if(newarrayValue.length != 0)
 				{
+					
+					// sort by value
+						newarrayValue.sort(function (a, b) {
+						  if (a.epoch > b.epoch) {
+							return 1;
+						  }
+						  if (a.epoch < b.epoch) {
+							return -1;
+						  }
+						  // a must be equal to b
+						  return 0;
+						});
+					
+					
+					
 					for(i=0; i< newarrayValue.length; i++)
 					{
 						myvalues=newarrayValue[i];
