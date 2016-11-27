@@ -596,7 +596,7 @@
         }
     });
 
-	freeboard.addStyle('div.pointer-value', "position:absolute;height:95px;margin: auto;top: 0px;bottom: 0px;width: 100%;text-align:center;");
+	freeboard.addStyle('div.pointer-value', "position:absolute;height:160px;margin: auto;top: 0px;bottom: 0px;width: 100%;text-align:center;");
     var pointerWidget = function (settings) {
         var self = this;
         var paper;
@@ -989,8 +989,10 @@
             });
 
             // place min and max labels
-            minValueLabel = paper.text(width / 2 - gaugeWidth / 2 - 8, height / 3, currentSettings.min_value);
-            maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 + 8, height / 3, currentSettings.max_value);
+           // minValueLabel = paper.text(width / 2 - gaugeWidth / 2 - 8, height / 3, currentSettings.min_value);
+          //  maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 + 8, height / 3, currentSettings.max_value);
+            minValueLabel = paper.text(width / 2 - gaugeWidth / 2 , (height / 3) + 10, currentSettings.min_value);
+            maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 , (height / 3) + 10, currentSettings.max_value);
 
             minValueLabel.attr({
                 "font-family": "arial",
@@ -1009,9 +1011,13 @@
             // place units and value
             var units = _.isUndefined(currentSettings.units) ? "" : currentSettings.units;
 
-            valueText = paper.text(width / 2, height * 2 / 3, "");
-            unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
+            //valueText = paper.text(width / 2, height * 2 / 3, "");
+            //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
+			valueText = paper.text(width *3/4 , height  / 3, "");
+            unitsText = paper.text(width *3/4,  height  / 3 + 20, units);
+			
+			
             valueText.attr({
                 "font-family": "arial",
                 "font-size": "25",
