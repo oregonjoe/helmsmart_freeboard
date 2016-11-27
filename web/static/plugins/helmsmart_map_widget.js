@@ -75,10 +75,10 @@
                     draggable: false,
                     styles: [
                         {"featureType": "water", "elementType": "geometry", "stylers": [
-                            {"color": "#2a2a2a"}
+                            {"color": "#052C84"}
                         ]},
                         {"featureType": "landscape", "elementType": "geometry", "stylers": [
-                            {"color": "#000000"},
+                            {"color": "#046753"},
                             {"lightness": 20}
                         ]},
                         {"featureType": "road.highway", "elementType": "geometry.fill", "stylers": [
@@ -86,7 +86,7 @@
                             {"lightness": 17}
                         ]},
                         {"featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [
-                            {"color": "#000000"},
+                            {"color": "#535207"},
                             {"lightness": 29},
                             {"weight": 0.2}
                         ]},
