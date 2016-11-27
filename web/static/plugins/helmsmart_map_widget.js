@@ -57,12 +57,30 @@
         var map;
         var marker;
         var currentPosition = {};
+		var myLatlng;
+		var myOldLatlng;
+		
+		
+		var newpoly = new Array();
+		var mypolyOptions = {
+		   strokeColor: '#B40B6A',
+		   strokeOpacity: 1.0,
+		   strokeWeight: 5,
+		   visible:true
+		   }
 
         function updatePosition() {
             if (map && marker && currentPosition.lat && currentPosition.lon) {
                 var newLatLon = new google.maps.LatLng(currentPosition.lat, currentPosition.lon);
                 marker.setPosition(newLatLon);
                 map.panTo(newLatLon);
+				
+				
+				
+				
+				//newpoly[i] = new google.maps.Polyline(mypolyOptions);
+				
+				
             }
         }
 
@@ -71,8 +89,8 @@
                 var mapOptions = {
                     zoom: 13,
                     center: new google.maps.LatLng(37.235, -115.811111),
-                    disableDefaultUI: true,
-                    draggable: false,
+                    disableDefaultUI: false,
+                    draggable: true,
                     styles: [
                         {"featureType": "water", "elementType": "geometry", "stylers": [
                             {"color": "#052C84"}
@@ -99,7 +117,7 @@
                             {"lightness": 16}
                         ]},
                         {"featureType": "poi", "elementType": "geometry", "stylers": [
-                            {"color": "#000000"},
+                            {"color": "#027533"},
                             {"lightness": 21}
                         ]},
                         {"elementType": "labels.text.stroke", "stylers": [
@@ -120,7 +138,7 @@
                             {"lightness": 19}
                         ]},
                         {"featureType": "administrative", "elementType": "geometry.fill", "stylers": [
-                            {"color": "#000000"},
+                            {"color": "#027533"},
                             {"lightness": 20}
                         ]},
                         {"featureType": "administrative", "elementType": "geometry.stroke", "stylers": [
@@ -168,10 +186,53 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (settingName == "lat") {
-                currentPosition.lat = newValue;
+               // currentPosition.lat = newValue;
             }
             else if (settingName == "lon") {
-                currentPosition.lon = newValue;
+               // currentPosition.lon = newValue;
+            }
+			 else if (settingName == "position") {
+				 position = newValue[0].position;
+				 currentPosition.lon = position.lon;
+				 currentPosition.lat = position.lat;
+				 
+				 for(i=0; i< newpoly.length; i++)
+				{
+					newpoly[i].setMap(null)
+				}
+				 newpoly=[];
+									
+				 for(i=0; i< newValue.length; i++)
+					{
+	
+						position = newValue[i].position;
+	
+						 
+						if((typeof newpoly[i] === 'undefined') || newpoly[i].Show != false)
+						{
+    
+							myLatlng = new google.maps.LatLng(position.lat, position.lng);
+						 
+						 newpoly[i] = new google.maps.Polyline(mypolyOptions);
+					
+							
+							
+						         var path = newpoly[i].getPath();
+
+					 // Because path is an MVCArray, we can simply append a new coordinate
+					// and it will automatically appear
+						 if(myOldLatlng != null)
+						   polyLineCount = path.push(myOldLatlng);
+						 
+						  polyLineCount = path.push(myLatlng);
+						  newpoly[i].setMap(map); 
+											 
+						 // marker.setPosition(myLatlng);
+											  
+						 myOldLatlng = myLatlng;	
+							
+							
+					}
             }
 
             updatePosition();
@@ -200,6 +261,11 @@
             {
                 name: "lon",
                 display_name: "Longitude",
+                type: "calculated"
+            },
+			{
+                name: "position",
+                display_name: "Position",
                 type: "calculated"
             }
         ],

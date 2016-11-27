@@ -4046,7 +4046,7 @@ def freeboard_location():
 
       lat=[]
       lng=[]
-
+      position=[]
  
       points = list(response.get_points())
 
@@ -4069,6 +4069,7 @@ def freeboard_location():
             value2 = convertfbunits(point['lng'], 15)
             lng.append({'epoch':ts, 'value':value2})
 
+            position.append({'epoch':ts, 'lat':value1, 'lng':value2})
  
       """
 
@@ -4107,7 +4108,7 @@ def freeboard_location():
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':list(reversed(lat)), 'lng':list(reversed(lng))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':list(reversed(lat)), 'lng':list(reversed(lng)), 'position':list(reversed(position))})     
         
 
      
