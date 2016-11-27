@@ -87,7 +87,7 @@
 		};
 
 			// Java, Light Green,Bittersweet, Wild Blue Yonder, Pale Turquoise,Razzmatazz, Plum, Apple, Valencia, Neptune, Saffron
-		var xColor{
+		var xColor = {
 		"name": "series" + i + "color",
 		"display_name": "Series " + i + " - Color",
 		"type": "option",
@@ -132,10 +132,10 @@
 			"name": "Neptune",
 			"value": "9"
 		},
-				{
+		{
 			"name": "Saffron",
 			"value": "10"
-		},
+		}
 		]
 		}; 
 		
