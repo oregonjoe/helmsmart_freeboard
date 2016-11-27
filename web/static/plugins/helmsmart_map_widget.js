@@ -275,7 +275,43 @@
         }
     });
 
-    freeboard.addStyle('.html-widget', "white-space:normal;width:100%;height:100%");
+	var valueStyle = freeboard.getStyleString("values");
+
+	freeboard.addStyle('.widget-big-text', valueStyle + "font-size:75px;");
+
+	freeboard.addStyle('.tw-display', 'width: 100%; height:100%; display:table; table-layout:fixed;');
+
+	freeboard.addStyle('.tw-tr',
+		'display:table-row;');
+
+	freeboard.addStyle('.tw-tg',
+		'display:table-row-group;');
+
+	freeboard.addStyle('.tw-tc',
+		'display:table-caption;');
+
+	freeboard.addStyle('.tw-td',
+		'display:table-cell;');
+
+	freeboard.addStyle('.tw-value',
+		valueStyle +
+		'overflow: hidden;' +
+		'display: inline-block;' +
+		'text-overflow: ellipsis;');
+
+	freeboard.addStyle('.tw-unit',
+		'display: inline-block;' +
+		'padding-left: 10px;' +
+		'padding-bottom: 1.1em;' +
+		'vertical-align: bottom;');
+
+	freeboard.addStyle('.tw-value-wrapper',
+		'position: relative;' +
+		'vertical-align: middle;' +
+		'height:100%;');
+
+	freeboard.addStyle('.tw-sparkline',
+		'height:20px;');
 
     var textWidget = function (settings) {
 
@@ -454,5 +490,7 @@
             newInstanceCallback(new textWidget(settings));
         }
     });
+
+
 
 }());
