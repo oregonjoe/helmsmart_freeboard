@@ -509,15 +509,24 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
+			// newValue is an array of arrays
+			// each sub arry is a series of data points
+			// there is an arry for each sparkline
+			
+			// get number of points to plot for the series
+			// assume all series have the saem number of points ??
 			length=newValue[0].length;
 			
 			for(i=0; i< length; i++)
 			{
+				// empty the series points
 				arrayvalues = [];
+				
+				// add a point from each series
 				for(j=0; j< newValue.length; j++)
 					arrayvalues.push(newValue[j][i].value);
 					
-				
+					// now pass the serries of points into the plot routine 
 					if (currentSettings.legend) {
 					
 						addValueToSparkline(sparklineElement,  arrayvalues, currentSettings.legend.split(","));
@@ -639,17 +648,17 @@
 
                     var oppositeCurrent = currentValue + 180;
 
-                    if (oppositeCurrent < newValu[0].value) {
+                    if (oppositeCurrent < newValue[0].value) {
                         //direction = "l";
                     }
 
-                    triangle.animate({transform: "r" + newValu[0].value + "," + (width / 2) + "," + (height / 2)}, 250, "bounce");
+                    triangle.animate({transform: "r" + newValue[0].value + "," + (width / 2) + "," + (height / 2)}, 250, "bounce");
                 }
 
-                currentValue = newValu[0].value;
+                currentValue = newValue[0].value;
             }
             else if (settingName == "value_text") {
-                valueDiv.html(newValu[0].value);
+                valueDiv.html(newValue[0].value);
             }
         }
 
@@ -733,13 +742,13 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (settingName == "value") {
-                isOn = Boolean(newValu[0].value);
+                isOn = Boolean(newValue[0].value);
             }
             if (settingName == "on_text") {
-                onText = newValu[0].value;
+                onText = newValue[0].value;
             }
             if (settingName == "off_text") {
-                offText = newValu[0].value;
+                offText = newValue[0].value;
             }
 
             updateState();
