@@ -514,7 +514,7 @@
 			for(i=0; i< length; i++)
 			{
 				arrayvalues = [];
-				for(j=0; < newValue.length; j++)
+				for(j=0; j< newValue.length; j++)
 					arrayvalues.push(newValue[j][i].value);
 					
 				
