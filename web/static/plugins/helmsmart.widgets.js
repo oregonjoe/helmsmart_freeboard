@@ -425,7 +425,8 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (!_.isUndefined(gaugeObject)) {
-                gaugeObject.refresh(Number(newValue));
+				
+                gaugeObject.refresh(Number(newValue[0].value));
             }
         }
 
@@ -508,9 +509,12 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
 			if (currentSettings.legend) {
-				addValueToSparkline(sparklineElement, newValue, currentSettings.legend.split(","));
+				for(i=0; i< newValue.length; i++)
+				addValueToSparkline(sparklineElement,  newValue[i].value, currentSettings.legend.split(","));
 			} else {
-				addValueToSparkline(sparklineElement, newValue);
+				for(i=0; i< newValue.length; i++)
+                    addValueToSparkline(sparklineElement, newValue[i].value);
+				
 			}
         }
 
@@ -624,17 +628,17 @@
 
                     var oppositeCurrent = currentValue + 180;
 
-                    if (oppositeCurrent < newValue) {
+                    if (oppositeCurrent < newValu[0].value) {
                         //direction = "l";
                     }
 
-                    triangle.animate({transform: "r" + newValue + "," + (width / 2) + "," + (height / 2)}, 250, "bounce");
+                    triangle.animate({transform: "r" + newValu[0].value + "," + (width / 2) + "," + (height / 2)}, 250, "bounce");
                 }
 
-                currentValue = newValue;
+                currentValue = newValu[0].value;
             }
             else if (settingName == "value_text") {
-                valueDiv.html(newValue);
+                valueDiv.html(newValu[0].value);
             }
         }
 
@@ -718,13 +722,13 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (settingName == "value") {
-                isOn = Boolean(newValue);
+                isOn = Boolean(newValu[0].value);
             }
             if (settingName == "on_text") {
-                onText = newValue;
+                onText = newValu[0].value;
             }
             if (settingName == "off_text") {
-                offText = newValue;
+                offText = newValu[0].value;
             }
 
             updateState();
