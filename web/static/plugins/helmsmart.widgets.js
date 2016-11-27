@@ -835,7 +835,7 @@
                 if (!_.isUndefined(gaugeFill) && !_.isUndefined(valueText)) {
 
                     newValue = _.isUndefined(newValue) ? 0 : newValue;
-                    var fillVal = 120 * (newValue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
+                    var fillVal = 120 * (newValue[0].value - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
 
                     fillVal = fillVal > 120 ? 120 : fillVal;
                     fillVal = fillVal < 0 ? 0 : fillVal;
@@ -846,7 +846,7 @@
                     gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#edebeb"}, 500, ">");
                     rect.animate({"fill": fillColor, "stroke": fillColor });
 
-                    valueText.attr({"text": newValue});
+                    valueText.attr({"text": newValue[0].value});
                 }
             }
         }
@@ -862,7 +862,7 @@
 
     freeboard.loadWidgetPlugin({
         type_name: "vertical-linear-gauge",
-        display_name: "Vertical Linear Gauge",
+        display_name: "HelmSmart Array Vertical Gauge",
         "external_scripts" : [
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/colormix.2.0.0.min.js"
