@@ -508,12 +508,13 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
+			arrayvalues = newValue[0];
 			if (currentSettings.legend) {
 				for(i=0; i< newValue.length; i++)
-				addValueToSparkline(sparklineElement,  newValue[i].value, currentSettings.legend.split(","));
+				addValueToSparkline(sparklineElement,  arrayvalues[i].value, currentSettings.legend.split(","));
 			} else {
 				for(i=0; i< newValue.length; i++)
-                    addValueToSparkline(sparklineElement, newValue[i].value);
+                    addValueToSparkline(sparklineElement, arrayvalues[i].value);
 				
 			}
         }
