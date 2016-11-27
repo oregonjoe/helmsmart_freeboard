@@ -308,7 +308,7 @@
 
     freeboard.loadWidgetPlugin({
         type_name: "text_widget",
-        display_name: "HelmSmart Text",
+        display_name: "HelmSmart Array Text",
         "external_scripts" : [
             //"plugins/thirdparty/jquery.sparkline.min.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
@@ -331,7 +331,7 @@
                     {
                         name: "Big",
                         value: "big"
-                    }
+                    },
 					{
                         name: "Huge",
                         value: "huge"
@@ -435,7 +435,7 @@
 
     freeboard.loadWidgetPlugin({
         type_name: "gauge",
-        display_name: "HelmSmart Gauge",
+        display_name: "HelmSmart Array Gauge",
         "external_scripts" : [
             //"plugins/thirdparty/raphael.2.1.0.min.js",
             //"plugins/thirdparty/justgage.1.0.1.js"
@@ -528,7 +528,7 @@
 
     freeboard.loadWidgetPlugin({
         type_name: "sparkline",
-        display_name: "HelmSmart Sparkline",
+        display_name: "HelmSmart Array Sparkline",
         "external_scripts" : [
             //"plugins/thirdparty/jquery.sparkline.min.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
@@ -642,7 +642,7 @@
 
     freeboard.loadWidgetPlugin({
         type_name: "pointer",
-        display_name: "HelmSmart Pointer",
+        display_name: "HelmSmart Array Pointer",
         "external_scripts" : [
             //"plugins/thirdparty/raphael.2.1.0.min.js"
 						"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
@@ -747,7 +747,7 @@
 
     freeboard.loadWidgetPlugin({
         type_name: "picture",
-        display_name: "HelmSmart Picture",
+        display_name: "HelmSmart Array Picture",
         fill_size: true,
         settings: [
             {
@@ -828,7 +828,7 @@
 
     freeboard.loadWidgetPlugin({
         type_name: "indicator",
-        display_name: "HelmSmart Indicator Light",
+        display_name: "HelmSmart Array Indicator Light",
         settings: [
 	        {
 	            name: "title",
@@ -1059,7 +1059,7 @@
 
     freeboard.loadWidgetPlugin({
         type_name: "google_map",
-        display_name: "HelmSmart Google Map",
+        display_name: "HelmSmart Array Google Map",
         fill_size: true,
         settings: [
             {
