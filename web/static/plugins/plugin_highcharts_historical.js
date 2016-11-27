@@ -412,6 +412,9 @@
 								[1, Highcharts.Color(Highcharts.getOptions().colors[chartcolor]).setOpacity(0).get('rgba')]
 							]
 						},
+						marker: {
+							fillColor :Highcharts.Color(Highcharts.getOptions().colors[chartcolor]).setOpacity(80).get('rgba'),
+						},
 
 						data: [],
 						connectNulls: true
