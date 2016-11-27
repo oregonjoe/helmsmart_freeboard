@@ -273,17 +273,21 @@
 		}
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
-            if (settingName == "value") {
+            if (settingName == "value") 
+			{
+				value = newValue[0].value;
 
                 if (currentSettings.animate) {
-                    easeTransitionText(newValue, valueElement, 500);
+                    easeTransitionText(value, valueElement, 500);
                 }
                 else {
-                    valueElement.text(newValue);
+                    valueElement.text(value);
                 }
 
+				
                 if (currentSettings.sparkline) {
-                    addValueToSparkline(sparklineElement, newValue);
+					for(i=0; i< newValue.length; i++)
+                    addValueToSparkline(sparklineElement, newValue[i].value);
                 }
             }
         }
