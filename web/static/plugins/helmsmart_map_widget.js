@@ -193,7 +193,7 @@
             }
 			 else if (settingName == "position") {
 				 position = newValue[0];
-				 currentPosition.lon = position.lon;
+				 currentPosition.lon = position.lng;
 				 currentPosition.lat = position.lat;
 				 
 				 for(i=0; i< newpoly.length; i++)
