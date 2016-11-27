@@ -192,7 +192,7 @@
                // currentPosition.lon = newValue;
             }
 			 else if (settingName == "position") {
-				 position = newValue[0].position;
+				 position = newValue[0];
 				 currentPosition.lon = position.lon;
 				 currentPosition.lat = position.lat;
 				 
@@ -205,7 +205,7 @@
 				 for(i=0; i< newValue.length; i++)
 					{
 	
-						position = newValue[i].position;
+						position = newValue[i];
 	
 						 
 						if((typeof newpoly[i] === 'undefined') || newpoly[i].Show != false)
