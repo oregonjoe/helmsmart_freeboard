@@ -391,7 +391,9 @@
 					var label = currentSettings[serieno];
 					console.log('label: ', label);
 					var serieclor = "series" + i + "color";
-					var chartcolor =currentSettings[serieclor];
+					var chartcolor =parseInt(currentSettings[serieclor]);
+					if(isNaN(chartcolor))
+						chartcolor = 0
 					
 					var newSeries = {
 						id: 'series' + i,
@@ -404,9 +406,9 @@
 								y2: 1
 							},
 							stops: [
-								[0, Highcharts.getOptions().colors[i - 1]],
+								[0, Highcharts.getOptions().colors[chartcolor]],
 								//[1, 'rgba(2,0,0,0)']
-								[1, Highcharts.Color(Highcharts.getOptions().colors[i - 1]).setOpacity(0).get('rgba')]
+								[1, Highcharts.Color(Highcharts.getOptions().colors[chartcolor]).setOpacity(0).get('rgba')]
 							]
 						},
 
