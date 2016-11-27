@@ -595,6 +595,10 @@
             newInstanceCallback(new sparklineWidget(settings));
         }
     });
+	
+	var pgaugeID = 0;
+	freeboard.addStyle('.pgauge-widget-wrapper', "width: 100%;text-align: center;");
+	freeboard.addStyle('.pgauge-widget', "width:150px;height:160px;display:inline-block;");
 
 	freeboard.addStyle('div.pointer-value', "position:absolute;height:160px;margin: auto;top: 0px;bottom: 0px;width: 100%;text-align:center;");
     var pointerWidget = function (settings) {
@@ -606,6 +610,12 @@
         var currentValue = 0;
         var valueDiv = $('<div class="widget-big-text"></div>');
         var unitsDiv = $('<div></div>');
+		var thisGaugeID = "gauge-" + pgaugeID++;
+        var titleElement = $('<h2 class="section-title"></h2>');
+        var gaugeElement = $('<div class="pgauge-widget" id="' + thisGaugeID + '"></div>');
+
+		
+		
 
         function polygonPath(points) {
             if (!points || points.length < 2)
@@ -620,8 +630,14 @@
         }
 
         this.render = function (element) {
+
+			
+			 $(element).append($('<div class="pointer-value"></div>').append(valueDiv).append(unitsDiv).append(gaugeElement));
+			
             width = $(element).width();
             height = $(element).height();
+			 height = gaugeElement.height();
+			height = 160;
 
             var radius = Math.min(width, height) / 2 - strokeWidth * 2;
 
@@ -722,7 +738,7 @@
 
         //var gaugeElement = $('<div></div>');
 
-		var thisGaugeID = "gauge-" + gaugeID++;
+		var thisGaugeID = "gauge-" + vgaugeID++;
         var titleElement = $('<h2 class="section-title"></h2>');
         var gaugeElement = $('<div class="vgauge-widget" id="' + thisGaugeID + '"></div>');
 		
