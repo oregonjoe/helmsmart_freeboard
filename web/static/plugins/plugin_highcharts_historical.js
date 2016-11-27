@@ -408,7 +408,7 @@
 							},
 							stops: [
 								//[0, Highcharts.getOptions().colors[chartcolor]],
-								[0, Highcharts.Color(Highcharts.getOptions().colors[chartcolor]).setOpacity(90).get('rgba')]
+								[0, Highcharts.Color(Highcharts.getOptions().colors[chartcolor]).setOpacity(90).get('rgba')],
 								[1, Highcharts.Color(Highcharts.getOptions().colors[chartcolor]).setOpacity(0).get('rgba')]
 							]
 						},
