@@ -705,11 +705,24 @@
         }
     });
 
+ var vgaugeID = 0;
+	freeboard.addStyle('.vgauge-widget-wrapper', "width: 100%;text-align: center;");
+	freeboard.addStyle('.vgauge-widget', "width:200px;height:160px;display:inline-block;");
 	
- var gaugeWidget = function (settings) {
+	
+ var verticalgaugeWidget = function (settings) {
         var titleElement = $('<h2 class="section-title"></h2>');
-        var gaugeElement = $('<div></div>');
+       // var gaugeElement = $('<div></div>');
+		
 
+        //var gaugeElement = $('<div></div>');
+
+		var thisGaugeID = "gauge-" + gaugeID++;
+        var titleElement = $('<h2 class="section-title"></h2>');
+        var gaugeElement = $('<div class="vgauge-widget" id="' + thisGaugeID + '"></div>');
+		
+		
+		
         var self = this;
         var paper = null;
         var gaugeFill = null;
@@ -899,7 +912,7 @@
             }
         ],
         newInstance: function (settings, newInstanceCallback) {
-            newInstanceCallback(new gaugeWidget(settings));
+            newInstanceCallback(new verticalgaugeWidget(settings));
         }
     });	
 	
