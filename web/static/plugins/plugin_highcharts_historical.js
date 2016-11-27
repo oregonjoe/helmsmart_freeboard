@@ -398,7 +398,7 @@
 					var newSeries = {
 						id: 'series' + i,
 						name: label,
-						strokeColor : Highcharts.getOptions().colors[chartcolor],
+						lineColor : Highcharts.getOptions().colors[chartcolor],
 						fillColor: {
 							linearGradient: {
 								x1: 0,
