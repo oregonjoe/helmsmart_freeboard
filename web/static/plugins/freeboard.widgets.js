@@ -378,7 +378,17 @@
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
                 label: currentSettings.units,
                 showInnerShadow: false,
-                valueFontColor: "#d3d4d4"
+                valueFontColor: "#d3d4d4",
+				donut: true,
+				pointer: true,
+				gaugeWidthScale: 0.4,
+				pointerOptions: {
+				  toplength: 10,
+				  bottomlength: 10,
+				  bottomwidth: 8,
+				  color: '#000'
+				},
+				counter: true
             });
         }
 
@@ -420,8 +430,8 @@
         type_name: "gauge",
         display_name: "Gauge",
         "external_scripts" : [
-            "plugins/thirdparty/raphael.2.1.0.min.js",
-            "plugins/thirdparty/justgage.1.0.1.js"
+            "plugins/thirdparty/raphael.2.1.4.min.js",
+            "plugins/thirdparty/justgage.1.2.9.js"
         ],
         settings: [
             {
@@ -622,7 +632,7 @@
         type_name: "pointer",
         display_name: "Pointer",
         "external_scripts" : [
-            "plugins/thirdparty/raphael.2.1.0.min.js"
+            "plugins/thirdparty/raphael.2.1.4.min.js"
         ],
         settings: [
             {
