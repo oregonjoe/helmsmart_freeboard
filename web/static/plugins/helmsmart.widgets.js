@@ -445,7 +445,7 @@
         this.onDispose = function () {
         }
 
-        this.getHeight = function () {
+        this.getHeight = function () { 
             return 3;
         }
 
