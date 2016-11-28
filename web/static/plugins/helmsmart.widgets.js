@@ -415,7 +415,7 @@
 				
 				shadowOpacity: 1,
 				shadowSize: 5,
-				shadowVerticalOffset: 10
+				shadowVerticalOffset: 10,
 				
 				
 				
