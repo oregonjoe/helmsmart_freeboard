@@ -828,7 +828,7 @@
                 "font-size": "25",
                 "font-weight": "bold",
                 "fill": "#d3d4d4",
-                "text-anchor": "left"
+                "text-anchor": "middle"
             });
 
             unitsText.attr({
@@ -836,7 +836,7 @@
                 "font-size": "10",
                 "font-weight": "normal",
                 "fill": "#b3b3b3",
-                "text-anchor": "left"
+                "text-anchor": "middle"
             });
 
             // fill to 0 percent
@@ -879,7 +879,7 @@
                     var fillColor = getColor(fillVal / 120);
 
                     // animate like radial gauges
-                    gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#edebeb"}, 500, ">");
+                    gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#A6A3A3"}, 500, ">");
                     rect.animate({"fill": fillColor, "stroke":  "#A6A3A3" });
 
                     valueText.attr({"text": datavalue});
@@ -942,7 +942,7 @@
 	
 	var hgaugeID = 0;
 	freeboard.addStyle('.hgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.hgauge-widget', "width:280px;height:80px;display:inline-block;");
+	freeboard.addStyle('.hgauge-widget', "width:180px;height:80px;display:inline-block;");
 	
    var horzinalgaugeWidget = function (settings) {
        //var titleElement = $('<h2 class="section-title"></h2>');
@@ -1032,8 +1032,8 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(width + 30  , height  / 3, "");
-            unitsText = paper.text(width +30 ,  height  / 3 + 20, units);
+			valueText = paper.text(width +20  , height  / 3, "");
+            unitsText = paper.text(width +20 ,  height  / 3 + 20, units);
 			
 			
             valueText.attr({
