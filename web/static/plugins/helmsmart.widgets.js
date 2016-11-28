@@ -391,7 +391,7 @@
         var thisGaugeID = "gauge-" + gaugeID++;
         var titleElement = $('<h2 class="section-title"></h2>');
        // var gaugeElement = $('<div class="gauge-widget" id="' + thisGaugeID + '" height:'+ myheight + 'px; "></div>');
-		var gaugeElement = $('<div class="gauge-widget" id="' + thisGaugeID + ' "></div>');
+		var gaugeElement = $('<div class="gauge-widget" id="' + thisGaugeID + '"></div>');
         var gaugeObject;
         var rendered = false;
 
