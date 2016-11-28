@@ -1054,7 +1054,7 @@
 
             // fill to 0 percent
             //gaugeFill = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
-			gaugeFill = paper.rect(24, height / 3 - gaugeHeight / 2, 4, gaugeHeight-8 );
+			gaugeFill = paper.rect(20, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
         }
 
         self.onSettingsChanged = function (newSettings) {
@@ -1088,7 +1088,8 @@
 
                     var fillColor = getColor(fillVal / 160);
 
-                    gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
+                    //gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
+					gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": "#A6A3A3"}, 500, ">");
                     valueText.attr({"text": datavalue});
                 }
             }
