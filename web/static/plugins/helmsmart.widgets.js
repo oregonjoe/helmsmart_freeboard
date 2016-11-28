@@ -13,6 +13,7 @@
 	
 	// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 	var gaugeColors = ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
+	var gaugeFillColors = [[ "#00fff6", "#ff00fc", "#1200ff" ], "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
 					
 					
@@ -410,7 +411,7 @@
 				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
 				
 				//levelColors: ['#F1C232',],
-				levelColors: [gaugeColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor],],
+				levelColors: [gaugeFillColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor],],
 				
                 label: currentSettings.units,
                 //showInnerShadow: false,
@@ -486,7 +487,8 @@
         }
 
         this.getHeight = function () { 
-            return 3;
+           // return 3;
+			return currentSettings.blocks;
         }
 
         this.onSettingsChanged(settings);
@@ -546,7 +548,12 @@
                 default_value: true
             },
 			
-			
+			{
+			name: "blocks",
+			display_name: "Height (No. Blocks)",
+			type": "text",
+			default_value: 4
+			}, 
 			
 			// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 			{
@@ -610,48 +617,53 @@
 			"type": "option",
 			"options": [
 				{
-					"name": "Java",
+					"name": "Default",
 					"value": "0"
+				}, 	
+			
+				{
+					"name": "Java",
+					"value": "1"
 				}, 
 				{
 					"name": "Light Green",
-					"value": "1"
+					"value": "2"
 				},
 						{
 					"name": "Bittersweet",
-					"value": "2"
+					"value": "3"
 				}, 
 				{
 					"name": "Wild Blue Yonder",
-					"value": "3"
+					"value": "4"
 				},
 						{
 					"name": "Pale Turquoise",
-					"value": "4"
+					"value": "5"
 				}, 
 				{
 					"name": "Razzmatazz",
-					"value": "5"
+					"value": "6"
 				},
 						{
 					"name": "Plum",
-					"value": "6"
+					"value": "7"
 				}, 
 				{
 					"name": "Apple",
-					"value": "7"
+					"value": "8"
 				},
 						{
 					"name": "Valencia",
-					"value": "8"
+					"value": "9"
 				}, 
 				{
 					"name": "Neptune",
-					"value": "9"
+					"value": "10"
 				},
 				{
 					"name": "Saffron",
-					"value": "10"
+					"value": "11"
 				}
 				]
 			} ,
