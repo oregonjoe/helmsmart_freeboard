@@ -313,7 +313,7 @@
     };
 
     freeboard.loadWidgetPlugin({
-        type_name: "text_widget",
+        type_name: "hstext_widget",
         display_name: "HelmSmart Array Text",
 		description: "Text Box - uses HelmSmart Data source to grab selected array span - plots first point in array",
         "external_scripts" : [
@@ -728,8 +728,8 @@
     });
 
  var vgaugeID = 0;
-	freeboard.addStyle('.vgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.vgauge-widget', "width:150px;height:160px;display:inline-block;");
+	freeboard.addStyle('.vgauge-widget-wrapper', "width: 50%;text-align: center;");
+	freeboard.addStyle('.vgauge-widget', "width:120px;height:160px;display:inline-block;");
 	
 	
  var verticalgaugeWidget = function (settings) {
@@ -843,7 +843,7 @@
             gaugeFill = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, 0);
             gaugeFill.attr({
                 "fill": "#edebeb",
-                "stroke": "#edebeb"
+                "stroke":  "#A6A3A3"
             });
         }
 
@@ -880,7 +880,7 @@
 
                     // animate like radial gauges
                     gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#edebeb"}, 500, ">");
-                    rect.animate({"fill": fillColor, "stroke": fillColor });
+                    rect.animate({"fill": fillColor, "stroke":  "#A6A3A3" });
 
                     valueText.attr({"text": datavalue});
                 }
@@ -942,7 +942,7 @@
 	
 	var hgaugeID = 0;
 	freeboard.addStyle('.hgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.hgauge-widget', "width:260px;height:80px;display:inline-block;");
+	freeboard.addStyle('.hgauge-widget', "width:280px;height:80px;display:inline-block;");
 	
    var horzinalgaugeWidget = function (settings) {
        //var titleElement = $('<h2 class="section-title"></h2>');
