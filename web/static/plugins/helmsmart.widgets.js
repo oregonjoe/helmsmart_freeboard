@@ -404,13 +404,21 @@
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
 				
 				//gaugeColor: '#F1C232',
-				gaugeColor: gaugeColors[currentSettings.gaugeBackColor],
+				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 0 : currentSettings.gaugeBackColor],
 				
-				levelColors: ['#F1C232',],
+				//levelColors: ['#F1C232',],
+				levelColors: [_.isUndefined(currentSettings.gaugeBackColor) ? 0 : currentSettings.gaugeBackColor,],
 				
                 label: currentSettings.units,
                 //showInnerShadow: false,
 				showInnerShadow: true,
+				
+				shadowOpacity: 1,
+				shadowSize: 5,
+				shadowVerticalOffset: 10
+				
+				
+				
                 valueFontColor: "#d3d4d4",
 								donut: true,
 				pointer: true,
