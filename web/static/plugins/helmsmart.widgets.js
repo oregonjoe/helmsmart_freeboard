@@ -10,7 +10,10 @@
 (function () {
 	var SPARKLINE_HISTORY_LENGTH = 100;
 	var SPARKLINE_COLORS = ["#FF9900", "#FFFFFF", "#B3B4B4", "#6B6B6B", "#28DE28", "#13F7F9", "#E6EE18", "#C41204", "#CA3CB8", "#0B1CFB"];
-
+	var gaugeColors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee",
+					"#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
+					
+					
     function easeTransitionText(newValue, textElement, duration) {
 
 		var currentValue = $(textElement).text();
@@ -401,7 +404,8 @@
                 min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
 				
-				gaugeColor: '#F1C232',
+				//gaugeColor: '#F1C232',
+				gaugeColor: gaugeColors[currentSettings.gaugeBackColor],
 				
 				levelColors: ['#F1C232',],
 				
@@ -412,15 +416,26 @@
 								donut: true,
 				pointer: true,
 				gaugeWidthScale: 0.5,
+				/*
 				pointerOptions: {
 				  toplength: -15,
 				  bottomlength: 10,
 				  bottomwidth: 12,
 				  color: '#8e8e93',
 				  stroke: '#ffffff',
-				  stroke_width: 3,
+				  stroke_width: 2,
 				  stroke_linecap: 'round'
 				},
+				*/
+				    pointerOptions: {
+				  toplength: 10,
+				  bottomlength: 10,
+				  bottomwidth: 8,
+				  color: '#8e8e93'
+				},
+						
+				
+				
 				counter: true
             });
         }
@@ -497,7 +512,69 @@
                 display_name: "Maximum",
                 type: "text",
                 default_value: 100
-            }
+            },
+			{
+			"name": "gaugeBackColor",
+			"display_name": "Gauge BackGround Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Java",
+					"value": "0"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "1"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "2"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "3"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "4"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "5"
+				},
+						{
+					"name": "Plum",
+					"value": "6"
+				}, 
+				{
+					"name": "Apple",
+					"value": "7"
+				},
+						{
+					"name": "Valencia",
+					"value": "8"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "9"
+				},
+				{
+					"name": "Saffron",
+					"value": "10"
+				}
+				]
+			} 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
         ],
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new hsgaugeWidget(settings));
