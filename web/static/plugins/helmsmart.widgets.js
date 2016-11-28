@@ -176,7 +176,7 @@
 		var titleElement = $('<h2 class="section-title hstw-title hstw-td"></h2>');
         var valueElement = $('<div class="hstw-value"></div>');
         var unitsElement = $('<div class="hstw-unit"></div>');
-        var sparklineElement = $('<div class="hstw-sparkline tw-td"></div>');
+        var sparklineElement = $('<div class="hstw-sparkline hstw-td"></div>');
 
 		function updateValueSizing()
 		{
@@ -728,7 +728,7 @@
     });
 
  var vgaugeID = 0;
-	freeboard.addStyle('.vgauge-widget-wrapper', "width: 50%;text-align: center;");
+	freeboard.addStyle('.vgauge-widget-wrapper', "width: 100%;text-align: center;");
 	freeboard.addStyle('.vgauge-widget', "width:120px;height:160px;display:inline-block;");
 	
 	
@@ -796,7 +796,7 @@
             rect = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
             rect.attr({
                 "fill": "#edebeb",
-                "stroke": "#edebeb"
+                "stroke": "#A6A3A3"
             });
 
             // place min and max labels
@@ -828,7 +828,7 @@
                 "font-size": "25",
                 "font-weight": "bold",
                 "fill": "#d3d4d4",
-                "text-anchor": "middle"
+                "text-anchor": "left"
             });
 
             unitsText.attr({
@@ -836,7 +836,7 @@
                 "font-size": "10",
                 "font-weight": "normal",
                 "fill": "#b3b3b3",
-                "text-anchor": "middle"
+                "text-anchor": "left"
             });
 
             // fill to 0 percent
