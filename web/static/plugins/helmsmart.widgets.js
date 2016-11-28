@@ -942,7 +942,7 @@
 	
 	var hgaugeID = 0;
 	freeboard.addStyle('.hgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.hgauge-widget', "width:270px;height:80px;display:inline-block;");
+	freeboard.addStyle('.hgauge-widget', "width:260px;height:80px;display:inline-block;");
 	
    var horzinalgaugeWidget = function (settings) {
        //var titleElement = $('<h2 class="section-title"></h2>');
