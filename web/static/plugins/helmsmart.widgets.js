@@ -1003,7 +1003,7 @@
             var rect = paper.rect( 20, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
             rect.attr({
                 "fill": "#edebeb",
-                "stroke": "#edebeb"
+                "stroke": "#A6A3A3"
             });
 
             // place min and max labels
@@ -1032,8 +1032,8 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(width  , height  / 3, "");
-            unitsText = paper.text(width ,  height  / 3 + 20, units);
+			valueText = paper.text(width - 20  , height  / 3, "");
+            unitsText = paper.text(width -20 ,  height  / 3 + 20, units);
 			
 			
             valueText.attr({
@@ -1053,7 +1053,8 @@
             });
 
             // fill to 0 percent
-            gaugeFill = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
+            //gaugeFill = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
+			gaugeFill = paper.rect(20, height / 3 - gaugeHeight / 2, 0, gaugeHeight - 5);
         }
 
         self.onSettingsChanged = function (newSettings) {
