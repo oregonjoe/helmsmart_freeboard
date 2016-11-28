@@ -414,8 +414,8 @@
 				showInnerShadow: true,
 				
 				shadowOpacity: 1,
-				shadowSize: 5,
-				shadowVerticalOffset: 10,
+				shadowSize: 3,
+				shadowVerticalOffset: 3,
 				
 				
 				
