@@ -1000,7 +1000,7 @@
             paper.clear();
 			
             //var rect = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
-            var rect = paper.rect( 20, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
+            var rect = paper.rect( 10, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
             rect.attr({
                 "fill": "#edebeb",
                 "stroke": "#A6A3A3"
@@ -1009,8 +1009,8 @@
             // place min and max labels
            // minValueLabel = paper.text(width / 2 - gaugeWidth / 2 - 8, height / 3, currentSettings.min_value);
           //  maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 + 8, height / 3, currentSettings.max_value);
-            minValueLabel = paper.text(20 + 10, (height / 3) + 25, currentSettings.min_value);
-            maxValueLabel = paper.text( 20 + gaugeWidth - 10, (height / 3) + 25, currentSettings.max_value);
+            minValueLabel = paper.text(10 + 10, (height / 3) + 25, currentSettings.min_value);
+            maxValueLabel = paper.text( 10 + gaugeWidth - 10, (height / 3) + 25, currentSettings.max_value);
 
             minValueLabel.attr({
                 "font-family": "arial",
@@ -1032,8 +1032,8 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(gaugeWidth +40  , height  / 3, "");
-            unitsText = paper.text(gaugeWidth +40 ,  height  / 3 + 20, units);
+			valueText = paper.text(gaugeWidth +50  , height  / 3, "");
+            unitsText = paper.text(gaugeWidth +50 ,  height  / 3 + 20, units);
 			
 			
             valueText.attr({
@@ -1054,7 +1054,7 @@
 
             // fill to 0 percent
             //gaugeFill = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
-			gaugeFill = paper.rect(20, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
+			gaugeFill = paper.rect(10, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
 			gaugeFill.attr({
                 "fill": "#edebeb",
                 "stroke":  "#A6A3A3"
