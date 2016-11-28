@@ -10,6 +10,8 @@
 (function () {
 	var SPARKLINE_HISTORY_LENGTH = 100;
 	var SPARKLINE_COLORS = ["#FF9900", "#FFFFFF", "#B3B4B4", "#6B6B6B", "#28DE28", "#13F7F9", "#E6EE18", "#C41204", "#CA3CB8", "#0B1CFB"];
+	
+	// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 	var gaugeColors = ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
 					
@@ -405,10 +407,10 @@
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
 				
 				//gaugeColor: '#F1C232',
-				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 12 : currentSettings.gaugeBackColor],
+				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
 				
 				//levelColors: ['#F1C232',],
-				levelColors: [gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 0 : currentSettings.gaugeBackColor],],
+				levelColors: [gaugeColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor],],
 				
                 label: currentSettings.units,
                 //showInnerShadow: false,
@@ -440,7 +442,7 @@
 				  bottomlength: 10,
 				  bottomwidth: 8,
 				  //color: '#8e8e93'
-				   color: gaugeColors[_.isUndefined(currentSettings.gaugePointerColor) ? 0 : currentSettings.gaugePointerColor],
+				   color: gaugePointerColors[_.isUndefined(currentSettings.gaugePointerColor) ? 0 : currentSettings.gaugePointerColor],
 				},
 						
 				
@@ -522,6 +524,25 @@
                 type: "text",
                 default_value: 100
             },
+			
+			
+			{
+                name: "fullcircle",
+                display_name: "Full Circle Gauge",
+				description: "Enable for compass style pointer gauge",
+                type: "boolean",
+                default_value: true
+            },
+			{
+                name: "dropshadow",
+                display_name: "Drop Shadow",
+                type: "boolean",
+                default_value: true
+            },
+			
+			
+			
+			// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 			{
 			"name": "gaugeBackColor",
 			"display_name": "Gauge BackGround Color",
@@ -529,7 +550,7 @@
 			"options": [
 				{
 					"name": "Default",
-					"value": "12"
+					"value": "11"
 				},
 				{
 					"name": "Java",
@@ -628,6 +649,7 @@
 				}
 				]
 			} ,
+			// Default-0, Java-1, Light Green-2,Bittersweet-3, Wild Blue Yonder-4, Pale Turquoise-5,Razzmatazz-6, Plum-7, Apple-8, Valencia-9, Neptune-10, Saffron-11, 
 						{
 			"name": "gaugePointerColor",
 			"display_name": "Gauge Pointer Color",
