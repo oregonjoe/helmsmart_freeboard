@@ -598,7 +598,7 @@
 	
 	var pgaugeID = 0;
 	freeboard.addStyle('.pgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.pgauge-widget', "width:150px;height:160px;display:inline-block;");
+	freeboard.addStyle('.pgauge-widget', "width:150px;height:200px;display:inline-block;");
 
 	freeboard.addStyle('div.pointer-value', "position:absolute;height:160px;margin: auto;top: 0px;bottom: 0px;width: 100%;text-align:center;");
     var pointerWidget = function (settings) {
@@ -637,7 +637,7 @@
             width = $(element).width();
             height = $(element).height();
 			 height = gaugeElement.height();
-			height = 160;
+			//height = 160;
 
             var radius = Math.min(width, height) / 2 - strokeWidth * 2;
 
@@ -1007,8 +1007,8 @@
             // place min and max labels
            // minValueLabel = paper.text(width / 2 - gaugeWidth / 2 - 8, height / 3, currentSettings.min_value);
           //  maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 + 8, height / 3, currentSettings.max_value);
-            minValueLabel = paper.text(width / 2 - gaugeWidth / 2 , (height / 3) + 10, currentSettings.min_value);
-            maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 , (height / 3) + 10, currentSettings.max_value);
+            minValueLabel = paper.text(width / 2 - gaugeWidth / 2 + 10, (height / 3) + 20, currentSettings.min_value);
+            maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 - 10, (height / 3) + 20, currentSettings.max_value);
 
             minValueLabel.attr({
                 "font-family": "arial",
@@ -1030,8 +1030,8 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(width *3/4 , height  / 3, "");
-            unitsText = paper.text(width *3/4,  height  / 3 + 20, units);
+			valueText = paper.text(width + 10 , height  / 3, "");
+            unitsText = paper.text(width + 10,  height  / 3 + 20, units);
 			
 			
             valueText.attr({
@@ -1039,7 +1039,7 @@
                 "font-size": "25",
                 "font-weight": "bold",
                 "fill": "#d3d4d4",
-                "text-anchor": "middle"
+                "text-anchor": "left"
             });
 
             unitsText.attr({
@@ -1047,7 +1047,7 @@
                 "font-size": "10",
                 "font-weight": "normal",
                 "fill": "#b3b3b3",
-                "text-anchor": "middle"
+                "text-anchor": "left"
             });
 
             // fill to 0 percent
@@ -1095,7 +1095,7 @@
         }
 
         self.getHeight = function () {
-            return 3;
+            return 2;
         }
 
     };
