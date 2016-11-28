@@ -166,7 +166,7 @@
 	freeboard.addStyle('.tw-sparkline',
 		'height:20px;');
 
-    var textWidget = function (settings) {
+    var hstextWidget = function (settings) {
 
         var self = this;
 
@@ -367,7 +367,7 @@
             }
         ],
         newInstance: function (settings, newInstanceCallback) {
-            newInstanceCallback(new textWidget(settings));
+            newInstanceCallback(new hstextWidget(settings));
         }
     });
 
@@ -375,7 +375,7 @@
 	freeboard.addStyle('.gauge-widget-wrapper', "width: 100%;text-align: center;");
 	freeboard.addStyle('.gauge-widget', "width:200px;height:160px;display:inline-block;");
 
-    var gaugeWidget = function (settings) {
+    var hsgaugeWidget = function (settings) {
         var self = this;
 
         var thisGaugeID = "gauge-" + gaugeID++;
@@ -480,7 +480,7 @@
             }
         ],
         newInstance: function (settings, newInstanceCallback) {
-            newInstanceCallback(new gaugeWidget(settings));
+            newInstanceCallback(new hsgaugeWidget(settings));
         }
     });
 
@@ -941,7 +941,7 @@
 	
 	var hgaugeID = 0;
 	freeboard.addStyle('.hgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.hgauge-widget', "width:200px;height:80px;display:inline-block;");
+	freeboard.addStyle('.hgauge-widget', "width:240px;height:80px;display:inline-block;");
 	
    var horzinalgaugeWidget = function (settings) {
        //var titleElement = $('<h2 class="section-title"></h2>');
