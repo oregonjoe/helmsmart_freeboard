@@ -444,8 +444,8 @@
 					showInnerShadow: currentSettings.dropshadow,
 					
 					shadowOpacity: 1,
-					shadowSize: 3,
-					shadowVerticalOffset: 3,
+					shadowSize: 2,
+					shadowVerticalOffset: 2,
 	
 				
 				
