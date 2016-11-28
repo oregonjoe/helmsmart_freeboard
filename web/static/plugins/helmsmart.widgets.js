@@ -414,28 +414,21 @@
 				
                 label: currentSettings.units,
                 //showInnerShadow: false,
-				
-				if(currentSettings.dropshadow == true)
-				{
-					showInnerShadow: true,
+		
+					//showInnerShadow: true,
+					showInnerShadow: currentSettings.dropshadow,
 					
 					shadowOpacity: 1,
 					shadowSize: 3,
 					shadowVerticalOffset: 3,
-				}
-				else
-				{
-					showInnerShadow: false,
-					
-				}
+	
 				
 				
                 valueFontColor: "#d3d4d4",
 				
-				if(currentSettings.fullcircle == true)
-				{
-					donut: true,
-				}
+			
+				donut: currentSettings.fullcircle,
+				
 				
 				pointer: true,
 				gaugeWidthScale: 0.5,
