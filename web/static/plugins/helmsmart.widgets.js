@@ -530,7 +530,7 @@
 				{
 					"name": "Default",
 					"value": "12"
-				}
+				},
 				{
 					"name": "Java",
 					"value": "0"
