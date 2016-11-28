@@ -1032,8 +1032,8 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(gaugeWidth +20  , height  / 3, "");
-            unitsText = paper.text(gaugeWidth +20 ,  height  / 3 + 20, units);
+			valueText = paper.text(gaugeWidth +40  , height  / 3, "");
+            unitsText = paper.text(gaugeWidth +40 ,  height  / 3 + 20, units);
 			
 			
             valueText.attr({
