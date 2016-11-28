@@ -10,7 +10,8 @@
 (function () {
 	var SPARKLINE_HISTORY_LENGTH = 100;
 	var SPARKLINE_COLORS = ["#FF9900", "#FFFFFF", "#B3B4B4", "#6B6B6B", "#28DE28", "#13F7F9", "#E6EE18", "#C41204", "#CA3CB8", "#0B1CFB"];
-	var gaugeColors = ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
+	var gaugeColors = ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
+	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
 					
 					
     function easeTransitionText(newValue, textElement, duration) {
@@ -404,7 +405,7 @@
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
 				
 				//gaugeColor: '#F1C232',
-				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 0 : currentSettings.gaugeBackColor],
+				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 12 : currentSettings.gaugeBackColor],
 				
 				//levelColors: ['#F1C232',],
 				levelColors: [gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 0 : currentSettings.gaugeBackColor],],
@@ -438,7 +439,8 @@
 				  toplength: 10,
 				  bottomlength: 10,
 				  bottomwidth: 8,
-				  color: '#8e8e93'
+				  //color: '#8e8e93'
+				   color: gaugeColors[_.isUndefined(currentSettings.gaugePointerColor) ? 0 : currentSettings.gaugePointerColor],
 				},
 						
 				
@@ -526,6 +528,10 @@
 			"type": "option",
 			"options": [
 				{
+					"name": "Default",
+					"value": "12"
+				}
+				{
 					"name": "Java",
 					"value": "0"
 				}, 
@@ -568,6 +574,112 @@
 				{
 					"name": "Saffron",
 					"value": "10"
+				}
+				]
+			} ,
+						{
+			"name": "gaugeFillColor",
+			"display_name": "Gauge Fill Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Java",
+					"value": "0"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "1"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "2"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "3"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "4"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "5"
+				},
+						{
+					"name": "Plum",
+					"value": "6"
+				}, 
+				{
+					"name": "Apple",
+					"value": "7"
+				},
+						{
+					"name": "Valencia",
+					"value": "8"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "9"
+				},
+				{
+					"name": "Saffron",
+					"value": "10"
+				}
+				]
+			} ,
+						{
+			"name": "gaugePointerColor",
+			"display_name": "Gauge Pointer Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Default",
+					"value": "0"
+				}, 
+				{
+					"name": "Java",
+					"value": "1"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "2"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "3"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "4"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "5"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "6"
+				},
+						{
+					"name": "Plum",
+					"value": "7"
+				}, 
+				{
+					"name": "Apple",
+					"value": "8"
+				},
+						{
+					"name": "Valencia",
+					"value": "9"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "10"
+				},
+				{
+					"name": "Saffron",
+					"value": "11"
 				}
 				]
 			} 
