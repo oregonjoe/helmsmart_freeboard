@@ -380,14 +380,17 @@
 
     var gaugeID = 0;
 	freeboard.addStyle('.gauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.gauge-widget', "width:200px;height:260px;display:inline-block;");
+	//freeboard.addStyle('.gauge-widget', "width:200px;height:260px;display:inline-block;");
+	freeboard.addStyle('.gauge-widget', "width:100%;100%;display:inline-block;");
 
     var hsgaugeWidget = function (settings) {
         var self = this;
 		var fillcolor = [];
+		var myheight = 60 * self.getHeight();
+		
         var thisGaugeID = "gauge-" + gaugeID++;
         var titleElement = $('<h2 class="section-title"></h2>');
-        var gaugeElement = $('<div class="gauge-widget" id="' + thisGaugeID + '"></div>');
+        var gaugeElement = $('<div class="gauge-widget" id="' + thisGaugeID + '" height:'+ myheight + 'px; "></div>');
 
         var gaugeObject;
         var rendered = false;
