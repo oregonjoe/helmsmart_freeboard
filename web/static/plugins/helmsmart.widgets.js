@@ -1034,8 +1034,8 @@
 
 			//valueText = paper.text(gaugeWidth +50  , height  / 3, "");
             //unitsText = paper.text(gaugeWidth +50 ,  height  / 3 + 20, units);
-			valueText = paper.text(width -25  , height  / 3, "");
-            unitsText = paper.text(width -25 ,  height  / 3 + 20, units);	
+			valueText = paper.text(width -30  , height  / 3, "");
+            unitsText = paper.text(width -30 ,  height  / 3 + 20, units);	
 			
             valueText.attr({
                 "font-family": "arial",
