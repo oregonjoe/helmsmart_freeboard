@@ -729,7 +729,7 @@
 
  var vgaugeID = 0;
 	freeboard.addStyle('.vgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.vgauge-widget', "width:120px;height:160px;display:inline-block;");
+	freeboard.addStyle('.vgauge-widget', "width:180px;height:160px;display:inline-block;");
 	
 	
  var verticalgaugeWidget = function (settings) {
@@ -942,7 +942,7 @@
 	
 	var hgaugeID = 0;
 	freeboard.addStyle('.hgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.hgauge-widget', "width:180px;height:80px;display:inline-block;");
+	freeboard.addStyle('.hgauge-widget', "width:280px;height:80px;display:inline-block;");
 	
    var horzinalgaugeWidget = function (settings) {
        //var titleElement = $('<h2 class="section-title"></h2>');
@@ -1032,8 +1032,8 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(width +20  , height  / 3, "");
-            unitsText = paper.text(width +20 ,  height  / 3 + 20, units);
+			valueText = paper.text(gaugeWidth +20  , height  / 3, "");
+            unitsText = paper.text(gaugeWidth +20 ,  height  / 3 + 20, units);
 			
 			
             valueText.attr({
