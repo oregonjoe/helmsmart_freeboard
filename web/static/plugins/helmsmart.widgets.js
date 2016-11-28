@@ -398,10 +398,16 @@
 		
 		if(parseInt(fillindex) == 0)
 		{
+			fillcolor.push('#85A137');	
+			fillcolor.push('#85A137');	
+			fillcolor.push('#85A137');	
+			fillcolor.push('#FFC414'); 	
+			fillcolor.push('#FFC414'); 	
+			fillcolor.push('#D0532A'); 				
 			fillcolor.push('#CE1B21');
-			fillcolor.push('#D0532A'); 
-			fillcolor.push('#FFC414'); 
-			fillcolor.push('#85A137');
+
+
+
 		}
 		else
 		 fillcolor.push(gaugeFillColors[parseInt(fillindex)]);
@@ -418,7 +424,8 @@
                 value: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
-				
+				relativeGaugeSize: true,
+
 				//gaugeColor: '#F1C232',
 				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
 				
