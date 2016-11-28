@@ -551,7 +551,7 @@
 			{
 			name: "blocks",
 			display_name: "Height (No. Blocks)",
-			type": "text",
+			type: "text",
 			default_value: 4
 			}, 
 			
