@@ -401,9 +401,9 @@
                 min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
 				
-				gaugeColor: #F1C232,
+				gaugeColor: '#F1C232',
 				
-				levelColors: [#F1C232,],
+				levelColors: ['#F1C232',],
 				
                 label: currentSettings.units,
                 //showInnerShadow: false,
