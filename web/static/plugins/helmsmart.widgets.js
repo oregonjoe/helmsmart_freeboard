@@ -729,7 +729,7 @@
 
  var vgaugeID = 0;
 	freeboard.addStyle('.vgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.vgauge-widget', "width:180px;height:160px;display:inline-block;");
+	freeboard.addStyle('.vgauge-widget', "width:270px;height:160px;display:inline-block;");
 	
 	
  var verticalgaugeWidget = function (settings) {
@@ -820,12 +820,12 @@
             // place units and value
             var units = _.isUndefined(currentSettings.units) ? "" : currentSettings.units;
 
-            valueText = paper.text(width * 2 / 3, height / 2 - 10, "");
-            unitsText = paper.text(width * 2 / 3, height / 2 + 10, units);
+            valueText = paper.text(width * 3 / 4, height / 2 - 10, "");
+            unitsText = paper.text(width * 3 / 4, height / 2 + 10, units);
 
             valueText.attr({
                 "font-family": "arial",
-                "font-size": "25",
+                "font-size": "45",
                 "font-weight": "bold",
                 "fill": "#d3d4d4",
                 "text-anchor": "middle"
@@ -833,7 +833,7 @@
 
             unitsText.attr({
                 "font-family": "arial",
-                "font-size": "10",
+                "font-size": "15",
                 "font-weight": "normal",
                 "fill": "#b3b3b3",
                 "text-anchor": "middle"
@@ -942,7 +942,7 @@
 	
 	var hgaugeID = 0;
 	freeboard.addStyle('.hgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.hgauge-widget', "width:280px;height:80px;display:inline-block;");
+	freeboard.addStyle('.hgauge-widget', "width:270px;height:80px;display:inline-block;");
 	
    var horzinalgaugeWidget = function (settings) {
        //var titleElement = $('<h2 class="section-title"></h2>');
