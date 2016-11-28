@@ -1032,8 +1032,8 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(width - 30  , height  / 3, "");
-            unitsText = paper.text(width -30 ,  height  / 3 + 20, units);
+			valueText = paper.text(width + 30  , height  / 3, "");
+            unitsText = paper.text(width +30 ,  height  / 3 + 20, units);
 			
 			
             valueText.attr({
@@ -1055,6 +1055,10 @@
             // fill to 0 percent
             //gaugeFill = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
 			gaugeFill = paper.rect(20, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
+			gaugeFill.attr({
+                "fill": "#edebeb",
+                "stroke":  "#A6A3A3"
+            });
         }
 
         self.onSettingsChanged = function (newSettings) {
