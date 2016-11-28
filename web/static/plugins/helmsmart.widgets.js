@@ -501,8 +501,8 @@
         }
 
         this.getHeight = function () { 
-           return 3;
-			//return currentSettings.blocks;
+          // return 3;
+			return currentSettings.blocks;
         }
 
         this.onSettingsChanged(settings);
@@ -561,14 +561,14 @@
                 type: "boolean",
                 default_value: true
             },
-			/*
+			
 			{
 			name: "blocks",
 			display_name: "Height (No. Blocks)",
 			type: "text",
 			default_value: 4
 			}, 
-			*/
+			
 			// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 			{
 			"name": "gaugeBackColor",
