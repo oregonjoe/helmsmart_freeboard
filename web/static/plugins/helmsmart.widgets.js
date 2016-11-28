@@ -729,7 +729,7 @@
 
  var vgaugeID = 0;
 	freeboard.addStyle('.vgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.vgauge-widget', "width:270px;height:160px;display:inline-block;");
+	freeboard.addStyle('.vgauge-widget', "width:240px;height:160px;display:inline-block;");
 	
 	
  var verticalgaugeWidget = function (settings) {
@@ -820,8 +820,8 @@
             // place units and value
             var units = _.isUndefined(currentSettings.units) ? "" : currentSettings.units;
 
-            valueText = paper.text(width * 3 / 4, height / 2 - 10, "");
-            unitsText = paper.text(width * 3 / 4, height / 2 + 10, units);
+            valueText = paper.text(width * 3 / 4, height / 2 - 20, "");
+            unitsText = paper.text(width * 3 / 4, height / 2 + 20, units);
 
             valueText.attr({
                 "font-family": "arial",
@@ -1032,16 +1032,17 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(gaugeWidth +50  , height  / 3, "");
-            unitsText = paper.text(gaugeWidth +50 ,  height  / 3 + 20, units);
-			
+			//valueText = paper.text(gaugeWidth +50  , height  / 3, "");
+            //unitsText = paper.text(gaugeWidth +50 ,  height  / 3 + 20, units);
+			valueText = paper.text(width -20  , height  / 3, "");
+            unitsText = paper.text(width -20 ,  height  / 3 + 20, units);	
 			
             valueText.attr({
                 "font-family": "arial",
                 "font-size": "25",
                 "font-weight": "bold",
                 "fill": "#d3d4d4",
-                "text-anchor": "left"
+                "text-anchor": "right"
             });
 
             unitsText.attr({
@@ -1049,7 +1050,7 @@
                 "font-size": "10",
                 "font-weight": "normal",
                 "fill": "#b3b3b3",
-                "text-anchor": "left"
+                "text-anchor": "right"
             });
 
             // fill to 0 percent
