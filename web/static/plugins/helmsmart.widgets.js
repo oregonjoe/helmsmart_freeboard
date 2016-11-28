@@ -400,18 +400,26 @@
                 value: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
+				
+				gaugeColor: #F1C232,
+				
+				levelColors: [#F1C232,],
+				
                 label: currentSettings.units,
                 //showInnerShadow: false,
 				showInnerShadow: true,
                 valueFontColor: "#d3d4d4",
 								donut: true,
 				pointer: true,
-				gaugeWidthScale: 0.4,
+				gaugeWidthScale: 0.5,
 				pointerOptions: {
-				  toplength: 10,
+				  toplength: -15,
 				  bottomlength: 10,
-				  bottomwidth: 8,
-				  color: '#000'
+				  bottomwidth: 12,
+				  color: '#8e8e93',
+				  stroke: '#ffffff',
+				  stroke_width: 3,
+				  stroke_linecap: 'round'
 				},
 				counter: true
             });
