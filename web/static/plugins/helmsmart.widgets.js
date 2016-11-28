@@ -131,6 +131,8 @@
 
 	freeboard.addStyle('.widget-big-text', valueStyle + "font-size:75px;");
 	freeboard.addStyle('.widget-huge-text', valueStyle + "font-size:150px;");
+	
+	freeboard.addStyle('.pwidget-big-text', valueStyle + "font-size:75px;");
 
 	freeboard.addStyle('.hstw-display', 'width: 100%; height:100%; display:table; table-layout:fixed;');
 
@@ -607,7 +609,7 @@
         var triangle;
         var width, height;
         var currentValue = 0;
-        var valueDiv = $('<div class="widget-big-text"></div>');
+        var valueDiv = $('<div class="pwidget-big-text"></div>');
         var unitsDiv = $('<div></div>');
 		var thisGaugeID = "gauge-" + pgaugeID++;
         var titleElement = $('<h2 class="section-title"></h2>');
@@ -998,7 +1000,7 @@
             paper.clear();
 			
             //var rect = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
-            var rect = paper.rect(width + 20, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
+            var rect = paper.rect( 20, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
             rect.attr({
                 "fill": "#edebeb",
                 "stroke": "#edebeb"
@@ -1007,8 +1009,8 @@
             // place min and max labels
            // minValueLabel = paper.text(width / 2 - gaugeWidth / 2 - 8, height / 3, currentSettings.min_value);
           //  maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 + 8, height / 3, currentSettings.max_value);
-            minValueLabel = paper.text(width + 20 + 10, (height / 3) + 25, currentSettings.min_value);
-            maxValueLabel = paper.text(width + 20 + gaugeWidth / 2 - 10, (height / 3) + 25, currentSettings.max_value);
+            minValueLabel = paper.text(20 + 10, (height / 3) + 25, currentSettings.min_value);
+            maxValueLabel = paper.text( 20 + gaugeWidth - 10, (height / 3) + 25, currentSettings.max_value);
 
             minValueLabel.attr({
                 "font-family": "arial",
@@ -1030,8 +1032,8 @@
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
 
-			valueText = paper.text(width + 10 , height  / 3, "");
-            unitsText = paper.text(width + 10,  height  / 3 + 20, units);
+			valueText = paper.text(width  , height  / 3, "");
+            unitsText = paper.text(width ,  height  / 3 + 20, units);
 			
 			
             valueText.attr({
