@@ -403,7 +403,17 @@
                 label: currentSettings.units,
                 //showInnerShadow: false,
 				showInnerShadow: true,
-                valueFontColor: "#d3d4d4"
+                valueFontColor: "#d3d4d4",
+								donut: true,
+				pointer: true,
+				gaugeWidthScale: 0.4,
+				pointerOptions: {
+				  toplength: 10,
+				  bottomlength: 10,
+				  bottomwidth: 8,
+				  color: '#000'
+				},
+				counter: true
             });
         }
 
@@ -449,8 +459,8 @@
         "external_scripts" : [
             //"plugins/thirdparty/raphael.2.1.0.min.js",
             //"plugins/thirdparty/justgage.1.0.1.js"
-			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
-			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/justgage.1.0.1.js"
+			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.4.min.js",
+			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/justgage.1.2.9.js"
         ],
         settings: [
             {
