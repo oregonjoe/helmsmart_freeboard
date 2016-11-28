@@ -13,7 +13,7 @@
 	
 	// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 	var gaugeColors = ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
-	var gaugeFillColors = [ ['#CE1B21', '#D0532A', '#FFC414', '#85A137'], "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
+	var gaugeFillColors = ["#EB9D07", "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
 					
 					
@@ -393,6 +393,13 @@
         var rendered = false;
 
         var currentSettings = settings;
+		
+		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+		
+		if(fillindex == 0)
+			var fillcollor = ['#CE1B21', '#D0532A', '#FFC414', '#85A137'];
+		else
+			var fillcolor = gaugeFillColors[fillindex];
 
         function createGauge() {
             if (!rendered) {
@@ -413,7 +420,7 @@
 				//levelColors: ['#F1C232',],
 				//levelColors: [gaugeFillColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor],],
 				
-				levelColors: ['#CE1B21', '#D0532A', '#FFC414', '#85A137'],
+				levelColors: fillcolor,
 				
                 label: currentSettings.units,
                 //showInnerShadow: false,
