@@ -386,7 +386,7 @@
     var hsgaugeWidget = function (settings) {
         var self = this;
 		var fillcolor = [];
-		var myheight = 60 * self.getHeight();
+		var myheight = 60 * this.getHeight();
 		
         var thisGaugeID = "gauge-" + gaugeID++;
         var titleElement = $('<h2 class="section-title"></h2>');
