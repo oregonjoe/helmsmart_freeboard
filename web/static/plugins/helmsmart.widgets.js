@@ -13,7 +13,7 @@
 	
 	// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 	var gaugeColors = ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
-	var gaugeFillColors = [[ "#00fff6", "#ff00fc", "#1200ff" ], "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
+	var gaugeFillColors = [ ['#CE1B21', '#D0532A', '#FFC414', '#85A137'], "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
 					
 					
@@ -487,8 +487,8 @@
         }
 
         this.getHeight = function () { 
-           // return 3;
-			return currentSettings.blocks;
+           return 3;
+			//return currentSettings.blocks;
         }
 
         this.onSettingsChanged(settings);
@@ -547,14 +547,14 @@
                 type: "boolean",
                 default_value: true
             },
-			
+			/*
 			{
 			name: "blocks",
 			display_name: "Height (No. Blocks)",
 			type: "text",
 			default_value: 4
 			}, 
-			
+			*/
 			// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 			{
 			"name": "gaugeBackColor",
