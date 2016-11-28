@@ -407,7 +407,7 @@
 				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 0 : currentSettings.gaugeBackColor],
 				
 				//levelColors: ['#F1C232',],
-				levelColors: [_.isUndefined(currentSettings.gaugeBackColor) ? 0 : currentSettings.gaugeBackColor,],
+				levelColors: [gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 0 : currentSettings.gaugeBackColor],],
 				
                 label: currentSettings.units,
                 //showInnerShadow: false,
