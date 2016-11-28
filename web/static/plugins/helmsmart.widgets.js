@@ -384,7 +384,7 @@
 
     var hsgaugeWidget = function (settings) {
         var self = this;
-
+		var fillcolor = [];
         var thisGaugeID = "gauge-" + gaugeID++;
         var titleElement = $('<h2 class="section-title"></h2>');
         var gaugeElement = $('<div class="gauge-widget" id="' + thisGaugeID + '"></div>');
@@ -396,10 +396,15 @@
 		
 		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
 		
-		if(fillindex == 0)
-			var fillcollor = ['#CE1B21', '#D0532A', '#FFC414', '#85A137'];
+		if(parseInt(fillindex) == 0)
+		{
+			fillcolor.push('#CE1B21');
+			fillcolor.push('#D0532A'); 
+			fillcolor.push('#FFC414'); 
+			fillcolor.push('#85A137');
+		}
 		else
-			var fillcolor = gaugeFillColors[fillindex];
+		 fillcolor.push(gaugeFillColors[parseInt(fillindex)]);
 
         function createGauge() {
             if (!rendered) {
