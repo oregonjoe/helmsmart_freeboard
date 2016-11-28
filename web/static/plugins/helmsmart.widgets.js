@@ -1034,14 +1034,15 @@
 
 			//valueText = paper.text(gaugeWidth +50  , height  / 3, "");
             //unitsText = paper.text(gaugeWidth +50 ,  height  / 3 + 20, units);
-			valueText = paper.text(width -20  , height  / 3, "");
-            unitsText = paper.text(width -20 ,  height  / 3 + 20, units);	
+			valueText = paper.text(width -25  , height  / 3, "");
+            unitsText = paper.text(width -25 ,  height  / 3 + 20, units);	
 			
             valueText.attr({
                 "font-family": "arial",
                 "font-size": "25",
                 "font-weight": "bold",
                 "fill": "#d3d4d4",
+				"text-align": "right",
                 "text-anchor": "right"
             });
 
@@ -1050,6 +1051,7 @@
                 "font-size": "10",
                 "font-weight": "normal",
                 "fill": "#b3b3b3",
+				"text-align": "right",
                 "text-anchor": "right"
             });
 
