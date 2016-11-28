@@ -132,38 +132,37 @@
 	freeboard.addStyle('.widget-big-text', valueStyle + "font-size:75px;");
 	freeboard.addStyle('.widget-huge-text', valueStyle + "font-size:150px;");
 
-	freeboard.addStyle('.tw-display', 'width: 100%; height:100%; display:table; table-layout:fixed;');
+	freeboard.addStyle('.hstw-display', 'width: 100%; height:100%; display:table; table-layout:fixed;');
 
-	freeboard.addStyle('.tw-tr',
-		'display:table-row;');
+	freeboard.addStyle('.hstw-tr', 'display:table-row;');
 
-	freeboard.addStyle('.tw-tg',
+	freeboard.addStyle('.hstw-tg',
 		'display:table-row-group;');
 
-	freeboard.addStyle('.tw-tc',
+	freeboard.addStyle('.hstw-tc',
 		'display:table-caption;');
 
-	freeboard.addStyle('.tw-td',
+	freeboard.addStyle('.hstw-td',
 		'display:table-cell;');
 
-	freeboard.addStyle('.tw-value',
+	freeboard.addStyle('.hstw-value',
 		valueStyle +
 		'overflow: hidden;' +
 		'display: inline-block;' +
 		'text-overflow: ellipsis;');
 
-	freeboard.addStyle('.tw-unit',
+	freeboard.addStyle('.hstw-unit',
 		'display: inline-block;' +
 		'padding-left: 10px;' +
 		'padding-bottom: 1.1em;' +
 		'vertical-align: bottom;');
 
-	freeboard.addStyle('.tw-value-wrapper',
+	freeboard.addStyle('.hstw-value-wrapper',
 		'position: relative;' +
 		'vertical-align: middle;' +
 		'height:100%;');
 
-	freeboard.addStyle('.tw-sparkline',
+	freeboard.addStyle('.hstw-sparkline',
 		'height:20px;');
 
     var hstextWidget = function (settings) {
@@ -171,11 +170,11 @@
         var self = this;
 
         var currentSettings = settings;
-		var displayElement = $('<div class="tw-display"></div>');
-		var titleElement = $('<h2 class="section-title tw-title tw-td"></h2>');
-        var valueElement = $('<div class="tw-value"></div>');
-        var unitsElement = $('<div class="tw-unit"></div>');
-        var sparklineElement = $('<div class="tw-sparkline tw-td"></div>');
+		var displayElement = $('<div class="hstw-display"></div>');
+		var titleElement = $('<h2 class="section-title hstw-title hstw-td"></h2>');
+        var valueElement = $('<div class="hstw-value"></div>');
+        var unitsElement = $('<div class="hstw-unit"></div>');
+        var sparklineElement = $('<div class="hstw-sparkline tw-td"></div>');
 
 		function updateValueSizing()
 		{
@@ -193,9 +192,9 @@
 			$(element).empty();
 
 			$(displayElement)
-				.append($('<div class="tw-tr"></div>').append(titleElement))
-				.append($('<div class="tw-tr"></div>').append($('<div class="tw-value-wrapper tw-td"></div>').append(valueElement).append(unitsElement)))
-				.append($('<div class="tw-tr"></div>').append(sparklineElement));
+				.append($('<div class="hstw-tr"></div>').append(titleElement))
+				.append($('<div class="hstw-tr"></div>').append($('<div class="hstw-value-wrapper hstw-td"></div>').append(valueElement).append(unitsElement)))
+				.append($('<div class="hstw-tr"></div>').append(sparklineElement));
 
 			$(element).append(displayElement);
 
@@ -997,8 +996,9 @@
 
             paper = Raphael(gaugeElement.get()[0], width, height);
             paper.clear();
-
-            var rect = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
+			
+            //var rect = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
+            var rect = paper.rect(width + 20, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
             rect.attr({
                 "fill": "#edebeb",
                 "stroke": "#edebeb"
@@ -1007,8 +1007,8 @@
             // place min and max labels
            // minValueLabel = paper.text(width / 2 - gaugeWidth / 2 - 8, height / 3, currentSettings.min_value);
           //  maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 + 8, height / 3, currentSettings.max_value);
-            minValueLabel = paper.text(width / 2 - gaugeWidth / 2 + 10, (height / 3) + 20, currentSettings.min_value);
-            maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 - 10, (height / 3) + 20, currentSettings.max_value);
+            minValueLabel = paper.text(width + 20 + 10, (height / 3) + 25, currentSettings.min_value);
+            maxValueLabel = paper.text(width + 20 + gaugeWidth / 2 - 10, (height / 3) + 25, currentSettings.max_value);
 
             minValueLabel.attr({
                 "font-family": "arial",
