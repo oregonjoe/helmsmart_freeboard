@@ -1381,7 +1381,7 @@
 			calculatedWidth = width * 0.60;
 			
             var gaugeWidth = calculatedWidth;
-            var gaugeHeight = 30;
+            var gaugeHeight = height * 0.40;
 			
 			var gaugeTop = height * 0.10;
 
@@ -1399,8 +1399,8 @@
             // place min and max labels
            // minValueLabel = paper.text(width / 2 - gaugeWidth / 2 - 8, height / 3, currentSettings.min_value);
           //  maxValueLabel = paper.text(width / 2 + gaugeWidth / 2 + 8, height / 3, currentSettings.max_value);
-            minValueLabel = paper.text(10 + 10, gaugeTop + gaugeWidth + 10, currentSettings.min_value);
-            maxValueLabel = paper.text( 10 + gaugeWidth - 10, gaugeTop + gaugeWidth + 10, currentSettings.max_value);
+            minValueLabel = paper.text(10 + 10, gaugeTop + gaugeHeight + 10, currentSettings.min_value);
+            maxValueLabel = paper.text( 10 + gaugeWidth - 10, gaugeTop + gaugeHeight + 10, currentSettings.max_value);
 
             minValueLabel.attr({
                 "font-family": "arial",
