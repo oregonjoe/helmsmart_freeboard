@@ -503,8 +503,10 @@ def getedeviceid(deviceapikey):
 
     conn = db_pool.getconn()
 
-  
-    query = "select deviceid from user_devices where deviceapikey = '%s'"
+    log.info("freeboard getedeviceid data Query %s", deviceapikey)
+    query = "select deviceid from user_devices where deviceapikey = %s"
+
+
 
 
     try:
