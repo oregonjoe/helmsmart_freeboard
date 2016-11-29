@@ -1383,7 +1383,7 @@
             var gaugeWidth = calculatedWidth;
             var gaugeHeight = 30;
 			
-			var gaugeTop = myheight * 0.10;
+			var gaugeTop = height * 0.10;
 
             paper = Raphael(gaugeElement.get()[0], width, height);
             paper.clear();
