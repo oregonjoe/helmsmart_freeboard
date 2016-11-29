@@ -2429,18 +2429,17 @@
                 display_name: "Position",
                 type: "calculated"
             },
-			{
-			name: "blocks",
-			display_name: "Height (No. Blocks)",
-			type: "text",
-			default_value: 4
-			}, 
+			//{
+			//name: "blocks",
+			//display_name: "Height (No. Blocks)",
+			//type: "text",
+			//default_value: 4
+			//}, 
 			{
 			name: "blocks",
 			display_name: "Height (No. Blocks)",
 			type: "option",
 			default_value: 4,
-			
 			options: [
 			{
 				"name": "0",
