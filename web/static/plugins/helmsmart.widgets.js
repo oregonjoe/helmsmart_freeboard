@@ -1070,18 +1070,24 @@
 			var myheight = 60 * self.getHeight();
 			height = myheight;
 			
-			calculatedHeight = 120;
-			calculatedHeight = myheight/2 - 20;
-			
+			//calculatedHeight = 120;
+			//calculatedHeight = myheight/2 - 20;
+			calculatedHeight = myheight * 0.80;
 			
 			
             var gaugeWidth = 30;
             var gaugeHeight = calculatedHeight;
 
+			// get full container space
             paper = Raphael(gaugeElement.get()[0], width, height);
+			// clear widget
             paper.clear();
 
-            rect = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
+			//rect = paper.rec(x pos, y pos, width, height, radius)
+            //rect = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
+			// set vBar top to 10% of the space
+			rect = paper.rect(width / 3 - gaugeWidth / 2, height*0.10, gaugeWidth, gaugeHeight);
+			
             rect.attr({
               //  "fill": "#edebeb",
 				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
@@ -1089,8 +1095,11 @@
             });
 
             // place min and max labels
-            minValueLabel = paper.text(width / 3, height / 2 + gaugeHeight / 2 + 14, currentSettings.min_value);
-            maxValueLabel = paper.text(width / 3, height / 2 - gaugeHeight / 2 - 14, currentSettings.max_value);
+           // minValueLabel = paper.text(width / 3, height / 2 + gaugeHeight / 2 + 14, currentSettings.min_value);
+           // maxValueLabel = paper.text(width / 3, height / 2 - gaugeHeight / 2 - 14, currentSettings.max_value);
+			
+			minValueLabel = paper.text(width / 3, height * 0.10 + gaugeHeight + 14, currentSettings.min_value);
+            maxValueLabel = paper.text(width / 3, height  * 0.10 - 14, currentSettings.max_value);
 
             minValueLabel.attr({
                 "font-family": "arial",
@@ -1129,7 +1138,11 @@
             });
 
             // fill to 0 percent
-            gaugeFill = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, 0);
+		
+			// set vBar top to 10% of the space
+
+            //gaugeFill = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, 0);
+			gaugeFill = paper.rect(width / 3 - gaugeWidth / 2, height*0.10, gaugeWidth, 0);
             gaugeFill.attr({
                // "fill": "#edebeb",
 				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
