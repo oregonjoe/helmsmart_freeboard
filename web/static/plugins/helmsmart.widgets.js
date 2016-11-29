@@ -1062,19 +1062,16 @@
             return "rgb(" + Math.round(R) + "," + Math.round(G) + "," + Math.round(B) + ")"
         }
 		       
+		function createvGauge()	;
+		{
 			
-		
-
-        self.render = function (element) {
-            $(element).append(titleElement.html(currentSettings.title)).append(gaugeElement);
-
-            width = gaugeElement.width();
+			width = gaugeElement.width();
             height = 160;
 			var myheight = 60 * self.getHeight();
 			height = myheight;
 			
 			calculatedHeight = 120;
-			calculatedHeight = myheight/2;
+			calculatedHeight = myheight/2 - 20;
 			
 			
 			
@@ -1138,6 +1135,15 @@
 				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
                 "stroke":  "#A6A3A3"
             });
+			
+		}
+		
+
+        self.render = function (element) {
+            $(element).append(titleElement.html(currentSettings.title)).append(gaugeElement);
+			
+			createvGauge();
+
         }
 
         self.onSettingsChanged = function (newSettings) {
@@ -1156,6 +1162,8 @@
             }
 
             titleElement.html(newSettings.title);
+			
+			createvGauge();
         }
 
         self.onCalculatedValueChanged = function (settingName, newValue) {
