@@ -518,7 +518,9 @@ def getedeviceid(deviceapikey):
 
         cursor = conn.cursor()
         #cursor.execute(query, (deviceapikey,))
-        cursor.execute("select deviceid from user_devices where deviceapikey = '%s'" % deviceapikey)
+        #cursor.execute("select deviceid from user_devices where deviceapikey = '%s'" % deviceapikey)
+        key=(deviceapikey,)
+        cursor.execute("select deviceid from user_devices where deviceapikey = '?'" , key)
         #response= cursor.query(query)
         i = cursor.fetchone()
         log.info("freeboard getedeviceid response %s", i)            
