@@ -2286,7 +2286,12 @@
              
 
               //  map = new google.maps.Map(element, mapOptions);
-			  
+			 // Creation of Navionics NauticalChart Layer
+var navionicsNauticalChartOverlay = new JNC.Views.gNavionicsOverlay({
+    navKey:'Navionics_webapi_00313',
+    chartType: JNC.Views.gNavionicsOverlay.CHARTS.NAUTICAL,
+    isTransparent: false
+}); 
 			   // Create a map object, and include the MapTypeId to add
         // to the map type control.
         map = new google.maps.Map(element, {
@@ -2294,12 +2299,14 @@
           zoom: 11,
           mapTypeControlOptions: {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-                    'styled_map']
+                    'styled_map',JNC.Views.gNavionicsOverlay.CHARTS.NAUTICAL]
           }
         });
 
         //Associate the styled map with the MapTypeId and set it to display.
         map.mapTypes.set('styled_map', styledMapType);
+		map.mapTypes.set(JNC.Views.gNavionicsOverlay.CHARTS.NAUTICAL, navionicsNauticalChartOverlay);
+
         //map.setMapTypeId('styled_map');
 		map.setMapTypeId('roadmap');
 				
