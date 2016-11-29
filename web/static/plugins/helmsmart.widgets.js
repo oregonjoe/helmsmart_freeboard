@@ -1174,7 +1174,8 @@
         }
 
         self.getHeight = function () {
-            return 3;
+            //return 3;
+			return currentSettings.blocks;
         }
 
     };
@@ -1454,8 +1455,8 @@
         }
 
         self.getHeight = function () {
-          //  return 2;
-			return currentSettings.blocks;
+            return 2;
+		//	return currentSettings.blocks;
         }
 
     };
