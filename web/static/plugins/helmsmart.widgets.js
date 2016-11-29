@@ -1539,7 +1539,7 @@
                 display_name: "Maximum",
                 type: "number",
                 default_value: 100
-            }
+            },
 			{
 			name: "blocks",
 			display_name: "Height (No. Blocks)",
