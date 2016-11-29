@@ -2397,9 +2397,9 @@
         }
 
         this.getHeight = function () {
-            //return 4;
+            return 4;
 
-		    return currentSettings.blocks;
+		    //return currentSettings.blocks;
        
         }
 
