@@ -282,8 +282,17 @@
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (settingName == "value") 
 			{
-				value = newValue[0].value;
-
+				if( newValue.constructor === Array)
+				{
+					value = newValue[0].value;
+				}
+				else if ( newValue instanceof string || typeof newValue === "string")
+				{
+					value = newValue;
+				}
+				
+				
+				
                 if (currentSettings.animate) {
                     easeTransitionText(value, valueElement, 500);
                 }
