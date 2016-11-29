@@ -1384,6 +1384,8 @@
             var gaugeHeight = height * 0.40;
 			
 			var gaugeTop = height * 0.10;
+			
+			var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
 
             paper = Raphael(gaugeElement.get()[0], width, height);
             paper.clear();
@@ -1392,7 +1394,7 @@
             //var rect = paper.rect( 10, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
 			var rect = paper.rect( 10, gaugeTop, gaugeWidth, gaugeHeight);
             rect.attr({
-                "fill": "#edebeb",
+                "fill": backfill,
                 "stroke": "#A6A3A3"
             });
 
@@ -1451,7 +1453,7 @@
             //gaugeFill = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
 			//gaugeFill = paper.rect(10, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
 			gaugeFill = paper.rect(10, gaugeTop, 0, gaugeHeight);
-			var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+			
 			gaugeFill.attr({
                // "fill": "#edebeb",
 				"fill": backfill,
