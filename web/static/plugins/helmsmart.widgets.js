@@ -1038,6 +1038,15 @@
 
         var currentSettings = settings;
 
+		
+		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+		
+
+	
+		
+		
+		
+		
         // get the color for a fill percentage
         //   these colors match the justGage library for radial guagues //
         function getColor(fillPercent) {
@@ -1078,6 +1087,11 @@
             var gaugeWidth = 30;
             var gaugeHeight = calculatedHeight;
 
+			
+			fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+
+			
+			
 			// get full container space
             paper = Raphael(gaugeElement.get()[0], width, height);
 			// clear widget
@@ -1191,7 +1205,14 @@
                     fillVal = fillVal < 0 ? 0 : fillVal;
 
 					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
-                    var fillColor = getColor(fillVal / calculatedHeight);
+					
+					if(parseInt(fillindex) == 0)
+	                    var fillColor = getColor(fillVal / calculatedHeight);
+					else					
+						var fillcolor = gaugeFillColors[parseInt(fillindex)];	
+							 
+							 
+
 
                     // animate like radial gauges
                     //gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#A6A3A3"}, 500, ">");
@@ -1314,7 +1335,63 @@
 					"value": "10"
 				}
 				]
-			} 
+			},
+						{
+			"name": "gaugeFillColor",
+			"display_name": "Gauge Fill Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Default",
+					"value": "0"
+				}, 	
+			
+				{
+					"name": "Java",
+					"value": "1"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "2"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "3"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "4"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "5"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "6"
+				},
+						{
+					"name": "Plum",
+					"value": "7"
+				}, 
+				{
+					"name": "Apple",
+					"value": "8"
+				},
+						{
+					"name": "Valencia",
+					"value": "9"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "10"
+				},
+				{
+					"name": "Saffron",
+					"value": "11"
+				}
+				]
+			} 			
         ],
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new verticalgaugeWidget(settings));
@@ -1348,7 +1425,8 @@
         //var colors = ["#a9d70b", "#f9c802", "#ff0000"];
 
         var currentSettings = settings;
-
+		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+		var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
         /* get the color for a fill percentage
            these colors match the justGage library for radial guagues */
         function getColor(fillPercent) {
@@ -1385,7 +1463,9 @@
 			
 			var gaugeTop = height * 0.10;
 			
-			var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+			fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+					
+			backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
 
             paper = Raphael(gaugeElement.get()[0], width, height);
             paper.clear();
@@ -1499,7 +1579,11 @@
                     fillVal = fillVal < 0 ? 0 : fillVal;
 					
 					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
-                    var fillColor = getColor(fillVal / calculatedWidth);
+					
+					if(parseInt(fillindex) == 0)
+	                    var fillColor = getColor(fillVal / calculatedHeight);
+					else					
+						var fillcolor = gaugeFillColors[parseInt(fillindex)];	
 
                     //gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
 					gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": "#A6A3A3"}, 500, ">");
@@ -1614,6 +1698,62 @@
 				{
 					"name": "Saffron",
 					"value": "10"
+				}
+				]
+			} ,
+									{
+			"name": "gaugeFillColor",
+			"display_name": "Gauge Fill Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Default",
+					"value": "0"
+				}, 	
+			
+				{
+					"name": "Java",
+					"value": "1"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "2"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "3"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "4"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "5"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "6"
+				},
+						{
+					"name": "Plum",
+					"value": "7"
+				}, 
+				{
+					"name": "Apple",
+					"value": "8"
+				},
+						{
+					"name": "Valencia",
+					"value": "9"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "10"
+				},
+				{
+					"name": "Saffron",
+					"value": "11"
 				}
 				]
 			} 
