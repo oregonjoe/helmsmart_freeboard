@@ -506,11 +506,11 @@ def getedeviceid(deviceapikey):
     log.info("freeboard getedeviceid data Query %s", deviceapikey)
     #query = "select deviceid from user_devices where deviceapikey = %s"
 
-    query = ("select deviceid from user_devices where deviceapikey = '{}' ") \
+    #query = ("select deviceid from user_devices where deviceapikey = '{}' ") \
                 .format(deviceapikey )
 
 
-    log.info("freeboard getedeviceid Query %s", query)
+    #log.info("freeboard getedeviceid Query %s", query)
 
 
     try:
@@ -518,18 +518,19 @@ def getedeviceid(deviceapikey):
 
         cursor = conn.cursor()
         #cursor.execute(query, (deviceapikey,))
-        response= cursor.query(query)
-        #i = cursor.fetchone()
-        log.info("freeboard getedeviceid response %s", response)            
+        cursor.execute("select deviceid from user_devices where deviceapikey = '%s'" % deviceapikey)
+        #response= cursor.query(query)
+        i = cursor.fetchone()
+        log.info("freeboard getedeviceid response %s", i)            
         # see we got any matches
-        #if response.rowcount == 0:
-        if not response:
+        if cursor.rowcount == 0:
+        #if not response:
             # cursor.close
             db_pool.putconn(conn) 
             return ""
         
         else:
-            deviceid = str(response[0])
+            deviceid = str(i[0])
             db_pool.putconn(conn) 
             return deviceid 
 
