@@ -263,6 +263,7 @@
 					}
 				},
 				legend: {
+					enabled: false,
 					itemStyle: {
 						color: '#E0E0E3'
 					},
