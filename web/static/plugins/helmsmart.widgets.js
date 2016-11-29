@@ -972,7 +972,7 @@
 
         this.onSettingsChanged(settings);
     };
-
+/*
     freeboard.loadWidgetPlugin({
         type_name: "pointer",
         display_name: "HelmSmart Array Pointer",
@@ -1036,8 +1036,8 @@
 
         var currentSettings = settings;
 
-        /* get the color for a fill percentage
-           these colors match the justGage library for radial guagues */
+        // get the color for a fill percentage
+           these colors match the justGage library for radial guagues //
         function getColor(fillPercent) {
             // mix colors
             // green rgb(169,215,11) #a9d70b
@@ -1178,7 +1178,7 @@
         }
 
     };
-
+*/
     freeboard.loadWidgetPlugin({
         type_name: "vertical-linear-gauge",
         display_name: "HelmSmart Array Vertical Gauge",
@@ -1216,6 +1216,15 @@
                 type: "number",
                 default_value: 100
             },
+			
+			{
+			name: "blocks",
+			display_name: "Height (No. Blocks)",
+			type: "text",
+			default_value: 3
+			}, 
+			
+			
 				// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 			{
 			"name": "gaugeBackColor",
@@ -1445,7 +1454,8 @@
         }
 
         self.getHeight = function () {
-            return 2;
+          //  return 2;
+			return currentSettings.blocks;
         }
 
     };
