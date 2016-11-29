@@ -248,8 +248,11 @@
 				unitsElement.hide();
 			}
 
-			var valueFontSize = 25;
-
+			var valueFontSize = 30;
+			if(newSettings.size == "small")
+			{
+				valueFontSize = 20;
+			}
 			if(newSettings.size == "big")
 			{
 				valueFontSize = 75;
@@ -349,6 +352,10 @@
                     {
                         name: "Regular",
                         value: "regular"
+                    },
+					{
+                        name: "Small",
+                        value: "small"
                     },
                     {
                         name: "Big",
