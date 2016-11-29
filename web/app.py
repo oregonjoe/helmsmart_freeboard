@@ -507,7 +507,7 @@ def getedeviceid(deviceapikey):
     #query = "select deviceid from user_devices where deviceapikey = %s"
 
     #query = ("select deviceid from user_devices where deviceapikey = '{}' ") \
-                .format(deviceapikey )
+    #            .format(deviceapikey )
 
 
     #log.info("freeboard getedeviceid Query %s", query)
