@@ -248,7 +248,7 @@
 				unitsElement.hide();
 			}
 
-			var valueFontSize = 30;
+			var valueFontSize = 25;
 
 			if(newSettings.size == "big")
 			{
