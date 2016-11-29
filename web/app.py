@@ -504,26 +504,32 @@ def getedeviceid(deviceapikey):
     conn = db_pool.getconn()
 
     log.info("freeboard getedeviceid data Query %s", deviceapikey)
-    query = "select deviceid from user_devices where deviceapikey = %s"
+    #query = "select deviceid from user_devices where deviceapikey = %s"
+
+    query = ('select deviceid from user_devices where deviceapikey = "{}" ') \
+                .format(deviceapikey )
 
 
+    log.info("freeboard getedeviceid Query %s", query)
 
 
     try:
     # first check db to see if deviceapikey is matched to device id
 
         cursor = conn.cursor()
-        cursor.execute(query, (deviceapikey,))
-        i = cursor.fetchone()
-            
+        #cursor.execute(query, (deviceapikey,))
+        response= cursor.query(query)
+        #i = cursor.fetchone()
+        log.info("freeboard getedeviceid response %s", response)            
         # see we got any matches
-        if cursor.rowcount == 0:
+        #if response.rowcount == 0:
+        if not response:
             # cursor.close
             db_pool.putconn(conn) 
             return ""
         
         else:
-            deviceid = str(i[0])
+            deviceid = str(response[0])
             db_pool.putconn(conn) 
             return deviceid 
 
