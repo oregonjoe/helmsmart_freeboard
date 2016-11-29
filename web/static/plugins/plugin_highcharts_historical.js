@@ -31,20 +31,29 @@
 	//
 	// TIME SERIES CHARTS
 	//
-	var highchartsLineWidgetSettings = [{
-{
+	var highchartsLineWidgetSettings = [
+	{
                 name: "showledgen",
                 display_name: "Show Ledgen",
                 type: "boolean",
                 default_value: false
-            },
-	{
+         },
+		{
 		"name": "blocks",
 		"display_name": "Height (No. Blocks)",
 		"type": "option",
 		"default_value": 4,
 		
-		"options": [{
+		"options": [
+		{
+			"name": "0",
+			"value": "0"
+		}, 
+		{
+			"name": "1",
+			"value": "1"
+		}, 
+		{
 			"name": "2",
 			"value": "2"
 		}, 
