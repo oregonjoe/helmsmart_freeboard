@@ -1031,6 +1031,8 @@
         var width, height;
         var valueText, unitsText;
         var minValueLabel, maxValueLabel;
+		var calculatedHeight=0;
+		
         //var currentValue = 0;
         //var colors = ["#a9d70b", "#f9c802", "#ff0000"];
 
@@ -1068,9 +1070,14 @@
 
             width = gaugeElement.width();
             height = 160;
-var myheight = 60 * self.getHeight();
+			var myheight = 60 * self.getHeight();
+			calculatedHeight = 120;
+			calculatedHeight = myheight/2;
+			
+			
+			
             var gaugeWidth = 30;
-            var gaugeHeight = 120;
+            var gaugeHeight = calculatedHeight;
 
             paper = Raphael(gaugeElement.get()[0], width, height);
             paper.clear();
@@ -1155,17 +1162,17 @@ var myheight = 60 * self.getHeight();
 
                     newValue = _.isUndefined(newValue) ? 0 : newValue;
 					var datavalue = newValue[0].value;
-                    var fillVal = 120 * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
+                    var fillVal = calculatedHeight * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
 
-                    fillVal = fillVal > 120 ? 120 : fillVal;
+                    fillVal = fillVal > calculatedHeight ? calculatedHeight : fillVal;
                     fillVal = fillVal < 0 ? 0 : fillVal;
 
 					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
-                    var fillColor = getColor(fillVal / 120);
+                    var fillColor = getColor(fillVal / calculatedHeight);
 
                     // animate like radial gauges
                     //gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#A6A3A3"}, 500, ">");
-					gaugeFill.animate({"height": 120 - fillVal, "fill": backfill, "stroke": "#A6A3A3"}, 500, ">");
+					gaugeFill.animate({"height": calculatedHeight - fillVal, "fill": backfill, "stroke": "#A6A3A3"}, 500, ">");
                     rect.animate({"fill": fillColor, "stroke":  "#A6A3A3" });
 
                     valueText.attr({"text": datavalue});
