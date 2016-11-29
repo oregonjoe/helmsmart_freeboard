@@ -1883,7 +1883,8 @@
 		
 		var newpoly = new Array();
 		var mypolyOptions = {
-		   strokeColor: '#B40B6A',
+		   //strokeColor: '#B40B6A',
+		   strokeColor: gaugeColors[_.isUndefined(currentSettings.trailColor) ? 5 : currentSettings.trailColor],
 		   strokeOpacity: 1.0,
 		   strokeWeight: 5,
 		   visible:true
@@ -2396,7 +2397,10 @@
         }
 
         this.getHeight = function () {
-            return 4;
+            //return 4;
+
+		    return currentSettings.blocks;
+        }
         }
 
         this.onSettingsChanged(settings);
@@ -2408,6 +2412,7 @@
 		description: "Map with historical path from data point array - uses HelmSmart Data source to grab selected span",
         fill_size: true,
         settings: [
+		/*
             {
                 name: "lat",
                 display_name: "Latitude",
@@ -2418,11 +2423,116 @@
                 display_name: "Longitude",
                 type: "calculated"
             },
+			*/
 			{
                 name: "position",
                 display_name: "Position",
                 type: "calculated"
-            }
+            },
+			{
+			name: "blocks",
+			display_name: "Height (No. Blocks)",
+			type: "text",
+			default_value: 4
+			}, 
+			{
+			name: "blocks",
+			display_name: "Height (No. Blocks)",
+			type: "option",
+			default_value: 4,
+			
+			options: [
+			{
+				"name": "0",
+				"value": "0"
+			}, 
+			{
+				"name": "1",
+				"value": "1"
+			}, 
+			{
+				"name": "2",
+				"value": "2"
+			}, 
+			{
+				"name": "3",
+				"value": "3"
+			},
+			{
+				"name": "4",
+				"value": "4"
+			},
+			{
+				"name": "5",
+				"value": "5"
+			},		
+			{
+				"name": "6",
+				"value": "6"
+			},
+			{
+				"name": "7",
+				"value": "7"
+			},
+			{
+				"name": "8",
+				"value": "8"
+			}]
+		}, 
+			
+					// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
+			{
+			"name": "trailColor",
+			"display_name": "Trail Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Java",
+					"value": "0"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "1"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "2"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "3"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "4"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "5"
+				},
+						{
+					"name": "Plum",
+					"value": "6"
+				}, 
+				{
+					"name": "Apple",
+					"value": "7"
+				},
+						{
+					"name": "Valencia",
+					"value": "8"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "9"
+				},
+				{
+					"name": "Saffron",
+					"value": "10"
+				}
+				]
+			},
+			
         ],
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new googleMapWidget(settings));
