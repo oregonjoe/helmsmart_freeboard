@@ -286,7 +286,7 @@
 				{
 					value = newValue[0].value;
 				}
-				else if ( newValue instanceof string || typeof newValue === "string")
+				else if ( typeof newValue === "string")
 				{
 					value = newValue;
 				}
