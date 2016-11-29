@@ -1062,7 +1062,7 @@
             return "rgb(" + Math.round(R) + "," + Math.round(G) + "," + Math.round(B) + ")"
         }
 		       
-		function createvGauge()	;
+		function createvGauge()
 		{
 			
 			width = gaugeElement.width();
