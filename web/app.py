@@ -504,7 +504,8 @@ def getedeviceid(deviceapikey):
     conn = db_pool.getconn()
 
   
-    query = "select deviceid from user_devices where deviceapikey = %s"
+    query = "select deviceid from user_devices where deviceapikey = '%s'"
+
 
     try:
     # first check db to see if deviceapikey is matched to device id
@@ -3905,7 +3906,7 @@ def freeboard_location():
     Interval = request.args.get('interval',"5min")
     resolution = request.args.get('resolution',"")
     response = None
-
+    log.info("freeboard_location deviceapikey %s", deviceapikey)
     starttime = 0
 
     epochtimes = getepochtimes(Interval)
