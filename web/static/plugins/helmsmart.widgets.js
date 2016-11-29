@@ -2216,7 +2216,7 @@
 				               ], 
 							   
 							   
-                {name: 'Styled Map'});
+                {name: 'Night Map'});
 				  
 				/*
                 var mapOptions = {
@@ -2289,7 +2289,7 @@
 			   // Create a map object, and include the MapTypeId to add
         // to the map type control.
         map = new google.maps.Map(element, {
-          center: {lat: 55.647, lng: 37.581},
+          center: {lat: -124.26833, lng: 42.05038},
           zoom: 11,
           mapTypeControlOptions: {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
@@ -2299,7 +2299,8 @@
 
         //Associate the styled map with the MapTypeId and set it to display.
         map.mapTypes.set('styled_map', styledMapType);
-        map.setMapTypeId('styled_map');
+        //map.setMapTypeId('styled_map');
+		map.setMapTypeId('roadmap');
 				
 			//}
 
