@@ -1086,7 +1086,7 @@
 			//rect = paper.rec(x pos, y pos, width, height, radius)
             //rect = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
 			// set vBar top to 10% of the space
-			rect = paper.rect(width / 4 - gaugeWidth / 2, height*0.10, gaugeWidth, gaugeHeight);
+			rect = paper.rect(width / 4 - gaugeWidth / 2, gaugeTop, gaugeWidth, gaugeHeight);
 			
             rect.attr({
               //  "fill": "#edebeb",
@@ -1325,6 +1325,7 @@
 	var hgaugeID = 0;
 	freeboard.addStyle('.hgauge-widget-wrapper', "width: 100%;text-align: center;");
 	freeboard.addStyle('.hgauge-widget', "width:260px;height:80px;display:inline-block;");
+		freeboard.addStyle('.hgauge-widget', "width:100%;100%;display:inline-block;");
 	
    var horzinalgaugeWidget = function (settings) {
        //var titleElement = $('<h2 class="section-title"></h2>');
@@ -1340,6 +1341,7 @@
         var width, height;
         var valueText, unitsText;
         var minValueLabel, maxValueLabel;
+		var calculatedWidth=160;
         //var currentValue = 0;
         //var colors = ["#a9d70b", "#f9c802", "#ff0000"];
 
@@ -1369,12 +1371,13 @@
             return "rgb(" + Math.round(R) + "," + Math.round(G) + "," + Math.round(B) + ")"
         }
 
-        self.render = function (element) {
-            $(element).append(titleElement.html(currentSettings.title)).append(gaugeElement);
-
-            width = gaugeElement.width();
+		function createhGauge()
+		{
+			width = gaugeElement.width();
             height = 160;
-
+			
+			calculatedWidth = width * 0.75;
+			
             var gaugeWidth = 160;
             var gaugeHeight = 30;
 
@@ -1444,6 +1447,12 @@
                 "fill": "#edebeb",
                 "stroke":  "#A6A3A3"
             });
+		}
+		
+        self.render = function (element) {
+            $(element).append(titleElement.html(currentSettings.title)).append(gaugeElement);
+
+           createhGauge();
         }
 
         self.onSettingsChanged = function (newSettings) {
@@ -1462,6 +1471,8 @@
             }
 
             titleElement.html(newSettings.title);
+			
+			 createhGauge();
         }
 
         self.onCalculatedValueChanged = function (settingName, newValue) {
@@ -1488,8 +1499,8 @@
         }
 
         self.getHeight = function () {
-            return 2;
-		//	return currentSettings.blocks;
+          //  return 2;
+		    return currentSettings.blocks;
         }
 
     };
@@ -1529,6 +1540,70 @@
                 type: "number",
                 default_value: 100
             }
+			{
+			name: "blocks",
+			display_name: "Height (No. Blocks)",
+			type: "text",
+			default_value: 3
+			}, 
+			
+			
+				// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
+			{
+			"name": "gaugeBackColor",
+			"display_name": "Gauge BackGround Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Default",
+					"value": "11"
+				},
+				{
+					"name": "Java",
+					"value": "0"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "1"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "2"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "3"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "4"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "5"
+				},
+						{
+					"name": "Plum",
+					"value": "6"
+				}, 
+				{
+					"name": "Apple",
+					"value": "7"
+				},
+						{
+					"name": "Valencia",
+					"value": "8"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "9"
+				},
+				{
+					"name": "Saffron",
+					"value": "10"
+				}
+				]
+			} 
         ],
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new horzinalgaugeWidget(settings));
