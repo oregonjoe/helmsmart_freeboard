@@ -2400,7 +2400,7 @@
             //return 4;
 
 		    return currentSettings.blocks;
-        }
+       
         }
 
         this.onSettingsChanged(settings);
