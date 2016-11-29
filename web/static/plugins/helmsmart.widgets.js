@@ -2291,15 +2291,15 @@
         map = new google.maps.Map(element, {
           center: {lat: 55.647, lng: 37.581},
           zoom: 11,
-         // mapTypeControlOptions: {
-         //   mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-         //           'styled_map']
-         // }
+          mapTypeControlOptions: {
+            mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+                    'styled_map']
+          }
         });
 
         //Associate the styled map with the MapTypeId and set it to display.
-        //map.mapTypes.set('styled_map', styledMapType);
-       // map.setMapTypeId('styled_map');
+        map.mapTypes.set('styled_map', styledMapType);
+        map.setMapTypeId('styled_map');
 				
 			//}
 
