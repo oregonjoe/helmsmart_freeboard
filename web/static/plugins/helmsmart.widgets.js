@@ -1157,7 +1157,7 @@
                     fillVal = fillVal > 120 ? 120 : fillVal;
                     fillVal = fillVal < 0 ? 0 : fillVal;
 
-					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
+					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
                     var fillColor = getColor(fillVal / 120);
 
                     // animate like radial gauges
