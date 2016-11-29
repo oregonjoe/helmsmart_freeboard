@@ -1426,8 +1426,8 @@
             //unitsText = paper.text(gaugeWidth +50 ,  height  / 3 + 20, units);
 			//valueText = paper.text(width -30  , height  / 3, "");
             //unitsText = paper.text(width -30 ,  height  / 3 + 20, units);	
-			valueText = paper.text(width -30  , height  / 3, "");
-            unitsText = paper.text(width -30 ,  height  / 3 + 20, units);	
+			valueText = paper.text(width -35  , height  * 0.3 , "");
+            unitsText = paper.text(width -35 ,  height  * 0.3 + 20, units);	
 			
             valueText.attr({
                 "font-family": "arial",
@@ -1451,9 +1451,10 @@
             //gaugeFill = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
 			//gaugeFill = paper.rect(10, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
 			gaugeFill = paper.rect(10, gaugeTop, 0, gaugeHeight);
-			
+			var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
 			gaugeFill.attr({
-                "fill": "#edebeb",
+               // "fill": "#edebeb",
+				"fill": backfill,
                 "stroke":  "#A6A3A3"
             });
 		}
@@ -1494,7 +1495,8 @@
 
                     fillVal = fillVal > calculatedWidth ? calculatedWidth : fillVal;
                     fillVal = fillVal < 0 ? 0 : fillVal;
-
+					
+					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
                     var fillColor = getColor(fillVal / calculatedWidth);
 
                     //gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
