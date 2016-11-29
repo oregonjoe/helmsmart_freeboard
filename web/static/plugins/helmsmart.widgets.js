@@ -1911,7 +1911,7 @@
                     center: new google.maps.LatLng(37.235, -115.811111),
                     disableDefaultUI: false,
                     draggable: true,
-                    styles: [
+                    styles: [ /*
                         {"featureType": "water", "elementType": "geometry", "stylers": [
                             {"color": "#052C84"}
                         ]},
@@ -1966,7 +1966,7 @@
                             {"lightness": 17},
                             {"weight": 1.2}
                         ]}
-                    ]
+                  */  ] 
                 };
 
                 map = new google.maps.Map(element, mapOptions);
