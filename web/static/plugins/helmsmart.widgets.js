@@ -1071,6 +1071,8 @@
             width = gaugeElement.width();
             height = 160;
 			var myheight = 60 * self.getHeight();
+			height = myheight;
+			
 			calculatedHeight = 120;
 			calculatedHeight = myheight/2;
 			
