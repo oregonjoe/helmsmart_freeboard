@@ -1059,13 +1059,16 @@
 
             return "rgb(" + Math.round(R) + "," + Math.round(G) + "," + Math.round(B) + ")"
         }
+		       
+			
+		
 
         self.render = function (element) {
             $(element).append(titleElement.html(currentSettings.title)).append(gaugeElement);
 
             width = gaugeElement.width();
             height = 160;
-
+var myheight = 60 * self.getHeight();
             var gaugeWidth = 30;
             var gaugeHeight = 120;
 
