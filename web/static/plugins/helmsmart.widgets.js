@@ -1342,6 +1342,8 @@
         var valueText, unitsText;
         var minValueLabel, maxValueLabel;
 		var calculatedWidth=160;
+		var calculatedHeight=160;
+				
         //var currentValue = 0;
         //var colors = ["#a9d70b", "#f9c802", "#ff0000"];
 
@@ -1375,17 +1377,20 @@
 		{
 			width = gaugeElement.width();
             height = 160;
-			
+			var myheight = 60 * self.getHeight();
 			calculatedWidth = width * 0.75;
 			
-            var gaugeWidth = 160;
+            var gaugeWidth = calculatedWidth;
             var gaugeHeight = 30;
+			
+			var gaugeTop = myheight * 0.10;
 
             paper = Raphael(gaugeElement.get()[0], width, height);
             paper.clear();
 			
-            //var rect = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
-            var rect = paper.rect( 10, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
+           //rect = paper.rec(x pos, y pos, width, height, radius)
+            //var rect = paper.rect( 10, height / 3 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
+			var rect = paper.rect( 10, gaugeTop, gaugeWidth, gaugeHeight);
             rect.attr({
                 "fill": "#edebeb",
                 "stroke": "#A6A3A3"
@@ -1419,6 +1424,8 @@
 
 			//valueText = paper.text(gaugeWidth +50  , height  / 3, "");
             //unitsText = paper.text(gaugeWidth +50 ,  height  / 3 + 20, units);
+			//valueText = paper.text(width -30  , height  / 3, "");
+            //unitsText = paper.text(width -30 ,  height  / 3 + 20, units);	
 			valueText = paper.text(width -30  , height  / 3, "");
             unitsText = paper.text(width -30 ,  height  / 3 + 20, units);	
 			
@@ -1442,7 +1449,9 @@
 
             // fill to 0 percent
             //gaugeFill = paper.rect(width / 2 - gaugeWidth / 2, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
-			gaugeFill = paper.rect(10, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
+			//gaugeFill = paper.rect(10, height / 3 - gaugeHeight / 2, 0, gaugeHeight);
+			gaugeFill = paper.rect(10, gaugeTop, 0, gaugeHeight);
+			
 			gaugeFill.attr({
                 "fill": "#edebeb",
                 "stroke":  "#A6A3A3"
@@ -1481,12 +1490,12 @@
 
                     newValue = _.isUndefined(newValue) ? 0 : newValue;
 					var datavalue = newValue[0].value;
-                    var fillVal = 160 * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
+                    var fillVal = calculatedWidth * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
 
-                    fillVal = fillVal > 160 ? 160 : fillVal;
+                    fillVal = fillVal > calculatedWidth ? calculatedWidth : fillVal;
                     fillVal = fillVal < 0 ? 0 : fillVal;
 
-                    var fillColor = getColor(fillVal / 160);
+                    var fillColor = getColor(fillVal / calculatedWidth);
 
                     //gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
 					gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": "#A6A3A3"}, 500, ">");
