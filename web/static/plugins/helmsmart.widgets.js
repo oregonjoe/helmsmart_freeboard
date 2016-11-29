@@ -1008,8 +1008,8 @@
 
  var vgaugeID = 0;
 	freeboard.addStyle('.vgauge-widget-wrapper', "width: 100%;text-align: center;");
-	freeboard.addStyle('.vgauge-widget', "width:240px;height:160px;display:inline-block;");
-	
+	//freeboard.addStyle('.vgauge-widget', "width:240px;height:160px;display:inline-block;");
+	freeboard.addStyle('.vgauge-widget', "width:100%;height:100%;display:inline-block;");
 	
  var verticalgaugeWidget = function (settings) {
        // var titleElement = $('<h2 class="section-title"></h2>');
@@ -1074,7 +1074,8 @@
 
             rect = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, gaugeHeight);
             rect.attr({
-                "fill": "#edebeb",
+              //  "fill": "#edebeb",
+				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
                 "stroke": "#A6A3A3"
             });
 
@@ -1121,7 +1122,8 @@
             // fill to 0 percent
             gaugeFill = paper.rect(width / 3 - gaugeWidth / 2, height / 2 - gaugeHeight / 2, gaugeWidth, 0);
             gaugeFill.attr({
-                "fill": "#edebeb",
+               // "fill": "#edebeb",
+				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
                 "stroke":  "#A6A3A3"
             });
         }
@@ -1211,7 +1213,63 @@
                 display_name: "Maximum",
                 type: "number",
                 default_value: 100
-            }
+            },
+				// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
+			{
+			"name": "gaugeBackColor",
+			"display_name": "Gauge BackGround Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Default",
+					"value": "11"
+				},
+				{
+					"name": "Java",
+					"value": "0"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "1"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "2"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "3"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "4"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "5"
+				},
+						{
+					"name": "Plum",
+					"value": "6"
+				}, 
+				{
+					"name": "Apple",
+					"value": "7"
+				},
+						{
+					"name": "Valencia",
+					"value": "8"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "9"
+				},
+				{
+					"name": "Saffron",
+					"value": "10"
+				}
+				]
+			} 
         ],
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new verticalgaugeWidget(settings));
