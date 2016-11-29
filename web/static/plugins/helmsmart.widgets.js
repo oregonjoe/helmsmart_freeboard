@@ -875,7 +875,7 @@
             newInstanceCallback(new sparklineWidget(settings));
         }
     });
-	
+	/*
 	var pgaugeID = 0;
 	freeboard.addStyle('.pgauge-widget-wrapper', "width: 100%;text-align: center;");
 	freeboard.addStyle('.pgauge-widget', "width:150px;height:200px;display:inline-block;");
@@ -972,7 +972,7 @@
 
         this.onSettingsChanged(settings);
     };
-/*
+
     freeboard.loadWidgetPlugin({
         type_name: "pointer",
         display_name: "HelmSmart Array Pointer",
@@ -1005,7 +1005,7 @@
             newInstanceCallback(new pointerWidget(settings));
         }
     });
-
+*/
  var vgaugeID = 0;
 	freeboard.addStyle('.vgauge-widget-wrapper', "width: 100%;text-align: center;");
 	//freeboard.addStyle('.vgauge-widget', "width:240px;height:160px;display:inline-block;");
@@ -1178,7 +1178,7 @@
         }
 
     };
-*/
+
     freeboard.loadWidgetPlugin({
         type_name: "vertical-linear-gauge",
         display_name: "HelmSmart Array Vertical Gauge",
