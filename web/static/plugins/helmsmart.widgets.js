@@ -397,7 +397,7 @@
     var gaugeID = 0;
 	freeboard.addStyle('.gauge-widget-wrapper', "width: 100%;text-align: center;");
 	//freeboard.addStyle('.gauge-widget', "width:200px;height:260px;display:inline-block;");
-	freeboard.addStyle('.gauge-widget', "width:100%;100%;display:inline-block;");
+	freeboard.addStyle('.gauge-widget', "width:90%;90%;display:inline-block;");
 
     var hsgaugeWidget = function (settings) {
         var self = this;
