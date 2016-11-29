@@ -1209,7 +1209,7 @@
 					if(parseInt(fillindex) == 0)
 	                    var fillColor = getColor(fillVal / calculatedHeight);
 					else					
-						var fillcolor = gaugeFillColors[parseInt(fillindex)];	
+						var fillColor = gaugeFillColors[parseInt(fillindex)];	
 							 
 							 
 
@@ -1583,7 +1583,7 @@
 					if(parseInt(fillindex) == 0)
 	                    var fillColor = getColor(fillVal / calculatedHeight);
 					else					
-						var fillcolor = gaugeFillColors[parseInt(fillindex)];	
+						var fillColor = gaugeFillColors[parseInt(fillindex)];	
 
                     //gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
 					gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": "#A6A3A3"}, 500, ">");
