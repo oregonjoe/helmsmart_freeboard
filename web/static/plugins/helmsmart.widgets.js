@@ -1157,10 +1157,12 @@
                     fillVal = fillVal > 120 ? 120 : fillVal;
                     fillVal = fillVal < 0 ? 0 : fillVal;
 
+					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
                     var fillColor = getColor(fillVal / 120);
 
                     // animate like radial gauges
-                    gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#A6A3A3"}, 500, ">");
+                    //gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#A6A3A3"}, 500, ">");
+					gaugeFill.animate({"height": 120 - fillVal, "fill": backfill, "stroke": "#A6A3A3"}, 500, ">");
                     rect.animate({"fill": fillColor, "stroke":  "#A6A3A3" });
 
                     valueText.attr({"text": datavalue});
