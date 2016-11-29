@@ -1037,7 +1037,7 @@
         var currentSettings = settings;
 
         // get the color for a fill percentage
-           these colors match the justGage library for radial guagues //
+        //   these colors match the justGage library for radial guagues //
         function getColor(fillPercent) {
             // mix colors
             // green rgb(169,215,11) #a9d70b
