@@ -47,7 +47,7 @@
 		"options": [
 		{
 			"name": "0",
-			"value": "0"
+			"value": "1"
 		}, 
 		{
 			"name": "1",
