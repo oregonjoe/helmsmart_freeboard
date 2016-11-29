@@ -32,16 +32,46 @@
 	// TIME SERIES CHARTS
 	//
 	var highchartsLineWidgetSettings = [{
-		"name": "timeframe",
-		"display_name": "Timeframe (s)",
-		"type": "text",
-		"description": "Specify the last number of seconds you want to see.",
-		"default_value": 60
-	}, {
+{
+                name: "showledgen",
+                display_name: "Show Ledgen",
+                type: "boolean",
+                default_value: false
+            },
+	{
 		"name": "blocks",
 		"display_name": "Height (No. Blocks)",
-		"type": "text",
-		"default_value": 4
+		"type": "option",
+		"default_value": 4,
+		
+		"options": [{
+			"name": "2",
+			"value": "2"
+		}, 
+		{
+			"name": "3",
+			"value": "3"
+		},
+		{
+			"name": "4",
+			"value": "4"
+		},
+		{
+			"name": "5",
+			"value": "5"
+		},		
+		{
+			"name": "6",
+			"value": "6"
+		},
+		{
+			"name": "7",
+			"value": "7"
+		},
+		{
+			"name": "8",
+			"value": "8"
+		}]
 	}, 
 	
 	{
@@ -263,7 +293,7 @@
 					}
 				},
 				legend: {
-					enabled: false,
+					enabled: currentSettings.showledgen,
 					itemStyle: {
 						color: '#E0E0E3'
 					},
