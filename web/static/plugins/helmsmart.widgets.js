@@ -289,7 +289,7 @@
 				{
 					value = newValue[0].value;
 				}
-				else if ( typeof newValue === "string")
+				else 
 				{
 					value = newValue;
 				}
@@ -805,50 +805,53 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
-			// newValue is an array of arrays
-			// each sub arry is a series of data points
-			// there is an arry for each sparkline
-			if( newValue.constructor === Array)
+			if (settingName == "value") 
 			{
-					
-				// get number of points to plot for the series
-				// assume all series have the saem number of points ??
-				length=newValue[0].length;
-				
-				for(i=0; i< length; i++)
+				// newValue is an array of arrays
+				// each sub arry is a series of data points
+				// there is an arry for each sparkline
+				if( newValue.constructor === Array)
 				{
-					// empty the series points
-					arrayvalues = [];
+						
+					// get number of points to plot for the series
+					// assume all series have the saem number of points ??
+					length=newValue[0].length;
 					
-					// add a point from each series
-					for(j=0; j< newValue.length; j++)
-						arrayvalues.push(newValue[j][i].value);
+					for(i=0; i< length; i++)
+					{
+						// empty the series points
+						arrayvalues = [];
 						
-						// now pass the serries of points into the plot routine 
-						if (currentSettings.legend)
-						{
-						
-							addValueToSparkline(sparklineElement,  arrayvalues, currentSettings.legend.split(","));
-						} else 
-						{
+						// add a point from each series
+						for(j=0; j< newValue.length; j++)
+							arrayvalues.push(newValue[j][i].value);
 							
-								addValueToSparkline(sparklineElement, arrayvalues);
+							// now pass the serries of points into the plot routine 
+							if (currentSettings.legend)
+							{
 							
-						}
+								addValueToSparkline(sparklineElement,  arrayvalues, currentSettings.legend.split(","));
+							} else 
+							{
+								
+									addValueToSparkline(sparklineElement, arrayvalues);
+								
+							}
+					}
 				}
-			}
-			else 
-			{
-					
-				// now pass the point into the plot routine 
-					if (currentSettings.legend) {
-					
-						addValueToSparkline(sparklineElement,  newValue, currentSettings.legend.split(","));
-					} else {
+				else 
+				{
 						
-							addValueToSparkline(sparklineElement, newValue);
+					// now pass the point into the plot routine 
+						if (currentSettings.legend) {
 						
-					}	
+							addValueToSparkline(sparklineElement,  newValue, currentSettings.legend.split(","));
+						} else {
+							
+								addValueToSparkline(sparklineElement, newValue);
+							
+						}	
+				}
 			}
         }
 
