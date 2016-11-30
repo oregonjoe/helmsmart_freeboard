@@ -2378,14 +2378,14 @@
             }
         }
 
-		  this.sendValue = function (url) {
+		  this.sendValue = function (url,new_val ) {
 			     freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
                 });
 		  }
 		  
 		  
-		this.onClick = function(e) {
-            e.preventDefault()
+		this.onClick = function(element) {
+            element.preventDefault()
 
             var new_val = !isOn
             this.onCalculatedValueChanged('value', new_val);
@@ -2394,7 +2394,7 @@
                 freeboard.showDialog($("<div align='center'>url undefined</div>"), "Error!", "OK", null, function () {
                 });
             else {
-                this.sendValue(url);
+                this.sendValue(url, new_val);
             }
         }
 		
