@@ -542,7 +542,7 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
-            if (!_.isUndefined(gaugeObject)) {
+            if (!_.isUndefined(compassObject)) {
 				
 				var datavalue;
 					
@@ -821,7 +821,7 @@
 	//freeboard.addStyle('.compass-widget', "width:200px;height:260px;display:inline-block;");
 	freeboard.addStyle('.compass-widget', "width:75%;75%;display:inline-block;");
 
-    var hsgaugeWidget = function (settings) {
+    var hscompassWidget = function (settings) {
         var self = this;
 		var fillcolor = [];
 		//var myheight = 60 * this.getHeight();
@@ -948,7 +948,7 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
-            if (!_.isUndefined(gaugeObject)) {
+            if (!_.isUndefined(compassObject)) {
 				
 				var datavalue;
 					
@@ -956,10 +956,10 @@
 					{
 						if(newValue.length)
 						{
-							gaugeObject.refresh(Number(newValue[0].value));
+							compassObject.refresh(Number(newValue[0].value));
 						}
 						else
-							gaugeObject.refresh(Number(99999));
+							compassObject.refresh(Number(99999));
 					}
             }
 			
