@@ -552,7 +552,8 @@
 					{
 						if(newValue.length)
 						{
-							gaugeObject.symbol = "NE";
+							gaugeObject.label = "NE";
+							//gaugeObject.symbol = "NE";
 							gaugeObject.refresh(Number(newValue[0].value));
 							
 						}
