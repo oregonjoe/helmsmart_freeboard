@@ -2389,7 +2389,10 @@
             element.preventDefault()
 
             var new_val = !isOn
-            this.onCalculatedValueChanged('value', new_val);
+			var new_val_array = []
+			new_val_array.push(new_val);
+			
+            this.onCalculatedValueChanged('value', new_val_array);
             url =  currentSettings.apikey;
             if (_.isUndefined(url))
                 freeboard.showDialog($("<div align='center'>url undefined</div>"), "Error!", "OK", null, function () {
