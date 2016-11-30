@@ -2971,6 +2971,20 @@ def freeboard_environmental():
       resolution = epochtimes[2]
     #resolution = 60
 
+
+    strvalue = ""
+    value1 = '---'
+    value2 = '---'
+    value3 = '---'
+    value4 = '---'
+
+    temperature=[]
+    atmospheric_pressure=[]
+    humidity=[]
+    
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+
     deviceid = getedeviceid(deviceapikey)
     
     log.info("freeboard deviceid %s", deviceid)
@@ -3074,13 +3088,15 @@ def freeboard_environmental():
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing', 'update':'False','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity))})     
       
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing', 'update':'False','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity))})     
 
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
     
@@ -3096,7 +3112,10 @@ def freeboard_environmental():
       atmospheric_pressure=[]
       humidity=[]
 
+      ts =startepoch*1000
 
+
+      
       points = list(response.get_points())
 
       #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
@@ -3112,15 +3131,15 @@ def freeboard_environmental():
           
         if point['temperature'] is not None: 
           value1 = convertfbunits(point['temperature'], 0)
-          temperature.append({'epoch':ts, 'value':value1})
+        temperature.append({'epoch':ts, 'value':value1})
           
         if point['atmospheric_pressure'] is not None:         
           value2 = convertfbunits(point['atmospheric_pressure'], 10)
-          atmospheric_pressure.append({'epoch':ts, 'value':value2})
+        atmospheric_pressure.append({'epoch':ts, 'value':value2})
                     
         if point['humidity'] is not None:         
           value3 = convertfbunits(point['humidity'], 26)
-          humidity.append({'epoch':ts, 'value':value3})
+        humidity.append({'epoch':ts, 'value':value3})
 
           
         #mydatetimestr = str(point['time'])
@@ -4062,7 +4081,7 @@ def freeboard_location():
  
       points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
        # log.info('freeboard:  InfluxDB-Cloud point%s:', point)
