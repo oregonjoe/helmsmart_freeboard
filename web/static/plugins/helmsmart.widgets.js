@@ -554,7 +554,7 @@
         }
 
         this.onSettingsChanged = function (newSettings) {
-            if (newSettings.gaugeStyle != currentSettings.gaugeStyle || newSettings.min_value != currentSettings.min_value || newSettings.max_value != currentSettings.max_value || newSettings.units != currentSettings.units) {
+            if (newSettings.gaugeStyle != currentSettings.gaugeStyle || newSettings.min_value != currentSettings.min_value || newSettings.max_value != currentSettings.max_value || newSettings.units != currentSettings.units || newSettings.units != currentSettings.units) {
 				
 				if(newSettings.gaugeStyle == "compass")
 				{
@@ -2378,6 +2378,27 @@
             }
         }
 
+		  this.sendValue = function (url) {
+			     freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
+                });
+		  }
+		  
+		  
+		this.onClick = function(e) {
+            e.preventDefault()
+
+            var new_val = !isOn
+            this.onCalculatedValueChanged('value', new_val);
+            url =  currentSettings.apikey;
+            if (_.isUndefined(url))
+                freeboard.showDialog($("<div align='center'>url undefined</div>"), "Error!", "OK", null, function () {
+                });
+            else {
+                this.sendValue(url);
+            }
+        }
+		
+		
         this.render = function (element) {
             $(element).append(titleElement).append(indicatorElement).append(stateElement);
         }
@@ -2436,7 +2457,12 @@
 	            name: "off_text",
 	            display_name: "Off Text",
 	            type: "calculated"
-	        }
+	        },
+			 {
+                name: "apikey",
+                display_name: "API KEY",
+                type: "text"
+            },
         ],
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new indicatorWidget(settings));
