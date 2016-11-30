@@ -2418,12 +2418,6 @@
         display_name: "HelmSmart Array Google Map",
 		description: "Map with historical path from data point array - uses HelmSmart Data source to grab selected span",
         fill_size: true,
-		"external_scripts": [
-				//"https://webapiv2.navionics.com/dist/webapi/webapi/webapi.min.no-dep.js",
-				//"https://webapiv2.navionics.com/dist/webapi/webapi.min.css"
-			],
-		
-		
         settings: [
 		/*
             {
