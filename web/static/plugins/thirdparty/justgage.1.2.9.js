@@ -852,10 +852,12 @@ JustGage.prototype.refresh = function(val, max) {
       "text": displayVal
     });
     setDy(obj.txtValue, obj.params.valueFontSize, obj.params.valueY);
+
+  }
+  
 	// refresh label value
 	setDy(obj.txtLabel, obj.params.labelFontSize, obj.params.labelY);
-  }
-
+	
   var rvl = obj.config.value;
   if (obj.config.reverse) {
     rvl = (obj.config.max * 1) + (obj.config.min * 1) - (obj.config.value * 1);
