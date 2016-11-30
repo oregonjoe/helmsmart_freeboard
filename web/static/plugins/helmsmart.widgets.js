@@ -494,7 +494,7 @@
 					if (val == 99999) 
 						return '---';
 					else
-						return "NW <BR> " + val;
+						return "[NW]" + val;
 					
 				},
 
@@ -550,8 +550,9 @@
 					{
 						if(newValue.length)
 						{
-							gaugeObject.refresh(Number(newValue[0].value));
 							gaugeObject.label = "NorthWest";
+							gaugeObject.refresh(Number(newValue[0].value));
+							
 						}
 						else
 							gaugeObject.refresh(Number(99999));
