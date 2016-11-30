@@ -489,6 +489,13 @@
 				
 				pointer: true,
 				gaugeWidthScale: 0.5,
+				
+				 textRenderer: function(val) {
+					if (val = 999999) {
+						return '---';
+					} 
+				},
+
 				/*
 				pointerOptions: {
 				  toplength: -15,
@@ -543,10 +550,11 @@
 						{
 							gaugeObject.refresh(Number(newValue[0].value));
 						}
-						//else
-						//	gaugeObject.refresh(Number(newValue[0].value));
+						else
+							gaugeObject.refresh(Number(999999));
 					}
             }
+			
         }
 
         this.onDispose = function () {
