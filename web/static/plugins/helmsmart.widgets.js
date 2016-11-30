@@ -2344,7 +2344,8 @@
 		//map.mapTypes.set(JNC.Views.gNavionicsOverlay.CHARTS.NAUTICAL, navionicsNauticalChartOverlay);
 
         //map.setMapTypeId('styled_map');
-		map.setMapTypeId('roadmap');
+		//map.setMapTypeId('roadmap');
+		map.setMapTypeId(_.isUndefined(currentSettings.mapstyle) ? 'roadmap' : currentSettings.mapstyle);
 				
 			//}
 
@@ -2526,6 +2527,34 @@
 				"value": "8"
 			}]
 		}, 
+		// mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',  'styled_map']
+		 {
+                name: "mapstyle",
+                display_name: "Map Style",
+                type: "option",
+                options: [
+                    {
+                        name: "Map",
+                        value: "roadmap"
+                    },
+					{
+                        name: "Sat",
+                        value: "satellite"
+                    },
+                    {
+                        name: "Hybrid",
+                        value: "hybrid"
+                    },
+					{
+                        name: "Terrain",
+                        value: "terrain"
+                    },
+					{
+                        name: "Night",
+                        value: "styled_map"
+                    }
+                ]
+            },
 			
 					// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
 			{
