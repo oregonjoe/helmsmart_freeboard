@@ -209,6 +209,10 @@ JustGage = function(config) {
     // counter : bool
     // animate level number change
     counter: kvLookup('counter', config, dataset, false),
+	
+	// compass : bool
+    // replaces label field with compass vales (North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest)
+    compass: kvLookup('compass', config, dataset, false),
 
     // decimals : int
     // number of digits after floating point
@@ -793,7 +797,8 @@ JustGage.prototype.refresh = function(val, max) {
 
   var obj = this;
   var displayVal, color, max = max || null;
-
+  var displayLabel;
+  
   // set new max
   if (max !== null) {
     obj.config.max = max;
@@ -835,6 +840,39 @@ JustGage.prototype.refresh = function(val, max) {
 
   color = getColor(val, (val - obj.config.min) / (obj.config.max - obj.config.min), obj.config.levelColors, obj.config.noGradient, obj.config.customSectors);
 
+  
+  if (obj.config.compass)
+  {
+	  displayLabel = "INVALID"
+	  if(displayVal >=0 && displayVal < 22)
+		displayLabel = "North";  
+	  else if(displayVal >=22 && displayVal < 67)
+		displayLabel = "NorthEast";  
+	  else if(displayVal >=67 && displayVal < 112)
+		displayLabel = "East"; 
+	  else if(displayVal >=112 && displayVal < 158)
+		displayLabel = "SouthEast"; 
+	  else if(displayVal >=158 && displayVal < 204)
+		displayLabel = "South"; 
+	  else if(displayVal >=204 && displayVal < 250)
+		displayLabel = "SouthWest"; 
+	  else if(displayVal >=250 && displayVal < 296)
+		displayLabel = "West"; 	
+	  else if(displayVal >=296 && displayVal < 338)
+		displayLabel = "NorthWest"; 
+	  else if(displayVal >=338 && displayVal < 360)
+		displayLabel = "North"; 
+	
+	  	// refresh label value
+	obj.txtLabel.attr({
+      "text": displayLabel
+    });
+	
+	setDy(obj.txtLabel, obj.params.labelFontSize, obj.params.labelY);
+	  
+  }
+  
+  
   if (obj.config.textRenderer) {
     displayVal = obj.config.textRenderer(displayVal);
   } else if (obj.config.humanFriendly) {
@@ -855,12 +893,7 @@ JustGage.prototype.refresh = function(val, max) {
 
   }
   
-	// refresh label value
-	obj.txtLabel.attr({
-      "text": obj.config.symbol
-    });
-	
-	setDy(obj.txtLabel, obj.params.labelFontSize, obj.params.labelY);
+
 	
   var rvl = obj.config.value;
   if (obj.config.reverse) {

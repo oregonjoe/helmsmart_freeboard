@@ -487,7 +487,7 @@
 				
 			
 				donut: currentSettings.fullcircle,
-				
+				compass: true,
 				
 				pointer: true,
 				gaugeWidthScale: 0.5,
@@ -552,8 +552,8 @@
 					{
 						if(newValue.length)
 						{
-							gaugeObject.label = "NE";
-							gaugeObject.symbol = "NE";
+							//gaugeObject.label = "NE";
+							//gaugeObject.symbol = "NE";
 							gaugeObject.refresh(Number(newValue[0].value));
 							
 						}
