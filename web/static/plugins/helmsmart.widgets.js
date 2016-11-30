@@ -535,7 +535,17 @@
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (!_.isUndefined(gaugeObject)) {
 				
-                gaugeObject.refresh(Number(newValue[0].value));
+				var datavalue;
+					
+					if( newValue.constructor === Array)
+					{
+						if(newValue.length)
+						{
+							gaugeObject.refresh(Number(newValue[0].value));
+						}
+						//else
+						//	gaugeObject.refresh(Number(newValue[0].value));
+					}
             }
         }
 
@@ -1258,28 +1268,44 @@
                 if (!_.isUndefined(gaugeFill) && !_.isUndefined(valueText)) {
 
                     newValue = _.isUndefined(newValue) ? 0 : newValue;
-					var datavalue = newValue[0].value;
-                    var fillVal = calculatedHeight * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
-
-                    fillVal = fillVal > calculatedHeight ? calculatedHeight : fillVal;
-                    fillVal = fillVal < 0 ? 0 : fillVal;
-
-					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
 					
-					if(parseInt(fillindex) == 0)
-	                    var fillColor = getColor(fillVal / calculatedHeight);
-					else					
-						var fillColor = gaugeFillColors[parseInt(fillindex)];	
+					var datavalue;
+					
+					if( newValue.constructor === Array)
+					{
+						if(newValue.length)
+						{
+							datavalue = newValue[0].value;
+					
+					
+					
+							var fillVal = calculatedHeight * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
+
+							fillVal = fillVal > calculatedHeight ? calculatedHeight : fillVal;
+							fillVal = fillVal < 0 ? 0 : fillVal;
+
+							var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+							
+							if(parseInt(fillindex) == 0)
+								var fillColor = getColor(fillVal / calculatedHeight);
+							else					
+								var fillColor = gaugeFillColors[parseInt(fillindex)];	
 							 
 							 
 
 
-                    // animate like radial gauges
-                    //gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#A6A3A3"}, 500, ">");
-					gaugeFill.animate({"height": calculatedHeight - fillVal, "fill": backfill, "stroke": "#A6A3A3"}, 500, ">");
-                    rect.animate({"fill": fillColor, "stroke":  "#A6A3A3" });
+							// animate like radial gauges
+							//gaugeFill.animate({"height": 120 - fillVal, "fill": "#edebeb", "stroke": "#A6A3A3"}, 500, ">");
+							gaugeFill.animate({"height": calculatedHeight - fillVal, "fill": backfill, "stroke": "#A6A3A3"}, 500, ">");
+							rect.animate({"fill": fillColor, "stroke":  "#A6A3A3" });
 
-                    valueText.attr({"text": datavalue});
+							valueText.attr({"text": datavalue});
+						}
+						else
+							valueText.attr({"text": "---"});
+					}
+					else
+						valueText.attr({"text": newValue});
                 }
             }
         }
@@ -1632,22 +1658,36 @@
                 if (!_.isUndefined(gaugeFill) && !_.isUndefined(valueText)) {
 
                     newValue = _.isUndefined(newValue) ? 0 : newValue;
-					var datavalue = newValue[0].value;
-                    var fillVal = calculatedWidth * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
-
-                    fillVal = fillVal > calculatedWidth ? calculatedWidth : fillVal;
-                    fillVal = fillVal < 0 ? 0 : fillVal;
+					//var datavalue = newValue[0].value;
+					var datavalue;
 					
-					var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+					if( newValue.constructor === Array)
+					{
+						if(newValue.length)
+						{
+							datavalue = newValue[0].value;
 					
-					if(parseInt(fillindex) == 0)
-	                    var fillColor = getColor(fillVal / calculatedHeight);
-					else					
-						var fillColor = gaugeFillColors[parseInt(fillindex)];	
+							var fillVal = calculatedWidth * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
 
-                    //gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
-					gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": "#A6A3A3"}, 500, ">");
-                    valueText.attr({"text": datavalue});
+							fillVal = fillVal > calculatedWidth ? calculatedWidth : fillVal;
+							fillVal = fillVal < 0 ? 0 : fillVal;
+							
+							var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+							
+							if(parseInt(fillindex) == 0)
+								var fillColor = getColor(fillVal / calculatedHeight);
+							else					
+								var fillColor = gaugeFillColors[parseInt(fillindex)];	
+
+							//gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
+							gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": "#A6A3A3"}, 500, ">");
+							valueText.attr({"text": datavalue});
+						}
+						else
+							valueText.attr({"text": "---"});
+					}
+					else
+						valueText.attr({"text": newValue});
                 }
             }
         }
