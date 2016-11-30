@@ -656,7 +656,7 @@
                 default_value: 100
             },
 			
-			
+			/*
 			{
                 name: "fullcircle",
                 display_name: "Full Circle Gauge",
@@ -664,7 +664,7 @@
                 type: "boolean",
                 default_value: false
             },
-			
+			*/
 			{
 			"name": "gaugeStyle",
 			"display_name": "Gauge Style",
