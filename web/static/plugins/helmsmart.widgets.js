@@ -287,14 +287,21 @@
 			{
 				var value;
 				
+				//if(Array.isArray(newValue[0]) && newValue[0].length)
+					
 				if( newValue.constructor === Array)
 				{
-					value = newValue[0].value;
-					
-					if (currentSettings.sparkline) {
-					for(i=0; i< newValue.length; i++)
-                    addValueToSparkline(sparklineElement, newValue[i].value);
+					if(newValue.length)
+					{
+						value = newValue[0].value;
+						
+						if (currentSettings.sparkline) {
+						for(i=0; i< newValue.length; i++)
+						addValueToSparkline(sparklineElement, newValue[i].value);
+						}
 					}
+					else
+						value = "---";
 					
 				}
 				else 
@@ -308,7 +315,8 @@
 				
 				
 				
-                if (currentSettings.animate) {
+                if (currentSettings.animate && !isNaN(value)) {
+					
                     easeTransitionText(value, valueElement, 500);
                 }
                 else {
