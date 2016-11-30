@@ -491,7 +491,7 @@
 				gaugeWidthScale: 0.5,
 				
 				 textRenderer: function(val) {
-					if (val = 999999) 
+					if (val == 99999) 
 						return '---';
 					else
 						return val;
