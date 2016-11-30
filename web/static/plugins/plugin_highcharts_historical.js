@@ -528,8 +528,11 @@
 		self.onCalculatedValueChanged = function(settingName, newarrayValue) {
 			// console.log(settingName, 'newValue:', newValue);
 			var myDataArray =[];
-			if(newarrayValue.length != 0)
+			if( newValue.constructor === Array)
+			{
+				if(newValue.length)
 				{
+			
 					
 					// sort by value
 						newarrayValue.sort(function (a, b) {
@@ -561,14 +564,16 @@
 						}
 					}
 				}
+				
+			}
 
 			var chart = thisWidgetContainer.highcharts();
 			var series = chart.get(settingName);
 			if (series) {
-				var timeframeMS = currentSettings.timeframe * ONE_SECOND_IN_MILIS;
-				var seriesno = settingName;
-				var len = series.data.length;
-				var shift = false;
+				//var timeframeMS = currentSettings.timeframe * ONE_SECOND_IN_MILIS;
+				//var seriesno = settingName;
+				//var len = series.data.length;
+				//var shift = false;
 
 				/*
 				// Check if it should shift the series
