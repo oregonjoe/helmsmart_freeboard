@@ -452,6 +452,28 @@
                 return;
             }
 			var myheight = 60 * self.getHeight();
+			
+			var enableCompass = false;
+			var enablefullCircle= false;
+			
+			if(currentSettings.gaugeStyle == "half")
+			{
+				enableCompass = false;
+				enablefullCircle= false;
+			}
+			else if(currentSettings.gaugeStyle == "full")
+			{
+				enableCompass = false;
+				enablefullCircle= true;
+			}
+			else if(currentSettings.gaugeStyle == "compass")
+				{
+				enableCompass = true;
+				enablefullCircle= true;
+				currentSettings.min_value = 0;
+				currentSettings.max_value = 360;
+			}
+			
             gaugeElement.empty();
 
             gaugeObject = new JustGage({
@@ -461,7 +483,7 @@
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
 				relativeGaugeSize: true,
 				
-				symbol: "NW",
+				//symbol: "NW",
 
 				//gaugeColor: '#F1C232',
 				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
@@ -486,8 +508,8 @@
                 valueFontColor: "#d3d4d4",
 				
 			
-				donut: currentSettings.fullcircle,
-				compass: true,
+				donut: enablefullCircle,
+				compass: enableCompass,
 				
 				pointer: true,
 				gaugeWidthScale: 0.5,
@@ -532,11 +554,31 @@
         }
 
         this.onSettingsChanged = function (newSettings) {
-            if (newSettings.min_value != currentSettings.min_value || newSettings.max_value != currentSettings.max_value || newSettings.units != currentSettings.units) {
+            if (newSettings.gaugeStyle != currentSettings.gaugeStyle || newSettings.min_value != currentSettings.min_value || newSettings.max_value != currentSettings.max_value || newSettings.units != currentSettings.units) {
+				
+				if(newSettings.gaugeStyle == "compass")
+				{
+			
+					currentSettings.min_value = 0;
+					currentSettings.max_value = 360;
+					newSettings.min_value = 0;
+					newSettings.max_value = 360;
+				}
+			
                 currentSettings = newSettings;
                 createGauge();
             }
-            else {
+            else 
+			{
+				if(newSettings.gaugeStyle == "compass")
+				{
+			
+					currentSettings.min_value = 0;
+					currentSettings.max_value = 360;
+					newSettings.min_value = 0;
+					newSettings.max_value = 360;
+				}
+				
                 currentSettings = newSettings;
             }
 
@@ -622,6 +664,28 @@
                 type: "boolean",
                 default_value: false
             },
+			
+			{
+			"name": "gaugeStyle",
+			"display_name": "Gauge Style",
+			"type": "option",
+			"options": [
+				{
+					"name": "Half Circle",
+					"value": "half"
+				},
+				{
+					"name": "Full Circle",
+					"value": "full"
+				},
+				{
+					"name": "Compass",
+					"value": "compass"
+				},
+				]
+			},
+
+			
 			{
                 name: "dropshadow",
                 display_name: "Drop Shadow",
