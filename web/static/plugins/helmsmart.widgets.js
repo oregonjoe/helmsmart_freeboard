@@ -2337,7 +2337,8 @@
             }
             else {
                 window.gmap_initialize = initializeMap;
-                head.js("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=gmap_initialize");
+                //head.js("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=gmap_initialize");
+				  head.js("https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCE0JHB4u3xqbBndHV4RFTa6oRfZrJzP8Y&callback=gmap_initialize");
             }
         }
 
@@ -2418,6 +2419,10 @@
         display_name: "HelmSmart Array Google Map",
 		description: "Map with historical path from data point array - uses HelmSmart Data source to grab selected span",
         fill_size: true,
+		//		"external_scripts": [
+		//		"https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCE0JHB4u3xqbBndHV4RFTa6oRfZrJzP8Y"
+		//	],
+		
         settings: [
 		/*
             {
