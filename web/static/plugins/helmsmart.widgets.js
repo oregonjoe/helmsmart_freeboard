@@ -808,29 +808,47 @@
 			// newValue is an array of arrays
 			// each sub arry is a series of data points
 			// there is an arry for each sparkline
-			
-			// get number of points to plot for the series
-			// assume all series have the saem number of points ??
-			length=newValue[0].length;
-			
-			for(i=0; i< length; i++)
+			if( newValue.constructor === Array)
 			{
-				// empty the series points
-				arrayvalues = [];
-				
-				// add a point from each series
-				for(j=0; j< newValue.length; j++)
-					arrayvalues.push(newValue[j][i].value);
 					
-					// now pass the serries of points into the plot routine 
+				// get number of points to plot for the series
+				// assume all series have the saem number of points ??
+				length=newValue[0].length;
+				
+				for(i=0; i< length; i++)
+				{
+					// empty the series points
+					arrayvalues = [];
+					
+					// add a point from each series
+					for(j=0; j< newValue.length; j++)
+						arrayvalues.push(newValue[j][i].value);
+						
+						// now pass the serries of points into the plot routine 
+						if (currentSettings.legend)
+						{
+						
+							addValueToSparkline(sparklineElement,  arrayvalues, currentSettings.legend.split(","));
+						} else 
+						{
+							
+								addValueToSparkline(sparklineElement, arrayvalues);
+							
+						}
+				}
+			}
+			else 
+			{
+					
+				// now pass the point into the plot routine 
 					if (currentSettings.legend) {
 					
-						addValueToSparkline(sparklineElement,  arrayvalues, currentSettings.legend.split(","));
+						addValueToSparkline(sparklineElement,  newValue, currentSettings.legend.split(","));
 					} else {
 						
-							addValueToSparkline(sparklineElement, arrayvalues);
+							addValueToSparkline(sparklineElement, newValue);
 						
-					}
+					}	
 			}
         }
 
