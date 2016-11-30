@@ -460,6 +460,8 @@
                 min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
 				relativeGaugeSize: true,
+				
+				symbol: "NW",
 
 				//gaugeColor: '#F1C232',
 				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
@@ -494,7 +496,7 @@
 					if (val == 99999) 
 						return '---';
 					else
-						return "[NW]" + val;
+						return val;
 					
 				},
 
@@ -550,7 +552,7 @@
 					{
 						if(newValue.length)
 						{
-							gaugeObject.label = "NorthWest";
+							gaugeObject.symbol = "NE";
 							gaugeObject.refresh(Number(newValue[0].value));
 							
 						}
