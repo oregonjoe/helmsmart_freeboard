@@ -542,7 +542,7 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
-            if (!_.isUndefined(compassObject)) {
+            if (!_.isUndefined(gaugeObject)) {
 				
 				var datavalue;
 					
