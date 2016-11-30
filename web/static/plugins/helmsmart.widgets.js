@@ -283,8 +283,9 @@
 		}
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
-            if (settingName == "value") 
+			if (settingName == "value") 
 			{
+				
 				if( newValue.constructor === Array)
 				{
 					value = newValue[0].value;
@@ -805,12 +806,12 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
-			if (settingName == "value") 
+			//if (settingName == "value") 
 			{
 				// newValue is an array of arrays
 				// each sub arry is a series of data points
 				// there is an arry for each sparkline
-				if( newValue.constructor === Array)
+				//if( newValue.constructor === Array)
 				{
 						
 					// get number of points to plot for the series
@@ -839,19 +840,7 @@
 							}
 					}
 				}
-				else 
-				{
-						
-					// now pass the point into the plot routine 
-						if (currentSettings.legend) {
-						
-							addValueToSparkline(sparklineElement,  newValue, currentSettings.legend.split(","));
-						} else {
-							
-								addValueToSparkline(sparklineElement, newValue);
-							
-						}	
-				}
+				
 			}
         }
 
