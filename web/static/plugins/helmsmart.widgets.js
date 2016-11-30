@@ -285,14 +285,25 @@
         this.onCalculatedValueChanged = function (settingName, newValue) {
 			if (settingName == "value") 
 			{
+				var value;
 				
 				if( newValue.constructor === Array)
 				{
 					value = newValue[0].value;
+					
+					if (currentSettings.sparkline) {
+					for(i=0; i< newValue.length; i++)
+                    addValueToSparkline(sparklineElement, newValue[i].value);
+					}
+					
 				}
 				else 
 				{
 					value = newValue;
+					
+					if (currentSettings.sparkline) {
+                    addValueToSparkline(sparklineElement, value);
+					}
 				}
 				
 				
@@ -304,11 +315,7 @@
                     valueElement.text(value);
                 }
 
-				
-                if (currentSettings.sparkline) {
-					for(i=0; i< newValue.length; i++)
-                    addValueToSparkline(sparklineElement, newValue[i].value);
-                }
+			
             }
         }
 
