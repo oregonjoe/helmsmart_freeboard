@@ -861,7 +861,7 @@
             compassElement.empty();
 
             compassObject = new JustGage({
-                id: thisGaugeID,
+                id: thisCompassID,
                 value: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
                 max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
