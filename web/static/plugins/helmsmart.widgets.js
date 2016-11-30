@@ -814,30 +814,49 @@
 				//if( newValue.constructor === Array)
 				{
 						
-					// get number of points to plot for the series
-					// assume all series have the saem number of points ??
-					length=newValue[0].length;
-					
-					for(i=0; i< length; i++)
+
+					if(Array.isArray(newValue[0]) && newValue[0].length)
 					{
-						// empty the series points
-						arrayvalues = [];
 						
-						// add a point from each series
-						for(j=0; j< newValue.length; j++)
-							arrayvalues.push(newValue[j][i].value);
+						// get number of points to plot for the series
+					// assume all series have the saem number of points ??
+					length=newValue[0].length;			
+						for(i=0; i< length; i++)
+						{
+							// empty the series points
+							arrayvalues = [];
 							
-							// now pass the serries of points into the plot routine 
-							if (currentSettings.legend)
-							{
-							
-								addValueToSparkline(sparklineElement,  arrayvalues, currentSettings.legend.split(","));
-							} else 
-							{
+							// add a point from each series
+							for(j=0; j< newValue.length; j++)
+								arrayvalues.push(newValue[j][i].value);
 								
-									addValueToSparkline(sparklineElement, arrayvalues);
+								// now pass the serries of points into the plot routine 
+								if (currentSettings.legend)
+								{
 								
-							}
+									addValueToSparkline(sparklineElement,  arrayvalues, currentSettings.legend.split(","));
+								} else 
+								{
+									
+										addValueToSparkline(sparklineElement, arrayvalues);
+									
+								}
+						}
+					}
+					else
+					{
+						// now pass the serries of points into the plot routine 
+								if (currentSettings.legend)
+								{
+								
+									addValueToSparkline(sparklineElement,  newValue, currentSettings.legend.split(","));
+								} else 
+								{
+									
+										addValueToSparkline(sparklineElement, newValue);
+									
+								}
+						
 					}
 				}
 				
