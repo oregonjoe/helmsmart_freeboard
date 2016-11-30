@@ -615,7 +615,7 @@
                 display_name: "Full Circle Gauge",
 				description: "Enable for compass style pointer gauge",
                 type: "boolean",
-                default_value: true
+                default_value: false
             },
 			{
                 name: "dropshadow",
@@ -816,6 +816,411 @@
         }
     });
 
+    var compassID = 0;
+	freeboard.addStyle('.compass-widget-wrapper', "width: 100%;text-align: center;");
+	//freeboard.addStyle('.compass-widget', "width:200px;height:260px;display:inline-block;");
+	freeboard.addStyle('.compass-widget', "width:75%;75%;display:inline-block;");
+
+    var hsgaugeWidget = function (settings) {
+        var self = this;
+		var fillcolor = [];
+		//var myheight = 60 * this.getHeight();
+		
+        var thisCompassID = "compass-" + compassID++;
+        var titleElement = $('<h2 class="section-title"></h2>');
+       // var gaugeElement = $('<div class="compass-widget" id="' + thisGaugeID + '" height:'+ myheight + 'px; "></div>');
+		var compassElement = $('<div class="compass-widget" id="' + thisCompassID + '"></div>');
+        var compassObject;
+        var rendered = false;
+
+        var currentSettings = settings;
+		
+		var fillindex = _.isUndefined(currentSettings.compassFillColor) ? 0 : currentSettings.compassFillColor;
+		
+		if(parseInt(fillindex) == 0)
+		{
+			fillcolor.push('#85A137');	
+			fillcolor.push('#85A137');	
+			fillcolor.push('#85A137');	
+			fillcolor.push('#FFC414'); 	
+			fillcolor.push('#FFC414'); 	
+			fillcolor.push('#D0532A'); 				
+			fillcolor.push('#CE1B21');
+
+
+
+		}
+		else
+		 fillcolor.push(gaugeFillColors[parseInt(fillindex)]);
+
+        function createCompass() {
+            if (!rendered) {
+                return;
+            }
+			var myheight = 60 * self.getHeight();
+            compassElement.empty();
+
+            compassObject = new JustGage({
+                id: thisGaugeID,
+                value: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
+                min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
+                max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
+				relativeGaugeSize: true,
+
+				//gaugeColor: '#F1C232',
+				gaugeColor: gaugeColors[_.isUndefined(currentSettings.compassBackColor) ? 11 : currentSettings.compassBackColor],
+				
+				//levelColors: ['#F1C232',],
+				//levelColors: [gaugeFillColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor],],
+				
+				levelColors: fillcolor,
+				
+                label: currentSettings.units,
+                //showInnerShadow: false,
+		
+					//showInnerShadow: true,
+					showInnerShadow: currentSettings.dropshadow,
+					
+					shadowOpacity: 1,
+					shadowSize: 2,
+					shadowVerticalOffset: 2,
+	
+				
+				
+                valueFontColor: "#d3d4d4",
+				
+			
+				donut: currentSettings.fullcircle,
+				
+				
+				pointer: true,
+				gaugeWidthScale: 0.5,
+				
+				 textRenderer: function(val) {
+					if (val == 99999) 
+						return '---';
+					else
+						return val;
+					
+				},
+
+				/*
+				pointerOptions: {
+				  toplength: -15,
+				  bottomlength: 10,
+				  bottomwidth: 12,
+				  color: '#8e8e93',
+				  stroke: '#ffffff',
+				  stroke_width: 2,
+				  stroke_linecap: 'round'
+				},
+				*/
+				    pointerOptions: {
+				  toplength: 10,
+				  bottomlength: 10,
+				  bottomwidth: 8,
+				  //color: '#8e8e93'
+				   color: gaugePointerColors[_.isUndefined(currentSettings.compassPointerColor) ? 0 : currentSettings.compassPointerColor],
+				},
+						
+				
+				
+				counter: true
+            });
+        }
+
+        this.render = function (element) {
+            rendered = true;
+            $(element).append(titleElement).append($('<div class="gauge-widget-wrapper"></div>').append(compassElement));
+            createCompass();
+        }
+
+        this.onSettingsChanged = function (newSettings) {
+            if (newSettings.min_value != currentSettings.min_value || newSettings.max_value != currentSettings.max_value || newSettings.units != currentSettings.units) {
+                currentSettings = newSettings;
+                createCompass();
+            }
+            else {
+                currentSettings = newSettings;
+            }
+
+            titleElement.html(newSettings.title);
+        }
+
+        this.onCalculatedValueChanged = function (settingName, newValue) {
+            if (!_.isUndefined(gaugeObject)) {
+				
+				var datavalue;
+					
+					if( newValue.constructor === Array)
+					{
+						if(newValue.length)
+						{
+							gaugeObject.refresh(Number(newValue[0].value));
+						}
+						else
+							gaugeObject.refresh(Number(99999));
+					}
+            }
+			
+        }
+
+        this.onDispose = function () {
+        }
+
+        this.getHeight = function () { 
+          // return 3;
+			return currentSettings.blocks;
+        }
+
+        this.onSettingsChanged(settings);
+    };
+
+    freeboard.loadWidgetPlugin({
+        type_name: "compass",
+        display_name: "HelmSmart Array Compass",
+		description: "Compass - uses HelmSmart Data source to grab selected array span - plots only first point in array",
+        "external_scripts" : [
+            //"plugins/thirdparty/raphael.2.1.0.min.js",
+            //"plugins/thirdparty/justgage.1.0.1.js"
+			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.4.min.js",
+			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/justgage.1.2.9.js"
+        ],
+        settings: [
+            {
+                name: "title",
+                display_name: "Title",
+                type: "text"
+            },
+            {
+                name: "value",
+                display_name: "Value",
+                type: "calculated"
+            },
+            {
+                name: "units",
+                display_name: "Units",
+                type: "text"
+            },
+            {
+                name: "min_value",
+                display_name: "Minimum",
+                type: "text",
+                default_value: 0
+            },
+            {
+                name: "max_value",
+                display_name: "Maximum",
+                type: "text",
+                default_value: 100
+            },
+			
+			
+			{
+                name: "fullcircle",
+                display_name: "Full Circle Gauge",
+				description: "Enable for compass style pointer gauge",
+                type: "boolean",
+                default_value: true
+            },
+			{
+                name: "dropshadow",
+                display_name: "Drop Shadow",
+                type: "boolean",
+                default_value: true
+            },
+			
+			{
+			name: "blocks",
+			display_name: "Height (No. Blocks)",
+			type: "text",
+			default_value: 4
+			}, 
+			
+			// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
+			{
+			"name": "compassBackColor",
+			"display_name": "Compass BackGround Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Default",
+					"value": "11"
+				},
+				{
+					"name": "Java",
+					"value": "0"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "1"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "2"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "3"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "4"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "5"
+				},
+						{
+					"name": "Plum",
+					"value": "6"
+				}, 
+				{
+					"name": "Apple",
+					"value": "7"
+				},
+						{
+					"name": "Valencia",
+					"value": "8"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "9"
+				},
+				{
+					"name": "Saffron",
+					"value": "10"
+				}
+				]
+			} ,
+						{
+			"name": "compassFillColor",
+			"display_name": "Compass Fill Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Default",
+					"value": "0"
+				}, 	
+			
+				{
+					"name": "Java",
+					"value": "1"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "2"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "3"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "4"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "5"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "6"
+				},
+						{
+					"name": "Plum",
+					"value": "7"
+				}, 
+				{
+					"name": "Apple",
+					"value": "8"
+				},
+						{
+					"name": "Valencia",
+					"value": "9"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "10"
+				},
+				{
+					"name": "Saffron",
+					"value": "11"
+				}
+				]
+			} ,
+			// Default-0, Java-1, Light Green-2,Bittersweet-3, Wild Blue Yonder-4, Pale Turquoise-5,Razzmatazz-6, Plum-7, Apple-8, Valencia-9, Neptune-10, Saffron-11, 
+						{
+			"name": "compassPointerColor",
+			"display_name": "Compass Pointer Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Default",
+					"value": "0"
+				}, 
+				{
+					"name": "Java",
+					"value": "1"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "2"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "3"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "4"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "5"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "6"
+				},
+						{
+					"name": "Plum",
+					"value": "7"
+				}, 
+				{
+					"name": "Apple",
+					"value": "8"
+				},
+						{
+					"name": "Valencia",
+					"value": "9"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "10"
+				},
+				{
+					"name": "Saffron",
+					"value": "11"
+				}
+				]
+			} 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+        ],
+        newInstance: function (settings, newInstanceCallback) {
+            newInstanceCallback(new hsgaugeWidget(settings));
+        }
+    });
 
 	freeboard.addStyle('.sparkline', "width:100%;height: 75px;");
     var sparklineWidget = function (settings) {
