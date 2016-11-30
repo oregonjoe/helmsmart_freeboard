@@ -306,7 +306,7 @@
 					}
 				}
 				
-				
+				value=0;
 				
                 if (currentSettings.animate) {
                     easeTransitionText(value, valueElement, 500);
