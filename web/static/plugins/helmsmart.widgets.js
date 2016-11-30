@@ -816,6 +816,9 @@
         }
     });
 
+	
+	
+	/*
     var compassID = 0;
 	freeboard.addStyle('.compass-widget-wrapper', "width: 100%;text-align: center;");
 	//freeboard.addStyle('.compass-widget', "width:200px;height:260px;display:inline-block;");
@@ -904,17 +907,17 @@
 					
 				},
 
-				/*
-				pointerOptions: {
-				  toplength: -15,
-				  bottomlength: 10,
-				  bottomwidth: 12,
-				  color: '#8e8e93',
-				  stroke: '#ffffff',
-				  stroke_width: 2,
-				  stroke_linecap: 'round'
-				},
-				*/
+				//
+				//pointerOptions: {
+				//  toplength: -15,
+				//  bottomlength: 10,
+				//  bottomwidth: 12,
+				//  color: '#8e8e93',
+				//  stroke: '#ffffff',
+				//  stroke_width: 2,
+				//  stroke_linecap: 'round'
+				//},
+				//
 				    pointerOptions: {
 				  toplength: 10,
 				  bottomlength: 10,
@@ -1222,6 +1225,10 @@
         }
     });
 
+	
+	*/
+	
+	
 	freeboard.addStyle('.sparkline', "width:100%;height: 75px;");
     var sparklineWidget = function (settings) {
         var self = this;
