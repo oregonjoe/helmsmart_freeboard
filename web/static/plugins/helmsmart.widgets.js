@@ -493,6 +493,8 @@
 				 textRenderer: function(val) {
 					if (val = 999999) {
 						return '---';
+					else
+						return val;
 					} 
 				},
 
@@ -551,7 +553,7 @@
 							gaugeObject.refresh(Number(newValue[0].value));
 						}
 						else
-							gaugeObject.refresh(Number(999999));
+							gaugeObject.refresh(Number(99999));
 					}
             }
 			
