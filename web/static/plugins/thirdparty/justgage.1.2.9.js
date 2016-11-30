@@ -856,6 +856,10 @@ JustGage.prototype.refresh = function(val, max) {
   }
   
 	// refresh label value
+	obj.txtLabel.attr({
+      "text": obj.config.symbol
+    });
+	
 	setDy(obj.txtLabel, obj.params.labelFontSize, obj.params.labelY);
 	
   var rvl = obj.config.value;
