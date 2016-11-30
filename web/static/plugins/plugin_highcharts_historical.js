@@ -528,9 +528,9 @@
 		self.onCalculatedValueChanged = function(settingName, newarrayValue) {
 			// console.log(settingName, 'newValue:', newValue);
 			var myDataArray =[];
-			if( newValue.constructor === Array)
+			if( newarrayValue.constructor === Array)
 			{
-				if(newValue.length)
+				if(newarrayValue.length)
 				{
 			
 					
