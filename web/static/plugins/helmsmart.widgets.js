@@ -2362,7 +2362,8 @@
 	
 	freeboard.addStyle('.indicator-light.on', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF; ");
 	freeboard.addStyle('.indicator-light.off', "background-color:#222;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF; ");
-	freeboard.addStyle('.indicator-light.wait', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF; animation: blink .5s step-end infinite alternate;");
+	//freeboard.addStyle('.indicator-light.wait', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF; animation: blink .5s step-end infinite alternate;");
+	freeboard.addStyle('.indicator-light.wait', "border-color:#FDF1DF; animation: blink .5s step-end infinite alternate;");
 	//freeboard.addStyle('.indicator-light.wait', "background-color:#DF5353;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;");
 	
 	//freeboard.addStyle('.indicator-light.wait', "background-color:#DF5353;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;");
@@ -2382,6 +2383,8 @@
         var isOn = false;
         var onText;
         var offText;
+		var stateWaiting = false;
+		var setState = false;
 		
 		/*
 		function flash($element, times) {
@@ -2395,12 +2398,14 @@
 		*/
 
         function updateState() {
-            indicatorElement.toggleClass("on", isOn);
+            //indicatorElement.toggleClass("on", isOn);
 
             if (isOn) {
+				indicatorElement.addClass("on")
                 stateElement.text((_.isUndefined(onText) ? (_.isUndefined(currentSettings.on_text) ? "" : currentSettings.on_text) : onText));
             }
             else {
+				indicatorElement.removeClass("on")
                 stateElement.text((_.isUndefined(offText) ? (_.isUndefined(currentSettings.off_text) ? "" : currentSettings.off_text) : offText));
             }
         }
@@ -2428,6 +2433,8 @@
             request.open('GET', url, true);
             freeboard.showLoadingIndicator(true);
             request.send();
+			
+			stateWaiting = true;
 			indicatorElement.addClass("wait");
 				
 		}
