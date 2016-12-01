@@ -5623,12 +5623,12 @@ def freeboard_switch_bank_status():
         if point['bank0'] is not None:
           bankvalue0 =  point['bank0']
 
-          bankvalue0  = ((bankvalue0 & 0xF0) << 4) | ((bankvalue0 & 0x0F) >> 4)
+          bankvalue0  = ((bankvalue0 & 0x0F) << 4) | ((bankvalue0 & 0xF0) >> 4)
 
         if point['bank1'] is not None:
           bankvalue1 =  point['bank1']
 
-          bankvalue1  = ((bankvalue1 & 0xF0) << 4) | ((bankvalue1 & 0x0F) >> 4)          
+          bankvalue1  = ((bankvalue1 & 0x0F) << 4) | ((bankvalue1 & 0xF0) >> 4)          
 
         log.info('freeboard:  InfluxDB-Cloud bankvalues %s:%s', bankvalue0, bankvalue1)
         
