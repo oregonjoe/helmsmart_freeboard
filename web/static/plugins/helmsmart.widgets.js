@@ -2392,7 +2392,11 @@
 			    // freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
                 //});
 				
-			var url = "http://www.helmsmart.net/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"	
+			///var url = "http://www.helmsmart.net/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"	
+			
+			var url = "https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
+
+
 				
 			request = new XMLHttpRequest();
             if (!request) {
