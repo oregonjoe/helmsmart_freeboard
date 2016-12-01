@@ -5513,7 +5513,23 @@ def freeboard_switch_bank_status():
 
       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
-    query = ('select  median(status) AS switchstatus FROM {} '             
+    query = ('select  median(indic01) as sw0, '
+                     'median(indic02) as sw1, '
+                     'median(indic03) as sw2, '
+                      'median(indic04) as sw3, '
+                      'median(indic05) as sw4, '
+                      'median(indic06) as sw5, '
+                      'median(indic07) as sw6, '
+                      'median(indic08) as sw7, '
+                      'median(indic09) as sw7, '
+                      'median(indic010) as sw9, '
+                      'median(indic011) as sw10, '
+                      'median(indic012) as sw11, '
+                      'median(indic013) as sw12, '
+                      'median(indic014) as sw13, '
+                      'median(indic015) as sw14, '
+                      'median(indic016) as sw15, '
+                     'AS switchstatus FROM {} '             
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5612,21 +5628,21 @@ def freeboard_switch_bank_status():
       byte3 = 0xFF
       
       status0=0x03
-      status1=0x0C
-      status2=0x30
-      status3=0xC0
+      status1=0x03
+      status2=0x03
+      status3=0x03
       status4=0x03
-      status5=0x0C
-      status6=0x30
-      status7=0xC3
+      status5=0x03
+      status6=0x03
+      status7=0x03
       status8=0x03
-      status9=0x0C
-      status10=0x30
-      status11=0xC0
+      status9=0x03
+      status10=0x03
+      status11=0x03
       status12=0x03
-      status13=0x0C
-      status14=0x30
-      status15=0xC0
+      status13=0x03
+      status14=0x03
+      status15=0x03
 
       switchstatus=[]
        
@@ -5643,11 +5659,78 @@ def freeboard_switch_bank_status():
           dtt = mydatetime.timetuple()
           ts = int(mktime(dtt)*1000)
   
+        statusvalues=[]
+        
+        if point['sw0'] is not None:
+          statusvalues.append(int(point['sw0']))
 
-        if point['switchstatus'] is not None:
-          bankvalue0 =  point['switchstatus']
+        
+        if point['sw1'] is not None:
+          statusvalues.append(int(point['sw1']))
+
+        
+        if point['sw2'] is not None:
+          statusvalues.append(int(point['sw2']))
+
+        
+        if point['sw3'] is not None:
+          statusvalues.append(int(point['sw3']))
+
+        
+        if point['sw4'] is not None:
+          statusvalues.append(int(point['sw4']))
+
+        
+        if point['sw5'] is not None:
+          statusvalues.append(int(point['sw5']))
+
+        
+        if point['sw6'] is not None:
+          statusvalues.append(int(point['sw6']))
+
+        
+        if point['sw7'] is not None:
+          statusvalues.append(int(point['sw7']))
+
+        
+        if point['sw8'] is not None:
+          statusvalues.append(int(point['sw8']))
+
+        
+        if point['sw9'] is not None:
+          statusvalues.append(int(point['sw9']))
+
+        
+        if point['sw10'] is not None:
+          statusvalues.append(int(point['sw10']))
+
+        
+        if point['sw11'] is not None:
+          statusvalues.append(int(point['sw11']))
+
+        
+        if point['sw12'] is not None:
+          statusvalues.append(int(point['sw12']))
+
+        
+        if point['sw13'] is not None:
+          statusvalues.append(int(point['sw13']))
+
+        
+        if point['sw14'] is not None:
+          statusvalues.append(int(point['sw14']))
+
+        
+        if point['sw15'] is not None:
+          statusvalues.append(int(point['sw15']))
+
+        statusvalues.append(int(Instance))
           
-          switchstatus.append(point['switchstatus'])
+        switchstatus.append(statusvalues)
+
+
+
+          
         """
         if point['bank0'] is not None:
           bankvalue0 =  point['bank0']
