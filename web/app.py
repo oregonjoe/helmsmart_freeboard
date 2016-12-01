@@ -5629,7 +5629,7 @@ def freeboard_bank_status():
 
         log.info('freeboard:  InfluxDB-Cloud bankvalues %s:%s', bankvalue2, bankvalue2)
         
-        switchstates =  "{:02X}".format(Instance) +   "{:04X}".format(bankvalue1) + "{:04X}".format(bankvalue2) 
+        switchstates =  "{:02X}".format(int(Instance)) +   "{:04X}".format(int(bankvalue1)) + "{:04X}".format(int(bankvalue2)) 
 
         log.info('freeboard:  InfluxDB-Cloud switchstates %s:', switchstates)
           
