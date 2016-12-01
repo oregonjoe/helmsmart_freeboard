@@ -5513,7 +5513,7 @@ def freeboard_switch_bank_status():
 
       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
-    query = ('select  median(raw) AS switchstatus FROM {} '             
+    query = ('select  median(status) AS switchstatus FROM {} '             
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
