@@ -2531,7 +2531,7 @@
 			var new_val_array = []
 			new_val_array.push(new_val);
 			
-            this.onCalculatedValueChanged('value', new_val_array);
+            //this.onCalculatedValueChanged('value', new_val_array);
             var apikey =  currentSettings.apikey;
 			//var switchinstance = currentSettings.instance;
 			var switchid = currentSettings.switchid;
