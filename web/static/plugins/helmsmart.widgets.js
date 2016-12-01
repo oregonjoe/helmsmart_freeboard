@@ -2564,6 +2564,23 @@
                 display_name: "API KEY",
                 type: "text"
             },
+			
+			{
+			"name": "indicatortype",
+			"display_name": "Switch Bank Instance",
+			"type": "option",
+			"default_value": 0,	
+			"options": [
+				{
+					"name": "Indicator",
+					"value": "indicator"
+				}, 
+				{
+					"name": "Switch Bank",
+					"value": "switch"
+				}, 
+				]
+			},
 			{
 			"name": "instance",
 			"display_name": "Switch Bank Instance",

@@ -168,8 +168,12 @@
 					},
 
 					{
-						name: "Switches and Indicators",
+						name: "Indicators",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_status"
+					},
+					{
+						name: "Switches",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_switch_bank_status"
 					}
 
 				]

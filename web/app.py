@@ -5454,9 +5454,9 @@ def freeboard_status():
 
 
 
-@app.route('/freeboard_bank_status')
+@app.route('/freeboard_switch_bank_status')
 @cross_origin()
-def freeboard_bank_status():
+def freeboard_switch_bank_status():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
@@ -5568,19 +5568,19 @@ def freeboard_bank_status():
         log.info("freeboard: Error: %s" % e)
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(switchstatus))})    
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','switch_bank':list(reversed(switchstatus))})    
 
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(switchstatus))})    
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','switch_bank':list(reversed(switchstatus))})    
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(switchstatus))})    
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','switch_bank':list(reversed(switchstatus))})    
 
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
@@ -5602,8 +5602,8 @@ def freeboard_bank_status():
     try:
     
       strvalue = ""
+      bankvalue0 = 0xFFFF
       bankvalue1 = 0xFFFF
-      bankvalue2 = 0xFFFF
 
        
       points = list(response.get_points())
@@ -5621,15 +5621,18 @@ def freeboard_bank_status():
   
 
         if point['bank0'] is not None:
-          bankvalue1 =  point['bank0']
+          bankvalue0 =  point['bank0']
 
+          bankvalue0  = ((bankvalue0 & 0xF0) << 4) | ((bankvalue0 & 0x0F) >> 4)
 
         if point['bank1'] is not None:
-          bankvalue2 =  point['bank1']
+          bankvalue1 =  point['bank1']
 
-        log.info('freeboard:  InfluxDB-Cloud bankvalues %s:%s', bankvalue2, bankvalue2)
+          bankvalue1  = ((bankvalue1 & 0xF0) << 4) | ((bankvalue1 & 0x0F) >> 4)          
+
+        log.info('freeboard:  InfluxDB-Cloud bankvalues %s:%s', bankvalue0, bankvalue1)
         
-        switchstates =  "{:02X}".format(int(Instance)) +   "{:04X}".format(int(bankvalue1)) + "{:04X}".format(int(bankvalue2)) 
+        switchstates =    "{:02X}".format(int(bankvalue0)) + "{:02X}".format(int(bankvalue1)) + "{:02X}".format(int(Instance)) 
 
         log.info('freeboard:  InfluxDB-Cloud switchstates %s:', switchstates)
           
@@ -5644,7 +5647,7 @@ def freeboard_bank_status():
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(status0)), 'status1':list(reversed(status1)), 'status2':list(reversed(status2)),'status3':list(reversed(status3)), 'status4':list(reversed(status4)), 'status5':list(reversed(status5)),'status6':list(reversed(status6)), 'status7':list(reversed(status7)), 'status8':list(reversed(status8)),'status9':list(reversed(status9)), 'status10':list(reversed(status10)), 'status11':list(reversed(status11)),'status12':list(reversed(status12)), 'status13':list(reversed(status13)), 'status14':list(reversed(status14)), 'status15':list(reversed(status15))})     
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(switchstatus))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','switch_bank':list(reversed(switchstatus))})     
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True',  'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7})
 
