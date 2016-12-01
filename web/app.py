@@ -5512,7 +5512,8 @@ def freeboard_switch_bank_status():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
       
-    query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
+    #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
+    query = ('select  median(raw) AS switchstatus FROM {} '             
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5626,6 +5627,8 @@ def freeboard_switch_bank_status():
       status13=0x0C
       status14=0x30
       status15=0xC0
+
+      switchstatus=[]
        
       points = list(response.get_points())
 
@@ -5641,6 +5644,11 @@ def freeboard_switch_bank_status():
           ts = int(mktime(dtt)*1000)
   
 
+        if point['switchstatus'] is not None:
+          bankvalue0 =  point['switchstatus']
+          
+          switchstatus.append(point['switchstatus'])
+        """
         if point['bank0'] is not None:
           bankvalue0 =  point['bank0']
 
@@ -5740,13 +5748,21 @@ def freeboard_switch_bank_status():
 
         log.info('freeboard:  InfluxDB-Cloud bankvalues %s:%s', bankvalue0, bankvalue1)
         
-        switchstates =  "{:02X}".format(int(Instance))  +  "{:01X}".format(int(byte1))  +  "{:01X}".format(int(byte0)) +  "{:01X}".format(int(byte3)) +  "{:01X}".format(int(byte3))
+        #switchstates =  "{:02X}".format(int(Instance))  +  "{:01X}".format(int(byte1))  +  "{:01X}".format(int(byte0)) +  "{:01X}".format(int(byte3)) +  "{:01X}".format(int(byte3))
 
+        switchstates = []
+
+        switchstates.append("{:02X}".format(int(Instance)))
+        switchstates.append("{:01X}".format(int(byte0)))
+        switchstates.append("{:01X}".format(int(byte1)))
+        switchstates.append("{:01X}".format(int(byte2)))
+        switchstates.append("{:01X}".format(int(byte3)))
+  
         log.info('freeboard:  InfluxDB-Cloud switchstates %s:', switchstates)
           
         switchstatus.append({'epoch':ts, 'value':switchstates})
           
-       
+        """       
 
 
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
