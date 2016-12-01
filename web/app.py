@@ -5663,97 +5663,97 @@ def freeboard_switch_bank_status():
         
         if point['sw0'] is not None:
           statusvalues.append(int(point['sw0']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw1'] is not None:
           statusvalues.append(int(point['sw1']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw2'] is not None:
           statusvalues.append(int(point['sw2']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw3'] is not None:
           statusvalues.append(int(point['sw3']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw4'] is not None:
           statusvalues.append(int(point['sw4']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw5'] is not None:
           statusvalues.append(int(point['sw5']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw6'] is not None:
           statusvalues.append(int(point['sw6']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw7'] is not None:
           statusvalues.append(int(point['sw7']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw8'] is not None:
           statusvalues.append(int(point['sw8']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw9'] is not None:
           statusvalues.append(int(point['sw9']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw10'] is not None:
           statusvalues.append(int(point['sw10']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw11'] is not None:
           statusvalues.append(int(point['sw11']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw12'] is not None:
           statusvalues.append(int(point['sw12']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw13'] is not None:
           statusvalues.append(int(point['sw13']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw14'] is not None:
           statusvalues.append(int(point['sw14']))
-        else
+        else:
           statusvalues.append(int(3))
 
         
         if point['sw15'] is not None:
           statusvalues.append(int(point['sw15']))
-        else
+        else:
           statusvalues.append(int(3))
 
         statusvalues.append(int(Instance))
