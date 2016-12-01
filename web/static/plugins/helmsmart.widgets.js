@@ -2385,6 +2385,9 @@
         var offText;
 		var stateWaiting = false;
 		var setState = false;
+		var switchStates=[];
+		var switchInstance=0;
+		
 		
 		/*
 		function flash($element, times) {
@@ -2396,7 +2399,11 @@
 		  }, 500);
 		}
 		*/
-
+			function toHex(d) {
+				return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase()
+			}
+			
+			
         function updateState() {
             //indicatorElement.toggleClass("on", isOn);
 
@@ -2421,16 +2428,53 @@
 		var request;
 		
 		// send HTTP post to URL to activate switch
-		this.sendValue = function (apikey, switchinstance, switchid, new_val ) {
+		this.sendValue = function (apikey,  switchid, new_val ) {
 			    // freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
                 //});
 				
 			if(new_val == false)
+			{
+				switchStates[switchid]=0;
 				setState = false;
+			}
 			else
+			{
+				switchStates[switchid]=1;
 				setState = true;
+			}
 			
-				
+			
+			var switchpgn = "$PCDIN,01F20E,00000000,00,"
+			switchpgn = switchpgn + toHex(switchInstance);
+			
+			pgnvalue = switchStates[2] << 2 | switchStates[3];
+			switchpgn = switchpgn + Number(pgnvalue).toString(16);
+			
+			pgnvalue = switchStates[0] << 2 | switchStates[1];
+			switchpgn = switchpgn + Number(pgnvalue).toString(16);
+
+			pgnvalue = switchStates[6] << 2 | switchStates[7];
+			switchpgn = switchpgn + Number(pgnvalue).toString(16);
+			
+			pgnvalue = switchStates[4] << 2 | switchStates[5];
+			switchpgn = switchpgn + Number(pgnvalue).toString(16);
+			
+			pgnvalue = switchStates[10] << 2 | switchStates[11];
+			switchpgn = switchpgn + Number(pgnvalue).toString(16);
+			
+			pgnvalue = switchStates[8] << 2 | switchStates[9];
+			switchpgn = switchpgn + Number(pgnvalue).toString(16);
+			
+			pgnvalue = switchStates[14] << 2 | switchStates[15];
+			switchpgn = switchpgn + Number(pgnvalue).toString(16);
+			
+			pgnvalue = switchStates[12] << 2 | switchStates[13];
+			switchpgn = switchpgn + Number(pgnvalue).toString(16);
+			
+			switchpgn = switchpgn + "FFFFFF*24"
+
+			
+			
 			///var url = "http://www.helmsmart.net/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"	
 			
 			//var url = "https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
@@ -2486,7 +2530,7 @@
 			
             this.onCalculatedValueChanged('value', new_val_array);
             var apikey =  currentSettings.apikey;
-			var switchinstance = currentSettings.instance;
+			//var switchinstance = currentSettings.instance;
 			var switchid = currentSettings.switchid;
 			
 			
@@ -2494,7 +2538,7 @@
                 freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
                 });
             else {
-                this.sendValue(apikey, switchinstance, switchid, new_val);
+                this.sendValue(apikey,  switchid, new_val);
             }
         }
 		
@@ -2514,18 +2558,20 @@
             if (settingName == "value") {
 				
 				var switchid=currentSettings.switchid;
-				var bankstatus = newValue[0];
+			    switchStates = newValue[0];
 				
-				var switchvalue = bankstatus[switchid]
+				var switchvalue = switchStates[switchid]
 				 
 				if(switchvalue == 0)
 				{
-					isOn = false
+					switchInstance = switchStates[16];
+					isOn = false;
 					updateState();
 				}
 				else if(switchvalue == 1)
                 {
-					isOn = true
+					switchInstance = switchStates[16];
+					isOn = true;
 					updateState();
 				}
             }
