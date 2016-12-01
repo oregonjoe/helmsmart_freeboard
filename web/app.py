@@ -4973,7 +4973,7 @@ def freeboard_ac_status():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
 
-    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
@@ -5604,7 +5604,22 @@ def freeboard_switch_bank_status():
       strvalue = ""
       bankvalue0 = 0xFFFF
       bankvalue1 = 0xFFFF
-
+      status0=0x03
+      status1=0x0C
+      status2=0x30
+      status3=0xC0
+      status4=0x03
+      status5=0x0C
+      status6=0x30
+      status7=0xC3
+      status8=0x03
+      status9=0x0C
+      status10=0x30
+      status11=0xC0
+      status12=0x03
+      status13=0x0C
+      status14=0x30
+      status15=0xC0
        
       points = list(response.get_points())
 
@@ -5623,16 +5638,103 @@ def freeboard_switch_bank_status():
         if point['bank0'] is not None:
           bankvalue0 =  point['bank0']
 
-          bankvalue0  = ((bankvalue0 & 0x0F) << 4) | ((bankvalue0 & 0xF0) >> 4)
+          if bankvalue0 & 0x1 == 0x1:
+            status0=0x01
+          else:
+            status0=0x00
+            
+          if bankvalue0 & 0x2 == 0x2:
+            status1=0x04
+          else:
+            status1=0x00
+
+          if bankvalue0 & 0x4 == 0x4:
+            status2=0x10
+          else:
+            status2=0x00
+
+          if bankvalue0 & 0x8 == 0x8:
+            status3=0x40
+          else:
+            status3=0x00
+
+          byte0= status0 | status1 | status2 | status3
+            
+
+          if bankvalue0 & 0x10 == 0x10:
+            status4=0x01
+          else:
+            status4=0x00
+
+          if bankvalue0 & 0x20 == 0x20:
+            status5=0x04
+          else:
+            status5=0x00
+
+          if bankvalue0 & 0x40 == 0x40:
+            status6=0x10
+          else:
+            status6=0x00
+
+          if bankvalue0 & 0x80 == 0x80:
+            status7=0x40
+          else:
+            status7=0x00
+
+          byte1= status4 | status5 | status6 | status7
 
         if point['bank1'] is not None:
           bankvalue1 =  point['bank1']
 
-          bankvalue1  = ((bankvalue1 & 0x0F) << 4) | ((bankvalue1 & 0xF0) >> 4)          
+
+          if bankvalue1 & 0x1 == 0x1:
+            status8=0x01
+          else:
+            status8=0x00
+            
+          if bankvalue1 & 0x2 == 0x2:
+            status9=0x04
+          else:
+            status9=0x00
+
+          if bankvalue1 & 0x4 == 0x4:
+            status10=0x10
+          else:
+            status10=0x00
+
+          if bankvalue1 & 0x8 == 0x8:
+            status11=0x40
+          else:
+            status11=0x00
+
+          byte2= status8 | status9 | status10 | status11
+            
+
+          if bankvalue1 & 0x10 == 0x10:
+            status12=0x01
+          else:
+            status12=0x00
+
+          if bankvalue1 & 0x20 == 0x20:
+            status13=0x04
+          else:
+            status13=0x00
+
+          if bankvalue1 & 0x40 == 0x40:
+            status14=0x10
+          else:
+            status14=0x00
+
+          if bankvalue1 & 0x80 == 0x80:
+            status15=0x40
+          else:
+            status15=0x00
+
+          byte3= status12 | status13 | status14 | status15    
 
         log.info('freeboard:  InfluxDB-Cloud bankvalues %s:%s', bankvalue0, bankvalue1)
         
-        switchstates =    "{:02X}".format(int(bankvalue0)) + "{:02X}".format(int(bankvalue1)) + "{:02X}".format(int(Instance)) 
+        switchstates =  "{:02X}".format(int(Instance))  +  "{:01X}".format(int(byte1))  +  "{:01X}".format(int(byte0)) +  "{:01X}".format(int(byte3)) +  "{:01X}".format(int(byte3))
 
         log.info('freeboard:  InfluxDB-Cloud switchstates %s:', switchstates)
           
