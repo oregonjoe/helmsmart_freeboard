@@ -2514,7 +2514,7 @@
             if (settingName == "value") {
 				
 				var switchid=currentSettings.switchid;
-				var bankstatus = newValue[0].value;
+				var bankstatus = newValue[0];
 				
 				var switchvalue = bankstatus[switchid]
 				 
