@@ -5521,7 +5521,7 @@ def freeboard_switch_bank_status():
                       'median(value5) as sw5, '
                       'median(value6) as sw6, '
                       'median(value7) as sw7, '
-                      'median(value8) as sw7, '
+                      'median(value8) as sw8, '
                       'median(value9) as sw9, '
                       'median(value10) as sw10, '
                       'median(value11) as sw11, '
