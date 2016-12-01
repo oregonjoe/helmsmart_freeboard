@@ -5529,7 +5529,7 @@ def freeboard_switch_bank_status():
                       'median(indic014) as sw13, '
                       'median(indic015) as sw14, '
                       'median(indic016) as sw15, '
-                     'AS switchstatus FROM {} '             
+                     ' FROM {} '             
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
