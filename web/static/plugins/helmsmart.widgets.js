@@ -15,7 +15,7 @@
 	var gaugeColors = ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugeFillColors = ["#EB9D07", "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
-					
+	var LOADING_INDICATOR_DELAY = 1000;				
 					
     function easeTransitionText(newValue, textElement, duration) {
 
@@ -2384,12 +2384,53 @@
             }
         }
 
-		  this.sendValue = function (apikey, switchinstance, switchid, new_val ) {
-			     freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
-                });
-		  }
+		
+		var request;
+		
+		// send HTTP post to URL to activate switch
+		this.sendValue = function (apikey, switchinstance, switchid, new_val ) {
+			    // freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
+                //});
+				
+			var url = "http://www.helmsmart.net/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"	
+				
+			request = new XMLHttpRequest();
+            if (!request) {
+                console.log('Giving up :( Cannot create an XMLHTTP instance');
+                return false;
+            }
+            request.onreadystatechange = this.alertContents;
+            request.open('GET', url, true);
+            freeboard.showLoadingIndicator(true);
+            request.send();
+				
+		}
+		
+		
+		
+		this.alertContents = function () {
+            if (request.readyState === XMLHttpRequest.DONE) {
+                if (request.status === 200) {
+                    console.log(request.responseText);
+                    setTimeout(function () {
+                        freeboard.showLoadingIndicator(false);
+                        //freeboard.showDialog($("<div align='center'>Request response 200</div>"),"Success!","OK",null,function(){});
+                    }, LOADING_INDICATOR_DELAY);
+                } else {
+                    console.log('There was a problem with the request.');
+                    setTimeout(function () {
+                        freeboard.showLoadingIndicator(false);
+                        freeboard.showDialog($("<div align='center'>There was a problem with the request. Code " + request.status + request.responseText + " </div>"), "Error!", "OK", null, function () {
+                        });
+                    }, LOADING_INDICATOR_DELAY);
+                }
+
+            }
+
+        }
+		
 		  
-		  
+		// handle mouse click on button 
 		this.onClick = function(element) {
             element.preventDefault()
 
