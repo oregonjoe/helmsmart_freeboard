@@ -2354,15 +2354,20 @@
         }
     });	
 	
+	var gIndicatorID=0;
     freeboard.addStyle('.indicator-light.interactive:hover', "box-shadow: 0px 0px 15px #FF9900; cursor: pointer;");
 	freeboard.addStyle('.indicator-light', "border-radius:50%;width:22px;height:22px;border:2px solid #3d3d3d;margin-top:5px;float:left;background-color:#222;margin-right:10px;");
 	freeboard.addStyle('.indicator-light.on', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;");
 	freeboard.addStyle('.indicator-text', "margin-top:10px;");
     var indicatorWidget = function (settings) {
         var self = this;
+		
+		var thisIndicatorID = "indicator-" + gIndicatorID++;
         var titleElement = $('<h2 class="section-title"></h2>');
         var stateElement = $('<div class="indicator-text"></div>');
-        var indicatorElement = $('<div class="indicator-light"></div>');
+        //var indicatorElement = $('<div class="indicator-light"></div>');
+		var indicatorElement = $('<div class="indicator-light" id="' + thisIndicatorID + '"></div>');
+
         var currentSettings = settings;
         var isOn = false;
         var onText;
@@ -2379,7 +2384,7 @@
             }
         }
 
-		  this.sendValue = function (url,new_val ) {
+		  this.sendValue = function (apikey, switchinstance, switchid, new_val ) {
 			     freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
                 });
 		  }
@@ -2393,12 +2398,16 @@
 			new_val_array.push(new_val);
 			
             this.onCalculatedValueChanged('value', new_val_array);
-            url =  currentSettings.apikey;
-            if (_.isUndefined(url))
-                freeboard.showDialog($("<div align='center'>url undefined</div>"), "Error!", "OK", null, function () {
+            var apikey =  currentSettings.apikey;
+			var switchinstance = currentSettings.instance;
+			var switchid = currentSettings.switchid;
+			
+			
+            if (_.isUndefined(apikey))
+                freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
                 });
             else {
-                this.sendValue(url, new_val);
+                this.sendValue(apikey, switchinstance, switchid, new_val);
             }
         }
 		
@@ -2468,6 +2477,126 @@
                 display_name: "API KEY",
                 type: "text"
             },
+			{
+			"name": "instance",
+			"display_name": "Switch Bank Instance",
+			"type": "option",
+			"default_value": 0,	
+			"options": [
+			{
+				"name": "0",
+				"value": "0"
+			}, 
+			{
+				"name": "1",
+				"value": "1"
+			}, 
+			{
+				"name": "2",
+				"value": "2"
+			}, 
+			{
+				"name": "3",
+				"value": "3"
+			},
+			{
+				"name": "4",
+				"value": "4"
+			},
+			{
+				"name": "5",
+				"value": "5"
+			},		
+			{
+				"name": "6",
+				"value": "6"
+			},
+			{
+				"name": "7",
+				"value": "7"
+			},
+			{
+				"name": "8",
+				"value": "8"
+			}]
+			}, 
+		
+			{
+			"name": "switchid",
+			"display_name": "Switch ID",
+			"type": "option",
+			"default_value": 0,	
+			"options": [
+			{
+				"name": "0",
+				"value": "0"
+			}, 
+			{
+				"name": "1",
+				"value": "1"
+			}, 
+			{
+				"name": "2",
+				"value": "2"
+			}, 
+			{
+				"name": "3",
+				"value": "3"
+			},
+			{
+				"name": "4",
+				"value": "4"
+			},
+			{
+				"name": "5",
+				"value": "5"
+			},		
+			{
+				"name": "6",
+				"value": "6"
+			},
+			{
+				"name": "7",
+				"value": "7"
+			},
+			{
+				"name": "8",
+				"value": "8"
+			},
+			{
+				"name": "9",
+				"value": "9"
+			},
+			{
+				"name": "10",
+				"value": "10"
+			}, 
+			{
+				"name": "11",
+				"value": "11"
+			}, 
+			{
+				"name": "12",
+				"value": "12"
+			}, 
+			{
+				"name": "13",
+				"value": "13"
+			},
+			{
+				"name": "14",
+				"value": "14"
+			},
+			{
+				"name": "15",
+				"value": "15"
+			},		
+			
+			]
+		}, 
+			
+		
+		
         ],
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new indicatorWidget(settings));
