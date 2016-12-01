@@ -15,7 +15,8 @@
 	var gaugeColors = ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugeFillColors = ["#EB9D07", "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
-	var LOADING_INDICATOR_DELAY = 1000;				
+	var LOADING_INDICATOR_DELAY = 1000;	
+	var gdisableIndicatorClick	= false;
 					
     function easeTransitionText(newValue, textElement, duration) {
 
@@ -2436,11 +2437,13 @@
 			{
 				switchStates[switchid]=0;
 				setState = false;
+				gdisableIndicatorClick = false;
 			}
 			else
 			{
 				switchStates[switchid]=1;
 				setState = true;
+				gdisableIndicatorClick = false;
 			}
 			
 			
@@ -2495,6 +2498,7 @@
             request.send();
 			
 			stateWaiting = true;
+			gdisableIndicatorClick = true;
 			indicatorElement.addClass("wait");
 				
 		}
@@ -2527,22 +2531,25 @@
 		this.onClick = function(element) {
             element.preventDefault()
 
-            var new_val = !isOn
-			var new_val_array = []
-			new_val_array.push(new_val);
-			
-            //this.onCalculatedValueChanged('value', new_val_array);
-            var apikey =  currentSettings.apikey;
-			//var switchinstance = currentSettings.instance;
-			var switchid = currentSettings.switchid;
-			
-			
-            if (_.isUndefined(apikey))
-                freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
-                });
-            else {
-                this.sendValue(apikey,  switchid, new_val);
-            }
+			if(gdisableIndicatorClick == false)
+			{
+				var new_val = !isOn
+				var new_val_array = []
+				new_val_array.push(new_val);
+				
+				//this.onCalculatedValueChanged('value', new_val_array);
+				var apikey =  currentSettings.apikey;
+				//var switchinstance = currentSettings.instance;
+				var switchid = currentSettings.switchid;
+				
+				
+				if (_.isUndefined(apikey))
+					freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
+					});
+				else {
+					this.sendValue(apikey,  switchid, new_val);
+				}
+			}
         }
 		
 		
