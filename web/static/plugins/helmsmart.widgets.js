@@ -2447,28 +2447,28 @@
 			var switchpgn = "$PCDIN,01F20E,00000000,00,"
 			switchpgn = switchpgn + toHex(switchInstance);
 			
-			pgnvalue = switchStates[2] << 2 | switchStates[3];
+			pgnvalue = switchStates[3] << 2 | switchStates[2];
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 			
-			pgnvalue = switchStates[0] << 2 | switchStates[1];
+			pgnvalue = switchStates[1] << 2 | switchStates[0];
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 
-			pgnvalue = switchStates[6] << 2 | switchStates[7];
+			pgnvalue = switchStates[7] << 2 | switchStates[6];
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 			
-			pgnvalue = switchStates[4] << 2 | switchStates[5];
+			pgnvalue = switchStates[5] << 2 | switchStates[4];
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 			
-			pgnvalue = switchStates[10] << 2 | switchStates[11];
+			pgnvalue = switchStates[11] << 2 | switchStates[10];
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 			
-			pgnvalue = switchStates[8] << 2 | switchStates[9];
+			pgnvalue = switchStates[9] << 2 | switchStates[8];
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 			
-			pgnvalue = switchStates[14] << 2 | switchStates[15];
+			pgnvalue = switchStates[15] << 2 | switchStates[14];
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 			
-			pgnvalue = switchStates[12] << 2 | switchStates[13];
+			pgnvalue = switchStates[13] << 2 | switchStates[12];
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 			
 			switchpgn = switchpgn + "FFFFFF*24"
