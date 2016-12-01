@@ -2355,9 +2355,12 @@
     });	
 	
 	var gIndicatorID=0;
+	
+	freeboard.addStyle('@keyframes blink {   50% { border-color: #ff0000; } }');
     freeboard.addStyle('.indicator-light.interactive:hover', "box-shadow: 0px 0px 15px #FF9900; cursor: pointer;");
 	freeboard.addStyle('.indicator-light', "border-radius:50%;width:22px;height:22px;border:2px solid #3d3d3d;margin-top:5px;float:left;background-color:#222;margin-right:10px;");
-	freeboard.addStyle('.indicator-light.on', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;");
+	freeboard.addStyle('.indicator-light.on', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF; animation: blink .5s step-end infinite alternate;");
+	freeboard.addStyle('.indicator-light.wait', "background-color:#DF5353;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;");
 	freeboard.addStyle('.indicator-text', "margin-top:10px;");
     var indicatorWidget = function (settings) {
         var self = this;
@@ -2372,6 +2375,17 @@
         var isOn = false;
         var onText;
         var offText;
+		
+		/*
+		function flash($element, times) {
+	  var colors = ['#fff', '#000'];
+	  $element.css('background-color', colors[times % colors.length]);
+	  if (times === 0) return;
+	  setTimeout(function () {
+		flash($element, times - 1);
+		  }, 500);
+		}
+		*/
 
         function updateState() {
             indicatorElement.toggleClass("on", isOn);
