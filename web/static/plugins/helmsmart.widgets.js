@@ -2401,10 +2401,17 @@
             //indicatorElement.toggleClass("on", isOn);
 
             if (isOn) {
+				if(setState == true)
+					indicatorElement.removeClass("wait")
+					
+				
 				indicatorElement.addClass("on")
                 stateElement.text((_.isUndefined(onText) ? (_.isUndefined(currentSettings.on_text) ? "" : currentSettings.on_text) : onText));
             }
             else {
+				if(setState == false)
+					indicatorElement.removeClass("wait")
+				
 				indicatorElement.removeClass("on")
                 stateElement.text((_.isUndefined(offText) ? (_.isUndefined(currentSettings.off_text) ? "" : currentSettings.off_text) : offText));
             }
@@ -2417,6 +2424,12 @@
 		this.sendValue = function (apikey, switchinstance, switchid, new_val ) {
 			    // freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
                 //});
+				
+			if(new_val == false)
+				setState = false;
+			else
+				setState = true;
+			
 				
 			///var url = "http://www.helmsmart.net/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"	
 			
