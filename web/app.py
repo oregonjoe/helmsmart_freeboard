@@ -4977,7 +4977,7 @@ def freeboard_ac_status():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -5604,6 +5604,12 @@ def freeboard_switch_bank_status():
       strvalue = ""
       bankvalue0 = 0xFFFF
       bankvalue1 = 0xFFFF
+
+      byte0 = 0xFF
+      byte1 = 0xFF
+      byte2 = 0xFF
+      byte3 = 0xFF
+      
       status0=0x03
       status1=0x0C
       status2=0x30
