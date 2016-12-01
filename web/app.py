@@ -5528,7 +5528,7 @@ def freeboard_switch_bank_status():
                       'median(indic013) as sw12, '
                       'median(indic014) as sw13, '
                       'median(indic015) as sw14, '
-                      'median(indic016) as sw15, '
+                      'median(indic016) as sw15 '
                      ' FROM {} '             
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
