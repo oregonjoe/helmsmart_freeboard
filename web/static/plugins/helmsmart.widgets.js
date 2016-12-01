@@ -2512,16 +2512,31 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (settingName == "value") {
-                isOn = Boolean(newValue[0].value);
+				
+				var switchid=currentSettings.switchid;
+				var bankstatus = newValue[0].value;
+				
+				var switchvalue = bankstatus[switchid]
+				 
+				if(switchvalue == 0)
+				{
+					isOn = false
+					updateState();
+				}
+				else if(switchvalue == 1)
+                {
+					isOn = true
+					updateState();
+				}
             }
-            if (settingName == "on_text") {
-                onText = newValue[0].value;
-            }
-            if (settingName == "off_text") {
-                offText = newValue[0].value;
-            }
+            //if (settingName == "on_text") {
+            //    onText = newValue[0].value;
+            //}
+            //if (settingName == "off_text") {
+            //    offText = newValue[0].value;
+            //}
 
-            updateState();
+            //updateState();
         }
 
         this.onDispose = function () {
