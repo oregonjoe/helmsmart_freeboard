@@ -2409,17 +2409,18 @@
             //indicatorElement.toggleClass("on", isOn);
 
             if (isOn) {
-				if(setState == true)
+				if(setState == true){
 					indicatorElement.removeClass("wait")
-					gdisableIndicatorClick = false;
+					gdisableIndicatorClick = false;}
 				
 				indicatorElement.addClass("on")
                 stateElement.text((_.isUndefined(onText) ? (_.isUndefined(currentSettings.on_text) ? "" : currentSettings.on_text) : onText));
             }
             else {
-				if(setState == false)
+				if(setState == false){
 					indicatorElement.removeClass("wait")
-				gdisableIndicatorClick = false;
+					gdisableIndicatorClick = false;}
+			
 				indicatorElement.removeClass("on")
                 stateElement.text((_.isUndefined(offText) ? (_.isUndefined(currentSettings.off_text) ? "" : currentSettings.off_text) : offText));
             }
