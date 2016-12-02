@@ -8042,3 +8042,42 @@ def freeboard_ac_status_array():
     #return jsonify(status='error', update=False )
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+
+@app.route('/setswitchapi')
+@cross_origin()
+def setswitchapi():
+  deviceapikey = request.args.get('deviceapikey', '000000000000')
+  switchid = request.args.get('switchid', "0")
+  switchvalue = request.args.get('switchvalue', "3")
+  Instance = request.args.get('instance', "0")
+
+
+  deviceid = getedeviceid(deviceapikey)
+    
+  log.info("sendswitchapi deviceid %s", deviceid)
+  #log.info("sendswitchapi switchpgn %s", switchpgn)
+  
+  if deviceid == "":
+    return jsonify(result="Error", switch=switchpgn)
+
+
+
+  #return jsonify(result="Status", switchpgn=switchpgn)
+
+
+  # Create an client object
+  cache = IronCache()
+
+  # Put an item
+  #cache.put(cache="001EC0B415BF", key="switch", value="$PCDIN,01F20E,00000000,00,0055000000FFFFFF*23")
+  #cache.put(cache="001EC0B415BF", key="switch", value=switchpgn )
+  switchpgn = {'instance':Instance, 'switchid':switchid, 'switchvalue':switchvalue}
+  log.info("IronCache put switch key %s", switchpgn)
+  item=cache.put(cache=deviceid, key="switch_"+str(switchid), value=switchpgn )
+  #item=cache.put(cache=deviceid, key="switch", value=switchpgn )
+  log.info("IronCache response key %s", item)
+  return jsonify(result="OK", switch=switchpgn)
+
+
