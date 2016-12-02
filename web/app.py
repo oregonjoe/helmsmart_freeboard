@@ -8066,6 +8066,7 @@ def setswitchapi():
   cache = IronCache()
   
   try:
+    log.info("setswitchapi - IronCache  get key %s", "switch_"+str(instance))
     switchitem = cache.get(cache=device_id, key="switch_"+str(instance))
   except:
     switchitem = ""
@@ -8083,6 +8084,7 @@ def setswitchapi():
   #cache.put(cache="001EC0B415BF", key="switch", value=switchpgn )
   switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
   log.info("IronCache put switch key %s", switchpgn)
+  log.info("setswitchapi - IronCache  put key %s", "switch_"+str(instance))
   item=cache.put(cache=deviceid, key="switch_"+str(instance), value=switchpgn )
   #item=cache.put(cache=deviceid, key="switch", value=switchpgn )
   log.info("IronCache response key %s", item)
