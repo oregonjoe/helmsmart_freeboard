@@ -8064,13 +8064,18 @@ def setswitchapi():
 
   # Create an client object
   cache = IronCache()
+  switchitem=""
   
   try:
     log.info("setswitchapi - IronCache  get key %s", "switch_"+str(instance))
     switchitem = cache.get(cache=device_id, key="switch_"+str(instance))
   except:
     switchitem = ""
+    log.info('setswitchapi - IronCache error  %s:  ', switchitem)
+    e = sys.exc_info()[0]
+    log.info('setswitchapi - IronCache error %s:  ' % e)
 
+        
   if switchitem != "":
     log.info("setswitchapi - IronCache  key exists %s", switchitem.value)
     newswitchitem = switchitem.value

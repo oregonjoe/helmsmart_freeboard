@@ -2380,7 +2380,8 @@
         var stateElement = $('<div class="indicator-text"></div>');
         //var indicatorElement = $('<div class="indicator-light"></div>');
 		var indicatorElement = $('<div class="indicator-light" id="' + thisIndicatorID + '"></div>');
-
+		var indicatortextElement = $('<div class="indicator-text" id="' + thisIndicatorID + '"></div>');
+		
         var currentSettings = settings;
         var isOn = false;
         var onText;
@@ -2537,7 +2538,7 @@
         }
 		
 			// handle mouse click on button 
-		this.ondblclick = function(element) {
+		this.ondDlclick = function(element) {
             element.preventDefault();
 			gdisableIndicatorClick == false;
 			indicatorElement.removeClass("wait");
@@ -2572,6 +2573,7 @@
         this.render = function (element) {
             $(element).append(titleElement).append(indicatorElement).append(stateElement);
 			$(indicatorElement).click(this.onClick.bind(this));
+			$(indicatorElement).dblclick(this.ondDlclick.bind(this));
         }
 
         this.onSettingsChanged = function (newSettings) {
