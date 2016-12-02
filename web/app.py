@@ -8073,7 +8073,7 @@ def setswitchapi():
   if switchitem != "":
     log.info("setswitchapi - IronCache  key exists %s", switchitem.value)
     newswitchitem = switchitem.value
-    switchpgn = {'instance':Instance, 'switchid':switchid, 'switchvalue':switchvalue}
+    switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
     newswitchitem = newswitchitem + "," + switchpgn
     log.info("setswitchapi - IronCache  new key  %s", newswitchitem)
 
@@ -8081,7 +8081,7 @@ def setswitchapi():
   # Put an item
   #cache.put(cache="001EC0B415BF", key="switch", value="$PCDIN,01F20E,00000000,00,0055000000FFFFFF*23")
   #cache.put(cache="001EC0B415BF", key="switch", value=switchpgn )
-  switchpgn = {'instance':Instance, 'switchid':switchid, 'switchvalue':switchvalue}
+  switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
   log.info("IronCache put switch key %s", switchpgn)
   item=cache.put(cache=deviceid, key="switch_"+str(instance), value=switchpgn )
   #item=cache.put(cache=deviceid, key="switch", value=switchpgn )
