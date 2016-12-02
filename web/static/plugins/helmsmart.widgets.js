@@ -2487,7 +2487,10 @@
 			//var url = "https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
 
 			//var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
-			var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
+			//var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
+		    var url = "https://helmsmart-freeboard.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
+			
+			
 				url = url + "&instance=" + switchInstance ;
 				url = url + "&switchid=" + switchid ;
 				url = url + "&switchvalue=" + switchvalue ;
