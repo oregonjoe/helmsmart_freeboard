@@ -2391,7 +2391,7 @@
 		var switchStates=[];
 		var switchInstance=0;
 		var gdisableIndicatorClick	= false;
-		
+		//var disableIndicatorClicks = [false,false,false,false,false,false]
 		/*
 		function flash($element, times) {
 	  var colors = ['#fff', '#000'];
@@ -2510,6 +2510,7 @@
 			
 			stateWaiting = true;
 			gdisableIndicatorClick = true;
+			//disableIndicatorClicks[switchid]=true;
 			indicatorElement.addClass("wait");
 				
 		}
@@ -2540,7 +2541,8 @@
 			// handle mouse click on button 
 		this.ondDlclick = function(element) {
             element.preventDefault();
-			element.gdisableIndicatorClick == false;
+			gdisableIndicatorClick = false;
+			//disableIndicatorClicks = false;
 			indicatorElement.removeClass("wait");
 		}
 		  
@@ -2548,7 +2550,7 @@
 		this.onClick = function(element) {
             element.preventDefault()
 
-			if(element.gdisableIndicatorClick == false)
+			if(gdisableIndicatorClick == false)
 			{
 				var new_val = !isOn
 				var new_val_array = []
