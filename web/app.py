@@ -8080,12 +8080,14 @@ def setswitchapi():
     e = sys.exc_info()[0]
     log.info('setswitchapi - IronCache error %s:  ' % e)
 
-        
+  newswitchitem=[]      
   if switchitem != "":
     log.info("setswitchapi - IronCache  key exists %s", switchitem.value)
-    newswitchitem = switchitem.value
+    for item in switchitem.value:
+      newswitchitem.append(item)
+    
     switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
-    newswitchitem = newswitchitem + "," + switchpgn
+    newswitchitem.append(switchpgn)
     log.info("setswitchapi - IronCache  new key  %s", newswitchitem)
 
    
