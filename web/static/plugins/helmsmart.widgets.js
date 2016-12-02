@@ -2540,7 +2540,7 @@
 			// handle mouse click on button 
 		this.ondDlclick = function(element) {
             element.preventDefault();
-			gdisableIndicatorClick == false;
+			element.gdisableIndicatorClick == false;
 			indicatorElement.removeClass("wait");
 		}
 		  
@@ -2548,7 +2548,7 @@
 		this.onClick = function(element) {
             element.preventDefault()
 
-			if(gdisableIndicatorClick == false)
+			if(element.gdisableIndicatorClick == false)
 			{
 				var new_val = !isOn
 				var new_val_array = []
