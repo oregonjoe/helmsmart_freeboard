@@ -2646,7 +2646,7 @@
 			"name": "indicatortype",
 			"display_name": "Type",
 			"type": "option",
-			"default_value": indicator,	
+			"default_value": "indicator",	
 			"options": [
 				{
 					"name": "Indicator",
