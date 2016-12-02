@@ -8089,7 +8089,7 @@ def setswitchapi():
     
   switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
   newswitchitem.append(switchpgn)
-  log.info("setswitchapi - IronCache  new key  %s", newswitchitem)
+  log.info("setswitchapi - IronCache  new key  %s",json.dumps(newswitchitem))
 
    
   # Put an item
