@@ -2412,7 +2412,8 @@
 				if(setState == true){
 					indicatorElement.removeClass("wait")
 					gdisableIndicatorClick = false;}
-				
+					
+				indicatorElement.removeClass("off")
 				indicatorElement.addClass("on")
                 stateElement.text((_.isUndefined(onText) ? (_.isUndefined(currentSettings.on_text) ? "" : currentSettings.on_text) : onText));
             }
@@ -2420,7 +2421,8 @@
 				if(setState == false){
 					indicatorElement.removeClass("wait")
 					gdisableIndicatorClick = false;}
-			
+					
+				indicatorElement.addClass("off")
 				indicatorElement.removeClass("on")
                 stateElement.text((_.isUndefined(offText) ? (_.isUndefined(currentSettings.off_text) ? "" : currentSettings.off_text) : offText));
             }
@@ -2642,9 +2644,9 @@
 			
 			{
 			"name": "indicatortype",
-			"display_name": "Switch Bank Instance",
+			"display_name": "Type",
 			"type": "option",
-			"default_value": 0,	
+			"default_value": indicator,	
 			"options": [
 				{
 					"name": "Indicator",
