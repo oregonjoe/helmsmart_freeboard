@@ -16,7 +16,7 @@
 	var gaugeFillColors = ["#EB9D07", "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
 	var LOADING_INDICATOR_DELAY = 1000;	
-	var gdisableIndicatorClick	= false;
+
 					
     function easeTransitionText(newValue, textElement, duration) {
 
@@ -2388,7 +2388,7 @@
 		var setState = false;
 		var switchStates=[];
 		var switchInstance=0;
-		
+		var gdisableIndicatorClick	= false;
 		
 		/*
 		function flash($element, times) {
