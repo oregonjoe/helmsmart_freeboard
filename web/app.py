@@ -5756,6 +5756,7 @@ def freeboard_switch_bank_status():
         else:
           statusvalues.append(int(3))
 
+        log.info('freeboard_switch_bank_status:  statusvalues%s:', statusvalues)
         statusvalues.append(int(Instance))
           
         switchstatus.append(statusvalues)
