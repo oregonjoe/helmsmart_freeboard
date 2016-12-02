@@ -8083,7 +8083,8 @@ def setswitchapi():
   newswitchitem=[]      
   if switchitem != "":
     log.info("setswitchapi - IronCache  key exists %s", switchitem.value)
-    for item in switchitem.value:
+    jsondata = json.loads(switchitem.value)
+    for item in jsondata:
       newswitchitem.append(item)
     
   switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
