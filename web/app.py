@@ -8086,20 +8086,20 @@ def setswitchapi():
     for item in switchitem.value:
       newswitchitem.append(item)
     
-    switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
-    newswitchitem.append(switchpgn)
-    log.info("setswitchapi - IronCache  new key  %s", newswitchitem)
+  switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
+  newswitchitem.append(switchpgn)
+  log.info("setswitchapi - IronCache  new key  %s", newswitchitem)
 
    
   # Put an item
   #cache.put(cache="001EC0B415BF", key="switch", value="$PCDIN,01F20E,00000000,00,0055000000FFFFFF*23")
   #cache.put(cache="001EC0B415BF", key="switch", value=switchpgn )
-  switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
-  log.info("IronCache put switch key %s", switchpgn)
+  #switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
+  log.info("IronCache put switch key %s", newswitchitem)
   log.info("setswitchapi - IronCache  put key %s", "switch_"+str(instance))
-  item=cache.put(cache=deviceid, key="switch_"+str(instance), value=switchpgn )
+  item=cache.put(cache=deviceid, key="switch_"+str(instance), value=newswitchitem )
   #item=cache.put(cache=deviceid, key="switch", value=switchpgn )
   log.info("IronCache response key %s", item)
-  return jsonify(result="OK", switch=switchpgn)
+  return jsonify(result="OK", switch=newswitchitem)
 
 
