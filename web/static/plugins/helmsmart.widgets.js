@@ -2436,18 +2436,18 @@
 				
 			if(new_val == false)
 			{
-				switchStates[switchid]=0;
+				switchvalue=0;
 				setState = false;
 				
 			}
 			else
 			{
-				switchStates[switchid]=1;
+				switchvalue=1;
 				setState = true;
 				
 			}
 			
-			
+			/*
 			var switchpgn = "$PCDIN,01F20E,00000000,00,"
 			switchpgn = switchpgn + toHex(switchInstance);
 			
@@ -2476,7 +2476,7 @@
 			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 			
 			switchpgn = switchpgn + "FFFFFF*24"
-
+*/
 			
 			
 			///var url = "http://www.helmsmart.net/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"	
@@ -2484,9 +2484,12 @@
 			//var url = "https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
 
 			//var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
-			var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch="
-				url = url + switchpgn;
-
+			var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
+				url = url + "&instance=" + switchInstance ;
+				url = url + "&switchid=" + switchid ;
+				url = url + "&switchvalue=" + switchvalue ;
+				
+				
 			
 			request = new XMLHttpRequest();
             if (!request) {
