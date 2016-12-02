@@ -2579,7 +2579,10 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (settingName == "value") {
-				
+			if( newValue.constructor === Array)
+					{
+						if(newValue.length)
+						{	
 				var switchid=currentSettings.switchid;
 			    switchStates = newValue[0];
 				
@@ -2603,6 +2606,13 @@
 					
 				}
             }
+			else
+			{
+				indicatorElement.removeClass("on")
+					indicatorElement.removeClass("off")
+			}
+					}
+			}
             //if (settingName == "on_text") {
             //    onText = newValue[0].value;
             //}

@@ -20,7 +20,7 @@ from itertools import groupby
 import pyonep
 from pyonep import onep
 import urlparse
-
+from iron_cache import *
 import logging
 # *******************************************************************
 # Debug Output defines
@@ -5756,10 +5756,14 @@ def freeboard_switch_bank_status():
         else:
           statusvalues.append(int(3))
 
-        log.info('freeboard_switch_bank_status:  statusvalues%s:', statusvalues)
+        #log.info('freeboard_switch_bank_status:  statusvalues%s:', statusvalues)
         statusvalues.append(int(Instance))
-          
-        switchstatus.append(statusvalues)
+
+        # check if array was all NONE  - if so disgard it
+        if statusvalues[0] != 3 and statusvalues[1] != 3 and statusvalues[2] != 3 and statusvalues[3] != 3 and statusvalues[4] != 3 and statusvalues[5] != 3 and statusvalues[6] != 3 and statusvalues[7] != 3 and statusvalues[8] != 3 and statusvalues[9] != 3 and statusvalues[10] != 3 and statusvalues[11] != 3 and statusvalues[12] != 3 and statusvalues[13] != 3 and statusvalues[14] != 3 and statusvalues[15] != 3:
+          switchstatus.append(statusvalues)
+          log.info('freeboard_switch_bank_status:  switchstatus%s:', switchstatus)          
+
 
 
 
