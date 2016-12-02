@@ -8068,7 +8068,7 @@ def setswitchapi():
   
   try:
     log.info("setswitchapi - IronCache  get key %s", "switch_"+str(instance))
-    switchitem = cache.get(cache=device_id, key="switch_"+str(instance))
+    switchitem = cache.get(cache=deviceid, key="switch_"+str(instance))
 
   except NameError, e:
       log.info('setswitchapi - IronCache NameError %s:  ' % str(e))
