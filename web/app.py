@@ -8051,7 +8051,7 @@ def setswitchapi():
   deviceapikey = request.args.get('deviceapikey', '000000000000')
   switchid = request.args.get('switchid', "0")
   switchvalue = request.args.get('switchvalue', "3")
-  Instance = request.args.get('instance', "0")
+  instance = request.args.get('instance', "0")
 
 
   deviceid = getedeviceid(deviceapikey)
@@ -8062,20 +8062,28 @@ def setswitchapi():
   if deviceid == "":
     return jsonify(result="Error", switch=switchpgn)
 
-
-
-  #return jsonify(result="Status", switchpgn=switchpgn)
-
-
   # Create an client object
   cache = IronCache()
+  
+  try:
+    switchitem = cache.get(cache=device_id, key="switch_"+str(instance))
+  except:
+    switchitem = ""
 
+  if switchitem != "":
+    log.info("setswitchapi - IronCache  key exists %s", switchitem.value)
+    newswitchitem = switchitem.value
+    switchpgn = {'instance':Instance, 'switchid':switchid, 'switchvalue':switchvalue}
+    newswitchitem = newswitchitem + "," + switchpgn
+    log.info("setswitchapi - IronCache  new key  %s", newswitchitem)
+
+   
   # Put an item
   #cache.put(cache="001EC0B415BF", key="switch", value="$PCDIN,01F20E,00000000,00,0055000000FFFFFF*23")
   #cache.put(cache="001EC0B415BF", key="switch", value=switchpgn )
   switchpgn = {'instance':Instance, 'switchid':switchid, 'switchvalue':switchvalue}
   log.info("IronCache put switch key %s", switchpgn)
-  item=cache.put(cache=deviceid, key="switch_"+str(switchid), value=switchpgn )
+  item=cache.put(cache=deviceid, key="switch_"+str(instance), value=switchpgn )
   #item=cache.put(cache=deviceid, key="switch", value=switchpgn )
   log.info("IronCache response key %s", item)
   return jsonify(result="OK", switch=switchpgn)
