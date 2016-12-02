@@ -2363,7 +2363,7 @@
 
 	freeboard.addStyle('.indicator-light.on', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF; ");
 	//freeboard.addStyle('.indicator-light.off', "background-color:#222;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF; ");
-	freeboard.addStyle('.indicator-light.off', "background-color:#9C6F2C;box-shadow: 0px 0px 15px #D4840B;border-color:#CA9E5D; ");
+	freeboard.addStyle('.indicator-light.off', "background-color:#6F490F;box-shadow: 0px 0px 15px #D4840B;border-color:#CA9E5D; ");
 	//freeboard.addStyle('.indicator-light.wait', "background-color:#FFC773;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF; animation: blink .5s step-end infinite alternate;");
 	freeboard.addStyle('.indicator-light.wait', "border-color:#FDF1DF; animation: blink .5s step-end infinite alternate;");
 	//freeboard.addStyle('.indicator-light.wait', "background-color:#DF5353;box-shadow: 0px 0px 15px #FF9900;border-color:#FDF1DF;");
@@ -2596,6 +2596,11 @@
 					switchInstance = switchStates[16];
 					isOn = true;
 					updateState();
+				}
+				else
+				{	indicatorElement.removeClass("on")
+					indicatorElement.removeClass("off")
+					
 				}
             }
             //if (settingName == "on_text") {
