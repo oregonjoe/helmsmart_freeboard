@@ -2576,6 +2576,8 @@
             $(element).append(titleElement).append(indicatorElement).append(stateElement);
 			$(indicatorElement).click(this.onClick.bind(this));
 			$(indicatorElement).dblclick(this.ondDlclick.bind(this));
+				indicatorElement.removeClass("on");
+					indicatorElement.removeClass("off");
         }
 
         this.onSettingsChanged = function (newSettings) {
