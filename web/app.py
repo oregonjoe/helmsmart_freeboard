@@ -4602,6 +4602,30 @@ def freeboard_engine():
       resolution = epochtimes[2]
 
 
+    strvalue = ""
+    value1 = '---'
+    value2 = '---'
+    value3 = '---'
+    value4 = '---'
+    value5 = '---'
+    value6 = '---'
+    value7 = '---'
+    value8 = '---'
+
+
+    speed=[]
+    engine_temp=[]
+    oil_pressure=[]
+    alternator_potential=[]
+    tripfuel=[]
+    fuel_rate=[]
+    level=[]
+    total_engine_hours=[]
+
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
+
+
     deviceid = getedeviceid(deviceapikey)
     
     log.info("freeboard deviceid %s", deviceid)
@@ -4694,17 +4718,17 @@ def freeboard_engine():
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','rpm':list(reversed(speed)), 'eng_temp':list(reversed(eng_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(fuel_level)), 'eng_hours':list(reversed(eng_hours))})     
 
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','rpm':list(reversed(speed)), 'eng_temp':list(reversed(eng_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(fuel_level)), 'eng_hours':list(reversed(eng_hours))})     
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','rpm':list(reversed(speed)), 'eng_temp':list(reversed(eng_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(fuel_level)), 'eng_hours':list(reversed(eng_hours))})     
 
     log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
@@ -4745,7 +4769,7 @@ def freeboard_engine():
       level=[]
       total_engine_hours=[]
 
-       
+      ts =startepoch*1000       
       points = list(response.get_points())
 
       #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
@@ -4766,32 +4790,32 @@ def freeboard_engine():
         
         if point['engine_temp'] is not None:
           value2 =  convertfbunits(point['engine_temp'], 0)
-          engine_temp.append({'epoch':ts, 'value':value2})
+        engine_temp.append({'epoch':ts, 'value':value2})
           
         
         if point['oil_pressure'] is not None:
           value3=  convertfbunits(point['oil_pressure'], 8)
-          oil_pressure.append({'epoch':ts, 'value':value3})
+        oil_pressure.append({'epoch':ts, 'value':value3})
           
         
         if point['alternator_potential'] is not None:
           value4 =  convertfbunits(point['alternator_potential'], 27)
-          alternator_potential.append({'epoch':ts, 'value':value4})
+        alternator_potential.append({'epoch':ts, 'value':value4})
           
         
         if point['fuel_rate'] is not None:
           value6 =  convertfbunits(point['fuel_rate'], 18)
-          fuel_rate.append({'epoch':ts, 'value':value6})
+        fuel_rate.append({'epoch':ts, 'value':value6})
           
        
         if point['level'] is not None:
           value7=  convertfbunits(point['level'], 26)
-          level.append({'epoch':ts, 'value':value7})
+        level.append({'epoch':ts, 'value':value7})
           
         
         if point['total_engine_hours'] is not None:
           value8 = convertfbunits(point['total_engine_hours'], 37)
-          total_engine_hours.append({'epoch':ts, 'value':value8})
+        total_engine_hours.append({'epoch':ts, 'value':value8})
           
 
       callback = request.args.get('callback')

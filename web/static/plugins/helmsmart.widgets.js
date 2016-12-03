@@ -2489,9 +2489,11 @@
 
 			//var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
 			//var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
-		    var url = "https://helmsmart-freeboard.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
+		   // var url = "https://helmsmart-freeboard.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
 			
-			
+				var url = "https://helmsmart-freeboard.herokuapp.com/setswitchapi";
+				url = url + "?deviceapikey=" + currentSettings.apikey;
+
 				url = url + "&instance=" + switchInstance ;
 				url = url + "&switchid=" + switchid ;
 				url = url + "&switchvalue=" + switchvalue ;
@@ -2549,24 +2551,27 @@
 		// handle mouse click on button 
 		this.onClick = function(element) {
             element.preventDefault()
-
-			if(gdisableIndicatorClick == false)
+			
+			if (currentSettings.indicatortype == "switch")
 			{
-				var new_val = !isOn
-				var new_val_array = []
-				new_val_array.push(new_val);
-				
-				//this.onCalculatedValueChanged('value', new_val_array);
-				var apikey =  currentSettings.apikey;
-				//var switchinstance = currentSettings.instance;
-				var switchid = currentSettings.switchid;
-				
-				
-				if (_.isUndefined(apikey))
-					freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
-					});
-				else {
-					this.sendValue(apikey,  switchid, new_val);
+				if(gdisableIndicatorClick == false)
+				{
+					var new_val = !isOn
+					var new_val_array = []
+					new_val_array.push(new_val);
+					
+					//this.onCalculatedValueChanged('value', new_val_array);
+					var apikey =  currentSettings.apikey;
+					//var switchinstance = currentSettings.instance;
+					var switchid = currentSettings.switchid;
+					
+					
+					if (_.isUndefined(apikey))
+						freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
+						});
+					else {
+						this.sendValue(apikey,  switchid, new_val);
+					}
 				}
 			}
         }
