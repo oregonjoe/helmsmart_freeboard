@@ -194,138 +194,138 @@ def convertunittype(value, units):
     
 #Convert Units used for freeboard numerical displays
 def convertfbunits(value, units):
-            units = int(units)
+  units = int(units)
 
-            #if not value:
-            #  return "---"
-            
-            if value is None:
-              return "---"
+  #if not value:
+  #  return "---"
 
-            if value == 'None':
-              return "---"
+  if value is None:
+    return "---"
+
+  if value == 'None':
+    return "---"
 
 
 
-            if units == 0: #//="0">Fahrenheit</option>
-                return float("{0:.0f}".format((value * 1.8) - 459) )
-            
-            
-            elif units ==  1: #//="1">Celsius</option>
-                return float("{0:.0f}".format((value * 1.0) - 273) )
-            
+  if units == 0: #//="0">Fahrenheit</option>
+      return float("{0:.0f}".format((value * 1.8) - 459) )
 
-            elif units == 2: #//e="2">Kelvin</option>
-                return value 
-            
 
-            #//  case 3: //="3">- - -</option> 
-      
-      
-            elif units == 4: #//="4">Knots</option>
-                return float("{0:.2f}".format(value * 1.94384449))
-           
+  elif units ==  1: #//="1">Celsius</option>
+      return float("{0:.0f}".format((value * 1.0) - 273) )
 
-            elif units == 5: #//="5">MPH</option>
-                return float("{0:.2f}".format(value * 2.23694) )
-            
-            
-            elif units == 6: #//e="6">KPH</option>
-                return float("{0:.2f}".format(value * 1.0) )
-           
-      
-      
-            #// case 7: //="7">- - -</option>
-            elif units == 8: #//="8">PSI</option>
-                return float("{0:.2f}".format(value * 0.145037738007) )
-          
-            
 
-            elif units == 9: #//e="9">KPASCAL</option>
-                return float("{0:.2f}".formatvalue )
+  elif units == 2: #//e="2">Kelvin</option>
+      return value 
 
-   
-            
-            elif units == 10: #//="10">INHG</option>
-                return float("{0:.2f}".format(value * 0.295229) )
+
+  #//  case 3: //="3">- - -</option> 
+
+
+  elif units == 4: #//="4">Knots</option>
+      return float("{0:.2f}".format(value * 1.94384449))
+
+
+  elif units == 5: #//="5">MPH</option>
+      return float("{0:.2f}".format(value * 2.23694) )
+
+
+  elif units == 6: #//e="6">KPH</option>
+      return float("{0:.2f}".format(value * 1.0) )
+
+
+
+  #// case 7: //="7">- - -</option>
+  elif units == 8: #//="8">PSI</option>
+      return float("{0:.2f}".format(value * 0.145037738007) )
+
+
+
+  elif units == 9: #//e="9">KPASCAL</option>
+      return float("{0:.2f}".formatvalue )
+
+
+
+  elif units == 10: #//="10">INHG</option>
+      return float("{0:.2f}".format(value * 0.295229) )
+
+
+  #//  case 11: //="11">- - -</option>
+  # //  case 12: //="12">TRUE</option>
+  #//   case 13: //="13">MAGNETIC</option>
+  #//   case 14: //="14">- - -</option>
+  #//   case 15: //="15">- - -</option>
+  elif units == 15:            #//   case 15: //="15">Lat/Lng</option>
+    return float("{0:.8f}".format(value * 1.0 ) )
+
+  elif units == 16:            #//   case 16: //="16">DEGREES</option>
+    return float("{0:.0f}".format(value * 1.0 ) )
+
+  #//   case 17: //="17">Radians</option>
+  elif units == 18: #//="18">Gallons/hs</option>
+      return float("{0:.2f}".format(value * 0.264172052 ) )
+
+
+  elif units == 19: #//="19">Liters/hr</option>
+      return float("{0:.2f}".format(value * 0.1 ) )
+
+
+  #case 20: //="20">Liters</option>
+  #case 21: //="21">Gallons</option>
+  #case 22: //="22">CubicMeter</option>
+  #case 23: //="23">- - -</option>
+  #case 24: //="24">RPM</option>
     
+  elif units == 24: #//="24">RPM</option>
+      return float("{0:.0f}".format(value *1.0))
 
-            #//  case 11: //="11">- - -</option>
-            # //  case 12: //="12">TRUE</option>
-            #//   case 13: //="13">MAGNETIC</option>
-            #//   case 14: //="14">- - -</option>
-            #//   case 15: //="15">- - -</option>
-            elif units == 15:            #//   case 15: //="15">Lat/Lng</option>
-              return float("{0:.8f}".format(value * 1.0 ) )
-
-            elif units == 16:            #//   case 16: //="16">DEGREES</option>
-              return float("{0:.0f}".format(value * 1.0 ) )
-            
-            #//   case 17: //="17">Radians</option>
-            elif units == 18: #//="18">Gallons/hs</option>
-                return float("{0:.2f}".format(value * 0.264172052 ) )
+    
+  #case 25: //="25">RPS</option>   
+    
+  elif units == 26: #//="26">%</option>
+      return float("{0:.0f}".format(value *1.0))
 
 
-            elif units == 19: #//="19">Liters/hr</option>
-                return float("{0:.2f}".format(value * 0.1 ) )
+    
+  elif units == 27: #//="27">Volts</option>
+      return float("{0:.2f}".format(value *0.10))
 
 
-            #case 20: //="20">Liters</option>
-            #case 21: //="21">Gallons</option>
-            #case 22: //="22">CubicMeter</option>
-            #case 23: //="23">- - -</option>
-            #case 24: //="24">RPM</option>
-              
-            elif units == 24: #//="24">RPM</option>
-                return float("{0:.0f}".format(value *1.0))
-            
-              
-            #case 25: //="25">RPS</option>   
-              
-            elif units == 26: #//="26">%</option>
-                return float("{0:.0f}".format(value *1.0))
-            
+  elif units == 31: #//="31">kWhrs</option>
+      return float("{0:.2f}".format(value *0.10))
+  # case 28: //="28">Amps</option>
 
-              
-            elif units == 27: #//="27">Volts</option>
-                return float("{0:.2f}".format(value *0.10))
-            
+  elif units == 33: #//="33">Meters</option>
+      return float("{0:.2f}".format(value * 1.0))
 
-            elif units == 31: #//="31">kWhrs</option>
-                return float("{0:.2f}".format(value *0.10))
-            # case 28: //="28">Amps</option>
-      
-            elif units == 33: #//="33">Meters</option>
-                return float("{0:.2f}".format(value * 1.0))
-          
-            
-            elif units == 34: #//="34">Feet</option>
-                return float("{0:.2f}".format(value * 3.28084)) 
-      
-            
-            elif units == 35: #//="35">Fathoms</option>
-                return float("{0:.2f}".format(value * 0.546806649))
 
-            elif units == 36: #//="36">Miles</option>
-                return float("{0:.2f}".format(value * 0.000621371))              
-  
+  elif units == 34: #//="34">Feet</option>
+      return float("{0:.2f}".format(value * 3.28084)) 
 
-  
-            elif units == 37: #//="37">Time</option>
-                #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
-                return (datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
 
-            elif units == 38: #//="38">Date/time</option>
-                #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
-                return (datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
-              
-            elif units == 39: #//="39">Hours</option>
-                #Engine Hours (value / (60*60))
-                 return float("{0:.2f}".format(value * 0.000277777))  
-            
-            
-            else:
-                return float("{0:.2f}".format(value))
+  elif units == 35: #//="35">Fathoms</option>
+      return float("{0:.2f}".format(value * 0.546806649))
+
+  elif units == 36: #//="36">Miles</option>
+      return float("{0:.2f}".format(value * 0.000621371))              
+
+
+
+  elif units == 37: #//="37">Time</option>
+      #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
+      return (datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
+
+  elif units == 38: #//="38">Date/time</option>
+      #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
+      return (datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
+    
+  elif units == 39: #//="39">Hours</option>
+      #Engine Hours (value / (60*60))
+       return float("{0:.2f}".format(value * 0.000277777))  
+
+
+  else:
+      return float("{0:.2f}".format(value))
 
 def convertunits(value, units):
             units = int(units)
