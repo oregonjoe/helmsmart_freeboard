@@ -4971,43 +4971,43 @@ def freeboard_engine_aux():
           
         if point['boost_presure'] is not None:
           value1 = convertfbunits( point['boost_presure'], convertunittype('pressure', units))
-          speed.append({'epoch':ts, 'value':value1})
+          boost_presure.append({'epoch':ts, 'value':value1})
           
         
         if point['coolant_pressure'] is not None:
           value2 =  convertfbunits(point['coolant_pressure'], convertunittype('pressure', units))
-        engine_temp.append({'epoch':ts, 'value':value2})
+        coolant_pressure.append({'epoch':ts, 'value':value2})
           
         
         if point['fuel_pressure'] is not None:
           value3=  convertfbunits(point['fuel_pressure'], convertunittype('pressure', units))
-        oil_pressure.append({'epoch':ts, 'value':value3})
+        fuel_pressure.append({'epoch':ts, 'value':value3})
           
         
         if point['oil_temp'] is not None:
           value4 =  convertfbunits(point['oil_temp'], convertunittype('temperature', units))
-        alternator_potential.append({'epoch':ts, 'value':value4})
+        oil_temp.append({'epoch':ts, 'value':value4})
           
         
         if point['egt_temperature'] is not None:
           value5 =  convertfbunits(point['egt_temperature'], convertunittype('temperature', units))
-        fuel_rate.append({'epoch':ts, 'value':value6})
+        egt_temperature.append({'epoch':ts, 'value':value6})
           
        
         if point['fuel_rate_average'] is not None:
           value6=  convertfbunits(point['fuel_rate_average'], convertunittype('flow', units))
-        level.append({'epoch':ts, 'value':value7})
+        fuel_rate_average.append({'epoch':ts, 'value':value7})
           
         
         if point['instantaneous_fuel_economy'] is not None:
           value7 = convertfbunits(point['instantaneous_fuel_economy'],convertunittype('flow', units))
-        total_engine_hours.append({'epoch':ts, 'value':value8})
+        instantaneous_fuel_economy.append({'epoch':ts, 'value':value8})
 
           
         
         if point['tilt_or_trim'] is not None:
           value8 = convertfbunits(point['tilt_or_trim'], convertunittype('%', units))
-        total_engine_hours.append({'epoch':ts, 'value':value8})
+        tilt_or_trim.append({'epoch':ts, 'value':value8})
           
           
 
