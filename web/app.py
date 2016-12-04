@@ -5961,8 +5961,8 @@ def freeboard_switch_bank_status():
 
 
 
-    log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
+    #log.info("freeboard Create InfluxDB %s", database)
 
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
@@ -6104,7 +6104,7 @@ def freeboard_switch_bank_status():
        
       points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
@@ -6218,7 +6218,7 @@ def freeboard_switch_bank_status():
         # check if array was all NONE  - if so disgard it
         if not (statusvalues[0] == 3 and statusvalues[1] == 3 and statusvalues[2] == 3 and statusvalues[3] == 3 and statusvalues[4] == 3 and statusvalues[5] == 3 and statusvalues[6] == 3 and statusvalues[7] == 3 and statusvalues[8] == 3 and statusvalues[9] == 3 and statusvalues[10] == 3 and statusvalues[11] == 3 and statusvalues[12] == 3 and statusvalues[13] == 3 and statusvalues[14] == 3 and statusvalues[15] == 3):
           switchstatus.append(statusvalues)
-          log.info('freeboard_switch_bank_status:  switchstatus%s:', switchstatus)          
+          #log.info('freeboard_switch_bank_status:  switchstatus%s:', switchstatus)          
 
 
 
