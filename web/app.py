@@ -105,13 +105,27 @@ def convertunittype(value, units):
     elif value == 'metric':
       return 1
     elif value == 'si':
-      return 1
+      return 2
+    elif value == 'nautical':
+      return 0
+
+
+    
 
   elif units == 'pressure':
     if value == 'US':
       return 8
     elif value == 'metric':
       return 9
+    elif value == 'nautical':
+      return 4
+    elif value == 'si':
+      return 9
+
+
+
+
+    
 
   elif units == 'speed':
     if value == 'US':
@@ -120,6 +134,11 @@ def convertunittype(value, units):
       return 6
     elif value == 'nautical':
       return 4
+    elif value == 'si':
+      return 7
+
+
+    
 
   elif units == 'volume':
     if value == 'US':
@@ -128,26 +147,52 @@ def convertunittype(value, units):
       return 20
     elif value == 'si':
       return 22
+    elif value == 'nautical':
+      return 20
+
+
+
+    
     
   elif units == 'flow':
     if value == 'US':
       return 18
     elif value == 'metric':
       return 19
+    elif value == 'nautical':
+      return 19
+    elif value == 'si':
+      return 19
+
+
+
+
+    
 
   elif units == 'depth':
+    if value == 'US':
+      return 32
+    elif value == 'metric':
+      return 33    
+    elif value == 'nautical':
+      return 36
+    elif value == 'si':
+      return 33
+
+
+    
+
+  elif units == 'distance':
     if value == 'US':
       return 34
     elif value == 'metric':
       return 33    
     elif value == 'nautical':
       return 35
+    elif value == 'si':
+      return 33
 
-  elif units == 'distance':
-    if value == 'US':
-      return 36
-    elif value == 'metric':
-      return 33    
+
 
   elif units == 'degree':
     return 16
@@ -271,7 +316,10 @@ def convertfbunits(value, units):
 
 
   #case 20: //="20">Liters</option>
-  #case 21: //="21">Gallons</option>
+  elif units == 21: #//="18">Gallons/hs</option>
+      return float("{0:.2f}".format(value * 0.264172052 ) )
+
+
   #case 22: //="22">CubicMeter</option>
   #case 23: //="23">- - -</option>
   #case 24: //="24">RPM</option>
@@ -294,20 +342,22 @@ def convertfbunits(value, units):
   elif units == 31: #//="31">kWhrs</option>
       return float("{0:.2f}".format(value *0.10))
   # case 28: //="28">Amps</option>
+            
+  elif units == 32: #//="32">Feet</option>
+      return float("{0:.2f}".format(value * 3.28084)) 
 
   elif units == 33: #//="33">Meters</option>
       return float("{0:.2f}".format(value * 1.0))
 
+  elif units == 34: #//="34">Miles</option>
+      return float("{0:.2f}".format(value * 0.000621371))              
 
-  elif units == 34: #//="34">Feet</option>
-      return float("{0:.2f}".format(value * 3.28084)) 
-
-
-  elif units == 35: #//="35">Fathoms</option>
+  elif units == 35: #//="35">Nautical Mile</option>
+      return float("{0:.2f}".format(value * 0.0005399568))                
+  
+  elif units == 36: #//="36">Fathoms</option>
       return float("{0:.2f}".format(value * 0.546806649))
 
-  elif units == 36: #//="36">Miles</option>
-      return float("{0:.2f}".format(value * 0.000621371))              
 
 
 
@@ -418,21 +468,21 @@ def convertunits(value, units):
   elif units == 31: #//="31">kWhrs</option>
       return float("{0:.2f}".format(value *0.10))
   # case 28: //="28">Amps</option>
+  
+  elif units == 32: #//="32">Feet</option>
+      return float("{0:.2f}".format(value * 3.28084)) 
 
   elif units == 33: #//="33">Meters</option>
       return float("{0:.2f}".format(value * 1.0))
 
-
-  elif units == 34: #//="34">Feet</option>
-      return float("{0:.2f}".format(value * 3.28084)) 
-
-
-  elif units == 35: #//="35">Fathoms</option>
-      return float("{0:.2f}".format(value * 0.546806649))
-
-  elif units == 36: #//="36">Miles</option>
+  elif units == 34: #//="34">Miles</option>
       return float("{0:.2f}".format(value * 0.000621371))              
 
+  elif units == 35: #//="35">Nautical Mile</option>
+      return float("{0:.2f}".format(value * 0.0005399568))                
+  
+  elif units == 36: #//="36">Fathoms</option>
+      return float("{0:.2f}".format(value * 0.546806649))
 
 
   elif units == 37: #//="37">Time</option>
