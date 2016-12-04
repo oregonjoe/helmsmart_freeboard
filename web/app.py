@@ -93,6 +93,105 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['DEBUG'] = True
 app.debug = True
 
+
+
+#Convert Units between US and Metric
+def convertunittype(value, units):
+
+
+  if units == 'temperature':
+    if value == 'US'
+      return 0
+    elif value = 'metric':
+      return 1
+    elif value = 'si':
+      return 1
+
+  elif units == 'pressure':
+    if value == 'US'
+      return 8
+    elif value = 'metric':
+      return 9
+
+  elif units == 'speed':
+    if value == 'US'
+      return 5
+    elif value = 'metric':
+      return 6
+    elif value = 'nautical':
+      return 4
+
+  elif units == 'volume':
+    if value == 'US'
+      return 21
+    elif value = 'metric':
+      return 20
+    elif value = 'si':
+      return 22
+    
+  elif units == 'flow':
+    if value == 'US'
+      return 18
+    elif value = 'metric':
+      return 19
+
+  elif units == 'depth':
+    if value == 'US'
+      return 34
+    elif value = 'metric':
+      return 33    
+    elif value = 'nautical':
+      return 35
+
+  elif units == 'distance':
+    if value == 'US'
+      return 36
+    elif value = 'metric':
+      return 33    
+
+  elif units == 'degree':
+    return 16
+
+  elif units == 'radian':
+    return 17
+
+  
+  elif units == 'rpm':
+    return 24
+  
+  elif units == 'rps':
+    return 25
+
+  elif units == '%':
+    return 26
+
+
+  elif units == 'volts':
+    return 27
+  
+  elif units == 'amps':
+    return 28
+
+  elif units == 'watts':
+    return 29
+  
+  elif units == 'watthrs':
+    return 30
+
+
+  elif units == 'time':
+    return 37
+  
+  elif units == 'date':
+    return 38
+  
+  elif units == 'hours':
+    return 39
+
+  else:
+    return 44
+  
+    
 #Convert Units used for freeboard numerical displays
 def convertfbunits(value, units):
             units = int(units)
@@ -191,18 +290,26 @@ def convertfbunits(value, units):
             elif units == 27: #//="27">Volts</option>
                 return float("{0:.2f}".format(value *0.10))
             
-            # case 26: //="26">%</option>
+
+            elif units == 31: #//="31">kWhrs</option>
+                return float("{0:.2f}".format(value *0.10))
+            # case 28: //="28">Amps</option>
       
-            elif units == 30: #//="30">Meters</option>
+            elif units == 33: #//="33">Meters</option>
                 return float("{0:.2f}".format(value * 1.0))
           
             
-            elif units == 31: #//="31">Feet</option>
+            elif units == 34: #//="34">Feet</option>
                 return float("{0:.2f}".format(value * 3.28084)) 
       
             
-            elif units == 32: #//="32">Fathoms</option>
+            elif units == 35: #//="35">Fathoms</option>
                 return float("{0:.2f}".format(value * 0.546806649))
+
+            elif units == 36: #//="36">Miles</option>
+                return float("{0:.2f}".format(value * 0.000621371))              
+  
+
   
             elif units == 37: #//="37">Time</option>
                 #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
@@ -211,6 +318,10 @@ def convertfbunits(value, units):
             elif units == 38: #//="38">Date/time</option>
                 #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
                 return (datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
+            
+           elif units == 39: #//="39">Hours</option>
+                #Engine Hours (value / (60*60))
+                 return float("{0:.2f}".format(value * 0.000277777))  
             
             
             else:
@@ -303,18 +414,26 @@ def convertunits(value, units):
             elif units == 27: #//="27">Volts</option>
                 return float("{0:.2f}".format(value *0.10))
             
-            # case 26: //="26">%</option>
+
+            elif units == 31: #//="31">kWhrs</option>
+                return float("{0:.2f}".format(value *0.10))
+            # case 28: //="28">Amps</option>
       
-            elif units == 30: #//="30">Meters</option>
+            elif units == 33: #//="33">Meters</option>
                 return float("{0:.2f}".format(value * 1.0))
           
             
-            elif units == 31: #//="31">Feet</option>
+            elif units == 34: #//="34">Feet</option>
                 return float("{0:.2f}".format(value * 3.28084)) 
       
             
-            elif units == 32: #//="32">Fathoms</option>
+            elif units == 35: #//="35">Fathoms</option>
                 return float("{0:.2f}".format(value * 0.546806649))
+
+            elif units == 36: #//="36">Miles</option>
+                return float("{0:.2f}".format(value * 0.000621371))              
+  
+
   
             elif units == 37: #//="37">Time</option>
                 #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
@@ -323,7 +442,10 @@ def convertunits(value, units):
             elif units == 38: #//="38">Date/time</option>
                 #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
                 return (datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
-            
+              
+           elif units == 39: #//="39">Hours</option>
+                #Engine Hours (value / (60*60))
+                 return float("{0:.2f}".format(value * 0.000277777))              
             
             else:
                 return float("{0:.2f}".format(value * 1.0))
@@ -4392,6 +4514,7 @@ def freeboard_battery():
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
+    units= request.args.get('units',"US")
     
     response = None
     
@@ -4404,6 +4527,12 @@ def freeboard_battery():
       resolution = epochtimes[2]
 
 
+    voltage=[]
+    current=[]
+    temperature=[]      
+
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
     deviceid = getedeviceid(deviceapikey)
     
     log.info("freeboard deviceid %s", deviceid)
@@ -4487,13 +4616,15 @@ def freeboard_battery():
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature))})     
 
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature))})     
 
     log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
@@ -4524,6 +4655,8 @@ def freeboard_battery():
       current=[]
       temperature=[]
 
+      ts =startepoch*1000
+
       points = list(response.get_points())
 
       #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
@@ -4540,16 +4673,16 @@ def freeboard_battery():
         
 
         if point['voltage'] is not None: 
-          value1 = convertfbunits(point['voltage'], 27)
-          voltage.append({'epoch':ts, 'value':value1})
+          value1 = convertfbunits(point['voltage'], convertunittype('volts', units))
+        voltage.append({'epoch':ts, 'value':value1})
           
         if point['current'] is not None:         
-          value2 = convertfbunits(point['current'], 28)
-          current.append({'epoch':ts, 'value':value2})
+          value2 = convertfbunits(point['current'], convertunittype('amps', units))
+        current.append({'epoch':ts, 'value':value2})
           
         if point['temperature'] is not None:         
-          value3 = convertfbunits(point['temperature'], 0)
-          temperature.append({'epoch':ts, 'value':value3})
+          value3 = convertfbunits(point['temperature'], convertunittype('temperature', units))
+        temperature.append({'epoch':ts, 'value':value3})
                
 
       callback = request.args.get('callback')
@@ -4590,6 +4723,7 @@ def freeboard_engine_aux():
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
+    units= request.args.get('units',"US")
     
     response = None
     
@@ -4760,17 +4894,19 @@ def freeboard_engine_aux():
       value8 = '---'
 
 
-    boost_presure=[]
-    coolant_pressure=[]
-    fuel_pressure=[]
-    oil_temp=[]
-    egt_temperature=[]
-    fuel_rate_average=[]
-    instantaneous_fuel_economy=[]
-    tilt_or_trim=[]
+      boost_presure=[]
+      coolant_pressure=[]
+      fuel_pressure=[]
+      oil_temp=[]
+      egt_temperature=[]
+      fuel_rate_average=[]
+      instantaneous_fuel_economy=[]
+      tilt_or_trim=[]
 
-      ts =startepoch*1000       
+      ts =startepoch*1000
+      
       points = list(response.get_points())
+
 
       #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
@@ -4783,39 +4919,46 @@ def freeboard_engine_aux():
           dtt = mydatetime.timetuple()
           ts = int(mktime(dtt)*1000)
           
-        if point['speed'] is not None:
-          value1 = convertfbunits( point['speed'], 24)
+        if point['boost_presure'] is not None:
+          value1 = convertfbunits( point['boost_presure'], convertunittype('pressure', units))
           speed.append({'epoch':ts, 'value':value1})
           
         
-        if point['engine_temp'] is not None:
-          value2 =  convertfbunits(point['engine_temp'], 0)
+        if point['coolant_pressure'] is not None:
+          value2 =  convertfbunits(point['coolant_pressure'], convertunittype('pressure', units))
         engine_temp.append({'epoch':ts, 'value':value2})
           
         
-        if point['oil_pressure'] is not None:
-          value3=  convertfbunits(point['oil_pressure'], 8)
+        if point['fuel_pressure'] is not None:
+          value3=  convertfbunits(point['fuel_pressure'], convertunittype('pressure', units))
         oil_pressure.append({'epoch':ts, 'value':value3})
           
         
-        if point['alternator_potential'] is not None:
-          value4 =  convertfbunits(point['alternator_potential'], 27)
+        if point['oil_temp'] is not None:
+          value4 =  convertfbunits(point['oil_temp'], convertunittype('temperature', units))
         alternator_potential.append({'epoch':ts, 'value':value4})
           
         
-        if point['fuel_rate'] is not None:
-          value6 =  convertfbunits(point['fuel_rate'], 18)
+        if point['egt_temperature'] is not None:
+          value5 =  convertfbunits(point['egt_temperature'], convertunittype('temperature', units))
         fuel_rate.append({'epoch':ts, 'value':value6})
           
        
-        if point['level'] is not None:
-          value7=  convertfbunits(point['level'], 26)
+        if point['fuel_rate_average'] is not None:
+          value6=  convertfbunits(point['fuel_rate_average'], convertunittype('flow', units))
         level.append({'epoch':ts, 'value':value7})
           
         
-        if point['total_engine_hours'] is not None:
-          value8 = convertfbunits(point['total_engine_hours'], 37)
+        if point['instantaneous_fuel_economy'] is not None:
+          value7 = convertfbunits(point['instantaneous_fuel_economy'],convertunittype('flow', units))
         total_engine_hours.append({'epoch':ts, 'value':value8})
+
+          
+        
+        if point['tilt_or_trim'] is not None:
+          value8 = convertfbunits(point['tilt_or_trim'], convertunittype('%', units))
+        total_engine_hours.append({'epoch':ts, 'value':value8})
+          
           
 
       callback = request.args.get('callback')
@@ -4879,6 +5022,7 @@ def freeboard_engine():
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
+    units= request.args.get('units',"US")
     
     response = None
     
@@ -5073,37 +5217,37 @@ def freeboard_engine():
           ts = int(mktime(dtt)*1000)
           
         if point['speed'] is not None:
-          value1 = convertfbunits( point['speed'], 24)
+          value1 = convertfbunits( point['speed'], convertunittype('rpm', units))
           speed.append({'epoch':ts, 'value':value1})
           
         
         if point['engine_temp'] is not None:
-          value2 =  convertfbunits(point['engine_temp'], 0)
+          value2 =  convertfbunits(point['engine_temp'], convertunittype('temperature', units))
         engine_temp.append({'epoch':ts, 'value':value2})
           
         
         if point['oil_pressure'] is not None:
-          value3=  convertfbunits(point['oil_pressure'], 8)
+          value3=  convertfbunits(point['oil_pressure'], convertunittype('pressure', units))
         oil_pressure.append({'epoch':ts, 'value':value3})
           
         
         if point['alternator_potential'] is not None:
-          value4 =  convertfbunits(point['alternator_potential'], 27)
+          value4 =  convertfbunits(point['alternator_potential'], convertunittype('volts', units))
         alternator_potential.append({'epoch':ts, 'value':value4})
           
         
         if point['fuel_rate'] is not None:
-          value6 =  convertfbunits(point['fuel_rate'], 18)
+          value6 =  convertfbunits(point['fuel_rate'], convertunittype('flow', units))
         fuel_rate.append({'epoch':ts, 'value':value6})
           
        
         if point['level'] is not None:
-          value7=  convertfbunits(point['level'], 26)
+          value7=  convertfbunits(point['level'], convertunittype('%', units))
         level.append({'epoch':ts, 'value':value7})
           
         
         if point['total_engine_hours'] is not None:
-          value8 = convertfbunits(point['total_engine_hours'], 37)
+          value8 = convertfbunits(point['total_engine_hours'], convertunittype('hours', units))
         total_engine_hours.append({'epoch':ts, 'value':value8})
           
 
