@@ -100,7 +100,7 @@ def convertunittype(value, units):
 
 
   if units == 'temperature':
-    if value == 'US'
+    if value == 'US':
       return 0
     elif value = 'metric':
       return 1
@@ -108,13 +108,13 @@ def convertunittype(value, units):
       return 1
 
   elif units == 'pressure':
-    if value == 'US'
+    if value == 'US':
       return 8
     elif value = 'metric':
       return 9
 
   elif units == 'speed':
-    if value == 'US'
+    if value == 'US':
       return 5
     elif value = 'metric':
       return 6
@@ -122,7 +122,7 @@ def convertunittype(value, units):
       return 4
 
   elif units == 'volume':
-    if value == 'US'
+    if value == 'US':
       return 21
     elif value = 'metric':
       return 20
@@ -130,13 +130,13 @@ def convertunittype(value, units):
       return 22
     
   elif units == 'flow':
-    if value == 'US'
+    if value == 'US':
       return 18
     elif value = 'metric':
       return 19
 
   elif units == 'depth':
-    if value == 'US'
+    if value == 'US':
       return 34
     elif value = 'metric':
       return 33    
@@ -144,7 +144,7 @@ def convertunittype(value, units):
       return 35
 
   elif units == 'distance':
-    if value == 'US'
+    if value == 'US':
       return 36
     elif value = 'metric':
       return 33    
