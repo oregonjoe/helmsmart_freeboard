@@ -4834,6 +4834,11 @@ def freeboard_engine_aux():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
     serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='temperature'  OR  sensor='trip_parameters_engine') AND "
+    if Instance == 1:
+      serieskeys= serieskeys +  " (type='NULL' OR type='Reserved 134')  AND "
+    else:
+      serieskeys= serieskeys +  " (type='NULL' OR type='Reserved 135')  AND "
+      
     serieskeys= serieskeys +  " (instance='" + Instance + "') "
 
 
