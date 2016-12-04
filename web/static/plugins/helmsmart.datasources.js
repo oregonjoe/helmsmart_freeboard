@@ -430,8 +430,33 @@
 						value: "GEN"
 					}
 				]
-			}
+			},
 					
+			{
+				name: "units",
+				display_name: "Units",
+				description: "Units for temperature, pressure, speed, flow, distance, and volume"
+				type: "option",
+				default_value: "US",
+				options: [
+					{
+						name: "US",
+						value: "US"
+					},
+					{
+						name: "Metric",
+						value: "metric"
+					},
+					{
+						name: "Scientific",
+						value: "si"
+					},
+					{
+						name: "Nautical",
+						value: "nautical"
+					}
+				]
+			}
 			/*
 			{
 				name: "method",

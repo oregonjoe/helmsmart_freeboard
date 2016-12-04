@@ -410,6 +410,8 @@
             newInstanceCallback(new hstextWidget(settings));
         }
     });
+	
+	/*
 
     var gaugeID = 0;
 	freeboard.addStyle('.gauge-widget-wrapper', "width: 100%;text-align: center;");
@@ -523,17 +525,17 @@
 					
 				},
 
-				/*
-				pointerOptions: {
-				  toplength: -15,
-				  bottomlength: 10,
-				  bottomwidth: 12,
-				  color: '#8e8e93',
-				  stroke: '#ffffff',
-				  stroke_width: 2,
-				  stroke_linecap: 'round'
-				},
-				*/
+				//
+				//pointerOptions: {
+				//  toplength: -15,
+				//  bottomlength: 10,
+				//  bottomwidth: 12,
+				//  color: '#8e8e93',
+				//  stroke: '#ffffff',
+				//  stroke_width: 2,
+				//  stroke_linecap: 'round'
+				//},
+				
 				    pointerOptions: {
 				  toplength: 10,
 				  bottomlength: 10,
@@ -657,15 +659,15 @@
                 default_value: 100
             },
 			
-			/*
-			{
-                name: "fullcircle",
-                display_name: "Full Circle Gauge",
-				description: "Enable for compass style pointer gauge",
-                type: "boolean",
-                default_value: false
-            },
-			*/
+			//
+			//{
+             //   name: "fullcircle",
+             //   display_name: "Full Circle Gauge",
+			//	description: "Enable for compass style pointer gauge",
+             //   type: "boolean",
+             //   default_value: false
+            //},
+			
 			{
 			"name": "gaugeStyle",
 			"display_name": "Gauge Style",
@@ -886,7 +888,7 @@
         }
     });
 
-	
+	*/
 	
 	/*
     var compassID = 0;

@@ -3130,6 +3130,8 @@ def freeboard_environmental():
     Interval = request.args.get('interval',"5min")
     #Interval = request.args.get('interval',"1hour")
     resolution = request.args.get('resolution',"")
+    units= request.args.get('units',"US")
+
     
     response = None
 
@@ -3302,7 +3304,7 @@ def freeboard_environmental():
           ts = int(mktime(dtt)*1000)
           
         if point['temperature'] is not None: 
-          value1 = convertfbunits(point['temperature'], 0)
+          value1 = convertfbunits(point['temperature'],  convertunittype('temperature', units))
         temperature.append({'epoch':ts, 'value':value1})
           
         if point['atmospheric_pressure'] is not None:         
@@ -3401,10 +3403,15 @@ def freeboard_winddata():
     Interval = request.args.get('interval',"5min")
     resolution = request.args.get('resolution',"")
     windtype = request.args.get('type',"true")
+    units= request.args.get('units',"US")
 
+    
     response = None
 
 
+    wind_speed=[]
+    wind_direction=[]
+    
     starttime = 0
 
     epochtimes = getepochtimes(Interval)
@@ -3413,6 +3420,8 @@ def freeboard_winddata():
     if resolution == "":
       resolution = epochtimes[2]
 
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
     deviceid = getedeviceid(deviceapikey)
     
@@ -3506,13 +3515,27 @@ def freeboard_winddata():
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        
+        if  windtype =="apparent":
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction))})
+        else:
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction))})
+   
 
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+      
+        if  windtype =="apparent":
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction))})
+        else:
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction))})
+   
+
+      
 
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
@@ -3532,7 +3555,7 @@ def freeboard_winddata():
       wind_speed=[]
       wind_direction=[]
 
-
+      ts =startepoch*1000
  
       points = list(response.get_points())
 
@@ -3547,12 +3570,12 @@ def freeboard_winddata():
           ts = int(mktime(dtt)*1000)
 
         if point['wind_speed'] is not None:       
-          value1 = convertfbunits(point['wind_speed'], 4)
-          wind_speed.append({'epoch':ts, 'value':value1})
+          value1 = convertfbunits(point['wind_speed'],  convertunittype('speed', units))
+        wind_speed.append({'epoch':ts, 'value':value1})
           
         if point['wind_direction'] is not None:       
           value2 = convertfbunits(point['wind_direction'], 16)
-          wind_direction.append({'epoch':ts, 'value':value2})
+        wind_direction.append({'epoch':ts, 'value':value2})
        
 
       callback = request.args.get('callback')
@@ -3560,11 +3583,9 @@ def freeboard_winddata():
 
       
       if  windtype =="apparent":
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction))})
-
-
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction))})
       else:
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction))})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction))})
    
 
       
@@ -3710,7 +3731,7 @@ def freeboard_winddata_apparent():
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        value1 = convertfbunits(point['wind_speed'], 4)
+        value1 = convertfbunits(point['wind_speed'],  4)
         value2 = convertfbunits(point['wind_direction'], 16)
 
         mydatetimestr = str(point['time'])
@@ -3849,7 +3870,7 @@ def freeboard_environmental2():
         mydatetimestr = str(fields['time'])
         
         if tag['type'] == 'Outside Temperature' and tag['parameter']== 'temperature':
-            value1 = convertfbunits(fields['mean'], 0)
+            value1 = convertfbunits(fields['mean'],  0)
             strvalue = strvalue + ':' + str(value1)
             
         elif tag['type']  == 'Outside Temperature' and tag['parameter'] == 'atmospheric_pressure':
@@ -4026,11 +4047,11 @@ def freeboard_winddataTrue():
 
 
         if tag['type'] == 'TWIND True North' and tag['parameter'] == 'wind_speed':
-            truewindspeed =  convertfbunits(fields['mean'],4)
+            truewindspeed =  convertfbunits(fields['mean'], convertunittype('speed', units))
             strvalue = strvalue + ':' + str(truewindspeed)
             
         elif tag['type'] == 'Apparent Wind' and tag['parameter'] == 'wind_speed':
-            appwindspeed =  convertfbunits(fields['mean'], 4)
+            appwindspeed =  convertfbunits(fields['mean'],  convertunittype('speed', units))
             strvalue = strvalue + ':' + str(appwindspeed)
             
         elif tag['type'] == 'TWIND True North' and tag['parameter'] == 'wind_direction':
@@ -4341,6 +4362,8 @@ def freeboard_nav():
     Interval = request.args.get('interval',"5min")
     resolution = request.args.get('resolution',"")
     navtype = request.args.get('type',"true")
+    units= request.args.get('units',"US")
+
     
     response = None
 
@@ -4513,7 +4536,7 @@ def freeboard_nav():
           cog.append({'epoch':ts, 'value':value1})
           
         if point['sog'] is not None:         
-          value2 = convertfbunits(point['sog'], 4)
+          value2 = convertfbunits(point['sog'], convertunittype('speed', units))
           sog.append({'epoch':ts, 'value':value2})
           
         if point['heading'] is not None:         
