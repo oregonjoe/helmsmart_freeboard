@@ -96,7 +96,7 @@ app.debug = True
 
 
 #Convert Units between US and Metric
-def convertunittype(value, units):
+def convertunittype(units, value):
 
 
   if units == 'temperature':
