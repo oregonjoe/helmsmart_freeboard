@@ -102,51 +102,51 @@ def convertunittype(value, units):
   if units == 'temperature':
     if value == 'US':
       return 0
-    elif value = 'metric':
+    elif value == 'metric':
       return 1
-    elif value = 'si':
+    elif value == 'si':
       return 1
 
   elif units == 'pressure':
     if value == 'US':
       return 8
-    elif value = 'metric':
+    elif value == 'metric':
       return 9
 
   elif units == 'speed':
     if value == 'US':
       return 5
-    elif value = 'metric':
+    elif value == 'metric':
       return 6
-    elif value = 'nautical':
+    elif value == 'nautical':
       return 4
 
   elif units == 'volume':
     if value == 'US':
       return 21
-    elif value = 'metric':
+    elif value == 'metric':
       return 20
-    elif value = 'si':
+    elif value == 'si':
       return 22
     
   elif units == 'flow':
     if value == 'US':
       return 18
-    elif value = 'metric':
+    elif value == 'metric':
       return 19
 
   elif units == 'depth':
     if value == 'US':
       return 34
-    elif value = 'metric':
+    elif value == 'metric':
       return 33    
-    elif value = 'nautical':
+    elif value == 'nautical':
       return 35
 
   elif units == 'distance':
     if value == 'US':
       return 36
-    elif value = 'metric':
+    elif value == 'metric':
       return 33    
 
   elif units == 'degree':
