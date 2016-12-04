@@ -435,7 +435,7 @@
 			{
 				name: "units",
 				display_name: "Units",
-				description: "Units for temperature, pressure, speed, flow, distance, and volume"
+				description: "Units for temperature, pressure, speed, flow, distance, and volume",
 				type: "option",
 				default_value: "US",
 				options: [
