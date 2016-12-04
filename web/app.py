@@ -318,8 +318,8 @@ def convertfbunits(value, units):
             elif units == 38: #//="38">Date/time</option>
                 #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
                 return (datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
-            
-             elif units == 39: #//="39">Hours</option>
+              
+            elif units == 39: #//="39">Hours</option>
                 #Engine Hours (value / (60*60))
                  return float("{0:.2f}".format(value * 0.000277777))  
             
