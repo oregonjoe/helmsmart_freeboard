@@ -40,25 +40,25 @@
 			var hsapikey = currentSettings.apikey;
 			var requestURL = hsurl + "?apikey=" + hsapikey;
 			
-			var hsinterval = currentSettings.span;
+			var hsinterval =  _.isUndefined(currentSettings.span) ? 600 : currentSettings.span;
 			if(hsinterval != "")
 				requestURL = requestURL + "&interval=" + hsinterval;
 			
-			var hsresolution = currentSettings.resolution;
+			var hsresolution =  _.isUndefined(currentSettings.resolution) ? 60 : currentSettings.resolution;
 			if(hsresolution != "")
 				requestURL = requestURL + "&resolution=" + hsresolution;		
 			
-			var hsinstance = currentSettings.instance;
+			var hsinstance = _.isUndefined(currentSettings.instance) ? 0 : currentSettings.instance;
 			if(hsinstance != "")
 				requestURL = requestURL + "&instance=" + hsinstance;			
 			
 			
-			var hstype = currentSettings.type;
+			var hstype = _.isUndefined(currentSettings.type) ? "" : currentSettings.type;
 			if(hstype != "")			
 				requestURL = requestURL + "&type=" + hstype;	
 
 
-			var hsunits = currentSettings.units;
+			var hsunits =  _.isUndefined(currentSettings.units) ? 'metric' : currentSettings.units;
 			if(hsunits != "")			
 				requestURL = requestURL + "&units=" + hsunits;			
 						
