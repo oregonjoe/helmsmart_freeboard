@@ -287,7 +287,7 @@ def convertfbunits(value, units):
 
 
   elif units == 9: #//e="9">KPASCAL</option>
-      return float("{0:.2f}".format(value * 1.0)
+      return float("{0:.2f}".format(value * 1.0))
 
 
 
@@ -425,7 +425,7 @@ def convertunits(value, units):
 
 
   elif units == 9: #//e="9">KPASCAL</option>
-      return float("{0:.2f}".format(value * 1.0)
+      return float("{0:.2f}".format(value * 1.0))
 
 
 
