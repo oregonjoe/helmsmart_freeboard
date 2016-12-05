@@ -58,7 +58,7 @@
 				requestURL = requestURL + "&type=" + hstype;	
 
 
-			var hsunits =  _.isUndefined(currentSettings.units) ? 'metric' : currentSettings.units;
+			var hsunits =  _.isUndefined(currentSettings.units) ? 'US' : currentSettings.units;
 			if(hsunits != "")			
 				requestURL = requestURL + "&units=" + hsunits;			
 						
