@@ -1582,7 +1582,7 @@
 
         //var gaugeElement = $('<div></div>');
 
-		var thisGaugeID = "gauge-" + vgaugeID++;
+		var thisGaugeID = "vgauge-" + vgaugeID++;
         var titleElement = $('<h2 class="section-title"></h2>');
         var gaugeElement = $('<div class="vgauge-widget" id="' + thisGaugeID + '"></div>');
 		
@@ -1988,7 +1988,7 @@
        //var titleElement = $('<h2 class="section-title"></h2>');
         //var gaugeElement = $('<div></div>');
 		
-		var thisGaugeID = "gauge-" + hgaugeID++;
+		var thisGaugeID = "hgauge-" + hgaugeID++;
         var titleElement = $('<h2 class="section-title"></h2>');
         var gaugeElement = $('<div class="hgauge-widget" id="' + thisGaugeID + '"></div>');
 
