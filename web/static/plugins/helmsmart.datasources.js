@@ -55,7 +55,12 @@
 			
 			var hstype = currentSettings.type;
 			if(hstype != "")			
-				requestURL = requestURL + "&type=" + hstype;						
+				requestURL = requestURL + "&type=" + hstype;	
+
+
+			var hsunits = currentSettings.units;
+			if(hsunits != "")			
+				requestURL = requestURL + "&units=" + hsunits;			
 						
 						
 			if (errorStage == 2 && use_thingproxy) {

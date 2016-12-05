@@ -411,7 +411,7 @@
         }
     });
 	
-	/*
+	
 
     var gaugeID = 0;
 	freeboard.addStyle('.gauge-widget-wrapper', "width: 100%;text-align: center;");
@@ -888,7 +888,7 @@
         }
     });
 
-	*/
+	
 	
 	/*
     var compassID = 0;
