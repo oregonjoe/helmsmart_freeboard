@@ -799,7 +799,15 @@ def index():
     #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
     response.headers['Cache-Control'] = 'public, max-age=0'
     return response
+  
+@app.route('/freeboard')
+@cross_origin()
+def freeboard():
 
+    response = make_response(render_template('freeboard.html', features = []))
+    #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 
 @app.route('/freeboard_InfluxDB')
 @cross_origin()
