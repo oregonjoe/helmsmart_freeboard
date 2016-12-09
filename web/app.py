@@ -340,7 +340,7 @@ def convertfbunits(value, units):
 
 
   elif units == 31: #//="31">kWhrs</option>
-      return float("{0:.2f}".format(value *0.10))
+      return float("{0:.2f}".format(value *01.0))
   # case 28: //="28">Amps</option>
             
   elif units == 32: #//="32">Feet</option>
@@ -466,7 +466,7 @@ def convertunits(value, units):
 
 
   elif units == 31: #//="31">kWhrs</option>
-      return float("{0:.2f}".format(value *0.10))
+      return float("{0:.2f}".format(value *1.00))
   # case 28: //="28">Amps</option>
   
   elif units == 32: #//="32">Feet</option>
