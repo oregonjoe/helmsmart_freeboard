@@ -5576,22 +5576,22 @@ def freeboard_ac_status():
           
         
         if point['volts'] is not None:
-          value1 = convertfbunits( point['volts'], 40)
+          value1 = convertfbunits( point['volts'], 27)
         volts.append({'epoch':ts, 'value':value1})    
         
         if point['amps'] is not None:
-          value2 =  convertfbunits(point['amps'],40)
-          energy_period = energy_period + float(value2)*float(value1)
+          value2 =  convertfbunits(point['amps'],28)
+          energy_period = energy_period +(( float(value2)*float(value1)) * 0.001)
         amps.append({'epoch':ts, 'value':value2})
         energy_caluculated.append({'epoch':ts, 'value':energy_period})
         
         if point['power'] is not None:
-          value3=  convertfbunits(point['power'], 40)
+          value3=  convertfbunits(point['power'], 29)
         power.append({'epoch':ts, 'value':value3})
           
         
         if point['energy'] is not None:
-          value4 =  convertfbunits(point['energy'], 40)
+          value4 =  convertfbunits(point['energy'], 31)
         energy.append({'epoch':ts, 'value':value4})
           
         
