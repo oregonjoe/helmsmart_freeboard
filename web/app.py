@@ -3576,6 +3576,11 @@ def freeboard_winddata():
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
+        
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
@@ -4291,6 +4296,11 @@ def freeboard_location():
 
       for point in points:
        # log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
+        
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
@@ -4389,6 +4399,14 @@ def freeboard_nav():
       resolution = epochtimes[2]
 
 
+    cog=[]
+    sog=[]
+    heading=[]
+
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+    
     deviceid = getedeviceid(deviceapikey)
     
     log.info("freeboard deviceid %s", deviceid)
@@ -4493,13 +4511,20 @@ def freeboard_nav():
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        if navtype == "magnetic":
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing' ,'cog':list(reversed(cog)), 'sog':list(reversed(sog)), 'heading_mag':list(reversed(heading))})     
+        else:
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing' ,'cog':list(reversed(cog)), 'sog':list(reversed(sog)), 'heading_true':list(reversed(heading))})     
 
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        if navtype == "magnetic":
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing' ,'cog':list(reversed(cog)), 'sog':list(reversed(sog)), 'heading_mag':list(reversed(heading))})     
+        else:
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing' ,'cog':list(reversed(cog)), 'sog':list(reversed(sog)), 'heading_true':list(reversed(heading))})     
+
 
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
@@ -4536,6 +4561,10 @@ def freeboard_nav():
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
 
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
@@ -4546,15 +4575,15 @@ def freeboard_nav():
         
         if point['cog'] is not None: 
           value1 = convertfbunits(point['cog'], 16)
-          cog.append({'epoch':ts, 'value':value1})
+        cog.append({'epoch':ts, 'value':value1})
           
         if point['sog'] is not None:         
           value2 = convertfbunits(point['sog'], convertunittype('speed', units))
-          sog.append({'epoch':ts, 'value':value2})
+        sog.append({'epoch':ts, 'value':value2})
           
         if point['heading'] is not None:         
           value3 = convertfbunits(point['heading'], 16)
-          heading.append({'epoch':ts, 'value':value3})
+        heading.append({'epoch':ts, 'value':value3})
           
 
 
@@ -4618,7 +4647,9 @@ def freeboard_battery():
     temperature=[]      
 
     mydatetime = datetime.datetime.now()
-    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+    
     deviceid = getedeviceid(deviceapikey)
     
     log.info("freeboard deviceid %s", deviceid)
@@ -4749,6 +4780,10 @@ def freeboard_battery():
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
 
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
@@ -5003,6 +5038,14 @@ def freeboard_engine_aux():
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
+        value5 = '---'
+        value6 = '---'
+        value7 = '---'
+        value8 = '---'
 
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
@@ -5300,7 +5343,15 @@ def freeboard_engine():
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
+        value5 = '---'
+        value6 = '---'
+        value7 = '---'
+        value8 = '---'
+        
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
@@ -5572,6 +5623,14 @@ def freeboard_ac_status():
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
+        value5 = '---'
+        value6 = '---'
+        value7 = '---'
+        value8 = '---'
 
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
