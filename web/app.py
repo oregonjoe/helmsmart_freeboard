@@ -3304,7 +3304,12 @@ def freeboard_environmental():
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-
+        
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
+      
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
