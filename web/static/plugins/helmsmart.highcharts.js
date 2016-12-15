@@ -517,8 +517,8 @@
 						var x = (new Date()).getTime();
 						// console.log('addPoint:', x,currentSettings[seriesno], Number(newValue));
 						var plotMqtt = [ myvalues.epoch, Number(myvalue)]; //create the array+ "Y"
-					
-						myDataArray[i] = plotMqtt;
+						//myDataArray[i] = plotMqtt;
+						myDataArray.push(plotMqtt);
 						}
 					}
 				}
