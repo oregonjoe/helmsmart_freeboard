@@ -8116,8 +8116,10 @@ def freeboard_raw():
     port = 8086
     username = 'helmsmart'
     password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+#    database = 'pushsmart-cloud'
+    database = 'pushsmart-raw'
 
+    
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid) + '_raw'
 
