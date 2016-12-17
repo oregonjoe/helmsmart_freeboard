@@ -8083,18 +8083,23 @@ def freeboard_raw():
     #deviceid = request.args.get('deviceid', '')
     startepoch = request.args.get('startepoch', 0)
     endepoch = request.args.get('endepoch', 0)
-    resolution = request.args.get('resolution', 60)
 
-    #return jsonify(result="OK")
+    Interval = request.args.get('interval',"5min")
+    Instance = request.args.get('instance','0')
+    resolution = request.args.get('resolution',"")
+
+    
+    starttime = 0
+
+    if startepoch == 0:
+      epochtimes = getepochtimes(Interval)
+      startepoch = epochtimes[0]
+      endepoch = epochtimes[1]
+      if resolution == "":
+        resolution = epochtimes[2]
     
     response = None
 
-    starttime = 0
-
-    #epochtimes = getepochtimes(Interval)
-    #startepoch = epochtimes[0]
-    #endepoch = epochtimes[1]
-    #resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(devicekey)
