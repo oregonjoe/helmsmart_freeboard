@@ -4836,11 +4836,17 @@ def freeboard_water_depth():
         
 
      
+    except KeyError, e:
+       #log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+
+
+        
         #return jsonify(update=False, status='missing' )
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
