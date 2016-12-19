@@ -4847,7 +4847,7 @@ def freeboard_water_depth():
         
 
      
-    except KeyError, e:
+    except KeyError, e: 
        #log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
         log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
     
