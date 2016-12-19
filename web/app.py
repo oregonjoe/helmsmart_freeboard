@@ -4628,7 +4628,7 @@ def freeboard_water_depth():
     resolution = request.args.get('resolution',"")
     navtype = request.args.get('type',"Paddle Wheel")
     units= request.args.get('units',"US")
-
+    dataformat = request.args.get('format', 'json')
     
     response = None
 
@@ -4793,13 +4793,17 @@ def freeboard_water_depth():
       points = list(response.get_points())
 
       #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
-
+      csvout = "Time, Depth" + '\r\n'
+      
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         value1 = '---'
         value2 = '---'
         value3 = '---'
         value4 = '---'
+
+
+        
 
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
@@ -4811,7 +4815,7 @@ def freeboard_water_depth():
         if point['depth'] is not None: 
           value1 = convertfbunits(point['depth'], 32)
         depth.append({'epoch':ts, 'value':value1})
-
+        csvout = csvout + ts + ", " + value1 + + '\r\n'
         """          
         if point['speed'] is not None:         
           value2 = convertfbunits(point['speed'], convertunittype('speed', units))
@@ -4822,18 +4826,24 @@ def freeboard_water_depth():
         temperature.append({'epoch':ts, 'value':value3})
         """              
 
+      if dataformat == 'csv':
+        response = make_response(csvout)
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers["Content-Disposition"] = "attachment; filename=HelmSmart_WaterDepth.csv"
+        return response
 
-      #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
+      #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)
+      
+      elif
+        callback = request.args.get('callback')
+        myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-      callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-
-      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      #if navtype == "magnetic":
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','depth':list(reversed(depth)), 'speed':list(reversed(speed)), 'temperature':list(reversed(temperature))})     
-      #else:
-       # return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','cog':list(reversed(cog)), 'sog':list(reversed(sog)), 'heading_true':list(reversed(heading))})     
+        #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+        #if navtype == "magnetic":
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','depth':list(reversed(depth)), 'speed':list(reversed(speed)), 'temperature':list(reversed(temperature))})     
+        #else:
+         # return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','cog':list(reversed(cog)), 'sog':list(reversed(sog)), 'heading_true':list(reversed(heading))})     
         
 
      
