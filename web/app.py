@@ -4833,7 +4833,7 @@ def freeboard_water_depth():
           value2 = convertfbunits(point['speed'], convertunittype('speed', units))
         speed.append({'epoch':ts, 'value':value2})
           
-        if point['temperature'] is not None:         
+        if point['temperature'] is not None:          
           value3 = convertfbunits(point['temperature'], 0)
         temperature.append({'epoch':ts, 'value':value3})
           
