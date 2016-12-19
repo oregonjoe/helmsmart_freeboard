@@ -171,6 +171,11 @@
 						name: "AC Status",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status"
 					},
+					
+					{
+						name: "Water Depth",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_water_depth"
+					},
 
 					{
 						name: "Indicators",
