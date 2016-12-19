@@ -4667,7 +4667,7 @@ def freeboard_water_depth():
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
 
-"""
+    """
     if navtype == "Pitot Tube":
       serieskeys=" deviceid='"
       serieskeys= serieskeys + deviceid + "' AND "
@@ -4679,7 +4679,7 @@ def freeboard_water_depth():
       serieskeys= serieskeys + deviceid + "' AND "
       serieskeys= serieskeys +  " (sensor='water_depth' OR sensor='heading') AND "
       serieskeys= serieskeys +  " (type='True') " 
-"""
+    """
 
 
     serieskeys=" deviceid='"
