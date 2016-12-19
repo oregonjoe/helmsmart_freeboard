@@ -4811,7 +4811,8 @@ def freeboard_water_depth():
         if point['depth'] is not None: 
           value1 = convertfbunits(point['depth'], 32)
         depth.append({'epoch':ts, 'value':value1})
-          
+
+        """          
         if point['speed'] is not None:         
           value2 = convertfbunits(point['speed'], convertunittype('speed', units))
         speed.append({'epoch':ts, 'value':value2})
@@ -4819,7 +4820,7 @@ def freeboard_water_depth():
         if point['temperature'] is not None:          
           value3 = convertfbunits(point['temperature'], 0)
         temperature.append({'epoch':ts, 'value':value3})
-          
+        """              
 
 
       #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
