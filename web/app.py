@@ -4680,8 +4680,6 @@ def freeboard_water_depth():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
 
-      environmental_data
-
     if serieskeys.find("*") > 0:
       serieskeys = serieskeys.replace("*", ".*")
 
