@@ -4685,7 +4685,7 @@ def freeboard_water_depth():
 
       
       #query = ('select  mean(depth) AS depth, mean(waterspeed) AS  waterspeed, mean(groundspeed) AS groundspeed, mean(groundspeed) AS groundspeed  from {} '
-      query = ('select  mean(depth) AS depth  from {} '
+      query = ('select  median(depth) AS depth  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -4694,7 +4694,7 @@ def freeboard_water_depth():
     else:
       
       #query = ('select  mean(course_over_ground) AS cog, mean(speed_over_ground) AS  sog, mean(heading) AS heading  from {} '
-      query = ('select  mean(depth) AS depth  from {} '            
+      query = ('select  median(depth) AS depth  from {} '            
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
