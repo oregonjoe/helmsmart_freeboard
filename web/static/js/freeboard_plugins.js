@@ -940,7 +940,8 @@ function FreeboardUI()
 		}
 		else
 		{
-	    		loadingIndicator.fadeOut(500).remove();
+	    		//loadingIndicator.fadeOut(500).remove();
+				loadingIndicator.remove();
 		}
 	}
 
