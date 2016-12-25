@@ -373,7 +373,9 @@ def convertfbunits(value, units):
       #Engine Hours (value / (60*60))
        return float("{0:.2f}".format(value * 0.000277777))  
 
-
+  elif units == 43: #//="43">Volts 10</option>
+      return float("{0:.2f}".format(value * 0.1))
+    
   else:
       return float("{0:.2f}".format(value))
 
@@ -495,7 +497,10 @@ def convertunits(value, units):
     
   elif units == 39: #//="39">Hours</option>
     #Engine Hours (value / (60*60))
-    return float("{0:.2f}".format(value * 0.000277777))              
+    return float("{0:.2f}".format(value * 0.000277777))
+
+  elif units == 43: #//="43">Volts 10</option>
+    return float("{0:.2f}".format(value * 0.1))
 
   else:
       return float("{0:.2f}".format(value * 1.0))
