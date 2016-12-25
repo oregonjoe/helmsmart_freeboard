@@ -936,7 +936,7 @@ function FreeboardUI()
 	{
 		if(show)
 		{
-			loadingIndicator.fadeOut(0).appendTo("body").fadeIn(500);
+			//loadingIndicator.fadeOut(0).appendTo("body").fadeIn(500);
 		}
 		else
 		{
