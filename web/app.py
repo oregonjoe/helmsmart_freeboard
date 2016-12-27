@@ -6981,7 +6981,7 @@ def get_dbstats():
           deviceid = tag['deviceid']
           for record in records:
             #log.info("get_dbstats deviceid %s - devicename %s", record[0], record[1])    
-            if deviceid = record[0]:
+            if deviceid == record[0]:
               devicename = record[1]
           
           strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
