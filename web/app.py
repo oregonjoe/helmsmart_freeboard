@@ -7246,13 +7246,13 @@ def get_dbstats_html():
       """
 
       tag = series['tags']
-      log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+      #log.info("freeboard Get InfluxDB series tags2 %s ", tag)
 
       #mydatetimestr = str(fields['time'])
       strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
       jsonkey.append(strvaluekey)        
 
-      log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
+      #log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
 
       
       for point in series['values']:
@@ -7287,23 +7287,24 @@ def get_dbstats_html():
     for stat in jsondata:
       if stat['value'] != None:
         total = total + float(stat['value'])
-
+    """
     if len(jsondata) > 0:
       mydatetimestr = str(jsondata[0]['epoch'])
-
+    """
     for statdata in jsondata:
       stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "</td><td>" + str(statdata['name']) + " </td><td>" +  str(statdata['value']) + "</td></tr>"
 
     stathtml = stathtml + "</table>"
 
-    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+    #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
     #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', stat1,stat2)            
 
     callback = request.args.get('callback')
-    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+    #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
     #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
     return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stats':stathtml})
@@ -8638,7 +8639,7 @@ def freeboard_raw():
     port = 8086
     username = 'helmsmart'
     password = 'Salm0n16'
-#    database = 'pushsmart-cloud'
+    #    database = 'pushsmart-cloud'
     database = 'pushsmart-raw'
 
     
