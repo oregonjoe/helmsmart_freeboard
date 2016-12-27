@@ -7260,7 +7260,7 @@ def get_dbstats_html():
         for key, val in zip(series['columns'], point):
           fields[key] = val
           
-        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+        #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
         
         if fields['records'] != None:
 
@@ -7281,7 +7281,7 @@ def get_dbstats_html():
     jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
 
     total = 0
-    stathtml = "<table>"
+    stathtml = '<tableborder="0" cellspacing="5" cellpadding="5" style="width:100%; display: block">'
 
 
     for stat in jsondata:
