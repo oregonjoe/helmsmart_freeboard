@@ -6856,6 +6856,16 @@ def get_dbstats():
   stat16 = '---'
 
 
+  conn = db_pool.getconn()
+
+  cursor = conn.cursor()
+  cursor.execute("select deviceid, devicename from user_devices")
+  records = cursor.fetchall()
+
+  db_pool.putconn(conn)   
+
+  for record in records:
+    log.info("get_dbstats deviceid %s - devicename", record[0], record[1])    
 
 
   try:
