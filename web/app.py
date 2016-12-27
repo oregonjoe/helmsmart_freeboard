@@ -7292,7 +7292,7 @@ def get_dbstats_html():
       mydatetimestr = str(jsondata[0]['epoch'])
 
     for statdata in jsondata:
-      stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "<\td><td>" + str(statdata['name']) + " <\td><td>" +  str(statdata['value']) + "</td></tr>"
+      stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "</td><td>" + str(statdata['name']) + " </td><td>" +  str(statdata['value']) + "</td></tr>"
 
     stathtml = stathtml + "</table>"
 
