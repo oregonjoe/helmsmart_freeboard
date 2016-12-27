@@ -7294,7 +7294,7 @@ def get_dbstats_html():
     for statdata in jsondata:
       stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "<\td><td>" + str(statdata['name']) + " <\td><td>" +  str(statdata['value']) + "</td></tr>"
 
-    stathtml = stathtml + "</table>
+    stathtml = stathtml + "</table>"
 
     mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
