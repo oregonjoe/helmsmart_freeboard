@@ -7281,7 +7281,7 @@ def get_dbstats_html():
     jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
 
     total = 0
-    stathtml = "<table>
+    stathtml = "<table>"
 
 
     for stat in jsondata:
