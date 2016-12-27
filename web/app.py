@@ -6864,8 +6864,6 @@ def get_dbstats():
 
   db_pool.putconn(conn)   
 
-  for record in records:
-    #log.info("get_dbstats deviceid %s - devicename %s", record[0], record[1])    
 
 
   try:
