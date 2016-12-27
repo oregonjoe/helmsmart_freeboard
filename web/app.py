@@ -7100,6 +7100,252 @@ def get_dbstats():
   callback = request.args.get('callback')
   return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
+
+@app.route('/get_dbstats_html')
+@cross_origin()
+def get_dbstats_html():
+
+
+  Interval = request.args.get('Interval',"5min")
+  rollup = request.args.get('rollup',"sum")
+
+  response = None
+
+  
+  starttime = 0
+
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  resolution = epochtimes[2]
+
+
+
+  response = None
+  
+  measurement = "HelmSmartDB"
+  stat0 = '---'
+  stat1 = '---'
+  stat2 = '---'
+  stat3 = '---'
+  stat4 = '---'
+  stat5 = '---'
+  stat6 = '---'
+  stat7 = '---'
+  stat8 = '---'
+  stat9 = '---'
+  stat10 = '---'
+  stat11 = '---'
+  stat12 = '---'
+  stat13 = '---'
+  stat14 = '---'
+  stat15 = '---'
+  stat16 = '---'
+
+
+  conn = db_pool.getconn()
+
+  cursor = conn.cursor()
+  cursor.execute("select deviceid, devicename from user_devices")
+  records = cursor.fetchall()
+
+  db_pool.putconn(conn)   
+
+
+
+  try:
+   
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+
+    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+     
+
+    
+    start = datetime.datetime.fromtimestamp(float(startepoch))
+    
+
+    end = datetime.datetime.fromtimestamp(float(endepoch))
+    resolutionstr = "PT" + str(resolution) + "S"
+
+    #rollup = "mean"
+
+ 
+
+    query = ('select {}(records) AS records FROM {} '
+                     'where time > {}s and time < {}s '
+                     'group by *, time({}s) LIMIT 1') \
+                .format(rollup,  measurement, 
+                        startepoch, endepoch,
+                        resolution) 
+
+    #query =(' select records as records from HelmSmartDB')      
+      
+    
+    log.info("inFlux-cloud Query %s", query)
+    
+
+    try:
+      response= db.query(query)
+    except:
+      e = sys.exc_info()[0]
+      log.info('inFluxDB: Error in geting inFluxDB data %s:  ' % e)
+        
+      return jsonify( message='Error in inFluxDB query 2', status='error')
+      #raise
+
+    
+    #return jsonify(results=response)
+    
+    #response =  shim.read_multi(keys=[SERIES_KEY], start=start, end=end, period=resolutionstr, rollup="mean" )
+    
+    #print 'inFluxDB read :', response.response.successful
+
+    
+    if not response:
+      #print 'inFluxDB Exception1:', response.response.successful, response.response.reason 
+      return jsonify( message='No response to return 1' , status='error')
+
+
+    #if not response.points:
+    #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
+    #  return jsonify( message='No data to return 2', status='error')
+
+    print 'inFluxDB processing data headers:'
+    jsondata=[]
+    jsonkey=[]
+    #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+    #jsonkey.append(strvaluekey)
+    print 'inFluxDB start processing data points:'
+    #log.info("freeboard Get InfluxDB response %s", response)
+
+    keys = response.raw.get('series',[])
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
+
+
+
+
+    strvalue=""
+    
+    for series in keys:
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+      #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+      #log.info("freeboard Get InfluxDB series values %s ", series['values'])
+
+      """        
+      values = series['values']
+      for value in values:
+        log.info("freeboard Get InfluxDB series time %s", value[0])
+        log.info("freeboard Get InfluxDB series mean %s", value[1])
+      """
+
+      tag = series['tags']
+      log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+
+      #mydatetimestr = str(fields['time'])
+      strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
+      jsonkey.append(strvaluekey)        
+
+      log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
+
+      
+      for point in series['values']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
+          
+        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+        
+        if fields['records'] != None:
+
+          devicename = ""
+          deviceid = tag['deviceid']
+          for record in records:
+            #log.info("get_dbstats deviceid %s - devicename %s", record[0], record[1])    
+            if deviceid == record[0]:
+              devicename = record[1]
+          
+          strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
+          jsondata.append(strvalue)
+
+
+
+
+
+    jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+
+    total = 0
+    stathtml = "<table>
+
+
+    for stat in jsondata:
+      if stat['value'] != None:
+        total = total + float(stat['value'])
+
+    if len(jsondata) > 0:
+      mydatetimestr = str(jsondata[0]['epoch'])
+
+    for statdata in jsondata:
+      stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "<\td><td>" + str(statdata['name']) + " <\td><td>" +  str(statdata['value']) + "</td></tr>"
+
+    stathtml = stathtml + "</table>
+
+    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+    #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', stat1,stat2)            
+
+    callback = request.args.get('callback')
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+
+    #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+    #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stats':stathtml})
+
+
+
+  except TypeError, e:
+      log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ' % str(e))
+          
+  except KeyError, e:
+      log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+  except NameError, e:
+      log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ' % str(e))
+          
+  except IndexError, e:
+      log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+  except ValueError, e:
+    log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('get_influxdbcloud_data: Value Error in InfluxDB  %s:  ' % str(e))
+
+  except AttributeError, e:
+    log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('get_influxdbcloud_data: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+  except InfluxDBClientError, e:
+    log.info('get_influxdbcloud_data: Exception Error in InfluxDB  %s:  ' % str(e))     
+  
+  except:
+    log.info('get_influxdbcloud_data: Error in geting freeboard response %s:  ', strvalue)
+    e = sys.exc_info()[0]
+    log.info('get_influxdbcloud_data: Error in geting freeboard ststs %s:  ' % e)
+    return jsonify( message='error processing data 3' , status='error')        
+
+  callback = request.args.get('callback')
+  return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
   
 
 @app.route('/get_influxdbcloud_data')
