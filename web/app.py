@@ -7171,9 +7171,12 @@ def get_dbstats_html():
     
 
     end = datetime.datetime.fromtimestamp(float(endepoch))
-    #resolutionstr = "PT" + str(resolution) + "S"
-    resolutionstr = "PT3600S" 
-    resolutionstr ="3600s"
+
+    resolution = 3600
+
+    
+    resolutionstr = "PT" + str(resolution) + "S"
+
     #rollup = "mean"
 
  
