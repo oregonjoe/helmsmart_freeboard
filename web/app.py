@@ -7333,11 +7333,14 @@ def get_dbstats_html():
       tindex=0
       values = statdata['value']
       for value in values:
-        stathtml = stathtml + "<td>" +  str(float("{0:.1f}".format(int(value) * 0.001) )) + "</td>"
         
         if value != "---":
+          stathtml = stathtml + "<td>" +  str(float("{0:.1f}".format(int(value) * 0.001) )) + "</td>"
           total = total + int(value)
-          #totals[tindex]=int(totals[tindex]) + int(value)
+          totals[tindex]=int(totals[tindex]) + int(value)
+          
+        else:
+          stathtml = stathtml + "<td>" +  "---"  + "</td>"
           
         tindex = tindex + 1
 
