@@ -7267,7 +7267,7 @@ def get_dbstats_html():
       #log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
       #log.info("freeboard Get InfluxDB series series['values'] %s ", series['values'])
       values=[]
-      for point in series['values']:
+      for point in reversed(series['values']):
         fields = {}
         for key, val in zip(series['columns'], point):
           fields[key] = val
