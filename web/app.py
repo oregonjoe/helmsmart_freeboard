@@ -7283,7 +7283,7 @@ def get_dbstats_html():
       jsondata.append(strvalue)
 
 
-    return jsonify( message=jsondata)
+    #return jsonify( message=jsondata)
 
 
     #jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
