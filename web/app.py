@@ -7302,7 +7302,7 @@ def get_dbstats_html():
      
     total = 0
     stathtml = '<table border="0" cellspacing="5" cellpadding="5" style="width:100%; display: block">'
-    """
+    
     stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
     stathtml = stathtml + "<td>" + "now" + "</td>"
     stathtml = stathtml + "<td>" +  str(int(period) * 1) +"hr" + "</td>"
@@ -7316,7 +7316,7 @@ def get_dbstats_html():
                 
     stathtml = stathtml + "</tr>"
 
-    """
+    
     """
     for stat in jsondata:
       if stat['value'] != None:
@@ -7347,7 +7347,7 @@ def get_dbstats_html():
         
       stathtml = stathtml + "  </tr>"
 
-    """
+    
     stathtml = stathtml + "<tr> <td>" + "" + "</td><td>" + "Totals" + "</td>"
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[0]) * 0.001) ))  + "</td>"
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[1]) * 0.001) ))  + "</td>"
@@ -7360,7 +7360,7 @@ def get_dbstats_html():
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[8]) * 0.001) ))  + "</td>"
                 
     stathtml = stathtml + "</tr>"      
-    """
+    
     stathtml = stathtml + "</table>"
 
     #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
