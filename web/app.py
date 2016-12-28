@@ -7106,7 +7106,7 @@ def get_dbstats():
 def get_dbstats_html():
 
 
-  Interval = request.args.get('Interval',"8hour")
+  Interval = request.args.get('Interval',"12hour")
   rollup = request.args.get('rollup',"sum")
 
   response = None
@@ -7299,7 +7299,11 @@ def get_dbstats_html():
     totals.append(0)
     totals.append(0)
     totals.append(0)   
-     
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    
     total = 0
     stathtml = '<table border="0" cellspacing="5" cellpadding="5" style="width:100%; display: block">'
     
@@ -7313,7 +7317,10 @@ def get_dbstats_html():
     stathtml = stathtml + "<td>" +  str(int(period) * 6) +"hr" + "</td>"
     stathtml = stathtml + "<td>" +  str(int(period) * 7) +"hr" + "</td>"
     stathtml = stathtml + "<td>" +  str(int(period) * 8) +"hr" + "</td>"
-                
+    stathtml = stathtml + "<td>" +  str(int(period) * 9) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 10) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 11) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 12) +"hr" + "</td>"                
     stathtml = stathtml + "</tr>"
 
     
@@ -7358,7 +7365,10 @@ def get_dbstats_html():
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[6]) * 0.001) ))  + "</td>"
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[7]) * 0.001) ))  + "</td>"
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[8]) * 0.001) ))  + "</td>"
-                
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[9]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[10]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[11]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[12]) * 0.001) ))  + "</td>"               
     stathtml = stathtml + "</tr>"      
     
     stathtml = stathtml + "</table>"
