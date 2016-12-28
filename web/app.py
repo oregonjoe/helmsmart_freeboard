@@ -7313,7 +7313,7 @@ def get_dbstats_html():
     stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
     stathtml = stathtml + "<td>" + "now" + "</td>"
     
-    if Interval = "1hr":
+    if Interval == "1hr":
       period = 5
       stathtml = stathtml + "<td>" +  str(int(period) * 1) +"min" + "</td>"
       stathtml = stathtml + "<td>" +  str(int(period) * 2) +"min" + "</td>"
