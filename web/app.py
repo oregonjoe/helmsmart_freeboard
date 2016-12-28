@@ -7286,21 +7286,29 @@ def get_dbstats_html():
     return jsonify( message=jsondata)
 
 
-    jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+    #jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
 
     total = 0
     stathtml = '<table border="0" cellspacing="5" cellpadding="5" style="width:100%; display: block">'
 
-
+    """
     for stat in jsondata:
       if stat['value'] != None:
         total = total + float(stat['value'])
+    """
+    
     """
     if len(jsondata) > 0:
       mydatetimestr = str(jsondata[0]['epoch'])
     """
     for statdata in jsondata:
-      stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "</td><td>" + str(statdata['name']) + " </td><td>" +  str(statdata['value']) + "</td></tr>"
+      stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "</td><td>" + str(statdata['name']) + " </td>"
+
+      values = statdata['value']
+      for value in values
+        stathtml = stathtml + "<td>" +  str(value) + "</td>
+
+      stathtml = stathtml + "  </tr>"
 
     stathtml = stathtml + "</table>"
 
