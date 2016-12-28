@@ -7106,7 +7106,7 @@ def get_dbstats():
 def get_dbstats_html():
 
 
-  Interval = request.args.get('Interval',"5min")
+  Interval = request.args.get('Interval',"8hour")
   rollup = request.args.get('rollup',"sum")
 
   response = None
@@ -7171,7 +7171,8 @@ def get_dbstats_html():
     
 
     end = datetime.datetime.fromtimestamp(float(endepoch))
-    resolutionstr = "PT" + str(resolution) + "S"
+    #resolutionstr = "PT" + str(resolution) + "S"
+    resolutionstr = "PT3600S" 
 
     #rollup = "mean"
 
@@ -7260,7 +7261,7 @@ def get_dbstats_html():
         for key, val in zip(series['columns'], point):
           fields[key] = val
           
-        #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
         
         if fields['records'] != None:
 
@@ -7275,7 +7276,7 @@ def get_dbstats_html():
           jsondata.append(strvalue)
 
 
-
+    return jsonify( message=jsondata)
 
 
     jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
