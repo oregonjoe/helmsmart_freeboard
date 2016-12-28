@@ -7304,14 +7304,14 @@ def get_dbstats_html():
     stathtml = '<table border="0" cellspacing="5" cellpadding="5" style="width:100%; display: block">'
     stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
     stathtml = stathtml + "<td>" + "now" + "</td>"
-    stathtml = stathtml + "<td>" +  str(period * 1) +"hr" + "</td>"
-    stathtml = stathtml + "<td>" +  str(period * 2) +"hr" + "</td>"
-    stathtml = stathtml + "<td>" +  str(period * 3) +"hr" + "</td>"
-    stathtml = stathtml + "<td>" +  str(period * 4) +"hr" + "</td>"
-    stathtml = stathtml + "<td>" +  str(period * 5) +"hr" + "</td>"
-    stathtml = stathtml + "<td>" +  str(period * 6) +"hr" + "</td>"
-    stathtml = stathtml + "<td>" +  str(period * 7) +"hr" + "</td>"
-    stathtml = stathtml + "<td>" +  str(period * 8) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 1) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 2) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 3) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 4) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 5) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 6) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 7) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 8) +"hr" + "</td>"
                 
     stathtml = stathtml + "</tr>"
     """
@@ -7341,7 +7341,7 @@ def get_dbstats_html():
         
       stathtml = stathtml + "  </tr>"
 
-
+    """
     stathtml = stathtml + "<tr> <td>" + "" + "</td><td>" + "Totals" + "</td>"
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[0]) * 0.001) ))  + "</td>"
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[1]) * 0.001) ))  + "</td>"
@@ -7354,7 +7354,7 @@ def get_dbstats_html():
     stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[8]) * 0.001) ))  + "</td>"
                 
     stathtml = stathtml + "</tr>"      
-
+    """
     stathtml = stathtml + "</table>"
 
     #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
