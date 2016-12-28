@@ -7175,7 +7175,7 @@ def get_dbstats_html():
 
 
     resolution = 3600
-    if Interval = "1hr":
+    if Interval == "1hr":
       resolution = 300
 
     
