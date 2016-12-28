@@ -7334,7 +7334,7 @@ def get_dbstats_html():
         
         if value != "---":
           total = total + int(value)
-          totals[tindex]=totals[tindex] + int(value)
+          totals[tindex]=int(totals[tindex]) + int(value)
           
         tindex = tindex + 1
 
@@ -7343,15 +7343,15 @@ def get_dbstats_html():
 
 
     stathtml = stathtml + "<tr> <td>" + "" + "</td><td>" + "Totals" + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[0] * 0.001) ))  + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[1] * 0.001) ))  + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[2] * 0.001) ))  + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[3] * 0.001) ))  + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[4] * 0.001) ))  + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[5] * 0.001) ))  + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[6] * 0.001) ))  + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[7] * 0.001) ))  + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[8] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[0]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[1]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[2]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[3]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[4]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[5]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[6]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[7]) * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(int(totals[8]) * 0.001) ))  + "</td>"
                 
     stathtml = stathtml + "</tr>"      
 
