@@ -7254,7 +7254,7 @@ def get_dbstats_html():
       jsonkey.append(strvaluekey)        
 
       #log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
-
+      log.info("freeboard Get InfluxDB series series['values'] %s ", series['values'])
       
       for point in series['values']:
         fields = {}
