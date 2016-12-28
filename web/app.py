@@ -7306,7 +7306,7 @@ def get_dbstats_html():
 
       values = statdata['value']
       for value in values:
-        stathtml = stathtml + "<td>" +  str(value) + "</td>
+        stathtml = stathtml + "<td>" +  str(value) + "</td>"
 
       stathtml = stathtml + "  </tr>"
 
