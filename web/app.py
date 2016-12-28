@@ -7111,6 +7111,7 @@ def get_dbstats_html():
 
   response = None
 
+  period = 1
   
   starttime = 0
 
@@ -7287,10 +7288,30 @@ def get_dbstats_html():
 
 
     #jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
-
+    totals[0]=0
+    totals[1]=0
+    totals[2]=0
+    totals[3]=0
+    totals[4]=0
+    totals[5]=0
+    totals[6]=0
+    totals[7]=0
+    totals[8]=0    
+     
     total = 0
     stathtml = '<table border="0" cellspacing="5" cellpadding="5" style="width:100%; display: block">'
-
+    stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
+    stathtml = stathtml + "<td>" + "now" + "</td>"
+    stathtml = stathtml + "<td>" +  str(period * 1) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(period * 2) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(period * 3) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(period * 4) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(period * 5) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(period * 6) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(period * 7) +"hr" + "</td>"
+    stathtml = stathtml + "<td>" +  str(period * 8) +"hr" + "</td>"
+                
+    stathtml = stathtml + "</tr>"
     """
     for stat in jsondata:
       if stat['value'] != None:
@@ -7304,11 +7325,33 @@ def get_dbstats_html():
     for statdata in jsondata:
       stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "</td><td>" + str(statdata['name']) + " </td>"
 
+      tindex=0
       values = statdata['value']
       for value in values:
-        stathtml = stathtml + "<td>" +  str(value) + "</td>"
+        stathtml = stathtml + "<td>" +  str(float("{0:.2f}".format(value * 0.001) )) + "</td>"
+        
+        if value != "---":
+          total = total + int(value)
+          totals[tindex]=totals[tindex] + int(value)
+          
+        tindex = tindex + 1
 
+        
       stathtml = stathtml + "  </tr>"
+
+
+    stathtml = stathtml + "<tr> <td>" + "" + "</td><td>" + "Totals" + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[0])   + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[1])   + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[2])   + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[3])   + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[4])   + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[5])   + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[6])   + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[7])   + "</td>"
+    stathtml = stathtml + "<td>" +   str(totals[8])   + "</td>"
+                
+    stathtml = stathtml + "</tr>"      
 
     stathtml = stathtml + "</table>"
 
