@@ -7302,6 +7302,7 @@ def get_dbstats_html():
      
     total = 0
     stathtml = '<table border="0" cellspacing="5" cellpadding="5" style="width:100%; display: block">'
+    """
     stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
     stathtml = stathtml + "<td>" + "now" + "</td>"
     stathtml = stathtml + "<td>" +  str(int(period) * 1) +"hr" + "</td>"
@@ -7314,6 +7315,8 @@ def get_dbstats_html():
     stathtml = stathtml + "<td>" +  str(int(period) * 8) +"hr" + "</td>"
                 
     stathtml = stathtml + "</tr>"
+
+    """
     """
     for stat in jsondata:
       if stat['value'] != None:
@@ -7334,7 +7337,7 @@ def get_dbstats_html():
         
         if value != "---":
           total = total + int(value)
-          totals[tindex]=int(totals[tindex]) + int(value)
+          #totals[tindex]=int(totals[tindex]) + int(value)
           
         tindex = tindex + 1
 
