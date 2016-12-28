@@ -7180,7 +7180,7 @@ def get_dbstats_html():
 
     query = ('select {}(records) AS records FROM {} '
                      'where time > {}s and time < {}s '
-                     'group by *, time({}s) LIMIT 1') \
+                     'group by *, time({}s) ') \
                 .format(rollup,  measurement, 
                         startepoch, endepoch,
                         resolution) 
