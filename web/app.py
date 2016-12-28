@@ -7288,6 +7288,7 @@ def get_dbstats_html():
 
 
     #jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+    totals=[]
     totals[0]=0
     totals[1]=0
     totals[2]=0
@@ -7328,7 +7329,7 @@ def get_dbstats_html():
       tindex=0
       values = statdata['value']
       for value in values:
-        stathtml = stathtml + "<td>" +  str(float("{0:.2f}".format(value * 0.001) )) + "</td>"
+        stathtml = stathtml + "<td>" +  str(float("{0:.1f}".format(value * 0.001) )) + "</td>"
         
         if value != "---":
           total = total + int(value)
@@ -7341,15 +7342,15 @@ def get_dbstats_html():
 
 
     stathtml = stathtml + "<tr> <td>" + "" + "</td><td>" + "Totals" + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[0])   + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[1])   + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[2])   + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[3])   + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[4])   + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[5])   + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[6])   + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[7])   + "</td>"
-    stathtml = stathtml + "<td>" +   str(totals[8])   + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[0] * 0.001) ))   + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[1] * 0.001) ))    + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[2] * 0.001) ))     + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[3] * 0.001) ))     + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[4] * 0.001) ))     + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[5] * 0.001) ))     + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[6] * 0.001) ))     + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[7] * 0.001) ))    + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[8] * 0.001) ))    + "</td>"
                 
     stathtml = stathtml + "</tr>"      
 
