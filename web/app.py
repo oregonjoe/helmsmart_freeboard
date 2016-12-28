@@ -7250,15 +7250,23 @@ def get_dbstats_html():
       """
 
       tag = series['tags']
-      #log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+      devicename = ""
+      deviceid = tag['deviceid']
+      for record in records:
+        #log.info("get_dbstats deviceid %s - devicename %s", record[0], record[1])    
+        if deviceid == record[0]:
+          devicename = record[1]
+              
+      log.info("get_dbstats deviceid %s - devicename %s", deviceid, devicename)
+
 
       #mydatetimestr = str(fields['time'])
-      strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
-      jsonkey.append(strvaluekey)        
+      #strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
+      #jsonkey.append(strvaluekey)        
 
       #log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
-      log.info("freeboard Get InfluxDB series series['values'] %s ", series['values'])
-      
+      #log.info("freeboard Get InfluxDB series series['values'] %s ", series['values'])
+      values=[]
       for point in series['values']:
         fields = {}
         for key, val in zip(series['columns'], point):
@@ -7267,16 +7275,12 @@ def get_dbstats_html():
         log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
         
         if fields['records'] != None:
-
-          devicename = ""
-          deviceid = tag['deviceid']
-          for record in records:
-            #log.info("get_dbstats deviceid %s - devicename %s", record[0], record[1])    
-            if deviceid == record[0]:
-              devicename = record[1]
+          values.append( fields['records'])
+        else:
+          values.append("---")
           
-          strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
-          jsondata.append(strvalue)
+      strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value':values}
+      jsondata.append(strvalue)
 
 
     return jsonify( message=jsondata)
