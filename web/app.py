@@ -7258,7 +7258,7 @@ def get_dbstats_html():
         if deviceid == record[0]:
           devicename = record[1]
               
-      log.info("get_dbstats deviceid %s - devicename %s", deviceid, devicename)
+      #log.info("get_dbstats deviceid %s - devicename %s", deviceid, devicename)
 
 
       #mydatetimestr = str(fields['time'])
@@ -7273,7 +7273,7 @@ def get_dbstats_html():
         for key, val in zip(series['columns'], point):
           fields[key] = val
           
-        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+        #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
         
         if fields['records'] != None:
           values.append( fields['records'])
@@ -7289,15 +7289,16 @@ def get_dbstats_html():
 
     #jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
     totals=[]
-    totals[0]=0
-    totals[1]=0
-    totals[2]=0
-    totals[3]=0
-    totals[4]=0
-    totals[5]=0
-    totals[6]=0
-    totals[7]=0
-    totals[8]=0    
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)
+    totals.append(0)   
      
     total = 0
     stathtml = '<table border="0" cellspacing="5" cellpadding="5" style="width:100%; display: block">'
@@ -7342,15 +7343,15 @@ def get_dbstats_html():
 
 
     stathtml = stathtml + "<tr> <td>" + "" + "</td><td>" + "Totals" + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[0] * 0.001) ))   + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[1] * 0.001) ))    + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[2] * 0.001) ))     + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[3] * 0.001) ))     + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[4] * 0.001) ))     + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[5] * 0.001) ))     + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[6] * 0.001) ))     + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[7] * 0.001) ))    + "</td>"
-    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[8] * 0.001) ))    + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[0] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[1] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[2] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[3] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[4] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[5] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[6] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[7] * 0.001) ))  + "</td>"
+    stathtml = stathtml + "<td>" +    str(float("{0:.1f}".format(totals[8] * 0.001) ))  + "</td>"
                 
     stathtml = stathtml + "</tr>"      
 
