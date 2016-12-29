@@ -1,0 +1,66 @@
+{"version":1,"allow_edit":true,"plugins":["https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js","https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js","https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js","/plugins/all"],
+
+"panes":[
+
+{"title":"Weather Links",
+"width":1,
+"row":{"3":1},
+"col":{"3":1},
+"col_width":"3",
+
+
+"widgets":[{"type":"plugin531a3b2b7df9e78c7300000f","settings":{"html":"<table width:100%>\n<tr>\n<td width:150px>\n<a href=\"https://freeboard.io/board/rwmn8B\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">KNSD, CA</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/EjOh2B\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">NBC-Boston</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/FVTEKy\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">Winchuck, OR</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/UaiVEa\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">Chetco, OR</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/jInuNy\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">GEMECO, SC</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/AuRuNy\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">BOSTON, MA</span>\n          </a>\n</td>\n\n\n</tr>\n</table>","height":"1"}}]},
+
+{"title":"Location",
+"width":1,
+"row":{"3":5,"5":5},
+"col":{"3":1,"5":1},
+"col_width":1,
+
+"widgets":[{"type":"google_map","settings":{"position":"datasources[\"SeaDream Location\"][\"position\"]","blocks":4,"mapstyle":"roadmap","trailColor":"0"}}]},
+
+{"title":"Current Weather Infomation",
+"width":1,
+"row":{"3":5,"5":5},
+"col":{"3":2,"5":2},
+"col_width":1,
+
+"widgets":[{"type":"hstext_widget","settings":{"title":"Air Temp","size":"regular","value":"datasources[\"SeaDream Environmental\"][\"temperature\"]","animate":true,"units":"F"}},
+
+{"type":"hstext_widget","settings":
+{"title":"Baro","size":"regular","value":"datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]","animate":true,"units":"inhg"}},{"type":"hstext_widget","settings":
+
+{"title":"Humidity","size":"regular","value":"datasources[\"SeaDream Environmental\"][\"humidity\"]","animate":true,"units":"%"}},{"type":"hstext_widget","settings":{"title":"Wind Speed","size":"regular","value":"datasources[\"SeaDream Wind\"][\"truewindspeed\"]","animate":true,"units":"mph"}}]},
+
+{"title":"Current Wind Direction",
+"width":1,
+"row":{"3":5,"5":5},
+"col":{"3":3,"5":3},
+"col_width":1,
+
+"widgets":[{"type":"gauge","settings":{"value":"datasources[\"SeaDream Wind\"][\"truewinddir\"]","units":"degrees","min_value":0,"max_value":360,"gaugeStyle":"compass","dropshadow":true,"blocks":4,"gaugeBackColor":"10","gaugeFillColor":"11","gaugePointerColor":"6"}}]},
+
+{"title":"Air Temp (24 hr)",
+
+"width":1,
+"row":{"3":15,"5":15},
+"col":{"3":1,"5":1},
+"col_width":1,
+"widgets":[{"type":"highcharts-timeseries","settings":{"showledgen":false,"blocks":4,"chartType":"area","xaxis":"{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}","yaxis":"{\"title\":{\"text\" : \"F\"}, \"minorTickInterval\":\"auto\", \"floor\":0}","series1":"datasources[\"SeaDream Environmental\"][\"temperature\"]","series1color":"0","series2color":"0","series3color":"0"}}]},
+
+
+{"title":"Baro (24 hr)",
+"width":1,
+"row":{"3":15,"5":15},
+"col":{"3":2,"5":2},
+"col_width":1,
+
+"widgets":[{"type":"highcharts-timeseries","settings":{"showledgen":false,"blocks":4,"chartType":"area","xaxis":"{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}","yaxis":"{\"title\":{\"text\" : \"inhg\"}, \"minorTickInterval\":\"auto\", \"min\":26, \"max\":32, \"floor\":0}","series1":"datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]","series1color":"6","series2color":"6","series3color":"0"}}]},
+
+{"title":"Wind Speed (24 hr)",
+"width":1,
+"row":{"3":15,"5":15},
+"col":{"3":3,"5":3},
+"col_width":1,
+
+"widgets":[{"type":"highcharts-timeseries","settings":{"showledgen":false,"blocks":4,"chartType":"area","xaxis":"{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}","yaxis":"{\"title\":{\"text\" : \"mph\"}, \"minorTickInterval\":\"auto\", \"floor\":0}","series1":"datasources[\"SeaDream Wind\"][\"truewindspeed\"]","series1color":"4","series2color":"0","series3color":"0"}}]}],"datasources":[{"name":"SeaDream Wind","type":"JSON","settings":{"units":"US","type":"","instance":"","resolution":"900","span":"1day","refresh":30,"apikey":"a06f045a384e96c2828139666edccc51","url":"https://helmsmart-freeboard.herokuapp.com/freeboard_winddata","name":"SeaDream Wind"}},{"name":"SeaDream Environmental","type":"JSON","settings":{"units":"US","type":"","instance":"","resolution":"600","span":"1day","refresh":60,"apikey":"a06f045a384e96c2828139666edccc51","url":"https://helmsmart-freeboard.herokuapp.com/freeboard_environmental","name":"SeaDream Environmental"}},{"name":"SeaDream Location","type":"JSON","settings":{"units":"US","type":"","instance":"","resolution":"600","span":"12hour","refresh":15,"apikey":"a06f045a384e96c2828139666edccc51","url":"https://helmsmart-freeboard.herokuapp.com/freeboard_location"}}],"columns":3}
