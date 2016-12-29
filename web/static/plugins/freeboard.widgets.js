@@ -1000,11 +1000,11 @@
         }
     });
 
-    freeboard.addStyle('.html-widget', "white-space:normal;width:100%;height:100%");
+    freeboard.addStyle('.hshtml-widget', "white-space:normal;width:100%;height:100%");
 
     var htmlWidget = function (settings) {
         var self = this;
-        var htmlElement = $('<div class="html-widget"></div>');
+        var htmlElement = $('<div class="hshtml-widget"></div>');
         var currentSettings = settings;
 
         this.render = function (element) {
@@ -1033,7 +1033,7 @@
 
     freeboard.loadWidgetPlugin({
         "type_name": "html",
-        "display_name": "HTML",
+        "display_name": "HelmSmart HTML",
         "fill_size": true,
         "settings": [
             {
