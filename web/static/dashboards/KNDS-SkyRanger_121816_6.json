@@ -1,4 +1,4 @@
-{"version":1,"allow_edit":true,"plugins":["https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js","https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js","https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js","/plugins/all"],
+{"version":1,"allow_edit":true,"plugins":["https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js","https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js","https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js"],
 
 "panes":[
 
@@ -28,9 +28,11 @@
 "widgets":[{"type":"hstext_widget","settings":{"title":"Air Temp","size":"regular","value":"datasources[\"SeaDream Environmental\"][\"temperature\"]","animate":true,"units":"F"}},
 
 {"type":"hstext_widget","settings":
-{"title":"Baro","size":"regular","value":"datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]","animate":true,"units":"inhg"}},{"type":"hstext_widget","settings":
+{"title":"Baro","size":"regular","value":"datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]","animate":true,"units":"inhg"}},
+{"type":"hstext_widget","settings":
 
-{"title":"Humidity","size":"regular","value":"datasources[\"SeaDream Environmental\"][\"humidity\"]","animate":true,"units":"%"}},{"type":"hstext_widget","settings":{"title":"Wind Speed","size":"regular","value":"datasources[\"SeaDream Wind\"][\"truewindspeed\"]","animate":true,"units":"mph"}}]},
+{"title":"Humidity","size":"regular","value":"datasources[\"SeaDream Environmental\"][\"humidity\"]","animate":true,"units":"%"}},
+{"type":"hstext_widget","settings":{"title":"Wind Speed","size":"regular","value":"datasources[\"SeaDream Wind\"][\"truewindspeed\"]","animate":true,"units":"mph"}}]},
 
 {"title":"Current Wind Direction",
 "width":1,

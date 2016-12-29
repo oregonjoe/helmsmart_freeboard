@@ -35,6 +35,7 @@
 					"settings": {
 						"lat": "",
 						"lon": "",
+						"blocks":4,
 						"position": "datasources[\"SeaDream Location\"][\"position\"]"
 					}
 				}
@@ -126,7 +127,7 @@
 				"3": 1,
 				"5": 1
 			},
-			"col_width": "1",
+			"col_width": 1,
 			"widgets": [
 				{
 					"type": "highcharts-timeseries",
@@ -157,7 +158,7 @@
 				"3": 2,
 				"5": 2
 			},
-			"col_width": "1",
+			"col_width": 1,
 			"widgets": [
 				{
 					"type": "highcharts-timeseries",
