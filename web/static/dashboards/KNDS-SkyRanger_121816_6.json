@@ -1,5 +1,5 @@
 {"version":1,"allow_edit":true,"plugins":["https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js","https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js","https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js"],
-
+ 
 "panes":[
 
 {"title":"Weather Links",

@@ -12,7 +12,7 @@
 			"width": 1,
 			"row":{"3":1},
 			"col":{"3":1},
-			"col_width": "3",
+			"col_width": 3,
 			"widgets": [
 				{
 					"type": "plugin531a3b2b7df9e78c7300000f",
@@ -28,7 +28,7 @@
 			"width": 1,
 			"row":{"3":5,"5":5},
 			"col":{"3":1,"5":1},
-			"col_width": "1",
+			"col_width": 1,
 			"widgets": [
 				{
 					"type": "google_map",
