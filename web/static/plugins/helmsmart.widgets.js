@@ -3635,7 +3635,7 @@
 	
 	 freeboard.addStyle('.hshtml-widget', "white-space:normal;width:100%;height:100%");
 
-    var htmlWidget = function (settings) {
+    var hshtmlWidget = function (settings) {
         var self = this;
         var htmlElement = $('<div class="hshtml-widget"></div>');
         var currentSettings = settings;
@@ -3684,7 +3684,7 @@
             }
         ],
         newInstance: function (settings, newInstanceCallback) {
-            newInstanceCallback(new htmlWidget(settings));
+            newInstanceCallback(new hshtmlWidget(settings));
         }
     });
 
