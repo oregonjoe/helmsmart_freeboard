@@ -550,16 +550,24 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		var pretty = $(event.currentTarget).data('pretty');
 		var contentType = 'application/octet-stream';
 		var a = document.createElement('a');
+		// save to local file
 		if(pretty){
 			var blob = new Blob([JSON.stringify(self.serialize(), null, '\t')], {'type': contentType});
-		}else{
-			var blob = new Blob([JSON.stringify(self.serialize())], {'type': contentType});
+		
+				document.body.appendChild(a);
+				a.href = window.URL.createObjectURL(blob);
+				a.download = "dashboard.json";
+				a.target="_self";
+				a.click();
+		
 		}
-		document.body.appendChild(a);
-		a.href = window.URL.createObjectURL(blob);
-		a.download = "dashboard.json";
-		a.target="_self";
-		a.click();
+		else{// save to server
+		
+			//var blob = new Blob([JSON.stringify(self.serialize())], {'type': contentType});
+			var blob = new Blob([JSON.stringify(self.serialize(), null, '\t')], {'type': contentType});
+			
+		}
+
 	}
 
 	this.addDatasource = function(datasource)
