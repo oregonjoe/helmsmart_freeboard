@@ -599,8 +599,14 @@
 						{
 							//gaugeObject.label = "NE";
 							//gaugeObject.symbol = "NE";
-							gaugeObject.refresh(Number(newValue[0].value));
-							
+							if(newValue[0].value == "---")
+							{
+								gaugeObject.refresh(Number(99999));
+							}
+							else
+							{
+								gaugeObject.refresh(Number(newValue[0].value));
+							}	
 						}
 						else
 							gaugeObject.refresh(Number(99999));
