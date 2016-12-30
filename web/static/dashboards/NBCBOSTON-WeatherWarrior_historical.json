@@ -17,7 +17,7 @@
 				{
 					"type": "hshtml",
 					"settings": {
-						"html": "<table width:100%>\n<tr>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/NBCBOSTON-WeatherWarrior.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">NBC-Boston Live</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/NBCBOSTON-WeatherWarrior_historical.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">NBC-Boston Historical</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-Airmar_Boston.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">BOSTON, MA</span>\n          </a>\n</td>\n\n</tr>\n</table>",
+						"html": "<table width:100%>\n<tr>\n<td width:180px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/NBCBOSTON-WeatherWarrior.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:180px\">NBC-Boston Live</span>\n          </a>\n</td>\n<td width:180px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/NBCBOSTON-WeatherWarrior_historical.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:180px\">NBC-Boston Historical</span>\n          </a>\n</td>\n<td width:180px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-Airmar_Boston.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:180px\">BOSTON, MA</span>\n          </a>\n</td>\n\n</tr>\n</table>",
 						"height": "1"
 					}
 				}
@@ -42,7 +42,7 @@
 			]
 		},
 		{
-			"title": "Weather",
+			"title": "Weather (30 min)",
 			"width":1,
 			"row":{"3":5,"5":5},
 			"col":{"3":2,"5":2},
@@ -91,7 +91,7 @@
 			]
 		},
 		{
-			"title": "Wind Dir True",
+			"title": "Wind Dir True (30 min)",
 			"width":1,
 			"row":{"3":5,"5":5},
 			"col":{"3":3,"5":3},
@@ -216,7 +216,7 @@
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
 				"refresh": 30,
-				"span": "24hour",
+				"span": "1day",
 				"resolution": "900",
 				"instance": "",
 				"type": "",
@@ -230,7 +230,7 @@
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
 				"refresh": 30,
-				"span": "24hour",
+				"span": "1day",
 				"resolution": "900",
 				"instance": "",
 				"type": "",
@@ -244,7 +244,7 @@
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_location",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
 				"refresh": 60,
-				"span": "24hour",
+				"span": "1day",
 				"resolution": "900",
 				"instance": "",
 				"type": "",
