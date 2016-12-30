@@ -137,7 +137,7 @@
 						"chartType": "area",
 						"title": "",
 						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
-						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"degrees F\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
 						"series1": "datasources[\"SeaDream Environmental\"][\"temperature\"]",
 						"series1label": "Air temperature (24 hours)",
 						"series1color": "0",
