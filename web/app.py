@@ -3217,7 +3217,7 @@ def freeboard_environmental():
 
         query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
                      'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
+                     'group by time({}s) fill(linear)') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
@@ -3225,7 +3225,7 @@ def freeboard_environmental():
       
       query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
                      'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
+                     'group by time({}s) fill(linear)') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
@@ -3483,7 +3483,7 @@ def freeboard_winddata():
       
     query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed from {} '
                    'where {} AND time > {}s and time < {}s '
-                   'group by time({}s)') \
+                   'group by time({}s)  fill(linear)') \
               .format( measurement, serieskeys,
                       startepoch, endepoch,
                       resolution)
