@@ -17,7 +17,7 @@
 				{
 					"type": "hshtml",
 					"settings": {
-						"html": "<table width:100%>\n<tr>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/KNDS-SkyRanger.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">KNSD, CA</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/NBCBOSTON-WeatherWarrior.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">NBC-Boston</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-Winchuck.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">Winchuck, OR</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-SeaDream.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">Chetco, OR</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-GEMECO.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">GEMECO, SC</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-Airmar_Boston\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">BOSTON, MA</span>\n          </a>\n</td>\n\n</tr>\n</table>",
+						"html": "<table width:100%>\n<tr>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/KNDS-SkyRanger.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">KNSD, CA</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/NBCBOSTON-WeatherWarrior.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">NBC-Boston</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-Winchuck.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">Winchuck, OR</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-SeaDream.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">Chetco, OR</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-GEMECO.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">GEMECO, SC</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://helmsmart-freeboard.herokuapp.com/freeboard#source=static/dashboards/Weather-Airmar_Boston.json\" onclick=\"location.reload()\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">BOSTON, MA</span>\n          </a>\n</td>\n\n</tr>\n</table>",
 						"height": "1"
 					}
 				}
@@ -216,8 +216,8 @@
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
 				"refresh": 30,
-				"span": "1day",
-				"resolution": "900",
+				"span": "6hour",
+				"resolution": "120",
 				"instance": "",
 				"type": "",
 				"units": "US"
@@ -229,9 +229,9 @@
 			"settings": {
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
-				"refresh": 60,
-				"span": "1day",
-				"resolution": "600",
+				"refresh": 30,
+				"span": "6hour",
+				"resolution": "120",
 				"instance": "",
 				"type": "",
 				"units": "US"
@@ -243,7 +243,7 @@
 			"settings": {
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_location",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
-				"refresh": 15,
+				"refresh": 60,
 				"span": "12hour",
 				"resolution": "600",
 				"instance": "",
