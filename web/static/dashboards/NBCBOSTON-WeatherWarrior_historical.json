@@ -117,7 +117,7 @@
 		},
 		
 		{
-			"title": "Air Temp (6 hr)",
+			"title": "Air Temp (24 hr)",
 			"width":1,
 			"row": {
 				"3": 15,
@@ -148,7 +148,7 @@
 			]
 		},
 		{
-			"title": "Wind Speed (6 hr)",
+			"title": "Wind Speed (24 hr)",
 			"width":1,
 			"row": {
 				"3": 15,
@@ -179,7 +179,7 @@
 			]
 		},
 		{
-			"title": "Baro (6 hr)",
+			"title": "Baro (24 hr)",
 			"width":1,
 			"row": {
 				"3": 15,
@@ -216,8 +216,8 @@
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
 				"refresh": 30,
-				"span": "6hour",
-				"resolution": "120",
+				"span": "24hour",
+				"resolution": "900",
 				"instance": "",
 				"type": "",
 				"units": "US"
@@ -230,8 +230,8 @@
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
 				"refresh": 30,
-				"span": "6hour",
-				"resolution": "120",
+				"span": "24hour",
+				"resolution": "900",
 				"instance": "",
 				"type": "",
 				"units": "US"
@@ -244,8 +244,8 @@
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_location",
 				"apikey": "0fbaa9c9779a78055007ffdadbeccbaa",
 				"refresh": 60,
-				"span": "12hour",
-				"resolution": "600",
+				"span": "24hour",
+				"resolution": "900",
 				"instance": "",
 				"type": "",
 				"units": "US"
