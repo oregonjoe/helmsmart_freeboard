@@ -811,7 +811,7 @@ def freeboard():
 
     response = make_response(render_template('freeboard.html', features = []))
     #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
-    response.headers['Cache-Control'] = 'public, max-age=0'
+    response.headers['Cache-Control'] = 'public, no-cache, max-age=0'
     return response
 
 @app.route('/freeboard_InfluxDB')
@@ -3217,7 +3217,7 @@ def freeboard_environmental():
 
         query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
                      'where {} AND time > {}s and time < {}s '
-                     'group by time({}s) fill(linear)') \
+                     'group by time({}s) fill(previous)') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
@@ -3225,7 +3225,7 @@ def freeboard_environmental():
       
       query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
                      'where {} AND time > {}s and time < {}s '
-                     'group by time({}s) fill(linear)') \
+                     'group by time({}s) fill(previous)') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
@@ -3483,7 +3483,7 @@ def freeboard_winddata():
       
     query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed from {} '
                    'where {} AND time > {}s and time < {}s '
-                   'group by time({}s)  fill(linear)') \
+                   'group by time({}s)  fill(previous)') \
               .format( measurement, serieskeys,
                       startepoch, endepoch,
                       resolution)
