@@ -196,7 +196,7 @@
 					"settings": {
 						"showledgen": false,
 						"blocks": 4,
-						"chartType": "area",
+						"chartType": "spline",
 						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
 						"yaxis": "{\"title\":{\"text\" : \"inhg\"}, \"minorTickInterval\":\"auto\", \"max\":32,  \"min\":26, \"floor\":0}",
 						"series1": "datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]",
