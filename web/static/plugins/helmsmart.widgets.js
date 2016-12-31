@@ -294,7 +294,16 @@
 				{
 					if(newValue.length)
 					{
-						value = newValue[0].value;
+						value = "---";
+						
+						for(i=0; i< newValue.length; i++)
+						{
+							if(newValue[i].value != "---")
+							{
+								value = newValue[i].value;
+								break;
+							}
+						}
 						
 						if (currentSettings.sparkline) {
 						for(i=0; i< newValue.length; i++)
@@ -597,16 +606,18 @@
 					{
 						if(newValue.length)
 						{
-							//gaugeObject.label = "NE";
-							//gaugeObject.symbol = "NE";
-							if(newValue[0].value == "---")
+							var gaugevalue = Number(99999);
+							
+							for(i=0; i< newValue.length; i++)
 							{
-								gaugeObject.refresh(Number(99999));
+								if(newValue[i].value != "---")
+								{
+									gaugevalue = Number(newValue[i].value);
+									break;
+								}
+								
 							}
-							else
-							{
-								gaugeObject.refresh(Number(newValue[0].value));
-							}	
+							gaugeObject.refresh(gaugevalue);
 						}
 						else
 							gaugeObject.refresh(Number(99999));
