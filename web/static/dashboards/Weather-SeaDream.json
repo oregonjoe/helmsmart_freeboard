@@ -53,7 +53,7 @@
 					"settings": {
 						"title": "Air Temp",
 						"size": "regular",
-						"value": "datasources[\"SeaDream Environmental\"][\"temperature\"]",
+						"value": "datasources[\"SeaDream Environmental Live\"][\"temperature\"]",
 						"animate": true,
 						"units": "F"
 					}
@@ -63,7 +63,7 @@
 					"settings": {
 						"title": "Baro",
 						"size": "regular",
-						"value": "datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]",
+						"value": "datasources[\"SeaDream Environmental Live\"][\"atmospheric_pressure\"]",
 						"animate": true,
 						"units": "inhg"
 					}
@@ -73,7 +73,7 @@
 					"settings": {
 						"title": "Wind Speed",
 						"size": "regular",
-						"value": "datasources[\"SeaDream Wind\"][\"truewindspeed\"]",
+						"value": "datasources[\"SeaDream Wind Live\"][\"truewindspeed\"]",
 						"animate": true,
 						"units": "knots"
 					}
@@ -83,7 +83,7 @@
 					"settings": {
 						"title": "Humidity",
 						"size": "regular",
-						"value": "datasources[\"SeaDream Environmental\"][\"humidity\"]",
+						"value": "datasources[\"SeaDream Environmental Live\"][\"humidity\"]",
 						"animate": true,
 						"units": "%"
 					}
@@ -215,9 +215,23 @@
 			"settings": {
 				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
 				"apikey": "397fa82fa820cd741e2cebc059f4d17b",
-				"refresh": 30,
+				"refresh": 60,
 				"span": "1day",
 				"resolution": "900",
+				"instance": "",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "SeaDream Wind Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
+				"apikey": "397fa82fa820cd741e2cebc059f4d17b",
+				"refresh": 60,
+				"span": "1hour",
+				"resolution": "60",
 				"instance": "",
 				"type": "",
 				"units": "US"
@@ -232,6 +246,20 @@
 				"refresh": 60,
 				"span": "1day",
 				"resolution": "600",
+				"instance": "",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "SeaDream Environmental Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
+				"apikey": "397fa82fa820cd741e2cebc059f4d17b",
+				"refresh": 60,
+				"span": "1hour",
+				"resolution": "60",
 				"instance": "",
 				"type": "",
 				"units": "US"
