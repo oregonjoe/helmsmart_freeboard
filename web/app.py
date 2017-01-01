@@ -95,6 +95,41 @@ app.debug = True
 
 
 
+
+app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
+app.config['STORMPATH_API_KEY_ID'] = environ.get('STORMPATH_API_KEY_ID')
+app.config['STORMPATH_API_KEY_SECRET'] = environ.get('STORMPATH_API_KEY_SECRET')
+#app.config['STORMPATH_APPLICATION'] = environ.get('STORMPATH_URL')
+app.config['STORMPATH_ENABLE_FORGOT_PASSWORD'] = True
+app.config['STORMPATH_APPLICATION'] = 'helmsmart-freeboard'
+app.config['STORMPATH_LOGIN_TEMPLATE'] = 'stormpath/login.html'
+#app.config['STORMPATH_REGISTRATION_TEMPLATE'] = 'stormpath/register.html'
+app.config['STORMPATH_ENABLE_GOOGLE'] = True
+#app.config['STORMPATH_SOCIAL'] = {
+#      'GOOGLE': {
+#          'client_id': environ.get('740357019563-kbkkg3ggk1jol4ujl3kpe37dn4jimr3h.apps.googleusercontent.com'),
+#          'client_secret': environ.get('0UQsadTsKWoiSd0VerCZICPg'),
+#      }
+#  }
+
+app.config['STORMPATH_SOCIAL'] = {
+      'GOOGLE': {
+          'client_id': '740357019563-kbkkg3ggk1jol4ujl3kpe37dn4jimr3h.apps.googleusercontent.com',
+          'client_secret': '0UQsadTsKWoiSd0VerCZICPg',
+      }
+  }
+
+
+
+stormpath_manager = StormpathManager()
+
+# some code which creates your app
+stormpath_manager.init_app(app)
+
+
+
+
+
 #Convert Units between US and Metric
 def convertunittype(units, value):
 
@@ -804,6 +839,25 @@ def index():
     #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
     response.headers['Cache-Control'] = 'public, max-age=0'
     return response
+
+
+
+@app.route('/login')
+@cross_origin()
+@login_required
+def login():
+
+    #response = make_response(render_template('index.html', features = []))
+    #response.headers['Cache-Control'] = 'public, max-age=0'
+    #return response
+  
+    response = make_response(render_template('freeboard.html', features = []))
+    #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    #response.headers['Cache-Control'] = 'public, no-cache, no-store, max-age=0'
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '-1'
+    return response  
   
 @app.route('/freeboard')
 @cross_origin()
