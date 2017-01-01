@@ -93,7 +93,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['DEBUG'] = True
 app.debug = True
 
-
+from flask_stormpath import StormpathManager, User, login_required, login_user, logout_user, user
+from stormpath.error import Error as StormpathError
 from os import environ
 
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
