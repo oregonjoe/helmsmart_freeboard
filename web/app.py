@@ -94,7 +94,7 @@ app.config['DEBUG'] = True
 app.debug = True
 
 
-
+from os import environ
 
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['STORMPATH_API_KEY_ID'] = environ.get('STORMPATH_API_KEY_ID')
