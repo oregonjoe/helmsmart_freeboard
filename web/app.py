@@ -106,12 +106,7 @@ app.config['STORMPATH_APPLICATION'] = 'helmsmart-freeboard'
 app.config['STORMPATH_LOGIN_TEMPLATE'] = 'stormpath/login.html'
 #app.config['STORMPATH_REGISTRATION_TEMPLATE'] = 'stormpath/register.html'
 app.config['STORMPATH_ENABLE_GOOGLE'] = True
-#app.config['STORMPATH_SOCIAL'] = {
-#      'GOOGLE': {
-#          'client_id': environ.get('740357019563-kbkkg3ggk1jol4ujl3kpe37dn4jimr3h.apps.googleusercontent.com'),
-#          'client_secret': environ.get('0UQsadTsKWoiSd0VerCZICPg'),
-#      }
-#  }
+
 
 app.config['STORMPATH_SOCIAL'] = {
       'GOOGLE': {
@@ -4209,6 +4204,8 @@ def freeboard_location():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('interval',"5min")
     resolution = request.args.get('resolution',"")
+    postype = request.args.get('type',"NULL")
+    
     response = None
     log.info("freeboard_location deviceapikey %s", deviceapikey)
     starttime = 0
@@ -4242,6 +4239,7 @@ def freeboard_location():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
     serieskeys= serieskeys +  " sensor='position_rapid' "
+    serieskeys= serieskeys +  "  AND type='" + postype + "' "
  
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
