@@ -247,7 +247,7 @@
 				"span": "12hour",
 				"resolution": "600",
 				"instance": "",
-				"type": "",
+				"type": "DGNSS fix",
 				"units": "US"
 			}
 		}

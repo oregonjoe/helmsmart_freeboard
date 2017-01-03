@@ -438,7 +438,33 @@
 					{
 						name: "GEN",
 						value: "GEN"
+					},
+					{
+						name: "no GPS",
+						value: "no GPS"
+					},
+					{
+						name: "GNSS fix",
+						value: "GNSS fix"
+					},
+					{
+						name: "DGNSS fix",
+						value: "DGNSS fix"
+					},					
+					{
+						name: "Precise GNSS",
+						value: "Precise GNSS"
+					},
+					{
+						name: "NULL",
+						value: "NULL"
 					}
+					
+					
+					
+					
+					
+					
 				]
 			},
 					
