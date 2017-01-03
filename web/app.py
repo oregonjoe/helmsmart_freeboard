@@ -4396,8 +4396,8 @@ def freeboard_location():
 
 
         if point['siv'] is not None:       
-            value3 = convertfbunits(point['siv'], 50)
-            lat.append({'epoch':ts, 'siv':value3})            
+          value3 = convertfbunits(point['siv'], 50)
+          siv.append({'epoch':ts, 'siv':value3})            
  
       """
 
