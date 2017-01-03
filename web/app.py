@@ -406,6 +406,9 @@ def convertfbunits(value, units):
 
   elif units == 43: #//="43">Volts 10</option>
       return float("{0:.2f}".format(value * 0.1))
+
+  elif units ==100: #//=convert to integer
+      return int(value)
     
   else:
       return float("{0:.2f}".format(value))
@@ -4396,7 +4399,7 @@ def freeboard_location():
 
 
         if point['siv'] is not None:       
-          value3 = convertfbunits(point['siv'], 50)
+          value3 = int(point['siv'])
           siv.append({'epoch':ts, 'siv':value3})            
  
       """
