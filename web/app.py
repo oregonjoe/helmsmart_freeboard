@@ -4217,6 +4217,16 @@ def freeboard_location():
       resolution = epochtimes[2]
 
 
+    lat=[]
+    lng=[]
+    position=[]
+    siv=[]
+
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+
+
     deviceid = getedeviceid(deviceapikey)
     
     log.info("freeboard deviceid %s", deviceid)
@@ -4254,7 +4264,7 @@ def freeboard_location():
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
-        query = ('select  mean(lat) AS lat, mean(lng) AS  lng  from {} '
+        query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(siv) AS  siv from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -4262,7 +4272,7 @@ def freeboard_location():
                         resolution)
     else:
       
-      query = ('select  mean(lat) AS lat, mean(lng) AS  lng  from {} '
+      query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(siv) AS  siv from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -4314,13 +4324,17 @@ def freeboard_location():
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing', 'lat':list(reversed(lat)), 'lng':list(reversed(lng)), 'position':list(reversed(position)), 'siv':list(reversed(siv))})     
+
 
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing', 'lat':list(reversed(lat)), 'lng':list(reversed(lng)), 'position':list(reversed(position)), 'siv':list(reversed(siv))})     
+
 
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
@@ -4350,6 +4364,7 @@ def freeboard_location():
       lat=[]
       lng=[]
       position=[]
+      siv=[]
  
       points = list(response.get_points())
 
@@ -4378,6 +4393,11 @@ def freeboard_location():
             lng.append({'epoch':ts, 'value':value2})
 
             position.append({'epoch':ts, 'lat':value1, 'lng':value2})
+
+
+        if point['siv'] is not None:       
+            value3 = convertfbunits(point['siv'], 50)
+            lat.append({'epoch':ts, 'siv':value3})            
  
       """
 
@@ -4416,7 +4436,7 @@ def freeboard_location():
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':list(reversed(lat)), 'lng':list(reversed(lng)), 'position':list(reversed(position))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':list(reversed(lat)), 'lng':list(reversed(lng)), 'position':list(reversed(position)), 'siv':list(reversed(siv))})     
         
 
      
