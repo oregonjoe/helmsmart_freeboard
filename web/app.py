@@ -712,7 +712,63 @@ def convert_influxdbcloud_json(key, mytime, value):
     if debug_all: log.info("Sync.py Error in convert_influxdbcloud_json: %s" % e)
 
 
+def getdashboardjson(prefid):
 
+
+    conn = db_pool.getconn()
+
+    log.info("freeboard getdashboardjson data Query %s", prefid)
+
+    try:
+    # first check db to see if deviceapikey is matched to device id
+
+        cursor = conn.cursor()
+        #cursor.execute(query, (deviceapikey,))
+        #cursor.execute("select deviceid from user_devices where deviceapikey = '%s'" % deviceapikey)
+        #key=('bfeba0c3c5244269b4c8d276872519a6',)
+        cursor.execute("select jsondata  from dashboard_prefs where prefid = %s" , (prefid,))
+        #response= cursor.query(query)
+        i = cursor.fetchone()
+        log.info("freeboard getdashboardjson response %s", i)            
+        # see we got any matches
+        if cursor.rowcount == 0:
+        #if not response:
+            # cursor.close
+            db_pool.putconn(conn) 
+            return ""
+        
+        else:
+            jsondata = str(i[0])
+            db_pool.putconn(conn) 
+            return jsondata 
+
+
+    except TypeError, e:
+        log.info('freeboard: getdashboardjson TypeError in geting deviceid  %s:  ', prefid)
+        log.info('freeboard: getdashboardjson TypeError in geting deviceid  %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: getdashboardjson KeyError in geting deviceid  %s:  ', prefid)
+        log.info('freeboard: getdashboardjson KeyError in geting deviceid  %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: getdashboardjson NameError in geting deviceid  %s:  ', prefid)
+        log.info('freeboard: getdashboardjson NameError in geting deviceid  %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: getdashboardjson IndexError in geting deviceid  %s:  ', prefid)
+        log.info('freeboard: getdashboardjson IndexError in geting deviceid  %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: getdashboardjson Error in geting  deviceid %s:  ', prefid)
+        e = sys.exc_info()[0]
+        log.info('freeboard: getdashboardjson Error in geting deviceid  %s:  ' % str(e))
+
+    # cursor.close
+    db_pool.putconn(conn)                       
+
+    return ""  
 
 def getedeviceid(deviceapikey):
 
@@ -833,6 +889,24 @@ def events_endpoint(device_id, partition):
     e = sys.exc_info()[0]
     log.info('freeboard: Error in geting deviceid  %s:  ' % str(e))
   
+
+@app.route('/freeboard_getDdashboardjson')
+@cross_origin()
+def freeboard_getDdashboardjson():
+
+  prefid = request.args.get('prefid',1)
+
+
+  dashboardjson = getdashboardjson(prefid)
+  
+  log.info("freeboard_GetDashboardJSON prefid %s -> %s", dashboardjson)
+
+
+  return dashboardjson  
+
+
+
+
 
 @app.route('/')
 @cross_origin()
