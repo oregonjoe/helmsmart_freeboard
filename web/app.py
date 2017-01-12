@@ -922,6 +922,8 @@ def dashboard():
 
             # cursor.close
             db_pool.putconn(conn)
+
+            log.info("dashboard.html: email:%s", session['userid'])
             
         except:
           e = sys.exc_info()[0]
