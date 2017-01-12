@@ -9,6 +9,7 @@ import urlparse
 import urllib
 import md5
 import base64
+import fnmatch
 from operator import itemgetter
 import numpy as np
 from geopy.distance import vincenty
@@ -22,6 +23,9 @@ from pyonep import onep
 import urlparse
 from iron_cache import *
 import logging
+import olap
+
+
 # *******************************************************************
 # Debug Output defines
 # Comment to enable/disable
@@ -103,7 +107,7 @@ app.config['STORMPATH_API_KEY_SECRET'] = environ.get('STORMPATH_API_KEY_SECRET')
 #app.config['STORMPATH_APPLICATION'] = environ.get('STORMPATH_URL')
 app.config['STORMPATH_ENABLE_FORGOT_PASSWORD'] = True
 app.config['STORMPATH_APPLICATION'] = 'helmsmart-freeboard'
-app.config['STORMPATH_LOGIN_TEMPLATE'] = 'stormpath/login.html'
+#app.config['STORMPATH_LOGIN_TEMPLATE'] = 'stormpath/login.html'
 #app.config['STORMPATH_REGISTRATION_TEMPLATE'] = 'stormpath/register.html'
 app.config['STORMPATH_ENABLE_GOOGLE'] = True
 
