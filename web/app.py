@@ -890,9 +890,9 @@ def events_endpoint(device_id, partition):
     log.info('freeboard: Error in geting deviceid  %s:  ' % str(e))
   
 
-@app.route('/freeboard_getDdashboardjson')
+@app.route('/freeboard_getdashboardjson')
 @cross_origin()
-def freeboard_getDdashboardjson():
+def freeboard_getdashboardjson():
 
   prefid = request.args.get('prefid',1)
 
