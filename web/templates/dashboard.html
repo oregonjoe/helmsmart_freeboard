@@ -29,11 +29,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='plugins/plugin_highcharts_historical.js') }}"></script>
 	
     <script type="text/javascript">
-        head.js("https://helmsmart-freeboard.herokuapp.com/static/js/freeboard_plugins.js",
-		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js",
-		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js",
-		"https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js",
-		//"js/freeboard_plugins.min.js",
+      
 var  jsondata = '{
 "version": 1,
 "allow_edit": false,
@@ -186,7 +182,11 @@ var  jsondata = '{
 "columns":3
 }';
 		
-                // *** Load more plugins here ***
+     head.js("https://helmsmart-freeboard.herokuapp.com/static/js/freeboard_plugins.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js",
+		//"js/freeboard_plugins.min.js",             // *** Load more plugins here ***
                 function(){
                     $(function()
                     { //DOM Ready
