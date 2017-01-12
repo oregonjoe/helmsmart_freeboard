@@ -875,8 +875,64 @@ def freeboard():
     return response
 
 @app.route('/dashboard')
+@login_required
 @cross_origin()
 def dashboard():
+
+
+    try:
+      
+      if user is not None:
+        log.info("dashboard.html: user exists:%s", user)
+        try:
+           log.info("dashboard.html: customdata:%s", user.custom_data)
+           mydata = user.custom_data
+
+           
+           mydevices = mydata['devices']
+           log.info("dashboard.html: mydevices:%s", mydevices)
+
+           for device in mydevices:
+             log.info("dashboard.html: mydevice  %s:%s", device['devicename'], device['deviceid'])
+           
+        except:
+          e = sys.exc_info()[0]
+          log.info('dashboard.html: Error in geting user.custom_data  %s:  ' % str(e))
+          pass
+
+        try:
+          if user.email is not None:
+
+            conn = db_pool.getconn()
+            session['username'] = user.email
+            
+            log.info("dashboard.html: email:%s", user.email )
+
+            query = "select userid from user_devices where useremail = %s group by userid"
+            
+            cursor = conn.cursor()
+            cursor.execute(query, [user.email])
+            i = cursor.fetchone()       
+            if cursor.rowcount > 0:
+
+                session['userid'] = str(i[0])
+                #session['adminid'] = verificationdata['email']
+            else:
+                session['userid'] = hash_string('helmsmart@mockmyid.com')
+
+            # cursor.close
+            db_pool.putconn(conn)
+            
+        except:
+          e = sys.exc_info()[0]
+          log.info('dashboard.html: Error in geting user.email  %s:  ' % str(e))
+          pass
+          
+    except:
+      e = sys.exc_info()[0]
+      log.info('dashboard.html: Error in geting user  %s:  ' % str(e))
+      pass
+
 
     response = make_response(render_template('dashboard.html', features = []))
     #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
