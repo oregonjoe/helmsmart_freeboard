@@ -23,7 +23,7 @@ from pyonep import onep
 import urlparse
 from iron_cache import *
 import logging
-import olap
+
 
 
 # *******************************************************************
