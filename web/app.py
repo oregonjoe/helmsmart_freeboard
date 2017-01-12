@@ -874,6 +874,19 @@ def freeboard():
     response.headers['Expires'] = '-1'
     return response
 
+@app.route('/dashboard')
+@cross_origin()
+def dashboard():
+
+    response = make_response(render_template('dashboard.html', features = []))
+    #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    #response.headers['Cache-Control'] = 'public, no-cache, no-store, max-age=0'
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '-1'
+    return response
+  
+
 @app.route('/freeboard_InfluxDB')
 @cross_origin()
 def freeboard_InfluxDB():
