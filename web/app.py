@@ -899,7 +899,7 @@ def freeboard_getdashboardjson():
 
   dashboardjson = getdashboardjson(prefid)
   
-  log.info("freeboard_GetDashboardJSON prefid %s -> %s", dashboardjson)
+  log.info("freeboard_GetDashboardJSON prefid %s -> %s", prefid, dashboardjson)
 
 
   return dashboardjson  
