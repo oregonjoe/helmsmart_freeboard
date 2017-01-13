@@ -43,7 +43,12 @@
 
                         var hashpattern = window.location.hash.match(/(&|#)source=([^&]+)/);
                         if (hashpattern !== null) {
-                            $.getJSON(hashpattern[2], function(data) {
+                            $.getJSON(hashpattern[2], function(data, status, xhr) {
+							
+								var mydata = data;
+								var mystatus = status,
+								var myxhr=xhr;
+								
                                 freeboard.loadDashboard(data, function() {
                                     freeboard.setEditing(false);
                                 });
