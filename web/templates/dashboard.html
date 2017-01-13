@@ -226,7 +226,7 @@ mydata = response;
 
 }		
 
-function getDashboardJSON(prefid)
+function getDashboardJSON(prefuid)
 {
 /*
         $.blockUI({ 
@@ -245,7 +245,7 @@ function getDashboardJSON(prefid)
 
 	var devicedataurl;
 	
-    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_getdashboardjson?prefid=" + prefid;
+    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_getdashboardjson?prefuid=" + prefuid;
 
     return $.ajax({
     //async: false,
