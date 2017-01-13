@@ -206,8 +206,8 @@ var  jsondata = {
                         }
 						else
 						{
-						           freeboard.loadDashboard(jsondata, function() {
-                                    freeboard.setEditing(false);
+						           //freeboard.loadDashboard(jsondata, function() {
+                                    freeboard.setEditing(true);
                                 });
 						}
 						
@@ -221,7 +221,7 @@ function handlegetDashboardJSON(response)
 mydata = response;
 
 	freeboard.loadDashboard(mydata, function() {
-        freeboard.setEditing(false);
+        freeboard.setEditing(true);
 		 });
 
 }		
