@@ -263,9 +263,13 @@ function getDashboardJSON(prefid)
     // unblock when remote call returns
     // document.getElementById("SearchStatus").innerHTML = "Search Complete";
     //   ShowGraphSmartChart(gindex);
+		console.log('completed');
     //$.unblockUI();
     },
     error: function(request,status,errorThrown) {
+	
+	console.log(status);
+	console.log(errorThrown);
     //document.getElementById("SearchStatus").innerHTML = "Search Error";
     //$.unblockUI();
     }
