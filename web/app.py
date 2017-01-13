@@ -740,7 +740,7 @@ def getdashboardlists(userid):
 
           log.info("freeboard getdashboardlists response %s", devices)     
           db_pool.putconn(conn) 
-          return jsondata 
+          return devices 
 
 
     except TypeError, e:
