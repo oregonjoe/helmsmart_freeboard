@@ -98,8 +98,8 @@ function getDashboardJSON(prefuid)
 				
     </script>
 </head>
-<body>
-<div>
+<body style=" margin: 0;">
+<div style="padding:5px">
   <center>
   {% if session['userid'] %}
      <a href="https://helmsmart-freeboard.herokuapp.com/dashboard" id="login" class="persona-button">
@@ -111,13 +111,7 @@ function getDashboardJSON(prefuid)
   </center>
 </div>
 
-<div id="board-content">
-    <img id="dash-logo" data-bind="attr:{src: header_image}, visible:header_image()">
-    <div class="gridster responsive-column-width">
-        <ul data-bind="grid: true">
-        </ul>
-    </div>
-</div>
+
 
 
 <div class="page">
