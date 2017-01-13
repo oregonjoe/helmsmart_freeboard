@@ -195,7 +195,7 @@ var  jsondata = {
                         var hashpattern = window.location.hash.match(/(&|#)prefuid=([^&]+)/);
                         if (hashpattern !== null) {
 						
-							getDashboardJSON(1);
+							getDashboardJSON(hashpattern[2]);
 						
                         //    $.getJSON(hashpattern[2], function(data, status) {
 						//		console.log(status);
