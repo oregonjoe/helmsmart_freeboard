@@ -1022,6 +1022,76 @@ def dashboard():
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '-1'
     return response
+
+@app.route('/dashboards_list')
+@login_required
+@cross_origin()
+def dashboards_list():
+
+
+    try:
+      
+      if user is not None:
+        log.info("dashboards_list.html: user exists:%s", user)
+        try:
+           log.info("dashboards_list.html: customdata:%s", user.custom_data)
+           mydata = user.custom_data
+
+           
+           mydevices = mydata['devices']
+           log.info("dashboards_list.html: mydevices:%s", mydevices)
+
+           for device in mydevices:
+             log.info("dashboards_list.html: mydevice  %s:%s", device['devicename'], device['deviceid'])
+           
+        except:
+          e = sys.exc_info()[0]
+          log.info('dashboards_list.html: Error in geting user.custom_data  %s:  ' % str(e))
+          pass
+
+        try:
+          if user.email is not None:
+
+            conn = db_pool.getconn()
+            session['username'] = user.email
+            
+            log.info("dashboards_list.html: email:%s", user.email )
+
+            query = "select userid from user_devices where useremail = %s group by userid"
+            
+            cursor = conn.cursor()
+            cursor.execute(query, [user.email])
+            i = cursor.fetchone()       
+            if cursor.rowcount > 0:
+
+                session['userid'] = str(i[0])
+                #session['adminid'] = verificationdata['email']
+            else:
+                session['userid'] = hash_string('helmsmart@mockmyid.com')
+
+            # cursor.close
+            db_pool.putconn(conn)
+
+            log.info("dashboards_list.html: email:%s", session['userid'])
+            
+        except:
+          e = sys.exc_info()[0]
+          log.info('dashboards_list.html: Error in geting user.email  %s:  ' % str(e))
+          pass
+          
+    except:
+      e = sys.exc_info()[0]
+      log.info('dashboards_list.html: Error in geting user  %s:  ' % str(e))
+      pass
+
+
+    response = make_response(render_template('dashboards_list.html', features = []))
+    #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    #response.headers['Cache-Control'] = 'public, no-cache, no-store, max-age=0'
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '-1'
+    return response
   
 
 @app.route('/freeboard_InfluxDB')
