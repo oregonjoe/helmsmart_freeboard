@@ -902,8 +902,13 @@ def freeboard_getdashboardjson():
   log.info("freeboard_GetDashboardJSON prefid %s -> %s", prefid, dashboardjson)
 
 
-  return dashboardjson  
+  #return dashboardjson  
+  #  result = json.dumps(r, cls=DateEncoder)
 
+  response = make_response(dashboardjson)
+  response.headers['Cache-Control'] = 'public, max-age=0'
+  response.headers['content-type'] = "application/json"
+  return response
 
 
 
