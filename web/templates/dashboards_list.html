@@ -29,21 +29,42 @@
 
 	
     <script type="text/javascript">
+		var gUserID="a91140300971bfb9244989a9bffde53c";
+	
+	$(document).ready(function () {
+	
+	   gUserID = "0";
+    {% if session['userid'] %}
+    gUserID = "{{session['userid']}}";
+    {% else %}
+    gUserID = "0";
+    {% endif %}
+
+
+    if (gUserID == null)
+    {
+    gUserID = "0";
+    }
+    else
+    {
+		getDashboardLists(gUserID);
+    
+    }
+	
+	}); 
 	
 
 				
-function handlegetDashboardJSON(response)
+function handlegetDashboardLists(response)
 {
 
 mydata = response;
 
-	freeboard.loadDashboard(mydata, function() {
-        freeboard.setEditing(false);
-		 });
+
 
 }		
 
-function getDashboardJSON(prefuid)
+function getDashboardLists(userid)
 {
 /*
         $.blockUI({ 
@@ -62,7 +83,7 @@ function getDashboardJSON(prefuid)
 
 	var devicedataurl;
 	
-    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_getdashboardjson?prefuid=" + prefuid;
+    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_getdashboardlist?userid=" + userid;
 
     return $.ajax({
     //async: false,
@@ -75,7 +96,7 @@ function getDashboardJSON(prefuid)
     200: function() {      }
     },
     success: function(response) {
-    handlegetDashboardJSON(response)
+    handlegetDashboardLists(response)
     },
     complete: function() {
     // unblock when remote call returns
@@ -125,7 +146,7 @@ function getDashboardJSON(prefuid)
 								<button id="create-new-btn" type="submit" class="btn btn-primary btn-add">Create New</button>
 							</div>
 						</form>
-						<h1>My Freeboards</h1>
+						<h1>HelmSmart DashBoards</h1>
 					</div>
 				</div>
 			</div>
@@ -154,7 +175,9 @@ function getDashboardJSON(prefuid)
 	
 <div >
 </div>
-
+<div class="footer">
+<div class="container">
+<div class="inner">
 <center>
 		<table>
 		<tr>
@@ -170,6 +193,8 @@ function getDashboardJSON(prefuid)
 				<tr><td colspan=2 align="center"> copyright 2017 </td></tr>
 		</table>
 		<center>
-
+		</div>
+		</div>
+</div>
 </body>
 </html>

@@ -712,6 +712,64 @@ def convert_influxdbcloud_json(key, mytime, value):
     if debug_all: log.info("Sync.py Error in convert_influxdbcloud_json: %s" % e)
 
 
+def getdashboardlists(userid):
+
+
+    conn = db_pool.getconn()
+
+    log.info("freeboard getdashboardlists data Query %s", userid)
+
+    try:
+    # first check db to see if deviceapikey is matched to device id
+
+        cursor = conn.cursor()
+
+        cursor.execute("select prefuid, prefname  from dashboard_prefs where userid = %s" , (userid,))
+
+        log.info("freeboard getdashboardlists response %s", cursor)            
+
+        # see we got any matches
+        if cursor.rowcount == 0:
+            return jsonify( message='Could not get prefuids', status='error')
+            db_pool.putconn(conn) 
+            return ""
+        
+        else:
+          devices = [dict((cursor.description[i][0], value) \
+            for i, value in enumerate(row)) for row in cursor.fetchall()]
+
+          log.info("freeboard getdashboardlists response %s", devices)     
+          db_pool.putconn(conn) 
+          return jsondata 
+
+
+    except TypeError, e:
+        log.info('freeboard: getdashboardlists TypeError in geting deviceid  %s:  ', userid)
+        log.info('freeboard: getdashboardlists TypeError in geting deviceid  %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: getdashboardlists KeyError in geting deviceid  %s:  ', userid)
+        log.info('freeboard: getdashboardlists KeyError in geting deviceid  %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: getdashboardlists NameError in geting deviceid  %s:  ', userid)
+        log.info('freeboard: getdashboardlists NameError in geting deviceid  %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: getdashboardlists IndexError in geting deviceid  %s:  ', userid)
+        log.info('freeboard: getdashboardlists IndexError in geting deviceid  %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: getdashboardlists Error in geting  deviceid %s:  ', userid)
+        e = sys.exc_info()[0]
+        log.info('freeboard: getdashboardlists Error in geting deviceid  %s:  ' % str(e))
+
+    # cursor.close
+    db_pool.putconn(conn)                       
+
+    return ""  
+
 def getdashboardjson(prefuid):
 
 
@@ -769,6 +827,8 @@ def getdashboardjson(prefuid):
     db_pool.putconn(conn)                       
 
     return ""  
+
+
 
 def getedeviceid(deviceapikey):
 
@@ -906,6 +966,27 @@ def freeboard_getdashboardjson():
   #  result = json.dumps(r, cls=DateEncoder)
 
   response = make_response(dashboardjson)
+  response.headers['Cache-Control'] = 'public, max-age=0'
+  response.headers['content-type'] = "application/json"
+  return response
+
+
+@app.route('/freeboard_getdashboardlist')
+@cross_origin()
+def freeboard_getdashboardlist():
+
+  userid = request.args.get('userid',1)
+
+
+  dashboardlists = getdashboardlists(userid)
+  
+  log.info("freeboard_GetDashboardJSON prefuid %s -> %s", userid, dashboardlists)
+
+
+  #return dashboardjson  
+  #  result = json.dumps(r, cls=DateEncoder)
+
+  response = make_response(dashboardlists)
   response.headers['Cache-Control'] = 'public, max-age=0'
   response.headers['content-type'] = "application/json"
   return response
