@@ -27,6 +27,8 @@
 <script type="text/javascript" src="{{ url_for('static', filename='plugins/helmsmart.datasources.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='plugins/helmsmart.widgets.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='plugins/plugin_highcharts_historical.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery_blockUI.js') }}"></script>
+
 	
     <script type="text/javascript">
       
@@ -73,7 +75,20 @@ var gPrefID="";
 	
 function SaveDashboardToServer(blob)
 {
-
+        $.blockUI({ 
+     message: '<h1>Search in progress...</h1>',    
+     css: {             
+     border: 'none',             
+     padding: '15px',             
+     backgroundColor: '#000', 
+        
+     '-webkit-border-radius': '10px',             
+     '-moz-border-radius': '10px',             
+     opacity: .5,             
+     color: '#fff'         
+     } }); 
+	 
+	 
 	var devicedataurl;
 	
     devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_savedashboardjson?prefuid=" + gPrefID;
@@ -94,6 +109,7 @@ function SaveDashboardToServer(blob)
 			},
 			success: function(response) {
 			console.log(response);
+			$.unblockUI();
 			},
 			complete: function() {
 			// unblock when remote call returns
@@ -107,7 +123,7 @@ function SaveDashboardToServer(blob)
 			console.log(status);
 			console.log(errorThrown);
 			//document.getElementById("SearchStatus").innerHTML = "Search Error";
-			//$.unblockUI();
+			$.unblockUI();
 			}
 			});
 
