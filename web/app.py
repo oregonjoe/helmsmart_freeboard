@@ -964,16 +964,24 @@ def freeboard_savedashboardjson():
   #mymessage = json.loads(request.data)
   log.info('freeboard_savedashboardjson: json data  %s:  ', mymessage)
 
-  sqlstr = " update dashboard_prefs SET jsondata ='%s' where  prefuid = '%s';" 
-  cursor.execute(sqlstr, (mymessage, prefuid, ))   
-  conn.commit()
+  try:
+    cursor = conn.cursor()
+    sqlstr = " update dashboard_prefs SET jsondata ='%s' where  prefuid = '%s';" 
+    cursor.execute(sqlstr, (mymessage, prefuid, ))   
+    conn.commit()
+    
+    return jsonify(result="OK")  
 
-  db_pool.putconn(conn)
+  except:
+    e = sys.exc_info()[0]
+    log.info('freeboard_savedashboardjson: Error in update pref  %s:  ' % str(e))
 
 
-  return jsonify(result="OK")  
   
+  finally:
+    db_pool.putconn(conn)
 
+    
 @app.route('/freeboard_getdashboardjson')
 @cross_origin()
 def freeboard_getdashboardjson():
