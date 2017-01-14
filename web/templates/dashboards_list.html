@@ -78,7 +78,7 @@ function handlegetDashboardLists(response)
 		myPrefID = row.prefuid;
 		
 		var myCellText = "<a href=https://helmsmart-freeboard.herokuapp.com/dashboard#prefuid=" + myPrefID + "> " + myPrefName + "</a>";
-		 var row = table.insertRow(1);
+		 var row = table.insertRow(0);
 		 
 		   var cell0 = row.insertCell(0);
 			cell0.innerHTML = myCellText;
