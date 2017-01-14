@@ -960,8 +960,8 @@ def freeboard_savedashboardjson():
   log.info('freeboard_savedashboardjson: prefuid  %s:  ', prefuid)
 
   
-  #mymessage = request.data
-  mymessage = json.loads(request.data)
+  mymessage = request.data
+  #mymessage = json.loads(request.data)
   log.info('freeboard_savedashboardjson: json data  %s:  ', mymessage)
 
 

@@ -81,11 +81,11 @@ function SaveDashboardToServer(blob)
 				return $.ajax({
 			//async: false,
 			type: 'POST',
-			data: blob,
+			data: JSON.stringify(blob, null, '\t');,
 			cache: false,
 			url: devicedataurl,
-			dataType: "json",
-			contentType: 'application/json', // set to whatever you like
+			dataType: "text",
+			contentType: 'application/text', // set to whatever you like
 			processData: false,
 			timeout: 30000,
 			statusCode: {
