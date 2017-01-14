@@ -132,17 +132,7 @@ function getDashboardJSON(prefuid)
     </script>
 </head>
 <body>
-<div>
-  <center>
-  {% if session['userid'] %}
-     <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list" id="login" class="persona-button">
-    <span>HelmSmart: {{session['username']}}</span></a>
-  {% else %}
-    <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list" id="login" class="persona-button">
-      <span>HelmSmart: Guest</span></a>
-  {% endif %}
-  </center>
-</div>
+
 
 <div id="board-content">
     <img id="dash-logo" data-bind="attr:{src: header_image}, visible:header_image()">
@@ -215,6 +205,19 @@ function getDashboardJSON(prefuid)
     <div id="toggle-header" data-bind="click: toggleEditing">
         <i id="toggle-header-icon" class="icon-wrench icon-white"></i></div>
 </header>
+
+<div>
+  <center>
+  {% if session['userid'] %}
+     <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list" id="login" class="persona-button">
+    <span>HelmSmart: {{session['username']}}</span></a>
+  {% else %}
+    <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list" id="login" class="persona-button">
+      <span>HelmSmart: Guest</span></a>
+  {% endif %}
+  </center>
+</div>
+
 
 <div style="display:hidden">
     <ul data-bind="template: { name: 'pane-template', foreach: panes}">
