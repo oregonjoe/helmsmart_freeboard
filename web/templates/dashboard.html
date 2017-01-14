@@ -30,7 +30,7 @@
 	
     <script type="text/javascript">
       
-
+var gUserID="a91140300971bfb9244989a9bffde53c";
 		
      head.js("https://helmsmart-freeboard.herokuapp.com/static/js/freeboard_plugins.js",
 		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js",
@@ -40,6 +40,17 @@
                 function(){
                     $(function()
                     { //DOM Ready
+					
+					
+					  gUserID = "0";
+					{% if session['userid'] %}
+					gUserID = "{{session['userid']}}";
+					{% else %}
+					gUserID = "0";
+					{% endif %}
+									
+					
+					
                         freeboard.initialize(false); // disable editing
 
                         var hashpattern = window.location.hash.match(/(&|#)prefuid=([^&]+)/);
@@ -64,7 +75,16 @@
 
                     });
                 });
-				
+	
+function SaveDashboardToServer(blob)
+{
+
+	var devicedataurl;
+	
+    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_savedashboardjson?userid=" + gUserID + "&json=" + blob;
+
+}
+	
 function handlegetDashboardJSON(response)
 {
 
@@ -151,7 +171,7 @@ function getDashboardJSON(prefuid)
                         <li data-bind="click: loadDashboardFromLocalFile"><i id="full-screen-icon" class="icon-folder-open icon-white"></i><label id="full-screen">Load Freeboard</label></li>
                         <li><i class="icon-download-alt icon-white"></i>
                             <label data-bind="click: saveDashboardClicked">Save Freeboard</label>
-							<label style="display: none;" data-bind="click: saveDashboard" data-pretty="false">Server</label>
+							<label style="display: none;" data-bind="click: saveDashboardServer" data-pretty="false">Server</label>
                             <label style="display: none;" data-bind="click: saveDashboard" data-pretty="true">Local</label>
                            <!-- <label style="display: none;" data-bind="click: saveDashboard" data-pretty="false">[Minified]</label> -->
                         </li>
