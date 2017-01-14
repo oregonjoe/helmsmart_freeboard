@@ -30,7 +30,7 @@
 	
     <script type="text/javascript">
       
-var gUserID="a91140300971bfb9244989a9bffde53c";
+var gPrefID="";
 		
      head.js("https://helmsmart-freeboard.herokuapp.com/static/js/freeboard_plugins.js",
 		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js",
@@ -41,13 +41,6 @@ var gUserID="a91140300971bfb9244989a9bffde53c";
                     $(function()
                     { //DOM Ready
 					
-					
-					  gUserID = "0";
-					{% if session['userid'] %}
-					gUserID = "{{session['userid']}}";
-					{% else %}
-					gUserID = "0";
-					{% endif %}
 									
 					
 					
@@ -56,7 +49,9 @@ var gUserID="a91140300971bfb9244989a9bffde53c";
                         var hashpattern = window.location.hash.match(/(&|#)prefuid=([^&]+)/);
                         if (hashpattern !== null) {
 						
-							getDashboardJSON(hashpattern[2]);
+						
+							gPrefID = hashpattern[2];
+							getDashboardJSON(gPrefID);
 						
                         //    $.getJSON(hashpattern[2], function(data, status) {
 						//		console.log(status);
@@ -81,7 +76,7 @@ function SaveDashboardToServer(blob)
 
 	var devicedataurl;
 	
-    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_savedashboardjson?userid=" + gUserID + "&json=" + blob;
+    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_savedashboardjson?prefuid=" + gPrefID;
 	
 				return $.ajax({
 			//async: false,

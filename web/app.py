@@ -726,7 +726,7 @@ def getdashboardlists(userid):
 
         cursor.execute("select prefuid, prefname  from dashboard_prefs where userid = %s" , (userid,))
 
-        log.info("freeboard getdashboardlists response %s", cursor)            
+        #log.info("freeboard getdashboardlists response %s", cursor)            
 
         # see we got any matches
         if cursor.rowcount == 0:
@@ -948,6 +948,29 @@ def events_endpoint(device_id, partition):
     log.info('freeboard: Error in geting  deviceid %s:  ', device_id)
     e = sys.exc_info()[0]
     log.info('freeboard: Error in geting deviceid  %s:  ' % str(e))
+
+
+  
+@app.route('/freeboard_savedashboardjson' , methods=['POST'])
+@cross_origin()
+def freeboard_savedashboardjson():
+  conn = db_pool.getconn()
+  
+  prefuid = request.args.get('prefuid',1)
+  log.info('freeboard_savedashboardjson: prefuid  %s:  ', prefuid)
+
+  
+  mymessage = json.loads(request.data)
+
+  log.info('freeboard_savedashboardjson: json data  %s:  ', mymessage)
+
+
+
+
+  db_pool.putconn(conn)
+
+
+  return jsonify(result="OK")  
   
 
 @app.route('/freeboard_getdashboardjson')
