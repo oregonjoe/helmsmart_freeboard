@@ -578,13 +578,14 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		
 			//var blob = new Blob([JSON.stringify(self.serialize())], {'type': contentType});
 			var blob = new Blob([JSON.stringify(self.serialize(), null, '\t')], {'type': contentType});
-			var myjson = JSON.stringify(self.serialize(), null, '\t');
+			var myjsonstring = JSON.stringify(self.serialize(), null, '\t');
+			var myjson = self.serialize();
 			//var devicedataurl;
 	
 			//devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_getdashboardjson?prefuid=" + prefuid;
 
 
-			SaveDashboardToServer(blob);
+			SaveDashboardToServer(myjson);
 	
 			
 			
