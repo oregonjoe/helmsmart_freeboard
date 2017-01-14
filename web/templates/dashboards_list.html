@@ -84,20 +84,23 @@ function handlegetDashboardLists(response)
 			cell0.innerHTML = myCellText;
 			cell0.style.textAlign = 'left';
 			
-			myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" style="width:100px" >';
+			myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" style="width:80px" >';
 			var cell1 = row.insertCell(1);
 			cell1.innerHTML = myCellText;
 			cell1.style.textAlign = 'left';
+			cell1.style.width = '90px';
 			
-			myCellText =  '<input type="button" value="Delete" class="btn btn-default btn-sm btn-details" style="width:100px" >';
+			myCellText =  '<input type="button" value="Delete" class="btn btn-default btn-sm btn-details" style="width:80px" >';
 			var cell2 = row.insertCell(2);
 			cell2.innerHTML = myCellText;
-			cell2.style.textAlign = 'left';			
+			cell2.style.textAlign = 'left';	
+			cell2.style.width = '90px';			
 			
-			myCellText =  '<input type="button" value="Share" class="btn btn-default btn-sm btn-details" style="width:100px" >';
+			myCellText =  '<input type="button" value="Share" class="btn btn-default btn-sm btn-details" style="width:80px" >';
 			var cell3 = row.insertCell(3);
 			cell3.innerHTML = myCellText;
-			cell3.style.textAlign = 'left';		
+			cell3.style.textAlign = 'left';	
+			cell3.style.width = '90px';			
 			
 			
 		});

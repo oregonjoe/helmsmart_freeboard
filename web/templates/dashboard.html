@@ -82,6 +82,37 @@ function SaveDashboardToServer(blob)
 	var devicedataurl;
 	
     devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_savedashboardjson?userid=" + gUserID + "&json=" + blob;
+	
+				return $.ajax({
+			//async: false,
+			type: 'POST',
+			data: blob,
+			cache: false,
+			url: devicedataurl,
+			dataType: "json",
+			timeout: 30000,
+			statusCode: {
+			404: function() {      alert( "page not found" );    },
+			200: function() {      }
+			},
+			success: function(response) {
+			console.log(response);
+			},
+			complete: function() {
+			// unblock when remote call returns
+			// document.getElementById("SearchStatus").innerHTML = "Search Complete";
+			//   ShowGraphSmartChart(gindex);
+				console.log('completed');
+			//$.unblockUI();
+			},
+			error: function(request,status,errorThrown) {
+			
+			console.log(status);
+			console.log(errorThrown);
+			//document.getElementById("SearchStatus").innerHTML = "Search Error";
+			//$.unblockUI();
+			}
+			});
 
 }
 	
