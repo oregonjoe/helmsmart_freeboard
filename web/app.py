@@ -740,7 +740,7 @@ def getdashboardlists(userid):
 
           log.info("freeboard getdashboardlists response %s", preferences)     
           db_pool.putconn(conn) 
-          return {'preferences':preferences} 
+          return preferences
 
 
     except TypeError, e:
@@ -983,7 +983,7 @@ def freeboard_getdashboardlist():
   log.info("freeboard_GetDashboardJSON prefuid %s -> %s", userid, dashboardlists)
 
 
-  return dashboardlists  
+  return jsonify({'preferences':dashboardlists})
   #  result = json.dumps(r, cls=DateEncoder)
 
   #response = make_response(dashboardlists)
