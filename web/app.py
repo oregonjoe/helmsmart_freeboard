@@ -972,10 +972,37 @@ def freeboard_savedashboardjson():
     
     return jsonify(result="OK")  
 
+
+  except psycopg2.ProgrammingError, e:
+    log.info('freeboard_savedashboardjson: ProgrammingError in  update pref %s:  ', prefuid)
+    log.info('freeboard_savedashboardjson: ProgrammingError in  update pref  %s:  ' % str(e))
+    return jsonify(result="ProgrammingError error")
+  
+  except TypeError, e:
+    log.info('freeboard_savedashboardjson: TypeError in  update pref %s:  ', prefuid)
+    log.info('freeboard_savedashboardjson: TypeError in  update pref  %s:  ' % str(e))
+
+  except ValueError, e:
+    log.info('freeboard_savedashboardjson: ValueError in  update pref  %s:  ', prefuid)
+    log.info('freeboard_savedashboardjson: ValueError in  update pref %s:  ' % str(e))
+    
+  except KeyError, e:
+    log.info('freeboard_savedashboardjson: KeyError in  update pref  %s:  ', prefuid)
+    log.info('freeboard_savedashboardjson: KeyError in  update pref  %s:  ' % str(e))
+
+  except NameError, e:
+    log.info('freeboard_savedashboardjson: NameError in  update pref  %s:  ', prefuid)
+    log.info('freeboard_savedashboardjson: NameError in  update pref %s:  ' % str(e))
+        
+  except IndexError, e:
+    log.info('freeboard_savedashboardjson: IndexError in  update pref  %s:  ', prefuid)
+    log.info('freeboard_savedashboardjson: IndexError in  update pref  %s:  ' % str(e))  
+
+
   except:
     e = sys.exc_info()[0]
     log.info('freeboard_savedashboardjson: Error in update pref  %s:  ' % str(e))
-
+    return jsonify(result="error") 
 
   
   finally:
