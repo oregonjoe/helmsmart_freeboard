@@ -206,17 +206,7 @@ function getDashboardJSON(prefuid)
         <i id="toggle-header-icon" class="icon-wrench icon-white"></i></div>
 </header>
 
-<div>
-  <center>
-  {% if session['userid'] %}
-     <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list" id="login" class="persona-button">
-    <span>HelmSmart: {{session['username']}}</span></a>
-  {% else %}
-    <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list" id="login" class="persona-button">
-      <span>HelmSmart: Guest</span></a>
-  {% endif %}
-  </center>
-</div>
+
 
 
 <div style="display:hidden">
@@ -263,6 +253,18 @@ function getDashboardJSON(prefuid)
 <div >
 </div>
 <div class="footer">
+<div>
+  <center>
+  {% if session['userid'] %}
+     <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list" id="login" class="persona-button">
+    <span>HelmSmart: {{session['username']}}</span></a>
+  {% else %}
+    <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list" id="login" class="persona-button">
+      <span>HelmSmart: Guest</span></a>
+  {% endif %}
+  </center>
+</div>
+
 <div class="container">
 <div class="inner">
 <center>
