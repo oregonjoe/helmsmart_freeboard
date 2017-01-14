@@ -550,6 +550,7 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		var pretty = $(event.currentTarget).data('pretty');
 		var contentType = 'application/octet-stream';
 		var a = document.createElement('a');
+		/*
 		if(pretty){
 			var blob = new Blob([JSON.stringify(self.serialize(), null, '\t')], {'type': contentType});
 		}else{
@@ -560,6 +561,40 @@ function FreeboardModel(datasourcePlugins, widgetPlugins, freeboardUI)
 		a.download = "dashboard.json";
 		a.target="_self";
 		a.click();
+		*/
+		
+		// save to local file
+		if(pretty){
+			var blob = new Blob([JSON.stringify(self.serialize(), null, '\t')], {'type': contentType});
+		
+				document.body.appendChild(a);
+				a.href = window.URL.createObjectURL(blob);
+				a.download = "dashboard.json";
+				a.target="_self";
+				a.click();
+		
+		}
+		else{// save to server
+		
+			//var blob = new Blob([JSON.stringify(self.serialize())], {'type': contentType});
+			var blob = new Blob([JSON.stringify(self.serialize(), null, '\t')], {'type': contentType});
+			
+			//var devicedataurl;
+	
+			//devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_getdashboardjson?prefuid=" + prefuid;
+
+
+			SaveDashboardToServer(blob);
+	
+			
+			
+		}
+		
+		
+		
+		
+		
+		
 	}
 
 	this.addDatasource = function(datasource)
