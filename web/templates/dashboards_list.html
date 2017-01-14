@@ -73,9 +73,9 @@ function handlegetDashboardLists(response)
 	}
 	
 	 mydata.forEach(function(row){
-		myMessage = JSON.parse(row[1]);
-		myPrefName = myMessage.prefname;
-		myPrefID = myMessage.prefuid;
+		//myMessage = JSON.parse(row[1]);
+		myPrefName = row.prefname;
+		myPrefID = row.prefuid;
 		
 		
 		});
