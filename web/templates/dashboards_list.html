@@ -58,8 +58,27 @@
 function handlegetDashboardLists(response)
 {
 
-mydata = response;
+	var myPrefID;
+	var myPrefName;
+	
+	
+	mydata = response.preferences;;
 
+	var table = document.getElementById("ReportData");
+ 
+    var rowCount = table.rows.length;
+	   	
+	while(table.rows.length > 1) {
+		table.deleteRow(1);
+	}
+	
+	 mydata.forEach(function(row){
+		myMessage = JSON.parse(row[1]);
+		myPrefName = myMessage.prefname;
+		myPrefID = myMessage.prefuid;
+		
+		
+		});
 
 
 }		
@@ -154,7 +173,7 @@ function getDashboardLists(userid)
 		<div class="row">
 			<div class="col-xs-12">
 				<div id="results-table">
-				<table class="table table-striped">
+				<table class="table table-striped" id="ReportData">
 				<tbody id="results-rows">
 				<tr>
 				<td><a href="https://helmsmart-freeboard.herokuapp.com/dashboard">Name 1</a></td><td class="private-status"></td>
