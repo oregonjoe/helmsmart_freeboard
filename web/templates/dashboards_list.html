@@ -68,7 +68,7 @@ function handlegetDashboardLists(response)
  
     var rowCount = table.rows.length;
 	   	
-	while(table.rows.length > 1) {
+	while(table.rows.length > 0) {
 		table.deleteRow(1);
 	}
 	
@@ -188,6 +188,7 @@ function getDashboardLists(userid)
 				<div id="results-table">
 				<table class="table table-striped" id="ReportData">
 				<tbody id="results-rows">
+				<!--
 				<tr>
 				<td><a href="https://helmsmart-freeboard.herokuapp.com/dashboard">Name 1</a></td><td class="private-status"></td>
 				<td class="text-right"><input type="button" value="Edit" class="btn btn-default btn-sm btn-details"></td>
@@ -196,6 +197,7 @@ function getDashboardLists(userid)
 				<td><a href="https://helmsmart-freeboard.herokuapp.com/dashboard">Name 2</a></td><td class="private-status"></td>
 				<td class="text-right"><input type="button" value="Edit" class="btn btn-default btn-sm btn-details"></td>
 				</tr>
+				-->
 				</table>
 				</div>
 			</div>
