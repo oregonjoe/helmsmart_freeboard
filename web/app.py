@@ -983,13 +983,13 @@ def freeboard_getdashboardlist():
   log.info("freeboard_GetDashboardJSON prefuid %s -> %s", userid, dashboardlists)
 
 
-  #return dashboardjson  
+  return dashboardlists  
   #  result = json.dumps(r, cls=DateEncoder)
 
-  response = make_response(dashboardlists)
-  response.headers['Cache-Control'] = 'public, max-age=0'
-  response.headers['content-type'] = "application/json"
-  return response
+  #response = make_response(dashboardlists)
+  #response.headers['Cache-Control'] = 'public, max-age=0'
+  #response.headers['content-type'] = "application/json"
+  #return response
 
 
 
