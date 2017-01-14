@@ -964,8 +964,9 @@ def freeboard_savedashboardjson():
   #mymessage = json.loads(request.data)
   log.info('freeboard_savedashboardjson: json data  %s:  ', mymessage)
 
-
-
+  sqlstr = " update dashboard_prefs SET jsondata ='%s' where  prefuid = '%s';" 
+  cursor.execute(sqlstr, (mymessage, prefuid, ))   
+  conn.commit()
 
   db_pool.putconn(conn)
 
