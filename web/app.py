@@ -965,7 +965,7 @@ def freeboard_savedashboardjson():
 
   try:
     cursor = conn.cursor()
-    sqlstr = " update dashboard_prefs SET jsondata ='%s' where  prefuid = '%s';" 
+    sqlstr = " update dashboard_prefs SET jsondata =%s where  prefuid = %s;" 
     cursor.execute(sqlstr, (mymessage, prefuid, ))   
     conn.commit()
     
