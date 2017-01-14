@@ -76,7 +76,7 @@ var gPrefID="";
 function SaveDashboardToServer(blob)
 {
         $.blockUI({ 
-     message: '<h1>Search in progress...</h1>',    
+     message: '<h1>Saving Dashboard...</h1>',    
      css: {             
      border: 'none',             
      padding: '15px',             
@@ -137,14 +137,16 @@ mydata = response;
 	freeboard.loadDashboard(mydata, function() {
         freeboard.setEditing(false);
 		 });
+		 
+	  $.unblockUI();	 
 
 }		
 
 function getDashboardJSON(prefuid)
 {
-/*
+
         $.blockUI({ 
-     message: '<h1>Search in progress...</h1>',    
+     message: '<h1>Loading Dashboard...</h1>',    
      css: {             
      border: 'none',             
      padding: '15px',             
@@ -155,7 +157,7 @@ function getDashboardJSON(prefuid)
      opacity: .5,             
      color: '#fff'         
      } }); 
-*/
+
 
 	var devicedataurl;
 	
@@ -186,7 +188,7 @@ function getDashboardJSON(prefuid)
 	console.log(status);
 	console.log(errorThrown);
     //document.getElementById("SearchStatus").innerHTML = "Search Error";
-    //$.unblockUI();
+    $.unblockUI();
     }
     });
 
