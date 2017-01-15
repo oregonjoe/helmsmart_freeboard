@@ -1008,6 +1008,68 @@ def freeboard_savedashboardjson():
     db_pool.putconn(conn)
 
     
+@app.route('/freeboard_addnewdashboard')
+@cross_origin()
+def freeboard_addnewdashboard():
+  conn = db_pool.getconn()
+  
+  userid = request.args.get('userid',1)
+  useremail = request.args.get('useremail',1)
+  prefname = request.args.get('prefname',1)
+
+  
+  log.info('freeboard_addnewdashboard: userid  %s:  ', userid)
+  log.info('freeboard_addnewdashboard: useremail  %s:  ', useremail)
+  log.info('freeboard_addnewdashboard: userid  %s:  ', prefname)
+  
+
+
+  try:
+    cursor = conn.cursor()
+    #sqlstr = " update dashboard_prefs SET jsondata =%s where  prefuid = %s;" 
+    #cursor.execute(sqlstr, (mymessage, userid, ))   
+    #conn.commit()
+    
+    return jsonify(result="OK")  
+
+
+  except psycopg2.ProgrammingError, e:
+    log.info('freeboard_addnewdashboard: ProgrammingError in  update pref %s:  ', userid)
+    log.info('freeboard_addnewdashboard: ProgrammingError in  update pref  %s:  ' % str(e))
+    return jsonify(result="ProgrammingError error")
+  
+  except TypeError, e:
+    log.info('freeboard_addnewdashboard: TypeError in  update pref %s:  ', userid)
+    log.info('freeboard_addnewdashboard: TypeError in  update pref  %s:  ' % str(e))
+
+  except ValueError, e:
+    log.info('freeboard_addnewdashboard: ValueError in  update pref  %s:  ', userid)
+    log.info('freeboard_addnewdashboard: ValueError in  update pref %s:  ' % str(e))
+    
+  except KeyError, e:
+    log.info('freeboard_addnewdashboard: KeyError in  update pref  %s:  ', userid)
+    log.info('freeboard_addnewdashboard: KeyError in  update pref  %s:  ' % str(e))
+
+  except NameError, e:
+    log.info('freeboard_addnewdashboard: NameError in  update pref  %s:  ', userid)
+    log.info('freeboard_addnewdashboard: NameError in  update pref %s:  ' % str(e))
+        
+  except IndexError, e:
+    log.info('freeboard_addnewdashboard: IndexError in  update pref  %s:  ', userid)
+    log.info('freeboard_addnewdashboard: IndexError in  update pref  %s:  ' % str(e))  
+
+
+  except:
+    e = sys.exc_info()[0]
+    log.info('freeboard_addnewdashboard: Error in update pref  %s:  ' % str(e))
+    return jsonify(result="error") 
+
+  
+  finally:
+    db_pool.putconn(conn)
+
+
+    
 @app.route('/freeboard_getdashboardjson')
 @cross_origin()
 def freeboard_getdashboardjson():
@@ -1091,6 +1153,21 @@ def freeboard():
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '-1'
     return response
+
+@app.route('/dashboards')
+@cross_origin()
+def dashboards():
+
+
+
+    response = make_response(render_template('dashboards.html', features = []))
+    #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    #response.headers['Cache-Control'] = 'public, no-cache, no-store, max-age=0'
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '-1'
+    return response
+  
 
 @app.route('/dashboard')
 @login_required

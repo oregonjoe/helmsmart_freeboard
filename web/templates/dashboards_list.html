@@ -25,17 +25,19 @@
 <link href="{{ url_for('static', filename='css/freeboard.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/freeboard.thirdparty.min.js') }}"></script> -->
 <script type="text/javascript" src="{{ url_for('static', filename='js/freeboard.thirdparty.js') }}"></script>
-
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery_blockUI.js') }}"></script>
 
 	
     <script type="text/javascript">
-		var gUserID="a91140300971bfb9244989a9bffde53c";
+		var gUserID= "";
+		var gUseremail = ""
 	
 	$(document).ready(function () {
 	
 	   gUserID = "0";
     {% if session['userid'] %}
     gUserID = "{{session['userid']}}";
+	gUseremail = "{{session['username']}}";
     {% else %}
     gUserID = "0";
     {% endif %}
@@ -53,7 +55,64 @@
 	
 	}); 
 	
+function handleaddnewboard()
+{
+ $.unblockUI();
+}	
+	
+function addnewboard()
+{
 
+
+        $.blockUI({ 
+     message: '<h1>Search in progress...</h1>',    
+     css: {             
+     border: 'none',             
+     padding: '15px',             
+     backgroundColor: '#000', 
+        
+     '-webkit-border-radius': '10px',             
+     '-moz-border-radius': '10px',             
+     opacity: .5,             
+     color: '#fff'         
+     } }); 
+
+
+	var devicedataurl;
+	var prefname = document.getElementById("freeboardName").value;
+	
+    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_adddashboard?userid=" + userid + "&useremail=" + gUseremail + "&prefname=" + prefname;
+
+    return $.ajax({
+    //async: false,
+    cache: false,
+    url: devicedataurl,
+    dataType: "json",
+    timeout: 30000,
+    statusCode: {
+    404: function() {      alert( "page not found" );    },
+    200: function() {      }
+    },
+    success: function(response) {
+    handleaddnewboard(response)
+    },
+    complete: function() {
+    // unblock when remote call returns
+    // document.getElementById("SearchStatus").innerHTML = "Search Complete";
+    //   ShowGraphSmartChart(gindex);
+		console.log('completed');
+    //$.unblockUI();
+    },
+    error: function(request,status,errorThrown) {
+	
+	console.log(status);
+	console.log(errorThrown);
+    //document.getElementById("SearchStatus").innerHTML = "Search Error";
+    $.unblockUI();
+    }
+    });
+
+}
 				
 function handlegetDashboardLists(response)
 {
@@ -61,6 +120,7 @@ function handlegetDashboardLists(response)
 	var myPrefID;
 	var myPrefName;
 	
+	 $.unblockUI();
 	
 	mydata = response.preferences;;
 
@@ -110,9 +170,9 @@ function handlegetDashboardLists(response)
 
 function getDashboardLists(userid)
 {
-/*
+
         $.blockUI({ 
-     message: '<h1>Search in progress...</h1>',    
+     message: '<h1>Getting DashBoards ...</h1>',    
      css: {             
      border: 'none',             
      padding: '15px',             
@@ -123,7 +183,7 @@ function getDashboardLists(userid)
      opacity: .5,             
      color: '#fff'         
      } }); 
-*/
+
 
 	var devicedataurl;
 	
@@ -154,7 +214,7 @@ function getDashboardLists(userid)
 	console.log(status);
 	console.log(errorThrown);
     //document.getElementById("SearchStatus").innerHTML = "Search Error";
-    //$.unblockUI();
+    $.unblockUI();
     }
     });
 
@@ -187,7 +247,7 @@ function getDashboardLists(userid)
 					<div class="page-header">
 						<form method="post" action="/board/new" class="form-inline pull-right">
 							<div class="input-group"><input id="freeboardName" name="freeboardName" type="text" placeholder="enter a name" class="form-control">
-								<button id="create-new-btn" type="submit" class="btn btn-primary btn-add">Create New</button>
+								<button id="create-new-btn" type="submit" class="btn btn-primary btn-add" onclick="addnewboard();">Create New</button>
 							</div>
 						</form>
 						<h1>HelmSmart DashBoards</h1>
