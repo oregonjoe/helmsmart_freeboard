@@ -100,6 +100,8 @@ from flask_stormpath import StormpathManager, User, login_required, login_user, 
 from stormpath.error import Error as StormpathError
 from os import environ
 
+app.secret_key = = environ.get('SECRET_KEY')
+
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['STORMPATH_API_KEY_ID'] = environ.get('STORMPATH_API_KEY_ID')
 app.config['STORMPATH_API_KEY_SECRET'] = environ.get('STORMPATH_API_KEY_SECRET')
@@ -126,7 +128,10 @@ stormpath_manager = StormpathManager()
 stormpath_manager.init_app(app)
 
 
-
+def hash_string(string):
+    #salted_hash = string + application.config['SECRET_KEY']
+    salted_hash = string + app.secret_key
+    return md5.new(salted_hash).hexdigest()
 
 
 #Convert Units between US and Metric
@@ -1022,7 +1027,8 @@ def freeboard_addnewdashboard():
   log.info('freeboard_addnewdashboard: useremail  %s:  ', useremail)
   log.info('freeboard_addnewdashboard: prefname  %s:  ', prefname)
   
-
+  prefuid=hash_string(useremail+prefname)
+  log.info('freeboard_addnewdashboard: prefname  %s:  ', prefuid)
 
   try:
     cursor = conn.cursor()
