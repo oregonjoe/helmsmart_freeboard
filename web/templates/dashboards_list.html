@@ -81,7 +81,7 @@ function addnewboard()
 	var devicedataurl;
 	var prefname = document.getElementById("freeboardName").value;
 	
-    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_adddashboard?userid=" + gUserID + "&useremail=" + gUseremail + "&prefname=" + prefname;
+    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_addnewdashboard?userid=" + gUserID + "&useremail=" + gUseremail + "&prefname=" + prefname;
 
     return $.ajax({
     //async: false,
