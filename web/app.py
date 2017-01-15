@@ -1020,7 +1020,7 @@ def freeboard_addnewdashboard():
   
   log.info('freeboard_addnewdashboard: userid  %s:  ', userid)
   log.info('freeboard_addnewdashboard: useremail  %s:  ', useremail)
-  log.info('freeboard_addnewdashboard: userid  %s:  ', prefname)
+  log.info('freeboard_addnewdashboard: prefname  %s:  ', prefname)
   
 
 
