@@ -100,7 +100,7 @@ from flask_stormpath import StormpathManager, User, login_required, login_user, 
 from stormpath.error import Error as StormpathError
 from os import environ
 
-app.secret_key = = environ.get('SECRET_KEY')
+app.secret_key = environ.get('SECRET_KEY')
 
 app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 app.config['STORMPATH_API_KEY_ID'] = environ.get('STORMPATH_API_KEY_ID')
