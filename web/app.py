@@ -1022,6 +1022,7 @@ def freeboard_addnewdashboard():
   useremail = request.args.get('useremail',1)
   prefname = request.args.get('prefname',1)
 
+  defaultjson = {"version": 1,"allow_edit": true}
   
   log.info('freeboard_addnewdashboard: userid  %s:  ', userid)
   log.info('freeboard_addnewdashboard: useremail  %s:  ', useremail)
@@ -1033,9 +1034,9 @@ def freeboard_addnewdashboard():
   try:
     cursor = conn.cursor()
     
-    sqlstr = " insert into dashboard_prefs (prefuid, userid, useremail, prefname) Values (%s,%s,%s,%s);"
+    sqlstr = " insert into dashboard_prefs (prefuid, userid, useremail, prefname, jsondata ) Values (%s,%s,%s,%s,%s);"
                                                                                     
-    cursor.execute(sqlstr, (prefuid, userid, useremail, prefname ))   
+    cursor.execute(sqlstr, (prefuid, userid, useremail, prefname, defaultjson))   
     conn.commit()
     
     return jsonify(result="OK")  
