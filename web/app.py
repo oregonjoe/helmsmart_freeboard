@@ -1022,7 +1022,7 @@ def freeboard_addnewdashboard():
   useremail = request.args.get('useremail',1)
   prefname = request.args.get('prefname',1)
 
-  defaultjson = {"version": 1,"allow_edit": true}
+  defaultjson = '{"version": 1,"allow_edit": true}'
   
   log.info('freeboard_addnewdashboard: userid  %s:  ', userid)
   log.info('freeboard_addnewdashboard: useremail  %s:  ', useremail)
