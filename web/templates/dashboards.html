@@ -73,61 +73,7 @@ var gPrefID="";
                     });
                 });
 	
-function SaveDashboardToServer(blob)
-{
-        $.blockUI({ 
-     message: '<h1>Saving Dashboard...</h1>',    
-     css: {             
-     border: 'none',             
-     padding: '15px',             
-     backgroundColor: '#000', 
-        
-     '-webkit-border-radius': '10px',             
-     '-moz-border-radius': '10px',             
-     opacity: .5,             
-     color: '#fff'         
-     } }); 
-	 
-	 
-	var devicedataurl;
-	
-    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_savedashboardjson?prefuid=" + gPrefID;
-	
-				return $.ajax({
-			//async: false,
-			type: 'POST',
-			data: JSON.stringify(blob, null, '\t'),
-			cache: false,
-			url: devicedataurl,
-			dataType: "text",
-			contentType: 'application/text', // set to whatever you like
-			processData: false,
-			timeout: 30000,
-			statusCode: {
-			404: function() {      alert( "page not found" );    },
-			200: function() {      }
-			},
-			success: function(response) {
-			console.log(response);
-			$.unblockUI();
-			},
-			complete: function() {
-			// unblock when remote call returns
-			// document.getElementById("SearchStatus").innerHTML = "Search Complete";
-			//   ShowGraphSmartChart(gindex);
-				console.log('completed');
-			//$.unblockUI();
-			},
-			error: function(request,status,errorThrown) {
-			
-			console.log(status);
-			console.log(errorThrown);
-			//document.getElementById("SearchStatus").innerHTML = "Search Error";
-			$.unblockUI();
-			}
-			});
 
-}
 	
 function handlegetDashboardJSON(response)
 {
@@ -325,6 +271,7 @@ function getDashboardJSON(prefuid)
 <div >
 </div>
 <div class="footer">
+<!--
 <div>
   <center>
   {% if session['userid'] %}
@@ -336,6 +283,7 @@ function getDashboardJSON(prefuid)
   {% endif %}
   </center>
 </div>
+-->
 
 <div class="container">
 <div class="inner">
