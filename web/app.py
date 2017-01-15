@@ -1028,13 +1028,15 @@ def freeboard_addnewdashboard():
   log.info('freeboard_addnewdashboard: prefname  %s:  ', prefname)
   
   prefuid=hash_string(useremail+prefname)
-  log.info('freeboard_addnewdashboard: prefname  %s:  ', prefuid)
+  log.info('freeboard_addnewdashboard: prefuid  %s:  ', prefuid)
 
   try:
     cursor = conn.cursor()
-    #sqlstr = " update dashboard_prefs SET jsondata =%s where  prefuid = %s;" 
-    #cursor.execute(sqlstr, (mymessage, userid, ))   
-    #conn.commit()
+    
+    sqlstr = " insert into dashboard_prefs (prefuid, userid, useremail, prefname) Values (%s,%s,%s,%s);"
+                                                                                    
+    cursor.execute(sqlstr, (prefuid, userid, useremail, prefname ))   
+    conn.commit()
     
     return jsonify(result="OK")  
 
