@@ -72,6 +72,17 @@
 //    document
 //        .getElementById('popup-clickie')
 //        .addEventListener('click', showPopup);
+
+function shareboard(sel)
+{
+
+	var prefuid = sel.name;
+	prefuid =  sel.name.replace("Share-", "");
+	
+	var url = "https://helmsmart-freeboard.herokuapp.com/dashboards?prefuid=" + prefuid ;
+	
+	window.location.href = url;
+}
 function deleteboard(sel)
 {
 
@@ -305,7 +316,7 @@ function handlegetDashboardLists(response)
 			cell2.style.textAlign = 'left';	
 			cell2.style.width = '90px';			
 			
-			myCellText =  '<input type="button" value="Share"  name="Share-' + myButtonID + '" class="btn btn-default btn-sm btn-details" style="width:80px" >';
+			myCellText =  '<input type="button" value="Share"  name="Share-' + myButtonID + '" class="btn btn-default btn-sm btn-details" onclick="shareboard(this);" style="width:80px" >';
 			var cell3 = row.insertCell(3);
 			cell3.innerHTML = myCellText;
 			cell3.style.textAlign = 'left';	
