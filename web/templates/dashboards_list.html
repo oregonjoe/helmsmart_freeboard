@@ -27,6 +27,12 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/freeboard.thirdparty.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery_blockUI.js') }}"></script>
 
+<style>
+    #popup-form {
+        display: none;
+        position: absolute;
+    }
+</style>
 	
     <script type="text/javascript">
 		var gUserID= "";
@@ -54,6 +60,29 @@
     }
 	
 	}); 
+	
+	
+	 var showPopup = function(event) {
+        event.preventDefault();
+        document
+            .getElementById('popup-form')
+            .style.display = 'block';
+    };
+
+//    document
+//        .getElementById('popup-clickie')
+//        .addEventListener('click', showPopup);
+		
+function editboardname()
+{
+	var myname = document.getElementById("EditName").value;
+}		
+function editboard(boardname)
+{
+
+	showPopup();
+
+}		
 	
 function handleaddnewboard()
 {
@@ -144,7 +173,7 @@ function handlegetDashboardLists(response)
 			cell0.innerHTML = myCellText;
 			cell0.style.textAlign = 'left';
 			
-			myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" style="width:80px" >';
+			myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(row.prefname); style="width:80px" >';
 			var cell1 = row.insertCell(1);
 			cell1.innerHTML = myCellText;
 			cell1.style.textAlign = 'left';
@@ -279,6 +308,14 @@ function getDashboardLists(userid)
 
 <script type="text/javascript" src="{{ url_for('static', filename='layouts/core.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery_blockUI.js') }}"></script>
+	
+	<div id="popup-form">
+  		<form method="get" action="" class="form-inline pull-right"> 
+				<div class="input-group"><input id="EditName" name="EditName" type="text" placeholder="enter a name" class="form-control">
+					<button id="create-new-btn" type="submit" class="btn btn-primary btn-add" onclick="editboardname();">Edit Name</button>
+				</div>
+		</form>
+	</div>
 	
 <div >
 </div>
