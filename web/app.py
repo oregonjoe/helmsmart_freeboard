@@ -1012,6 +1012,69 @@ def freeboard_savedashboardjson():
   finally:
     db_pool.putconn(conn)
 
+@app.route('/freeboard_deletedashboard')
+@cross_origin()
+def freeboard_deletedashboard():
+  conn = db_pool.getconn()
+  
+
+  prefuid = request.args.get('prefuid',1)
+
+
+
+  log.info('freeboard_deletedashboard: prefuid  %s:  ', prefuid)
+  
+
+
+  try:
+    cursor = conn.cursor()
+    
+    sqlstr = "delete from dashboard_prefs where prefuid = %s;"
+                                                                                    
+    cursor.execute(sqlstr, (prefuid,))   
+    conn.commit()
+    
+    return jsonify(result="OK")  
+
+
+  except psycopg2.ProgrammingError, e:
+    log.info('freeboard_deletedashboard: ProgrammingError in  edit pref %s:  ', prefuid)
+    log.info('freeboard_deletedashboard: ProgrammingError in  edit pref  %s:  ' % str(e))
+    return jsonify(result="ProgrammingError error")
+  
+  except TypeError, e:
+    log.info('freeboard_editdashboard: TypeError in  edit pref %s:  ', prefuid)
+    log.info('freeboard_editdashboard: TypeError in  edit pref  %s:  ' % str(e))
+
+  except ValueError, e:
+    log.info('freeboard_deletedashboard: ValueError in  edit pref  %s:  ', prefuid)
+    log.info('freeboard_deletedashboard: ValueError in  edit pref %s:  ' % str(e))
+    
+  except KeyError, e:
+    log.info('freeboard_deletedashboard: KeyError in  edit pref  %s:  ', prefuid)
+    log.info('freeboard_deletedashboard: KeyError in  edit pref  %s:  ' % str(e))
+
+  except NameError, e:
+    log.info('freeboard_deletedashboard: NameError in  edit pref  %s:  ', prefuid)
+    log.info('freeboard_deletedashboard: NameError in  edit pref %s:  ' % str(e))
+        
+  except IndexError, e:
+    log.info('freeboard_deletedashboard: IndexError in  edit pref  %s:  ', prefuid)
+    log.info('freeboard_deletedashboard: IndexError in  edit pref  %s:  ' % str(e))  
+
+
+  except:
+    e = sys.exc_info()[0]
+    log.info('freeboard_deletedashboard: Error in edit pref  %s:  ' % str(e))
+    return jsonify(result="error") 
+
+  
+  finally:
+    db_pool.putconn(conn)
+
+
+    
+
 @app.route('/freeboard_editdashboard')
 @cross_origin()
 def freeboard_editdashboard():
@@ -1074,6 +1137,7 @@ def freeboard_editdashboard():
   
   finally:
     db_pool.putconn(conn)
+
 
 
     

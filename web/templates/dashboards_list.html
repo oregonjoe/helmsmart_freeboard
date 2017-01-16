@@ -72,14 +72,72 @@
 //    document
 //        .getElementById('popup-clickie')
 //        .addEventListener('click', showPopup);
-		
+function deleteboad(sel)
+{
+
+	var prefuid = sel.name;
+	prefuid =  sel.name.replace("Delete-", "");
+	
+	        $.blockUI({ 
+     message: '<h1>Delete in progress...</h1>',    
+     css: {             
+     border: 'none',             
+     padding: '15px',             
+     backgroundColor: '#000', 
+        
+     '-webkit-border-radius': '10px',             
+     '-moz-border-radius': '10px',             
+     opacity: .5,             
+     color: '#fff'         
+     } }); 
+
+
+	var devicedataurl;
+	var prefname = document.getElementById("freeboardName").value;
+	
+    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_deletedashboard?prefuid=" + prefuid ;
+
+    return $.ajax({
+    //async: false,
+    cache: false,
+    url: devicedataurl,
+    dataType: "json",
+    timeout: 30000,
+    statusCode: {
+    404: function() {      alert( "page not found" );    },
+    200: function() {      }
+    },
+    success: function(response) {
+    $.unblockUI();
+    },
+    complete: function() {
+    // unblock when remote call returns
+    // document.getElementById("SearchStatus").innerHTML = "Search Complete";
+    //   ShowGraphSmartChart(gindex);
+		console.log('completed');
+    //$.unblockUI();
+    },
+    error: function(request,status,errorThrown) {
+	
+	console.log(status);
+	console.log(errorThrown);
+    //document.getElementById("SearchStatus").innerHTML = "Search Error";
+    $.unblockUI();
+    }
+    });
+	
+	
+	
+}	
+
+	
 function editboardname()
 {
 	var newname = document.getElementById("EditName").value;
 	var prefuid = document.getElementById("EditBoardID").value;
 	
 	        $.blockUI({ 
-     message: '<h1>Search in progress...</h1>',    
+     message: '<h1>Update in progress...</h1>',    
      css: {             
      border: 'none',             
      padding: '15px',             
@@ -128,7 +186,9 @@ function editboardname()
 	
 	
 	
-}		
+}	
+
+	
 function editboard(sel)
 {
 
@@ -232,20 +292,20 @@ function handlegetDashboardLists(response)
 			
 			//myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(f34583d42595de730af418a063e9c31a)"; style="width:80px" >';
 		//	myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(this)"; style="width:80px" >';
-			myCellText =  '<input type="button" value = "Edit" name="' + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this)"; style="width:80px" >';
+			myCellText =  '<input type="button" value = "Edit" name="' + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this);" style="width:80px" >';
 			//myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(' + myPrefID +')"; style="width:80px" >';
 			var cell1 = row.insertCell(1);
 			cell1.innerHTML = myCellText;
 			cell1.style.textAlign = 'left';
 			cell1.style.width = '90px';
 			
-			myCellText =  '<input type="button" value="Delete" class="btn btn-default btn-sm btn-details" style="width:80px" >';
+			myCellText =  '<input type="button" value="Delete" name=Delete-"' + myButtonID + '"class="btn btn-default btn-sm btn-details" onclick="deleteboard(this);" style="width:80px" >';
 			var cell2 = row.insertCell(2);
 			cell2.innerHTML = myCellText;
 			cell2.style.textAlign = 'left';	
 			cell2.style.width = '90px';			
 			
-			myCellText =  '<input type="button" value="Share" class="btn btn-default btn-sm btn-details" style="width:80px" >';
+			myCellText =  '<input type="button" value="Share"  name=Share-"' + myButtonID + '" class="btn btn-default btn-sm btn-details" style="width:80px" >';
 			var cell3 = row.insertCell(3);
 			cell3.innerHTML = myCellText;
 			cell3.style.textAlign = 'left';	
@@ -338,7 +398,7 @@ function getDashboardLists(userid)
 			<div class="col-xs-12">
 				<div id="header">
 					<div class="page-header">
-						<form method="get" action="" class="form-inline pull-right"> 
+						<form method="get" action='?' class="form-inline pull-right"> 
 							<div class="input-group"><input id="freeboardName" name="freeboardName" type="text" placeholder="enter a name" class="form-control">
 								<button id="create-new-btn" type="submit" class="btn btn-primary btn-add" onclick="addnewboard();">Create New</button>
 							</div>
@@ -382,6 +442,9 @@ function getDashboardLists(userid)
 		</form>
 		<h1>   </h1>
 	</div>
+	
+
+	
 	
 <div >
 </div>
