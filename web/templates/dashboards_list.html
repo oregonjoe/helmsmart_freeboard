@@ -129,10 +129,11 @@ function editboardname()
 	
 	
 }		
-function editboard(boardid)
+function editboard(sel)
 {
 
 //	showPopup();
+	var boardid = sel.name;
 	
 		document.getElementById("popup-form").style.display = 'block';
 		document.getElementById("EditBoardID").value = boardid;
@@ -220,7 +221,7 @@ function handlegetDashboardLists(response)
 		//myMessage = JSON.parse(row[1]);
 		myPrefName = row.prefname;
 		myPrefID = row.prefuid;
-		myButtonID = "Edit-" + myPrefID;
+		myButtonID = myPrefID;
 		
 		var myCellText = "<a href=https://helmsmart-freeboard.herokuapp.com/dashboard#prefuid=" + myPrefID + "> " + myPrefName + "</a>";
 		 var row = table.insertRow(0);
@@ -231,7 +232,7 @@ function handlegetDashboardLists(response)
 			
 			//myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(f34583d42595de730af418a063e9c31a)"; style="width:80px" >';
 		//	myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(this)"; style="width:80px" >';
-			myCellText =  '<input type="button" value="' + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this)"; style="width:80px" >';
+			myCellText =  '<input type="button" value = "Edit" name="' + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this)"; style="width:80px" >';
 			//myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(' + myPrefID +')"; style="width:80px" >';
 			var cell1 = row.insertCell(1);
 			cell1.innerHTML = myCellText;
