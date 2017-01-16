@@ -220,6 +220,7 @@ function handlegetDashboardLists(response)
 		//myMessage = JSON.parse(row[1]);
 		myPrefName = row.prefname;
 		myPrefID = row.prefuid;
+		myButtonID = "Edit-" + myPrefID;
 		
 		var myCellText = "<a href=https://helmsmart-freeboard.herokuapp.com/dashboard#prefuid=" + myPrefID + "> " + myPrefName + "</a>";
 		 var row = table.insertRow(0);
@@ -229,7 +230,8 @@ function handlegetDashboardLists(response)
 			cell0.style.textAlign = 'left';
 			
 			//myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(f34583d42595de730af418a063e9c31a)"; style="width:80px" >';
-			myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard("1234")"; style="width:80px" >';
+		//	myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(this)"; style="width:80px" >';
+			myCellText =  '<input type="button" value="' + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this)"; style="width:80px" >';
 			//myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(' + myPrefID +')"; style="width:80px" >';
 			var cell1 = row.insertCell(1);
 			cell1.innerHTML = myCellText;
