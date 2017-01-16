@@ -61,7 +61,7 @@
 	
 	}); 
 	
-	
+	document.getElementById("EditBoardID").value = "";
 //	 var showPopup = function(event) {
 //        event.preventDefault();
 //        document
@@ -75,14 +75,68 @@
 		
 function editboardname()
 {
-	var myname = document.getElementById("EditName").value;
+	var newname = document.getElementById("EditName").value;
+	var prefuid = document.getElementById("EditBoardID").value;
+	
+	        $.blockUI({ 
+     message: '<h1>Search in progress...</h1>',    
+     css: {             
+     border: 'none',             
+     padding: '15px',             
+     backgroundColor: '#000', 
+        
+     '-webkit-border-radius': '10px',             
+     '-moz-border-radius': '10px',             
+     opacity: .5,             
+     color: '#fff'         
+     } }); 
+
+
+	var devicedataurl;
+	var prefname = document.getElementById("freeboardName").value;
+	
+    devicedataurl = "https://helmsmart-freeboard.herokuapp.com/freeboard_editdashboard?prefuid=" + prefuid + "&prefname=" + newname;
+
+    return $.ajax({
+    //async: false,
+    cache: false,
+    url: devicedataurl,
+    dataType: "json",
+    timeout: 30000,
+    statusCode: {
+    404: function() {      alert( "page not found" );    },
+    200: function() {      }
+    },
+    success: function(response) {
+    $.unblockUI();
+    },
+    complete: function() {
+    // unblock when remote call returns
+    // document.getElementById("SearchStatus").innerHTML = "Search Complete";
+    //   ShowGraphSmartChart(gindex);
+		console.log('completed');
+    //$.unblockUI();
+    },
+    error: function(request,status,errorThrown) {
+	
+	console.log(status);
+	console.log(errorThrown);
+    //document.getElementById("SearchStatus").innerHTML = "Search Error";
+    $.unblockUI();
+    }
+    });
+	
+	
+	
 }		
-function editboard(boardname)
+function editboard(boardid)
 {
 
 //	showPopup();
 	
 		document.getElementById("popup-form").style.display = 'block';
+		document.getElementById("EditBoardID").value = boardid;
+		
 }		
 	
 function handleaddnewboard()
@@ -174,7 +228,7 @@ function handlegetDashboardLists(response)
 			cell0.innerHTML = myCellText;
 			cell0.style.textAlign = 'left';
 			
-			myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(' + row.prefname + ')"; style="width:80px" >';
+			myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(' + row.prefuid + ')"; style="width:80px" >';
 			var cell1 = row.insertCell(1);
 			cell1.innerHTML = myCellText;
 			cell1.style.textAlign = 'left';
@@ -318,8 +372,10 @@ function getDashboardLists(userid)
   		<form method="get" action="" class="form-inline pull-right"> 
 				<div class="input-group"><input id="EditName" name="EditName" type="text" placeholder="enter a name" class="form-control">
 					<button id="create-new-btn" type="submit" class="btn btn-primary btn-add" onclick="editboardname();">Edit Name</button>
+					<input id="EditBoardID" name="EditBoardID" type="hidden"  class="form-control">
 				</div>
 		</form>
+		<h1>   </h1>
 	</div>
 	
 <div >

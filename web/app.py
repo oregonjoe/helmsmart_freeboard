@@ -1012,6 +1012,70 @@ def freeboard_savedashboardjson():
   finally:
     db_pool.putconn(conn)
 
+@app.route('/freeboard_editdashboard')
+@cross_origin()
+def freeboard_editdashboard():
+  conn = db_pool.getconn()
+  
+
+  prefname = request.args.get('prefname',1)
+  prefuid = request.args.get('prefuid',1)
+
+
+  
+
+  log.info('freeboard_editdashboard: prefname  %s:  ', prefname)
+  log.info('freeboard_editdashboard: prefuid  %s:  ', prefuid)
+  
+
+
+  try:
+    cursor = conn.cursor()
+    
+    sqlstr = "update dashboard_prefs set prefname = %s where prefid = %s;"
+                                                                                    
+    cursor.execute(sqlstr, (prefname, prefuid))   
+    conn.commit()
+    
+    return jsonify(result="OK")  
+
+
+  except psycopg2.ProgrammingError, e:
+    log.info('freeboard_editdashboard: ProgrammingError in  update pref %s:  ', userid)
+    log.info('freeboard_editdashboard: ProgrammingError in  update pref  %s:  ' % str(e))
+    return jsonify(result="ProgrammingError error")
+  
+  except TypeError, e:
+    log.info('freeboard_editdashboard: TypeError in  update pref %s:  ', userid)
+    log.info('freeboard_editdashboard: TypeError in  update pref  %s:  ' % str(e))
+
+  except ValueError, e:
+    log.info('freeboard_editdashboard: ValueError in  update pref  %s:  ', userid)
+    log.info('freeboard_editdashboard: ValueError in  update pref %s:  ' % str(e))
+    
+  except KeyError, e:
+    log.info('freeboard_editdashboard: KeyError in  update pref  %s:  ', userid)
+    log.info('freeboard_editdashboard: KeyError in  update pref  %s:  ' % str(e))
+
+  except NameError, e:
+    log.info('freeboard_editdashboard: NameError in  update pref  %s:  ', userid)
+    log.info('freeboard_editdashboard: NameError in  update pref %s:  ' % str(e))
+        
+  except IndexError, e:
+    log.info('freeboard_editdashboard: IndexError in  update pref  %s:  ', userid)
+    log.info('freeboard_editdashboard: IndexError in  update pref  %s:  ' % str(e))  
+
+
+  except:
+    e = sys.exc_info()[0]
+    log.info('freeboard_editdashboard: Error in update pref  %s:  ' % str(e))
+    return jsonify(result="error") 
+
+  
+  finally:
+    db_pool.putconn(conn)
+
+
     
 @app.route('/freeboard_addnewdashboard')
 @cross_origin()
