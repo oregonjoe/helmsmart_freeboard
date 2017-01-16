@@ -1032,7 +1032,7 @@ def freeboard_editdashboard():
   try:
     cursor = conn.cursor()
     
-    sqlstr = "update dashboard_prefs set prefname = %s where prefid = %s;"
+    sqlstr = "update dashboard_prefs set prefname = %s where prefuid = %s;"
                                                                                     
     cursor.execute(sqlstr, (prefname, prefuid))   
     conn.commit()
@@ -1041,34 +1041,34 @@ def freeboard_editdashboard():
 
 
   except psycopg2.ProgrammingError, e:
-    log.info('freeboard_editdashboard: ProgrammingError in  update pref %s:  ', userid)
-    log.info('freeboard_editdashboard: ProgrammingError in  update pref  %s:  ' % str(e))
+    log.info('freeboard_editdashboard: ProgrammingError in  edit pref %s:  ', prefuid)
+    log.info('freeboard_editdashboard: ProgrammingError in  edit pref  %s:  ' % str(e))
     return jsonify(result="ProgrammingError error")
   
   except TypeError, e:
-    log.info('freeboard_editdashboard: TypeError in  update pref %s:  ', userid)
-    log.info('freeboard_editdashboard: TypeError in  update pref  %s:  ' % str(e))
+    log.info('freeboard_editdashboard: TypeError in  edit pref %s:  ', prefuid)
+    log.info('freeboard_editdashboard: TypeError in  edit pref  %s:  ' % str(e))
 
   except ValueError, e:
-    log.info('freeboard_editdashboard: ValueError in  update pref  %s:  ', userid)
-    log.info('freeboard_editdashboard: ValueError in  update pref %s:  ' % str(e))
+    log.info('freeboard_editdashboard: ValueError in  edit pref  %s:  ', prefuid)
+    log.info('freeboard_editdashboard: ValueError in  edit pref %s:  ' % str(e))
     
   except KeyError, e:
-    log.info('freeboard_editdashboard: KeyError in  update pref  %s:  ', userid)
-    log.info('freeboard_editdashboard: KeyError in  update pref  %s:  ' % str(e))
+    log.info('freeboard_editdashboard: KeyError in  edit pref  %s:  ', prefuid)
+    log.info('freeboard_editdashboard: KeyError in  edit pref  %s:  ' % str(e))
 
   except NameError, e:
-    log.info('freeboard_editdashboard: NameError in  update pref  %s:  ', userid)
-    log.info('freeboard_editdashboard: NameError in  update pref %s:  ' % str(e))
+    log.info('freeboard_editdashboard: NameError in  edit pref  %s:  ', prefuid)
+    log.info('freeboard_editdashboard: NameError in  edit pref %s:  ' % str(e))
         
   except IndexError, e:
-    log.info('freeboard_editdashboard: IndexError in  update pref  %s:  ', userid)
-    log.info('freeboard_editdashboard: IndexError in  update pref  %s:  ' % str(e))  
+    log.info('freeboard_editdashboard: IndexError in  edit pref  %s:  ', prefuid)
+    log.info('freeboard_editdashboard: IndexError in  edit pref  %s:  ' % str(e))  
 
 
   except:
     e = sys.exc_info()[0]
-    log.info('freeboard_editdashboard: Error in update pref  %s:  ' % str(e))
+    log.info('freeboard_editdashboard: Error in edit pref  %s:  ' % str(e))
     return jsonify(result="error") 
 
   
