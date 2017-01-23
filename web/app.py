@@ -7164,7 +7164,7 @@ def freeboard_indicator_status():
 
         # check if array was all NONE  - if so disgard it
         if not (statusvalues == 3 ):
-          switchstatus.append(statusvalues)
+          switchstatus.append({'epoch':ts, 'value':statusvalues})
           #log.info('freeboard_switch_bank_status:  switchstatus%s:', switchstatus)          
 
 
