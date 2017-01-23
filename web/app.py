@@ -7051,7 +7051,7 @@ def freeboard_indicator_status():
                      ' FROM {} '             
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
-                .format( measurement, parameter, serieskeys,
+                .format(parameter,  measurement,  serieskeys,
                         startepoch, endepoch,
                         resolution) 
  
