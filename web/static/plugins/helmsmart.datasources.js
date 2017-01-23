@@ -50,7 +50,12 @@
 			
 			var hsinstance = _.isUndefined(currentSettings.instance) ? 0 : currentSettings.instance;
 			if(hsinstance != "")
-				requestURL = requestURL + "&instance=" + hsinstance;			
+				requestURL = requestURL + "&instance=" + hsinstance;
+			
+			var hsindex = _.isUndefined(currentSettings.index) ? 0 : currentSettings.index;
+			if(hsindex != "")
+				requestURL = requestURL + "&indicator=" + hsindex;			
+			
 			
 			
 			var hstype = _.isUndefined(currentSettings.type) ? "" : currentSettings.type;
@@ -178,8 +183,13 @@
 					},
 
 					{
-						name: "Indicators",
+						name: "Indicator Bank",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_status"
+					},
+					
+					{
+						name: "Indicator",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_status"
 					},
 					{
 						name: "Switches",
@@ -366,6 +376,57 @@
 			{
 				name: "instance",
 				display_name: "Instance",
+				type: "option",
+				options: [
+					{
+						name: "---",
+						value: ""
+					},
+					{
+						name: "0",
+						value: "0"
+					},
+					{
+						name: "1",
+						value: "1"
+					},
+					{
+						name: "2",
+						value: "2"
+					},					
+					{
+						name: "3",
+						value: "3"
+					},					
+					{
+						name: "4",
+						value: "4"
+					},					
+					{
+						name: "5",
+						value: "5"
+					},					
+					{
+						name: "6",
+						value: "6"
+					},					
+					{
+						name: "7",
+						value: "7"
+					},					
+					{
+						name: "8",
+						value: "8"
+					},					
+					{
+						name: "9",
+						value: "9"
+					}
+				]
+			},
+			{
+				name: "index",
+				display_name: "Value Index",
 				type: "option",
 				options: [
 					{
