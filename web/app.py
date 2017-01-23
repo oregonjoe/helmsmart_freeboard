@@ -7157,7 +7157,7 @@ def freeboard_indicator_status():
   
         
         if point['indicator'] is not None:
-          statusvalues.=(int(point['indicator']))
+          statusvalues=(int(point['indicator']))
         else:
           statusvalues=(int(3))
 
