@@ -299,7 +299,7 @@
 							lineWidth: 1,
 							lineColor: '#666666'
 						}
-					}
+					},
 					boxplot: {
 						fillColor: '#505053'
 					},
