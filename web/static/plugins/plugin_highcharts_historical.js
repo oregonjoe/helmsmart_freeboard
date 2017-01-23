@@ -291,6 +291,15 @@
 							lineColor: '#333'
 						}
 					},
+					 area: {
+						stacking: 'normal',
+						lineColor: '#666666',
+						lineWidth: 1,
+						marker: {
+							lineWidth: 1,
+							lineColor: '#666666'
+						}
+					}
 					boxplot: {
 						fillColor: '#505053'
 					},
