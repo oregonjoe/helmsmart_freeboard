@@ -90,7 +90,12 @@
 		"options": [{
 			"name": "Area",
 			"value": "area"
-		}, {
+		}, 
+		{
+			"name": "Stacked Area",
+			"value": "stackedarea"
+		}, 
+		{
 			"name": "Spline",
 			"value": "spline"
 		}]
@@ -291,15 +296,7 @@
 							lineColor: '#333'
 						}
 					},
-					 area: {
-						stacking: 'normal',
-						lineColor: '#666666',
-						lineWidth: 1,
-						marker: {
-							lineWidth: 1,
-							lineColor: '#666666'
-						}
-					},
+					 
 					boxplot: {
 						fillColor: '#505053'
 					},
@@ -429,8 +426,16 @@
 			var thisWidgetYAxis = JSON.parse(currentSettings.yaxis);
 			var thisWidgetTitle = currentSettings.title;
 			var thisWidgetChartType = currentSettings.chartType;
+			var thisWidgetChartStackedStyle = null;
 			//console.log('chartType:' + currentSettings.chartType + ' ' + thisWidgetChartType);
 			var thisWidgetSeries = [];
+			
+			if(thisWidgetChartType == "stackedarea")
+			{
+				thisWidgetChartType = "area";
+				thisWidgetChartStackedStyle ="normal";
+			}
+			
 
 			for (i = 1; i <= MAX_NUM_SERIES; i++) {
 				var datasource = currentSettings['series' + i];
@@ -492,6 +497,7 @@
 
 				plotOptions: {
 					area: {
+						stacking: thisWidgetChartStackedStyle,
 						marker: {
 							enabled: false,
 							symbol: 'circle',
