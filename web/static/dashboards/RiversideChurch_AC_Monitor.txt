@@ -1,0 +1,230 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Lights Zone A",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Amps",
+						"size": "regular",
+						"value": "datasources[\"RCC1 AC Status\"][\"amps\"]",
+						"animate": true,
+						"units": "amps"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Energy",
+						"size": "regular",
+						"value": "datasources[\"RCC1 AC Status\"][\"energy\"]",
+						"animate": true,
+						"units": "kw/hr"
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Lights",
+						"value": "datasources[\"RCC1 Switch Status\"][\"switch_bank\"]",
+						"on_text": "ON",
+						"off_text": "OFF",
+						"apikey": "443cbc09f9f643f79a408a4dd86ab0bf",
+						"indicatortype": "indicator",
+						"instance": "1",
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Status (1 week)",
+			"width": 1,
+			"row": {
+				"3": 9
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": "3",
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"RCC1 AC Status\"][\"amps\"]",
+						"series1label": "amps",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 2",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Amps",
+						"size": "regular",
+						"value": "datasources[\"RCC2 AC Status\"][\"amps\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Energy",
+						"size": "regular",
+						"value": "datasources[\"RCC2 AC Status\"][\"energy\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Lights",
+						"value": "datasources[\"RCC1 Switch Status\"][\"switch_bank\"]",
+						"on_text": "ON",
+						"off_text": "OFF",
+						"apikey": "443cbc09f9f643f79a408a4dd86ab0bf",
+						"indicatortype": "indicator",
+						"instance": "1",
+						"switchid": "1"
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 3",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Amps",
+						"size": "regular",
+						"value": "datasources[\"RCC3 AC Status\"][\"amps\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Energy",
+						"size": "regular",
+						"value": "datasources[\"RCC3 AC Status\"][\"energy\"]",
+						"animate": true
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "RCC1 AC Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "443cbc09f9f643f79a408a4dd86ab0bf",
+				"refresh": 10,
+				"span": "1day",
+				"resolution": "900",
+				"instance": "0",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "RCC2 AC Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "443cbc09f9f643f79a408a4dd86ab0bf",
+				"refresh": 5,
+				"span": "1day",
+				"resolution": "900",
+				"instance": "1",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "RCC2 Switch",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_switch_bank_status",
+				"apikey": "8d59576bce3c35de89b582b944eb2360",
+				"refresh": 5,
+				"span": "1day",
+				"resolution": "900",
+				"instance": "1",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "RCC1 Switch Status",
+			"type": "JSON",
+			"settings": {
+				"name": "RCC1 Switch Status",
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_switch_bank_status",
+				"apikey": "443cbc09f9f643f79a408a4dd86ab0bf",
+				"refresh": 5,
+				"span": "1day",
+				"resolution": "900",
+				"instance": "1",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "RCC3 AC Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "8d59576bce3c35de89b582b944eb2360",
+				"refresh": 5,
+				"span": "7day",
+				"resolution": "1200",
+				"instance": "0",
+				"type": "",
+				"units": "US"
+			}
+		}
+	],
+	"columns": 3
+}

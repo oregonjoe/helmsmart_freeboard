@@ -196,8 +196,10 @@
 			"display_name": "HelmSmart Array HighChart",
 			"description": "Time series charts using array of data points - uses HelmSmart Data source to grab selected span",
 			"external_scripts": [
-				"https://code.highcharts.com/highcharts.js",
-				"https://code.highcharts.com/modules/exporting.js"
+				//"https://code.highcharts.com/highcharts.js",
+				//"https://code.highcharts.com/modules/exporting.js"
+				"plugins/thirdparty/highcharts.js",
+				"plugins/thirdparty/exporting.js"
 			],
 			"fill_size": true,
 			"settings": highchartsLineWidgetSettings,
