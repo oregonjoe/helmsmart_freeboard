@@ -198,8 +198,10 @@
 			"external_scripts": [
 				//"https://code.highcharts.com/highcharts.js",
 				//"https://code.highcharts.com/modules/exporting.js"
-				"plugins/thirdparty/highcharts.js",
-				"plugins/thirdparty/exporting.js"
+				//"plugins/thirdparty/highcharts.js",
+				//"plugins/thirdparty/exporting.js"
+				"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/highcharts.js",
+				"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/exporting.js"
 			],
 			"fill_size": true,
 			"settings": highchartsLineWidgetSettings,
