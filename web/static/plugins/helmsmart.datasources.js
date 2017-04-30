@@ -192,6 +192,10 @@
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_status"
 					},
 					{
+						name: "Dimmer",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_status"
+					},
+					{
 						name: "Switches",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_switch_bank_status"
 					}
@@ -515,6 +519,14 @@
 					{
 						name: "Precise GNSS",
 						value: "Precise GNSS"
+					},
+					{
+						name: "LED 4 Channel",
+						value: "LED 4 Channel"
+					},
+					{
+						name: "RGB 1 Channel",
+						value: "RGB 1 Channel"
 					},
 					{
 						name: "NULL",
