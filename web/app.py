@@ -25,8 +25,6 @@ from iron_cache import *
 import logging
 import psycopg2
 #test comment
-#test comment 2
-#test comment 3
 # *******************************************************************
 # Debug Output defines
 # Comment to enable/disable
@@ -7426,7 +7424,7 @@ def freeboard_dimmer_status():
             
     except IndexError, e:
         log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
-        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))   
 
     except ValueError, e:
       #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
