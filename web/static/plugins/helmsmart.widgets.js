@@ -331,6 +331,7 @@
                 }
                 else {
                     valueElement.text(value);
+					unitsElement.css({"color" : "blue"});
                 }
 
 			
