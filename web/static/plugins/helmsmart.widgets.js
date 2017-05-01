@@ -331,8 +331,8 @@
                 }
                 else {
                     valueElement.text(value);
-					unitsElement.css({"color" : "blue !important"});
-					valueElement.css({"color" : "blue !important"});
+					//unitsElement.css({"color" : "blue !important"});
+					//valueElement.css({"color" : "blue !important"});
                 }
 
 			
