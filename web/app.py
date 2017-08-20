@@ -1264,7 +1264,7 @@ def index():
 
 @app.route('/login')
 @cross_origin()
-@login_required
+#@login_required
 def login():
 
     #response = make_response(render_template('index.html', features = []))
@@ -1307,7 +1307,7 @@ def dashboards():
   
 
 @app.route('/dashboard')
-@login_required
+#@login_required
 @cross_origin()
 def dashboard():
 
@@ -1377,7 +1377,7 @@ def dashboard():
     return response
 
 @app.route('/dashboards_list')
-@login_required
+#@login_required
 @cross_origin()
 def dashboards_list():
 
