@@ -1373,7 +1373,7 @@ def dashboards():
 @app.route('/dashboard')
 #@login_required
 @cross_origin()
-@requires_auth
+#@requires_auth
 def dashboard():
 
 
@@ -1455,7 +1455,7 @@ def dashboard():
 @app.route('/dashboards_list')
 #@login_required
 @cross_origin()
-@requires_auth
+#@requires_auth
 def dashboards_list():
 
 
