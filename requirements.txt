@@ -2,7 +2,7 @@ Flask==0.11.1
 Flask-Assets==0.8
 Flask-Script==0.6.2
 Flask-Cors==2.1.2
-Flask-Stormpath==0.4.8
+#Flask-Stormpath==0.4.8
 Jinja2==2.7
 MarkupSafe==0.18
 SQLAlchemy==0.8.2
@@ -27,11 +27,12 @@ graphiteudp==0.0.2
 socketcache==0.1.0
 redis==2.9.1
 rq==0.5.5
-python-postmark==0.4.1
+#python-postmark==0.4.1
 APScheduler==2.0.3
 dropbox==2.2.0
 numpy==1.6.2
 geopy==1.9.1
 requests>=2.0
 pyonep==0.13.7
+auth0-python
 

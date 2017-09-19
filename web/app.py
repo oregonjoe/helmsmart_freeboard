@@ -95,6 +95,19 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['DEBUG'] = True
 app.debug = True
+
+
+
+#Adding auth0
+from auth0.v3.authentication import GetToken
+from auth0.v3.authentication import Users
+
+AUTH0_CALLBACK_URL = environ.get('AUTH0_CALLBACK_URL')
+AUTH0_CLIENT_ID = environ.get('AUTH0_CLIENT_ID')
+AUTH0_CLIENT_SECRET = environ.get('AUTH0_CLIENT_SECRET')
+AUTH0_DOMAIN = environ.get('AUTH0_DOMAIN')
+
+
 """
 from flask_stormpath import StormpathManager, User, login_required, login_user, logout_user, user
 from stormpath.error import Error as StormpathError
