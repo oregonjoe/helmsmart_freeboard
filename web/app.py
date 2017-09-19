@@ -1461,16 +1461,16 @@ def dashboards_list():
 
     try:
       
-        if session['profile'] is not None:
+      if session['profile'] is not None:
           
-          try:
-            mydata = session['profile']
-            log.info("dashboards_list: customdata:%s", mydata)
-            
-          except:
-            e = sys.exc_info()[0]
-            log.info('dashboards_list: Error in geting user.custom_data  %s:  ' % str(e))
-            pass
+        try:
+          mydata = session['profile']
+          log.info("dashboards_list: customdata:%s", mydata)
+          
+        except:
+          e = sys.exc_info()[0]
+          log.info('dashboards_list: Error in geting user.custom_data  %s:  ' % str(e))
+          pass
         
       if user is not None:
         log.info("dashboards_list.html: user exists:%s", user)
