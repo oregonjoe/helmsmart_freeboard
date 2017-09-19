@@ -1277,6 +1277,55 @@ def index():
 
 
 
+@app.route('/callback')
+def callback_handling():
+    code = request.args.get('code')
+    get_token = GetToken(AUTH0_DOMAIN)
+    auth0_users = Users(AUTH0_DOMAIN)
+    token = get_token.authorization_code(AUTH0_CLIENT_ID,
+                                         AUTH0_CLIENT_SECRET, code, AUTH0_CALLBACK_URL)
+    user_info = auth0_users.userinfo(token['access_token'])
+    log.info('auth0callback: user_info %s:  ' , user_info)
+    session['profile'] = json.loads(user_info)
+    
+    if 'profile' in session:
+      try:
+        mydata = session['profile']   
+        log.info("authcallback: customdata:%s", mydata)
+
+        if 'name' in mydata:
+          myusername = mydata['name']
+          session['username'] = myusername
+          log.info("authcallback: username:%s", myusername)
+          
+      except:
+        e = sys.exc_info()[0]
+        log.info('auth0callback: Error in geting username  %s:  ' % str(e))
+        pass
+
+        
+    return redirect('/index')
+
+@app.route('/auth0logout')
+def auth0logout():
+    session.clear()
+    log.info('auth0logout: AUTH0_CALLBACK_URL %s:  ' , AUTH0_CALLBACK_URL)
+    parsed_base_url = urlparse(AUTH0_CALLBACK_URL)
+    #base_url = parsed_base_url.scheme + '://' + parsed_base_url.netloc
+    base_url = 'http://' + parsed_base_url.netloc
+    log.info('auth0logout: base_url %s:  ' , base_url)
+    
+    log.info('auth0logout: https://%s/v2/logout?returnTo=%s&client_id=%s' % (AUTH0_DOMAIN, base_url, AUTH0_CLIENT_ID))
+    #return jsonify(status='ok' )
+      
+    return redirect('https://%s/v2/logout?returnTo=%s&client_id=%s' % (AUTH0_DOMAIN, base_url, AUTH0_CLIENT_ID))
+  
+
+
+
+
+
+
 @app.route('/login')
 @cross_origin()
 #@login_required
@@ -1324,11 +1373,23 @@ def dashboards():
 @app.route('/dashboard')
 #@login_required
 @cross_origin()
+@requires_auth
 def dashboard():
 
 
     try:
       
+        if session['profile'] is not None:
+          
+        try:
+          mydata = session['profile']
+          log.info("dashboard: customdata:%s", mydata)
+          
+        except:
+          e = sys.exc_info()[0]
+          log.info('dashboard: Error in geting user.custom_data  %s:  ' % str(e))
+          pass
+        
       if user is not None:
         log.info("dashboard.html: user exists:%s", user)
         try:
@@ -1394,11 +1455,23 @@ def dashboard():
 @app.route('/dashboards_list')
 #@login_required
 @cross_origin()
+@requires_auth
 def dashboards_list():
 
 
     try:
       
+        if session['profile'] is not None:
+          
+        try:
+          mydata = session['profile']
+          log.info("dashboards_list: customdata:%s", mydata)
+          
+        except:
+          e = sys.exc_info()[0]
+          log.info('dashboards_list: Error in geting user.custom_data  %s:  ' % str(e))
+          pass
+        
       if user is not None:
         log.info("dashboards_list.html: user exists:%s", user)
         try:
