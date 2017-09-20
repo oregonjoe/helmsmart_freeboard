@@ -1,5 +1,4 @@
 import os
-from os import environ
 import sys
 import json
 #import csv
@@ -25,7 +24,6 @@ import urlparse
 from iron_cache import *
 import logging
 import psycopg2
-from os import environ as env, path
 #test comment
 # *******************************************************************
 # Debug Output defines
@@ -98,19 +96,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['DEBUG'] = True
 app.debug = True
 
-
-
-#Adding auth0
-from auth0.v3.authentication import GetToken
-from auth0.v3.authentication import Users
-
-AUTH0_CALLBACK_URL = environ.get('AUTH0_CALLBACK_URL')
-AUTH0_CLIENT_ID = environ.get('AUTH0_CLIENT_ID')
-AUTH0_CLIENT_SECRET = environ.get('AUTH0_CLIENT_SECRET')
-AUTH0_DOMAIN = environ.get('AUTH0_DOMAIN')
-
-
-"""
 from flask_stormpath import StormpathManager, User, login_required, login_user, logout_user, user
 from stormpath.error import Error as StormpathError
 from os import environ
@@ -141,7 +126,7 @@ stormpath_manager = StormpathManager()
 
 # some code which creates your app
 stormpath_manager.init_app(app)
-"""
+
 
 def hash_string(string):
     #salted_hash = string + application.config['SECRET_KEY']
@@ -1277,58 +1262,9 @@ def index():
 
 
 
-@app.route('/callback')
-def callback_handling():
-    code = request.args.get('code')
-    get_token = GetToken(AUTH0_DOMAIN)
-    auth0_users = Users(AUTH0_DOMAIN)
-    token = get_token.authorization_code(AUTH0_CLIENT_ID,
-                                         AUTH0_CLIENT_SECRET, code, AUTH0_CALLBACK_URL)
-    user_info = auth0_users.userinfo(token['access_token'])
-    log.info('auth0callback: user_info %s:  ' , user_info)
-    session['profile'] = json.loads(user_info)
-    
-    if 'profile' in session:
-      try:
-        mydata = session['profile']   
-        log.info("authcallback: customdata:%s", mydata)
-
-        if 'name' in mydata:
-          myusername = mydata['name']
-          session['username'] = myusername
-          log.info("authcallback: username:%s", myusername)
-          
-      except:
-        e = sys.exc_info()[0]
-        log.info('auth0callback: Error in geting username  %s:  ' % str(e))
-        pass
-
-        
-    return redirect('/index')
-
-@app.route('/auth0logout')
-def auth0logout():
-    session.clear()
-    log.info('auth0logout: AUTH0_CALLBACK_URL %s:  ' , AUTH0_CALLBACK_URL)
-    parsed_base_url = urlparse(AUTH0_CALLBACK_URL)
-    #base_url = parsed_base_url.scheme + '://' + parsed_base_url.netloc
-    base_url = 'http://' + parsed_base_url.netloc
-    log.info('auth0logout: base_url %s:  ' , base_url)
-    
-    log.info('auth0logout: https://%s/v2/logout?returnTo=%s&client_id=%s' % (AUTH0_DOMAIN, base_url, AUTH0_CLIENT_ID))
-    #return jsonify(status='ok' )
-      
-    return redirect('https://%s/v2/logout?returnTo=%s&client_id=%s' % (AUTH0_DOMAIN, base_url, AUTH0_CLIENT_ID))
-  
-
-
-
-
-
-
 @app.route('/login')
 @cross_origin()
-#@login_required
+@login_required
 def login():
 
     #response = make_response(render_template('index.html', features = []))
@@ -1371,25 +1307,13 @@ def dashboards():
   
 
 @app.route('/dashboard')
-#@login_required
+@login_required
 @cross_origin()
-#@requires_auth
 def dashboard():
 
 
     try:
       
-      if session['profile'] is not None:
-        
-        try:
-          mydata = session['profile']
-          log.info("dashboard: customdata:%s", mydata)
-          
-        except:
-          e = sys.exc_info()[0]
-          log.info('dashboard: Error in geting user.custom_data  %s:  ' % str(e))
-          pass
-        
       if user is not None:
         log.info("dashboard.html: user exists:%s", user)
         try:
@@ -1453,110 +1377,13 @@ def dashboard():
     return response
 
 @app.route('/dashboards_list')
+@login_required
 @cross_origin()
 def dashboards_list():
 
-    
-    adminid=""
-
-    if 'admin' in request.form:
-      adminid = request.form['admin']
-      
-    try:
-      
-      if session['profile'] is not None:
-        try:
-          mydata = session['profile']
-          log.info("dashboards_list.html: customdata:%s", mydata)
-         
-
-          if mydata['name'] is not None:
-            myusername = mydata['name']
-            log.info("dashboards_list.html: myusername:%s", myusername)
-
-
-          """
-          if mydata['devices'] is not None:
-            mydevices = mydata['devices']
-            log.info("index.html: mydevices:%s", mydevices)
-
-            for device in mydevices:
-              log.info("index.html: mydevice  %s:%s", device['devicename'], device['deviceid'])
-          """
-          
-        except:
-          e = sys.exc_info()[0]
-          log.info('dashboards_list.html: Error in geting user.custom_data  %s:  ' % str(e))
-          pass
-
-        try:
-          if myusername is not None:
-
-            conn = db_pool.getconn()
-            session['username'] = myusername
-            
-            log.info("dashboards_list.html: email:%s", myusername )
-
-            query = "select userid from user_devices where useremail = %s group by userid"
-
-            cursor = conn.cursor()
-            cursor.execute(query, [myusername])
-            i = cursor.fetchone()       
-            if cursor.rowcount > 0:
-
-                session['userid'] = str(i[0])
-                #session['adminid'] = verificationdata['email']
-            else:
-                session['userid'] = hash_string('helmsmart@mockmyid.com')
-                
-            log.info('dashboards_list.html: userid is  %s:  ' , session['userid'] )
-            # cursor.close
-            db_pool.putconn(conn)
-            
-        except:
-          e = sys.exc_info()[0]
-          log.info('dashboards_list.html: Error in geting user.email  %s:  ' % str(e))
-          pass
-
-
-        return render_template('dashboards_list.html', user=session['profile'], env=env)
-
-      
-    except:
-      e = sys.exc_info()[0]
-      log.info('dashboards_list.html: Error in geting user  %s:  ' % str(e))
-      pass
-
-
-    return render_template('dashboards_list.html',  env=env)
-    #response = make_response(render_template('index.html', features = []))
-    #response.headers['Cache-Control'] = 'public, max-age=0'
-    #return response
-
-
-
-
-
-@app.route('/olddashboards_list')
-#@login_required
-@cross_origin()
-#@requires_auth
-def olddashboards_list():
-
 
     try:
       
-      if session['profile'] is not None:
-          
-        try:
-          mydata = session['profile']
-          log.info("dashboards_list: customdata:%s", mydata)
-          
-        except:
-          e = sys.exc_info()[0]
-          log.info('dashboards_list: Error in geting user.custom_data  %s:  ' % str(e))
-          pass
-        
       if user is not None:
         log.info("dashboards_list.html: user exists:%s", user)
         try:

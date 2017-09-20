@@ -1,0 +1,247 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js"
+	],
+	"panes": [
+		{
+			"title": "Current Location - Winchuck River",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "google_map",
+					"settings": {
+						"lat": "",
+						"lon": "",
+						"blocks": 4,
+						"position": "datasources[\"SeaDream Location\"][\"position\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "Weather",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"3": 2,
+				"5": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Air Temp",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Environmental\"][\"temperature\"]",
+						"animate": true,
+						"units": "F"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Baro",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]",
+						"animate": true,
+						"units": "inhg"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Wind Speed",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Wind\"][\"truewindspeed\"]",
+						"animate": true,
+						"units": "knots"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Humidity",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Environmental\"][\"humidity\"]",
+						"animate": true,
+						"units": "%"
+					}
+				}
+			]
+		},
+		{
+			"title": "Wind Dir True",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"3": 3,
+				"5": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"gaugePointerColor": "6",
+						"gaugeFillColor": "11",
+						"gaugeBackColor": "10",
+						"blocks": "4",
+						"dropshadow": true,
+						"gaugeStyle": "compass",
+						"max_value": 360,
+						"min_value": 0,
+						"units": "degrees",
+						"value": "datasources[\"SeaDream Wind\"][\"truewinddir\"]",
+						"title": ""
+					}
+				}
+			]
+		},
+		{
+			"title": "Air Temp (24 hour)",
+			"width": 1,
+			"row": {
+				"3": 11
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"SeaDream Environmental\"][\"temperature\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Wind Speed (24 hours)",
+			"width": 1,
+			"row": {
+				"3": 11
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"SeaDream Wind\"][\"truewindspeed\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Baro (24 hours)",
+			"width": 1,
+			"row": {
+				"3": 11
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "SeaDream Wind",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
+				"apikey": "3f1bfb9fd15f32a1c55a118946aac0fd",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "900",
+				"instance": "",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "SeaDream Environmental",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
+				"apikey": "3f1bfb9fd15f32a1c55a118946aac0fd",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "SeaDream Location",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_location",
+				"apikey": "3f1bfb9fd15f32a1c55a118946aac0fd",
+				"refresh": 15,
+				"span": "12hour",
+				"resolution": "600",
+				"instance": "",
+				"type": "DGNSS fix",
+				"units": "US"
+			}
+		}
+	],
+	"columns": 3
+}
