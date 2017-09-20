@@ -10663,4 +10663,7 @@ def setswitchapi():
   log.info("IronCache response key %s", item)
   return jsonify(result="OK", switch=newswitchitem)
 
+# set the secret key.  keep this really secret:
+app.secret_key = 'H0Zr27j/3yX R~CDI!jmN]CDI/,?RT'
+
 
