@@ -1266,9 +1266,9 @@ def freeboard_getdashboardlist():
 
 
 
-@app.route('/')
+@app.route('/help')
 @cross_origin()
-def index():
+def help():
 
     response = make_response(render_template('index.html', features = []))
     #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
@@ -1439,6 +1439,7 @@ def dashboard():
 
     return render_template('dashboards_list.html', user=session['profile'], env=env) 
 
+@app.route('/')
 @app.route('/dashboards_list')
 @cross_origin()
 def dashboards_list():

@@ -60,7 +60,7 @@ var myusername
 
  {% if session['username'] %}
      myusername = "{{session['username']}}";  
-	 document.getElementById("loginbutton").innerHTML =' <center><a href="#" id="logout" class="persona-button"><span>' + myusername + ': Sign Out</span>  </a>';
+	 document.getElementById("loginbutton").innerHTML =' <center><a href="#" id="logout" class="persona-button"><span> HelmSmart: ' + myusername + ': Sign Out</span>  </a>';
 
  $("#logout").click(function(e) {
             e.preventDefault();
@@ -69,7 +69,7 @@ window.location.href = '/auth0logout';
 
 	 {% else %}
      myusername = ""; 
-	 document.getElementById("loginbutton").innerHTML =' <center><a href="#" id="login" class="persona-button"><span>Sign in with your Email</span>  </a>';
+	 document.getElementById("loginbutton").innerHTML =' <center><a href="#" id="login" class="persona-button"><span>HelmSmart: Sign in with your Email</span>  </a>';
  
   $("#login").click(function(e) {
             e.preventDefault();
@@ -443,6 +443,10 @@ function getDashboardLists(userid)
 <body style=" margin: 0;">
 <div style="padding:5px">
   <center>
+  	<div id = 'loginbutton'>
+
+	</div>
+	<!--
   {% if session['userid'] %}
      <a href="https://helmsmart-freeboard.herokuapp.com/dashboard" id="login" class="persona-button">
     <span>HelmSmart: {{session['username']}}</span></a>
@@ -450,6 +454,7 @@ function getDashboardLists(userid)
     <a href="https://helmsmart-freeboard.herokuapp.com/dashboard" id="login" class="persona-button">
       <span>HelmSmart: Guest</span></a>
   {% endif %}
+  -->
   </center>
 </div>
 
@@ -513,9 +518,7 @@ function getDashboardLists(userid)
 <div >
 </div>
 <div class="footer">
-	<div id = 'loginbutton'>
 
-	</div>
 <div class="container">
 <div class="inner">
 <center>
