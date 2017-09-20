@@ -1456,11 +1456,8 @@ def dashboard():
 @cross_origin()
 def dashboards_list():
 
-    
-    adminid=""
+    log.info("dashboards_list.html: Start")
 
-    if 'admin' in request.form:
-      adminid = request.form['admin']
       
     try:
       
@@ -1527,6 +1524,25 @@ def dashboards_list():
       log.info('dashboards_list.html: Error in geting user  %s:  ' % str(e))
       pass
 
+    except TypeError, e:
+      #log.info('dashboards_list: TypeError in  update pref %s:  ', userid)
+      log.info('dashboards_list: TypeError in  update pref  %s:  ' % str(e))
+
+    except ValueError, e:
+      #log.info('dashboards_list: ValueError in  update pref  %s:  ', userid)
+      log.info('dashboards_list: ValueError in  update pref %s:  ' % str(e))
+      
+    except KeyError, e:
+      #log.info('dashboards_list: KeyError in  update pref  %s:  ', userid)
+      log.info('dashboards_list: KeyError in  update pref  %s:  ' % str(e))
+
+    except NameError, e:
+      #log.info('dashboards_list: NameError in  update pref  %s:  ', userid)
+      log.info('dashboards_list: NameError in  update pref %s:  ' % str(e))
+          
+    except IndexError, e:
+      #log.info('dashboards_list: IndexError in  update pref  %s:  ', userid)
+      log.info('dashboards_list: IndexError in  update pref  %s:  ' % str(e))  
 
     return render_template('dashboards_list.html',  env=env)
     #response = make_response(render_template('index.html', features = []))

@@ -26,7 +26,17 @@
 <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/freeboard.thirdparty.min.js') }}"></script> -->
 <script type="text/javascript" src="{{ url_for('static', filename='js/freeboard.thirdparty.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery_blockUI.js') }}"></script>
-
+      <script src="https://cdn.auth0.com/js/auth0/8.6.0/auth0.min.js"></script>
+       <!-- <script src="/public/app.js"> </script> -->
+        <!-- <link href="/public/app.css" rel="stylesheet"> -->
+		 <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/auth0app.js') }}" ></script> -->
+		 <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth0app.css') }}"/> -->
+        <script>
+        var AUTH0_CLIENT_ID = '{{env.AUTH0_CLIENT_ID}}';
+        var AUTH0_DOMAIN = '{{env.AUTH0_DOMAIN}}';
+        var AUTH0_CALLBACK_URL = '{{env.AUTH0_CALLBACK_URL if env.AUTH0_CALLBACK_URL else "http://localhost:3000/callback" }}';
+        var API_AUDIENCE = '{{env.API_ID}}';
+        </script>  
 <style>
     #popup-form {
         display: none;
@@ -37,6 +47,49 @@
     <script type="text/javascript">
 		var gUserID= "";
 		var gUseremail = ""
+		var currentUser = null;
+
+$(window).bind("load", function() {
+var myusername
+
+ var auth = new auth0.WebAuth({
+    domain: AUTH0_DOMAIN,
+    clientID: AUTH0_CLIENT_ID
+   });
+
+
+ {% if session['username'] %}
+     myusername = "{{session['username']}}";  
+	 document.getElementById("loginbutton").innerHTML =' <center><a href="#" id="logout" class="persona-button"><span>' + myusername + ': Sign Out</span>  </a>';
+
+ $("#logout").click(function(e) {
+            e.preventDefault();
+window.location.href = '/auth0logout';
+			 });
+
+	 {% else %}
+     myusername = ""; 
+	 document.getElementById("loginbutton").innerHTML =' <center><a href="#" id="login" class="persona-button"><span>Sign in with your Email</span>  </a>';
+ 
+  $("#login").click(function(e) {
+            e.preventDefault();
+		auth.authorize({
+				audience: 'https://'+AUTH0_DOMAIN+'/userinfo', // you can also set this on the .env file and put API_AUDIENCE instead
+				scope: 'openid profile',
+				responseType: 'code',
+				redirectUri: AUTH0_CALLBACK_URL
+			  }); 
+			
+			
+          });
+ {% endif %}
+
+
+
+
+
+
+});
 	
 	$(document).ready(function () {
 	
@@ -53,7 +106,7 @@
     {
     gUserID = "0";
     }
-    else
+    else if(gUserID != "0")
     {
 		getDashboardLists(gUserID);
     
@@ -460,6 +513,9 @@ function getDashboardLists(userid)
 <div >
 </div>
 <div class="footer">
+	<div id = 'loginbutton'>
+
+	</div>
 <div class="container">
 <div class="inner">
 <center>
