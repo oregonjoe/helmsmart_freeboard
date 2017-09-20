@@ -1406,7 +1406,7 @@ def dashboard():
             query = "select userid from user_devices where useremail = %s group by userid"
             
             cursor = conn.cursor()
-            cursor.execute(query, [user.email])
+            cursor.execute(query, [user_email])
             i = cursor.fetchone()       
             if cursor.rowcount > 0:
 
@@ -1428,7 +1428,7 @@ def dashboard():
   
         except:
           e = sys.exc_info()[0]
-          log.info('dashboard.html: Error in geting user.email  %s:  ' % str(e))
+          log.info('dashboard.html: Error in geting user_email  %s:  ' % str(e))
           pass
           
     except:
@@ -1437,13 +1437,7 @@ def dashboard():
       pass
 
 
-    response = make_response(render_template('dashboards_list.html', features = []))
-    #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
-    #response.headers['Cache-Control'] = 'public, no-cache, no-store, max-age=0'
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0, max-age=0'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '-1'
-    return response
+    return render_template('dashboards_list.html', user=session['profile'], env=env) 
 
 @app.route('/dashboards_list')
 @cross_origin()
