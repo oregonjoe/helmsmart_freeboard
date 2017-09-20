@@ -1519,10 +1519,7 @@ def dashboards_list():
         return render_template('dashboards_list.html', user=session['profile'], env=env)
 
       
-    except:
-      e = sys.exc_info()[0]
-      log.info('dashboards_list.html: Error in geting user  %s:  ' % str(e))
-      pass
+
 
     except TypeError, e:
       #log.info('dashboards_list: TypeError in  update pref %s:  ', userid)
@@ -1544,6 +1541,12 @@ def dashboards_list():
       #log.info('dashboards_list: IndexError in  update pref  %s:  ', userid)
       log.info('dashboards_list: IndexError in  update pref  %s:  ' % str(e))  
 
+    except:
+      e = sys.exc_info()[0]
+      log.info('dashboards_list.html: Error in geting user  %s:  ' % str(e))
+      pass
+
+    
     return render_template('dashboards_list.html',  env=env)
     #response = make_response(render_template('index.html', features = []))
     #response.headers['Cache-Control'] = 'public, max-age=0'
