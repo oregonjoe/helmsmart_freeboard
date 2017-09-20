@@ -1385,36 +1385,23 @@ def dashboard():
           mydata = session['profile']
           log.info("dashboard: customdata:%s", mydata)
           
-        except:
-          e = sys.exc_info()[0]
-          log.info('dashboard: Error in geting user.custom_data  %s:  ' % str(e))
-          pass
         
-      if user is not None:
-        log.info("dashboard.html: user exists:%s", user)
-        try:
-           log.info("dashboard.html: customdata:%s", user.custom_data)
-           mydata = user.custom_data
-
-           
-           mydevices = mydata['devices']
-           log.info("dashboard.html: mydevices:%s", mydevices)
-
-           for device in mydevices:
-             log.info("dashboard.html: mydevice  %s:%s", device['devicename'], device['deviceid'])
+          if mydata is not None:
+            user_email = mydata.name
+            log.info("dashboard.html: user exists:%s", user_email)
            
         except:
           e = sys.exc_info()[0]
           log.info('dashboard.html: Error in geting user.custom_data  %s:  ' % str(e))
-          pass
+          return render_template('dashboards_list.html', user=session['profile'], env=env) 
 
         try:
-          if user.email is not None:
+          if user_email is not None:
 
             conn = db_pool.getconn()
-            session['username'] = user.email
+            session['username'] = user_email
             
-            log.info("dashboard.html: email:%s", user.email )
+            log.info("dashboard.html: email:%s", user_email )
 
             query = "select userid from user_devices where useremail = %s group by userid"
             
@@ -1431,8 +1418,14 @@ def dashboard():
             # cursor.close
             db_pool.putconn(conn)
 
-            log.info("dashboard.html: email:%s", session['userid'])
-            
+            log.info("dashboard.html: userid:%s", session['userid'])
+
+            response = make_response(render_template('dashboard.html', features = []))
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0, max-age=0'
+            response.headers['Pragma'] = 'no-cache'
+            response.headers['Expires'] = '-1'
+            return response
+  
         except:
           e = sys.exc_info()[0]
           log.info('dashboard.html: Error in geting user.email  %s:  ' % str(e))
@@ -1444,7 +1437,7 @@ def dashboard():
       pass
 
 
-    response = make_response(render_template('dashboard.html', features = []))
+    response = make_response(render_template('dashboards_list.html', features = []))
     #response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
     #response.headers['Cache-Control'] = 'public, no-cache, no-store, max-age=0'
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0, max-age=0'
