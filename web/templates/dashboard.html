@@ -28,17 +28,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='plugins/helmsmart.widgets.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='plugins/plugin_highcharts_historical.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery_blockUI.js') }}"></script>
-      <script src="https://cdn.auth0.com/js/auth0/8.6.0/auth0.min.js"></script>
-       <!-- <script src="/public/app.js"> </script> -->
-        <!-- <link href="/public/app.css" rel="stylesheet"> -->
-		 <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/auth0app.js') }}" ></script> -->
-		 <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth0app.css') }}"/> -->
-        <script>
-        var AUTH0_CLIENT_ID = '{{env.AUTH0_CLIENT_ID}}';
-        var AUTH0_DOMAIN = '{{env.AUTH0_DOMAIN}}';
-        var AUTH0_CALLBACK_URL = '{{env.AUTH0_CALLBACK_URL if env.AUTH0_CALLBACK_URL else "http://localhost:3000/callback" }}';
-        var API_AUDIENCE = '{{env.API_ID}}';
-        </script>  
+
 	
     <script type="text/javascript">
       
@@ -331,9 +321,7 @@ function getDashboardJSON(prefuid)
 <div >
 </div>
 <div class="footer">
-	<div id = 'loginbutton'>
 
-	</div>
 <div>
   <center>
   {% if session['userid'] %}
