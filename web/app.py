@@ -1304,7 +1304,7 @@ def callback_handling():
         pass
 
         
-    return redirect('/index')
+    return redirect('/dashboards_list')
 
 @app.route('/auth0logout')
 def auth0logout():
