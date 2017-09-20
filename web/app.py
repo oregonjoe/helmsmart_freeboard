@@ -1387,7 +1387,7 @@ def dashboard():
           
         
           if mydata is not None:
-            user_email = mydata.name
+            user_email = mydata['name']
             log.info("dashboard.html: user exists:%s", user_email)
            
         except:
