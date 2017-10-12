@@ -7824,7 +7824,7 @@ def freeboard_dimmer_values():
 
         
         if point['dv2'] is not None:
-          statusvalues.append(int(point[dv2']))
+          statusvalues.append(int(point['dv2']))
         else:
           statusvalues.append(int(255))
 
