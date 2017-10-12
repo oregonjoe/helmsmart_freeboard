@@ -2622,7 +2622,19 @@
 						{
 
 					
-							var switchvalue = newValue[0].value;
+							var switchvalue = switchvalue = "---";
+													
+						
+							for(i=0; i< newValue.length; i++)
+							{
+								if(newValue[i].value != "---")
+								{
+									switchvalue = newValue[i].value;
+									break;
+								}
+							}
+						
+						
 							if (currentSettings.indicatormode == "active_high")
 							{
 								if(switchvalue == 0)
