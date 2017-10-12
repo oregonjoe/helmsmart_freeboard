@@ -7853,9 +7853,9 @@ def freeboard_dimmer_values():
         #statusvalues.append(int(Instance))
 
         # check if array was all NONE  - if so disgard it
-        if not (statusvalues[0] == 255 and statusvalues[1] == 255 and statusvalues[2] == 255 and statusvalues[3] == 255 and statusvalues[4] == 255 ):
-          dimmerstatus.append(statusvalues)
-          #log.info('freeboard_dimmer_values:  dimmerstatus%s:', switchstatus)          
+        #if not (statusvalues[0] == 255 and statusvalues[1] == 255 and statusvalues[2] == 255 and statusvalues[3] == 255 and statusvalues[4] == 255 ):
+        #  dimmerstatus.append(statusvalues)
+   
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
