@@ -196,6 +196,10 @@
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_status"
 					},
 					{
+						name: "Dimmer Values",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values"
+					},
+					{
 						name: "Switches",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_switch_bank_status"
 					}
