@@ -7795,6 +7795,12 @@ def freeboard_dimmer_values():
 
 
       dimmerstatus=[]
+      dimmer0=[]
+      dimmer1=[]
+      dimmer2=[]
+      dimmer3=[]
+      dimmer4=[]
+      
        
       points = list(response.get_points())
 
@@ -7812,39 +7818,39 @@ def freeboard_dimmer_values():
         statusvalues=[]
         
         if point['dv0'] is not None:
-          statusvalues.append(int(point['dv0']))
+          dimmer0.append(int(point['dv0']))
         else:
-          statusvalues.append(int(255))
+          dimmer0.append(int(255))
 
         
         if point['dv1'] is not None:
-          statusvalues.append(int(point['dv1']))
+          dimmer1.append(int(point['dv1']))
         else:
-          statusvalues.append(int(255))
+          dimmer1.append(int(255))
 
         
         if point['dv2'] is not None:
-          statusvalues.append(int(point['dv2']))
+          dimmer2.append(int(point['dv2']))
         else:
-          statusvalues.append(int(255))
+          dimmer2.append(int(255))
 
         
         if point['dv3'] is not None:
-          statusvalues.append(int(point['dv3']))
+          dimmer3.append(int(point['dv3']))
         else:
-          statusvalues.append(int(255))
+          dimmer3.append(int(255))
 
         
         if point['dv4'] is not None:
-          statusvalues.append(int(point['dv4']))
+          dimmer4.append(int(point['dv4']))
         else:
-          statusvalues.append(int(255))
+          dimmer4.append(int(255))
 
         
 
 
         #log.info('freeboard_dimmer_values:  statusvalues%s:', statusvalues)
-        statusvalues.append(int(Instance))
+        #statusvalues.append(int(Instance))
 
         # check if array was all NONE  - if so disgard it
         if not (statusvalues[0] == 255 and statusvalues[1] == 255 and statusvalues[2] == 255 and statusvalues[3] == 255 and statusvalues[4] == 255 ):
@@ -7853,7 +7859,7 @@ def freeboard_dimmer_values():
 
       callback = request.args.get('callback')
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_values':list(reversed(dimmerstatus))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
