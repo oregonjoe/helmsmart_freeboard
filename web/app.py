@@ -7818,33 +7818,33 @@ def freeboard_dimmer_values():
         statusvalues=[]
         
         if point['dv0'] is not None:
-          dimmer0.append(int(point['dv0']))
+          dimmer0.append({'epoch':ts, 'value':int(point['dv0']})
         else:
-          dimmer0.append(int(255))
+          dimmer0.append({'epoch':ts, 'value':'---')
 
         
         if point['dv1'] is not None:
-          dimmer1.append(int(point['dv1']))
+          dimmer1.append({'epoch':ts, 'value':int(point['dv1']})
         else:
-          dimmer1.append(int(255))
+          dimmer1.append({'epoch':ts, 'value':'---')
 
         
         if point['dv2'] is not None:
-          dimmer2.append(int(point['dv2']))
+          dimmer2.append({'epoch':ts, 'value':int(point['dv2']})
         else:
-          dimmer2.append(int(255))
+          dimmer2.append({'epoch':ts, 'value':'---')
 
         
         if point['dv3'] is not None:
-          dimmer3.append(int(point['dv3']))
+          dimmer3.append({'epoch':ts, 'value':int(point['dv3']})
         else:
-          dimmer3.append(int(255))
+          dimmer3.append({'epoch':ts, 'value':'---')
 
         
         if point['dv4'] is not None:
-          dimmer4.append(int(point['dv4']))
+          dimmer4.append({'epoch':ts, 'value':int(point['dv4']})
         else:
-          dimmer4.append(int(255))
+          dimmer4.append({'epoch':ts, 'value':'---')
 
         
 

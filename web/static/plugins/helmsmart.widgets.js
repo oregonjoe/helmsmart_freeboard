@@ -2622,7 +2622,7 @@
 						{
 
 					
-							var switchvalue = newValue[0];
+							var switchvalue = newValue[0].value;
 							if (currentSettings.indicatormode == "active_high")
 							{
 								if(switchvalue == 0)
