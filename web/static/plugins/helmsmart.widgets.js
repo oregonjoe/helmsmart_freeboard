@@ -2614,39 +2614,90 @@
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
             if (settingName == "value") {
-			if( newValue.constructor === Array)
-					{
-						if(newValue.length)
-						{	
-				var switchid=currentSettings.switchid;
-			    switchStates = newValue[0];
-				
-				var switchvalue = switchStates[switchid]
-				 
-				if(switchvalue == 0)
+				if( newValue.constructor === Array)
 				{
-					switchInstance = switchStates[16];
-					isOn = false;
-					updateState();
-				}
-				else if(switchvalue == 1)
-                {
-					switchInstance = switchStates[16];
-					isOn = true;
-					updateState();
-				}
-				else
-				{	indicatorElement.removeClass("on")
-					indicatorElement.removeClass("off")
+					if(newValue.length)
+					{	
+						if (currentSettings.indicatortype == "indicator_value")
+						{
+
 					
-				}
-            }
-			else
-			{
-				indicatorElement.removeClass("on")
-					indicatorElement.removeClass("off")
-			}
+							var switchvalue = newValue[0];
+							if (currentSettings.indicatormode == "active_high")
+							{
+								if(switchvalue == 0)
+								{
+									
+									isOn = false;
+									updateState();
+								}
+								else if(switchvalue >= 1)
+								{
+									
+									isOn = true;
+									updateState();
+								}
+								else
+								{	indicatorElement.removeClass("on")
+									indicatorElement.removeClass("off")
+									
+								}
+							}
+							else if (currentSettings.indicatormode == "active_low")
+							{
+								if(switchvalue == 0)
+								{
+									
+									isOn = true;
+									updateState();
+								}
+								else if(switchvalue >= 1)
+								{
+									
+									isOn = false;
+									updateState();
+								}
+								else
+								{	indicatorElement.removeClass("on")
+									indicatorElement.removeClass("off")
+									
+								}
+							}
+							
+							
+						}
+						else
+						{
+							var switchid=currentSettings.switchid;
+							switchStates = newValue[0];
+					
+							var switchvalue = switchStates[switchid]
+					 
+							if(switchvalue == 0)
+							{
+								switchInstance = switchStates[16];
+								isOn = false;
+								updateState();
+							}
+							else if(switchvalue == 1)
+							{
+								switchInstance = switchStates[16];
+								isOn = true;
+								updateState();
+							}
+							else
+							{	indicatorElement.removeClass("on")
+								indicatorElement.removeClass("off")
+								
+							}
+						}
 					}
+					else
+					{
+						indicatorElement.removeClass("on")
+						indicatorElement.removeClass("off")
+					}
+				}
 			}
             //if (settingName == "on_text") {
             //    onText = newValue[0].value;
@@ -2706,13 +2757,34 @@
 			"default_value": "indicator",	
 			"options": [
 				{
-					"name": "Indicator",
+					"name": "Indicator Value",
+					"value": "indicator_value"
+				}, 
+				{
+					"name": "Indicator Bank",
 					"value": "indicator"
 				}, 
 				{
 					"name": "Switch Bank",
 					"value": "switch"
 				}, 
+				]
+			},
+			{
+			"name": "indicatormode",
+			"display_name": "Type",
+			"type": "option",
+			"default_value": "active_low",	
+			"options": [
+				{
+					"name": "Active Low",
+					"value": "active_low"
+				}, 
+				{
+					"name": "Active High",
+					"value": "active_high"
+				}, 
+
 				]
 			},
 			{
