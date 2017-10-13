@@ -2621,7 +2621,7 @@
 						if (currentSettings.indicatortype == "indicator_value")
 						{
 
-					
+							var threshold = currentSettings.threshold
 							var switchvalue = switchvalue = "---";
 													
 						
@@ -2635,47 +2635,70 @@
 							}
 						
 						
-							if (currentSettings.indicatormode == "active_high")
+							if (currentSettings.indicatormode == "active_high_GT")
 							{
-								if(switchvalue == 0)
-								{
-									
-									isOn = false;
-									updateState();
-								}
-								else if(switchvalue >= 1)
+								if(switchvalue > threshold)
 								{
 									
 									isOn = true;
 									updateState();
 								}
 								else
-								{	indicatorElement.removeClass("on")
-									indicatorElement.removeClass("off")
-									
-								}
-							}
-							else if (currentSettings.indicatormode == "active_low")
-							{
-								if(switchvalue == 0)
-								{
-									
-									isOn = true;
-									updateState();
-								}
-								else if(switchvalue >= 1)
 								{
 									
 									isOn = false;
 									updateState();
 								}
-								else
-								{	indicatorElement.removeClass("on")
-									indicatorElement.removeClass("off")
-									
-								}
+								
 							}
-							
+							else if (currentSettings.indicatormode == "active_low_GT")
+							{
+								if(switchvalue > threshold)
+								{
+									
+									isOn = false;
+									updateState();
+								}
+								else 
+								{
+									
+									isOn = true;
+									updateState();
+								}
+								
+							}
+							else if (currentSettings.indicatormode == "active_high_LT")
+							{
+								if(switchvalue < threshold)
+								{
+									
+									isOn = true;
+									updateState();
+								}
+								else
+								{
+									
+									isOn = false;
+									updateState();
+								}
+								
+							}
+							else if (currentSettings.indicatormode == "active_low_LT")
+							{
+								if(switchvalue < threshold)
+								{
+									
+									isOn = false;
+									updateState();
+								}
+								else 
+								{
+									
+									isOn = true;
+									updateState();
+								}
+								
+							}
 							
 						}
 						else
@@ -2789,15 +2812,30 @@
 			"default_value": "active_low",	
 			"options": [
 				{
-					"name": "Active Low",
-					"value": "active_low"
+					"name": "Active Low - Less then ",
+					"value": "active_low_LT"
 				}, 
 				{
-					"name": "Active High",
-					"value": "active_high"
+					"name": "Active Low - Greater then ",
+					"value": "active_low_GT"
+				}, 
+				{
+					"name": "Active High - Less then ",
+					"value": "active_high_LT"
+				}, 
+				{
+					"name": "Active High - Greater then ",
+					"value": "active_high_GT"
 				}, 
 
 				]
+			},
+			{
+				name: "threshold",
+				display_name: "Threshold Value",
+				type: "number",
+				suffix: "",
+				default_value: 0
 			},
 			{
 			"name": "instance",
