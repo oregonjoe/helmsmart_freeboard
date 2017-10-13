@@ -996,6 +996,11 @@ def freeboard_savedashboardjson():
     log.info('freeboard_savedashboardjson: ProgrammingError in  update pref %s:  ', prefuid)
     log.info('freeboard_savedashboardjson: ProgrammingError in  update pref  %s:  ' % str(e))
     return jsonify(result="ProgrammingError error")
+
+  except psycopg2.DataError, e:
+    log.info('freeboard_savedashboardjson: DataError in  update pref %s:  ', prefuid)
+    log.info('freeboard_savedashboardjson: DataError in  update pref  %s:  ' % str(e))
+    return jsonify(result="DataError error")
   
   except TypeError, e:
     log.info('freeboard_savedashboardjson: TypeError in  update pref %s:  ', prefuid)
