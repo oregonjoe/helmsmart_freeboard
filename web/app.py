@@ -7648,6 +7648,13 @@ def freeboard_dimmer_values():
     response = None
 
     dimmerstatus=[]
+    dimmer0=[]
+    dimmer1=[]
+    dimmer2=[]
+    dimmer3=[]
+    dimmer4=[]
+
+      
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
@@ -7662,7 +7669,7 @@ def freeboard_dimmer_values():
 
     deviceid = getedeviceid(deviceapikey)
     
-    log.info("freeboard freeboard_bank_status deviceid %s", deviceid)
+    log.info("freeboard freeboard_dimmer_values deviceid %s", deviceid)
 
     if deviceid == "":
         callback = request.args.get('callback')
@@ -7709,7 +7716,7 @@ def freeboard_dimmer_values():
  
 
 
-    log.info("freeboard freeboard_bank_status data Query %s", query)
+    log.info("freeboard freeboard_dimmer_values data Query %s", query)
 
     try:
         response= dbc.query(query)
@@ -7756,19 +7763,20 @@ def freeboard_dimmer_values():
         log.info("freeboard: Error: %s" % e)
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_values':list(reversed(dimmerstatus))})    
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
+
 
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_values':list(reversed(dimmerstatus))})    
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_values':list(reversed(dimmerstatus))})    
+         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
 
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
