@@ -277,6 +277,11 @@ function editboard(sel)
 		document.getElementById("EditBoardID").value = boardid;
 		document.getElementById("EditName").value = boardname;
 		
+		document.getElementById("modal_new_name").value = boardname;
+		$("#myModal").modal();
+		
+		
+		
 }		
 function closepopup()
 {
@@ -380,10 +385,10 @@ function handlegetDashboardLists(response)
 			
 			//myCellText =  '<input type="button" value = "Edit" name="' + myPrefName + ":" + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this);" style="width:80px" >';
 			
-			//myCellText =  '<input type="button" value = "Edit" name="' + myPrefName + ":" + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this);" style="width:80px" >';
+			myCellText =  '<input type="button" value = "Edit" name="' + myPrefName + ":" + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this);" style="width:80px" >';
 			//myCellText =  '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit</button>';
-			myCellText =  '<button type="button" name="' + myPrefName + ":" + myButtonID +'" class="btn btn-default btn-sm btn-details" data-toggle="modal" data-target="#myModal"; style="width:80px">Edit</button>';
-						
+		//	myCellText =  '<button type="button" name="' + myPrefName + ":" + myButtonID +'" class="btn btn-default btn-sm btn-details" data-toggle="modal" data-target="#myModal"; style="width:80px">Edit</button>';
+				
 						
 			
 			var cell1 = row.insertCell(1);
