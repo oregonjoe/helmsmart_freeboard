@@ -205,7 +205,8 @@ function deleteboard(sel)
 	
 function editboardname()
 {
-	var newname = document.getElementById("EditName").value;
+	///var newname = document.getElementById("EditName").value;
+	var newname = document.getElementById("modal_new_name").value;
 	var prefuid = document.getElementById("EditBoardID").value;
 	
 	closepopup();
@@ -550,11 +551,11 @@ function getDashboardLists(userid)
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-backdrop="false" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Edit Name</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <p> <input type="text" id="modal_new_name"></p>
       </div>
       <div class="modal-footer">
 	  <button id="create-new-btn" type="submit" class="btn btn-primary btn-add" onclick="editboardname();">Edit Name</button>
