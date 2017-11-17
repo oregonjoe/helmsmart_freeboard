@@ -37,20 +37,7 @@
         var AUTH0_CALLBACK_URL = '{{env.AUTH0_CALLBACK_URL if env.AUTH0_CALLBACK_URL else "http://localhost:3000/callback" }}';
         var API_AUDIENCE = '{{env.API_ID}}';
         </script>  
-<style>
-    #popup-form {
-        display: none;
-        position: absolute;
-		            top: 50%;
-            left: 50%;
-            background: #fff;
-            width: 400px;
-            height: 200px;
-            margin-left: -250px; /*Half the value of width to center div*/
-            margin-top: -250px; /*Half the value of height to center div*/
-            z-index: 200;
-    }
-</style>
+
 	
     <script type="text/javascript">
 		var gUserID= "";
@@ -209,7 +196,7 @@ function editboardname()
 	var newname = document.getElementById("modal_new_name").value;
 	var prefuid = document.getElementById("EditBoardID").value;
 	
-	closepopup();
+	$('#myModal').modal({"hide"})  ;
 	
 	        $.blockUI({ 
      message: '<h1>Update in progress...</h1>',    
@@ -535,18 +522,6 @@ function getDashboardLists(userid)
 <script type="text/javascript" src="{{ url_for('static', filename='layouts/core.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery_blockUI.js') }}"></script>
 	
-	<div id="popup-form">
-  		<form method="get" action="" class="form-inline pull-left"> 
-				<div class="input-group"><input id="EditName" name="EditName" type="text" placeholder="enter new name" class="form-control">
-					<button id="create-new-btn" type="submit" class="btn btn-primary btn-add" onclick="editboardname();">Edit Name</button>
-					<input id="EditBoardID" name="EditBoardID" type="hidden"  class="form-control">
-				</div>
-				<div>
-				<button id="close-new-btn" type="submit" class="btn btn-primary btn-add" onclick="closepopup();">Close</button>
-				</div>
-		</form>
-		<h1>   </h1>
-	</div>
 	
 
 	<!-- Modal -->
