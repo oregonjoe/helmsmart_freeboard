@@ -266,12 +266,15 @@ function editboardname()
 function editboard(sel)
 {
 
-//	showPopup();
-	var boardid = sel.name;
+	//	showPopup();
+	var editname = sel.name.split(":");
+	var boardname = editname[0];
+	var boardid = editname[1];
 	
+	//document.getElementById("EditName").value
 		document.getElementById("popup-form").style.display = 'block';
 		document.getElementById("EditBoardID").value = boardid;
-		document.getElementById("EditName").value = boardid;
+		document.getElementById("EditName").value = boardname;
 		
 }		
 function closepopup()
@@ -376,7 +379,7 @@ function handlegetDashboardLists(response)
 			
 			//myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(f34583d42595de730af418a063e9c31a)"; style="width:80px" >';
 		//	myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(this)"; style="width:80px" >';
-			myCellText =  '<input type="button" value = "Edit" name="' + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this);" style="width:80px" >';
+			myCellText =  '<input type="button" value = "Edit" name="' + myPrefName + ":" + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this);" style="width:80px" >';
 			//myCellText =  '<input type="button" value="Edit" class="btn btn-default btn-sm btn-details" onclick="editboard(' + myPrefID +')"; style="width:80px" >';
 			var cell1 = row.insertCell(1);
 			cell1.innerHTML = myCellText;
