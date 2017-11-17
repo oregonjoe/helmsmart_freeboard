@@ -381,7 +381,7 @@ function handlegetDashboardLists(response)
 			
 			//myCellText =  '<input type="button" value = "Edit" name="' + myPrefName + ":" + myButtonID +'" class="btn btn-default btn-sm btn-details" onclick="editboard(this);" style="width:80px" >';
 			//myCellText =  '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Edit</button>';
-			myCellText =  '<button type="button" class="btn btn-default btn-sm btn-details" data-toggle="modal" data-target="#myModal">Edit</button>';
+			myCellText =  '<button type="button" name="' + myPrefName + ":" + myButtonID +'" class="btn btn-default btn-sm btn-details" data-toggle="modal" data-target="#myModal"; style="width:80px">Edit</button>';
 						
 						
 			
@@ -551,12 +551,14 @@ function getDashboardLists(userid)
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Edit Name</h4>
       </div>
       <div class="modal-body">
         <p>Some text in the modal.</p>
       </div>
       <div class="modal-footer">
+	  <button id="create-new-btn" type="submit" class="btn btn-primary btn-add" onclick="editboardname();">Edit Name</button>
+		<input id="EditBoardID" name="EditBoardID" type="hidden"  class="form-control">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
