@@ -44,8 +44,8 @@
 		            top: 50%;
             left: 50%;
             background: #fff;
-            width: 500px;
-            height: 500px;
+            width: 400px;
+            height: 200px;
             margin-left: -250px; /*Half the value of width to center div*/
             margin-top: -250px; /*Half the value of height to center div*/
             z-index: 200;
@@ -208,6 +208,8 @@ function editboardname()
 	var newname = document.getElementById("EditName").value;
 	var prefuid = document.getElementById("EditBoardID").value;
 	
+	closepopup();
+	
 	        $.blockUI({ 
      message: '<h1>Update in progress...</h1>',    
      css: {             
@@ -269,9 +271,19 @@ function editboard(sel)
 	
 		document.getElementById("popup-form").style.display = 'block';
 		document.getElementById("EditBoardID").value = boardid;
+		document.getElementById("EditName").value = boardid;
 		
 }		
+function closepopup()
+{
+
+//	showPopup();
+	//var boardid = sel.name;
 	
+		document.getElementById("popup-form").style.display = 'none';
+		
+		
+}		
 function handleaddnewboard()
 {
  $.unblockUI();
@@ -511,10 +523,13 @@ function getDashboardLists(userid)
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery_blockUI.js') }}"></script>
 	
 	<div id="popup-form">
-  		<form method="get" action="" class="form-inline pull-right"> 
-				<div class="input-group"><input id="EditName" name="EditName" type="text" placeholder="enter a name" class="form-control">
+  		<form method="get" action="" class="form-inline pull-left"> 
+				<div class="input-group"><input id="EditName" name="EditName" type="text" placeholder="enter new name" class="form-control">
 					<button id="create-new-btn" type="submit" class="btn btn-primary btn-add" onclick="editboardname();">Edit Name</button>
 					<input id="EditBoardID" name="EditBoardID" type="hidden"  class="form-control">
+				</div>
+				<div>
+				<button id="close-new-btn" type="submit" class="btn btn-primary btn-add" onclick="closepopup();">Close</button>
 				</div>
 		</form>
 		<h1>   </h1>
