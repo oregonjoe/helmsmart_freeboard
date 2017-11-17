@@ -273,12 +273,12 @@ function editboard(sel)
 	var boardid = editname[1];
 	
 	//document.getElementById("EditName").value
-		document.getElementById("popup-form").style.display = 'block';
+		//document.getElementById("popup-form").style.display = 'block';
 		document.getElementById("EditBoardID").value = boardid;
 		document.getElementById("EditName").value = boardname;
 		
 		document.getElementById("modal_new_name").value = boardname;
-		$("#myModal").modal();
+		$("#myModal").modal()({backdrop: false})  ;
 		
 		
 		
@@ -556,7 +556,7 @@ function getDashboardLists(userid)
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-backdrop="false" data-dismiss="modal">&times;</button>
+        <button type="button" class="close"  data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Edit Name</h4>
       </div>
       <div class="modal-body">
