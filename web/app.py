@@ -7707,7 +7707,7 @@ def freeboard_get_dimmer_values():
                       'last(value3) as dv3, '
                       'last(value4) as dv4 '
                      ' FROM {} '             
-                     'where {} )') \
+                     'where {} ') \
                 .format( measurement, serieskeys ) 
  
 
