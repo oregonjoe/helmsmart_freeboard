@@ -7642,7 +7642,7 @@ def freeboard_get_dimmer_values():
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('interval',"5min")
-    Instance = request.args.get('instance','0')
+    instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
     response = None
 
@@ -7685,7 +7685,7 @@ def freeboard_get_dimmer_values():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
     serieskeys= serieskeys +  " sensor='seasmartdimmer'  AND "
-    serieskeys= serieskeys +  " (instance='" + Instance + "') "
+    serieskeys= serieskeys +  " (instance='" + instance + "') "
 
 
 
