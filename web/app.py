@@ -7671,9 +7671,7 @@ def freeboard_get_dimmer_values():
     log.info("freeboard freeboard_dimmer_values deviceid %s", deviceid)
 
     if deviceid == "":
-        callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
-
+      return jsonify(result="ERROR")
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -7699,7 +7697,7 @@ def freeboard_get_dimmer_values():
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
-      
+    #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
     query = ('select  last(value0) as dv0, '
                      'last(value1) as dv1, '
@@ -7757,24 +7755,17 @@ def freeboard_get_dimmer_values():
         log.info('freeboard: Error in InfluxDB mydata append %s:', query)
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
-        callback = request.args.get('callback')
-        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
-
+        return jsonify(result="ERROR")
 
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
-        callback = request.args.get('callback')
-        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
+        return jsonify(result="ERROR")
 
+      
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        callback = request.args.get('callback')
-        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
+        return jsonify(result="ERROR")
 
-    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
@@ -7792,83 +7783,42 @@ def freeboard_get_dimmer_values():
     
     #log.info("freeboard jsonkey..%s", jsonkey )
     try:
-    
-      strvalue = ""
 
-      
-      status0=0x255
-      status1=0x255
-      status2=0x255
-      status3=0x255
-      status4=0x255
-
-
-      dimmerstatus=[]
-      dimmer0=[]
-      dimmer1=[]
-      dimmer2=[]
-      dimmer3=[]
-      dimmer4=[]
-      
-       
       points = list(response.get_points())
 
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-
-        if point['time'] is not None:
-          mydatetimestr = str(point['time'])
-          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
-          ts = int(mktime(dtt)*1000)
-  
-        statusvalues=[]
         
         if point['dv0'] is not None:
-          dimmer0.append({'epoch':ts, 'value':int(point['dv0'])})
+          dimmer0=int(point['dv0'])
         else:
-          dimmer0.append({'epoch':ts, 'value':'---'})
+          dimmer0='---'
 
-        
         if point['dv1'] is not None:
-          dimmer1.append({'epoch':ts, 'value':int(point['dv1'])})
+          dimmer1=int(point['dv1'])
         else:
-          dimmer1.append({'epoch':ts, 'value':'---'})
+          dimmer1='---'
 
-        
         if point['dv2'] is not None:
-          dimmer2.append({'epoch':ts, 'value':int(point['dv2'])})
+          dimmer2=int(point['dv2'])
         else:
-          dimmer2.append({'epoch':ts, 'value':'---'})
-
-        
+          dimmer2='---'
+          
         if point['dv3'] is not None:
-          dimmer3.append({'epoch':ts, 'value':int(point['dv3'])})
+          dimmer3=int(point['dv3'])
         else:
-          dimmer3.append({'epoch':ts, 'value':'---'})
+          dimmer3='---'
 
-        
         if point['dv4'] is not None:
-          dimmer4.append({'epoch':ts, 'value':int(point['dv4'])})
+          dimmer4=int(point['dv4'])
         else:
-          dimmer4.append({'epoch':ts, 'value':'---'})
+          dimmer4='---'
 
         
+      return jsonify(result="OK",  instance=instance, oldvalue0=dimmer0, oldvalue1=dimmer1, oldvalue2=dimmer2, oldvalue3=dimmer3, oldvalue4=dimmer4)
 
-
-        #log.info('freeboard_dimmer_values:  statusvalues%s:', statusvalues)
-        #statusvalues.append(int(Instance))
-
-        # check if array was all NONE  - if so disgard it
-        #if not (statusvalues[0] == 255 and statusvalues[1] == 255 and statusvalues[2] == 255 and statusvalues[3] == 255 and statusvalues[4] == 255 ):
-        #  dimmerstatus.append(statusvalues)
-   
-
-      callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
@@ -7901,14 +7851,10 @@ def freeboard_get_dimmer_values():
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
-        #return jsonify(update=False, status='missing' )
-        callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
-  
-    #return jsonify(status='error', update=False )
-    callback = request.args.get('callback')
-    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+        return jsonify(result="ERROR")
+
+    return jsonify(result="ERROR")
 
   
 
