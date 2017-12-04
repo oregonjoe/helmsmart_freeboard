@@ -7687,7 +7687,7 @@ def freeboard_get_weather_values():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " (sensor='environmental_data OR sensor='wind_data') AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity' OR type='TWIND True North')"
+    serieskeys= serieskeys +  " (sensor='environmental_data' OR sensor='wind_data') AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity' OR type='TWIND True North')"
 
 
 
