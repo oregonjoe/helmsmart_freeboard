@@ -7794,27 +7794,27 @@ def freeboard_get_weather_values():
         if point['temperature'] is not None:
           temperature=int(point['temperature'])
         else:
-          temperature='---'
+          temperature='unavailable'
 
         if point['atmospheric_pressure'] is not None:
           atmospheric_pressure=int(point['atmospheric_pressure'])
         else:
-          atmospheric_pressure='---'
+          atmospheric_pressure='unavailable'
 
         if point['humidity'] is not None:
           humidity=int(point['humidity'])
         else:
-          humidity='---'
+          humidity='unavailable'
           
         if point['wind_direction'] is not None:
           wind_direction=int(point['wind_direction'])
         else:
-          wind_direction='---'
+          wind_direction='unavailable'
 
         if point['wind_speed'] is not None:
           wind_speed=int(point['wind_speed'])
         else:
-          wind_speed='---'
+          wind_speed='unavailable'
 
         
       return jsonify(result="OK",  instance=instance, temperature=temperature, atmospheric_pressure=atmospheric_pressure, humidity=humidity, wind_direction=wind_direction, wind_speed=wind_speed)
