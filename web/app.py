@@ -7792,27 +7792,28 @@ def freeboard_get_weather_values():
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         
         if point['temperature'] is not None:
-          temperature=int(point['temperature'])
+          temperature=convertfbunits(point['temperature'],  convertunittype('temperature', units))
         else:
           temperature='unavailable'
 
         if point['atmospheric_pressure'] is not None:
-          atmospheric_pressure=int(point['atmospheric_pressure'])
+          atmospheric_pressure=convertfbunits(point['atmospheric_pressure'], 10)
         else:
           atmospheric_pressure='unavailable'
 
         if point['humidity'] is not None:
-          humidity=int(point['humidity'])
+          humidity=convertfbunits(point['humidity'], 26)
         else:
           humidity='unavailable'
           
         if point['wind_direction'] is not None:
-          wind_direction=int(point['wind_direction'])
+          wind_direction=convertfbunits(point['wind_direction'], 16)
         else:
           wind_direction='unavailable'
 
         if point['wind_speed'] is not None:
-          wind_speed=int(point['wind_speed'])
+          wind_speed=convertfbunits(point['wind_speed'],  convertunittype('speed', units))
+          
         else:
           wind_speed='unavailable'
 
