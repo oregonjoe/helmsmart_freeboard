@@ -7706,8 +7706,8 @@ def freeboard_get_weather_values():
                       'last(wind_direction)  as wind_direction, '
                       'last(wind_speed)  as wind_speed '
                      ' FROM {} '             
-                     'where {} ') \
-                .format( measurement, serieskeys ) 
+                     'where {} AND time > {}s and time < {}s') \
+                .format( measurement, serieskeys, startepoch, endepoch ) 
  
 
 
