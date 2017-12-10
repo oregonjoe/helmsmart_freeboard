@@ -7646,6 +7646,7 @@ def freeboard_get_weather_values():
     Interval = request.args.get('interval',"5min")
     instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
+    mode== request.args.get('mode',"last")
     units= request.args.get('units',"US")
     response = None
 
@@ -7700,15 +7701,67 @@ def freeboard_get_weather_values():
 
     #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
-    query = ('select  last(temperature)  as temperature, '
-                     'last(atmospheric_pressure)  as atmospheric_pressure, '
-                     'last(humidity) as humidity, '
-                      'last(wind_direction)  as wind_direction, '
-                      'last(wind_speed)  as wind_speed '
-                     ' FROM {} '             
-                     'where {} AND time > {}s and time < {}s') \
-                .format( measurement, serieskeys, startepoch, endepoch ) 
- 
+    if mode == 'min':
+      
+      query = ('select  min(temperature)  as temperature, '
+                       'min(atmospheric_pressure)  as atmospheric_pressure, '
+                       'min(humidity) as humidity, '
+                        'min(wind_direction)  as wind_direction, '
+                        'min(wind_speed)  as wind_speed '
+                       ' FROM {} '             
+                       'where {} AND time > {}s and time < {}s') \
+                  .format( measurement, serieskeys, startepoch, endepoch ) 
+   
+    elif mode == 'max':      
+      query = ('select  max(temperature)  as temperature, '
+                       'max(atmospheric_pressure)  as atmospheric_pressure, '
+                       'max(humidity) as humidity, '
+                        'max(wind_direction)  as wind_direction, '
+                        'max(wind_speed)  as wind_speed '
+                       ' FROM {} '             
+                       'where {} AND time > {}s and time < {}s') \
+                  .format( measurement, serieskeys, startepoch, endepoch ) 
+   
+
+
+    elif mode == 'avg':      
+      query = ('select  percentile(temperature,50)  as temperature, '
+                       'percentile(atmospheric_pressure,50)  as atmospheric_pressure, '
+                       'percentile(humidity,50) as humidity, '
+                        'percentile(wind_direction,50)  as wind_direction, '
+                        'percentile(wind_speed,50)  as wind_speed '
+                       ' FROM {} '             
+                       'where {} AND time > {}s and time < {}s') \
+                  .format( measurement, serieskeys, startepoch, endepoch ) 
+   
+   
+
+
+    else:      
+      query = ('select  last(temperature)  as temperature, '
+                       'last(atmospheric_pressure)  as atmospheric_pressure, '
+                       'last(humidity) as humidity, '
+                        'last(wind_direction)  as wind_direction, '
+                        'last(wind_speed)  as wind_speed '
+                       ' FROM {} '             
+                       'where {} AND time > {}s and time < {}s') \
+                  .format( measurement, serieskeys, startepoch, endepoch ) 
+   
+
+
+   
+
+
+    if mode == 'min':      
+      query = ('select  last(temperature)  as temperature, '
+                       'last(atmospheric_pressure)  as atmospheric_pressure, '
+                       'last(humidity) as humidity, '
+                        'last(wind_direction)  as wind_direction, '
+                        'last(wind_speed)  as wind_speed '
+                       ' FROM {} '             
+                       'where {} AND time > {}s and time < {}s') \
+                  .format( measurement, serieskeys, startepoch, endepoch ) 
+   
 
 
     log.info("freeboard freeboard_dimmer_values data Query %s", query)
@@ -7756,16 +7809,16 @@ def freeboard_get_weather_values():
         log.info('freeboard: Error in InfluxDB mydata append %s:', query)
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
-        return jsonify(result="ERROR")
+        return jsonify(result="error")
 
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
-        return jsonify(result="ERROR")
+        return jsonify(result="error")
 
       
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
-        return jsonify(result="ERROR")
+        return jsonify(result="error")
 
 
     keys = response.raw.get('series',[])
