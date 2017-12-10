@@ -7646,7 +7646,7 @@ def freeboard_get_weather_values():
     Interval = request.args.get('interval',"5min")
     instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
-    mode== request.args.get('mode',"last")
+    mode= request.args.get('mode',"last")
     units= request.args.get('units',"US")
     response = None
 
