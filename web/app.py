@@ -7701,8 +7701,10 @@ def freeboard_get_weather_values():
 
     #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
+    log.info("freeboard_get_weather_values mode = %s", mode)
+    
     if mode == 'min':
-      
+      #log.info("freeboard_get_weather_values mode is min")
       query = ('select  min(temperature)  as temperature, '
                        'min(atmospheric_pressure)  as atmospheric_pressure, '
                        'min(humidity) as humidity, '
@@ -7746,21 +7748,7 @@ def freeboard_get_weather_values():
                        ' FROM {} '             
                        'where {} AND time > {}s and time < {}s') \
                   .format( measurement, serieskeys, startepoch, endepoch ) 
-   
-
-
-   
-
-
-    if mode == 'min':      
-      query = ('select  last(temperature)  as temperature, '
-                       'last(atmospheric_pressure)  as atmospheric_pressure, '
-                       'last(humidity) as humidity, '
-                        'last(wind_direction)  as wind_direction, '
-                        'last(wind_speed)  as wind_speed '
-                       ' FROM {} '             
-                       'where {} AND time > {}s and time < {}s') \
-                  .format( measurement, serieskeys, startepoch, endepoch ) 
+  
    
 
 
