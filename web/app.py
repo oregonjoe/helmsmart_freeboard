@@ -7709,8 +7709,7 @@ def freeboard_get_weather_values():
                        'min(atmospheric_pressure)  as atmospheric_pressure, '
                        'min(humidity) as humidity, '
                         'min(wind_direction)  as wind_direction, '
-                        'min(wind_speed)  as wind_speed, '
-                        'time as time '
+                        'min(wind_speed)  as wind_speed '
                        ' FROM {} '             
                        'where {} AND time > {}s and time < {}s') \
                   .format( measurement, serieskeys, startepoch, endepoch ) 
@@ -7720,8 +7719,7 @@ def freeboard_get_weather_values():
                        'max(atmospheric_pressure)  as atmospheric_pressure, '
                        'max(humidity) as humidity, '
                         'max(wind_direction)  as wind_direction, '
-                        'max(wind_speed)  as wind_speed, '
-                        'time as time '
+                        'max(wind_speed)  as wind_speed '
                        ' FROM {} '             
                        'where {} AND time > {}s and time < {}s') \
                   .format( measurement, serieskeys, startepoch, endepoch ) 
@@ -7733,8 +7731,7 @@ def freeboard_get_weather_values():
                        'percentile(atmospheric_pressure,50)  as atmospheric_pressure, '
                        'percentile(humidity,50) as humidity, '
                         'percentile(wind_direction,50)  as wind_direction, '
-                        'percentile(wind_speed,50)  as wind_speed, '
-                        'time as time '
+                        'percentile(wind_speed,50)  as wind_speed '
                        ' FROM {} '             
                        'where {} AND time > {}s and time < {}s') \
                   .format( measurement, serieskeys, startepoch, endepoch ) 
@@ -7748,7 +7745,6 @@ def freeboard_get_weather_values():
                        'last(humidity) as humidity, '
                         'last(wind_direction)  as wind_direction, '
                         'last(wind_speed)  as wind_speed '
-                        'time as time '
                        ' FROM {} '             
                        'where {} AND time > {}s and time < {}s') \
                   .format( measurement, serieskeys, startepoch, endepoch ) 
@@ -7862,12 +7858,9 @@ def freeboard_get_weather_values():
         else:
           wind_speed='unavailable'
 
-        if point['time'] is not None:
-          mydatetimestr = int(point['time']*1000)
-          mydatetime = datetime.datetime.fromtimestamp(mydatetimestr)
-          myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
         
-      return jsonify(result="OK",  instance=instance, time=myjsondate,  temperature=temperature, atmospheric_pressure=atmospheric_pressure, humidity=humidity, wind_direction=wind_direction, wind_speed=wind_speed)
+      return jsonify(result="OK",  instance=instance,  temperature=temperature, atmospheric_pressure=atmospheric_pressure, humidity=humidity, wind_direction=wind_direction, wind_speed=wind_speed)
 
 
     except TypeError, e:
