@@ -8143,7 +8143,7 @@ def freeboard_get_weather_minmax_value():
           #mydatetime = datetime.datetime.fromtimestamp(mydatetimestr)
           #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
           mydatetimestr = str(point['time'])
-          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          myjsondate = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
           
       return jsonify(result="OK",  time=myjsondate, instance=instance,  temperature=temperature, atmospheric_pressure=atmospheric_pressure, humidity=humidity, wind_direction=wind_direction, wind_speed=wind_speed)
