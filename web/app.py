@@ -8139,10 +8139,11 @@ def freeboard_get_weather_minmax_value():
 
 
         if point['time'] is not None:
-          mydatetimestr = int(point['time']*1000)
-          mydatetime = datetime.datetime.fromtimestamp(mydatetimestr)
-          myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-
+          #mydatetimestr = int(point['time']*1000)
+          #mydatetime = datetime.datetime.fromtimestamp(mydatetimestr)
+          #myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
           
       return jsonify(result="OK",  time=myjsondate, instance=instance,  temperature=temperature, atmospheric_pressure=atmospheric_pressure, humidity=humidity, wind_direction=wind_direction, wind_speed=wind_speed)
