@@ -7927,8 +7927,8 @@ def freeboard_get_weather_minmax_value():
     epochtimes = getepochtimes(Interval)
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    if resolution == "":
-      resolution = epochtimes[2]
+    #if resolution == "":
+    #  resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
