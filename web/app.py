@@ -8097,47 +8097,52 @@ def freeboard_get_weather_minmax_value():
     
     #log.info("freeboard jsonkey..%s", jsonkey )
     try:
+      
+      temperature='unavailable'
+      atmospheric_pressure='unavailable'
+      humidity='unavailable'
+      wind_direction='unavailable'
+      wind_speed='unavailable'
+      myjsondate='unavailable'
 
-
-
+      
       points = list(response.get_points())
 
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        
-        if point['temperature'] is not None:
-          temperature=convertfbunits(point['temperature'],  convertunittype('temperature', units))
-        else:
-          temperature='unavailable'
 
-        if point['atmospheric_pressure'] is not None:
-          atmospheric_pressure=convertfbunits(point['atmospheric_pressure'], 10)
-        else:
-          atmospheric_pressure='unavailable'
+        if parameter == 'air temp':        
+          if point['temperature'] is not None:
+            temperature=convertfbunits(point['temperature'],  convertunittype('temperature', units))
 
-        if point['humidity'] is not None:
-          humidity=convertfbunits(point['humidity'], 26)
-        else:
-          humidity='unavailable'
-          
-        if point['wind_direction'] is not None:
-          wind_direction=convertfbunits(point['wind_direction'], 16)
-        else:
-          wind_direction='unavailable'
+            
+        if parameter == 'barometric pressure':     
+          if point['atmospheric_pressure'] is not None:
+            atmospheric_pressure=convertfbunits(point['atmospheric_pressure'], 10)
 
-        if point['wind_speed'] is not None:
-          wind_speed=convertfbunits(point['wind_speed'],  convertunittype('speed', units)) 
-        else:
-          wind_speed='unavailable'
+            
+        if parameter == 'humidity':     
+          if point['humidity'] is not None:
+            humidity=convertfbunits(point['humidity'], 26)
+
+            
+        if parameter == 'wind direction':                 
+          if point['wind_direction'] is not None:
+            wind_direction=convertfbunits(point['wind_direction'], 16)
+
+            
+        if parameter == 'wind speed':     
+          if point['wind_speed'] is not None:
+            wind_speed=convertfbunits(point['wind_speed'],  convertunittype('speed', units)) 
+
 
         if point['time'] is not None:
           mydatetimestr = int(point['time']*1000)
           mydatetime = datetime.datetime.fromtimestamp(mydatetimestr)
           myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-        else:
-          myjsondate='unavailable'
+
 
           
       return jsonify(result="OK",  time=myjsondate, instance=instance,  temperature=temperature, atmospheric_pressure=atmospheric_pressure, humidity=humidity, wind_direction=wind_direction, wind_speed=wind_speed)
