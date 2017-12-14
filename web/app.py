@@ -4141,8 +4141,6 @@ def freeboard_environmental():
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
           mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
-
-          #mytimezone= "US/Eastern"
           mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
 
           #dtt = mydatetime.timetuple()       
@@ -4249,6 +4247,7 @@ def freeboard_winddata():
     Interval = request.args.get('interval',"5min")
     resolution = request.args.get('resolution',"")
     windtype = request.args.get('type',"true")
+    mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
 
     
@@ -4417,7 +4416,12 @@ def freeboard_winddata():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
 
         if point['wind_speed'] is not None:       
@@ -4463,7 +4467,7 @@ def freeboard_winddata_apparent():
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
-
+    mytimezone = request.args.get('timezone',"UTC")
     starttime = 0
 
     epochtimes = getepochtimes(Interval)
@@ -4980,6 +4984,7 @@ def freeboard_location():
     Interval = request.args.get('interval',"5min")
     resolution = request.args.get('resolution',"")
     postype = request.args.get('type',"NULL")
+    mytimezone = request.args.get('timezone',"UTC")
     
     response = None
     log.info("freeboard_location deviceapikey %s", deviceapikey)
@@ -5155,7 +5160,12 @@ def freeboard_location():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
 
         
@@ -5242,7 +5252,7 @@ def freeboard_nav():
     resolution = request.args.get('resolution',"")
     navtype = request.args.get('type',"true")
     units= request.args.get('units',"US")
-
+    mytimezone = request.args.get('timezone',"UTC")
     
     response = None
 
@@ -5425,7 +5435,12 @@ def freeboard_nav():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
 
         
@@ -5485,6 +5500,8 @@ def freeboard_water_depth():
     navtype = request.args.get('type',"Paddle Wheel")
     units= request.args.get('units',"US")
     dataformat = request.args.get('format', 'json')
+    mytimezone = request.args.get('timezone',"UTC")
+
     
     response = None
 
@@ -5661,10 +5678,16 @@ def freeboard_water_depth():
 
         
 
+
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
 
         
@@ -5741,6 +5764,8 @@ def freeboard_battery():
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
     units= request.args.get('units',"US")
+    mytimezone = request.args.get('timezone',"UTC")
+
     
     response = None
     
@@ -5896,13 +5921,17 @@ def freeboard_battery():
         value3 = '---'
         value4 = '---'
 
+
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
-          ts = int(mktime(dtt)*1000)
 
-        
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
+          ts = int(mktime(dtt)*1000)
 
         if point['voltage'] is not None: 
           value1 = convertfbunits(point['voltage'], convertunittype('volts', units))
@@ -5956,6 +5985,8 @@ def freeboard_engine_aux():
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
     units= request.args.get('units',"US")
+    mytimezone = request.args.get('timezone',"UTC")
+
     
     response = None
     
@@ -6161,7 +6192,12 @@ def freeboard_engine_aux():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
           
         if point['boost_presure'] is not None:
@@ -6268,6 +6304,8 @@ def freeboard_engine():
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
     units= request.args.get('units',"US")
+    mytimezone = request.args.get('timezone',"UTC")
+
     
     response = None
     
@@ -6466,7 +6504,12 @@ def freeboard_engine():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
           
         if point['speed'] is not None:
@@ -6564,6 +6607,8 @@ def freeboard_ac_status():
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
     actype = request.args.get('type','GEN')
+    mytimezone = request.args.get('timezone',"UTC")
+
     
     response = None
     
@@ -6746,7 +6791,12 @@ def freeboard_ac_status():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
           
         
@@ -6833,6 +6883,7 @@ def freeboard_status():
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
+    mytimezone = request.args.get('timezone',"UTC")
     response = None
 
     
@@ -7017,7 +7068,12 @@ def freeboard_status():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
   
 
@@ -7190,6 +7246,7 @@ def freeboard_indicator_status():
     Instance = request.args.get('instance','0')
     Indicator = request.args.get('indicator','0')
     resolution = request.args.get('resolution',"")
+    mytimezone = request.args.get('timezone',"UTC")
     response = None
 
     switchstatus=[]
@@ -7345,7 +7402,12 @@ def freeboard_indicator_status():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
   
         
@@ -7424,6 +7486,7 @@ def freeboard_dimmer_status():
     Instance = request.args.get('instance','0')
     dimmerIndex = request.args.get('indicator','0')
     resolution = request.args.get('resolution',"")
+    mytimezone = request.args.get('timezone',"UTC")
     response = None
 
     dimmerstatus=[]
@@ -7579,7 +7642,12 @@ def freeboard_dimmer_status():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
   
         
@@ -7658,6 +7726,7 @@ def freeboard_get_weather_values():
     resolution = request.args.get('resolution',"")
     mode= request.args.get('mode',"last")
     units= request.args.get('units',"US")
+    mytimezone = request.args.get('timezone',"UTC")
     response = None
 
     dimmerstatus=[]
@@ -8234,6 +8303,7 @@ def freeboard_get_dimmer_values():
     Interval = request.args.get('interval',"5min")
     instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
+    mytimezone = request.args.get('timezone',"UTC")
     response = None
 
     dimmerstatus=[]
@@ -8457,6 +8527,7 @@ def freeboard_dimmer_values():
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
+    mytimezone = request.args.get('timezone',"UTC")
     response = None
 
     dimmerstatus=[]
@@ -8637,7 +8708,12 @@ def freeboard_dimmer_values():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
   
         statusvalues=[]
@@ -8737,6 +8813,7 @@ def freeboard_switch_bank_status():
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
+    mytimezone = request.args.get('timezone',"UTC")
     response = None
 
     switchstatus=[]
@@ -8930,7 +9007,12 @@ def freeboard_switch_bank_status():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
   
         statusvalues=[]
@@ -11445,6 +11527,8 @@ def freeboard_ac_status_array():
     Interval = request.args.get('Interval',"1hour")
     Instance = request.args.get('instance','0')
     actype = request.args.get('type','GEN')
+    mytimezone = request.args.get('timezone',"UTC")
+
     
     response = None
     
@@ -11607,7 +11691,12 @@ def freeboard_ac_status_array():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
 
         if point['volts'] is not None:
