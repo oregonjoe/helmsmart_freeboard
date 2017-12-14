@@ -4184,7 +4184,7 @@ def freeboard_environmental():
        """     
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+      myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity))})     
 
@@ -4434,7 +4434,7 @@ def freeboard_winddata():
        
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
 
       
       if  windtype =="apparent":
@@ -5217,7 +5217,7 @@ def freeboard_location():
       
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
@@ -5461,7 +5461,7 @@ def freeboard_nav():
       #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
@@ -5715,7 +5715,7 @@ def freeboard_water_depth():
       
       #elif dataformat == 'json':
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
@@ -5947,7 +5947,7 @@ def freeboard_battery():
                
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
@@ -6243,7 +6243,7 @@ def freeboard_engine_aux():
           
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','rpm':list(reversed(speed)), 'eng_temp':list(reversed(engine_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator_potential)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(level)), 'eng_hours':list(reversed(total_engine_hours))})     
@@ -6548,7 +6548,7 @@ def freeboard_engine():
           
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','rpm':list(reversed(speed)), 'eng_temp':list(reversed(engine_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator_potential)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(level)), 'eng_hours':list(reversed(total_engine_hours))})     
@@ -6823,7 +6823,7 @@ def freeboard_ac_status():
 
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','volts':list(reversed(volts)), 'amps':list(reversed(amps)), 'power':list(reversed(power)), 'energy':list(reversed(energy)), 'energy_interval':list(reversed(energy_caluculated))})     
 
@@ -7188,7 +7188,7 @@ def freeboard_status():
 
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(status0)), 'status1':list(reversed(status1)), 'status2':list(reversed(status2)),'status3':list(reversed(status3)), 'status4':list(reversed(status4)), 'status5':list(reversed(status5)),'status6':list(reversed(status6)), 'status7':list(reversed(status7)), 'status8':list(reversed(status8)),'status9':list(reversed(status9)), 'status10':list(reversed(status10)), 'status11':list(reversed(status11)),'status12':list(reversed(status12)), 'status13':list(reversed(status13)), 'status14':list(reversed(status14)), 'status15':list(reversed(status15))})     
@@ -7251,7 +7251,7 @@ def freeboard_indicator_status():
 
     switchstatus=[]
     mydatetime = datetime.datetime.now()
-    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
+    myjsondate= mydatetime.strftime("%B %d, %Y %H:%M:%S")      
     
     starttime = 0
 
@@ -7425,7 +7425,7 @@ def freeboard_indicator_status():
 
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(status0)), 'status1':list(reversed(status1)), 'status2':list(reversed(status2)),'status3':list(reversed(status3)), 'status4':list(reversed(status4)), 'status5':list(reversed(status5)),'status6':list(reversed(status6)), 'status7':list(reversed(status7)), 'status8':list(reversed(status8)),'status9':list(reversed(status9)), 'status10':list(reversed(status10)), 'status11':list(reversed(status11)),'status12':list(reversed(status12)), 'status13':list(reversed(status13)), 'status14':list(reversed(status14)), 'status15':list(reversed(status15))})     
@@ -7665,7 +7665,7 @@ def freeboard_dimmer_status():
 
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(status0)), 'status1':list(reversed(status1)), 'status2':list(reversed(status2)),'status3':list(reversed(status3)), 'status4':list(reversed(status4)), 'status5':list(reversed(status5)),'status6':list(reversed(status6)), 'status7':list(reversed(status7)), 'status8':list(reversed(status8)),'status9':list(reversed(status9)), 'status10':list(reversed(status10)), 'status11':list(reversed(status11)),'status12':list(reversed(status12)), 'status13':list(reversed(status13)), 'status14':list(reversed(status14)), 'status15':list(reversed(status15))})     
@@ -8759,7 +8759,7 @@ def freeboard_dimmer_values():
    
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
 
     except TypeError, e:
@@ -9243,7 +9243,7 @@ def freeboard_switch_bank_status():
 
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'bank0':value1, 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status0':status0, 'status1':status1, 'status2':status2, 'status3':status3, 'status4':status4, 'status5':status5, 'status6':status6, 'status7':status7, 'status8':status8, 'status9':status9, 'status10':status10, 'status11':status11, 'status12':status12, 'status13':status13, 'status14':status14, 'status15':status15})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','status0':list(reversed(status0)), 'status1':list(reversed(status1)), 'status2':list(reversed(status2)),'status3':list(reversed(status3)), 'status4':list(reversed(status4)), 'status5':list(reversed(status5)),'status6':list(reversed(status6)), 'status7':list(reversed(status7)), 'status8':list(reversed(status8)),'status9':list(reversed(status9)), 'status10':list(reversed(status10)), 'status11':list(reversed(status11)),'status12':list(reversed(status12)), 'status13':list(reversed(status13)), 'status14':list(reversed(status14)), 'status15':list(reversed(status15))})     
