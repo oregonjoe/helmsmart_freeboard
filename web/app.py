@@ -4145,8 +4145,8 @@ def freeboard_environmental():
           mytimezone= "US/Eastern"
           mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
 
-          #dtt = mydatetime.timetuple()       
-          dtt = mydatetimetz.timetuple()
+          dtt = mydatetime.timetuple()       
+          #dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
           
         if point['temperature'] is not None: 
