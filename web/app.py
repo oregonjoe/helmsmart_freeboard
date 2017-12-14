@@ -7914,7 +7914,7 @@ def freeboard_get_weather_minmax_value():
     parameter = request.args.get('parameter',"air temp")
     mode= request.args.get('mode',"last")
     units= request.args.get('units',"US")
-    timezone= request.args.get('timezone',"GMT")
+    timezone= request.args.get('timezone',"US/Pacific")
     response = None
 
     dimmerstatus=[]
