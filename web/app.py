@@ -17,6 +17,8 @@ from geopy.distance import vincenty
 import datetime
 import time
 from time import mktime
+import pytz
+from pytz import timezone
 #from datetime import datetime
 from itertools import groupby
 import pyonep
@@ -8147,7 +8149,20 @@ def freeboard_get_weather_minmax_value():
           #myjsondate = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
           #myjsondate = mydatetime.strftime( '%A, %B, %Y, at %I,%M,%p, %Z')
-          myjsondate = mydatetime.strftime( '%A,  at %I %M,%p, G M T')
+          localtz = timezone('US/Pacific')
+          mydatetimetz = localtz.localize(mydatetime)
+          myjsondate = mydatetimetz.strftime( '%A,  at %I %M,%p, G M T')
+
+          #from pytz import timezone
+          #localtz = timezone('Europe/Lisbon')
+          #dt_aware = localtz.localize(dt_unware)
+          #def ms_to_datetime(epoch_ms):
+          #return datetime.datetime.fromtimestamp(epoch_ms / 1.0, tz=pytz.utc)
+          #location.timezone = 'US/Pacific'
+          #timezone = location.timezone
+          #log.info("getSunRiseSet:  in proc getSunRiseSet Astral timezone: %s", timezone)
+          #mylocal = pytz.timezone(timezone)
+          
           
       return jsonify(result="OK",  time=myjsondate, instance=instance,  temperature=temperature, atmospheric_pressure=atmospheric_pressure, humidity=humidity, wind_direction=wind_direction, wind_speed=wind_speed)
 
