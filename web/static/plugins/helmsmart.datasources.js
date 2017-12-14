@@ -624,23 +624,23 @@
 					},
 					{
 						name: "Eastern",
-						value: "US/Eastern"
+						value: "US%2FEastern"
 					},
 					{
 						name: "Central",
-						value: "US/Central"
+						value: "US%2FCentral"
 					},
 					{
 						name: "Mountain",
-						value: "US/Mountain"
+						value: "US%2FMountain"
 					},
 					{
 						name: "Pacific",
-						value: "US/Pacific"
+						value: "US%2FPacific"
 					},
 					{
 						name: "Hawaii",
-						value: "US/Hawaii"
+						value: "US%2FHawaii"
 					}
 				]
 			},		
