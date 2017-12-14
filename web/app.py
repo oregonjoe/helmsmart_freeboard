@@ -7914,6 +7914,7 @@ def freeboard_get_weather_minmax_value():
     parameter = request.args.get('parameter',"air temp")
     mode= request.args.get('mode',"last")
     units= request.args.get('units',"US")
+    timezone= request.args.get('timezone',"GMT")
     response = None
 
     dimmerstatus=[]
@@ -8156,7 +8157,7 @@ def freeboard_get_weather_minmax_value():
           mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
           log.info('freeboard_get_weather_minmax_value:  mydatetimetz %s:', mydatetime_utctz)
           
-          mydatetimetz = mydatetime_utctz.astimezone(timezone('US/Pacific'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(timezone))
           log.info('freeboard_get_weather_minmax_value:  mydatetimetz %s:', mydatetimetz)
           
           #myjsondate = mydatetimetz.strftime( '%A,  at %I %M,%p, G M T')
