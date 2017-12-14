@@ -3963,7 +3963,7 @@ def freeboard_environmental():
     Interval = request.args.get('interval',"5min")
     #Interval = request.args.get('interval',"1hour")
     resolution = request.args.get('resolution',"")
-    mytimezone = = request.args.get('timezone',"UTC")
+    mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
 
     
