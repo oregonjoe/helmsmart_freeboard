@@ -3963,6 +3963,7 @@ def freeboard_environmental():
     Interval = request.args.get('interval',"5min")
     #Interval = request.args.get('interval',"1hour")
     resolution = request.args.get('resolution',"")
+    mytimezone = = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
 
     
@@ -4138,7 +4139,14 @@ def freeboard_environmental():
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
           mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          dtt = mydatetime.timetuple()
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+
+          mytimezone= "US/Eastern"
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
           
         if point['temperature'] is not None: 
