@@ -8152,7 +8152,11 @@ def freeboard_get_weather_minmax_value():
           #myjsondate = mydatetime.strftime( '%A, %B, %Y, at %I,%M,%p, %Z')
           #localtz = timezone('US/Pacific')
           #mydatetimetz = localtz.localize(mydatetime)
-          mydatetimetz = timezone('US/Pacific').localize(mydatetime)
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          log.info('freeboard_get_weather_minmax_value:  mydatetimetz %s:', mydatetime_utctz)
+          
+          mydatetimetz = mydatetime_utctz.astimezone(timezone('US/Pacific'))
           log.info('freeboard_get_weather_minmax_value:  mydatetimetz %s:', mydatetimetz)
           
           myjsondate = mydatetimetz.strftime( '%A,  at %I %M,%p, G M T')
