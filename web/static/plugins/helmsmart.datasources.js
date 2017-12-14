@@ -63,10 +63,16 @@
 				requestURL = requestURL + "&type=" + hstype;	
 
 
+	
+		
+
+			var hstimezone =  _.isUndefined(currentSettings.timezone) ? 'UTC' : currentSettings.units;
+			if(hstimezone != "")			
+				requestURL = requestURL + "&timezone=" + hstimezone;
+
 			var hsunits =  _.isUndefined(currentSettings.units) ? 'US' : currentSettings.units;
 			if(hsunits != "")			
-				requestURL = requestURL + "&units=" + hsunits;			
-						
+				requestURL = requestURL + "&units=" + hsunits;				
 						
 			if (errorStage == 2 && use_thingproxy) {
 				requestURL = (location.protocol == "https:" ? "https:" : "http:") + "//thingproxy.freeboard.io/fetch/" + encodeURI(currentSettings.url);
@@ -604,6 +610,40 @@
 					
 				]
 			},
+			
+				{
+				name: "timezone",
+				display_name: "Timezone",
+				description: "Timezone for device data ",
+				type: "option",
+				default_value: "UTC",
+				options: [
+					{
+						name: "UTC",
+						value: "UTC"
+					},
+					{
+						name: "Eastern",
+						value: "US/Eastern"
+					},
+					{
+						name: "Central",
+						value: "US/Central"
+					},
+					{
+						name: "Mountain",
+						value: "US/Mountain"
+					},
+					{
+						name: "Pacific",
+						value: "US/Pacific"
+					},
+					{
+						name: "Hawaii",
+						value: "US/Hawaii"
+					}
+				]
+			},		
 					
 			{
 				name: "units",
