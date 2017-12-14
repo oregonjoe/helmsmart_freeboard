@@ -66,7 +66,7 @@
 	
 		
 
-			var hstimezone =  _.isUndefined(currentSettings.timezone) ? 'UTC' : currentSettings.units;
+			var hstimezone =  _.isUndefined(currentSettings.timezone) ? 'UTC' : currentSettings.timezone;
 			if(hstimezone != "")			
 				requestURL = requestURL + "&timezone=" + hstimezone;
 
