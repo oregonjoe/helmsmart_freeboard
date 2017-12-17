@@ -24,9 +24,10 @@ from itertools import groupby
 import pyonep
 from pyonep import onep
 import urlparse
-from iron_cache import *
+#from iron_cache import *
 import logging
 import psycopg2
+import pylibmc
 from os import environ as env, path
 #test comment
 # *******************************************************************
@@ -110,6 +111,35 @@ AUTH0_CALLBACK_URL = environ.get('AUTH0_CALLBACK_URL')
 AUTH0_CLIENT_ID = environ.get('AUTH0_CLIENT_ID')
 AUTH0_CLIENT_SECRET = environ.get('AUTH0_CLIENT_SECRET')
 AUTH0_DOMAIN = environ.get('AUTH0_DOMAIN')
+
+
+
+mcservers = os.environ.get('MEMCACHIER_SERVERS', '').split(',')
+mcuser = os.environ.get('MEMCACHIER_USERNAME', '')
+mcpass = os.environ.get('MEMCACHIER_PASSWORD', '')
+
+mc = pylibmc.Client(mcservers, binary=True,
+                    username=mcuser, password=mcpass,
+                    behaviors={
+                      # Faster IO
+                      "tcp_nodelay": True,
+
+                      # Keep connection alive
+                      'tcp_keepalive': True,
+
+                      # Timeout for set/get requests
+                      'connect_timeout': 2000, # ms
+                      'send_timeout': 750 * 1000, # us
+                      'receive_timeout': 750 * 1000, # us
+                      '_poll_timeout': 2000, # ms
+
+                      # Better failover
+                      'ketama': True,
+                      'remove_failed': 1,
+                      'retry_timeout': 2,
+                      'dead_timeout': 30,
+                    })
+
 
 
 """
@@ -11796,9 +11826,9 @@ def setswitchapi():
     return jsonify(result="Error", switch=switchpgn)
 
   # Create an client object
-  cache = IronCache()
+  #cache = IronCache()
   switchitem=""
-  
+  """
   try:
     log.info("setswitchapi - IronCache  get key %s", "switch_"+str(instance))
     switchitem = cache.get(cache=deviceid, key="switch_"+str(instance))
@@ -11812,9 +11842,26 @@ def setswitchapi():
     log.info('setswitchapi - IronCache error  %s:  ', switchitem)
     e = sys.exc_info()[0]
     log.info('setswitchapi - IronCache error %s:  ' % e)
+  """
+
+  try:
+    switchitem = mc.get(deviceid + '_switch_'+str(instance))
+
+    log.info('setswitchapi - MemCache   deviceid %s payload %s:  ', deviceid, switchitem)
+
+  except NameError, e:
+    log.info('setswitchapi - MemCache NameError %s:  ' % str(e))
+
+    
+  except:
+    switchitem = ""
+    log.info('setswitchapi - MemCache error  deviceid %s payload %s:  ', deviceid, switchitem)
+    e = sys.exc_info()[0]
+    log.info('setswitchapi - MemCache error %s:  ' % e)
+
 
   newswitchitem=[]      
-  if switchitem != "":
+  if switchitem != "" and switchitem != "" and switchitem is not None:
     log.info("setswitchapi - IronCache  key exists %s", switchitem.value)
     jsondata = json.loads(switchitem.value)
     for item in jsondata:
@@ -11829,11 +11876,27 @@ def setswitchapi():
   #cache.put(cache="001EC0B415BF", key="switch", value="$PCDIN,01F20E,00000000,00,0055000000FFFFFF*23")
   #cache.put(cache="001EC0B415BF", key="switch", value=switchpgn )
   #switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
-  log.info("IronCache put switch key %s", newswitchitem)
-  log.info("setswitchapi - IronCache  put key %s", "switch_"+str(instance))
-  item=cache.put(cache=deviceid, key="switch_"+str(instance), value=newswitchitem )
-  #item=cache.put(cache=deviceid, key="switch", value=switchpgn )
-  log.info("IronCache response key %s", item)
+  log.info("Cache put switch key %s", newswitchitem)
+  log.info("setswitchapi - Cache  put key %s", "switch_"+str(instance))
+  #item=cache.put(cache=deviceid, key="switch_"+str(instance), value=newswitchitem )
+  #log.info("IronCache response key %s", item)
+
+  try:
+    mc.set(deviceid + "switch_"+str(instance) , newswitchitem, time=600)
+    log.info('setswitchapi - MemCache  set deviceid %s payload %s:  ', deviceid, newswitchitem)
+
+  except NameError, e:
+    log.info('setswitchapi - MemCache set NameError %s:  ' % str(e))
+
+    
+  except:
+    newswitchitem = ""
+    log.info('setswitchapi - MemCache set error  deviceid %s payload %s:  ', deviceid, newswitchitem)
+    e = sys.exc_info()[0]
+    log.info('setswitchapi - MemCache set error %s:  ' % e)
+
+
+  
   return jsonify(result="OK", switch=newswitchitem)
 
 # set the secret key.  keep this really secret:
