@@ -4062,7 +4062,7 @@ def freeboard_environmental():
 
 
       
-
+    """
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
@@ -4100,7 +4100,7 @@ def freeboard_environmental():
                         startepoch, endepoch,
                         resolution)
  
-    """
+    
 
     log.info("freeboard data Query %s", query)
 
