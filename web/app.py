@@ -4061,27 +4061,7 @@ def freeboard_environmental():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
 
-      
-    """
-    if serieskeys.find("*") > 0:
-        serieskeys = serieskeys.replace("*", ".*")
 
-        query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity from {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by time({}s) ') \
-                .format( measurement, serieskeys,
-                        startepoch, endepoch,
-                        resolution)
-    else:
-      
-      query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity from {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by time({}s) ') \
-                .format( measurement, serieskeys,
-                        startepoch, endepoch,
-                        resolution)
- 
-    """
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
