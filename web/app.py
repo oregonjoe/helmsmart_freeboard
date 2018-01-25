@@ -422,7 +422,7 @@ def convertfbunits(value, units):
 
     
   elif units == 27: #//="27">Volts</option>
-      return float("{0:.2f}".format(value *1.00))
+      return float("{0:.2f}".format(value *0.10))
 
 
   elif units == 31: #//="31">kWhrs</option>
@@ -7981,7 +7981,7 @@ def freeboard_get_engine_values():
           rpm='unavailable'
 
         if point['fuel_level'] is not None:
-          fuel_level=convertfbunits(point['fuel_level'],  convertunittype('volume', units)) 
+          fuel_level=convertfbunits(point['fuel_level'],  convertunittype('%', units)) 
         else:
           fuel_level='unavailable'
 
