@@ -7854,11 +7854,11 @@ def freeboard_get_engine_values():
 
 
     elif mode == 'avg':      
-      query = ('select  percentile(engine_temp)  as engine_temp, '
-                       'percentile(alternator_potential)  as alt_volts, '
-                       'percentile(oil_pressure) as oil_pressure, '
-                        'percentile(speed)  as rpm, '
-                        'percentile(level)  as fuel_level '
+      query = ('select  percentile(engine_temp, 50)  as engine_temp, '
+                       'percentile(alternator_potential, 50)  as alt_volts, '
+                       'percentile(oil_pressure, 50) as oil_pressure, '
+                        'percentile(speed, 50)  as rpm, '
+                        'percentile(level, 50)  as fuel_level '
                        ' FROM {} '             
                        'where {} AND time > {}s and time < {}s') \
                   .format( measurement, serieskeys, startepoch, endepoch ) 
