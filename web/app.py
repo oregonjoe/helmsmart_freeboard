@@ -7817,7 +7817,7 @@ def freeboard_get_engine_values():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
     serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='fluid_level') AND "
-    serieskeys= serieskeys +  " (instance='" + Instance + "') "
+    serieskeys= serieskeys +  " (instance='" + instance + "') "
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
