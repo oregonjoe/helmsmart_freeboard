@@ -7949,11 +7949,7 @@ def freeboard_get_engine_values():
     #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
     #jsonkey.append(strvaluekey)
     #print 'freeboard start processing data points:'
-          query = ('select  last(engine_temp)  as engine_temp, '
-                       'last(alternator_potential)  as alt_volts, '
-                       'last(oil_pressure) as oil_pressure, '
-                        'last(speed)  as rpm, '
-                        'last(level)  as fuel_level '
+
     #log.info("freeboard jsonkey..%s", jsonkey )
     try:
 
