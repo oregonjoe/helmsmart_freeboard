@@ -422,7 +422,7 @@ def convertfbunits(value, units):
 
     
   elif units == 27: #//="27">Volts</option>
-      return float("{0:.2f}".format(value *0.10))
+      return float("{0:.2f}".format(value *1.00))
 
 
   elif units == 31: #//="31">kWhrs</option>
