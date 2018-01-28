@@ -567,6 +567,14 @@
 						value: "true"
 					},
 					{
+						name: "Inside",
+						value: "inside"
+					},
+					{
+						name: "Outside",
+						value: "outside"
+					},
+					{
 						name: "UTIL",
 						value: "UTIL"
 					},					

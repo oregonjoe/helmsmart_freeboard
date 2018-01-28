@@ -3993,6 +3993,7 @@ def freeboard_environmental():
     Interval = request.args.get('interval',"5min")
     #Interval = request.args.get('interval',"1hour")
     resolution = request.args.get('resolution',"")
+    env_type = request.args.get('type',"outside")
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
 
@@ -4045,7 +4046,11 @@ def freeboard_environmental():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity')"
+    if env_type == "inside":
+      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Inside Temperature' OR type='Inside Humidity')"
+    else:
+      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity')"
+      
     #serieskeys= serieskeys +  " sensor='environmental_data'  AND type='Outside_Temperature'"
     #serieskeys= serieskeys +  " sensor='environmental_data'  "
     
