@@ -684,7 +684,7 @@
 				display_name: "Mode",
 				description: "method for averaging between points",
 				type: "option",
-				default_value: "Mean",
+				default_value: "Median",
 				options: [
 					{
 						name: "Mean",

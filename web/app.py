@@ -5834,7 +5834,7 @@ def freeboard_battery():
     resolution = request.args.get('resolution',"")
     units= request.args.get('units',"US")
     mytimezone = request.args.get('timezone',"UTC")
-    mode  = request.args.get('mode',"mean")
+    mode  = request.args.get('mode',"median")
     
     response = None
     
