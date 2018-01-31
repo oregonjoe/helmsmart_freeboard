@@ -4078,6 +4078,24 @@ def freeboard_environmental():
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
+
+    elif mode == "max":
+        query = ('select  max(temperature) AS temperature, max(atmospheric_pressure) AS  atmospheric_pressure, max(humidity) AS humidity from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s) ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+    elif mode == "min":
+        query = ('select  min(temperature) AS temperature, min(atmospheric_pressure) AS  atmospheric_pressure, min(humidity) AS humidity from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s) ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+        
     else:
       
       query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
@@ -5411,6 +5429,25 @@ def freeboard_nav():
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
+      
+    elif mode == "max":      
+
+      query = ('select  max(course_over_ground) AS cog, max(speed_over_ground) AS  sog, max(heading) AS heading  from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+      
+    elif mode == "min":      
+
+      query = ('select  min(course_over_ground) AS cog, min(speed_over_ground) AS  sog, min(heading) AS heading  from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)      
+      
     else:
       
       query = ('select  mean(course_over_ground) AS cog, mean(speed_over_ground) AS  sog, mean(heading) AS heading  from {} '
@@ -5646,16 +5683,33 @@ def freeboard_water_depth():
 
     if mode == "median":
       
-      #query = ('select  mean(depth) AS depth, mean(waterspeed) AS  waterspeed, mean(groundspeed) AS groundspeed, mean(groundspeed) AS groundspeed  from {} '
       query = ('select  median(depth) AS depth  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
-    else:
+
+    elif mode == "max":
       
-      #query = ('select  mean(course_over_ground) AS cog, mean(speed_over_ground) AS  sog, mean(heading) AS heading  from {} '
+      query = ('select  max(depth) AS depth  from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+    elif mode == "min":
+      
+      query = ('select  min(depth) AS depth  from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)      
+      
+    else:
+
       query = ('select  mean(depth) AS depth  from {} '            
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
@@ -5913,6 +5967,25 @@ def freeboard_battery():
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
+      
+    elif mode == "max":
+      
+      query = ('select  max(voltage) AS voltage, max(current) AS  current, max(temperature) AS temperature  from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+      
+    elif mode == "min":
+      
+      query = ('select  min(voltage) AS voltage, min(current) AS  current, min(temperature) AS temperature  from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+      
     else:
       
       query = ('select  mean(voltage) AS voltage, mean(current) AS  current, mean(temperature) AS temperature  from {} '
@@ -6165,6 +6238,22 @@ def freeboard_engine_aux():
 
     if mode == "median":
       query = ('select  median(tilt_or_trim) AS tilt_or_trim, median(boost_presure) AS  boost_presure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(actual_temperature) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
+
+    elif mode == "max":
+      query = ('select  max(tilt_or_trim) AS tilt_or_trim, max(boost_presure) AS  boost_presure, max(coolant_pressure) AS coolant_pressure, max(fuel_pressure) AS fuel_pressure, max(oil_temp) AS oil_temp ,  max(actual_temperature) AS egt_temperature , max(fuel_rate_average) AS fuel_rate_average  , max(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
+
+    elif mode == "min":
+      query = ('select  min(tilt_or_trim) AS tilt_or_trim, min(boost_presure) AS  boost_presure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(actual_temperature) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6491,8 +6580,24 @@ def freeboard_engine():
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
+                          resolution)
+      
+    elif mode == "max":      
+      query = ('select  max(speed) AS speed, max(engine_temp) AS  engine_temp, max(oil_pressure) AS oil_pressure, max(alternator_potential) AS alternator_potential, max(fuel_rate) AS fuel_rate ,  max(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
                           resolution) 
- 
+
+     elif mode == "min":      
+      query = ('select  min(speed) AS speed, min(engine_temp) AS  engine_temp, min(oil_pressure) AS oil_pressure, min(alternator_potential) AS alternator_potential, min(fuel_rate) AS fuel_rate ,  min(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
+  
     else:      
       query = ('select  mean(speed) AS speed, mean(engine_temp) AS  engine_temp, mean(oil_pressure) AS oil_pressure, mean(alternator_potential) AS alternator_potential, mean(fuel_rate) AS fuel_rate ,  mean(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
                        'where {} AND time > {}s and time < {}s '
@@ -6781,6 +6886,26 @@ def freeboard_ac_status():
     if mode == "median":
       
       query = ('select  median(ac_line_neutral_volts) AS volts, median(ac_amps) AS  amps, median(ac_watts) AS power, median(ac_kwatthours) AS energy FROM {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+
+      
+    elif mode == "max":
+      
+      query = ('select  max(ac_line_neutral_volts) AS volts, max(ac_amps) AS  amps, max(ac_watts) AS power, max(ac_kwatthours) AS energy FROM {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+
+
+    elif mode == "min":
+      
+      query = ('select  min(ac_line_neutral_volts) AS volts, min(ac_amps) AS  amps, min(ac_watts) AS power, min(ac_kwatthours) AS energy FROM {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
