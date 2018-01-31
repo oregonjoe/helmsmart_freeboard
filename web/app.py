@@ -4373,6 +4373,26 @@ def freeboard_winddata():
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
+      
+    elif mode == "max":
+      
+      query = ('select  max(wind_direction) AS wind_direction, max(wind_speed) AS  wind_speed from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)  ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+      
+    elif mode == "min":
+      
+      query = ('select  min(wind_direction) AS wind_direction, min(wind_speed) AS  wind_speed from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)  ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)      
+      
     else:       
       query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed from {} '
                      'where {} AND time > {}s and time < {}s '

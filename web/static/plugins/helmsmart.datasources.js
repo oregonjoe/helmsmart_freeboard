@@ -693,7 +693,16 @@
 					{
 						name: "Median",
 						value: "median"
+					},
+					{
+						name: "Max",
+						value: "max"
+					},
+					{
+						name: "Min",
+						value: "min"
 					}
+					
 				]
 			}
 			/*
