@@ -6590,7 +6590,7 @@ def freeboard_engine():
                           startepoch, endepoch,
                           resolution) 
 
-     elif mode == "min":      
+    elif mode == "min":      
       query = ('select  min(speed) AS speed, min(engine_temp) AS  engine_temp, min(oil_pressure) AS oil_pressure, min(alternator_potential) AS alternator_potential, min(fuel_rate) AS fuel_rate ,  min(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
