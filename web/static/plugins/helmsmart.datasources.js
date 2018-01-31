@@ -72,7 +72,11 @@
 
 			var hsunits =  _.isUndefined(currentSettings.units) ? 'US' : currentSettings.units;
 			if(hsunits != "")			
-				requestURL = requestURL + "&units=" + hsunits;				
+				requestURL = requestURL + "&units=" + hsunits;	
+
+			var hsmode =  _.isUndefined(currentSettings.mode) ? 'median' : currentSettings.mode;
+			if(hsmode != "")			
+				requestURL = requestURL + "&mode=" + hsmode;				
 						
 			if (errorStage == 2 && use_thingproxy) {
 				requestURL = (location.protocol == "https:" ? "https:" : "http:") + "//thingproxy.freeboard.io/fetch/" + encodeURI(currentSettings.url);
@@ -684,7 +688,7 @@
 				display_name: "Mode",
 				description: "method for averaging between points",
 				type: "option",
-				default_value: "Median",
+				default_value: "median",
 				options: [
 					{
 						name: "Mean",
