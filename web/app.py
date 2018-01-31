@@ -3996,7 +3996,7 @@ def freeboard_environmental():
     env_type = request.args.get('type',"outside")
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
-
+    mode= request.args.get('mode',"mean")
     
     response = None
 
@@ -4070,7 +4070,8 @@ def freeboard_environmental():
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
-        query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
+    if mode == "median":
+        query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
@@ -4303,7 +4304,7 @@ def freeboard_winddata():
     windtype = request.args.get('type',"true")
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
-
+    mode= request.args.get('mode',"mean")
     
     response = None
 
@@ -4360,15 +4361,24 @@ def freeboard_winddata():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
   
+    if serieskeys.find("*") > 0:
+        serieskeys = serieskeys.replace("*", ".*")
 
+    if mode == "median":
       
-    query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed from {} '
-                   'where {} AND time > {}s and time < {}s '
-                   'group by time({}s)  ') \
-              .format( measurement, serieskeys,
-                      startepoch, endepoch,
-                      resolution)
- 
+      query = ('select  median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)  ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+    else:       
+      query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)  ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
 
 
     log.info("freeboard data Query %s", query)
@@ -5307,6 +5317,7 @@ def freeboard_nav():
     navtype = request.args.get('type',"true")
     units= request.args.get('units',"US")
     mytimezone = request.args.get('timezone',"UTC")
+    mode = request.args.get('mode',"mean")
     
     response = None
 
@@ -5371,7 +5382,9 @@ def freeboard_nav():
     if serieskeys.find("*") > 0:
       serieskeys = serieskeys.replace("*", ".*")
 
-      query = ('select  mean(course_over_ground) AS cog, mean(speed_over_ground) AS  sog, mean(heading) AS heading  from {} '
+    if mode == "median":      
+
+      query = ('select  median(course_over_ground) AS cog, median(speed_over_ground) AS  sog, median(heading) AS heading  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5555,7 +5568,7 @@ def freeboard_water_depth():
     units= request.args.get('units',"US")
     dataformat = request.args.get('format', 'json')
     mytimezone = request.args.get('timezone',"UTC")
-
+    mode = request.args.get('mode',"mean")
     
     response = None
 
@@ -5610,9 +5623,10 @@ def freeboard_water_depth():
     if serieskeys.find("*") > 0:
       serieskeys = serieskeys.replace("*", ".*")
 
+    if mode == "median":
       
       #query = ('select  mean(depth) AS depth, mean(waterspeed) AS  waterspeed, mean(groundspeed) AS groundspeed, mean(groundspeed) AS groundspeed  from {} '
-      query = ('select  mean(depth) AS depth  from {} '
+      query = ('select  median(depth) AS depth  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5819,7 +5833,7 @@ def freeboard_battery():
     resolution = request.args.get('resolution',"")
     units= request.args.get('units',"US")
     mytimezone = request.args.get('timezone',"UTC")
-
+    mode = = request.args.get('mode',"mean")
     
     response = None
     
@@ -5870,13 +5884,22 @@ def freeboard_battery():
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
+    if mode == "median":
       
-    query = ('select  mean(voltage) AS voltage, mean(current) AS  current, mean(temperature) AS temperature  from {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format( measurement, serieskeys,
-                        startepoch, endepoch,
-                        resolution) 
+      query = ('select  median(voltage) AS voltage, median(current) AS  current, median(temperature) AS temperature  from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+    else:
+      
+      query = ('select  mean(voltage) AS voltage, mean(current) AS  current, mean(temperature) AS temperature  from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
  
 
 
@@ -6040,6 +6063,7 @@ def freeboard_engine_aux():
     resolution = request.args.get('resolution',"")
     units= request.args.get('units',"US")
     mytimezone = request.args.get('timezone',"UTC")
+    mode =  request.args.get('mode',"mean")
 
     
     response = None
@@ -6118,14 +6142,22 @@ def freeboard_engine_aux():
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
-      
-    query = ('select  mean(tilt_or_trim) AS tilt_or_trim, mean(boost_presure) AS  boost_presure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(actual_temperature) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format( measurement, serieskeys,
-                        startepoch, endepoch,
-                        resolution) 
- 
+    if mode == "median":
+      query = ('select  median(tilt_or_trim) AS tilt_or_trim, median(boost_presure) AS  boost_presure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(actual_temperature) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
+
+    else:        
+      query = ('select  mean(tilt_or_trim) AS tilt_or_trim, mean(boost_presure) AS  boost_presure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(actual_temperature) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
+   
 
 
     log.info("freeboard data Query %s", query)
@@ -6359,7 +6391,7 @@ def freeboard_engine():
     resolution = request.args.get('resolution',"")
     units= request.args.get('units',"US")
     mytimezone = request.args.get('timezone',"UTC")
-
+    mode = request.args.get('mode',"mean")
     
     response = None
     
@@ -6432,15 +6464,21 @@ def freeboard_engine():
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
-      
-    query = ('select  mean(speed) AS speed, mean(engine_temp) AS  engine_temp, mean(oil_pressure) AS oil_pressure, mean(alternator_potential) AS alternator_potential, mean(fuel_rate) AS fuel_rate ,  mean(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format( measurement, serieskeys,
-                        startepoch, endepoch,
-                        resolution) 
+    if mode == "median":      
+      query = ('select  median(speed) AS speed, median(engine_temp) AS  engine_temp, median(oil_pressure) AS oil_pressure, median(alternator_potential) AS alternator_potential, median(fuel_rate) AS fuel_rate ,  median(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
  
-
+    else:      
+      query = ('select  mean(speed) AS speed, mean(engine_temp) AS  engine_temp, mean(oil_pressure) AS oil_pressure, mean(alternator_potential) AS alternator_potential, mean(fuel_rate) AS fuel_rate ,  mean(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
 
     log.info("freeboard data Query %s", query)
 
@@ -6662,7 +6700,7 @@ def freeboard_ac_status():
     resolution = request.args.get('resolution',"")
     actype = request.args.get('type','GEN')
     mytimezone = request.args.get('timezone',"UTC")
-
+    mode = request.args.get('mode',"mean")
     
     response = None
     
@@ -6719,14 +6757,24 @@ def freeboard_ac_status():
 
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
+    if mode == "median":
       
-    query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(ac_kwatthours) AS energy FROM {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)') \
-                .format( measurement, serieskeys,
-                        startepoch, endepoch,
-                        resolution) 
- 
+      query = ('select  median(ac_line_neutral_volts) AS volts, median(ac_amps) AS  amps, median(ac_watts) AS power, median(ac_kwatthours) AS energy FROM {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+
+    else:
+      
+      query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(ac_kwatthours) AS energy FROM {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
+   
 
 
     log.info("freeboard data Query %s", query)

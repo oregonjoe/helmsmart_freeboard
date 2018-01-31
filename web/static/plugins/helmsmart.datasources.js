@@ -677,6 +677,24 @@
 						value: "nautical"
 					}
 				]
+			},		
+					
+			{
+				name: "mode",
+				display_name: "Mode",
+				description: "method for averaging between points",
+				type: "option",
+				default_value: "Mean",
+				options: [
+					{
+						name: "Mean",
+						value: "mean"
+					},
+					{
+						name: "Median",
+						value: "median"
+					}
+				]
 			}
 			/*
 			{
