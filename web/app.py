@@ -3997,7 +3997,7 @@ def freeboard_environmental():
     env_type = request.args.get('type',"outside")
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
-    mode= request.args.get('mode',"mean")
+    mode  = request.args.get('mode',"median")
     
     response = None
 
@@ -4305,7 +4305,7 @@ def freeboard_winddata():
     windtype = request.args.get('type',"true")
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
-    mode= request.args.get('mode',"mean")
+    mode  = request.args.get('mode',"median")
     
     response = None
 
