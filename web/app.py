@@ -209,6 +209,15 @@ def convertunittype(units, value):
     elif value == 'si':
       return 9
 
+  elif units == 'baro_pressure':
+    if value == 'US':
+      return 8
+    elif value == 'metric':
+      return 11
+    elif value == 'nautical':
+      return 10
+    elif value == 'si':
+      return 9
 
 
 
@@ -380,6 +389,11 @@ def convertfbunits(value, units):
 
   elif units == 10: #//="10">INHG</option>
       return float("{0:.2f}".format(value * 0.295229) )
+
+
+
+  elif units == 11: #//e="9">HPASCAL</option>
+      return float("{0:.2f}".format(value * 10.0))
 
 
   #//  case 11: //="11">- - -</option>
@@ -4226,7 +4240,7 @@ def freeboard_environmental():
         temperature.append({'epoch':ts, 'value':value1})
           
         if point['atmospheric_pressure'] is not None:         
-          value2 = convertfbunits(point['atmospheric_pressure'], 10)
+          value2 = convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))
         atmospheric_pressure.append({'epoch':ts, 'value':value2})
                     
         if point['humidity'] is not None:         
