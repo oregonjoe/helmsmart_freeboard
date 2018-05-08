@@ -9907,7 +9907,7 @@ def get_dbstats():
 
   useremail = getuseremail(deviceapikey)
     
-  log.info("freeboard freeboard_bank_status deviceid %s", useremail)
+  log.info("freeboard get_dbstats useremail %s", useremail)
 
   response = None
   
@@ -10194,10 +10194,11 @@ def get_dbstats_html():
   startepoch = epochtimes[0]
   endepoch = epochtimes[1]
   resolution = epochtimes[2]
-
+  
+  log.info("freeboard get_dbstats_html deviceapikey %s", deviceapikey)
   useremail = getuseremail(deviceapikey)
     
-  log.info("freeboard freeboard_bank_status deviceid %s", useremail)
+  log.info("freeboard get_dbstats_html useremail %s", useremail)
 
     
 
