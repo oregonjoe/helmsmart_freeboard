@@ -10228,9 +10228,9 @@ def get_dbstats_html():
 
   cursor = conn.cursor()
   #cursor.execute("select deviceid, devicename from user_devices where useremail = ")
-  query = "select deviceid, devicename from user_devices where useremail = %s "
-  cursor.execute(query,useremail)
-
+  #query = "select deviceid, devicename from user_devices where useremail = %s "
+  #cursor.execute(query,useremail)
+  cursor.execute("select deviceid, devicename from user_devices where useremail = %s" , (useremail,))
   
   records = cursor.fetchall()
 
