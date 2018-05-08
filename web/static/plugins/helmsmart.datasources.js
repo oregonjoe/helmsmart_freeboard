@@ -213,6 +213,10 @@
 						name: "Switches",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_switch_bank_status"
 					}
+					{
+						name: "Stats",
+						value: "https://helmsmart-freeboard.herokuapp.com/get_dbstats_html"
+					}
 
 				]
 			},	

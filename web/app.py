@@ -961,6 +961,74 @@ def getedeviceid(deviceapikey):
 
     return ""
 
+
+def getuseremail(deviceapikey):
+
+    conn = db_pool.getconn()
+
+    log.info("freeboard getuseremail data Query %s", deviceapikey)
+    #query = "select deviceid from user_devices where deviceapikey = %s"
+
+    #query = ("select deviceid from user_devices where deviceapikey = '{}' ") \
+    #            .format(deviceapikey )
+
+
+    #log.info("freeboard getedeviceid Query %s", query)
+
+
+    try:
+    # first check db to see if deviceapikey is matched to device id
+
+        cursor = conn.cursor()
+        #cursor.execute(query, (deviceapikey,))
+        #cursor.execute("select deviceid from user_devices where deviceapikey = '%s'" % deviceapikey)
+        #key=('bfeba0c3c5244269b4c8d276872519a6',)
+        cursor.execute("select useremail from user_devices where deviceapikey = %s" , (deviceapikey,))
+        #response= cursor.query(query)
+        i = cursor.fetchone()
+        log.info("freeboard getuseremail response %s", i)            
+        # see we got any matches
+        if cursor.rowcount == 0:
+        #if not response:
+            # cursor.close
+            db_pool.putconn(conn) 
+            return ""
+        
+        else:
+            useremail = str(i[0])
+            db_pool.putconn(conn) 
+            return useremail 
+
+
+    except TypeError, e:
+        log.info('freeboard: TypeError in geting useremail  %s:  ', deviceapikey)
+        log.info('freeboard: TypeError in geting deviceid  %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: KeyError in geting useremail  %s:  ', deviceapikey)
+        log.info('freeboard: KeyError in geting useremail  %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: NameError in geting useremail  %s:  ', deviceapikey)
+        log.info('freeboard: NameError in geting useremail  %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: IndexError in geting useremail  %s:  ', deviceapikey)
+        log.info('freeboard: IndexError in geting useremail  %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: Error in geting  useremail %s:  ', deviceapikey)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting useremail  %s:  ' % str(e))
+
+    # cursor.close
+    db_pool.putconn(conn)                       
+
+    return ""
+
+  
+
 @app.route('/freeboard_test/<apikey>', methods=['GET','POST'])
 @cross_origin()
 def freeboard_test(apikey):
@@ -9823,7 +9891,7 @@ def freeboard_switch_bank_status():
 @cross_origin()
 def get_dbstats():
 
-
+  deviceapikey = request.args.get('apikey','')
   Interval = request.args.get('Interval',"5min")
   rollup = request.args.get('rollup',"sum")
 
@@ -9837,7 +9905,9 @@ def get_dbstats():
   endepoch = epochtimes[1]
   resolution = epochtimes[2]
 
-
+  useremail = getuseremail(deviceapikey)
+    
+  log.info("freeboard freeboard_bank_status deviceid %s", useremail)
 
   response = None
   
@@ -10110,7 +10180,7 @@ def get_dbstats():
 @cross_origin()
 def get_dbstats_html():
 
-
+  deviceapikey = request.args.get('apikey','')
   Interval = request.args.get('Interval',"12hour")
   rollup = request.args.get('rollup',"sum")
 
@@ -10125,7 +10195,11 @@ def get_dbstats_html():
   endepoch = epochtimes[1]
   resolution = epochtimes[2]
 
+  useremail = getuseremail(deviceapikey)
+    
+  log.info("freeboard freeboard_bank_status deviceid %s", useremail)
 
+    
 
   response = None
   
@@ -10152,7 +10226,11 @@ def get_dbstats_html():
   conn = db_pool.getconn()
 
   cursor = conn.cursor()
-  cursor.execute("select deviceid, devicename from user_devices")
+  #cursor.execute("select deviceid, devicename from user_devices where useremail = ")
+  query = "select deviceid, devicename from user_devices where useremail = %s "
+  cursor.execute(query,useremail)
+
+  
   records = cursor.fetchall()
 
   db_pool.putconn(conn)   
