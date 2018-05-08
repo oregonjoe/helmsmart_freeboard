@@ -10510,8 +10510,9 @@ def get_dbstats_html():
       log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ' % str(e))
           
   except IndexError, e:
-      log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
-      log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+      #log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))
+      pass
 
   except ValueError, e:
     log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
