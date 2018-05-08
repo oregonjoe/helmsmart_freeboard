@@ -10263,7 +10263,7 @@ def get_dbstats_html():
       resolution = 300
     elif Interval == "2hour":
       resolution = 600
-    elif Interval == "1Day":
+    elif Interval == "1day":
       resolution = 7200
 
       
@@ -10401,7 +10401,7 @@ def get_dbstats_html():
     stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
     stathtml = stathtml + "<td>" + "now" + "</td>"
 
-    log.info("get_dbstats header %s ", stathtml)
+    log.info("get_dbstats header1 %s ", stathtml)
     units = "hr"
     period = 1
     
@@ -10433,7 +10433,7 @@ def get_dbstats_html():
     stathtml = stathtml + "</tr>"
 
     
-    log.info("get_dbstats header %s ", stathtml)
+    log.info("get_dbstats header2 %s ", stathtml)
 
     
     for statdata in jsondata:
