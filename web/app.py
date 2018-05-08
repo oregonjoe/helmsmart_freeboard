@@ -10181,7 +10181,7 @@ def get_dbstats():
 def get_dbstats_html():
 
   deviceapikey = request.args.get('apikey','')
-  Interval = request.args.get('Interval',"12hour")
+  Interval = request.args.get('interval',"12hour")
   rollup = request.args.get('rollup',"sum")
 
   response = None
@@ -10261,8 +10261,12 @@ def get_dbstats_html():
     resolution = 3600
     if Interval == "1hour":
       resolution = 300
+    elif Interval == "2hour":
+      resolution = 600
+    elif Interval == "1Day":
+      resolution = 7200
 
-    
+      
     resolutionstr = "PT" + str(resolution) + "S"
 
     #rollup = "mean"
@@ -10396,38 +10400,36 @@ def get_dbstats_html():
     
     stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
     stathtml = stathtml + "<td>" + "now" + "</td>"
+
+
+    units = "hr"
+    period = 1
     
     if Interval == "1hour":
       period = 5
-      stathtml = stathtml + "<td>" +  str(int(period) * 1) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 2) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 3) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 4) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 5) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 6) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 7) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 8) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 9) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 10) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 11) +"min" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 12) +"min" + "</td>"
-      
-    else:
-      
-      stathtml = stathtml + "<td>" +  str(int(period) * 1) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 2) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 3) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 4) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 5) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 6) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 7) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 8) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 9) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 10) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 11) +"hr" + "</td>"
-      stathtml = stathtml + "<td>" +  str(int(period) * 12) +"hr" + "</td>"
+      units = "min"
 
-    
+    elif Interval == "2hour":
+      period = 10
+      units = "min"
+      
+    elif Interval == "1Day":
+      period = 2
+      units = "hr"
+      
+    stathtml = stathtml + "<td>" +  str(int(period) * 1) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 2) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 3) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 4) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 5) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 6) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 7) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 8) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 9) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 10) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 11) +units + "</td>"
+    stathtml = stathtml + "<td>" +  str(int(period) * 12) +units + "</td>"
+
     stathtml = stathtml + "</tr>"
 
     
