@@ -10349,7 +10349,7 @@ def get_dbstats_html():
         if deviceid == record[0]:
           devicename = record[1]
               
-      log.info("get_dbstats deviceid %s - devicename %s", deviceid, devicename)
+      #log.info("get_dbstats deviceid %s - devicename %s", deviceid, devicename)
 
 
       #mydatetimestr = str(fields['time'])
@@ -10373,7 +10373,7 @@ def get_dbstats_html():
           
       strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value':values}
       jsondata.append(strvalue)
-      log.info("get_dbstats jsondata %s ", strvalue)
+      #log.info("get_dbstats jsondata %s ", strvalue)
 
     #return jsonify( message=jsondata)
 
@@ -10401,7 +10401,7 @@ def get_dbstats_html():
     stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
     stathtml = stathtml + "<td>" + "now" + "</td>"
 
-    log.info("get_dbstats header1 %s ", stathtml)
+    #log.info("get_dbstats header1 %s ", stathtml)
     units = "hr"
     period = 1
     
@@ -10413,7 +10413,7 @@ def get_dbstats_html():
       period = 10
       units = "min"
       
-    elif Interval == "1Day":
+    elif Interval == "1day":
       period = 2
       units = "hr"
       
@@ -10433,7 +10433,7 @@ def get_dbstats_html():
     stathtml = stathtml + "</tr>"
 
     
-    log.info("get_dbstats header2 %s ", stathtml)
+    #log.info("get_dbstats header2 %s ", stathtml)
 
     
     for statdata in jsondata:
@@ -10452,7 +10452,7 @@ def get_dbstats_html():
           stathtml = stathtml + "<td>" +  "---"  + "</td>"
           
         tindex = tindex + 1
-      log.info("get_dbstats deviceid %s - tindex %s", statdata['source'], tindex)
+      #log.info("get_dbstats deviceid %s - tindex %s", statdata['source'], tindex)
         
       stathtml = stathtml + "  </tr>"
 
