@@ -10349,7 +10349,7 @@ def get_dbstats_html():
         if deviceid == record[0]:
           devicename = record[1]
               
-      #log.info("get_dbstats deviceid %s - devicename %s", deviceid, devicename)
+      log.info("get_dbstats deviceid %s - devicename %s", deviceid, devicename)
 
 
       #mydatetimestr = str(fields['time'])
@@ -10373,7 +10373,7 @@ def get_dbstats_html():
           
       strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value':values}
       jsondata.append(strvalue)
-
+      log.info("get_dbstats jsondata %s ", strvalue)
 
     #return jsonify( message=jsondata)
 
@@ -10401,7 +10401,7 @@ def get_dbstats_html():
     stathtml = stathtml + "<tr> <td>" + "DeviceID" + "</td><td>" + "Device Name" + "</td>"
     stathtml = stathtml + "<td>" + "now" + "</td>"
 
-
+    log.info("get_dbstats header %s ", stathtml)
     units = "hr"
     period = 1
     
@@ -10433,16 +10433,9 @@ def get_dbstats_html():
     stathtml = stathtml + "</tr>"
 
     
-    """
-    for stat in jsondata:
-      if stat['value'] != None:
-        total = total + float(stat['value'])
-    """
+    log.info("get_dbstats header %s ", stathtml)
+
     
-    """
-    if len(jsondata) > 0:
-      mydatetimestr = str(jsondata[0]['epoch'])
-    """
     for statdata in jsondata:
       stathtml = stathtml + "<tr> <td>" +  str(statdata['source']) + "</td><td>" + str(statdata['name']) + " </td>"
 
