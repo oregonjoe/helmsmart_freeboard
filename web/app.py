@@ -74,7 +74,6 @@ from flask.ext.cors import CORS, cross_origin
 
 
 
-#import db
 
 def connection_from(url):
   config = urlparse.urlparse(url)
@@ -180,6 +179,29 @@ def hash_string(string):
     #salted_hash = string + application.config['SECRET_KEY']
     salted_hash = string + app.secret_key
     return md5.new(salted_hash).hexdigest()
+
+  
+#calculate baro offset in milibars from altitude in feet
+def getAtmosphericCompensation(feet):
+
+  if feet == '---':
+    return 0
+
+  index = 0
+  
+  try:
+    # divide by 200
+    index = int(feet * 0.005)
+  except"
+    return 0
+
+  #index range is 0 to 50
+  gAtmosphericCompensation = [0,7,15,22,29,36,43,50,57,64,71,78,85,92,98,105,112,118,125,132,138,145,151,157,164,170,176,183,189,195,201,207,213,219,225,231,237,243,249,255,261,266,272,278,283,289,295,300,306,311,316]
+
+  baro_milibars = gAtmosphericCompensation[index]
+  baro_pascals = float(baro_milibars * 0.1)
+  # convert to pascals
+  return baro_pascals
 
 
 #Convert Units between US and Metric
@@ -4275,6 +4297,7 @@ def freeboard_environmental():
 
       temperature=[]
       atmospheric_pressure=[]
+      atmospheric_pressure_sea=[]
       humidity=[]
       altitude=[]
       ts =startepoch*1000
@@ -4292,6 +4315,7 @@ def freeboard_environmental():
         value2 = '---'
         value3 = '---'
         value4 = '---'
+        value5 = '---'
       
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
@@ -4321,7 +4345,17 @@ def freeboard_environmental():
           value4 = convertfbunits(point['altitude'], 32)
         altitude.append({'epoch':ts, 'value':value4})
 
-
+        if point['atmospheric_pressure'] is not None and point['altitude'] is not None:
+          #get pressure in KPa
+          value2 = convertfbunits(point['atmospheric_pressure'], 9)
+          #get altitde in feet
+          value4 = convertfbunits(point['altitude'], 32)
+          # get adjustment for altitude in KPa
+          value5 = getAtmosphericCompensation(value4)
+          #add offset if any in KPa
+          value5 = convertfbunits(value2 + value5, convertunittype('baro_pressure', units))
+          
+        atmospheric_pressure_sea.append({'epoch':ts, 'value':value5})        
 
 
           
@@ -4351,7 +4385,7 @@ def freeboard_environmental():
       callback = request.args.get('callback')
       myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
 
     except AttributeError, e:
       #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
