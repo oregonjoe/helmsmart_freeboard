@@ -4133,6 +4133,7 @@ def freeboard_environmental():
       serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Inside Temperature' OR type='Inside Humidity')"
     else:
       serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity')"
+
       
     #serieskeys= serieskeys +  " sensor='environmental_data'  AND type='Outside_Temperature'"
     #serieskeys= serieskeys +  " sensor='environmental_data'  "
@@ -4154,7 +4155,7 @@ def freeboard_environmental():
         serieskeys = serieskeys.replace("*", ".*")
 
     if mode == "median":
-        query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity from {} '
+        query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity , median(altitude) AS altitude from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
@@ -4162,7 +4163,7 @@ def freeboard_environmental():
                         resolution)
 
     elif mode == "max":
-        query = ('select  max(temperature) AS temperature, max(atmospheric_pressure) AS  atmospheric_pressure, max(humidity) AS humidity from {} '
+        query = ('select  max(temperature) AS temperature, max(atmospheric_pressure) AS  atmospheric_pressure, max(humidity) AS humidity, max(altitude) AS altitude from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
@@ -4170,7 +4171,7 @@ def freeboard_environmental():
                         resolution)
 
     elif mode == "min":
-        query = ('select  min(temperature) AS temperature, min(atmospheric_pressure) AS  atmospheric_pressure, min(humidity) AS humidity from {} '
+        query = ('select  min(temperature) AS temperature, min(atmospheric_pressure) AS  atmospheric_pressure, min(humidity) AS humidity, min(altitude) AS altitude from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
@@ -4180,7 +4181,7 @@ def freeboard_environmental():
         
     else:
       
-      query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity from {} '
+      query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity, mean(altitude) AS altitude from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
@@ -4275,7 +4276,7 @@ def freeboard_environmental():
       temperature=[]
       atmospheric_pressure=[]
       humidity=[]
-
+      altitude=[]
       ts =startepoch*1000
 
 
@@ -4315,6 +4316,14 @@ def freeboard_environmental():
           value3 = convertfbunits(point['humidity'], 26)
         humidity.append({'epoch':ts, 'value':value3})
 
+                    
+        if point['altitude'] is not None:         
+          value4 = convertfbunits(point['altitude'], 32)
+        altitude.append({'epoch':ts, 'value':value4})
+
+
+
+
           
         #mydatetimestr = str(point['time'])
 
@@ -4342,7 +4351,7 @@ def freeboard_environmental():
       callback = request.args.get('callback')
       myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude))})     
 
     except AttributeError, e:
       #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
