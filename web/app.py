@@ -192,7 +192,7 @@ def getAtmosphericCompensation(feet):
   try:
     # divide by 200
     index = int(feet * 0.005)
-  except"
+  except:
     return 0
 
   #index range is 0 to 50
@@ -4356,7 +4356,7 @@ def freeboard_environmental():
           value5 = convertfbunits(value2 + value5, convertunittype('baro_pressure', units))
           
         atmospheric_pressure_sea.append({'epoch':ts, 'value':value5})        
-
+ 
 
           
         #mydatetimestr = str(point['time'])
