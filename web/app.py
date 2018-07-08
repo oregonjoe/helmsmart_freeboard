@@ -4285,7 +4285,7 @@ def freeboard_environmental():
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing', 'update':'False','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity))})     
 
-    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
     
     try:
     
@@ -4306,7 +4306,7 @@ def freeboard_environmental():
       
       points = list(response.get_points())
 
-      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
