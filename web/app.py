@@ -4315,7 +4315,7 @@ def freeboard_environmental():
       #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         
         value1 = '---'
         value2 = '---'
