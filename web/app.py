@@ -4309,7 +4309,7 @@ def freeboard_environmental():
       #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         
         value1 = '---'
         value2 = '---'
@@ -4391,7 +4391,7 @@ def freeboard_environmental():
       #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
       #e = sys.exc_info()[0]
 
-      log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ' % str(e))
+      log.info('freeboard_environmental: AttributeError in freeboard_environmental %s:  ' % str(e))
       
     except TypeError, e:
       l#og.info('inFluxDB_GPS: TypeError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
@@ -4403,17 +4403,17 @@ def freeboard_environmental():
       log.info('freeboard_environmental: ValueError in freeboard_environmental point %s:  ', point)
       #e = sys.exc_info()[0]
 
-      log.info('inFluxDB_GPS: ValueError in freeboard_environmental %s:  ' % str(e))            
+      log.info('freeboard_environmental: ValueError in freeboard_environmental point%s:  ' % str(e))            
       
     except NameError, e:
       #log.info('inFluxDB_GPS: NameError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
       #e = sys.exc_info()[0]
-      log.info('inFluxDB_GPS: ValueError in freeboard_environmental %s:  ' % str(e))           
+      log.info('freeboard_environmental: NameError in freeboard_environmental %s:  ' % str(e))           
 
     except IndexError, e:
-      #log.info('inFluxDB_GPS: IndexError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+      log.info('freeboard_environmental: IndexError in freeboard_environmental point %s:  ', point)
       #e = sys.exc_info()[0]
-      log.info('inFluxDB_GPS: ValueError in freeboard_environmental %s:  ' % str(e))
+      log.info('freeboard_environmental: IndexError in freeboard_environmental %s:  ' % str(e))
       
     except pyonep.exceptions.JsonRPCRequestException as ex:
         print('JsonRPCRequestException: {0}'.format(ex))
