@@ -187,6 +187,12 @@ def getAtmosphericCompensation(feet):
   if feet == '---':
     return 0
 
+  if int(feet) < 0:
+    return 0
+  
+  if int(feet) > 10000:
+    return 317
+  
   index = 0
   
   try:
