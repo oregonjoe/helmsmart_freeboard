@@ -8111,18 +8111,18 @@ def freeboard_indicator_runtime():
           
         if point['status'] is not None:
           value1 = convertfbunits( point['status'], convertunittype('count', units))
-        status.append({'epoch':ts, 'status':value1})
+        status.append({'epoch':ts, 'status':float("{0:.2f}".format(value1 * 1.0))})
           
         
         if point['runtime'] is not None:
           value2 = datetime.datetime.fromtimestamp(int(point['runtime'])).strftime('%H.%M')
           #value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
-        runtime.append({'epoch':ts, 'runtime':value2})
+        runtime.append({'epoch':ts, 'runtime':float("{0:.2f}".format(value2 * 1.0))})
           
         
         if point['cycles'] is not None:
           value3=  convertfbunits(point['cycles'], convertunittype('count', units))
-        cycles.append({'epoch':ts, 'cycles':value3})
+        cycles.append({'epoch':ts, 'cycles':float("{0:.2f}".format(value3 * 1.0))})
           
         
                  
@@ -8132,6 +8132,11 @@ def freeboard_indicator_runtime():
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','indicator':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','indicator':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
   
+
+
+
+
+
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
