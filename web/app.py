@@ -6373,7 +6373,7 @@ def freeboard_engine_aux():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
     if mode == "median":
-      query = ('select  median(tilt_or_trim) AS tilt_or_trim, median(boost_presure) AS  boost_presure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(egt_temperature) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+      query = ('select  median(tilt_or_trim) AS tilt_or_trim, median(boost_presure) AS  boost_presure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(egt_temp) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6381,7 +6381,7 @@ def freeboard_engine_aux():
                           resolution) 
 
     elif mode == "max":
-      query = ('select  max(tilt_or_trim) AS tilt_or_trim, max(boost_presure) AS  boost_presure, max(coolant_pressure) AS coolant_pressure, max(fuel_pressure) AS fuel_pressure, max(oil_temp) AS oil_temp ,  max(egt_temperature) AS egt_temperature , max(fuel_rate_average) AS fuel_rate_average  , max(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+      query = ('select  max(tilt_or_trim) AS tilt_or_trim, max(boost_presure) AS  boost_presure, max(coolant_pressure) AS coolant_pressure, max(fuel_pressure) AS fuel_pressure, max(oil_temp) AS oil_temp ,  max(egt_temp) AS egt_temperature , max(fuel_rate_average) AS fuel_rate_average  , max(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6389,7 +6389,7 @@ def freeboard_engine_aux():
                           resolution) 
 
     elif mode == "min":
-      query = ('select  min(tilt_or_trim) AS tilt_or_trim, min(boost_presure) AS  boost_presure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(egt_temperature) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+      query = ('select  min(tilt_or_trim) AS tilt_or_trim, min(boost_presure) AS  boost_presure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(egt_temp) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6397,7 +6397,7 @@ def freeboard_engine_aux():
                           resolution) 
 
     else:        
-      query = ('select  mean(tilt_or_trim) AS tilt_or_trim, mean(boost_presure) AS  boost_presure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(egt_temperature) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+      query = ('select  mean(tilt_or_trim) AS tilt_or_trim, mean(boost_presure) AS  boost_presure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(egt_temp) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
