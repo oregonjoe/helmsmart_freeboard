@@ -494,7 +494,7 @@ def convertfbunits(value, units):
 
   elif units == 37: #//="37">Time</option>
       #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
-      return (datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
+      return float("{0:.2f}".format((datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))))
 
   elif units == 38: #//="38">Date/time</option>
       #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
@@ -8075,7 +8075,7 @@ def freeboard_indicator_runtime():
       value8 = '---'
 
 
-      status=[]
+      indicator=[]
       runtime=[]
       cycles=[]
 
@@ -8111,18 +8111,18 @@ def freeboard_indicator_runtime():
           
         if point['status'] is not None:
           value1 = convertfbunits( point['status'], convertunittype('count', units))
-        status.append({'epoch':ts, 'status':float("{0:.2f}".format(int(value1) * 1.0))})
+        indicator.append({'epoch':ts, 'indicator':value1})
           
         
         if point['runtime'] is not None:
-          value2 = datetime.datetime.fromtimestamp(int(point['runtime'])).strftime('%H.%M')
-          #value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
-        runtime.append({'epoch':ts, 'runtime':float("{0:.2f}".format(float(value2) * 1.0))})
+          #value2 = datetime.datetime.fromtimestamp(int(point['runtime'])).strftime('%H.%M')
+          value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
+        runtime.append({'epoch':ts, 'runtime':value2})
           
         
         if point['cycles'] is not None:
           value3=  convertfbunits(point['cycles'], convertunittype('count', units))
-        cycles.append({'epoch':ts, 'cycles':float("{0:.2f}".format(int(value3) * 1.0))})
+        cycles.append({'epoch':ts, 'cycles':value3})
           
         
                  
@@ -8130,7 +8130,7 @@ def freeboard_indicator_runtime():
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','indicator':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','indicator':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','indicator':list(reversed(indicator)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
   
 
 
