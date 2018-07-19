@@ -8111,7 +8111,7 @@ def freeboard_indicator_runtime():
           
         if point['status'] is not None:
           value1 = convertfbunits( point['status'], convertunittype('count', units))
-        value.append({'epoch':ts, 'status':value1})
+        status.append({'epoch':ts, 'status':value1})
           
         
         if point['runtime'] is not None:
