@@ -494,7 +494,7 @@ def convertfbunits(value, units):
 
   elif units == 37: #//="37">Time</option>
       #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))
-      return float("{0:.2f}".format((datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S'))))
+      return datetime.datetime.fromtimestamp(int(value)).strftime('%H:%M:%S')
 
   elif units == 38: #//="38">Date/time</option>
       #log.info('HeartBeat time %s:', datetime.datetime.fromtimestamp(int(value)).strftime('%m/%d/%Y %H:%M:%S'))
@@ -8110,18 +8110,19 @@ def freeboard_indicator_runtime():
           ts = int(mktime(dtt)*1000)
           
         if point['status'] is not None:
-          value1 = convertfbunits( point['status'], convertunittype('count', units))
+          value1 = convertfbunits( point['status'], convertunittype('', units))
         indicator.append({'epoch':ts, 'indicator':value1})
           
         
         if point['runtime'] is not None:
           #value2 = datetime.datetime.fromtimestamp(int(point['runtime'])).strftime('%H.%M')
-          value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
+          #value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
+          value2 =  convertfbunits(point['cycles'], convertunittype('', units))
         runtime.append({'epoch':ts, 'runtime':value2})
           
         
         if point['cycles'] is not None:
-          value3=  convertfbunits(point['cycles'], convertunittype('count', units))
+          value3=  convertfbunits(point['cycles'], convertunittype('', units))
         cycles.append({'epoch':ts, 'cycles':value3})
           
         
