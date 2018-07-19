@@ -298,9 +298,11 @@
 						
 						for(i=0; i< newValue.length; i++)
 						{
-							if(newValue[i].value != "---")
+							//if(newValue[i].value != "---")
+							if(newValue[i][1] != "---")
 							{
-								value = newValue[i].value;
+								//value = newValue[i].value;
+								value = newValue[i][1];
 								break;
 							}
 						}
