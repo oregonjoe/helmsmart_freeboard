@@ -7898,7 +7898,7 @@ def freeboard_indicator_runtime():
     value8 = '---'
 
 
-    value=[]
+    status=[]
     runtime=[]
     cycles=[]
 
@@ -7955,7 +7955,7 @@ def freeboard_indicator_runtime():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
     if mode == "median":
-      query = ('select  median(value) AS value, median(runtime_sec) AS  runtime, median(cycles) AS cycles from {} '
+      query = ('select  median(value) AS status, median(runtime_sec) AS  runtime, median(cycles) AS cycles from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -7963,7 +7963,7 @@ def freeboard_indicator_runtime():
                           resolution) 
 
     elif mode == "max":
-      query = ('select  max(value) AS value, max(runtime_sec) AS  runtime, max(cycles) AS cycles from {} '
+      query = ('select  max(value) AS status, max(runtime_sec) AS  runtime, max(cycles) AS cycles from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -7971,7 +7971,7 @@ def freeboard_indicator_runtime():
                           resolution) 
 
     elif mode == "min":
-      query = ('select  min(value) AS value, min(runtime_sec) AS  runtime, min(cycles) AS cycles from {} '
+      query = ('select  min(value) AS status, min(runtime_sec) AS  runtime, min(cycles) AS cycles from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -7979,7 +7979,7 @@ def freeboard_indicator_runtime():
                           resolution) 
 
     else:        
-      query = ('select  mean(value) AS value, mean(runtime_sec) AS  runtime, mean(cycles) AS cycles from {} '
+      query = ('select  mean(value) AS status, mean(runtime_sec) AS  runtime, mean(cycles) AS cycles from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -8034,17 +8034,17 @@ def freeboard_indicator_runtime():
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
 
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
       
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
     log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
@@ -8075,7 +8075,7 @@ def freeboard_indicator_runtime():
       value8 = '---'
 
 
-      vaule=[]
+      status=[]
       runtime=[]
       cycles=[]
 
@@ -8109,26 +8109,26 @@ def freeboard_indicator_runtime():
           dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
           
-        if point['vaule'] is not None:
-          value1 = convertfbunits( point['vaule'], convertunittype('count', units))
-        vaule.append({'epoch':ts, 'value':value1})
+        if point['status'] is not None:
+          value1 = convertfbunits( point['status'], convertunittype('count', units))
+        value.append({'epoch':ts, 'status':value1})
           
         
         if point['runtime'] is not None:
           value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
-        runtime.append({'epoch':ts, 'value':value2})
+        runtime.append({'epoch':ts, 'runtime':value2})
           
         
         if point['cycles'] is not None:
           value3=  convertfbunits(point['cycles'], convertunittype('count', units))
-        cycles.append({'epoch':ts, 'value':value3})
+        cycles.append({'epoch':ts, 'cycles':value3})
           
         
                  
 
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','vaule':list(reversed(vaule)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','status':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
 
 
 
