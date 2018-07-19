@@ -8117,7 +8117,7 @@ def freeboard_indicator_runtime():
         if point['runtime'] is not None:
           value2 = datetime.datetime.fromtimestamp(int(point['runtime'])).strftime('%H.%M')
           #value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
-        runtime.append({'epoch':ts, 'runtime':float("{0:.2f}".format(value2 * 1.0))})
+        runtime.append({'epoch':ts, 'runtime':float("{0:.2f}".format(float(value2) * 1.0))})
           
         
         if point['cycles'] is not None:
