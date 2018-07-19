@@ -8111,19 +8111,19 @@ def freeboard_indicator_runtime():
           
         if point['status'] is not None:
           value1 = convertfbunits( point['status'], convertunittype('', units))
-        indicator.append({'epoch':ts, 'indicator':value1})
+        indicator.append({'epoch':ts, 'value':value1})
           
         
         if point['runtime'] is not None:
           #value2 = datetime.datetime.fromtimestamp(int(point['runtime'])).strftime('%H.%M')
           value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
           #value2 =  convertfbunits(point['cycles'], convertunittype('', units))
-        runtime.append({'epoch':ts, 'runtime':value2})
+        runtime.append({'epoch':ts, 'value':value2})
           
         
         if point['cycles'] is not None:
           value3=  convertfbunits(point['cycles'], convertunittype('', units))
-        cycles.append({'epoch':ts, 'cycles':value3})
+        cycles.append({'epoch':ts, 'value':value3})
           
         
                  
@@ -8131,7 +8131,7 @@ def freeboard_indicator_runtime():
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','indicator':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','indicator':list(reversed(indicator)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, , 'status':'success','update':'True','indicator':list(reversed(indicator)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
   
 
 
