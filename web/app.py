@@ -8034,17 +8034,17 @@ def freeboard_indicator_runtime():
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles)))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
 
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles)))})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
       
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles)))})    
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(value)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
     log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
