@@ -8111,7 +8111,7 @@ def freeboard_indicator_runtime():
           
         if point['status'] is not None:
           value1 = convertfbunits( point['status'], convertunittype('count', units))
-        status.append({'epoch':ts, 'status':float("{0:.2f}".format(value1 * 1.0))})
+        status.append({'epoch':ts, 'status':float("{0:.2f}".format(int(value1) * 1.0))})
           
         
         if point['runtime'] is not None:
@@ -8122,7 +8122,7 @@ def freeboard_indicator_runtime():
         
         if point['cycles'] is not None:
           value3=  convertfbunits(point['cycles'], convertunittype('count', units))
-        cycles.append({'epoch':ts, 'cycles':float("{0:.2f}".format(value3 * 1.0))})
+        cycles.append({'epoch':ts, 'cycles':float("{0:.2f}".format(int(value3) * 1.0))})
           
         
                  
