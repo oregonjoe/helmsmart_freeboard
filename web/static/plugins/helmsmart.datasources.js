@@ -205,6 +205,12 @@
 						name: "Indicator",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_status"
 					},
+					
+					{
+						name: "Indicator Runtime",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime"
+					},
+					
 					{
 						name: "Dimmer",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_status"
