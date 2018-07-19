@@ -176,7 +176,11 @@
 					{
 						name: "Engine Status",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_engine"
-					},				
+					},	
+					{
+						name: "Engine Status Extended",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux"
+					},						
 					{
 						name: "DC Status",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_battery"
