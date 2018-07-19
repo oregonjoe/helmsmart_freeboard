@@ -6554,17 +6554,17 @@ def freeboard_engine_aux():
         
         if point['egt_temperature'] is not None:
           value5 =  convertfbunits(point['egt_temperature'], convertunittype('temperature', units))
-        egt_temperature.append({'epoch':ts, 'value':value6})
+        egt_temperature.append({'epoch':ts, 'value':value5})
           
        
         if point['fuel_rate_average'] is not None:
           value6=  convertfbunits(point['fuel_rate_average'], convertunittype('flow', units))
-        fuel_rate_average.append({'epoch':ts, 'value':value7})
+        fuel_rate_average.append({'epoch':ts, 'value':value6})
           
         
         if point['instantaneous_fuel_economy'] is not None:
           value7 = convertfbunits(point['instantaneous_fuel_economy'],convertunittype('flow', units))
-        instantaneous_fuel_economy.append({'epoch':ts, 'value':value8})
+        instantaneous_fuel_economy.append({'epoch':ts, 'value':value7})
 
           
         
