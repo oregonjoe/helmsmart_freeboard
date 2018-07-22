@@ -8096,7 +8096,7 @@ def freeboard_indicator_runtime():
         value5 = '---'
         value6 = '---'
         value7 = '---'
-        value8 = '---'
+        rttime = '---'
 
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
