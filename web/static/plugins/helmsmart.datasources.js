@@ -172,7 +172,10 @@
 						name: "Navigation",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_nav"
 					},
-					
+					{
+						name: "Attitude",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_attitude"
+					},
 					{
 						name: "Engine Status",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_engine"

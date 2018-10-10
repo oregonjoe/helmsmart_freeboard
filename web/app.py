@@ -5800,9 +5800,8 @@ def freeboard_water_depth():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " (sensor='water_depth' )  "
-
-
+    #serieskeys= serieskeys +  " (sensor='water_depth' )  "
+    serieskeys= serieskeys +  " (sensor='water_depth' OR sensor='water_speed') "
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
     log.info("freeboard Create InfluxDB %s", database)
@@ -5816,7 +5815,7 @@ def freeboard_water_depth():
 
     if mode == "median":
       
-      query = ('select  median(depth) AS depth  from {} '
+      query = ('select  median(depth) AS depth, median(waterspeed) AS waterspeed from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5825,7 +5824,7 @@ def freeboard_water_depth():
 
     elif mode == "max":
       
-      query = ('select  max(depth) AS depth  from {} '
+      query = ('select  max(depth) AS depth, max(waterspeed) AS waterspeed  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5834,7 +5833,7 @@ def freeboard_water_depth():
 
     elif mode == "min":
       
-      query = ('select  min(depth) AS depth  from {} '
+      query = ('select  min(depth) AS depth, min(waterspeed) AS waterspeed  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5843,7 +5842,7 @@ def freeboard_water_depth():
       
     else:
 
-      query = ('select  mean(depth) AS depth  from {} '            
+      query = ('select  mean(depth) AS depth, mean(waterspeed) AS waterspeed  from {} '            
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5936,7 +5935,7 @@ def freeboard_water_depth():
       value4 = '---'
       
       depth=[]
-      speed=[]
+      waterspeed=[]
       temperature=[]
  
       points = list(response.get_points())
@@ -5971,11 +5970,13 @@ def freeboard_water_depth():
           value1 = convertfbunits(point['depth'], 32)
         depth.append({'epoch':ts, 'value':value1})
         csvout = csvout + str(ts) + ', '+ str(value1)  + '\r\n'
-        """          
-        if point['speed'] is not None:         
-          value2 = convertfbunits(point['speed'], convertunittype('speed', units))
+
+        if point['waterspeed'] is not None:         
+          value2 = convertfbunits(point['waterspeed'], convertunittype('speed', units))
         speed.append({'epoch':ts, 'value':value2})
-          
+
+        
+        """                  
         if point['temperature'] is not None:          
           value3 = convertfbunits(point['temperature'], 0)
         temperature.append({'epoch':ts, 'value':value3})
@@ -6025,6 +6026,257 @@ def freeboard_water_depth():
     #return jsonify(status='error', update=False )
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+
+
+
+
+@app.route('/freeboard_attitude')
+@cross_origin()
+def freeboard_attitude():
+
+    deviceapikey = request.args.get('apikey','')
+    serieskey = request.args.get('datakey','')
+    Interval = request.args.get('interval',"5min")
+    Instance = request.args.get('instance','0')
+    resolution = request.args.get('resolution',"")
+    units= request.args.get('units',"US")
+    mytimezone = request.args.get('timezone',"UTC")
+    mode  = request.args.get('mode',"median")
+    
+    response = None
+    
+    starttime = 0
+
+    epochtimes = getepochtimes(Interval)
+    startepoch = epochtimes[0]
+    endepoch = epochtimes[1]
+    if resolution == "":
+      resolution = epochtimes[2]
+
+
+    pitch=[]
+    roll=[]
+    yaw=[]      
+
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+    
+    deviceid = getedeviceid(deviceapikey)
+    
+    log.info("freeboard deviceid %s", deviceid)
+
+    if deviceid == "":
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+    measurement = "HelmSmart"
+    measurement = 'HS_' + str(deviceid)
+
+
+    serieskeys=" deviceid='"
+    serieskeys= serieskeys + deviceid + "' AND "
+    serieskeys= serieskeys +  " sensor='attitude' "
+    #serieskeys= serieskeys +  " instance='" + Instance + "' "
+
+    log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
+    log.info("freeboard Create InfluxDB %s", database)
+
+
+    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+    if mode == "median":
+      
+      query = ('select  median(pitch) AS pitch, median(roll) AS  roll, median(yaw) AS yaw  from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+      
+    elif mode == "max":
+      
+      query = ('select  max(pitch) AS pitch, max(roll) AS  roll, max(yaw) AS yaw  from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+      
+    elif mode == "min":
+      
+      query = ('select  min(pitch) AS pitch, min(roll) AS  roll, min(yaw) AS yaw  from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution)
+      
+    else:
+      
+      query = ('select  mean(pitch) AS pitch, mean(roll) AS  roll, mean(yaw) AS yaw  from {} '
+                       'where {} AND time > {}s and time < {}s '
+                       'group by time({}s)') \
+                  .format( measurement, serieskeys,
+                          startepoch, endepoch,
+                          resolution) 
+ 
+
+
+    log.info("freeboard data Query %s", query)
+
+    try:
+        response= dbc.query(query)
+        
+    except TypeError, e:
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+
+            
+    except:
+        log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+        e = sys.exc_info()[0]
+        log.info("freeboard: Error: %s" % e)
+        pass
+
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'pitch':list(reversed(pitch)), 'roll':list(reversed(roll)), 'yaw':list(reversed(yaw))})     
+
+
+    if not response:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'pitch':list(reversed(pitch)), 'roll':list(reversed(roll)), 'yaw':list(reversed(yaw))})     
+
+    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+
+    keys = response.raw.get('series',[])
+    #keys = result.keys()
+    log.info("freeboard Get InfluxDB series keys %s", keys)
+
+
+    #callback = request.args.get('callback')
+    #return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
+     
+    jsondata=[]
+    #jsonkey=[]
+    #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+    #jsonkey.append(strvaluekey)
+    #print 'freeboard start processing data points:'
+    
+    #log.info("freeboard jsonkey..%s", jsonkey )
+    try:
+    
+      strvalue = ""
+      value1 = '---'
+      value2 = '---'
+      value3 = '---'
+      value4 = '---'
+      
+      pitch=[]
+      roll=[]
+      yaw=[]
+
+      ts =startepoch*1000
+
+      points = list(response.get_points())
+
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+      for point in points:
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
+
+
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
+          ts = int(mktime(dtt)*1000)
+
+        if point['pitch'] is not None: 
+          value1 = convertfbunits(point['pitch'], 16)
+        voltage.append({'epoch':ts, 'value':value1})
+          
+        if point['roll'] is not None:         
+          value2 = convertfbunits(point['roll'], 16)
+        current.append({'epoch':ts, 'value':value2})
+          
+        if point['yaw'] is not None:         
+          value3 = convertfbunits(point['yaw'], 16)
+        temperature.append({'epoch':ts, 'value':value3})
+               
+
+      callback = request.args.get('callback')
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
+
+
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':value1, 'current':value2, 'temperature':value3})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','pitch':list(reversed(pitch)), 'roll':list(reversed(roll)), 'yaw':list(reversed(yaw))})     
+        
+
+     
+    
+    except:
+        log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+  
+    #return jsonify(status='error', update=False )
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
 
 
 
