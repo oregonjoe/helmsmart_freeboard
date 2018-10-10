@@ -5880,7 +5880,7 @@ def freeboard_water_depth():
       #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
       log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
 
-    except InfluxDBClientError, e:
+    except InfluxDBClientError, e: 
       log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
 
 
