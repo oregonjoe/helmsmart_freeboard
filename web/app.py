@@ -6241,15 +6241,15 @@ def freeboard_attitude():
 
         if point['pitch'] is not None: 
           value1 = convertfbunits(point['pitch'], 16)
-        voltage.append({'epoch':ts, 'value':value1})
+        pitch.append({'epoch':ts, 'value':value1})
           
         if point['roll'] is not None:         
           value2 = convertfbunits(point['roll'], 16)
-        current.append({'epoch':ts, 'value':value2})
+        roll.append({'epoch':ts, 'value':value2})
           
         if point['yaw'] is not None:         
           value3 = convertfbunits(point['yaw'], 16)
-        temperature.append({'epoch':ts, 'value':value3})
+        yaw.append({'epoch':ts, 'value':value3})
                
 
       callback = request.args.get('callback')
