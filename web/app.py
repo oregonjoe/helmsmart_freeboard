@@ -5801,7 +5801,8 @@ def freeboard_water_depth():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
     #serieskeys= serieskeys +  " (sensor='water_depth' )  "
-    serieskeys= serieskeys +  " (sensor='water_depth' OR sensor='water_speed') "
+    serieskeys= serieskeys +  " (sensor='water_depth' OR sensor='water_speed' OR sensor='temperature') AND "
+    serieskeys= serieskeys +  " (type='Sea Temperature' OR type='Paddle Wheel' OR type='NULL' ) "
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
     log.info("freeboard Create InfluxDB %s", database)
@@ -5815,7 +5816,7 @@ def freeboard_water_depth():
 
     if mode == "median":
       
-      query = ('select  median(depth) AS depth, median(waterspeed) AS waterspeed from {} '
+      query = ('select  median(depth) AS depth, median(waterspeed) AS waterspeed, median(actual_temperature) AS temperature   from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5824,7 +5825,7 @@ def freeboard_water_depth():
 
     elif mode == "max":
       
-      query = ('select  max(depth) AS depth, max(waterspeed) AS waterspeed  from {} '
+      query = ('select  max(depth) AS depth, max(waterspeed) AS waterspeed, max(actual_temperature) AS temperature    from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5833,7 +5834,7 @@ def freeboard_water_depth():
 
     elif mode == "min":
       
-      query = ('select  min(depth) AS depth, min(waterspeed) AS waterspeed  from {} '
+      query = ('select  min(depth) AS depth, min(waterspeed) AS waterspeed, min(actual_temperature) AS temperature    from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5842,7 +5843,7 @@ def freeboard_water_depth():
       
     else:
 
-      query = ('select  mean(depth) AS depth, mean(waterspeed) AS waterspeed  from {} '            
+      query = ('select  mean(depth) AS depth, mean(waterspeed) AS waterspeed, mean(actual_temperature) AS temperature  from {} '            
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5975,6 +5976,11 @@ def freeboard_water_depth():
           value2 = convertfbunits(point['waterspeed'], convertunittype('speed', units))
         speed.append({'epoch':ts, 'value':value2})
 
+          
+        if point['temperature'] is not None:         
+          value3 = convertfbunits(point['temperature'], convertunittype('temperature', units))
+        temperature.append({'epoch':ts, 'value':value3})
+               
         
         """                  
         if point['temperature'] is not None:          
