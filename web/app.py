@@ -5968,7 +5968,7 @@ def freeboard_water_depth():
 
         
         if point['depth'] is not None: 
-          value1 = convertfbunits(point['depth'], 32)
+          value1 = convertfbunits(point['depth'], convertunittype('depth', units))
         depth.append({'epoch':ts, 'value':value1})
         csvout = csvout + str(ts) + ', '+ str(value1)  + '\r\n'
 
