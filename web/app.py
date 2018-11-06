@@ -7220,7 +7220,7 @@ def freeboard_ac_status():
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
-    actype = request.args.get('type','GEN')
+    actype = request.args.get('type','UTIL')
     mytimezone = request.args.get('timezone',"UTC")
     mode = request.args.get('mode',"mean")
     
@@ -7281,7 +7281,7 @@ def freeboard_ac_status():
 
     if mode == "median":
       
-      query = ('select  median(ac_line_neutral_volts) AS volts, median(ac_amps) AS  amps, median(ac_watts) AS power, median(ac_kwatthours) AS energy FROM {} '
+      query = ('select  median(ac_line_neutral_volts) AS volts, median(ac_amps) AS  amps, median(ac_watts) AS power, median(ac_kwatthours) AS energy, median(status) AS status FROM {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -7291,7 +7291,7 @@ def freeboard_ac_status():
       
     elif mode == "max":
       
-      query = ('select  max(ac_line_neutral_volts) AS volts, max(ac_amps) AS  amps, max(ac_watts) AS power, max(ac_kwatthours) AS energy FROM {} '
+      query = ('select  max(ac_line_neutral_volts) AS volts, max(ac_amps) AS  amps, max(ac_watts) AS power, max(ac_kwatthours) AS energy, max(status) AS status FROM {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -7301,7 +7301,7 @@ def freeboard_ac_status():
 
     elif mode == "min":
       
-      query = ('select  min(ac_line_neutral_volts) AS volts, min(ac_amps) AS  amps, min(ac_watts) AS power, min(ac_kwatthours) AS energy FROM {} '
+      query = ('select  min(ac_line_neutral_volts) AS volts, min(ac_amps) AS  amps, min(ac_watts) AS power, min(ac_kwatthours) AS energy, min(status) AS status FROM {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -7310,7 +7310,7 @@ def freeboard_ac_status():
 
     else:
       
-      query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(ac_kwatthours) AS energy FROM {} '
+      query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(ac_kwatthours) AS energy, mean(status) AS status FROM {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -7413,6 +7413,7 @@ def freeboard_ac_status():
       amps=[]
       power=[]
       energy=[]
+      status=[]
       energy_caluculated=[]
       energy_period = float(0.0)
 
@@ -7457,19 +7458,23 @@ def freeboard_ac_status():
         if point['power'] is not None:
           value3=  convertfbunits(point['power'], 29)
         power.append({'epoch':ts, 'value':value3})
-          
-        
+
         if point['energy'] is not None:
           value4 =  convertfbunits(point['energy'], 31)
         energy.append({'epoch':ts, 'value':value4})
           
+          
+        if point['status'] is not None:
+          value5=  convertfbunits(point['status'], 44)
+        status.append({'epoch':ts, 'value':value5})
+        
         
 
       #return jsonify(date_time=mydatetime, update=True, rpm=value1, eng_temp=value2, oil_pressure=value3, alternator=value4, boost=value5, fuel_rate=value6, fuel_level=value7, eng_hours=value8)
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','volts':list(reversed(volts)), 'amps':list(reversed(amps)), 'power':list(reversed(power)), 'energy':list(reversed(energy)), 'energy_interval':list(reversed(energy_caluculated))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','volts':list(reversed(volts)), 'amps':list(reversed(amps)), 'power':list(reversed(power)), 'energy':list(reversed(energy)), 'status':list(reversed(status)), 'energy_interval':list(reversed(energy_caluculated))})     
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)

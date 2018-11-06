@@ -604,6 +604,22 @@
 						value: "GEN"
 					},
 					{
+						name: "LIGHTS",
+						value: "LIGHTS"
+					},
+					{
+						name: "HEAT",
+						value: "HEAT"
+					},
+					{
+						name: "OUTDOOR",
+						value: "OUTDOOR"
+					},
+					{
+						name: "APPLIANCE",
+						value: "APPLIANCE"
+					},
+					{
 						name: "no GPS",
 						value: "no GPS"
 					},
