@@ -596,6 +596,10 @@
 						value: "outside"
 					},
 					{
+						name: "Sea",
+						value: "sea"
+					},
+					{
 						name: "UTIL",
 						value: "UTIL"
 					},					

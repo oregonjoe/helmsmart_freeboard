@@ -4161,6 +4161,8 @@ def freeboard_environmental():
     serieskeys= serieskeys + deviceid + "' AND "
     if env_type == "inside":
       serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Inside Temperature' OR type='Inside Humidity')"
+    elif env_type == "sea":
+      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Sea Temperature' OR type='Inside Humidity')"      
     else:
       serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity')"
 
