@@ -592,6 +592,11 @@
 						value: "inside"
 					},
 					{
+						name: "Inside Mesh",
+						value: "inside mesh"
+					},
+					
+					{
 						name: "Outside",
 						value: "outside"
 					},

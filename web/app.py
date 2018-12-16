@@ -4104,7 +4104,7 @@ def freeboard_environmental():
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('interval',"5min")
-    #Interval = request.args.get('interval',"1hour")
+    Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
     env_type = request.args.get('type',"outside")
     mytimezone = request.args.get('timezone',"UTC")
@@ -4161,10 +4161,21 @@ def freeboard_environmental():
     serieskeys= serieskeys + deviceid + "' AND "
     if env_type == "inside":
       serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Inside Temperature' OR type='Inside Humidity')"
+
+    elif env_type == "inside mesh":
+      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='" + Instance + "' "
+
+      
     elif env_type == "sea":
-      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Sea Temperature' OR type='Inside Humidity')"      
+      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Sea Temperature' OR type='Inside Humidity')"
+
+      
     else:
       serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity')"
+
+
+
+
 
       
     #serieskeys= serieskeys +  " sensor='environmental_data'  AND type='Outside_Temperature'"
