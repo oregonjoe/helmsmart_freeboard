@@ -8413,7 +8413,7 @@ def freeboard_indicator_runtime():
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','indicator':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
-      return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'success','update':'True','indicator':list(reversed(indicator)), 'runtime':list(reversed(runtime)), 'runtime_seconds':list(reversed(runtime_secs)), 'cycles':list(reversed(cycles ))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'success','update':'True','indicator':list(reversed(indicator)), 'runtime_hours':list(reversed(runtime)), 'runtime_seconds':list(reversed(runtime_secs)), 'cycles':list(reversed(cycles ))})     
   
 
 
