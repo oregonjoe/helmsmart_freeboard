@@ -8353,6 +8353,7 @@ def freeboard_indicator_runtime():
 
       indicator=[]
       runtime=[]
+      runtime_secs=[]
       cycles=[]
 
 
@@ -8399,6 +8400,7 @@ def freeboard_indicator_runtime():
           #value2 =  convertfbunits(point['runtime'], convertunittype('time', units))
           #value2 =  convertfbunits(point['cycles'], convertunittype('', units))
         runtime.append({'epoch':ts, 'value':rttime})
+        runtime_secs.append({'epoch':ts, 'value':value2})
           
         
         if point['cycles'] is not None:
@@ -8411,7 +8413,7 @@ def freeboard_indicator_runtime():
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','indicator':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
-      return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'success','update':'True','indicator':list(reversed(indicator)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'success','update':'True','indicator':list(reversed(indicator)), 'runtime':list(reversed(runtime)), 'runtime_seconds':list(reversed(runtime_secs)), 'cycles':list(reversed(cycles ))})     
   
 
 
