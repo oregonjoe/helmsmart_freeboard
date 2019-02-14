@@ -7313,7 +7313,7 @@ def freeboard_fluidlevels():
     if mode == "median":      
       query = ('select  median(level) AS level from {} '
                        'where {} AND time > {}s and time < {}s '
-                       'group by time({}s, type, instance)') \
+                       'group by time({}s), type, instance') \
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution)
@@ -7321,7 +7321,7 @@ def freeboard_fluidlevels():
     elif mode == "max":      
       query = ('select  max(level) AS level from {} '
                        'where {} AND time > {}s and time < {}s '
-                       'group by time({}s, type, instance)') \
+                       'group by time({}s), type, instance') \
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution) 
@@ -7329,7 +7329,7 @@ def freeboard_fluidlevels():
     elif mode == "min":      
       query = ('select  min(level) AS level from {} '
                        'where {} AND time > {}s and time < {}s '
-                       'group by time({}s, type, instance)') \
+                       'group by time({}s), type, instance') \
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution) 
@@ -7337,7 +7337,7 @@ def freeboard_fluidlevels():
     else:      
       query = ('select  mean(level) AS level from {} '
                        'where {} AND time > {}s and time < {}s '
-                       'group by time({}s, type, instance)') \
+                       'group by time({}s), type, instance') \
                   .format( measurement, serieskeys,
                           startepoch, endepoch,
                           resolution) 
