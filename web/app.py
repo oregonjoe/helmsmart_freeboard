@@ -7488,8 +7488,8 @@ def freeboard_fluidlevels():
           value7 = '---'
           value8 = '---'
           
-          if point['time'] is not None:
-            mydatetimestr = str(point['time'])
+          if point[0] is not None:
+            mydatetimestr = str(point[0])
             mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
             mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
@@ -7499,8 +7499,8 @@ def freeboard_fluidlevels():
             dtt = mydatetimetz.timetuple()
             ts = int(mktime(dtt)*1000)
             
-          if point['level'] is not None:
-            value1 = convertfbunits( point['level'], convertunittype('%', units))
+          if point[1] is not None:
+            value1 = convertfbunits( point[1], convertunittype('%', units))
             fuel_port.append({'epoch':ts, 'value':value1})
           
 
