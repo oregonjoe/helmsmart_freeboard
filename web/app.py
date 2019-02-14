@@ -7405,7 +7405,7 @@ def freeboard_fluidlevels():
     keys = response.raw.get('series',[])
     #keys = result.keys()
     log.info("freeboard Get InfluxDB series keys %s", keys)
-
+    """
     for series in keys:
       log.info("freeboard Get InfluxDB series key %s", series)
       log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
@@ -7413,11 +7413,14 @@ def freeboard_fluidlevels():
 
       log.info("freeboard Get InfluxDB series tag type  %s ", tags['type'])
       log.info("freeboard Get InfluxDB series tag instance  %s ", tags['instance'])
+
+      fluidtype = tags['type']
+      fluidinstance = tags['instance']
         #log.info("freeboard Get InfluxDB series values %s ", series['values'])
       
       log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
       log.info("freeboard Get InfluxDB series values %s ", series['values'])
-
+    """
       
     #callback = request.args.get('callback')
     #return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
@@ -7457,7 +7460,24 @@ def freeboard_fluidlevels():
 
       log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
-      for point in points:
+
+      for series in keys:
+        log.info("freeboard Get InfluxDB series key %s", series)
+        log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+        tags = series['tags']
+
+        log.info("freeboard Get InfluxDB series tag type  %s ", tags['type'])
+        log.info("freeboard Get InfluxDB series tag instance  %s ", tags['instance'])
+
+        fluidtype = tags['type']
+        fluidinstance = tags['instance']
+
+        log.info("freeboard Get InfluxDB series tag type  %s ",fluidtype)
+        log.info("freeboard Get InfluxDB series tag instance  %s ", fluidinstance)
+
+      
+        point =  tags['values']
+        #for point in points:
         log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         value1 = '---'
         value2 = '---'
