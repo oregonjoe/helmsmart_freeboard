@@ -7475,33 +7475,33 @@ def freeboard_fluidlevels():
         log.info("freeboard Get InfluxDB series tag type  %s ",fluidtype)
         log.info("freeboard Get InfluxDB series tag instance  %s ", fluidinstance)
 
-      
-        point =  tags['values']
-        #for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        value1 = '---'
-        value2 = '---'
-        value3 = '---'
-        value4 = '---'
-        value5 = '---'
-        value6 = '---'
-        value7 = '---'
-        value8 = '---'
-        
-        if point['time'] is not None:
-          mydatetimestr = str(point['time'])
-          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
-          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
-          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
-
-          #dtt = mydatetime.timetuple()       
-          dtt = mydatetimetz.timetuple()
-          ts = int(mktime(dtt)*1000)
+        points =  series['values']
+        for point in points:
+          log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+          value1 = '---'
+          value2 = '---'
+          value3 = '---'
+          value4 = '---'
+          value5 = '---'
+          value6 = '---'
+          value7 = '---'
+          value8 = '---'
           
-        if point['level'] is not None:
-          value1 = convertfbunits( point['level'], convertunittype('%', units))
-          fuel_port.append({'epoch':ts, 'value':value1})
+          if point['time'] is not None:
+            mydatetimestr = str(point['time'])
+            mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+            mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+            mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+            #dtt = mydatetime.timetuple()       
+            dtt = mydatetimetz.timetuple()
+            ts = int(mktime(dtt)*1000)
+            
+          if point['level'] is not None:
+            value1 = convertfbunits( point['level'], convertunittype('%', units))
+            fuel_port.append({'epoch':ts, 'value':value1})
           
 
           
