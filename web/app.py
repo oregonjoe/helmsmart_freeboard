@@ -7416,7 +7416,7 @@ def freeboard_fluidlevels():
     #jsonkey.append(strvaluekey)
     print 'freeboard start processing data points:'
     
-    log.info("freeboard jsonkey..%s", jsonkey )
+    #log.info("freeboard jsonkey..%s", jsonkey )
     try:
     
       strvalue = ""
