@@ -7400,11 +7400,11 @@ def freeboard_fluidlevels():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing','update':'False','fuel_port':list(reversed(fuel_port)), 'fuel_strbd':list(reversed(fuel_strbd)), 'fuel_center':list(reversed(fuel_center)),'water_port':list(reversed(water_port)), 'water_strbd':list(reversed(water_strbd)), 'water_center':list(reversed(water_center)), 'waste_port':list(reversed(waste_port)), 'waste_strbd':list(reversed(waste_strbd)), 'waste_center':list(reversed(waste_center))})     
 
-    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
     """
     for series in keys:
       log.info("freeboard Get InfluxDB series key %s", series)
@@ -7458,27 +7458,27 @@ def freeboard_fluidlevels():
       ts =startepoch*1000       
       points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
 
       for series in keys:
-        log.info("freeboard Get InfluxDB series key %s", series)
-        log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+        #log.info("freeboard Get InfluxDB series key %s", series)
+        #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
         tags = series['tags']
 
-        log.info("freeboard Get InfluxDB series tag type  %s ", tags['type'])
-        log.info("freeboard Get InfluxDB series tag instance  %s ", tags['instance'])
+        #log.info("freeboard Get InfluxDB series tag type  %s ", tags['type'])
+        #log.info("freeboard Get InfluxDB series tag instance  %s ", tags['instance'])
 
         fluidtype = int(tags['type'])
         fluidinstance = int(tags['instance'])
 
-        log.info("freeboard Get InfluxDB series tag type  %s ",fluidtype)
-        log.info("freeboard Get InfluxDB series tag instance  %s ", fluidinstance)
+        #log.info("freeboard Get InfluxDB series tag type  %s ",fluidtype)
+        #log.info("freeboard Get InfluxDB series tag instance  %s ", fluidinstance)
 
 
         points =  series['values']
         for point in points:
-          log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+          #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
           value1 = '---'
           
           if point[0] is not None and  point[1] is not None:

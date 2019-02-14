@@ -183,6 +183,10 @@
 					{
 						name: "Engine Status Extended",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux"
+					},	
+					{
+						name: "Fluid Levels",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_fluidlevels"
 					},						
 					{
 						name: "DC Status",
