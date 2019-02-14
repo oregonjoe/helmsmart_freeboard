@@ -7406,7 +7406,13 @@ def freeboard_fluidlevels():
     #keys = result.keys()
     log.info("freeboard Get InfluxDB series keys %s", keys)
 
+    for series in keys:
+      log.info("freeboard Get InfluxDB series key %s", series)
+      log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+      log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+      log.info("freeboard Get InfluxDB series values %s ", series['values'])
 
+      
     #callback = request.args.get('callback')
     #return '{0}({1})'.format(callback, {'update':'False', 'status':'success' })
      
