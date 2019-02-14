@@ -7480,15 +7480,8 @@ def freeboard_fluidlevels():
         for point in points:
           log.info('freeboard:  InfluxDB-Cloud point%s:', point)
           value1 = '---'
-          value2 = '---'
-          value3 = '---'
-          value4 = '---'
-          value5 = '---'
-          value6 = '---'
-          value7 = '---'
-          value8 = '---'
           
-          if point[0] is not None:
+          if point[0] is not None and  point[1] is not None:
             mydatetimestr = str(point[0])
             mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
@@ -7498,13 +7491,31 @@ def freeboard_fluidlevels():
             #dtt = mydatetime.timetuple()       
             dtt = mydatetimetz.timetuple()
             ts = int(mktime(dtt)*1000)
-            
-          if point[1] is not None:
-            value1 = convertfbunits( point[1], convertunittype('%', units))
-            fuel_port.append({'epoch':ts, 'value':value1})
-          
 
-          
+            value1 = convertfbunits( point[1], convertunittype('%', units))
+            
+            if fluidtype== 0 and fluidinstance==0:
+              fuel_port.append({'epoch':ts, 'value':value1})
+            elif fluidtype== 0 and fluidinstance==1:
+              fuel_strbd.append({'epoch':ts, 'value':value1})          
+            elif fluidtype== 0 and fluidinstance==2:
+              fuel_center.append({'epoch':ts, 'value':value1})          
+
+            elif fluidtype== 1 and fluidinstance==0:
+              water_port.append({'epoch':ts, 'value':value1})
+            elif fluidtype== 1 and fluidinstance==1:
+              water_strbd.append({'epoch':ts, 'value':value1})          
+            elif fluidtype== 1 and fluidinstance==2:
+              water_center.append({'epoch':ts, 'value':value1})          
+
+            elif fluidtype== 2 and fluidinstance==0:
+              waste_port.append({'epoch':ts, 'value':value1})
+            elif fluidtype== 2 and fluidinstance==1:
+              waste_strbd.append({'epoch':ts, 'value':value1})          
+            elif fluidtype== 2 and fluidinstance==2:
+              waste_center.append({'epoch':ts, 'value':value1})          
+
+         
 
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
