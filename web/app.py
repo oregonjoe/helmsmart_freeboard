@@ -7469,8 +7469,8 @@ def freeboard_fluidlevels():
         log.info("freeboard Get InfluxDB series tag type  %s ", tags['type'])
         log.info("freeboard Get InfluxDB series tag instance  %s ", tags['instance'])
 
-        fluidtype = tags['type']
-        fluidinstance = tags['instance']
+        fluidtype = int(tags['type'])
+        fluidinstance = int(tags['instance'])
 
         log.info("freeboard Get InfluxDB series tag type  %s ",fluidtype)
         log.info("freeboard Get InfluxDB series tag instance  %s ", fluidinstance)
@@ -7494,25 +7494,25 @@ def freeboard_fluidlevels():
 
             value1 = convertfbunits( point[1], convertunittype('%', units))
             
-            if fluidtype== 0 and fluidinstance==0:
+            if fluidtype == 0 and fluidinstance ==0:
               fuel_port.append({'epoch':ts, 'value':value1})
-            elif fluidtype== 0 and fluidinstance==1:
+            elif fluidtype == 0 and fluidinstance ==1:
               fuel_strbd.append({'epoch':ts, 'value':value1})          
-            elif fluidtype== 0 and fluidinstance==2:
+            elif fluidtype == 0 and fluidinstance ==2:
               fuel_center.append({'epoch':ts, 'value':value1})          
 
-            elif fluidtype== 1 and fluidinstance==0:
+            elif fluidtype == 1 and fluidinstance ==0:
               water_port.append({'epoch':ts, 'value':value1})
-            elif fluidtype== 1 and fluidinstance==1:
+            elif fluidtype == 1 and fluidinstance ==1:
               water_strbd.append({'epoch':ts, 'value':value1})          
-            elif fluidtype== 1 and fluidinstance==2:
+            elif fluidtype == 1 and fluidinstance ==2:
               water_center.append({'epoch':ts, 'value':value1})          
 
-            elif fluidtype== 2 and fluidinstance==0:
+            elif fluidtype == 2 and fluidinstance ==0:
               waste_port.append({'epoch':ts, 'value':value1})
-            elif fluidtype== 2 and fluidinstance==1:
+            elif fluidtype == 2 and fluidinstance ==1:
               waste_strbd.append({'epoch':ts, 'value':value1})          
-            elif fluidtype== 2 and fluidinstance==2:
+            elif fluidtype == 2 and fluidinstance ==2:
               waste_center.append({'epoch':ts, 'value':value1})          
 
          
