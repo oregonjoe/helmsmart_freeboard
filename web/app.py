@@ -7410,8 +7410,9 @@ def freeboard_fluidlevels():
       log.info("freeboard Get InfluxDB series key %s", series)
       log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
       tags = series['tags']
-      for tag in tags:
-        log.info("freeboard Get InfluxDB series tags %s ", tag['tags'])
+
+      log.info("freeboard Get InfluxDB series tag type  %s ", tags['type'])
+      log.info("freeboard Get InfluxDB series tag instance  %s ", tags['instance'])
         #log.info("freeboard Get InfluxDB series values %s ", series['values'])
       
       log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
