@@ -387,7 +387,7 @@ def convertfbunits(value, units):
 
 
   elif units == 2: #//e="2">Kelvin</option>
-      return value 
+      return float("{0:.0f}".format((value * 1.0) ) )
 
 
   #//  case 3: //="3">- - -</option> 
@@ -7076,7 +7076,7 @@ def freeboard_engine():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -8692,7 +8692,7 @@ def freeboard_indicator_runtime():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
