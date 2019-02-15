@@ -7311,7 +7311,7 @@ def freeboard_fluidlevels():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
     if mode == "median":      
-      query = ('select  median(level) AS level from {} '
+      query = ('select  median(level) AS level,  median(tank_capacity) AS capacity  from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s), type, instance') \
                   .format( measurement, serieskeys,
@@ -7319,7 +7319,7 @@ def freeboard_fluidlevels():
                           resolution)
       
     elif mode == "max":      
-      query = ('select  max(level) AS level from {} '
+      query = ('select  max(level) AS level,  median(tank_capacity) AS capacity  from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s), type, instance') \
                   .format( measurement, serieskeys,
@@ -7327,7 +7327,7 @@ def freeboard_fluidlevels():
                           resolution) 
 
     elif mode == "min":      
-      query = ('select  min(level) AS level from {} '
+      query = ('select  min(level) AS level,  median(tank_capacity) AS capacity  from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s), type, instance') \
                   .format( measurement, serieskeys,
@@ -7335,7 +7335,7 @@ def freeboard_fluidlevels():
                           resolution) 
   
     else:      
-      query = ('select  mean(level) AS level from {} '
+      query = ('select  mean(level) AS level,  median(tank_capacity) AS capacity  from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s), type, instance') \
                   .format( measurement, serieskeys,
@@ -7462,7 +7462,7 @@ def freeboard_fluidlevels():
 
 
       for series in keys:
-        #log.info("freeboard Get InfluxDB series key %s", series)
+        log.info("freeboard Get InfluxDB series key %s", series)
         #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
         tags = series['tags']
 
@@ -7479,9 +7479,17 @@ def freeboard_fluidlevels():
         points =  series['values']
         for point in points:
           #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-          value1 = '---'
+          volume = '---'
+
           
           if point[0] is not None and  point[1] is not None:
+            capacity = '---'
+            level =  point[1] #is in percent 100% = 1.0
+
+            # make asignment if not NULL
+            if point[2] is not None:
+              capacity = point[2] # is in liters
+            
             mydatetimestr = str(point[0])
             mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
@@ -7491,29 +7499,45 @@ def freeboard_fluidlevels():
             #dtt = mydatetime.timetuple()       
             dtt = mydatetimetz.timetuple()
             ts = int(mktime(dtt)*1000)
-
-            value1 = convertfbunits( point[1], convertunittype('%', units))
             
-            if fluidtype == 0 and fluidinstance ==0:
-              fuel_port.append({'epoch':ts, 'value':value1})
-            elif fluidtype == 0 and fluidinstance ==1:
-              fuel_strbd.append({'epoch':ts, 'value':value1})          
-            elif fluidtype == 0 and fluidinstance ==2:
-              fuel_center.append({'epoch':ts, 'value':value1})          
 
-            elif fluidtype == 1 and fluidinstance ==0:
-              water_port.append({'epoch':ts, 'value':value1})
-            elif fluidtype == 1 and fluidinstance ==1:
-              water_strbd.append({'epoch':ts, 'value':value1})          
-            elif fluidtype == 1 and fluidinstance ==2:
-              water_center.append({'epoch':ts, 'value':value1})          
+              
+            if units == 'US': # we will calculate in gallons
+              #check if we have a good capacity value before making volume calculation
+              if capacity != '---':
+                volgallons = convertfbunits( int(capacity), 21)
+                volume = level * 0.01 *  volgallons
+                
+            elif units == 'metric': # we will calculate in liters
+              #check if we have a good capacity value before making volume calculation
+              if capacity != '---':
+                volliters = capacity # is in liters
+                volume = level * 0.01 * volliters
+                
+            else : #default will be in %
+                volume = level
 
-            elif fluidtype == 2 and fluidinstance ==0:
-              waste_port.append({'epoch':ts, 'value':value1})
-            elif fluidtype == 2 and fluidinstance ==1:
-              waste_strbd.append({'epoch':ts, 'value':value1})          
-            elif fluidtype == 2 and fluidinstance ==2:
-              waste_center.append({'epoch':ts, 'value':value1})          
+            
+            if fluidtype == 0 and fluidinstance ==0 and volume != '---':
+              fuel_port.append({'epoch':ts, 'value':volume})
+            elif fluidtype == 0 and fluidinstance ==1 and volume != '---':
+              fuel_strbd.append({'epoch':ts, 'value':volume})          
+            elif fluidtype == 0 and fluidinstance ==2 and volume != '---':
+              fuel_center.append({'epoch':ts, 'value':volume})          
+
+            elif fluidtype == 1 and fluidinstance ==0 and volume != '---':
+              water_port.append({'epoch':ts, 'value':volume})
+            elif fluidtype == 1 and fluidinstance ==1 and volume != '---':
+              water_strbd.append({'epoch':ts, 'value':volume})          
+            elif fluidtype == 1 and fluidinstance ==2 and volume != '---':
+              water_center.append({'epoch':ts, 'value':volume})          
+
+            elif fluidtype == 2 and fluidinstance ==0 and volume != '---':
+              waste_port.append({'epoch':ts, 'value':volume})
+            elif fluidtype == 2 and fluidinstance ==1 and volume != '---':
+              waste_strbd.append({'epoch':ts, 'value':volume})          
+            elif fluidtype == 2 and fluidinstance ==2 and volume != '---':
+              waste_center.append({'epoch':ts, 'value':volume})          
 
          
 
