@@ -8688,7 +8688,7 @@ def freeboard_indicator_runtime():
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','value':list(reversed(status)), 'runtime':list(reversed(runtime)), 'cycles':list(reversed(cycles ))}) 
-    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
