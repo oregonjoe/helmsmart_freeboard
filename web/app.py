@@ -6458,7 +6458,7 @@ def freeboard_battery():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -7462,7 +7462,7 @@ def freeboard_fluidlevels():
 
 
       for series in keys:
-        log.info("freeboard Get InfluxDB series key %s", series)
+        #log.info("freeboard Get InfluxDB series key %s", series)
         #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
         tags = series['tags']
 
@@ -7506,16 +7506,17 @@ def freeboard_fluidlevels():
               #check if we have a good capacity value before making volume calculation
               if capacity != '---':
                 volgallons = convertfbunits( int(capacity), 21)
-                volume = level * 0.01 *  volgallons
+                volume =  float("{0:.1f}".format(level * 0.01 *  volgallons))
+               
                 
             elif units == 'metric': # we will calculate in liters
               #check if we have a good capacity value before making volume calculation
               if capacity != '---':
                 volliters = capacity # is in liters
-                volume = level * 0.01 * volliters
+                volume =  float("{0:.1f}".format(level * 0.01 *  volliters))
                 
             else : #default will be in %
-                volume = level
+                volume =  float("{0:.1f}".format(level * 1.0 ))
 
             
             if fluidtype == 0 and fluidinstance ==0 and volume != '---':
