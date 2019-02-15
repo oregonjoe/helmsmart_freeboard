@@ -6454,7 +6454,7 @@ def freeboard_battery():
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
         return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature))})     
 
-    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
