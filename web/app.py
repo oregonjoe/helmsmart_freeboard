@@ -78,7 +78,8 @@ from flask.ext.cors import CORS, cross_origin
 
 
 def connection_from(url):
-  config = urlparse.urlparse(url)
+  #config = urlparse.urlparse(url)
+  config = urlparse(url)
   return dict(
     host=config.hostname, 
     port=config.port, 
