@@ -6,8 +6,9 @@ import json
 import requests
 from requests.exceptions import HTTPError
 #import nmea
-import urlparse
+#import urlparse
 import urllib
+from urlparse import urlparse
 import md5
 import base64
 import fnmatch
@@ -23,7 +24,8 @@ from pytz import timezone
 from itertools import groupby
 import pyonep
 from pyonep import onep
-import urlparse
+#import urlparse
+
 #from iron_cache import *
 import logging
 import psycopg2
