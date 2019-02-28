@@ -2229,7 +2229,7 @@
 								//gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": fillColor}, 500, ">");
 								gaugeFill.animate({"width": fillVal, "fill": fillColor, "stroke": "#A6A3A3"}, 500, ">");
 								valueText.attr({"text": datavalue});
-							}						}
+							}						
 							else
 								valueText.attr({"text": "---"});
 						}
