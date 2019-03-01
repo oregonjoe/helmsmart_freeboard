@@ -6330,7 +6330,9 @@ def freeboard_battery():
 
     voltage=[]
     current=[]
-    temperature=[]      
+    temperature=[]
+    stateofcharge=[]
+    timeremaining=[]
 
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
@@ -6368,7 +6370,7 @@ def freeboard_battery():
 
     if mode == "median":
       
-      query = ('select  median(voltage) AS voltage, median(current) AS  current, median(temperature) AS temperature  from {} '
+      query = ('select  median(voltage) AS voltage, median(current) AS  current, median(temperature) AS temperature,  median(stateofcharge) AS stateofcharge ,  median(timeremaining) AS timeremaining from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6377,7 +6379,7 @@ def freeboard_battery():
       
     elif mode == "max":
       
-      query = ('select  max(voltage) AS voltage, max(current) AS  current, max(temperature) AS temperature  from {} '
+      query = ('select  max(voltage) AS voltage, max(current) AS  current, max(temperature) AS temperature,  max(stateofcharge) AS stateofcharge ,  max(timeremaining) AS timeremaining  from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6386,7 +6388,7 @@ def freeboard_battery():
       
     elif mode == "min":
       
-      query = ('select  min(voltage) AS voltage, min(current) AS  current, min(temperature) AS temperature  from {} '
+      query = ('select  min(voltage) AS voltage, min(current) AS  current, min(temperature) AS temperature,  min(stateofcharge) AS stateofcharge ,  min(timeremaining) AS timeremaining  from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6395,7 +6397,7 @@ def freeboard_battery():
       
     else:
       
-      query = ('select  mean(voltage) AS voltage, mean(current) AS  current, mean(temperature) AS temperature  from {} '
+      query = ('select  mean(voltage) AS voltage, mean(current) AS  current, mean(temperature) AS temperature,  mean(stateofcharge) AS stateofcharge ,  mean(timeremaining) AS timeremaining  from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6448,14 +6450,14 @@ def freeboard_battery():
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature)), 'stateofcharge':list(reversed(stateofcharge)), 'timeremaining':list(reversed(timeremaining))})     
 
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
-        return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate,  'status':'missing', 'update':'False', 'voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature)), 'stateofcharge':list(reversed(stateofcharge)), 'timeremaining':list(reversed(timeremaining))})     
 
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
@@ -6481,10 +6483,13 @@ def freeboard_battery():
       value2 = '---'
       value3 = '---'
       value4 = '---'
+      value5 = '---'
       
       voltage=[]
       current=[]
       temperature=[]
+      stateofcharge=[]
+      timeremaining=[]
 
       ts =startepoch*1000
 
@@ -6498,7 +6503,7 @@ def freeboard_battery():
         value2 = '---'
         value3 = '---'
         value4 = '---'
-
+        value5 = '---'
 
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
@@ -6522,6 +6527,14 @@ def freeboard_battery():
         if point['temperature'] is not None:         
           value3 = convertfbunits(point['temperature'], convertunittype('temperature', units))
         temperature.append({'epoch':ts, 'value':value3})
+                      
+        if point['stateofcharge'] is not None:         
+          value4 = convertfbunits(point['stateofcharge'], convertunittype('%', units))
+        stateofcharge.append({'epoch':ts, 'value':value4})
+          
+        if point['timeremaining'] is not None:         
+          value5 = convertfbunits(point['timeremaining'], convertunittype('time', units))
+        timeremaining.append({'epoch':ts, 'value':value5})
                
 
       callback = request.args.get('callback')
@@ -6530,7 +6543,7 @@ def freeboard_battery():
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':value1, 'current':value2, 'temperature':value3})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','voltage':list(reversed(voltage)), 'current':list(reversed(current)), 'temperature':list(reversed(temperature)), 'stateofcharge':list(reversed(stateofcharge)), 'timeremaining':list(reversed(timeremaining))})     
         
 
      
