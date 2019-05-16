@@ -188,7 +188,7 @@
         <tr>
           <td class="auto-style18"><strong>Wind Data - Speed and direction both 
 		  True North and Apparent</strong><br><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
@@ -198,7 +198,7 @@
         <tr>
           <td class="auto-style18"><strong>Environmential - Air temperature, 
 		  Barometric pressure, and Humidity<br></strong><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmential?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmential?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
@@ -208,8 +208,7 @@
         <tr>
           <td class="auto-style18"><strong>Navigation - Speed over Ground, 
 		  Course over Ground, and Heading<br></strong><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
-		  or US]<br><br>EXAMPLE:
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
@@ -217,19 +216,29 @@
 		        <tr>
           <td class="auto-style18"><strong>Battery - Volts, 
 		  Amps, and Temperature<br></strong><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
         </tr>
 		
-		        <tr>
+		  <tr>
           <td class="auto-style18"><strong>Engine - RPM, Water Temperature, 
 		  Oil Pressure, Fuel Rate, Alt Volts, Fuel Level, Boost, Hours<br></strong><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Instance=[Number]&amp;Units=[IM 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Instance=[Number]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+		
+		
+			<tr>
+          <td class="auto-style18"><strong>Engine Aux- boost_pressure,coolant_pressure,fuel_pressure,oil_temp,egt_temperature,fuel_rate_average,instantaneous_fuel_economy,tilt_or_trim=<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Instance=[Number]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
         </tr>
@@ -237,7 +246,7 @@
 		        <tr>
           <td class="auto-style18"><strong>AC Status - AC Volts, Amps, Watts, 
 		  Energy<br></strong><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Type=[UTIL 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Type=[UTIL 
 		  or GEN]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
@@ -246,7 +255,7 @@
 
         <tr>
           <td class="auto-style12"><strong>Switch Status - Open or closed - 16 switches<br></strong><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Units=[IM 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
@@ -285,7 +294,7 @@
           <td class="auto-style5">www.chetcodigital.com&nbsp; www.seasmart.net www.netgauges.net www.digitalmarinegauges.com 				</td>
         </tr>
 		 <tr>
-          <td class="auto-style5"><center> copyright 2016</center>			</td>
+          <td class="auto-style5"><center> copyright 2019</center>			</td>
         </tr>
 		
 
