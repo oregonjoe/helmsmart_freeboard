@@ -152,19 +152,46 @@
         <tr>
           <td class="auto-style18">Most APIs take a device key and resolution 
 		  parameter. <br><br>The device key is issued by HelmSmart to link a 
-		  device to a user account. <br><br>Resolution is a optional numerical 
+		  device to a user account. <br>
+		  
+		  <br>Interval is a optional numerical 
+		  time value for which a group of values 
+		  is returned. Interval starts from current time API is called going backwards. 
+		  If no Interval parameter is used, the default is 5 
+		  minutes from the current time. Options are 
+		  [1min,2min,5min,10min,15min,30min,1hour,4hour,6hour,8hour,1hour,1day,2day,7day,1month]<br>
+		  
+		  <br>Resolution is a optional numerical time
 		  value in seconds for which a average is calculated and a single value 
-		  is returned. If no Interval parameter is used, the default is 5 
-		  minutes from the current time.<br><br>Some APIs take additional 
-		  optional parameters<br><br>INSTANCE is used to identify multiple 
+		  is returned. If a Interval of 10min with a resolution of 60 (sec) is used, 10 data points will be returned.
+		  If no Resolution parameter is used, the default is a single data point based on the interval.<br>
+		  
+		  <br>Some APIs take additional 
+		  optional parameters<br>
+		  
+		  <br>INSTANCE is used to identify multiple 
 		  sensors belonging to the same class - For example Fuel Level or engine 
 		  speed. It is a numerical value from&nbsp; 0 to 255 with 0 common for 
 		  single devices or PORT and 1 for STARBOARD. Not all APIs will have a 
-		  INSTANCE parameter<br><br>UNITS can be used to convert to Metric [IM] 
+		  INSTANCE parameter<br>
+		  
+		  <br>UNITS can be used to convert to Metric [IM] 
 		  or US Customary [US] units of measure. If IM is used temperature will 
 		  be in degrees celsius while US will be fahrenheit. The default is US 
 		  if no parameter is specified. Not all APIs will have a UNITS 
-		  parameter.</td>
+		  parameter. Options are [US, Metric, Scientific, Nautical]<br>
+		  
+		  <br>TIMEZONE converts from GMT (universial) to local time. Options are [UTC, Eastern, Central, Mountain, Pacific, Hawaii]<br>
+		  
+		 <br>Mode can be used to group data point within a span (interval). Default is to average data based on resolution.
+		 If a interval of 1 hour is choosed with resolution of 10 minutes - the average (mean) value for every 10 minutes is trurned.
+		 Options are [Mean, Median, Max, Min]<br> 
+		 
+		  <br>TYPE is used for some APIs to select subsets of data. True Wind Direction vs Apparent Wind Direction for example. Options are dependent on the API type. Not all APIs use a TYPE <br>
+		  
+		  
+		  
+		  </td>
         </tr>
 
         <tr>
@@ -188,7 +215,7 @@
         <tr>
           <td class="auto-style18"><strong>Wind Data - Speed and direction both 
 		  True North and Apparent</strong><br><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Type=[apparent or true]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
@@ -198,7 +225,7 @@
         <tr>
           <td class="auto-style18"><strong>Environmential - Air temperature, 
 		  Barometric pressure, and Humidity<br></strong><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmential?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmential?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Type=[sea or inside or outside]&amp;Units=[IM 
 		  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
@@ -208,7 +235,7 @@
         <tr>
           <td class="auto-style18"><strong>Navigation - Speed over Ground, 
 		  Course over Ground, and Heading<br></strong><br>FORMAT: 
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM  or US]<br><br>EXAMPLE:
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;;Type=[magnetic or true]&amp;Units=[IM  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
 		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
@@ -240,7 +267,7 @@
 		  or US]<br><br>EXAMPLE:
 		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux?apikey=a5069b96637473d7701fa11eb9baad3d">
 		  <span class="auto-style15">
-		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
         </tr>
 		
 		        <tr>
