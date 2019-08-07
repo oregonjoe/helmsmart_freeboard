@@ -9121,7 +9121,7 @@ def freeboard_get_engine_values():
 
     deviceid = getedeviceid(deviceapikey)
     
-    log.info("freeboard freeboard_dimmer_values deviceid %s", deviceid)
+    log.info("freeboard freeboard_get_engine_values deviceid %s", deviceid)
 
     if deviceid == "":
       return jsonify(result="ERROR")
@@ -9386,7 +9386,7 @@ def freeboard_get_weather_values():
 
     deviceid = getedeviceid(deviceapikey)
     
-    log.info("freeboard freeboard_dimmer_values deviceid %s", deviceid)
+    log.info("freeboard freeboard_get_weather_values deviceid %s", deviceid)
 
     if deviceid == "":
       return jsonify(result="ERROR")
@@ -9466,7 +9466,7 @@ def freeboard_get_weather_values():
    
 
 
-    log.info("freeboard freeboard_dimmer_values data Query %s", query)
+    log.info("freeboard freeboard_get_weather_values data Query %s", query)
 
     try:
         response= dbc.query(query)
@@ -9648,7 +9648,7 @@ def freeboard_get_weather_minmax_value():
 
     deviceid = getedeviceid(deviceapikey)
     
-    log.info("freeboard freeboard_dimmer_values deviceid %s", deviceid)
+    log.info("freeboard freeboard_get_weather_minmax_value deviceid %s", deviceid)
 
     if deviceid == "":
       return jsonify(result="ERROR")
@@ -9699,7 +9699,7 @@ def freeboard_get_weather_minmax_value():
 
     #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
-    log.info("freeboard_get_weather_values mode = %s", mode)
+    log.info("freeboard_get_weather_minmax_value mode = %s", mode)
     
     if mode == 'min':
       #log.info("freeboard_get_weather_values mode is min")
@@ -9739,7 +9739,7 @@ def freeboard_get_weather_minmax_value():
    
 
 
-    log.info("freeboard freeboard_dimmer_values data Query %s", query)
+    log.info("freeboard freeboard_get_weather_minmax_value data Query %s", query)
 
     try:
         response= dbc.query(query)
@@ -9935,6 +9935,7 @@ def freeboard_get_dimmer_values():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
+    gwtype = request.args.get('gateway',"hub")
     Interval = request.args.get('interval',"5min")
     instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
@@ -10159,6 +10160,7 @@ def freeboard_dimmer_values():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
+    gwtype = request.args.get('gateway',"hub")
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
@@ -10331,7 +10333,8 @@ def freeboard_dimmer_values():
       dimmer2=[]
       dimmer3=[]
       dimmer4=[]
-      
+      dimmer_override=[]
+      dimmer_status=[]
        
       points = list(response.get_points())
 
@@ -10379,8 +10382,12 @@ def freeboard_dimmer_values():
         
         if point['dv4'] is not None:
           dimmer4.append({'epoch':ts, 'value':int(point['dv4'])})
+          dimmer_override.append({'epoch':ts, 'value':(int(point['dv4']) >> 4)})
+          dimmer_status.append({'epoch':ts, 'value':(int(point['dv4']) & 0x0F)})
         else:
           dimmer4.append({'epoch':ts, 'value':'---'})
+          dimmer_override.append({'epoch':ts, 'value':'---'})
+          dimmer_status.append({'epoch':ts, 'value':'---'})
 
         
 
@@ -10394,8 +10401,14 @@ def freeboard_dimmer_values():
    
 
       callback = request.args.get('callback')
-      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
+      myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
+
+      if gwtype == "mesh"
+
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_value':list(reversed(dimmer0)),'dimmer_dio':list(reversed(dimmer2)),'dimmer_adc':list(reversed(dimmer3)),'dimmer_override':list(reversed(dimmer_override)),'dimmer_status':list(reversed(dimmer_status))})     
+
+      else:
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)

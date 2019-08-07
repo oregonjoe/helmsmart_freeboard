@@ -649,12 +649,16 @@
 						value: "Precise GNSS"
 					},
 					{
-						name: "LED 4 Channel",
-						value: "LED 4 Channel"
+						name: "LED 4 Channel Hub",
+						value: "hub"
 					},
 					{
-						name: "RGB 1 Channel",
-						value: "RGB 1 Channel"
+						name: "LED 1 Channel Mesh",
+						value: "mesh"
+					},
+					{
+						name: "RGB 1 Channel Hub",
+						value: "rgbhub"
 					},
 					{
 						name: "NULL",
