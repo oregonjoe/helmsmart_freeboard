@@ -10335,6 +10335,7 @@ def freeboard_dimmer_values():
       dimmer4=[]
       dimmer_override=[]
       dimmer_status=[]
+      dimmer_motion=[]
        
       points = list(response.get_points())
 
@@ -10370,8 +10371,10 @@ def freeboard_dimmer_values():
         
         if point['dv2'] is not None:
           dimmer2.append({'epoch':ts, 'value':int(point['dv2'])})
+          dimmer_motion.append({'epoch':ts, 'value':((int(point['dv2']) & 0x10) * 6.25)})
         else:
           dimmer2.append({'epoch':ts, 'value':'---'})
+          dimmer_motion.append({'epoch':ts, 'value':'---'})
 
         
         if point['dv3'] is not None:
@@ -10405,7 +10408,7 @@ def freeboard_dimmer_values():
 
       if gwtype == "mesh":
 
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_value':list(reversed(dimmer0)),'dimmer_dio':list(reversed(dimmer2)),'dimmer_adc':list(reversed(dimmer3)),'dimmer_override':list(reversed(dimmer_override)),'dimmer_status':list(reversed(dimmer_status))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_value':list(reversed(dimmer0)),'dimmer_dio':list(reversed(dimmer2)),'dimmer_adc':list(reversed(dimmer3)),'dimmer_motion':list(reversed(dimmer_motion)),'dimmer_override':list(reversed(dimmer_override)),'dimmer_status':list(reversed(dimmer_status))})     
 
       else:
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
