@@ -9935,7 +9935,7 @@ def freeboard_get_dimmer_values():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    gwtype = request.args.get('gateway',"hub")
+    gwtype = request.args.get('type',"hub")
     Interval = request.args.get('interval',"5min")
     instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
@@ -10160,7 +10160,7 @@ def freeboard_dimmer_values():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
-    gwtype = request.args.get('gateway',"hub")
+    gwtype = request.args.get('type',"hub")
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
