@@ -10371,7 +10371,8 @@ def freeboard_dimmer_values():
         
         if point['dv2'] is not None:
           dimmer2.append({'epoch':ts, 'value':int(point['dv2'])})
-          dimmer_motion.append({'epoch':ts, 'value':((int(point['dv2']) & 0x10) * 6.25)})
+          #dimmer_motion.append({'epoch':ts, 'value':((int(point['dv2']) & 0x10) * 6.25)})
+          dimmer_motion.append({'epoch':ts, 'value':((int(point['dv2']) & 0x10) * 8.0)})
         else:
           dimmer2.append({'epoch':ts, 'value':'---'})
           dimmer_motion.append({'epoch':ts, 'value':'---'})
