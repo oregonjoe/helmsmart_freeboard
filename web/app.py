@@ -10403,7 +10403,7 @@ def freeboard_dimmer_values():
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
 
-      if gwtype == "mesh"
+      if gwtype == "mesh":
 
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_value':list(reversed(dimmer0)),'dimmer_dio':list(reversed(dimmer2)),'dimmer_adc':list(reversed(dimmer3)),'dimmer_override':list(reversed(dimmer_override)),'dimmer_status':list(reversed(dimmer_status))})     
 
