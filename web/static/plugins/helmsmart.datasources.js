@@ -611,7 +611,13 @@
 					{
 						name: "UTIL",
 						value: "UTIL"
-					},					
+					},	
+					{
+						name: "UTIL2",
+						value: "UTIL2"
+					},		
+
+					
 					{
 						name: "GEN",
 						value: "GEN"
@@ -620,6 +626,11 @@
 						name: "LIGHTS",
 						value: "LIGHTS"
 					},
+										{
+						name: "LIGHTS2",
+						value: "LIGHTS2"
+					},
+					
 					{
 						name: "HEAT",
 						value: "HEAT"
