@@ -7161,7 +7161,7 @@ def freeboard_engine_aux():
         
         if point['throttle_position'] is not None:
           value8 = convertfbunits(point['throttle_position'], convertunittype('%', units))
-        tilt_or_trim.append({'epoch':ts, 'value':value8})
+        throttle_position.append({'epoch':ts, 'value':value8})
           
           
 
