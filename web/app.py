@@ -6910,7 +6910,8 @@ def freeboard_engine_aux():
     egt_temperature=[]
     fuel_rate_average=[]
     instantaneous_fuel_economy=[]
-    tilt_or_trim=[]
+    #tilt_or_trim=[]
+    throttle_position=[]
 
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
@@ -6963,7 +6964,7 @@ def freeboard_engine_aux():
     dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
 
     if mode == "median":
-      query = ('select  median(tilt_or_trim) AS tilt_or_trim, median(boost_pressure) AS  boost_pressure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(egt_temp) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+      query = ('select  median(throttle_position) AS throttle_position, median(boost_pressure) AS  boost_pressure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(egt_temp) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6971,7 +6972,7 @@ def freeboard_engine_aux():
                           resolution) 
 
     elif mode == "max":
-      query = ('select  max(tilt_or_trim) AS tilt_or_trim, max(boost_pressure) AS  boost_pressure, max(coolant_pressure) AS coolant_pressure, max(fuel_pressure) AS fuel_pressure, max(oil_temp) AS oil_temp ,  max(egt_temp) AS egt_temperature , max(fuel_rate_average) AS fuel_rate_average  , max(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+      query = ('select  max(throttle_position) AS throttle_position, max(boost_pressure) AS  boost_pressure, max(coolant_pressure) AS coolant_pressure, max(fuel_pressure) AS fuel_pressure, max(oil_temp) AS oil_temp ,  max(egt_temp) AS egt_temperature , max(fuel_rate_average) AS fuel_rate_average  , max(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6979,7 +6980,7 @@ def freeboard_engine_aux():
                           resolution) 
 
     elif mode == "min":
-      query = ('select  min(tilt_or_trim) AS tilt_or_trim, min(boost_pressure) AS  boost_pressure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(egt_temp) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+      query = ('select  min(throttle_position) AS throttle_position, min(boost_pressure) AS  boost_pressure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(egt_temp) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -6987,7 +6988,7 @@ def freeboard_engine_aux():
                           resolution) 
 
     else:        
-      query = ('select  mean(tilt_or_trim) AS tilt_or_trim, mean(boost_pressure) AS  boost_pressure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(egt_temp) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
+      query = ('select  mean(throttle_position) AS throttle_position, mean(boost_pressure) AS  boost_pressure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(egt_temp) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from {} '
                        'where {} AND time > {}s and time < {}s '
                        'group by time({}s)') \
                   .format( measurement, serieskeys,
@@ -7042,17 +7043,17 @@ def freeboard_engine_aux():
         e = sys.exc_info()[0]
         log.info("freeboard: Error: %s" % e)
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','boost_pressure':list(reversed(boost_pressure)), 'coolant_pressure':list(reversed(coolant_pressure)), 'fuel_pressure':list(reversed(fuel_pressure)),'oil_temp':list(reversed(oil_temp)), 'egt_temperature':list(reversed(egt_temperature)), 'fuel_rate_average':list(reversed(fuel_rate_average)), 'instantaneous_fuel_economy':list(reversed(instantaneous_fuel_economy)), 'tilt_or_trim':list(reversed(tilt_or_trim))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','boost_pressure':list(reversed(boost_pressure)), 'coolant_pressure':list(reversed(coolant_pressure)), 'fuel_pressure':list(reversed(fuel_pressure)),'oil_temp':list(reversed(oil_temp)), 'egt_temperature':list(reversed(egt_temperature)), 'fuel_rate_average':list(reversed(fuel_rate_average)), 'instantaneous_fuel_economy':list(reversed(instantaneous_fuel_economy)), 'throttle_position':list(reversed(throttle_position))})     
 
     if response is None:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','boost_pressure':list(reversed(boost_pressure)), 'coolant_pressure':list(reversed(coolant_pressure)), 'fuel_pressure':list(reversed(fuel_pressure)),'oil_temp':list(reversed(oil_temp)), 'egt_temperature':list(reversed(egt_temperature)), 'fuel_rate_average':list(reversed(fuel_rate_average)), 'instantaneous_fuel_economy':list(reversed(instantaneous_fuel_economy)), 'tilt_or_trim':list(reversed(tilt_or_trim))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','boost_pressure':list(reversed(boost_pressure)), 'coolant_pressure':list(reversed(coolant_pressure)), 'fuel_pressure':list(reversed(fuel_pressure)),'oil_temp':list(reversed(oil_temp)), 'egt_temperature':list(reversed(egt_temperature)), 'fuel_rate_average':list(reversed(fuel_rate_average)), 'instantaneous_fuel_economy':list(reversed(instantaneous_fuel_economy)), 'throttle_position':list(reversed(throttle_position))})     
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','boost_pressure':list(reversed(boost_pressure)), 'coolant_pressure':list(reversed(coolant_pressure)), 'fuel_pressure':list(reversed(fuel_pressure)),'oil_temp':list(reversed(oil_temp)), 'egt_temperature':list(reversed(egt_temperature)), 'fuel_rate_average':list(reversed(fuel_rate_average)), 'instantaneous_fuel_economy':list(reversed(instantaneous_fuel_economy)), 'tilt_or_trim':list(reversed(tilt_or_trim))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing','update':'False','boost_pressure':list(reversed(boost_pressure)), 'coolant_pressure':list(reversed(coolant_pressure)), 'fuel_pressure':list(reversed(fuel_pressure)),'oil_temp':list(reversed(oil_temp)), 'egt_temperature':list(reversed(egt_temperature)), 'fuel_rate_average':list(reversed(fuel_rate_average)), 'instantaneous_fuel_economy':list(reversed(instantaneous_fuel_economy)), 'throttle_position':list(reversed(throttle_position))})     
 
     log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
@@ -7091,7 +7092,7 @@ def freeboard_engine_aux():
       egt_temperature=[]
       fuel_rate_average=[]
       instantaneous_fuel_economy=[]
-      tilt_or_trim=[]
+      throttle_position=[]
 
       ts =startepoch*1000
       
@@ -7158,8 +7159,8 @@ def freeboard_engine_aux():
 
           
         
-        if point['tilt_or_trim'] is not None:
-          value8 = convertfbunits(point['tilt_or_trim'], convertunittype('%', units))
+        if point['throttle_position'] is not None:
+          value8 = convertfbunits(point['throttle_position'], convertunittype('%', units))
         tilt_or_trim.append({'epoch':ts, 'value':value8})
           
           
@@ -7169,7 +7170,7 @@ def freeboard_engine_aux():
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','rpm':list(reversed(speed)), 'eng_temp':list(reversed(engine_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator_potential)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(level)), 'eng_hours':list(reversed(total_engine_hours))})     
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','boost_pressure':list(reversed(boost_pressure)), 'coolant_pressure':list(reversed(coolant_pressure)), 'fuel_pressure':list(reversed(fuel_pressure)),'oil_temp':list(reversed(oil_temp)), 'egt_temperature':list(reversed(egt_temperature)), 'fuel_rate_average':list(reversed(fuel_rate_average)), 'instantaneous_fuel_economy':list(reversed(instantaneous_fuel_economy)), 'tilt_or_trim':list(reversed(tilt_or_trim))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'success','update':'True','boost_pressure':list(reversed(boost_pressure)), 'coolant_pressure':list(reversed(coolant_pressure)), 'fuel_pressure':list(reversed(fuel_pressure)),'oil_temp':list(reversed(oil_temp)), 'egt_temperature':list(reversed(egt_temperature)), 'fuel_rate_average':list(reversed(fuel_rate_average)), 'instantaneous_fuel_economy':list(reversed(instantaneous_fuel_economy)), 'throttle_position':list(reversed(throttle_position))})     
 
 
 
