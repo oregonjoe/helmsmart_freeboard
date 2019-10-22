@@ -6119,7 +6119,7 @@ def freeboard_water_depth():
     serieskeys= serieskeys + deviceid + "' AND "
     #serieskeys= serieskeys +  " (sensor='water_depth' )  "
     serieskeys= serieskeys +  " (sensor='water_depth' OR sensor='water_speed' OR sensor='temperature') AND "
-    serieskeys= serieskeys +  " (type='Sea Temperature' OR type='Paddle Wheel' OR type='NULL' ) "
+    serieskeys= serieskeys +  " (type='Sea Temperature' OR type='Paddle Wheel' OR type='Correlation Log'  OR type='NULL' ) "
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
     log.info("freeboard Create InfluxDB %s", database)
