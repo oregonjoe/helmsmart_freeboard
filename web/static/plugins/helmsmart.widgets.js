@@ -3010,6 +3010,7 @@
         var currentSettings = settings;
         var map;
         var marker;
+		var markers = new Array();
         var currentPosition = {};
 		var myLatlng;
 		var myOldLatlng;
@@ -3038,6 +3039,22 @@
 				
             }
         }
+		
+		 function updatePositions(zone) {
+            if (map && markers[zone] && currentPosition.lat && currentPosition.lon) {
+                var newLatLon = new google.maps.LatLng(currentPosition.lat, currentPosition.lon);
+                markers[zone].setPosition(newLatLon);
+                //map.panTo(newLatLon);
+				
+				
+				
+				
+				//newpoly[i] = new google.maps.Polyline(mypolyOptions);
+				
+				
+            }
+        }
+		
 
         this.render = function (element) {
             function initializeMap() {
@@ -3465,6 +3482,17 @@
                 marker = new google.maps.Marker({map: map});
 
                 updatePosition();
+				
+				for (i = 1; i <= MAX_NUM_ZONES; i++) {
+					
+					
+					 markers[i] = new google.maps.Marker({map: map});
+
+					//updatePositions(i);
+					
+				}
+				
+				
             }
 
             if (window.google && window.google.maps) {
@@ -3534,6 +3562,29 @@
 
             updatePosition();
         }
+		 else if (settingName == "zone1") {
+				 position = newValue[0];
+				 currentPosition.lon = position.lng;
+				 currentPosition.lat = position.lat;
+		
+				updatePositions(0);
+		
+		}
+		else if (settingName == "zone2") {
+				 position = newValue[0];
+				 currentPosition.lon = position.lng;
+				 currentPosition.lat = position.lat;
+		
+				updatePositions(1);
+		
+		}
+		else if (settingName == "zone3") {
+				 position = newValue[0];
+				 currentPosition.lon = position.lng;
+				 currentPosition.lat = position.lat;
+		
+				updatePositions(2);
+		
 		}
 
         this.onDispose = function () {
