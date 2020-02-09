@@ -5723,14 +5723,19 @@ def freeboard_location():
 
         
         if (point['lat'] is not None)  :
-          if (point['lng'] is not None) :          
-            value1 = convertfbunits(point['lat'], 15)
-            lat.append({'epoch':ts, 'value':value1})
+          if (point['lng'] is not None) :
             
-            value2 = convertfbunits(point['lng'], 15)
-            lng.append({'epoch':ts, 'value':value2})
+            value1 = convertfbunits(point['lat'], 15)
+            if value1 > 0.1:
+              lat.append({'epoch':ts, 'value':value1})
 
-            position.append({'epoch':ts, 'lat':value1, 'lng':value2})
+
+            value2 = convertfbunits(point['lng'], 15)
+            if value2 > 0.1:            
+              lng.append({'epoch':ts, 'value':value2})
+
+            if value1 > 0.1 and value2 > 0.1:
+              position.append({'epoch':ts, 'lat':value1, 'lng':value2})
 
 
         if point['siv'] is not None:       
