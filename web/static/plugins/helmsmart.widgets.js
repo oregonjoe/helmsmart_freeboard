@@ -3604,13 +3604,13 @@
 	
 	
 	var GoogleMapsWidgetSettings = [
-	/*
+	
 		{
                 name: "position",
                 display_name: "Position",
                 type: "calculated"
         },
-		*/
+		
 		{
 			name: "blocks",
 			display_name: "Height (No. Blocks)",
