@@ -3687,7 +3687,7 @@
 	
 	];
 	
-		for (i = 1; i <= MAX_NUM_SERIES; i++) {
+		for (i = 1; i <= MAX_NUM_ZONES; i++) {
 		var dataSource = {
 			"name": "series" + i,
 			"display_name": "Series " + i + " - Datasource",
