@@ -3483,7 +3483,7 @@
 
                 updatePosition();
 				
-				for (i = 1; i <= MAX_NUM_ZONES; i++) {
+				for (i = 0; i < MAX_NUM_ZONES; i++) {
 					
 					
 					 markers[i] = new google.maps.Marker({map: map});
@@ -3562,7 +3562,7 @@
 
             updatePosition();
         }
-		 else if (settingName == "zone1") {
+		 else if (settingName == "zone0") {
 				 position = newValue[0];
 				 currentPosition.lon = position.lng;
 				 currentPosition.lat = position.lat;
@@ -3570,7 +3570,7 @@
 				updatePositions(0);
 		
 		}
-		else if (settingName == "zone2") {
+		else if (settingName == "zone1") {
 				 position = newValue[0];
 				 currentPosition.lon = position.lng;
 				 currentPosition.lat = position.lat;
@@ -3578,7 +3578,7 @@
 				updatePositions(1);
 		
 		}
-		else if (settingName == "zone3") {
+		else if (settingName == "zone2") {
 				 position = newValue[0];
 				 currentPosition.lon = position.lng;
 				 currentPosition.lat = position.lat;
@@ -3741,7 +3741,7 @@
 	
 	];
 	
-		for (i = 1; i <= MAX_NUM_ZONES; i++) {
+		for (i = 0; i < MAX_NUM_ZONES; i++) {
 		var dataSource = {
 			"name": "zone" + i,
 			"display_name": "Zone " + i + " - Datasource",
