@@ -3501,6 +3501,15 @@
 					
 					var myLabel = currentSettings['zone' + i];
 					
+					if (datasource) {
+						var serieno = "zone" + i + "label";
+						var label = currentSettings[serieno];
+						console.log('label: ', label);
+						var serieclor = "series" + i + "color";
+					}
+					
+					
+					
 					 markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: "zone " + i, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 
 					//updatePositions(i);
