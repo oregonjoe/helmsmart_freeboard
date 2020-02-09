@@ -3499,7 +3499,7 @@
 				
 				for (i = 0; i < MAX_NUM_ZONES; i++) {
 					
-					var myLabel = currentSettings['zone' + i];
+					var datasource = currentSettings['zone' + i];
 					
 					if (datasource) {
 						var serieno = "zone" + i + "label";
