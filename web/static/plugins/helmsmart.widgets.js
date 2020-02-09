@@ -3044,9 +3044,23 @@
             if (map && markers[zone] && currentPosition.lat && currentPosition.lon) {
                 var newLatLon = new google.maps.LatLng(currentPosition.lat, currentPosition.lon);
                 markers[zone].setPosition(newLatLon);
-                map.panTo(newLatLon);
 				
 				
+				var bounds = new google.maps.LatLngBounds();
+	//var infowindow = new google.maps.InfoWindow();
+				for (i = 0; i < MAX_NUM_ZONES; i++) {
+					  //extend the bounds to include each marker's position
+					  
+					if(markers[i])
+					{
+						bounds.extend(markers[i].position);
+					}
+				}
+				
+               // map.panTo(newLatLon);
+				
+				//now fit the map to the newly inclusive bounds
+				map.fitBounds(bounds);
 				
 				
 				//newpoly[i] = new google.maps.Polyline(mypolyOptions);
@@ -3601,7 +3615,9 @@
         this.onSettingsChanged(settings);
     };
 	
-	
+	//create empty LatLngBounds object
+	//var bounds = new google.maps.LatLngBounds();
+	//var infowindow = new google.maps.InfoWindow();
 	
 	var GoogleMapsWidgetSettings = [
 	
