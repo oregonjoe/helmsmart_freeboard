@@ -3504,7 +3504,7 @@
 					if (datasource) {
 						var serieno = "zone" + i + "label";
 						var title = currentSettings[serieno];
-						console.log('label: ', label);
+						
 						var serieclor = "series" + i + "color";
 						var iconcolor = currentSettings[serieclor];
 						
