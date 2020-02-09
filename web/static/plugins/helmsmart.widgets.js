@@ -3687,7 +3687,78 @@
 	
 	];
 	
-	
+		for (i = 1; i <= MAX_NUM_SERIES; i++) {
+		var dataSource = {
+			"name": "series" + i,
+			"display_name": "Series " + i + " - Datasource",
+			"type": "calculated"
+		};
+
+		var xField = {
+			"name": "series" + i + "label",
+			"display_name": "Series " + i + " - Label",
+			"type": "text",
+		};
+
+			// Java, Light Green,Bittersweet, Wild Blue Yonder, Pale Turquoise,Razzmatazz, Plum, Apple, Valencia, Neptune, Saffron
+		var xColor = {
+		"name": "series" + i + "color",
+		"display_name": "Series " + i + " - Color",
+		"type": "option",
+		"options": [
+		{
+			"name": "Java",
+			"value": "0"
+		}, 
+		{
+			"name": "Light Green",
+			"value": "1"
+		},
+				{
+			"name": "Bittersweet",
+			"value": "2"
+		}, 
+		{
+			"name": "Wild Blue Yonder",
+			"value": "3"
+		},
+				{
+			"name": "Pale Turquoise",
+			"value": "4"
+		}, 
+		{
+			"name": "Razzmatazz",
+			"value": "5"
+		},
+				{
+			"name": "Plum",
+			"value": "6"
+		}, 
+		{
+			"name": "Apple",
+			"value": "7"
+		},
+				{
+			"name": "Valencia",
+			"value": "8"
+		}, 
+		{
+			"name": "Neptune",
+			"value": "9"
+		},
+		{
+			"name": "Saffron",
+			"value": "10"
+		}
+		]
+		}; 
+		
+		
+		
+		GoogleMapsWidgetSettings.push(dataSource);
+		GoogleMapsWidgetSettings.push(xField);
+		GoogleMapsWidgetSettings.push(xColor);
+	}
 	
 	
     freeboard.loadWidgetPlugin({
@@ -3695,34 +3766,18 @@
         display_name: "HelmSmart Array Google Map",
 		description: "Map with historical path from data point array - uses HelmSmart Data source to grab selected span",
         fill_size: true,
-		//		"external_scripts": [
-		//		"https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCE0JHB4u3xqbBndHV4RFTa6oRfZrJzP8Y"
-		//	],
+
+		settings : GoogleMapsWidgetSettings,
+		/*
 		
         settings: [
-		/*
-            {
-                name: "lat",
-                display_name: "Latitude",
-                type: "calculated"
-            },
-            {
-                name: "lon",
-                display_name: "Longitude",
-                type: "calculated"
-            },
-			*/
+
 			{
                 name: "position",
                 display_name: "Position",
                 type: "calculated"
             },
-			//{
-			//name: "blocks",
-			//display_name: "Height (No. Blocks)",
-			//type: "text",
-			//default_value: 4
-			//}, 
+
 			{
 			name: "blocks",
 			display_name: "Height (No. Blocks)",
@@ -3849,6 +3904,8 @@
 			},
 			
         ],
+		*/
+		
         newInstance: function (settings, newInstanceCallback) {
             newInstanceCallback(new googleMapWidget(settings));
         }
