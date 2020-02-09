@@ -7,6 +7,8 @@
 // │ Licensed under the MIT license.                                    │ \\
 // └────────────────────────────────────────────────────────────────────┘ \\
 
+	var MAX_NUM_ZONES = 3;
+
 (function () {
 	var SPARKLINE_HISTORY_LENGTH = 100;
 	var SPARKLINE_COLORS = ["#FF9900", "#FFFFFF", "#B3B4B4", "#6B6B6B", "#28DE28", "#13F7F9", "#E6EE18", "#C41204", "#CA3CB8", "#0B1CFB"];
@@ -3546,7 +3548,148 @@
 
         this.onSettingsChanged(settings);
     };
+	
+	
+	
+	var GoogleMapsWidgetSettings = [
+		{
+                name: "position",
+                display_name: "Position",
+                type: "calculated"
+        },
+		{
+			name: "blocks",
+			display_name: "Height (No. Blocks)",
+			type: "option",
+			default_value: 4,
+			options: [
+			{
+				"name": "0",
+				"value": "1"
+			}, 
+			{
+				"name": "1",
+				"value": "1"
+			}, 
+			{
+				"name": "2",
+				"value": "2"
+			}, 
+			{
+				"name": "3",
+				"value": "3"
+			},
+			{
+				"name": "4",
+				"value": "4"
+			},
+			{
+				"name": "5",
+				"value": "5"
+			},		
+			{
+				"name": "6",
+				"value": "6"
+			},
+			{
+				"name": "7",
+				"value": "7"
+			},
+			{
+				"name": "8",
+				"value": "8"
+			}]
+		}, 
+	{
+                name: "mapstyle",
+                display_name: "Map Style",
+                type: "option",
+                options: [
+                    {
+                        name: "Map",
+                        value: "roadmap"
+                    },
+					{
+                        name: "Sat",
+                        value: "satellite"
+                    },
+                    {
+                        name: "Hybrid",
+                        value: "hybrid"
+                    },
+					{
+                        name: "Terrain",
+                        value: "terrain"
+                    },
+					{
+                        name: "Night",
+                        value: "styled_map"
+                    }
+                ]
+            },
+			
+			// Java-0, Light Green-1,Bittersweet-2, Wild Blue Yonder-3, Pale Turquoise-4,Razzmatazz-5, Plum-6, Apple-7, Valencia-8, Neptune-9, Saffron-10, Default-11
+			{
+			"name": "trailColor",
+			"display_name": "Trail Color",
+			"type": "option",
+			"options": [
+				{
+					"name": "Java",
+					"value": "0"
+				}, 
+				{
+					"name": "Light Green",
+					"value": "1"
+				},
+						{
+					"name": "Bittersweet",
+					"value": "2"
+				}, 
+				{
+					"name": "Wild Blue Yonder",
+					"value": "3"
+				},
+						{
+					"name": "Pale Turquoise",
+					"value": "4"
+				}, 
+				{
+					"name": "Razzmatazz",
+					"value": "5"
+				},
+						{
+					"name": "Plum",
+					"value": "6"
+				}, 
+				{
+					"name": "Apple",
+					"value": "7"
+				},
+						{
+					"name": "Valencia",
+					"value": "8"
+				}, 
+				{
+					"name": "Neptune",
+					"value": "9"
+				},
+				{
+					"name": "Saffron",
+					"value": "10"
+				}
+				]
+			},
+	
+	
+	
 
+	
+	];
+	
+	
+	
+	
     freeboard.loadWidgetPlugin({
         type_name: "google_map",
         display_name: "HelmSmart Array Google Map",
