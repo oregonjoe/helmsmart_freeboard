@@ -3044,7 +3044,7 @@
             if (map && markers[zone] && currentPosition.lat && currentPosition.lon) {
                 var newLatLon = new google.maps.LatLng(currentPosition.lat, currentPosition.lon);
                 markers[zone].setPosition(newLatLon);
-                //map.panTo(newLatLon);
+                map.panTo(newLatLon);
 				
 				
 				
