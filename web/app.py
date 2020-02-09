@@ -5726,15 +5726,21 @@ def freeboard_location():
           if (point['lng'] is not None) :
             
             value1 = convertfbunits(point['lat'], 15)
+            log.info("freeboard freeboard_location lat %s", value1)
             if value1 > 0.1:
+              log.info("freeboard freeboard_location adding lat %s", value1)
               lat.append({'epoch':ts, 'value':value1})
 
 
             value2 = convertfbunits(point['lng'], 15)
-            if value2 > 0.1:            
+            log.info("freeboard freeboard_location lng %s", value2)
+            if value2 > 0.1:
+              log.info("freeboard freeboard_location adding lng %s", value2)
               lng.append({'epoch':ts, 'value':value2})
 
+            log.info("freeboard freeboard_location lat %s lng %s", value1, value2)
             if value1 > 0.1 and value2 > 0.1:
+              log.info("freeboard freeboard_location adding position %s", value2)
               position.append({'epoch':ts, 'lat':value1, 'lng':value2})
 
 
