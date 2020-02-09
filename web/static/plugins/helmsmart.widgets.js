@@ -3499,8 +3499,8 @@
 				
 				for (i = 0; i < MAX_NUM_ZONES; i++) {
 					
-					
-					 markers[i] = new google.maps.Marker({map: map, title: "zone " + i, label : {text : "label " + i}});
+					myLabel = currentsettings.
+					 markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: "zone " + i, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 
 					//updatePositions(i);
 					
