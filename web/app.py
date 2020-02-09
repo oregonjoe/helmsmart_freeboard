@@ -5722,8 +5722,8 @@ def freeboard_location():
           ts = int(mktime(dtt)*1000)
 
         
-        if point['lat'] is not None:
-          if point['lng'] is not None:          
+        if (point['lat'] is not None) and  (point['lat'] > 0.1) :
+          if (point['lng'] is not None) and  (point['lng']  > 0.1):          
             value1 = convertfbunits(point['lat'], 15)
             lat.append({'epoch':ts, 'value':value1})
             
