@@ -3051,7 +3051,7 @@
 				for (i = 0; i < MAX_NUM_ZONES; i++) {
 					  //extend the bounds to include each marker's position
 					  
-					if(markers[i])
+					if(markers[i].position)
 					{
 						bounds.extend(markers[i].position);
 					}
