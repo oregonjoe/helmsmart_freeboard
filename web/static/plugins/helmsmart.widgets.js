@@ -3500,7 +3500,7 @@
 				for (i = 0; i < MAX_NUM_ZONES; i++) {
 					
 					
-					 markers[i] = new google.maps.Marker({map: map});
+					 markers[i] = new google.maps.Marker({map: map, title: "zone " + i, label : {text : "label " + i}});
 
 					//updatePositions(i);
 					
