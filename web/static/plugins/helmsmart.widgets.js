@@ -3552,11 +3552,13 @@
 	
 	
 	var GoogleMapsWidgetSettings = [
+	/*
 		{
                 name: "position",
                 display_name: "Position",
                 type: "calculated"
         },
+		*/
 		{
 			name: "blocks",
 			display_name: "Height (No. Blocks)",
@@ -3689,21 +3691,21 @@
 	
 		for (i = 1; i <= MAX_NUM_ZONES; i++) {
 		var dataSource = {
-			"name": "series" + i,
-			"display_name": "Series " + i + " - Datasource",
+			"name": "zone" + i,
+			"display_name": "Zone " + i + " - Datasource",
 			"type": "calculated"
 		};
 
 		var xField = {
-			"name": "series" + i + "label",
-			"display_name": "Series " + i + " - Label",
+			"name": "zone" + i + "label",
+			"display_name": "Zone " + i + " - Label",
 			"type": "text",
 		};
 
 			// Java, Light Green,Bittersweet, Wild Blue Yonder, Pale Turquoise,Razzmatazz, Plum, Apple, Valencia, Neptune, Saffron
 		var xColor = {
-		"name": "series" + i + "color",
-		"display_name": "Series " + i + " - Color",
+		"name": "zone" + i + "color",
+		"display_name": "Zone " + i + " - Color",
 		"type": "option",
 		"options": [
 		{
