@@ -3586,6 +3586,7 @@
 				updatePositions(2);
 		
 		}
+		};
 
         this.onDispose = function () {
         }
