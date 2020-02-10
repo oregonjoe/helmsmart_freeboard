@@ -3012,6 +3012,7 @@
         var marker;
 		var markers = new Array();
         var currentPosition = {};
+		var currentWind = {};
 		var myLatlng;
 		var myOldLatlng;
 		
@@ -3044,6 +3045,12 @@
             if (map && markers[zone] && currentPosition.lat && currentPosition.lon) {
                 var newLatLon = new google.maps.LatLng(currentPosition.lat, currentPosition.lon);
                 markers[zone].setPosition(newLatLon);
+				
+				if(currentWind)
+				{
+					markers[zone].set('labelContent', 'wind speed =' + currentWind.speed);
+				
+				}
 				
 				
 				var bounds = new google.maps.LatLngBounds();
@@ -3542,6 +3549,9 @@
         }
 
         this.onCalculatedValueChanged = function (settingName, newValue) {
+			
+			currentWind = {};
+			
             if (settingName == "lat") {
                // currentPosition.lat = newValue;
             }
@@ -3598,6 +3608,12 @@
 				 position = newValue[0];
 				 currentPosition.lon = position.lng;
 				 currentPosition.lat = position.lat;
+				 
+				 try {
+				 currentWind.speed = position.truewindspeed;
+				 currentWind.direction = position.truewinddir;
+				}
+				catch(err) { };
 		
 				updatePositions(0);
 		
@@ -3606,6 +3622,12 @@
 				 position = newValue[0];
 				 currentPosition.lon = position.lng;
 				 currentPosition.lat = position.lat;
+				 
+				 try {
+				 currentWind.speed = position.truewindspeed;
+				 currentWind.direction = position.truewinddir;
+				}
+				catch(err) { };
 		
 				updatePositions(1);
 		
@@ -3614,6 +3636,12 @@
 				 position = newValue[0];
 				 currentPosition.lon = position.lng;
 				 currentPosition.lat = position.lat;
+		
+				try {
+				 currentWind.speed = position.truewindspeed;
+				 currentWind.direction = position.truewinddir;
+				}
+				catch(err) { };
 		
 				updatePositions(2);
 		
