@@ -6069,7 +6069,9 @@ def freeboard_location_wind():
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'position':list(reversed(position)),'truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction))})     
         
 
-     
+    except NameError, e:
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))     
     
     except:
         log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
