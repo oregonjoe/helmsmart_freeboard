@@ -5979,7 +5979,7 @@ def freeboard_location_wind():
       lat=[]
       lng=[]
       position=[]
-      siv=[]
+      position_wind=[]
       wind_speed=[]
       wind_direction=[]
  
@@ -6026,7 +6026,9 @@ def freeboard_location_wind():
                 
               if point['wind_direction'] is not None:       
                 value4 = convertfbunits(point['wind_direction'], 16)
-              wind_direction.append({'epoch':ts, 'value':value4})              
+              wind_direction.append({'epoch':ts, 'value':value4})
+
+              position_wind.append({'epoch':ts, 'lat':value1, 'lng':value2, 'truewindspeed':value3, 'truewinddir':value4  })
 
 
        
@@ -6068,7 +6070,7 @@ def freeboard_location_wind():
 
 
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'position':list(reversed(position)),'truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'position':list(reversed(position)),'truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'location_wind':list(reversed(position_wind))})     
         
 
     except NameError, e:
