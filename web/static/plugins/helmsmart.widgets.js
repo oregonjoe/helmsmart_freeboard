@@ -3051,7 +3051,7 @@
 					//markers[zone].set('labelContent', 'wind speed =' + currentWind.speed);
 					var icon = markers[zone].getIcon();
 					
-					icon.rotation = int(currentWind.speed);
+					icon.rotation = Math.floor(currentWind.speed);
 					markers[zone].setIcon(icon);
 					
 					var label = markers[zone].getLabel();
