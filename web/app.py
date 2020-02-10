@@ -5816,6 +5816,8 @@ def freeboard_location_wind():
     resolution = request.args.get('resolution',"")
     postype = request.args.get('type',"NULL")
     mytimezone = request.args.get('timezone',"UTC")
+    units= request.args.get('units',"US")
+    mode  = request.args.get('mode',"median")
     
     response = None
     log.info("freeboard_location_wind deviceapikey %s", deviceapikey)
