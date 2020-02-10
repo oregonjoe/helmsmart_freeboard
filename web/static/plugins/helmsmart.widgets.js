@@ -3049,9 +3049,9 @@
 				if(currentWind)
 				{
 					//markers[zone].set('labelContent', 'wind speed =' + currentWind.speed);
-					var label = markers[zone].getlabel();
+					var label = markers[zone].getLabel();
 					label.text = 'wind speed =' + currentWind.speed;
-					markers[zone].setlabel(label);
+					markers[zone].setLabel(label);
 				}
 				
 				
