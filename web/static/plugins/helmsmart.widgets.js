@@ -3023,6 +3023,7 @@
         var map;
         var marker;
 		var markers = new Array();
+		var infowindows = new Array();
         var currentPosition = {};
 		var currentWind = {};
 		var myLatlng;
@@ -3545,7 +3546,9 @@
 						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 						
 						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title});
-			
+						
+						infowindows[i] = new google.maps.InfoWindow({ content: "<span>any html goes here zone=" + i +" </span>" });
+						google.maps.event.addListener(markers[i], 'click', function() {   infowindows[i].open(map,markers[i]); });
 						
 					}
 					
