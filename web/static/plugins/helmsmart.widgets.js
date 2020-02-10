@@ -3049,6 +3049,7 @@
 				if(currentWind)
 				{
 					//markers[zone].set('labelContent', 'wind speed =' + currentWind.speed);
+					var icon = markers[zone].getIcon();
 					var label = markers[zone].getLabel();
 					label.text = 'wind speed =' + currentWind.speed;
 					markers[zone].setLabel(label);
@@ -3523,7 +3524,7 @@
 						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 						//markers[i] = new google.maps.Marker({map: map,  title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 						
-						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, rotation : 30 }, title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
+						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : #222222 , rotation : 30 }, title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 						
 						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title});
 			
