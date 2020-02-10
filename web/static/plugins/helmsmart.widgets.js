@@ -18,7 +18,19 @@
 	var gaugeFillColors = ["#EB9D07", "#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232","#edebeb"];
 	var gaugePointerColors = ["#8e8e93","#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#76A5AF", "#F1C232"];
 	var LOADING_INDICATOR_DELAY = 1000;	
-
+	var myStrokeColors = ['#3E147B', '#3E147B','#3E147B','#3E147B','#3E147B','#3E147B', '#3E147B','#3E147B','#3E147B','#3E147B',
+  '#41137B', '#47137B','#4F127B','#58107B','#630F7B','#6D0E7B', '#780C7B','#840A7B','#90097B','#9C087B',
+  '#A7067B', '#B3047B','#BE047B','#C7027B','#D1017B','#D9007B', '#DF007A','#E20078','#E20076','#E20075',
+  '#E20072', '#E20070','#E2006D','#E2006B','#E20068','#E20064', '#E20061','#E2005E','#E2005A','#E20057',
+  '#E20053', '#E2004F','#E2004C','#E20049','#E20045','#E20042', '#E2003F','#E1003B','#E00238','#E00436',
+  '#DF0733', '#DF0B31','#DF0E2E','#DF122C','#E0182A','#E11F28', '#E22726','#E42F25','#E63922','#E84320',
+  '#EB4F1F', '#EE5A1D','#F1661C','#F3721A','#F37D19','#F38A19', '#F39618','#F3A216','#F3AD16','#F3B815',
+  '#F3C315', '#F3CC15','#F3D515','#F3DE15','#F3E415','#F3E915', '#F3EE15','#EFEF15','#E7EF16','#DEEF17',
+  '#D3EF18', '#C8ED19','#BAE91A','#ADE31C','#9EDD1D','#8FD71F', '#7ED021','#6FC924','#5FC127','#51BA29',
+  '#42B32C', '#34AC30','#27A633','#1BA137','#109D3C','#089A41', '#009847','#00984C','#009852','#009859',
+  '#009961', '#009C69','#009E72','#00A07A','#00A384','#00A68D', '#00AA97','#00ADA1','#00B1A9','#00B4B3',
+  '#00B8BC', '#00BCC5','#00BECD','#00C2D5','#01C5DC','#02C7E3', '#04CAE9','#04CBED','#04CCF0','#04CCF0',
+  '#04CCF0', '#04CCF0','#04CCF0','#04CCF0','#04CCF0','#04CCF0', '#04CCF0','#04CCF0','#04CCF0','#04CCF0'];
 					
     function easeTransitionText(newValue, textElement, duration) {
 
@@ -3051,7 +3063,9 @@
 					//markers[zone].set('labelContent', 'wind speed =' + currentWind.speed);
 					var icon = markers[zone].getIcon();
 					
-					icon.rotation = Math.floor(currentWind.speed);
+					icon.rotation = Math.floor(currentWind.direction);
+					icon.color = myStrokeColors[Math.floor(currentWind.speed * 2) & 0x7F];
+					
 					markers[zone].setIcon(icon);
 					
 					var label = markers[zone].getLabel();
