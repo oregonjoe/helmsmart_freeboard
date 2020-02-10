@@ -3520,7 +3520,8 @@
 						var serieclor = "zone" + i + "color";
 						var iconcolor = currentSettings[serieclor];
 						
-						markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
+						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
+						markers[i] = new google.maps.Marker({map: map,  title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title});
 			
 						
