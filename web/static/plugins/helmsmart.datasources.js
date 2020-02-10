@@ -168,6 +168,12 @@
 						name: "GPS Location",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_location"
 					},
+					
+					{
+						name: "GPS Location and Wind",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_location_wind"
+					},					
+					
 					{
 						name: "Navigation",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_nav"
