@@ -3064,7 +3064,7 @@
 					var icon = markers[zone].getIcon();
 					
 					icon.rotation = Math.floor(currentWind.direction);
-					icon.color = myStrokeColors[Math.floor(currentWind.speed * 2) & 0x7F];
+					icon.strokeColor = myStrokeColors[Math.floor(currentWind.speed * 2) & 0x7F];
 					
 					markers[zone].setIcon(icon);
 					
