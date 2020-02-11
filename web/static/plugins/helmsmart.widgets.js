@@ -3024,7 +3024,7 @@
         var marker;
 		var markers = new Array();
 		var infowindows = new Array();
-		var infowindow;
+		var infoWindow;
         var currentPosition = {};
 		var currentWind = {};
 		var myLatlng;
