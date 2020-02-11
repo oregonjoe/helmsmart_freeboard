@@ -8,12 +8,12 @@
 // └────────────────────────────────────────────────────────────────────┘ \\
 
 		var sourceoptions = new Array ();
-		
+		var sourceoptionsjson = {}
 		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 0  + '", value: "' + 0  + '" },'
 		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 1  + '", value: "' + 1  + '" },'
 		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 2  + '", value: "' + 2  + '" },'
 		
-		sourceoptions.append(sourceoptionsjson);
+		sourceoptions.push(sourceoptionsjson);
 
 
 (function () {
