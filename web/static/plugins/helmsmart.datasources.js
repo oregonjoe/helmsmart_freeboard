@@ -15,7 +15,7 @@
 		
 		for (i=0; i < 255; i++)
 		{
-			sourceoptionsjson = { "name":  i, "value": i };
+			sourceoptionsjson = { "name":  ('00' + (parseInt(i)).toString(16).toUpperCase()).slice(-2), "value": i };
 			sourceoptions.push(sourceoptionsjson);
 		}
 		
