@@ -7,6 +7,15 @@
 // │ Licensed under the MIT license.                                    │ \\
 // └────────────────────────────────────────────────────────────────────┘ \\
 
+		var sourceoptions = new Array ();
+		
+		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 0  + '", value: "' + 0  + '" },'
+		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 1  + '", value: "' + 1  + '" },'
+		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 2  + '", value: "' + 2  + '" },'
+		
+		sourceoptions.append(sourceoptionsjson);
+
+
 (function () {
 	var jsonDatasource = function (settings, updateCallback) {
 		var self = this;
@@ -18,13 +27,7 @@
 		var lockErrorStage = false;
 		var use_thingproxy = true;
 		
-		var sourceoptions = new Array ();
-		
-		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 0  + '", value: "' + 0  + '" },'
-		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 1  + '", value: "' + 1  + '" },'
-		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 2  + '", value: "' + 2  + '" },'
-		
-		sourceoptions.append(sourceoptionsjson);
+
 
 		function updateRefresh(refreshTime) {
 			if (updateTimer) {
