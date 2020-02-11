@@ -3023,8 +3023,8 @@
         var map;
         var marker;
 		var markers = new Array();
-		var infowindows = new Array();
-		
+		//var infowindows = new Array();
+		var infoWindows = new Array();
         var currentPosition = {};
 		var currentWind = {};
 		var myLatlng;
@@ -3556,13 +3556,13 @@
 
 						'</font>';
 
-						var infoWindow  = new google.maps.InfoWindow();
+						var infoWindows[i]  = new google.maps.InfoWindow();
 
-						infoWindow.setContent(contentString);
+						infoWindows[i].setContent(contentString);
 						
 						// google.maps.event.addListener(marker, 'click', function() { myinfoWindow.open(map,marker); });
 						
-						google.maps.event.addListener(markers[i], 'click', function() {   infoWindow.open(map,markers[i]); });
+						google.maps.event.addListener(markers[i], 'click', function() {   infoWindows[i].open(map,markers[i]); });
 						
 					}
 					
