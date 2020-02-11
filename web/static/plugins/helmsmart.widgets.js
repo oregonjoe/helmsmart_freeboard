@@ -3024,7 +3024,7 @@
         var marker;
 		var markers = new Array();
 		var infowindows = new Array();
-		var infoWindow;
+		
         var currentPosition = {};
 		var currentWind = {};
 		var myLatlng;
@@ -3556,7 +3556,7 @@
 
 						'</font>';
 
-	 
+						var infoWindow  = new google.maps.InfoWindow();
 
 						infoWindow.setContent(contentString);
 						
