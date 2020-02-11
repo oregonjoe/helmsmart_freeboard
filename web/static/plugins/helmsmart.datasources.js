@@ -10,7 +10,10 @@
 		var sourceoptions = new Array ();
 		var sourceoptionsjson = {}
 		
-		for (i=0; i < 6; i++)
+		sourceoptionsjson = { "name": "---", "value": "" };
+		sourceoptions.push(sourceoptionsjson);
+		
+		for (i=0; i < 255; i++)
 		{
 			sourceoptionsjson = { "name":  i, "value": i };
 			sourceoptions.push(sourceoptionsjson);
@@ -60,11 +63,17 @@
 			
 			var hsresolution =  _.isUndefined(currentSettings.resolution) ? 60 : currentSettings.resolution;
 			if(hsresolution != "")
-				requestURL = requestURL + "&resolution=" + hsresolution;		
+				requestURL = requestURL + "&resolution=" + hsresolution;	
+
+			
 			
 			var hsinstance = _.isUndefined(currentSettings.instance) ? 0 : currentSettings.instance;
 			if(hsinstance != "")
 				requestURL = requestURL + "&instance=" + hsinstance;
+			
+			var hssource = _.isUndefined(currentSettings.source) ? 0 : currentSettings.source;
+			if(hssource != "")
+				requestURL = requestURL + "&source=" + (hssource),toString.padStart(2, '0');			
 			
 			var hsindex = _.isUndefined(currentSettings.index) ? 0 : currentSettings.index;
 			if(hsindex != "")
