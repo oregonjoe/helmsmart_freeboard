@@ -3024,6 +3024,7 @@
         var marker;
 		var markers = new Array();
 		var infowindows = new Array();
+		var infowindow;
         var currentPosition = {};
 		var currentWind = {};
 		var myLatlng;
@@ -3548,7 +3549,20 @@
 						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title});
 						
 						//infowindows[i] = new google.maps.InfoWindow({ content: "<span>any html goes here zone=" + i +" </span>" });
-						//google.maps.event.addListener(markers[i], 'click', function() {   infowindows[i].open(map,markers[i]); });
+						
+						var contentString = '<font size="1"> ' +
+						  '<p>Wind Speed = 2.4 </p>' +
+						  '<p> Wind Direction = 4.4</p>'+
+
+						'</font>';
+
+	 
+
+						myinfoWindow.setContent(contentString);
+						
+						// google.maps.event.addListener(marker, 'click', function() { myinfoWindow.open(map,marker); });
+						
+						google.maps.event.addListener(markers[i], 'click', function() {   myinfoWindow.open(map,markers[i]); });
 						
 					}
 					
