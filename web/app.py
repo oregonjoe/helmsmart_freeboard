@@ -5866,8 +5866,8 @@ def freeboard_location_wind():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
 
-    if source != "":
-      serieskeys= serieskeys + "source = '" + source + "' AND "
+    #if source != "":
+    #  serieskeys= serieskeys + "source = '" + source + "' AND "
 
       
     serieskeys= serieskeys +  " sensor='position_rapid' OR sensor='wind_data'"
@@ -5886,7 +5886,7 @@ def freeboard_location_wind():
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
-        query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed  from {} '
+        query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed, median(source) AS  source  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5894,7 +5894,7 @@ def freeboard_location_wind():
                         resolution)
     else:
       
-      query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed  from {} '
+      query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed, median(source) AS  source  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
