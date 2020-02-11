@@ -5886,7 +5886,7 @@ def freeboard_location_wind():
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
 
-        query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed, median(source) AS  source  from {} '
+        query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed, source AS  source  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
@@ -5894,7 +5894,7 @@ def freeboard_location_wind():
                         resolution)
     else:
       
-      query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed, median(source) AS  source  from {} '
+      query = ('select  median(lat) AS lat, median(lng) AS  lng  , median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed, source AS  source  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
                 .format( measurement, serieskeys,
