@@ -3549,11 +3549,12 @@
 						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 						//markers[i] = new google.maps.Marker({map: map,  title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 						
-						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title, snippet: "wind dir 230 speed 2.3", label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
+						//markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title, snippet: "wind dir 230 speed 2.3", label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 						
-						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title, labelContent:contentString, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
+						//markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title, labelContent:contentString, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 	
-						
+						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: contentString, });
+			
 						
 						
 						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title});
@@ -3562,13 +3563,13 @@
 						
 
 
-						infoWindows[i]  = new google.maps.InfoWindow();
+						//infoWindows[i]  = new google.maps.InfoWindow();
 
-						infoWindows[i].setContent(contentString);
+						//infoWindows[i].setContent(contentString);
 						
 						// google.maps.event.addListener(marker, 'click', function() { myinfoWindow.open(map,marker); });
 						
-						google.maps.event.addListener(markers[i], 'click', function() {   infoWindows[i].open(map,markers[i]); });
+						//google.maps.event.addListener(markers[i], 'click', function() {   infoWindows[i].open(map,markers[i]); });
 						
 					}
 					
