@@ -5818,7 +5818,9 @@ def freeboard_location_wind():
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
-    
+    source  = request.args.get('source',"")
+
+        
     response = None
     log.info("freeboard_location_wind deviceapikey %s", deviceapikey)
     starttime = 0
@@ -5863,6 +5865,11 @@ def freeboard_location_wind():
 
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' AND "
+
+    if source != "":
+      serieskeys= serieskeys + 'source = ' + source + "' AND "
+
+      
     serieskeys= serieskeys +  " sensor='position_rapid' OR sensor='wind_data'"
     serieskeys= serieskeys +  "  AND type='" + postype + "' OR type='TWIND True North' "
  
