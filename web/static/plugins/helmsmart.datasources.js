@@ -70,7 +70,7 @@
 			var hsinstance = _.isUndefined(currentSettings.instance) ? 0 : currentSettings.instance;
 			if(hsinstance != "")
 				requestURL = requestURL + "&instance=" + hsinstance;
-			
+			 
 			var hssource = _.isUndefined(currentSettings.source) ? 0 : currentSettings.source;
 			if(hssource != "")
 				requestURL = requestURL + "&source=" + ('00' + (hssource).toString(16).toUpperCase()).slice(-2);	
