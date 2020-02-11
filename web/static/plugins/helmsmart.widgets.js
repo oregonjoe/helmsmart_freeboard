@@ -3062,6 +3062,10 @@
 				
 				if(currentWind)
 				{
+					
+						var serieno = "zone" + i + "label";
+						var title = currentSettings[serieno];
+					
 					//markers[zone].set('labelContent', 'wind speed =' + currentWind.speed);
 					var icon = markers[zone].getIcon();
 					
@@ -3073,6 +3077,13 @@
 				//	var label = markers[zone].getLabel();
 				//	label.text = 'wind speed =' + currentWind.speed;
 				//	markers[zone].setLabel(label);
+				
+					var TitleString = title + '\n' +
+						  'Wind Speed = ' + currentWind.direction + '\n' +
+						  'Wind Direction = ' + currentWind.direction;
+				
+					markers[zone].setTitle(TitleString)
+				
 				}
 				
 				
@@ -3557,7 +3568,7 @@
 						
 						//markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title, labelContent:contentString, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
 	
-						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: TitleString });
+						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title });
 			
 						
 						
