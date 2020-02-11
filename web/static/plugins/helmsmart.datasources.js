@@ -17,6 +17,12 @@
 		// 2 = try thingproxy.freeboard.io
 		var lockErrorStage = false;
 		var use_thingproxy = true;
+		
+		var sourceoptions = "";
+		
+		sourceoptions = sourceoptions + '{ name: "' + 0  + '", value: "' + 0  + '" },'
+		sourceoptions = sourceoptions + '{ name: "' + 1  + '", value: "' + 1  + '" },'
+		sourceoptions = sourceoptions + '{ name: "' + 2  + '", value: "' + 2  + '" },'
 
 		function updateRefresh(refreshTime) {
 			if (updateTimer) {
@@ -418,6 +424,18 @@
 					}
 				]
 			},
+			
+						{
+				name: "source",
+				display_name: "Source",
+				type: "option",
+				options: [
+	
+						sourceoptions
+					
+						]
+			},
+			
 			{
 				name: "instance",
 				display_name: "Instance",
@@ -529,6 +547,12 @@
 					}					
 				]
 			},
+			
+			
+			
+			
+			
+			
 			{
 				name: "index",
 				display_name: "Value Index",
