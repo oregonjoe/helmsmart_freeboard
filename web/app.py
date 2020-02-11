@@ -5867,7 +5867,7 @@ def freeboard_location_wind():
     serieskeys= serieskeys + deviceid + "' AND "
 
     if source != "":
-      serieskeys= serieskeys + 'source = ' + source + "' AND "
+      serieskeys= serieskeys + "source = '" + source + "' AND "
 
       
     serieskeys= serieskeys +  " sensor='position_rapid' OR sensor='wind_data'"
