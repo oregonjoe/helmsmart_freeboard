@@ -3063,7 +3063,7 @@
 				if(currentWind)
 				{
 					
-						var serieno = "zone" + i + "label";
+						var serieno = "zone" + zone + "label";
 						var title = currentSettings[serieno];
 					
 					//markers[zone].set('labelContent', 'wind speed =' + currentWind.speed);
