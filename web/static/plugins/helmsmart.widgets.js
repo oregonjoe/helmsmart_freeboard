@@ -3079,10 +3079,12 @@
 				//	markers[zone].setLabel(label);
 				
 					var TitleString = title + '\n' +
-						  'Wind Speed = ' + currentWind.direction + '\n' +
+						  'Wind Speed = ' + currentWind.speed + '\n' +
 						  'Wind Direction = ' + currentWind.direction;
 				
 					markers[zone].setTitle(TitleString)
+					
+					markers[zone].snippet = currentWind.speed + "\n" + currentWind.direction
 				
 				}
 				
