@@ -73,7 +73,8 @@
 			
 			var hssource = _.isUndefined(currentSettings.source) ? 0 : currentSettings.source;
 			if(hssource != "")
-				requestURL = requestURL + "&source=" + (hssource),toString.padStart(2, '0');			
+				requestURL = requestURL + "&source=" + ('00' + (hssource).toString(16).toUpperCase()).slice(-2);	
+				//requestURL = requestURL + "&source=" + (hssource).toString.padStart(2, '0');			
 			
 			var hsindex = _.isUndefined(currentSettings.index) ? 0 : currentSettings.index;
 			if(hsindex != "")
