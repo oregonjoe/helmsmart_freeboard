@@ -3558,11 +3558,11 @@
 
 	 
 
-						myinfoWindow.setContent(contentString);
+						infoWindow.setContent(contentString);
 						
 						// google.maps.event.addListener(marker, 'click', function() { myinfoWindow.open(map,marker); });
 						
-						google.maps.event.addListener(markers[i], 'click', function() {   myinfoWindow.open(map,markers[i]); });
+						google.maps.event.addListener(markers[i], 'click', function() {   infoWindow.open(map,markers[i]); });
 						
 					}
 					
