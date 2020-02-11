@@ -9,11 +9,14 @@
 
 		var sourceoptions = new Array ();
 		var sourceoptionsjson = {}
-		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 0  + '", value: "' + 0  + '" },'
-		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 1  + '", value: "' + 1  + '" },'
-		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 2  + '", value: "' + 2  + '" },'
 		
-		sourceoptions.push(sourceoptionsjson);
+		for (i=0; i < 6; i++)
+		{
+			sourceoptionsjson = { "name":  i, "value": i };
+			sourceoptions.push(sourceoptionsjson);
+		}
+		
+		
 
 
 (function () {
