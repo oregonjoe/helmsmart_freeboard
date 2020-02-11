@@ -431,7 +431,7 @@
 				type: "option",
 				options: [
 	
-						sourceoptions
+						sourceoptions;
 					
 						]
 			},
