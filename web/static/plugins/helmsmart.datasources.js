@@ -18,11 +18,13 @@
 		var lockErrorStage = false;
 		var use_thingproxy = true;
 		
-		var sourceoptions = "";
+		var sourceoptions = new Array ();
 		
-		sourceoptions = sourceoptions + '{ name: "' + 0  + '", value: "' + 0  + '" },'
-		sourceoptions = sourceoptions + '{ name: "' + 1  + '", value: "' + 1  + '" },'
-		sourceoptions = sourceoptions + '{ name: "' + 2  + '", value: "' + 2  + '" },'
+		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 0  + '", value: "' + 0  + '" },'
+		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 1  + '", value: "' + 1  + '" },'
+		sourceoptionsjson = sourceoptionsjson + '{ name: "' + 2  + '", value: "' + 2  + '" },'
+		
+		sourceoptions.append(sourceoptionsjson);
 
 		function updateRefresh(refreshTime) {
 			if (updateTimer) {
@@ -429,11 +431,9 @@
 				name: "source",
 				display_name: "Source",
 				type: "option",
-				options: [
-	
-						sourceoptions;
+				options: sourceoptions,
 					
-						]
+						
 			},
 			
 			{
