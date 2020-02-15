@@ -4768,6 +4768,10 @@ def freeboard_weather_wung():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
+
+    wunstation = request.args.get('wunstation','')
+    wunpassword = request.args.get('wunpw','')
+    
     Interval = request.args.get('interval',"5min")
     resolution = request.args.get('resolution',"")
     windtype = request.args.get('type',"true")
@@ -5039,11 +5043,23 @@ def freeboard_weather_wung():
 
 
       devicedataurl = " https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=KORBROOK78&PASSWORD=SK5S9I4J&dateutc=" + str(mywundate)
-      devicedataurl = devicedataurl + "&winddir=" + str(value2)
-      devicedataurl = devicedataurl + "&windspeedmph=" + str(value1)
-      devicedataurl = devicedataurl + "&tempf=" + str(value3)
-      devicedataurl = devicedataurl + "&baromin=" + str(value4)
-      devicedataurl = devicedataurl + "&humidity=" + str(value5)
+
+      
+      if value2 != '---':
+        devicedataurl = devicedataurl + "&winddir=" + str(value2)
+        
+      if value1 != '---':        
+        devicedataurl = devicedataurl + "&windspeedmph=" + str(value1)
+        
+      if value2 != '---':
+        devicedataurl = devicedataurl + "&tempf=" + str(value3)
+        
+      if value4 != '---':
+        devicedataurl = devicedataurl + "&baromin=" + str(value4)
+        
+      if value5 != '---':
+        devicedataurl = devicedataurl + "&humidity=" + str(value5)
+      
       devicedataurl = devicedataurl + "&action=updateraw" 
 
       
@@ -5056,7 +5072,7 @@ def freeboard_weather_wung():
         response = requests.get(devicedataurl)
 
         if response.ok:
-          log.info('freeboard_weather_wung:  WUNG HTTP GET %s: ', response.text )
+          log.info('freeboard_weather_wung:  WUNG HTTP GET OK %s: ', response.text )
 
 
         else:
