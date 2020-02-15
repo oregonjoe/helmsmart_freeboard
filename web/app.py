@@ -5020,13 +5020,13 @@ def freeboard_weather_wung():
 
         if point['atmospheric_pressure'] is not None and point['altitude'] is not None:
           #get pressure in KPa
-          value4 = convertfbunits(point['atmospheric_pressure'], 9)
+          value8 = convertfbunits(point['atmospheric_pressure'], 9)
           #get altitde in feet
           value6 = convertfbunits(point['altitude'], 32)
           # get adjustment for altitude in KPa
           value7 = getAtmosphericCompensation(value6)
           #add offset if any in KPa
-          value7 = convertfbunits(value4 + value7, convertunittype('baro_pressure', units))
+          value7 = convertfbunits(value8 + value7, convertunittype('baro_pressure', units))
           
         atmospheric_pressure_sea.append({'epoch':ts, 'value':value7})    
 
