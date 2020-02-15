@@ -54,8 +54,20 @@
 			}
 
 			var hsurl = currentSettings.url;
-			var hsapikey = currentSettings.apikey;
-			var requestURL = hsurl + "?apikey=" + hsapikey;
+			
+			var hsapikey = currentSettings.apikey.split(':');
+			
+			
+			var requestURL = hsurl + "?apikey=" + hsapikey[0];
+			
+			if ( length(hsapikey) == 3)
+			{
+				var hswunstationid =  hsapikey[1];
+				var hswunstationpw =  hsapikey[2];
+			}
+			
+			
+			
 			
 			var hsinterval =  _.isUndefined(currentSettings.span) ? 600 : currentSettings.span;
 			if(hsinterval != "")
