@@ -61,9 +61,10 @@
 			var requestURL = hsurl + "?apikey=" + hsapikey[0];
 			
 			if ( hsapikey.length == 3)
-			{
-				var hswunstationid =  hsapikey[1];
-				var hswunstationpw =  hsapikey[2];
+			{	
+				requestURL = requestURL + "&wunstation=" + hsapikey[1];
+				
+				requestURL = requestURL + "&wunpw=" + hsapikey[2];
 			}
 			
 			
