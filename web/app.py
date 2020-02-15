@@ -5033,7 +5033,7 @@ def freeboard_weather_wung():
 
       callback = request.args.get('callback')
       myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
-      mywundate = mydatetimetz.strftime("%Y-%B-%d %H:%M:%S")
+      mywundate = mydatetimetz.strftime("%Y-%M-%d %H:%M:%S")
 
      
 
