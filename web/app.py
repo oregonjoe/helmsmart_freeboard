@@ -5033,7 +5033,7 @@ def freeboard_weather_wung():
 
       callback = request.args.get('callback')
       myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
-      mywundate = mydatetimetz.strftime("%Y-%M-%d %H:%M:%S")
+      mywundate = mydatetimetz.strftime("%Y-%m-%d %H:%M:%S")
 
      
 
@@ -5050,7 +5050,7 @@ def freeboard_weather_wung():
 
       log.info("freeboard_weather_wung:  WUNG HTTP GET: %s", devicedataurl)
 
-      """
+      
       try:      
         headers = {'content-type': 'application/json'}
         response = requests.get(devicedataurl)
@@ -5067,7 +5067,7 @@ def freeboard_weather_wung():
         e = sys.exc_info()[0]
         log.info("freeboard_weather_wung:: update_wun_url error: %s" % e)
 
-      """
+      
 
       return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)),'temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
 
