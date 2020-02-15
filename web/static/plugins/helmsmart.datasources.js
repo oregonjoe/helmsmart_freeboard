@@ -188,6 +188,13 @@
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata"
 					},					
 					
+					
+					{
+						name: "Weather WUN",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung"
+					},		
+					
+					
 					{
 						name: "GPS Location",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_location"
