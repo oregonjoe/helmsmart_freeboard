@@ -4873,7 +4873,7 @@ def freeboard_weather_wung():
                         startepoch, endepoch,
                         resolution)      
       
-    else:       
+    else mode == "mean":    
       query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed, mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity , mean(altitude) AS altitude  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
@@ -4881,6 +4881,12 @@ def freeboard_weather_wung():
                         startepoch, endepoch,
                         resolution)
 
+
+    else:       
+      query = ('select  last(wind_direction) AS wind_direction, last(wind_speed) AS  wind_speed, last(temperature) AS temperature, last(atmospheric_pressure) AS  atmospheric_pressure, last(humidity) AS humidity , last(altitude) AS altitude  from {} '
+                     'where {} AND time > {}s and time < {}s  ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch )
 
     log.info("freeboard data Query %s", query)
 
