@@ -4777,7 +4777,7 @@ def freeboard_weather_wung():
     windtype = request.args.get('type',"true")
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
-    mode  = request.args.get('mode',"median")
+    mode  = request.args.get('mode',"last")
     
     response = None
 
@@ -4880,6 +4880,12 @@ def freeboard_weather_wung():
                 .format( measurement, serieskeys,
                         startepoch, endepoch,
                         resolution)
+
+    elif mode == "last":        
+      query = ('select  last(wind_direction) AS wind_direction, last(wind_speed) AS  wind_speed, last(temperature) AS temperature, last(atmospheric_pressure) AS  atmospheric_pressure, last(humidity) AS humidity , last(altitude) AS altitude  from {} '
+                     'where {} AND time > {}s and time < {}s  ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch )
 
 
     else:       
