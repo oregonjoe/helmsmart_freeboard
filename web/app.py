@@ -4916,11 +4916,11 @@ def freeboard_weather_wung():
         log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
 
     except ValueError, e:
-      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
       log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
 
     except AttributeError, e:
-      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
       log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
 
     except InfluxDBClientError, e:
@@ -5106,17 +5106,24 @@ def freeboard_weather_wung():
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)),'temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
    
 
-      
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard: Error in geting freeboard response  %s:  ' % str(e))     
 
+      e = sys.exc_info()[0]
+      log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+      #return jsonify(update=False, status='missing' )
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
      
     
     except:
-        log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
-        e = sys.exc_info()[0]
-        log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
-        #return jsonify(update=False, status='missing' )
-        callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+      log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
+      e = sys.exc_info()[0]
+      log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+      #return jsonify(update=False, status='missing' )
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
   
     #return jsonify(status='error',  update=False )
