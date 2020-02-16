@@ -321,8 +321,12 @@
 						}
 						
 						if (currentSettings.sparkline) {
-						for(i=0; i< newValue.length; i++)
-						addValueToSparkline(sparklineElement, newValue[i].value);
+							for(i=0; i< newValue.length; i++)
+							{
+								
+								if(newValue[i].value != "---")
+									addValueToSparkline(sparklineElement, newValue[i].value);
+							}
 						}
 					}
 					else
@@ -1381,7 +1385,10 @@
 							
 							// add a point from each series
 							for(j=0; j< newValue.length; j++)
-								arrayvalues.push(newValue[j][i].value);
+							{
+								if(newValue[j][i].value != "---")
+									arrayvalues.push(newValue[j][i].value);
+							}
 								
 								// now pass the serries of points into the plot routine 
 								if (currentSettings.legend)
