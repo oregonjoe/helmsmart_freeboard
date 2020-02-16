@@ -4996,7 +4996,9 @@ def freeboard_weather_wung():
         
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
-          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+          #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S.%fZ')
+          mydatetime = datetime.datetime.strptime(mydatetimestr[:19]+'Z', '%Y-%m-%dT%H:%M:%SZ')
 
           mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
           mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
