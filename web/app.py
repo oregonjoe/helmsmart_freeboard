@@ -4830,7 +4830,7 @@ def freeboard_rain_gauge():
 
     if mode == "median":
       
-      query = ('select  median(accumulation) AS accumulation, median(duration) AS  duration, median(rate) AS rate, median(peak) AS  peak from {} '
+      query = ('select  median(accumulation) AS accumulation, median("duration") AS  "duration", median(rate) AS rate, median(peak) AS  peak from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -4839,7 +4839,7 @@ def freeboard_rain_gauge():
       
     elif mode == "max":
       
-      query = ('select  max(accumulation) AS accumulation, max(duration) AS  duration, max(rate) AS rate, max(peak) AS  peak  from {} '
+      query = ('select  max(accumulation) AS accumulation, max("duration") AS  "duration", max(rate) AS rate, max(peak) AS  peak  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -4849,7 +4849,7 @@ def freeboard_rain_gauge():
       
     elif mode == "min":
       
-      query = ('select  min(accumulation) AS accumulation, min(duration) AS  duration, min(rate) AS rate, min(peak) AS  peak from {} '
+      query = ('select  min(accumulation) AS accumulation, min("duration") AS  "duration", min(rate) AS rate, min(peak) AS  peak from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -4857,7 +4857,7 @@ def freeboard_rain_gauge():
                         resolution)      
       
     else:       
-      query = ('select  mean(accumulation) AS accumulation, mean(duration) AS  duration, mean(rate) AS rate, mean(peak) AS  peak  from {} '
+      query = ('select  mean(accumulation) AS accumulation, mean("duration") AS  "duration", mean(rate) AS rate, mean(peak) AS  peak  from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -10874,9 +10874,9 @@ def freeboard_get_engine_values():
     return jsonify(result="ERROR")
 
 
-@app.route('/freeboard_rain_gauge')
+@app.route('/freeboard_get_rain_gauge')
 @cross_origin()
-def freeboard_rain_gauge():
+def freeboard_get_rain_gauge():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
@@ -10975,7 +10975,7 @@ def freeboard_rain_gauge():
 
     else:      
       query = ('select  last(accumulation)  as accumulation, '
-                       'last("duration")  as "duration", '
+                       'last("duration)  as "duration", '
                         'last(rate)  as rate, '
                         'last(peak)  as peak '
                        ' FROM {} '             
