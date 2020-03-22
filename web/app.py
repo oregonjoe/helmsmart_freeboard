@@ -11090,7 +11090,7 @@ def freeboard_get_rain_gauge_wug():
 
 
         
-      return jsonify(result="OK",  instance=instance,  accumulation=accumulation, duration=duration, rate=rate, rate=rate, peak=peak)
+      return jsonify(result="OK",  instance=instance,  accumulation=accumulation, duration=duration, rate=rate, peak=peak)
 
 
     except TypeError, e:
