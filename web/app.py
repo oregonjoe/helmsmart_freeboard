@@ -10943,7 +10943,7 @@ def freeboard_get_rain_gauge():
     if mode == 'min':
       #log.info("freeboard_get_weather_values mode is min")
       query = ('select  min(accumulation)  as accumulation, '
-                       'min("duration:)  as "duration", '
+                       'min("duration")  as "duration", '
                         'min(rate)  as rate, '
                         'min(peak)  as peak '
                        ' FROM {} '             
@@ -10952,7 +10952,7 @@ def freeboard_get_rain_gauge():
    
     elif mode == 'max':      
       query = ('select  max(accumulation)  as accumulation, '
-                       'max("duration:)  as "duration", '
+                       'max("duration")  as "duration", '
                         'max(rate)  as rate, '
                         'max(peak)  as peak '
                        ' FROM {} '             
@@ -10975,7 +10975,7 @@ def freeboard_get_rain_gauge():
 
     else:      
       query = ('select  last(accumulation)  as accumulation, '
-                       'last("duration:)  as "duration", '
+                       'last("duration")  as "duration", '
                         'last(rate)  as rate, '
                         'last(peak)  as peak '
                        ' FROM {} '             
