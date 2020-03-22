@@ -221,7 +221,7 @@
 
 					{
 						name: "Rain Gauge",
-						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_freeboard_get_rain_gauge"
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_rain_gauge"
 					},	
 					
 					

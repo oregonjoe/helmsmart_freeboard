@@ -10874,9 +10874,9 @@ def freeboard_get_engine_values():
     return jsonify(result="ERROR")
 
 
-@app.route('/freeboard_get_rain_gauge')
+@app.route('/freeboard_rain_gauge')
 @cross_origin()
-def freeboard_get_rain_gauge():
+def freeboard_rain_gauge():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
