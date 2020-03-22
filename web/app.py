@@ -10874,9 +10874,9 @@ def freeboard_get_engine_values():
     return jsonify(result="ERROR")
 
 
-@app.route('/freeboard_get_rain_gauge_wug')
+@app.route('/freeboard_get_rain_gauge')
 @cross_origin()
-def freeboard_get_rain_gauge_wug():
+def freeboard_get_rain_gauge():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
@@ -10943,7 +10943,7 @@ def freeboard_get_rain_gauge_wug():
     if mode == 'min':
       #log.info("freeboard_get_weather_values mode is min")
       query = ('select  min(accumulation)  as accumulation, '
-                       'min(duration)  as duration, '
+                       'min("duration:)  as "duration", '
                         'min(rate)  as rate, '
                         'min(peak)  as peak '
                        ' FROM {} '             
@@ -10952,7 +10952,7 @@ def freeboard_get_rain_gauge_wug():
    
     elif mode == 'max':      
       query = ('select  max(accumulation)  as accumulation, '
-                       'max(duration) as duration, '
+                       'max("duration:)  as "duration", '
                         'max(rate)  as rate, '
                         'max(peak)  as peak '
                        ' FROM {} '             
@@ -10963,7 +10963,7 @@ def freeboard_get_rain_gauge_wug():
 
     elif mode == 'avg':      
       query = ('select  percentile(accumulation,50)  as accumulation, '
-                       'percentile(duration,50)  as duration, '
+                       'percentile("duration",50)  as "duration", '
                         'percentile(rate,50)  as rate, '
                         'percentile(peak,50)  as peak '
                        ' FROM {} '             
@@ -10975,7 +10975,7 @@ def freeboard_get_rain_gauge_wug():
 
     else:      
       query = ('select  last(accumulation)  as accumulation, '
-                       'last(duration)  as duration, '
+                       'last("duration:)  as "duration", '
                         'last(rate)  as rate, '
                         'last(peak)  as peak '
                        ' FROM {} '             
