@@ -4942,6 +4942,7 @@ def freeboard_rain_gauge():
 
       accumulation=[]
       duration=[]
+      duration_min=[]
       rate=[]
       peak=[]
 
@@ -4983,6 +4984,11 @@ def freeboard_rain_gauge():
           value2 = convertfbunits(point['duration'], 37)
         duration.append({'epoch':ts, 'value':value2})
 
+        if point['duration'] is not None:       
+          #value5 = convertfbunits(point['duration'], 37)
+          value5 = float("{0:.2f}".format(point['duration'] * 0.0166666))  
+        duration_min.append({'epoch':ts, 'value':value5})
+
         if point['rate'] is not None: 
           value3 = convertfbunits((float(point['rate'])/1000),  convertunittype('depth', units))
         rate.append({'epoch':ts, 'value':value3})
@@ -5001,7 +5007,7 @@ def freeboard_rain_gauge():
 
       
 
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','accumulation':list(reversed(accumulation)), 'duration':list(reversed(duration)),'rate':list(reversed(rate)), 'peak':list(reversed(peak))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','accumulation':list(reversed(accumulation)), 'duration':list(reversed(duration)), 'duration_minutes':list(reversed(duration_min)), 'rate':list(reversed(rate)), 'peak':list(reversed(peak))})     
    
 
       
