@@ -217,7 +217,13 @@
 					{
 						name: "GPS Location and Wind",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_location_wind"
-					},					
+					},	
+
+					{
+						name: "Rain Gauge",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_freeboard_get_rain_gauge"
+					},	
+					
 					
 					{
 						name: "Navigation",
