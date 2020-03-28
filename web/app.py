@@ -307,6 +307,22 @@ def convertunittype(units, value):
       return 33
 
 
+  elif units == 'rain':
+    if value == 'US':
+      return 45
+    elif value == 'metric':
+      return 44    
+    elif value == 'nautical':
+      return 32
+    elif value == 'si':
+      return 33
+
+
+  elif units == 44: #//= RAIN IN mm
+       return float("{0:.2f}".format(value * 1000))  
+
+  elif units == 45: #//=RAIN in inches
+      return float("{0:.2f}".format(value * 39.3))
     
 
   elif units == 'distance':
@@ -493,6 +509,12 @@ def convertfbunits(value, units):
       return float("{0:.2f}".format(value * 0.546806649))
 
 
+
+  elif units == 44: #//= RAIN IN mm
+       return float("{0:.2f}".format(value * 1000))  
+
+  elif units == 45: #//=RAIN in inches
+      return float("{0:.2f}".format(value * 39.3))
 
 
   elif units == 37: #//="37">Time</option>
@@ -4977,7 +4999,7 @@ def freeboard_rain_gauge():
           ts = int(mktime(dtt)*1000)
 
         if point['accumulation'] is not None:       
-          value1 = convertfbunits((float(point['accumulation'])),  convertunittype('depth', units))
+          value1 = convertfbunits((float(point['accumulation'])),  convertunittype('rain', units))
         accumulation.append({'epoch':ts, 'value':value1})
           
         if point['duration'] is not None:       
@@ -4990,11 +5012,11 @@ def freeboard_rain_gauge():
         duration_min.append({'epoch':ts, 'value':value5})
 
         if point['rate'] is not None: 
-          value3 = convertfbunits((float(point['rate'])),  convertunittype('depth', units))
+          value3 = convertfbunits((float(point['rate'])),  convertunittype('rain', units))
         rate.append({'epoch':ts, 'value':value3})
           
         if point['peak'] is not None:         
-          value4 = convertfbunits((float(point['peak'])), convertunittype('depth', units))
+          value4 = convertfbunits((float(point['peak'])), convertunittype('rain', units))
         peak.append({'epoch':ts, 'value':value4})
                     
  
