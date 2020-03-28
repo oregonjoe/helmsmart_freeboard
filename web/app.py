@@ -4977,7 +4977,7 @@ def freeboard_rain_gauge():
           ts = int(mktime(dtt)*1000)
 
         if point['accumulation'] is not None:       
-          value1 = convertfbunits((float(point['accumulation'])/1000),  convertunittype('depth', units))
+          value1 = convertfbunits((float(point['accumulation'])),  convertunittype('depth', units))
         accumulation.append({'epoch':ts, 'value':value1})
           
         if point['duration'] is not None:       
@@ -4990,11 +4990,11 @@ def freeboard_rain_gauge():
         duration_min.append({'epoch':ts, 'value':value5})
 
         if point['rate'] is not None: 
-          value3 = convertfbunits((float(point['rate'])/1000),  convertunittype('depth', units))
+          value3 = convertfbunits((float(point['rate'])),  convertunittype('depth', units))
         rate.append({'epoch':ts, 'value':value3})
           
         if point['peak'] is not None:         
-          value4 = convertfbunits((float(point['peak'])/1000), convertunittype('depth', units))
+          value4 = convertfbunits((float(point['peak'])), convertunittype('depth', units))
         peak.append({'epoch':ts, 'value':value4})
                     
  
