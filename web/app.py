@@ -636,6 +636,14 @@ def convertunits(value, units):
   elif units == 33: #//="33">Meters</option>
       return float("{0:.2f}".format(value * 1.0))
 
+
+  elif units == 44: #//= RAIN IN mm
+       return float("{0:.2f}".format(value * 1000.0))  
+
+  elif units == 45: #//=RAIN in inches
+      return float("{0:.2f}".format(value * 39.3))
+    
+
   elif units == 34: #//="34">Miles</option>
       return float("{0:.2f}".format(value * 0.000621371))              
 
