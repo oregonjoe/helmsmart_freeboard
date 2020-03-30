@@ -4623,7 +4623,7 @@ def freeboard_environmental_calculated():
         serieskeys = serieskeys.replace("*", ".*")
 
     if mode == "median":
-        query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity , median(altitude) AS altitude, median(wind_speed) AS  wind_speed, from {} '
+        query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity , median(altitude) AS altitude, median(wind_speed) AS  wind_speed from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
@@ -4631,7 +4631,7 @@ def freeboard_environmental_calculated():
                         resolution)
 
     elif mode == "max":
-        query = ('select  max(temperature) AS temperature, max(atmospheric_pressure) AS  atmospheric_pressure, max(humidity) AS humidity, max(altitude) AS altitude, max(wind_speed) AS  wind_speed, from {} '
+        query = ('select  max(temperature) AS temperature, max(atmospheric_pressure) AS  atmospheric_pressure, max(humidity) AS humidity, max(altitude) AS altitude, max(wind_speed) AS  wind_speed from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
@@ -4639,7 +4639,7 @@ def freeboard_environmental_calculated():
                         resolution)
 
     elif mode == "min":
-        query = ('select  min(temperature) AS temperature, min(atmospheric_pressure) AS  atmospheric_pressure, min(humidity) AS humidity, min(altitude) AS altitude, min(wind_speed) AS  wind_speed, from {} '
+        query = ('select  min(temperature) AS temperature, min(atmospheric_pressure) AS  atmospheric_pressure, min(humidity) AS humidity, min(altitude) AS altitude, min(wind_speed) AS  wind_speed from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
@@ -4649,7 +4649,7 @@ def freeboard_environmental_calculated():
         
     else:
       
-      query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity, mean(altitude) AS altitude, mean(wind_speed) AS  wind_speed, from {} '
+      query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity, mean(altitude) AS altitude, mean(wind_speed) AS  wind_speed from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) ') \
                 .format( measurement, serieskeys,
