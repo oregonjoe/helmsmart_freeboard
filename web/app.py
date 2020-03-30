@@ -4814,25 +4814,52 @@ def freeboard_environmental_calculated():
           windmph = convertfbunits(point['wind_speed'], 5)
         wind_speed.append({'epoch':ts, 'value':value6})
 
-        # calculate Wind Chill
-        if tempF != '---' and  windmph != '---':
-          wc = wind_chill(temperature=tempF, wind_speed=windmph)
-          log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc)
+        try:
 
-        # calculate dew_point
-        if tempF != '---' and  humidity100 != '---':
-          dp = dew_point(temperature=tempF, humidity=humidity100)
-          log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp)
+          # calculate dew_point
+          if tempF != '---' and  humidity100 != '---':
+            dp = dew_point(temperature=tempF, humidity=humidity100)
+            log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp)
 
-        # calculate heat_index
-        if tempF != '---' and  humidity100 != '---':        
-          hi= heat_index(temperature=tempF, humidity=humidity100)
-          log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi)
+          # calculate heat_index
+          if tempF != '---' and  humidity100 != '---':        
+            hi= heat_index(temperature=tempF, humidity=humidity100)
+            log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi)
 
-        # calculate feels_like
-        if tempF != '---' and  humidity100 != '---' and  windmph != '---':
-          fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
-          log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl)
+          # calculate feels_like
+          if tempF != '---' and  humidity100 != '---' and  windmph != '---':
+            fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
+            log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl)
+
+
+          # calculate Wind Chill
+          if tempF != '---' and  windmph != '---':
+            wc = wind_chill(temperature=tempF, wind_speed=windmph)
+            log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc)
+
+            
+
+        except AttributeError, e:
+          log.info('freeboard_environmental_calculated: AttributeError in calculated %s:  ' % str(e))
+          
+        except TypeError, e:
+          log.info('freeboard_environmental_calculated: TypeError in calculated %s:  ' % str(e))
+          
+        except ValueError, e:
+          log.info('freeboard_environmental_calculated: ValueError in calculated %s:  ' % str(e))            
+          
+        except NameError, e:
+          log.info('freeboard_environmental_calculated: NameError in calculated %s:  ' % str(e))           
+
+        except IndexError, e:
+          log.info('freeboard_environmental_calculated: IndexError in calculated %s:  ' % str(e))
+          
+        except:
+          e = sys.exc_info()[0]
+          log.info('freeboard_environmental_calculated: Error in geting calculated ststs %s:  ' % e)
+
+
+
         
         #mydatetimestr = str(point['time'])
 
