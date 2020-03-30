@@ -24,6 +24,7 @@ from pytz import timezone
 from itertools import groupby
 import pyonep
 from pyonep import onep
+from meteocalc import Temp, dew_point, heat_index, wind_chill, feels_like
 #import urlparse
 
 #from iron_cache import *
@@ -182,6 +183,7 @@ def hash_string(string):
     #salted_hash = string + application.config['SECRET_KEY']
     salted_hash = string + app.secret_key
     return md5.new(salted_hash).hexdigest()
+
 
   
 #calculate baro offset in milibars from altitude in feet
@@ -4517,6 +4519,378 @@ def freeboard_environmental():
     #return jsonify(status='error',  update=False )
     callback = request.args.get('callback')
     return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+@app.route('/freeboard_environmental_calculated')
+@cross_origin()
+def freeboard_environmental_calculated():
+
+    deviceapikey = request.args.get('apikey','')
+    serieskey = request.args.get('datakey','')
+    Interval = request.args.get('interval',"5min")
+    Instance = request.args.get('instance','0')
+    resolution = request.args.get('resolution',"")
+    env_type = request.args.get('type',"outside")
+    mytimezone = request.args.get('timezone',"UTC")
+    units= request.args.get('units',"US")
+    mode  = request.args.get('mode',"median")
+    
+    response = None
+
+
+    starttime = 0
+
+    epochtimes = getepochtimes(Interval)
+    startepoch = epochtimes[0]
+    endepoch = epochtimes[1]
+    if resolution == "":
+      resolution = epochtimes[2]
+    #resolution = 60
+
+
+    strvalue = ""
+    value1 = '---'
+    value2 = '---'
+    value3 = '---'
+    value4 = '---'
+
+    temperature=[]
+    atmospheric_pressure=[]
+    humidity=[]
+    wind_speed=[]
+    
+    mydatetime = datetime.datetime.now()
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+
+    deviceid = getedeviceid(deviceapikey)
+    
+    log.info("freeboard deviceid %s", deviceid)
+
+    if deviceid == "":
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+    measurement = "HelmSmart"
+    measurement = 'HS_' + str(deviceid)
+    
+    #serieskeys={'deviceid'=deviceid, 'sensor'='environmental_data', 'instance'='0', 'type'='Outside_Temperature'}
+
+    serieskeys=" deviceid='"
+    serieskeys= serieskeys + deviceid + "' AND "
+    if env_type == "inside":
+      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Inside Temperature' OR type='Inside Humidity')"
+
+    elif env_type == "inside mesh":
+      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='" + Instance + "' "
+
+      
+    elif env_type == "sea":
+      serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Sea Temperature' OR type='Inside Humidity')"
+
+      
+    else:
+      #serieskeys= serieskeys +  " sensor='environmental_data' AND instance='0' AND (type='Outside Temperature' OR type='Outside Humidity')"
+      serieskeys= serieskeys +  " (sensor='wind_data' OR sensor='environmental_data') AND instance='0' AND (type='Apparent Wind'  OR type='Outside Temperature' OR type='Outside Humidity')"
+
+
+
+
+      
+    #serieskeys= serieskeys +  " sensor='environmental_data'  AND type='Outside_Temperature'"
+    #serieskeys= serieskeys +  " sensor='environmental_data'  "
+    
+    Key2="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:humidity.HelmSmart"
+    Key3="deviceid:001EC010AD69.sensor:environmental_data.source:0.instance:0.type:Outside_Temperature.parameter:atmospheric_pressure.HelmSmart"
+
+
+
+    log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
+    log.info("freeboard Create InfluxDB %s", database)
+
+
+    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+
+
+    if serieskeys.find("*") > 0:
+        serieskeys = serieskeys.replace("*", ".*")
+
+    if mode == "median":
+        query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity , median(altitude) AS altitude, median(wind_speed) AS  wind_speed, from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s) ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+    elif mode == "max":
+        query = ('select  max(temperature) AS temperature, max(atmospheric_pressure) AS  atmospheric_pressure, max(humidity) AS humidity, max(altitude) AS altitude, max(wind_speed) AS  wind_speed, from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s) ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+    elif mode == "min":
+        query = ('select  min(temperature) AS temperature, min(atmospheric_pressure) AS  atmospheric_pressure, min(humidity) AS humidity, min(altitude) AS altitude, min(wind_speed) AS  wind_speed, from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s) ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+
+        
+    else:
+      
+      query = ('select  mean(temperature) AS temperature, mean(atmospheric_pressure) AS  atmospheric_pressure, mean(humidity) AS humidity, mean(altitude) AS altitude, mean(wind_speed) AS  wind_speed, from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s) ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+ 
+
+    """
+    if serieskeys.find("*") > 0:
+        serieskeys = serieskeys.replace("*", ".*")
+
+        query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s) ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+    else:
+      
+      query = ('select  median(temperature) AS temperature, median(atmospheric_pressure) AS  atmospheric_pressure, median(humidity) AS humidity from {} '
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s) ') \
+                .format( measurement, serieskeys,
+                        startepoch, endepoch,
+                        resolution)
+ 
+    """    
+
+    log.info("freeboard data Query %s", query)
+
+    try:
+        response= dbc.query(query)
+        
+    except TypeError, e:
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Type Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Name Error in InfluxDB mydata append %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+        log.info('freeboard: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+    except ValueError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: Value Error in InfluxDB  %s:  ' % str(e))
+
+    except AttributeError, e:
+      #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('freeboard_createInfluxDB: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+    except InfluxDBClientError, e:
+      log.info('freeboard_createInfluxDB: Exception Error in InfluxDB  %s:  ' % str(e))
+
+
+            
+    except:
+        log.info('freeboard: Error in InfluxDB mydata append %s:', response)
+        e = sys.exc_info()[0]
+        log.info("freeboard: Error: %s" % e)
+        pass
+
+    if response is None:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing', 'update':'False','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity))})     
+      
+
+    if not response:
+        log.info('freeboard: InfluxDB Query has no data ')
+        callback = request.args.get('callback')
+        #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'status':'missing', 'update':'False','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity))})     
+
+    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    
+    try:
+    
+      strvalue = ""
+      value1 = '---'
+      value2 = '---'
+      value3 = '---'
+      value4 = '---'
+
+      temperature=[]
+      atmospheric_pressure=[]
+      atmospheric_pressure_sea=[]
+      humidity=[]
+      altitude=[]
+      ts =startepoch*1000
+
+
+      
+      points = list(response.get_points())
+
+      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+      for point in points:
+        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        
+        value1 = '---'
+        value2 = '---'
+        value3 = '---'
+        value4 = '---'
+        value5 = '---'
+      
+        if point['time'] is not None:
+          mydatetimestr = str(point['time'])
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          #dtt = mydatetime.timetuple()       
+          dtt = mydatetimetz.timetuple()
+          ts = int(mktime(dtt)*1000)
+          
+        if point['temperature'] is not None: 
+          value1 = convertfbunits(point['temperature'],  convertunittype('temperature', units))
+        temperature.append({'epoch':ts, 'value':value1})
+          
+        if point['atmospheric_pressure'] is not None:         
+          value2 = convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))
+        atmospheric_pressure.append({'epoch':ts, 'value':value2})
+                    
+        if point['humidity'] is not None:         
+          value3 = convertfbunits(point['humidity'], 26)
+        humidity.append({'epoch':ts, 'value':value3})
+
+                    
+        if point['altitude'] is not None:         
+          value4 = convertfbunits(point['altitude'], 32)
+        altitude.append({'epoch':ts, 'value':value4})
+
+        if point['atmospheric_pressure'] is not None and point['altitude'] is not None:
+          #get pressure in KPa
+          value2 = convertfbunits(point['atmospheric_pressure'], 9)
+          #get altitde in feet
+          value4 = convertfbunits(point['altitude'], 32)
+          # get adjustment for altitude in KPa
+          value5 = getAtmosphericCompensation(value4)
+          #add offset if any in KPa
+          value5 = convertfbunits(value2 + value5, convertunittype('baro_pressure', units))
+          
+        atmospheric_pressure_sea.append({'epoch':ts, 'value':value5})        
+ 
+
+        if point['wind_speed'] is not None:         
+          value6 = convertfbunits(point['wind_speed'], convertunittype('speed', units))
+        wind_speed.append({'epoch':ts, 'value':value6})
+
+
+          
+        #mydatetimestr = str(point['time'])
+
+        #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+      #log.info('freeboard: freeboard returning data values temperature:%s, baro:%s, humidity:%s  ', value1,value2,value3)
+
+      """
+      log.info('freeboard: before exosite write:')
+      o = onep.OnepV1()
+
+      cik = '5b38da024d8a1f252e575202afb431ef22d3eb66'
+      #dataport_alias = 'Device'
+      #val_to_write = 'Data'
+      dataport_alias = 'air_temperature'
+      val_to_write =float(value1)
+
+      #testvar = o.write(cik, {"alias": dataport_alias}, val_to_write,{})
+      #log.info('freeboard: fter exosite write:%s', testvar)
+      o.write(cik, {"alias": dataport_alias}, val_to_write,{})
+      log.info('freeboard: after exosite write:')
+
+       """     
+
+      callback = request.args.get('callback')
+      myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
+      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
+
+    except AttributeError, e:
+      #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+
+      log.info('freeboard_environmental: AttributeError in freeboard_environmental %s:  ' % str(e))
+      
+    except TypeError, e:
+      l#og.info('inFluxDB_GPS: TypeError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+
+      log.info('inFluxDB_GPS: TypeError in freeboard_environmental %s:  ' % str(e))
+      
+    except ValueError, e:
+      log.info('freeboard_environmental: ValueError in freeboard_environmental point %s:  ', point)
+      #e = sys.exc_info()[0]
+
+      log.info('freeboard_environmental: ValueError in freeboard_environmental point%s:  ' % str(e))            
+      
+    except NameError, e:
+      #log.info('inFluxDB_GPS: NameError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+      #e = sys.exc_info()[0]
+      log.info('freeboard_environmental: NameError in freeboard_environmental %s:  ' % str(e))           
+
+    except IndexError, e:
+      log.info('freeboard_environmental: IndexError in freeboard_environmental point %s:  ', point)
+      #e = sys.exc_info()[0]
+      log.info('freeboard_environmental: IndexError in freeboard_environmental %s:  ' % str(e))
+      
+    except pyonep.exceptions.JsonRPCRequestException as ex:
+        print('JsonRPCRequestException: {0}'.format(ex))
+        
+    except pyonep.exceptions.JsonRPCResponseException as ex:
+        print('JsonRPCResponseException: {0}'.format(ex))
+        
+    except pyonep.exceptions.OnePlatformException as ex:
+        print('OnePlatformException: {0}'.format(ex))
+       
+    except:
+        log.info('freeboard: Error in geting freeboard response %s:  ', strvalue)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting freeboard ststs %s:  ' % e)
+        #return jsonify(update=False, status='missing' )
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+  
+    #return jsonify(status='error',  update=False )
+    callback = request.args.get('callback')
+    return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+
+
 
 @app.route('/freeboard_weather')
 @cross_origin()
