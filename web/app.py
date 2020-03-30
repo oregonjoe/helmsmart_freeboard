@@ -4746,6 +4746,12 @@ def freeboard_environmental_calculated():
       atmospheric_pressure_sea=[]
       humidity=[]
       altitude=[]
+      wind_chill=[]
+      heat_index=[]
+      dew_point=[]
+      feels_like=[]
+
+      
       ts =startepoch*1000
 
 
@@ -4820,24 +4826,28 @@ def freeboard_environmental_calculated():
           if tempF != '---' and  humidity100 != '---':
             dp = dew_point(temperature=tempF, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
+            dew_point.append({'epoch':ts, 'value':dp.k})
 
+            
           # calculate heat_index
           if tempF != '---' and  humidity100 != '---':        
             hi= heat_index(temperature=tempF, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi.k)
+            heat_index.append({'epoch':ts, 'value':hi.k})
 
+            
           # calculate feels_like
           if tempF != '---' and  humidity100 != '---' and  windmph != '---':
             fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl.k)
-
+            feels_like.append({'epoch':ts, 'value':fl.k})
 
           # calculate Wind Chill
           if tempF != '---' and  windmph != '---':
             wc = wind_chill(temperature=tempF, wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc.k)
-
-            
+            wind_chill.append({'epoch':ts, 'value':wc.k})
+ 
 
         except AttributeError, e:
           log.info('freeboard_environmental_calculated: AttributeError in calculated %s:  ' % str(e))
@@ -4887,7 +4897,19 @@ def freeboard_environmental_calculated():
       callback = request.args.get('callback')
       myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate,
+                                          'update':'True','temperature':list(reversed(temperature)),
+                                          'atmospheric_pressure':list(reversed(atmospheric_pressure)),
+
+                                           'humidity':list(reversed(humidity)),
+                                           'altitude':list(reversed(altitude)),
+                                          
+                                           'dewpoinr':list(reversed(dew_point)),
+                                           'heatindex':list(reversed(heat_index)),
+                                           'feelslike':list(reversed(feels_like)),
+                                           'windchill':list(reversed(wind_chill)),
+
+                                           'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
 
     except AttributeError, e:
       #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
