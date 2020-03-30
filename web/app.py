@@ -4762,6 +4762,9 @@ def freeboard_environmental_calculated():
         value3 = '---'
         value4 = '---'
         value5 = '---'
+        tempF='---'
+        humidity100='---'
+        windmph='---'
       
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
@@ -4776,6 +4779,7 @@ def freeboard_environmental_calculated():
           
         if point['temperature'] is not None: 
           value1 = convertfbunits(point['temperature'],  convertunittype('temperature', units))
+          tempF=convertfbunits(point['temperature'],  0)
         temperature.append({'epoch':ts, 'value':value1})
           
         if point['atmospheric_pressure'] is not None:         
@@ -4784,6 +4788,7 @@ def freeboard_environmental_calculated():
                     
         if point['humidity'] is not None:         
           value3 = convertfbunits(point['humidity'], 26)
+          humidity100 = convertfbunits(point['humidity'], 26)
         humidity.append({'epoch':ts, 'value':value3})
 
                     
@@ -4806,11 +4811,29 @@ def freeboard_environmental_calculated():
 
         if point['wind_speed'] is not None:         
           value6 = convertfbunits(point['wind_speed'], convertunittype('speed', units))
+          windmph = convertfbunits(point['wind_speed'], 5)
         wind_speed.append({'epoch':ts, 'value':value6})
 
         # calculate Wind Chill
-        wc = wind_chill(temperature=15, wind_speed=25)
-        log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc)          
+        if tempF != '---' and  windmph != '---':
+          wc = wind_chill(temperature=tempF, wind_speed=windmph)
+          log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc)
+
+        # calculate dew_point
+        if tempF != '---' and  humidity100 != '---':
+          dp = dew_point(temperature=tempF, humidity=humidity100)
+          log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp)
+
+        # calculate heat_index
+        if tempF != '---' and  humidity100 != '---':        
+          hi= heat_index(temperature=tempF, humidity=humidity100)
+          log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi)
+
+        # calculate feels_like
+        if tempF != '---' and  humidity100 != '---' and  windmph != '---':
+          fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
+          log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl)
+        
         #mydatetimestr = str(point['time'])
 
         #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
