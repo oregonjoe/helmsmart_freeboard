@@ -4819,23 +4819,23 @@ def freeboard_environmental_calculated():
           # calculate dew_point
           if tempF != '---' and  humidity100 != '---':
             dp = dew_point(temperature=tempF, humidity=humidity100)
-            log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp)
+            log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
 
           # calculate heat_index
           if tempF != '---' and  humidity100 != '---':        
             hi= heat_index(temperature=tempF, humidity=humidity100)
-            log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi)
+            log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi.k)
 
           # calculate feels_like
           if tempF != '---' and  humidity100 != '---' and  windmph != '---':
             fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
-            log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl)
+            log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl.k)
 
 
           # calculate Wind Chill
           if tempF != '---' and  windmph != '---':
             wc = wind_chill(temperature=tempF, wind_speed=windmph)
-            log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc)
+            log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc.k)
 
             
 
