@@ -1469,7 +1469,30 @@ def callback_handling():
                                          AUTH0_CLIENT_SECRET, code, AUTH0_CALLBACK_URL)
     user_info = auth0_users.userinfo(token['access_token'])
     log.info('auth0callback: user_info %s:  ' , user_info)
-    session['profile'] = json.loads(user_info)
+
+
+
+    try:
+      #session['profile'] = json.loads(user_info)
+      user_info_json = json.dumps(user_info)
+      log.info('auth0callback: TypeError in user_info %s:  ', user_info_json)
+      
+      session['profile'] =json.loads(user_info_json)
+      log.info('auth0callback: TypeError in session user_info %s:  ', session)
+      
+    except TypeError, e:
+      log.info('auth0callback: TypeError in user_info %s:  ', user_info_json)
+      #e = sys.exc_info()[0]
+
+      log.info('auth0callback: TypeError in user_info %s:  ' % str(e))
+      
+    except:
+      e = sys.exc_info()[0]
+      log.info('auth0callback: Error in geting username  %s:  ' % str(e))
+    
+ 
+
+    
     
     if 'profile' in session:
       try:
@@ -1480,6 +1503,10 @@ def callback_handling():
           myusername = mydata['name']
           session['username'] = myusername
           log.info("authcallback: username:%s", myusername)
+
+      except TypeError, e:
+        log.info('auth0callback: TypeError in customdata %s:  ', mydata)
+        #e = sys.exc_info()[0]
           
       except:
         e = sys.exc_info()[0]
