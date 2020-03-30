@@ -5752,6 +5752,7 @@ def freeboard_winddata():
 
     wind_speed=[]
     wind_direction=[]
+    wind_gusts=[]
     
     starttime = 0
 
@@ -5786,11 +5787,11 @@ def freeboard_winddata():
     if  windtype =="apparent":
       serieskeys=" deviceid='"
       serieskeys= serieskeys + deviceid + "' AND "
-      serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND type='Apparent Wind' "
+      serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND (type='Apparent Wind' OR type='Gust' ) "
     else  :
       serieskeys=" deviceid='"
       serieskeys= serieskeys + deviceid + "' AND "
-      serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND type='TWIND True North' "
+      serieskeys= serieskeys +  " sensor='wind_data' AND instance='0' AND (type='TWIND True North' OR type='Gust' ) "
   
     #serieskeys= serieskeys +  " sensor='wind_data'  "
 
@@ -5807,7 +5808,7 @@ def freeboard_winddata():
 
     if mode == "median":
       
-      query = ('select  median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed from {} '
+      query = ('select  median(wind_direction) AS wind_direction, median(wind_speed) AS  wind_speed , median(wind_gusts) AS  wind_gusts from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -5816,7 +5817,7 @@ def freeboard_winddata():
       
     elif mode == "max":
       
-      query = ('select  max(wind_direction) AS wind_direction, max(wind_speed) AS  wind_speed from {} '
+      query = ('select  max(wind_direction) AS wind_direction, max(wind_speed) AS  wind_speed , max(wind_gusts) AS  wind_gusts from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -5826,7 +5827,7 @@ def freeboard_winddata():
       
     elif mode == "min":
       
-      query = ('select  min(wind_direction) AS wind_direction, min(wind_speed) AS  wind_speed from {} '
+      query = ('select  min(wind_direction) AS wind_direction, min(wind_speed) AS  wind_speed, min(wind_gusts) AS  wind_gusts from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -5834,7 +5835,7 @@ def freeboard_winddata():
                         resolution)      
       
     else:       
-      query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed from {} '
+      query = ('select  mean(wind_direction) AS wind_direction, mean(wind_speed) AS  wind_speed, mean(wind_gusts) AS  wind_gusts from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
                 .format( measurement, serieskeys,
@@ -5924,6 +5925,7 @@ def freeboard_winddata():
 
       wind_speed=[]
       wind_direction=[]
+      wind_gusts=[]
 
       ts =startepoch*1000
  
@@ -5956,6 +5958,10 @@ def freeboard_winddata():
         if point['wind_direction'] is not None:       
           value2 = convertfbunits(point['wind_direction'], 16)
         wind_direction.append({'epoch':ts, 'value':value2})
+
+        if point['wind_gusts'] is not None:       
+          value3 = convertfbunits(point['wind_gusts'],  convertunittype('speed', units))
+        wind_gusts.append({'epoch':ts, 'value':value1})
        
 
       callback = request.args.get('callback')
@@ -5963,9 +5969,9 @@ def freeboard_winddata():
 
       
       if  windtype =="apparent":
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction))})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))})
       else:
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction))})
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))})
    
 
       
