@@ -5961,7 +5961,7 @@ def freeboard_winddata():
 
         if point['wind_gusts'] is not None:       
           value3 = convertfbunits(point['wind_gusts'],  convertunittype('speed', units))
-        wind_gusts.append({'epoch':ts, 'value':value1})
+        wind_gusts.append({'epoch':ts, 'value':value3})
        
 
       callback = request.args.get('callback')
