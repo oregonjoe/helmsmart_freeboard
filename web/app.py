@@ -4808,8 +4808,9 @@ def freeboard_environmental_calculated():
           value6 = convertfbunits(point['wind_speed'], convertunittype('speed', units))
         wind_speed.append({'epoch':ts, 'value':value6})
 
-
-          
+        # calculate Wind Chill
+        wc = wind_chill(temperature=15, wind_speed=25)
+        log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc)          
         #mydatetimestr = str(point['time'])
 
         #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')

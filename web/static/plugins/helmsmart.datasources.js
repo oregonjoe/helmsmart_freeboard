@@ -197,6 +197,12 @@
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental"
 					},
 					
+					{
+						name: "Environmental Calculated",
+						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental_calculated"
+					},
+					
+					
 					{ 
 						name: "Wind Data",
 						value: "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata"
