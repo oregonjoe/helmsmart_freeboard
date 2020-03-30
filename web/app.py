@@ -4905,7 +4905,7 @@ def freeboard_environmental_calculated():
                                            'altitude':list(reversed(altitude)),
                                           
                                            'dewpoinr':list(reversed(dewpoint)),
-                                           'heatindex':list(reversed(heat_ndex)),
+                                           'heatindex':list(reversed(heatindex)),
                                            'feelslike':list(reversed(feelslike)),
                                            'windchill':list(reversed(windchill)),
 
