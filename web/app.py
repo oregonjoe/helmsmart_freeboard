@@ -4826,27 +4826,27 @@ def freeboard_environmental_calculated():
           if tempF != '---' and  humidity100 != '---':
             dp = dew_point(temperature=tempF, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
-            dewpoint.append({'epoch':ts, 'value':dp.k})
+            dewpoint.append({'epoch':ts, 'value':convertfbunits(dp.k,  convertunittype('temperature', units))})
 
             
           # calculate heat_index
           if tempF != '---' and  humidity100 != '---':        
             hi= heat_index(temperature=tempF, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi.k)
-            heatindex.append({'epoch':ts, 'value':hi.k})
+            heatindex.append({'epoch':ts, 'value':convertfbunits(hi.k,  convertunittype('temperature', units))})
 
             
           # calculate feels_like
           if tempF != '---' and  humidity100 != '---' and  windmph != '---':
             fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl.k)
-            feelslike.append({'epoch':ts, 'value':fl.k})
+            feelslike.append({'epoch':ts, 'value':convertfbunits(fl.k,  convertunittype('temperature', units))})
 
           # calculate Wind Chill
           if tempF != '---' and  windmph != '---':
             wc = wind_chill(temperature=tempF, wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc.k)
-            windchill.append({'epoch':ts, 'value':wc.k})
+            windchill.append({'epoch':ts, 'value':convertfbunits(wc.k,  convertunittype('temperature', units))})
  
 
         except AttributeError, e:
