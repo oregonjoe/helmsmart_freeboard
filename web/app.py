@@ -4769,6 +4769,7 @@ def freeboard_environmental_calculated():
         value4 = '---'
         value5 = '---'
         tempF='---'
+        tempC='---'
         humidity100='---'
         windmph='---'
       
@@ -4786,6 +4787,7 @@ def freeboard_environmental_calculated():
         if point['temperature'] is not None: 
           value1 = convertfbunits(point['temperature'],  convertunittype('temperature', units))
           tempF=convertfbunits(point['temperature'],  0)
+          tempC=convertfbunits(point['temperature'],  1)          
         temperature.append({'epoch':ts, 'value':value1})
           
         if point['atmospheric_pressure'] is not None:         
@@ -4823,8 +4825,9 @@ def freeboard_environmental_calculated():
         try:
 
           # calculate dew_point
-          if tempF != '---' and  humidity100 != '---':
-            dp = dew_point(temperature=tempF, humidity=humidity100)
+          if tempC != '---' and  humidity100 != '---':
+            #dp = dew_point(temperature=tempF, humidity=humidity100)
+            dp = dew_point(temperature=tempC, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
             dewpoint.append({'epoch':ts, 'value':convertfbunits(dp.k,  convertunittype('temperature', units))})
 
