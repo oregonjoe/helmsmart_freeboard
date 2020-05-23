@@ -5191,17 +5191,17 @@ def freeboard_environmental_metar():
       value5 = '---'
       value6 = '---'
       value7 = '---'
-      temperature=[]
-      atmospheric_pressure=[]
-      atmospheric_pressure_sea=[]
-      humidity=[]
-      altitude=[]
-      windchill=[]
-      wind_speed=[]
-      wind_dir=[]
-      heatindex=[]
-      dewpoint=[]
-      feelslike=[]
+      temperature=""
+      atmospheric_pressure=""
+      atmospheric_pressure_sea=""
+      humidity=""
+      altitude=""
+      windchill=""
+      wind_speed=""
+      wind_dir=""
+      heatindex=""
+      dewpoint=""
+      feelslike=""
 
       
       ts =startepoch*1000
@@ -5240,24 +5240,24 @@ def freeboard_environmental_metar():
           ts = int(mktime(dtt)*1000)
           
         if point['temperature'] is not None: 
-          value1 = convertfbunits(point['temperature'],  convertunittype('temperature', units))
+          temperature = int(convertfbunits(point['temperature'],  1)   ) 
           tempF=convertfbunits(point['temperature'],  0)
           tempC=convertfbunits(point['temperature'],  1)          
-        temperature.append({'epoch':ts, 'value':value1})
+
           
         if point['atmospheric_pressure'] is not None:         
-          value2 = convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))
-        atmospheric_pressure.append({'epoch':ts, 'value':value2})
+          atmospheric_pressure = int((convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))) * 100)
+
                     
         if point['humidity'] is not None:         
-          value3 = convertfbunits(point['humidity'], 26)
+          humidity = convertfbunits(point['humidity'], 26)
           humidity100 = convertfbunits(point['humidity'], 26)
-        humidity.append({'epoch':ts, 'value':value3})
+
 
                     
         if point['altitude'] is not None:         
-          value4 = convertfbunits(point['altitude'], 32)
-        altitude.append({'epoch':ts, 'value':value4})
+          altitude = convertfbunits(point['altitude'], 32)
+
 
         if point['atmospheric_pressure'] is not None and point['altitude'] is not None:
           #get pressure in KPa
@@ -5267,19 +5267,20 @@ def freeboard_environmental_metar():
           # get adjustment for altitude in KPa
           value5 = getAtmosphericCompensation(value4)
           #add offset if any in KPa
-          value5 = convertfbunits(value2 + value5, convertunittype('baro_pressure', units))
+          atmospheric_pressure_sea = int((convertfbunits(value2 + value5, convertunittype('baro_pressure', units))) * 10)
           
-        atmospheric_pressure_sea.append({'epoch':ts, 'value':value5})        
+   
  
 
         if point['wind_speed'] is not None:         
-          value6 = convertfbunits(point['wind_speed'], convertunittype('speed', units))
-          windmph = convertfbunits(point['wind_speed'], 5)
-        wind_speed.append({'epoch':ts, 'value':value6})
+          wind_speed = convertfbunits(point['wind_speed'], convertunittype('speed', units))
+          windmph = int(convertfbunits(point['wind_speed'], 5))
+          wind_speed =str(wind_speed).zfill(2)
+       
 
         if point['wind_direction'] is not None:         
-          value7 = convertfbunits(point['wind_direction'], 16)
-        wind_dir.append({'epoch':ts, 'value':value7})
+          wind_dir = int(convertfbunits(point['wind_direction'], 16))
+          wind_dir =str(wind_dir).zfill(3)
 
         try:
 
@@ -5288,27 +5289,28 @@ def freeboard_environmental_metar():
             #dp = dew_point(temperature=tempF, humidity=humidity100)
             dp = dew_point(temperature=tempC, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
-            dewpoint.append({'epoch':ts, 'value':convertfbunits(dp.k,  convertunittype('temperature', units))})
+            dewpoint=int(convertfbunits(dp.k,  convertunittype('temperature', units)))
+
 
             
           # calculate heat_index
           if tempF != '---' and  humidity100 != '---':        
             hi= heat_index(temperature=tempF, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi.k)
-            heatindex.append({'epoch':ts, 'value':convertfbunits(hi.k,  convertunittype('temperature', units))})
+            heatindex=convertfbunits(hi.k,  convertunittype('temperature', units))
 
             
           # calculate feels_like
           if tempF != '---' and  humidity100 != '---' and  windmph != '---':
             fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl.k)
-            feelslike.append({'epoch':ts, 'value':convertfbunits(fl.k,  convertunittype('temperature', units))})
+            feelslike=convertfbunits(fl.k,  convertunittype('temperature', units))=
 
           # calculate Wind Chill
           if tempF != '---' and  windmph != '---':
             wc = wind_chill(temperature=tempF, wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc.k)
-            windchill.append({'epoch':ts, 'value':convertfbunits(wc.k,  convertunittype('temperature', units))})
+            windchill=convertfbunits(wc.k,  convertunittype('temperature', units))
  
 
         except AttributeError, e:
@@ -5357,21 +5359,12 @@ def freeboard_environmental_metar():
        """     
 
       callback = request.args.get('callback')
-      myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate,
-                                          'update':'True','temperature':list(reversed(temperature)),
-                                          'atmospheric_pressure':list(reversed(atmospheric_pressure)),
+      myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-                                           'humidity':list(reversed(humidity)),
-                                           'altitude':list(reversed(altitude)),
-                                          
-                                           'dewpoinr':list(reversed(dewpoint)),
-                                           'wind_dir':list(reversed(wind_dir)),
-                                           'wind_speed':list(reversed(wind_speed)),
-                                           'windchill':list(reversed(windchill)),
+      metarstr = ('METAR I025 %S AUTO %S%S' %  ( myjsondatetz,  wind_dir, wind_speed))
+      
+      return metarstr
 
-                                           'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
 
     except AttributeError, e:
       #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
