@@ -5240,14 +5240,15 @@ def freeboard_environmental_metar():
           ts = int(mktime(dtt)*1000)
           
         if point['temperature'] is not None: 
-          temperature = int(convertfbunits(point['temperature'],  1)   ) 
+          temperature = int(convertfbunits(point['temperature'],  1)   )
+          temperature = str(temperature).zfill(2)
           tempF=convertfbunits(point['temperature'],  0)
           tempC=convertfbunits(point['temperature'],  1)          
 
           
         if point['atmospheric_pressure'] is not None:         
           atmospheric_pressure = int((convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))) * 100)
-
+          atmospheric_pressure = str(atmospheric_pressure).zfill(4)
                     
         if point['humidity'] is not None:         
           humidity = convertfbunits(point['humidity'], 26)
@@ -5273,7 +5274,7 @@ def freeboard_environmental_metar():
  
 
         if point['wind_speed'] is not None:         
-          wind_speed = convertfbunits(point['wind_speed'], convertunittype('speed', units))
+          wind_speed = int(convertfbunits(point['wind_speed'], 4))
           windmph = int(convertfbunits(point['wind_speed'], 5))
           wind_speed =str(wind_speed).zfill(2)
        
@@ -5290,7 +5291,7 @@ def freeboard_environmental_metar():
             dp = dew_point(temperature=tempC, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
             dewpoint=int(convertfbunits(dp.k,  convertunittype('temperature', units)))
-
+            dewpoint = str(dewpoint).zfill(2)
 
             
           # calculate heat_index
@@ -5307,11 +5308,12 @@ def freeboard_environmental_metar():
             feelslike=convertfbunits(fl.k,  convertunittype('temperature', units))
 
           # calculate Wind Chill
+          """
           if tempF != '---' and  windmph != '---':
             wc = wind_chill(temperature=tempF, wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc.k)
             windchill=convertfbunits(wc.k,  convertunittype('temperature', units))
- 
+          """ 
 
         except AttributeError, e:
           log.info('freeboard_environmental_calculated: AttributeError in calculated %s:  ' % str(e))
@@ -5361,7 +5363,7 @@ def freeboard_environmental_metar():
       callback = request.args.get('callback')
       myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-      metarstr = ('METAR I025 %s AUTO %s%s' %  ( myjsondatetz,  wind_dir, wind_speed))
+      metarstr = ('METAR I025 %s AUTO %s%sKT %s/%s A%s' %  ( myjsondatetz,  wind_dir, wind_speed, temperature, dewpoint, atmospheric_pressure))
       
       return metarstr
 
