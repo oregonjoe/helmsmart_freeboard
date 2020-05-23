@@ -5361,7 +5361,7 @@ def freeboard_environmental_metar():
       callback = request.args.get('callback')
       myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-      metarstr = ('METAR I025 %S AUTO %S%S' %  ( myjsondatetz,  wind_dir, wind_speed))
+      metarstr = ('METAR I025 %s AUTO %s%s' %  ( myjsondatetz,  wind_dir, wind_speed))
       
       return metarstr
 
