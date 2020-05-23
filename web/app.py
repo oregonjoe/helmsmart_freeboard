@@ -5304,7 +5304,7 @@ def freeboard_environmental_metar():
           if tempF != '---' and  humidity100 != '---' and  windmph != '---':
             fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl.k)
-            feelslike=convertfbunits(fl.k,  convertunittype('temperature', units))=
+            feelslike=convertfbunits(fl.k,  convertunittype('temperature', units))
 
           # calculate Wind Chill
           if tempF != '---' and  windmph != '---':
