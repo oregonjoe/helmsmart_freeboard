@@ -5320,8 +5320,9 @@ def freeboard_environmental_metar():
           
         if point['temperature'] is not None: 
           temperature = int(convertfbunits(point['temperature'],  1)   )
-          temperature = str(temperature).zfill(2)
           temperature1hr = str(temperature * 10 ).zfill(4)
+          temperature = str(temperature).zfill(2)
+
           tempF=convertfbunits(point['temperature'],  0)
           tempC=convertfbunits(point['temperature'],  1)          
 
@@ -5371,8 +5372,9 @@ def freeboard_environmental_metar():
             dp = dew_point(temperature=tempC, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
             dewpoint=int(convertfbunits(dp.k,  convertunittype('temperature', units)))
-            dewpoint = str(dewpoint).zfill(2)
             dewpoint1hr = str(dewpoint * 10).zfill(4)
+            dewpoint = str(dewpoint).zfill(2)
+
 
             
           # calculate heat_index
