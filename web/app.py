@@ -5371,7 +5371,7 @@ def freeboard_environmental_metar():
             #dp = dew_point(temperature=tempF, humidity=humidity100)
             dp = dew_point(temperature=tempC, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
-            dewpoint=int(convertfbunits(dp.k,  convertunittype('temperature', units)))
+            dewpoint=int(convertfbunits(dp.k, 1))
             dewpoint1hr = str(dewpoint * 10).zfill(4)
             dewpoint = str(dewpoint).zfill(2)
 
