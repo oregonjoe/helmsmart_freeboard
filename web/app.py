@@ -5321,6 +5321,7 @@ def freeboard_environmental_metar():
         if point['temperature'] is not None: 
           temperature = int(convertfbunits(point['temperature'],  1)   )
           temperature = str(temperature).zfill(2)
+          temperature1hr = str(temperature * 10 ).zfill(4)
           tempF=convertfbunits(point['temperature'],  0)
           tempC=convertfbunits(point['temperature'],  1)          
 
@@ -5371,6 +5372,7 @@ def freeboard_environmental_metar():
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
             dewpoint=int(convertfbunits(dp.k,  convertunittype('temperature', units)))
             dewpoint = str(dewpoint).zfill(2)
+            dewpoint1hr = str(dewpoint * 10).zfill(4)
 
             
           # calculate heat_index
@@ -5444,9 +5446,13 @@ def freeboard_environmental_metar():
       myjsondatetz = mydatetime.strftime("%d%H%M")
 
       stationid = devicename[0:4]
-      
-      metarstr = ('METAR %s %sZ AUTO %s%sKT %s/%s A%s' %  (stationid, myjsondatetz,  wind_dir, wind_speed, temperature, dewpoint, atmospheric_pressure))
-      
+
+      if Interval == '1hour':
+        metarstr = ('METAR %s %sZ AUTO %s%sKT %s/%s A%s RMK T%s%s' %  (stationid, myjsondatetz,  wind_dir, wind_speed, temperature, dewpoint, atmospheric_pressure, temperature1hr, dewpoint1hr))
+        
+      else:
+        metarstr = ('METAR %s %sZ AUTO %s%sKT %s/%s A%s' %  (stationid, myjsondatetz,  wind_dir, wind_speed, temperature, dewpoint, atmospheric_pressure))
+        
       return metarstr
 
 
