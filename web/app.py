@@ -1027,6 +1027,75 @@ def getedeviceid(deviceapikey):
     return ""
 
 
+
+def getedevicename(deviceapikey):
+
+    conn = db_pool.getconn()
+
+    log.info("freeboard getedevicename data Query %s", deviceapikey)
+    #query = "select deviceid from user_devices where deviceapikey = %s"
+
+    #query = ("select deviceid from user_devices where deviceapikey = '{}' ") \
+    #            .format(deviceapikey )
+
+
+    #log.info("freeboard getedeviceid Query %s", query)
+
+
+    try:
+    # first check db to see if deviceapikey is matched to device id
+
+        cursor = conn.cursor()
+        #cursor.execute(query, (deviceapikey,))
+        #cursor.execute("select deviceid from user_devices where deviceapikey = '%s'" % deviceapikey)
+        #key=('bfeba0c3c5244269b4c8d276872519a6',)
+        cursor.execute("select devicename from user_devices where deviceapikey = %s" , (deviceapikey,))
+        #response= cursor.query(query)
+        i = cursor.fetchone()
+        log.info("freeboard getedevicename response %s", i)            
+        # see we got any matches
+        if cursor.rowcount == 0:
+        #if not response:
+            # cursor.close
+            db_pool.putconn(conn) 
+            return ""
+        
+        else:
+            devicename = str(i[0])
+            db_pool.putconn(conn) 
+            return devicename 
+
+
+    except TypeError, e:
+        log.info('freeboard: TypeError in geting devicename  %s:  ', deviceapikey)
+        log.info('freeboard: TypeError in geting devicename  %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: KeyError in geting devicename  %s:  ', deviceapikey)
+        log.info('freeboard: KeyError in geting devicename  %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: NameError in geting devicename  %s:  ', deviceapikey)
+        log.info('freeboard: NameError in geting devicename  %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: IndexError in geting devicename  %s:  ', deviceapikey)
+        log.info('freeboard: IndexError in geting devicename  %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: Error in geting  devicename %s:  ', deviceapikey)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting devicename  %s:  ' % str(e))
+
+    # cursor.close
+    db_pool.putconn(conn)                       
+
+    return ""
+
+
+
+
 def getuseremail(deviceapikey):
 
     conn = db_pool.getconn()
@@ -5018,6 +5087,16 @@ def freeboard_environmental_metar():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
+    devicename = getedevicename(deviceapikey)
+    
+    log.info("freeboard devicename %s", devicename)
+
+    if devicename == "":
+        callback = request.args.get('callback')
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'devicename error' })
+
+
+
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -5364,7 +5443,7 @@ def freeboard_environmental_metar():
       myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")
       myjsondatetz = mydatetime.strftime("%d%H%M")
 
-      stationid = "KMBC"
+      stationid = devicename[0:4]
       
       metarstr = ('METAR %s %sZ AUTO %s%sKT %s/%s A%s' %  (stationid, myjsondatetz,  wind_dir, wind_speed, temperature, dewpoint, atmospheric_pressure))
       
