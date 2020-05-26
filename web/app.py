@@ -5533,9 +5533,9 @@ def wind_deg_to_compass(deg):
   elif deg >= 348.75 and deg < 359.99: return 'N'
   else: return ''
 
-@app.route('/freeboard_environmental_csv')
+@app.route('/helmsmart_environmental_baroncsv')
 @cross_origin()
-def freeboard_environmental_csv():
+def helmsmart_environmental_baroncsv():
 
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
