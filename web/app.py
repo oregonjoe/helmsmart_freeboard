@@ -5820,7 +5820,7 @@ def freeboard_environmental_csv():
           ts = int(mktime(dtt)*1000)
           
         if point['temperature'] is not None: 
-          temperature = int(convertfbunits(point['temperature'],  0)   )
+          temperature = convertfbunits(point['temperature'],  0)   
           temperature1hr = str(temperature * 10 ).zfill(4)
           #temperature = str(temperature).zfill(2)
 
@@ -5829,7 +5829,7 @@ def freeboard_environmental_csv():
 
           
         if point['atmospheric_pressure'] is not None:         
-          atmospheric_pressure = int((convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))) )
+          atmospheric_pressure = ((convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))) )
           #atmospheric_pressure = str(atmospheric_pressure).zfill(4)
                     
         if point['humidity'] is not None:         
@@ -5856,7 +5856,7 @@ def freeboard_environmental_csv():
  
 
         if point['wind_speed'] is not None:         
-          wind_speed = int(convertfbunits(point['wind_speed'], 4))
+          wind_speed = convertfbunits(point['wind_speed'], 4)
           windmph = int(convertfbunits(point['wind_speed'], 5))
           #wind_speed =str(wind_speed).zfill(2)
        
