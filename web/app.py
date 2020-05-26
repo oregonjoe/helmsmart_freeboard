@@ -5822,7 +5822,7 @@ def freeboard_environmental_csv():
         if point['temperature'] is not None: 
           temperature = int(convertfbunits(point['temperature'],  0)   )
           temperature1hr = str(temperature * 10 ).zfill(4)
-          temperature = str(temperature).zfill(2)
+          #temperature = str(temperature).zfill(2)
 
           tempF=convertfbunits(point['temperature'],  0)
           tempC=convertfbunits(point['temperature'],  1)          
@@ -5830,7 +5830,7 @@ def freeboard_environmental_csv():
           
         if point['atmospheric_pressure'] is not None:         
           atmospheric_pressure = int((convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))) )
-          atmospheric_pressure = str(atmospheric_pressure).zfill(4)
+          #atmospheric_pressure = str(atmospheric_pressure).zfill(4)
                     
         if point['humidity'] is not None:         
           humidity = convertfbunits(point['humidity'], 26)
@@ -5858,7 +5858,7 @@ def freeboard_environmental_csv():
         if point['wind_speed'] is not None:         
           wind_speed = int(convertfbunits(point['wind_speed'], 4))
           windmph = int(convertfbunits(point['wind_speed'], 5))
-          wind_speed =str(wind_speed).zfill(2)
+          #wind_speed =str(wind_speed).zfill(2)
        
 
         if point['wind_direction'] is not None:         
@@ -5948,10 +5948,10 @@ def freeboard_environmental_csv():
        """     
 
       callback = request.args.get('callback')
-      myjsondatetz = mydatetime.strftime("%m %d, %Y %H:%M:%S")
-      myjsondatetz = mydatetime.strftime("%d%H%M")
+      #myjsondatetz = mydatetime.strftime("%m %d, %Y %H:%M:%S")
+      #myjsondatetz = mydatetime.strftime("%d%H%M")
 
-      mycsvdate = mydatetime.strftime("%B/%d/%Y")
+      mycsvdate = mydatetime.strftime("%m/%d/%Y")
       mycsvtime = mydatetime.strftime("%H:%M:%S")
  
       stationid = devicename[0:4]
