@@ -5507,9 +5507,31 @@ def freeboard_environmental_metar():
 
 
 
+def degToCompass(num):
+    val=int((num/22.5)+.5)
+    arr=["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]
+    return arr[(val % 16)]
 
 
-
+def wind_deg_to_compass(deg):
+  if    deg >= 0.0 and deg < 11.25: return 'NNE'
+  elif deg >=  11.25 and deg <  33.75: return 'NNE'
+  elif deg >=  33.75 and deg <  56.25: return 'NE'
+  elif deg >=  56.25 and deg <  78.75: return 'ENE'
+  elif deg >=  78.75 and deg < 101.25: return 'E'
+  elif deg >= 101.25 and deg < 123.75: return 'ESE'
+  elif deg >= 123.75 and deg < 146.25: return 'SE'
+  elif deg >= 146.25 and deg < 168.75: return 'SSE'
+  elif deg >= 168.75 and deg < 191.25: return 'S'
+  elif deg >= 191.25 and deg < 213.75: return 'SSW'
+  elif deg >= 213.75 and deg < 236.25: return 'SW'
+  elif deg >= 236.25 and deg < 258.75: return 'WSW'
+  elif deg >= 258.75 and deg < 281.25: return 'W'
+  elif deg >= 281.25 and deg < 303.75: return 'WNW'
+  elif deg >= 303.75 and deg < 326.25: return 'NW'
+  elif deg >= 326.25 and deg < 348.75: return 'NNW'
+  elif deg >= 348.75 and deg < 359.99: return 'N'
+  else: return ''
 
 @app.route('/freeboard_environmental_csv')
 @cross_origin()
@@ -5798,7 +5820,7 @@ def freeboard_environmental_csv():
           ts = int(mktime(dtt)*1000)
           
         if point['temperature'] is not None: 
-          temperature = int(convertfbunits(point['temperature'],  1)   )
+          temperature = int(convertfbunits(point['temperature'],  0)   )
           temperature1hr = str(temperature * 10 ).zfill(4)
           temperature = str(temperature).zfill(2)
 
@@ -5807,7 +5829,7 @@ def freeboard_environmental_csv():
 
           
         if point['atmospheric_pressure'] is not None:         
-          atmospheric_pressure = int((convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))) * 100)
+          atmospheric_pressure = int((convertfbunits(point['atmospheric_pressure'], convertunittype('baro_pressure', units))) )
           atmospheric_pressure = str(atmospheric_pressure).zfill(4)
                     
         if point['humidity'] is not None:         
@@ -5828,7 +5850,7 @@ def freeboard_environmental_csv():
           # get adjustment for altitude in KPa
           value5 = getAtmosphericCompensation(value4)
           #add offset if any in KPa
-          atmospheric_pressure_sea = int((convertfbunits(value2 + value5, convertunittype('baro_pressure', units))) * 10)
+          atmospheric_pressure_sea = int((convertfbunits(value2 + value5, convertunittype('baro_pressure', units))) )
           
    
  
@@ -5841,7 +5863,9 @@ def freeboard_environmental_csv():
 
         if point['wind_direction'] is not None:         
           wind_dir = int(convertfbunits(point['wind_direction'], 16))
-          wind_dir =str(wind_dir).zfill(3)
+          #wind_dir = str(degToCompass(wind_dir))
+          wind_dir = str(wind_deg_to_compass(wind_dir))
+          #wind_dir =str(wind_dir).zfill(3)
 
         try:
 
@@ -5850,7 +5874,7 @@ def freeboard_environmental_csv():
             #dp = dew_point(temperature=tempF, humidity=humidity100)
             dp = dew_point(temperature=tempC, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated dew_point  %s:', dp.k)
-            dewpoint=int(convertfbunits(dp.k, 1))
+            dewpoint=int(convertfbunits(dp.k, 0))
             dewpoint1hr = str(dewpoint * 10).zfill(4)
             dewpoint = str(dewpoint).zfill(2)
 
@@ -5860,14 +5884,15 @@ def freeboard_environmental_csv():
           if tempF != '---' and  humidity100 != '---':        
             hi= heat_index(temperature=tempF, humidity=humidity100)
             log.info('freeboard:  freeboard_environmental_calculated heat_index %s:', hi.k)
-            heatindex=convertfbunits(hi.k,  convertunittype('temperature', units))
+            heatindex=convertfbunits(hi.k,  0)
 
             
           # calculate feels_like
           if tempF != '---' and  humidity100 != '---' and  windmph != '---':
             fl = feels_like(temperature=tempF, humidity= humidity100 , wind_speed=windmph)
             log.info('freeboard:  freeboard_environmental_calculated feels_like  %s:', fl.k)
-            feelslike=convertfbunits(fl.k,  convertunittype('temperature', units))
+            #feelslike=convertfbunits(fl.k,  convertunittype('temperature', units))
+            feelslike=convertfbunits(fl.k,  0)
 
           # calculate Wind Chill
           """
@@ -5923,10 +5948,10 @@ def freeboard_environmental_csv():
        """     
 
       callback = request.args.get('callback')
-      myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+      myjsondatetz = mydatetime.strftime("%m %d, %Y %H:%M:%S")
       myjsondatetz = mydatetime.strftime("%d%H%M")
 
-      mycsvdate = mydatetime.strftime("%B/%d/%Y %H:%M:%S")
+      mycsvdate = mydatetime.strftime("%B/%d/%Y")
       mycsvtime = mydatetime.strftime("%H:%M:%S")
  
       stationid = devicename[0:4]
