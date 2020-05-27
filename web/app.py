@@ -5978,7 +5978,7 @@ def helmsmart_environmental_baroncsv():
       
       csvstr = "ALBN,05/27/2020,12:20,76.0,68.0,64.0,76,76,S,7,12,,0.1,79,64"
 
-      csvstr = ('%s,%s,%s,%s,%s,64,76,76,S,7,12,,0.1,79,64' %  (stationid, mycsvdate, mycsvtime, temperature, humidity ))
+      csvstr = ('%s,%s,%s,%s,%s,%s,%s,%s,S,7,12,,0.1,79,64' %  (stationid, mycsvdate, mycsvtime, temperature, humidity,dewpoint, windchill, heatindex  ))
 
         
       csvout =  "ID,DATE,TIME,TEMP,RH,DEWPT,WINDCHILL,HEATINDEX,WDIR,WSPEED,WGUST,PRESSURE,PRECIP,HIGH,LOW" + '\r\n' + csvstr + '\r\n'
