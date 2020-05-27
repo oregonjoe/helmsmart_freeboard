@@ -5897,9 +5897,10 @@ def helmsmart_environmental_baroncsv():
           # calculate Wind Chill
           """
           if tempF != '---' and  windmph != '---':
-            wc = wind_chill(temperature=tempF, wind_speed=windmph)
-            log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc.k)
-            windchill=convertfbunits(wc.k,  convertunittype('temperature', units))
+            if temperature < 50 and wind_speed > 3:
+              wc = wind_chill(temperature=tempF, wind_speed=windmph)
+              log.info('freeboard:  freeboard_environmental_calculated wind chill %s:', wc.k)
+              windchill=convertfbunits(wc.k,  convertunittype('temperature', units))
           """ 
 
         except AttributeError, e:
@@ -5953,6 +5954,7 @@ def helmsmart_environmental_baroncsv():
 
       mycsvdate = mydatetime.strftime("%m/%d/%Y")
       mycsvtime = mydatetime.strftime("%H:%M:%S")
+      mycsvtime = mydatetime.strftime("%H:%M")
  
       stationid = devicename[0:4]
 
