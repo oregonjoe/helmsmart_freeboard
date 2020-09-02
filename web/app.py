@@ -14805,7 +14805,7 @@ def freeboard_dimmer_values():
 
       if gwtype == "mesh":
 
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_value':list(reversed(dimmer0)),'dimmer_dio':list(reversed(dimmer2)),'dimmer_adc':list(reversed(dimmer3)),'dimmer_adc2':list(reversed(dimmer1)),'dimmer_motion':list(reversed(dimmer_motion)),'dimmer_override':list(reversed(dimmer_override)), 'dimmer_switchoverride':list(reversed(dimmer_switchoverride)), 'dimmer_photooverride':list(reversed(dimmer_photooverride)), 'dimmer_status':list(reversed(dimmer_status))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_value':list(reversed(dimmer0)),'dimmer_dio_adc3':list(reversed(dimmer2)),'dimmer_adc':list(reversed(dimmer3)),'dimmer_adc2':list(reversed(dimmer1)),'dimmer_motion':list(reversed(dimmer_motion)),'dimmer_override':list(reversed(dimmer_override)), 'dimmer_switchoverride':list(reversed(dimmer_switchoverride)), 'dimmer_photooverride':list(reversed(dimmer_photooverride)), 'dimmer_status':list(reversed(dimmer_status))})     
 
       else:
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
