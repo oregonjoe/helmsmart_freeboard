@@ -1741,7 +1741,7 @@ def simplejson_query():
   log.info("simplejson_query: req:%s", req)
 
 
-    data = [
+  data = [
         {
             "target": req['targets'][0]['target'],
             "datapoints": [
@@ -1750,7 +1750,7 @@ def simplejson_query():
             ]
         }
     ]
-    return jsonify(data)
+  return jsonify(data)
   
 
 @app.route('/')
