@@ -1761,7 +1761,7 @@ def simplejson_query():
   for target in targets:
     search_key = target['target']    
 
-
+  log.info("freeboard search_key %s", search_key)
   #deviceapikey = request.args.get('apikey','')
   #serieskey = request.args.get('datakey','')
   #Interval = request.args.get('interval',"5min")
@@ -1833,7 +1833,7 @@ def simplejson_query():
   query = ('select  median({}) AS value FROM {} '
                    'where {} AND time > {}s and time < {}s '
                    'group by time({}s)') \
-              .format( measurement, serieskeys,
+              .format( search_key, measurement, serieskeys,
                       startepoch, endepoch,
                       resolution)
 
