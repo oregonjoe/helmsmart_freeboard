@@ -15,6 +15,7 @@ import fnmatch
 from operator import itemgetter
 import numpy as np
 from geopy.distance import vincenty
+from calendar import timegm
 import datetime
 import time
 from time import mktime
