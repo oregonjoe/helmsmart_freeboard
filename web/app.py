@@ -1744,7 +1744,7 @@ def simplejson_search():
   req="something"
   log.info("simplejson_search: req:%s", req)
   
-  return jsonify(['ac_status', 'dimmer_values'])
+  return jsonify(['ac_line_neutral_volts', 'ac_amps', 'ac_watts'])
 
 @app.route('/freeboad_simplejson_test/query', methods=['POST'])
 @cross_origin()
@@ -1762,7 +1762,121 @@ def simplejson_query():
     search_key = target['target']    
 
 
+  #deviceapikey = request.args.get('apikey','')
+  #serieskey = request.args.get('datakey','')
+  #Interval = request.args.get('interval',"5min")
+  #Instance = request.args.get('instance','0')
+  #resolution = request.args.get('resolution',"")
+  #actype = request.args.get('type','UTIL')
+  #mytimezone = request.args.get('timezone',"UTC")
+  #mode = request.args.get('mode',"mean")
 
+  mode = "median"
+  Interval = "5min"
+
+
+  
+  response = None
+  
+  starttime = 0
+
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  if resolution == "":
+    resolution = epochtimes[2]
+
+
+  deviceid = getedeviceid(deviceapikey)
+  
+  log.info("freeboard deviceid %s", deviceid)
+
+  if deviceid == "":
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+  host = 'hilldale-670d9ee3.influxcloud.net' 
+  port = 8086
+  username = 'helmsmart'
+  password = 'Salm0n16'
+  database = 'pushsmart-cloud'
+
+  measurement = "HelmSmart"
+  measurement = 'HS_' + str(deviceid)
+
+  volts=[]
+  amps=[]
+  power=[]
+  energy=[]
+  energy_caluculated=[]
+
+  mydatetime = datetime.datetime.now()
+  myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
+
+  serieskeys=" deviceid='"
+  serieskeys= serieskeys + deviceid + "' AND "
+  #serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='fluid_level') AND "
+  serieskeys= serieskeys +  " (sensor='ac_basic' OR sensor='ac_watthours'  ) "
+  serieskeys= serieskeys +  "  AND type = '" + actype + "' AND "
+  serieskeys= serieskeys +  " (instance='" + Instance + "') "
+  
+
+  dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+  #if mode == "median":
+    
+  query = ('select  median({}) AS value FROM {} '
+                   'where {} AND time > {}s and time < {}s '
+                   'group by time({}s)') \
+              .format( measurement, serieskeys,
+                      startepoch, endepoch,
+                      resolution)
+
+  log.info("freeboard data Query %s", query)
+
+  #try:
+  response= dbc.query(query)
+
+
+  if response is None:
+    log.info('freeboard: InfluxDB Query has no data ')
+    return jsonify({'update':'False', 'status':'no data' })
+
+  if not response:
+    log.info('freeboard: InfluxDB Query has no data ')
+    return jsonify({'update':'False', 'status':'no data' })
+
+
+  ts =startepoch*1000       
+  points = list(response.get_points())
+
+  #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+  values = []
+
+  for point in points:
+    
+    if point['time'] is not None:
+      mydatetimestr = str(point['time'])
+      mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+      mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+      mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+   
+      dtt = mydatetimetz.timetuple()
+      ts = int(mktime(dtt)*1000)
+      
+    
+    if point['value'] is not None:
+      #value1 = convertfbunits( point['volts'], 27)
+      #value1 = point['volts'], 27)
+      values.append({'value': point['value'], 'epoch':ts})
+
+
+  data = [{ "target": search_key, "datapoints": values}]
+  
+  """      
   data = [
         {
             "target": search_key,
@@ -1772,6 +1886,8 @@ def simplejson_query():
             ]
         }
     ]
+  """
+  
   return jsonify(data)
   
 
