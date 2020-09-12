@@ -1813,15 +1813,15 @@ def freeboad_simplejson_test():
     {
       "target":"upper_75", #The field being queried for
       "datapoints":[
-        [622,1450754160000],  #Metric value as a float , unixtimestamp in milliseconds
-        [365,1450754220000]
+        [622,1599938657000],  #Metric value as a float , unixtimestamp in milliseconds
+        [365,1599938658000]
       ]
     },
     {
       "target":"upper_90",
       "datapoints":[
-        [861,1450754160000],
-        [767,1450754220000]
+        [861,1599938657000],
+        [767,1599938658000]
       ]
     }
   ])
