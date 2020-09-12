@@ -1804,7 +1804,48 @@ def simplejson_tag_values():
           {'text': 'United States'}
       ])
 
+@app.route('/tag-values', methods=['POST'])
+@cross_origin()
+def simplejson_tag_values():
+  req = request.get_json()
+  if req['key'] == 'City':
+      return jsonify([
+          {'text': 'Tokyo'},
+          {'text': 'Sao Paulo'},
+          {'text': 'Jakarta'}
+      ])
+  elif req['key'] == 'Country':
+      return jsonify([
+          {'text': 'China'},
+          {'text': 'India'},
+          {'text': 'United States'}
+      ])
 
+@app.route('/freeboad_simplejson_test')
+@cross_origin()
+def freeboad_simplejson_test():
+
+  return jsonify([
+    {
+      "target":"upper_75", #The field being queried for
+      "datapoints":[
+        [622,1450754160000],  #Metric value as a float , unixtimestamp in milliseconds
+        [365,1450754220000]
+      ]
+    },
+    {
+      "target":"upper_90",
+      "datapoints":[
+        [861,1450754160000],
+        [767,1450754220000]
+      ]
+    }
+  ])
+
+
+
+
+  
 
 @app.route('/')
 @app.route('/dashboards_list')
