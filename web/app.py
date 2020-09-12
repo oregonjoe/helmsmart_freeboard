@@ -1748,8 +1748,8 @@ def simplejson_query():
         {
             "target": req['targets'][0]['target'],
             "datapoints": [
-                [861, convert_to_time_ms(req['range']['from'])],
-                [767, convert_to_time_ms(req['range']['to'])]
+                [862, convert_to_time_ms(req['range']['from'])],
+                [768, convert_to_time_ms(req['range']['to'])]
             ]
         }
     ]
@@ -1809,20 +1809,21 @@ def simplejson_tag_values():
 @cross_origin()
 def freeboad_simplejson_test():
   
-  req = request.get_json()
-  log.info("freeboad_simplejson_test: %s", req)
+  #req = request.get_json()
+  #deviceapikey = request.args.get('apikey','')
+  log.info("freeboad_simplejson_test: %s", request)
 
   
   return jsonify([
     {
-      "target":"upper_75", #The field being queried for
+      "target":"upper_76", #The field being queried for
       "datapoints":[
         [622,1599938657000],  #Metric value as a float , unixtimestamp in milliseconds
         [365,1599938658000]
       ]
     },
     {
-      "target":"upper_90",
+      "target":"upper_91",
       "datapoints":[
         [861,1599938657000],
         [767,1599938658000]
