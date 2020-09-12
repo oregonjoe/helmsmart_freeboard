@@ -1772,9 +1772,9 @@ def simplejson_query():
   #mode = request.args.get('mode',"mean")
 
   mode = "median"
-  Interval = "5min"
+  Interval = "6hour"
   Instance = "0"
-  resolution = 60
+  resolution = 600
   actype = 'GEN'
   mytimezone = "UTC"
 
