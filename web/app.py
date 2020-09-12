@@ -1720,6 +1720,39 @@ def dashboard():
 
     return render_template('dashboards_list.html', user=session['profile'], env=env) 
 
+
+def convert_to_time_ms(timestamp):
+    return 1000 * timegm(datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%fZ').timetuple())
+
+
+
+@app.route('/search', methods=['POST'])
+@cross_origin()
+def simplejson_search():
+
+  return jsonify(['ac_status', 'dimmer_values'])
+
+@app.route('/query', methods=['POST'])
+@cross_origin()
+def simplejson_query():
+
+
+  req = request.get_json()
+  log.info("simplejson_query: req:%s", req)
+
+
+    data = [
+        {
+            "target": req['targets'][0]['target'],
+            "datapoints": [
+                [861, convert_to_time_ms(req['range']['from'])],
+                [767, convert_to_time_ms(req['range']['to'])]
+            ]
+        }
+    ]
+    return jsonify(data)
+  
+
 @app.route('/')
 @app.route('/dashboards_list')
 @cross_origin()
