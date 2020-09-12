@@ -1773,6 +1773,10 @@ def simplejson_query():
 
   mode = "median"
   Interval = "5min"
+  Instance = 0
+  resolution = 60
+  actype = 'GEN'
+  mytimezone = "UTC"
 
 
   
