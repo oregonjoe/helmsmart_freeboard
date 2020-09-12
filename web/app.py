@@ -1743,7 +1743,7 @@ def simplejson_query():
 
   #req = request.get_json()
   req="something"
-  log.info("simplejson_query: req:%s", request)
+  log.info("simplejson_query: req:%s", request.get_json())
 
 
   data = [
