@@ -1794,7 +1794,7 @@ def simplejson_tag_values():
   if req['key'] == 'City':
       return jsonify([
           {'text': 'Tokyo'},
-          {'text': 'São Paulo'},
+          {'text': 'Sao Paulo'},
           {'text': 'Jakarta'}
       ])
   elif req['key'] == 'Country':
