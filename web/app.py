@@ -1730,7 +1730,8 @@ def convert_to_time_ms(timestamp):
 @cross_origin()
 def simplejson_search():
   
-  req = request.get_json()
+  #req = request.get_json()
+  req="something"
   log.info("simplejson_search: req:%s", req)
   
   return jsonify(['ac_status', 'dimmer_values'])
@@ -1740,7 +1741,8 @@ def simplejson_search():
 def simplejson_query():
 
 
-  req = request.get_json()
+  #req = request.get_json()
+  req="something"
   log.info("simplejson_query: req:%s", req)
 
 
@@ -1761,7 +1763,8 @@ def simplejson_query():
 @app.route('/annotations', methods=['POST'])
 @cross_origin()
 def simplejson_annotations():
-  req = request.get_json()
+  #req = request.get_json()
+  req="something"
   log.info("simplejson_query: req:%s", req)
     
   data = [
