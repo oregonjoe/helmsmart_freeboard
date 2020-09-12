@@ -1804,22 +1804,6 @@ def simplejson_tag_values():
           {'text': 'United States'}
       ])
 
-@app.route('/tag-values', methods=['POST'])
-@cross_origin()
-def simplejson_tag_values():
-  req = request.get_json()
-  if req['key'] == 'City':
-      return jsonify([
-          {'text': 'Tokyo'},
-          {'text': 'Sao Paulo'},
-          {'text': 'Jakarta'}
-      ])
-  elif req['key'] == 'Country':
-      return jsonify([
-          {'text': 'China'},
-          {'text': 'India'},
-          {'text': 'United States'}
-      ])
 
 @app.route('/freeboad_simplejson_test')
 @cross_origin()
