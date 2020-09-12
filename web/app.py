@@ -1745,10 +1745,17 @@ def simplejson_query():
   req="something"
   log.info("simplejson_query: req:%s", request.get_json())
 
+  req = request.get_json()
+  targets = req['targets']
+  
+  for target in targets:
+    search_key = target['target']    
+
+
 
   data = [
         {
-            "target": req['targets'][0]['target'],
+            "target": search_key,
             "datapoints": [
                 [862, convert_to_time_ms(req['range']['from'])],
                 [768, convert_to_time_ms(req['range']['to'])]
