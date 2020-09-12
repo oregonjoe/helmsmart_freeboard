@@ -1721,9 +1721,18 @@ def dashboard():
 
     return render_template('dashboards_list.html', user=session['profile'], env=env) 
 
+#mydatetimestr = str(point['time'])
+#mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
+#mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+#mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+    
+#dtt = mydatetimetz.timetuple()
+#ts = int(mktime(dtt)*1000)
+
+  
 def convert_to_time_ms(timestamp):
-    return 1000 * timegm(datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%fZ').timetuple())
+    return 1000 * timegm( datetime.datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%fZ').timetuple())
 
 
 
