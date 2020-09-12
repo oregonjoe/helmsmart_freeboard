@@ -1726,7 +1726,7 @@ def convert_to_time_ms(timestamp):
 
 
 
-@app.route('/search', methods=['POST'])
+@app.route('/freeboad_simplejson_test/search', methods=['POST'])
 @cross_origin()
 def simplejson_search():
   
@@ -1736,7 +1736,7 @@ def simplejson_search():
   
   return jsonify(['ac_status', 'dimmer_values'])
 
-@app.route('/query', methods=['POST'])
+@app.route('/freeboad_simplejson_test/query', methods=['POST'])
 @cross_origin()
 def simplejson_query():
 
@@ -1760,7 +1760,7 @@ def simplejson_query():
 
 
 
-@app.route('/annotations', methods=['POST'])
+@app.route('/freeboad_simplejson_test/annotations', methods=['POST'])
 @cross_origin()
 def simplejson_annotations():
   #req = request.get_json()
@@ -1780,7 +1780,7 @@ def simplejson_annotations():
   return jsonify(data)
 
 
-@app.route('/tag-keys', methods=['POST'])
+@app.route('/freeboad_simplejson_test/tag-keys', methods=['POST'])
 @cross_origin()
 def simplejson_tag_keys():
   data = [
@@ -1790,7 +1790,7 @@ def simplejson_tag_keys():
   return jsonify(data)
 
 
-@app.route('/tag-values', methods=['POST'])
+@app.route('/freeboad_simplejson_test/tag-values', methods=['POST'])
 @cross_origin()
 def simplejson_tag_values():
   req = request.get_json()
