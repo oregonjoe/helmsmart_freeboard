@@ -1808,7 +1808,11 @@ def simplejson_tag_values():
 @app.route('/freeboad_simplejson_test')
 @cross_origin()
 def freeboad_simplejson_test():
+  
+  req = request.get_json()
+  log.info("freeboad_simplejson_test: %s", req)
 
+  
   return jsonify([
     {
       "target":"upper_75", #The field being queried for
