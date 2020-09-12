@@ -1778,7 +1778,7 @@ def simplejson_query():
   actype = 'GEN'
   mytimezone = "UTC"
 
-
+  deviceapikey= "fa876d387ee521bd79aac4c0092cd7d0"
   
   response = None
   
