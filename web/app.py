@@ -1750,7 +1750,8 @@ def simplejson_search():
 @cross_origin()
 def simplejson_query():
 
-
+  log.info("simplejson_query.authorization: %s", request.authorization)
+  log.info("simplejson_query.authorization username: %s", request.authorization.username)
   #req = request.get_json()
   req="something"
   log.info("simplejson_query: req:%s", request.get_json())
