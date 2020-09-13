@@ -1811,7 +1811,7 @@ def simplejson_query():
       
     try:
       #actypes=targetdata["actype"]
-      for actype in  json.loads(targetdata['actype'])
+      for actype in  json.loads(targetdata['actype']):
         actypes.append(actype)
 
                
