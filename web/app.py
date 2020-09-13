@@ -1805,7 +1805,7 @@ def simplejson_query():
       #must be an list of values then ["0", "1"]
       try:
         #need to convert them into a list
-        myacphases = json.loads(targetdata['acphase'])
+        #myacphases = json.loads(targetdata['acphase'])
         
         log.info("freeboard acphase2 %s", targetdata['acphase'])
         #go through all elements even though we only need the first one
@@ -1825,18 +1825,42 @@ def simplejson_query():
 
           
 
-
-
-      
-      
+    
     try:
-      #actypes=targetdata["actype"]
-      for actype in  json.loads(targetdata['actype']):
-        actypes.append(actype)
+      #acphases=targetdata["acphase"]
+      log.info("freeboard actype1 %s", targetdata['actype'])
 
-               
+      actype=targetdata.get('actype', "0")
+      log.info("freeboard actype3 %s",acphase)
+      actypes.append(actype)
+
     except:
-      actypes.append("GEN") 
+      e = sys.exc_info()[0]
+      log.info('actype1: Error in geting key  %s:  ' % str(e))
+
+      #must be an list of values then ["0", "1"]
+      try:
+        #need to convert them into a list
+        #myacphases = json.loads(targetdata['actype'])
+        
+        log.info("freeboard actype2 %s", targetdata['actype'])
+        #go through all elements even though we only need the first one
+        for actype in json.loads(targetdata['actype']):
+          
+          log.info("freeboard actype3 %s",actype)
+          actypes.append(actype)
+
+      except:
+        e = sys.exc_info()[0]
+        log.info('actype4: Error in geting key  %s:  ' % str(e))
+        # load a default value
+        actypes.append("0")
+        pass
+      
+      log.info("freeboard actype5 %s", actypes)
+
+          
+
 
 
     log.info("freeboard acphases %s", acphases)
