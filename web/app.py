@@ -1791,12 +1791,19 @@ def simplejson_query():
     #actypes.append(targetdata.get("actype","GEN"))
     
     try:
-      acphases.append(targetdata["acphase"])
+      acphases=targetdata["acphase"]
+      for acphase in acphases:
+        acphases.append(acphase)
+        
     except:
       acphases.append("2")
       
     try:
-      actypes.append(targetdata["actype"])
+      actypes=(targetdata["actype"]
+      for actype in actypes:
+        actypes.append(actype)
+
+               
     except:
       actypes.append("UTIL") 
 
