@@ -1805,7 +1805,7 @@ def simplejson_query():
         
       log.info("freeboard acphase4 %s", acphases)
 
-        
+          
 
 
     except TypeError, e:
