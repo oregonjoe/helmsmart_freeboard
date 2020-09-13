@@ -1795,33 +1795,33 @@ def simplejson_query():
       log.info("freeboard acphase1 %s", targetdata['acphase'])
 
       acphase=targetdata.get('acphase', "0")
-      log.info("freeboard acphase3 %s",acphase)
+      log.info("freeboard acphase2 %s",acphase)
       acphases.append(acphase)
 
     except:
       e = sys.exc_info()[0]
-      log.info('acphase1: Error in geting key  %s:  ' % str(e))
+      log.info('acphase3: Error in geting key  %s:  ' % str(e))
 
       #must be an list of values then ["0", "1"]
       try:
         #need to convert them into a list
         #myacphases = json.loads(targetdata['acphase'])
         
-        log.info("freeboard acphase2 %s", targetdata['acphase'])
+        log.info("freeboard acphase4 %s", targetdata['acphase'])
         #go through all elements even though we only need the first one
         for acphase in json.loads(targetdata['acphase']):
           
-          log.info("freeboard acphase3 %s",acphase)
+          log.info("freeboard acphase5 %s",acphase)
           acphases.append(acphase)
 
       except:
         e = sys.exc_info()[0]
-        log.info('acphase4: Error in geting key  %s:  ' % str(e))
+        log.info('acphase6: Error in geting key  %s:  ' % str(e))
         # load a default value
         acphases.append("0")
         pass
       
-      log.info("freeboard acphase5 %s", acphases)
+      log.info("freeboard acphase7 %s", acphases)
 
           
 
@@ -1830,34 +1830,34 @@ def simplejson_query():
       #acphases=targetdata["acphase"]
       log.info("freeboard actype1 %s", targetdata['actype'])
 
-      actype=targetdata.get('actype', "0")
-      log.info("freeboard actype3 %s",acphase)
+      actype=targetdata.get('actype', "GEN")
+      log.info("freeboard actype2 %s",actype)
       actypes.append(actype)
 
     except:
       e = sys.exc_info()[0]
-      log.info('actype1: Error in geting key  %s:  ' % str(e))
+      log.info('actype3: Error in geting key  %s:  ' % str(e))
 
       #must be an list of values then ["0", "1"]
       try:
         #need to convert them into a list
         #myacphases = json.loads(targetdata['actype'])
         
-        log.info("freeboard actype2 %s", targetdata['actype'])
+        log.info("freeboard actype4 %s", targetdata['actype'])
         #go through all elements even though we only need the first one
         for actype in json.loads(targetdata['actype']):
           
-          log.info("freeboard actype3 %s",actype)
+          log.info("freeboard actype5 %s",actype)
           actypes.append(actype)
 
       except:
         e = sys.exc_info()[0]
-        log.info('actype4: Error in geting key  %s:  ' % str(e))
+        log.info('actype6: Error in geting lists  %s:  ' % str(e))
         # load a default value
-        actypes.append("0")
+        actypes.append("GEN")
         pass
       
-      log.info("freeboard actype5 %s", actypes)
+      log.info("freeboard actype7 %s", actypes)
 
           
 
