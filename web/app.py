@@ -1805,9 +1805,9 @@ def simplejson_query():
 
   log.info("simplejson_query: rangeFrom:%s rangeTo %s",rangeFrom,  rangeTo)
 
-  #queryInterval = req['__interval']  
+  queryInterval = req['interval']  
 
-  #Interval = queryInterval['value']
+  Interval = queryInterval['value']
 
   log.info("simplejson_query: Interval:%s  ",Interval)
 
