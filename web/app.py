@@ -1794,7 +1794,7 @@ def simplejson_query():
       #acphases=targetdata["acphase"]
       log.info("freeboard acphase1 %s", targetdata['acphase'])
 
-      acphase=targetdata.get('acphase', "0")
+      acphase=targetdata.get('acphase', "3")
       log.info("freeboard acphase2 %s",acphase)
       acphases.append(acphase)
 
@@ -1818,7 +1818,7 @@ def simplejson_query():
         e = sys.exc_info()[0]
         log.info('acphase6: Error in geting key  %s:  ' % str(e))
         # load a default value
-        acphases.append("0")
+        acphases.append("1")
         pass
       
       log.info("freeboard acphase7 %s", acphases)
@@ -1868,7 +1868,7 @@ def simplejson_query():
 
     
     actype = actypes[0]
-    Instance = acphases[0]
+    Instance = int(acphases[0]) - 1
 
   log.info("freeboard search_key %s", search_key)
 
