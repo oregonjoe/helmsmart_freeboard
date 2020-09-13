@@ -1796,7 +1796,7 @@ def simplejson_query():
       acphases=["2"]
 
     try:
-      acphases=targetdata["actype"]
+      actype=targetdata["actype"]
     except:
       actype=["UTIL"]     
 
