@@ -1788,8 +1788,8 @@ def simplejson_query():
     targetdata = target.get("data")
     #acphases.append(targetdata.get("acphase","0"))
     #actypes.append(targetdata.get("actype","GEN"))
-    acphases.get("acphase",["2"]))
-    actypes.get("actype",["UTIL"]))
+    acphases.get("acphase",["2"])
+    actypes.get("actype",["UTIL"])
 
     actype = actypes[0]
     Instance = acphases[0]
