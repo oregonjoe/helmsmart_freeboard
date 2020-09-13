@@ -1790,8 +1790,8 @@ def simplejson_query():
     if adhocFilter['key'] == 'Type':
       actype = adhocFilter['value']
 
-     elif adhocFilter['key'] == 'Phase':   
-       Instance = adhocFilter['value']
+    elif adhocFilter['key'] == 'Phase':   
+      Instance = adhocFilter['value']
 
      
   log.info("simplejson_query: actype:%s", actype)
