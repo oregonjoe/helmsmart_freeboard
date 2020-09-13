@@ -1876,7 +1876,7 @@ def simplejson_query():
       #value1 = convertfbunits( point['volts'], 27)
       #value1 = point['volts'], 27)
       value = []
-      value.append({point['value'], ts})
+      value.append([point['value'], ts])
       #values.append({'value': point['value'], 'epoch':ts})
       values.append(value)
 
