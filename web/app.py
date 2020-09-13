@@ -1793,6 +1793,7 @@ def simplejson_query():
     try:
       #acphases=targetdata["acphase"]
       for acphase in targetdata["acphase"]:
+        log.info("freeboard acphase %s", acphase)
         acphases.append(acphase)
         
     except:
