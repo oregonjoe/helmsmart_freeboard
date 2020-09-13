@@ -1795,7 +1795,8 @@ def simplejson_query():
       log.info("freeboard acphase0 %s", targetdata['acphase'])
 
       #jacphases = json.loads(targetdata['acphase'])
-      jacphases = json.loads(targetdata)
+      #jacphases = json.loads(targetdata)
+      jacphases = json.dumps(targetdata)
       log.info("freeboard acphase1 %s", jacphases)
 
       acphase=jacphases.get('acphase', "3")
