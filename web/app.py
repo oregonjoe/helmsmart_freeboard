@@ -1871,7 +1871,7 @@ def simplejson_query():
 
     
     actype = actypes[0]
-    Instance = int(acphases[0]) - 1
+    Instance = str( int(acphases[0]) - 1 )
 
   log.info("freeboard search_key %s", search_key)
 
