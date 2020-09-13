@@ -1791,7 +1791,7 @@ def simplejson_query():
       actype = adhocFilter['value']
 
     elif adhocFilter['key'] == 'Phase':   
-      Instance = str(int(adhocFilter['value'] - 1))
+      Instance = str(int(adhocFilter['value']) - 1)
 
      
   log.info("simplejson_query: actype:%s", actype)
