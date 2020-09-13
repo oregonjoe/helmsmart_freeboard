@@ -1799,7 +1799,7 @@ def simplejson_query():
       acphases.append("2")
       
     try:
-      actypes=(targetdata["actype"]
+      actypes=targetdata["actype"]
       for actype in actypes:
         actypes.append(actype)
 
