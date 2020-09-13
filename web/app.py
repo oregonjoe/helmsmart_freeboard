@@ -1792,7 +1792,7 @@ def simplejson_query():
     
     try:
       #acphases=targetdata["acphase"]
-      log.info("freeboard acphase1 %s", targetdata['acphase'])
+      log.info("freeboard acphase0 %s", targetdata['acphase'])
 
       jacphases = json.loads(targetdata['acphase'])
       log.info("freeboard acphase1 %s", jacphases)
@@ -1831,9 +1831,13 @@ def simplejson_query():
     
     try:
       #acphases=targetdata["acphase"]
-      log.info("freeboard actype1 %s", targetdata['actype'])
+      log.info("freeboard actype0 %s", targetdata['actype'])
 
-      actype=targetdata.get('actype', "GEN")
+
+      jactypes = json.loads(targetdata['actype'])
+      log.info("freeboard actype1 %s", jactypes)     
+
+      actype=jactypes.get('actype', "GEN")
       log.info("freeboard actype2 %s",actype)
       actypes.append(actype)
 
