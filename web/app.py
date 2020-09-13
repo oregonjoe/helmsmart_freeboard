@@ -1925,8 +1925,8 @@ def simplejson_annotations():
 @cross_origin()
 def simplejson_tag_keys():
   data = [
-      {"type": "string", "text": "City"},
-      {"type": "string", "text": "Country"}
+      {"type": "string", "text": "Type"},
+      {"type": "string", "text": "Phase"}
   ]
   return jsonify(data)
 
@@ -1935,17 +1935,16 @@ def simplejson_tag_keys():
 @cross_origin()
 def simplejson_tag_values():
   req = request.get_json()
-  if req['key'] == 'City':
+  if req['key'] == 'Type':
       return jsonify([
-          {'text': 'Tokyo'},
-          {'text': 'Sao Paulo'},
-          {'text': 'Jakarta'}
+          {'text': 'GEN'},
+          {'text': 'UTIL'}
       ])
-  elif req['key'] == 'Country':
+  elif req['key'] == 'Phase':
       return jsonify([
-          {'text': 'China'},
-          {'text': 'India'},
-          {'text': 'United States'}
+          {'text': '1'},
+          {'text': '2'},
+          {'text': '3'}
       ])
 
 
