@@ -1802,18 +1802,26 @@ def simplejson_query():
       e = sys.exc_info()[0]
       log.info('acphase1: Error in geting key  %s:  ' % str(e))
 
-      
-      myacphases = json.loads(targetdata['acphase'])
-      
-      log.info("freeboard acphase2 %s", targetdata['acphase'])
-      #for acphase in myacphases:
-      for acphase in json.loads(targetdata['acphase']):
+      #must be an list of values then ["0", "1"]
+      try:
+        #need to convert them into a list
+        myacphases = json.loads(targetdata['acphase'])
         
-        log.info("freeboard acphase3 %s",acphase)
-        acphases.append(acphase)
+        log.info("freeboard acphase2 %s", targetdata['acphase'])
+        #go through all elements even though we only need the first one
+        for acphase in json.loads(targetdata['acphase']):
+          
+          log.info("freeboard acphase3 %s",acphase)
+          acphases.append(acphase)
 
-        
-      log.info("freeboard acphase4 %s", acphases)
+      except:
+        e = sys.exc_info()[0]
+        log.info('acphase4: Error in geting key  %s:  ' % str(e))
+        # load a default value
+        acphases.append("0")
+        pass
+      
+      log.info("freeboard acphase5 %s", acphases)
 
           
 
