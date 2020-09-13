@@ -1792,18 +1792,18 @@ def simplejson_query():
     
     try:
       #acphases=targetdata["acphase"]
-      log.info("freeboard acphase %s", targetdata['acphase'])
+      log.info("freeboard acphase1 %s", targetdata['acphase'])
       myacphases = json.loads(targetdata['acphase'])
       
-      log.info("freeboard acphase %s", targetdata['acphase'])
+      log.info("freeboard acphase2 %s", targetdata['acphase'])
       #for acphase in myacphases:
       for acphase in json.loads(targetdata['acphase']):
         
-        log.info("freeboard acphase %s",acphase)
+        log.info("freeboard acphase3 %s",acphase)
         acphases.append(acphase)
 
         
-      log.info("freeboard acphase %s", acphases)
+      log.info("freeboard acphase4 %s", acphases)
 
         
     except:
