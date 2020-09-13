@@ -1793,8 +1793,14 @@ def simplejson_query():
     try:
       #acphases=targetdata["acphase"]
       log.info("freeboard acphase %s", targetdata['acphase'])
-   
-      acphases.append(targetdata['acphase'])
+      myacphases = json.loads(targetdata['acphase'])
+      
+      log.info("freeboard acphase %s", targetdata['acphase'])
+      for acphase in myacphases:
+        log.info("freeboard acphas %s",acphase)
+        acphases.append(acphase)
+
+        
       log.info("freeboard acphase %s", acphases)
 
         
