@@ -1802,6 +1802,20 @@ def simplejson_query():
       log.info("freeboard acphase2 %s",acphase)
       acphases.append(acphase)
 
+
+    except TypeError, e:
+      #log.info('dashboards_list: TypeError in  update pref %s:  ', userid)
+      log.info('acphase3: TypeError in   %s:  ' % str(e))
+
+    except ValueError, e:
+      #log.info('dashboards_list: ValueError in  update pref  %s:  ', userid)
+      log.info('acphase3: ValueError in   %s:  ' % str(e))
+      
+    except KeyError, e:
+      #log.info('dashboards_list: KeyError in  update pref  %s:  ', userid)
+      log.info('acphase3: KeyError in  %s:  ' % str(e))
+
+
     except:
       e = sys.exc_info()[0]
       log.info('acphase3: Error in geting key  %s:  ' % str(e))
