@@ -1812,7 +1812,7 @@ def simplejson_query():
       #log.info('dashboards_list: ValueError in  update pref  %s:  ', userid)
       log.info('acphase3: ValueError in   %s:  ' % str(e))
 
-     except AttributeError, e:
+    except AttributeError, e:
       #log.info('dashboards_list: AttributeError in  update pref  %s:  ', userid)
       log.info('acphase3: AttributeError in   %s:  ' % str(e))     
       
