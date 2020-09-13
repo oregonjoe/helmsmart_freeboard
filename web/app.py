@@ -1784,8 +1784,10 @@ def simplejson_query():
   
   for target in targets:
     search_key =  target.get("target","ac_amps")
-    acphases.append(target.get("acphase","0"))
-    actypes.append(target.get("actype","GEN"))
+    # this may not exist
+    targetdata = target.get("data")
+    acphases.append(targetdata.get("acphase","0"))
+    actypes.append(targetdata.get("actype","GEN"))
 
     actype = actypes[0]
     Instance = acphases[0]
