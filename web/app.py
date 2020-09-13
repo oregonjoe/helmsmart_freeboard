@@ -1875,7 +1875,10 @@ def simplejson_query():
     if point['value'] is not None:
       #value1 = convertfbunits( point['volts'], 27)
       #value1 = point['volts'], 27)
-      values.append({'value': point['value'], 'epoch':ts})
+      value = []
+      value.append(point['value'], ts)
+      #values.append({'value': point['value'], 'epoch':ts})
+      values.append(value)
 
 
   data = [{ "target": search_key, "datapoints": values}]
