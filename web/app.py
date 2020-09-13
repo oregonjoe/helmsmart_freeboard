@@ -1750,19 +1750,10 @@ def simplejson_search():
 @cross_origin()
 def simplejson_query():
 
-  log.info("simplejson_query.authorization: %s", request.authorization)
+  #log.info("simplejson_query.authorization: %s", request.authorization)
   log.info("simplejson_query.authorization username: %s", request.authorization.username)
-  #req = request.get_json()
-  req="something"
-  log.info("simplejson_query: req:%s", request.get_json())
 
-  req = request.get_json()
-  targets = req['targets']
-  
-  for target in targets:
-    search_key = target['target']    
 
-  log.info("freeboard search_key %s", search_key)
   #deviceapikey = request.args.get('apikey','')
   #serieskey = request.args.get('datakey','')
   #Interval = request.args.get('interval',"5min")
@@ -1779,7 +1770,52 @@ def simplejson_query():
   actype = 'GEN'
   mytimezone = "UTC"
 
-  deviceapikey= "fa876d387ee521bd79aac4c0092cd7d0"
+  
+  #req = request.get_json()
+  req="something"
+  log.info("simplejson_query: req:%s", request.get_json())
+
+  req = request.get_json()
+  targets = req['targets']
+  
+  for target in targets:
+    search_key = target['target']    
+
+  log.info("freeboard search_key %s", search_key)
+
+  adhocFilters =  req['adhocFilters']
+
+  for adhocFilter in adhocFilters:
+    
+    if adhocFilter['key'] == 'Type':
+      actype = adhocFilter['value']
+
+     elif adhocFilter['key'] == 'Phase':   
+       Instance = adhocFilter['value']
+
+     
+  log.info("simplejson_query: actype:%s", actype)
+  log.info("simplejson_query: Instance:%s",Instance)
+
+
+  rangeRaw = req['rangeRaw']
+
+  rangeFrom = rangeRaw['from']
+  rangeTo = rangeRaw['to']
+
+  log.info("simplejson_query: rangeFrom:%s rangeTo %s",rangeFrom,  rangeTo)
+
+  queryInterval = req['__interval']  
+
+  Interval = queryInterval['value']
+
+  log.info("simplejson_query: Interval:%s  ",Interval)
+
+  Interval = "6hour"
+
+  
+  #deviceapikey= "fa876d387ee521bd79aac4c0092cd7d0"
+  deviceapikey= request.authorization.username
   
   response = None
   
@@ -1955,8 +1991,8 @@ def freeboad_simplejson_test():
   
   #req = request.get_json()
   #deviceapikey = request.args.get('apikey','')
-  log.info("freeboad_simplejson_test: %s", request)
-  log.info("freeboad_simplejson_test: %s", request.headers)
+  #log.info("freeboad_simplejson_test: %s", request)
+  #log.info("freeboad_simplejson_test: %s", request.headers)
   log.info("freeboad_simplejson_testrequest.authorization: %s", request.authorization)
   
   return jsonify([
