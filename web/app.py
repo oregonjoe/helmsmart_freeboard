@@ -1806,8 +1806,38 @@ def simplejson_query():
       log.info("freeboard acphase4 %s", acphases)
 
         
+
+
+    except TypeError, e:
+      #log.info('dashboards_list: TypeError in  update pref %s:  ', userid)
+      log.info('acphase1: TypeError in  update pref  %s:  ' % str(e))
+
+    except ValueError, e:
+      #log.info('dashboards_list: ValueError in  update pref  %s:  ', userid)
+      log.info('acphase1: ValueError in  update pref %s:  ' % str(e))
+      
+    except KeyError, e:
+      #log.info('dashboards_list: KeyError in  update pref  %s:  ', userid)
+      log.info('acphase1: KeyError in  update pref  %s:  ' % str(e))
+
+    except NameError, e:
+      #log.info('dashboards_list: NameError in  update pref  %s:  ', userid)
+      log.info('acphase1: NameError in  update pref %s:  ' % str(e))
+          
+    except IndexError, e:
+      #log.info('dashboards_list: IndexError in  update pref  %s:  ', userid)
+      log.info('acphase1: IndexError in  update pref  %s:  ' % str(e))  
+
     except:
+      e = sys.exc_info()[0]
+      log.info('acphase1.html: Error in geting user  %s:  ' % str(e))
       acphases.append("2")
+      pass
+
+
+
+
+      
       
     try:
       #actypes=targetdata["actype"]
