@@ -1791,14 +1791,14 @@ def simplejson_query():
     #actypes.append(targetdata.get("actype","GEN"))
     
     try:
-      acphases=targetdata["acphase"]
+      acphases.append(targetdata["acphase"])
     except:
-      acphases=["2"]
-
+      acphases.append("2")
+      
     try:
-      actypes=targetdata["actype"]
+      actypes.append(targetdata["actype"])
     except:
-      actypes=["UTIL"]     
+      actypes.append("UTIL") 
 
 
     log.info("freeboard acphases %s", acphases)
