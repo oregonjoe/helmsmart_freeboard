@@ -1779,9 +1779,27 @@ def simplejson_query():
   targets = req['targets']
   
   for target in targets:
-    search_key = target['target']    
+    search_key =  target.get("target","ac_amps")
+    acphases = target.get("acphase","0")
+    actypes = target.get("actype","0")
+
+    actype = actypes[0]
+    Instance = acphases[0]
 
   log.info("freeboard search_key %s", search_key)
+
+
+  """
+  adhocFilters =  req['adhocFilters']
+
+  for adhocFilter in adhocFilters:
+    
+    if adhocFilter['key'] == 'Type':
+      actype = adhocFilter['value']
+
+    elif adhocFilter['key'] == 'Phase':   
+      Instance = str(int(adhocFilter['value']) - 1)
+
 
   adhocFilters =  req['adhocFilters']
 
@@ -1792,6 +1810,7 @@ def simplejson_query():
 
     elif adhocFilter['key'] == 'Phase':   
       Instance = str(int(adhocFilter['value']) - 1)
+  """
 
      
   log.info("simplejson_query: actype:%s", actype)
