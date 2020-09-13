@@ -1796,9 +1796,9 @@ def simplejson_query():
       acphases=["2"]
 
     try:
-      actype=targetdata["actype"]
+      actypes=targetdata["actype"]
     except:
-      actype=["UTIL"]     
+      actypes=["UTIL"]     
 
 
     log.info("freeboard acphases %s", acphases)
