@@ -1766,7 +1766,7 @@ def simplejson_query():
   mode = "median"
   Interval = "6hour"
   Instance = "0"
-  resolution = 600
+  resolution = 60
   actype = 'GEN'
   mytimezone = "UTC"
 
@@ -1791,7 +1791,7 @@ def simplejson_query():
       actype = adhocFilter['value']
 
     elif adhocFilter['key'] == 'Phase':   
-      Instance = adhocFilter['value']
+      Instance = str(int(adhocFilter['value'] - 1))
 
      
   log.info("simplejson_query: actype:%s", actype)
