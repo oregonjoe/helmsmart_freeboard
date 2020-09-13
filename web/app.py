@@ -1794,7 +1794,7 @@ def simplejson_query():
       #acphases=targetdata["acphase"]
       log.info("freeboard acphase1 %s", targetdata['acphase'])
 
-      acphase.get(targetdata['acphase'], "0")
+      acphase=targetdata.get('acphase', "0")
 
     except:
       e = sys.exc_info()[0]
