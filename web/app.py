@@ -1846,6 +1846,366 @@ def convert_to_time_ms(timestamp):
     return 1000 * timegm( datetime.datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%fZ').timetuple())
 
 
+@app.route('/grafana_dimmer_values/search', methods=['POST'])
+@cross_origin()
+def grafana_dimmer_values_search():
+  
+
+  log.info("grafana_dimmer_values/search:")
+  
+  return jsonify(['dimmer_value', 'ac_amps1',  'ac_amps2', 'ac_amps3', 'dimmer_status'])
+
+
+
+@app.route('/grafana_dimmer_values/query', methods=['POST'])
+@cross_origin()
+def grafana_dimmer_values_query():
+
+  #log.info("simplejson_query.authorization: %s", request.authorization)
+  log.info("grafana_dimmer_values_query.authorization username: %s", request.authorization.username)
+
+
+  #deviceapikey = request.args.get('apikey','')
+  #serieskey = request.args.get('datakey','')
+  #Interval = request.args.get('interval',"5min")
+  #Instance = request.args.get('instance','0')
+  #resolution = request.args.get('resolution',"")
+  #actype = request.args.get('type','UTIL')
+  #mytimezone = request.args.get('timezone',"UTC")
+  #mode = request.args.get('mode',"mean")
+
+  mode = "median"
+  Interval = "6hour"
+  Instance = "0"
+  resolution = 60
+  dimmertype = 'Mesh'
+  mytimezone = "UTC"
+
+  
+  #req = request.get_json()
+  req="something"
+  log.info("grafana_acstatus_query: req:%s", request.get_json())
+
+  req = request.get_json()
+  targets = req['targets']
+
+  dimmerindexs  = []
+  actypes = []
+
+  
+  for target in targets:
+    search_key =  target.get("target","dimmer_value")
+    # this may not exist
+    targetdata = target.get("data")
+    log.info("freeboard targetdata %s", targetdata)
+    #acphases.append(targetdata.get("acphase","0"))
+    #actypes.append(targetdata.get("actype","GEN"))
+    
+    try:
+      #acphases=targetdata["acphase"]
+      log.info("freeboard dimmerindex %s", targetdata['dimmerindex'])
+
+
+      jdimmerindex = json.loads(targetdata['dimmerindex'])
+      #jacphases = json.loads(targetdata)
+      #jacphases = json.dumps(targetdata)
+      log.info("freeboard jdimmerindex %s", jdimmerindex)
+
+      check_list = isinstance(jdimmerindex, list)
+      log.info("freeboard check_list %s", check_list)
+
+      #u'data': {u'acphase': u'["1"]'}, u'refId': u'A', u'type': u'timeseries'}
+      if check_list == True:
+        
+
+           
+        #go through all elements even though we only need the first one
+        for dimmerindex in json.loads(targetdata['dimmerindex']):
+          
+          log.info("freeboard dimmerindex2 is a list %s",dimmerindex)
+          dimmerindexs.append(dimmerindex)
+          
+      else: 
+
+        dimmerindex=targetdata.get('dimmerindex', "0")
+        log.info("freeboard dimmerindex2 is an object %s",dimmerindex)
+        dimmerindexs.append(dimmerindex)
+
+    except:
+      e = sys.exc_info()[0]
+      log.info('dimmerindex3: Error in geting key  %s:  ' % str(e))
+
+      #must be an list of values then ["0", "1"]
+      try:
+        #need to convert them into a list
+        #myacphases = json.loads(targetdata['acphase'])
+        
+        log.info("freeboard dimmerindex4 %s", targetdata['dimmerindex'])
+        #go through all elements even though we only need the first one
+        for dimmerindex in json.loads(targetdata['dimmerindex']):
+          
+          log.info("freeboard dimmerindex5 %s",dimmerindex)
+          dimmerindexs.append(dimmerindex)
+
+      except:
+        e = sys.exc_info()[0]
+        log.info('dimmerindex6: Error in geting key  %s:  ' % str(e))
+        # load a default value
+        dimmerindexs.append("1")
+        pass
+      
+      log.info("freeboard dimmerindex7 %s", dimmerindex)
+
+          
+
+    """    
+    try:
+      #acphases=targetdata["acphase"]
+      log.info("freeboard actype0 %s", targetdata['actype'])
+
+
+      jactypes = json.loads(targetdata['actype'])
+      log.info("freeboard actype1 %s", jactypes)     
+
+      actype=jactypes.get('actype', "GEN")
+      log.info("freeboard actype2 %s",actype)
+      actypes.append(actype)
+
+    except:
+      e = sys.exc_info()[0]
+      log.info('actype3: Error in geting key  %s:  ' % str(e))
+
+      #must be an list of values then ["0", "1"]
+      try:
+        #need to convert them into a list
+        #myacphases = json.loads(targetdata['actype'])
+        
+        log.info("freeboard actype4 %s", targetdata['actype'])
+        #go through all elements even though we only need the first one
+        for actype in json.loads(targetdata['actype']):
+          
+          log.info("freeboard actype5 %s",actype)
+          actypes.append(actype)
+
+      except:
+        e = sys.exc_info()[0]
+        log.info('actype6: Error in geting lists  %s:  ' % str(e))
+        # load a default value
+        actypes.append("GEN")
+        pass
+      
+      log.info("freeboard actype7 %s", actypes)
+
+          
+    """    
+
+
+    log.info("freeboard acphases %s", acphases)
+    log.info("freeboard actypes %s", actypes)
+
+    
+
+    if len(actypes) == 0:
+      actype = "GEN"
+    else:
+      actype = actypes[0]
+    
+
+    if len(dimmerindexs) == 0:
+      Instance = "0"
+    else:
+      Instance = str( int(dimmerindexs[0]) - 1 )
+
+  log.info("freeboard search_key %s", search_key)
+
+
+
+     
+  log.info("simplejson_query: actype:%s", actype)
+  log.info("simplejson_query: Instance:%s",Instance)
+
+
+  rangeRaw = req['rangeRaw']
+
+  rangeFrom = rangeRaw['from']
+  rangeTo = rangeRaw['to']
+
+  log.info("simplejson_query: rangeFrom:%s rangeTo %s",rangeFrom,  rangeTo)
+
+  Interval = req['interval']  
+
+
+  log.info("simplejson_query: Interval:%s  ",Interval)
+
+  IntervalMs = req['intervalMs']  
+
+
+  log.info("simplejson_query: IntervalMs:%s  ",IntervalMs)  
+
+  queryRange = req['range']
+  queryFrom = queryRange['from']  
+  queryTo = queryRange['to']
+
+  log.info("simplejson_query: queryFrom:%s queryTo %s",queryFrom,  queryTo)
+
+  log.info("simplejson_query: queryFrom:%s queryTo %s", convert_to_time_ms(queryFrom),  convert_to_time_ms(queryTo))
+
+
+  
+  Interval = "6hour"
+
+  
+  #deviceapikey= "fa876d387ee521bd79aac4c0092cd7d0"
+  deviceapikey= request.authorization.username
+  
+  response = None
+  
+  starttime = 0
+
+  """
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  if resolution == "":
+    resolution = epochtimes[2]
+
+  """
+
+  resolution = int(IntervalMs) / 1000
+
+  
+  # epochtimes = getgrfanatimes(rangeFrom)
+  #startepoch = epochtimes[0]
+  #endepoch = epochtimes[1]
+  #if resolution == "":
+  #  resolution = epochtimes[2]
+
+  startepoch =  convert_to_time_ms(queryFrom) / 1000
+  endepoch = convert_to_time_ms(queryTo) / 1000
+
+  log.info("simplejson_query: startepoch:%s endepoch %s",startepoch,  endepoch)
+
+  deviceid = getedeviceid(deviceapikey)
+  
+  log.info("freeboard deviceid %s", deviceid)
+
+  if deviceid == "":
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+  host = 'hilldale-670d9ee3.influxcloud.net' 
+  port = 8086
+  username = 'helmsmart'
+  password = 'Salm0n16'
+  database = 'pushsmart-cloud'
+
+  measurement = "HelmSmart"
+  measurement = 'HS_' + str(deviceid)
+
+
+  mydatetime = datetime.datetime.now()
+  myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+
+  if search_key == "dimmer_value":
+    search_value = "value0"
+    
+  elif search_key == "ac_amps1":
+    search_value = "value1"
+
+  elif search_key == "ac_amps2":
+    search_value = "value2"
+    
+  elif search_key == "ac_amps3":
+    search_value = "value3"
+
+  elif search_key == "dimmer_status":
+    search_value = "value4"
+
+  else: 
+    search_value = "value0"
+
+
+  serieskeys=" deviceid='"
+  serieskeys= serieskeys + deviceid + "' AND "
+  serieskeys= serieskeys +  " sensor='seasmartdimmer'  AND "
+  serieskeys= serieskeys +  " (instance='" + Instance + "') "
+  
+
+  dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+  #if mode == "median":
+    
+  query = ('select  median({}) AS value FROM {} '
+                   'where {} AND time > {}s and time < {}s '
+                   'group by time({}s)') \
+              .format( search_value, measurement, serieskeys,
+                      startepoch, endepoch,
+                      resolution)
+
+  log.info("freeboard data Query %s", query)
+
+  #try:
+  response= dbc.query(query)
+
+
+  if response is None:
+    log.info('freeboard: InfluxDB Query has no data ')
+    return jsonify({'update':'False', 'status':'no data' })
+
+  if not response:
+    log.info('freeboard: InfluxDB Query has no data ')
+    return jsonify({'update':'False', 'status':'no data' })
+
+
+  ts =startepoch*1000       
+  points = list(response.get_points())
+
+  #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+
+  values = []
+
+  for point in points:
+    
+    if point['time'] is not None:
+      mydatetimestr = str(point['time'])
+      mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+      mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+      mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+   
+      dtt = mydatetimetz.timetuple()
+      ts = int(mktime(dtt)*1000)
+      
+    
+    if point['value'] is not None:
+      #value1 = convertfbunits( point['volts'], 27)
+      #value1 = point['volts'], 27)
+      #value = []
+      #value.append([point['value'], ts])
+      value=[point['value'], ts]
+      #values.append({'value': point['value'], 'epoch':ts})
+      values.append(value)
+
+
+  data = [{ "target": search_key, "datapoints": values}]
+  
+  """      
+  data = [
+        {
+            "target": search_key,
+            "datapoints": [
+                [862, convert_to_time_ms(req['range']['from'])],
+                [768, convert_to_time_ms(req['range']['to'])]
+            ]
+        }
+    ]
+  """
+  
+  return jsonify(data)
+  
+
 
 @app.route('/grafana_acstatus/search', methods=['POST'])
 @cross_origin()
@@ -2291,7 +2651,7 @@ def grafana_dimmer_values():
   #deviceapikey = request.args.get('apikey','')
   #log.info("freeboad_simplejson_test: %s", request)
   #log.info("freeboad_simplejson_test: %s", request.headers)
-  log.info("freeboad_simplejson_testrequest.authorization: %s", request.authorization)
+  log.info("grafana_dimmer_values.authorization: %s", request.authorization)
   
   return jsonify({"status":"success"})
    
