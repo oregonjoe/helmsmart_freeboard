@@ -1880,11 +1880,11 @@ def grafana_dimmer_values_query():
   resolution = 60
   dimmertype = 'Mesh'
   mytimezone = "UTC"
-
+  dimmerindex = "0"
   
   #req = request.get_json()
   req="something"
-  log.info("grafana_acstatus_query: req:%s", request.get_json())
+  log.info("grafana_dimmer_values_query: req:%s", request.get_json())
 
   req = request.get_json()
   targets = req['targets']
@@ -1897,7 +1897,7 @@ def grafana_dimmer_values_query():
     search_key =  target.get("target","dimmer_value")
     # this may not exist
     targetdata = target.get("data")
-    log.info("freeboard targetdata %s", targetdata)
+    log.info("dimmer_values targetdata %s", targetdata)
     #acphases.append(targetdata.get("acphase","0"))
     #actypes.append(targetdata.get("actype","GEN"))
     
