@@ -2014,7 +2014,7 @@ def grafana_dimmer_values_query():
     if len(dimmerindexs) == 0:
       Instance = "0"
     else:
-      Instance = str( int(dimmerindexs[0]) - 1 )
+      Instance = str( int(dimmerindexs[0])  )
 
   log.info("freeboard search_key %s", search_key)
 
