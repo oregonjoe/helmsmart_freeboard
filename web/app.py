@@ -2283,7 +2283,7 @@ def grafana_acstatus():
 
 
 
-@app.route('/grafana_dimmer_values)
+@app.route('/grafana_dimmer_values')
 @cross_origin()
 def grafana_acstatus():
   
