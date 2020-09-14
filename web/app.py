@@ -781,6 +781,117 @@ def getepochtimes(Interval):
 
     return(epochtimes)
 
+
+
+def getgrfanatimes(Interval):
+
+    epochtimes=[]
+    starttime = 0
+
+    
+    try:
+        # if 0 then use current time 
+        if starttime == 0:
+            nowtime = datetime.datetime.now()
+            endepoch =  int(time.time())
+
+            if Interval== "now-1m":
+                resolution = 60
+                startepoch = endepoch - (resolution * 2)
+                oldtime = datetime.datetime.now() - datetime.timedelta(minutes=2)
+            elif Interval == "now-2m":
+                resolution = 60*2
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(minutes=3)                
+            elif Interval == "now-5m":
+                resolution = 60*5
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(minutes=5)
+            elif Interval== "now-10m":
+                resolution = 60*10
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(minutes=10)
+            elif Interval == "now-15m":
+                resolution = 60*15
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(minutes=15)
+            elif Interval== "now-30m":
+                resolution = 60*30
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(minutes=30)
+            elif Interval== "now-1h":
+                resolution = 60*60
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=1)
+             elif Interval == "now-3h":
+                resolution = 60*60*3
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=3)               
+            elif Interval == "now-4h":
+                resolution = 60*60*4
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=4)
+            elif Interval == "now-6h":
+                resolution = 60*60*6
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=6)
+            elif Interval == "now-8h":
+                resolution = 60*60*8
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=8)
+            elif Interval == "now-12h":
+                resolution = 60*60*12
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=12)
+            elif Interval == "now-1d":
+                resolution = 60*60*24
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(days=1)
+            elif Interval == "now-2d":
+                resolution = 60*60*24*2
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(days=2)                
+            elif Interval== "now-7d":
+                resolution = 60*60*24*7
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(days=7)
+          
+            else:
+                resolution = 60*60
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=1)
+
+                
+        epochtimes.append(startepoch)
+        epochtimes.append(endepoch)
+        epochtimes.append(resolution)
+
+    except TypeError, e:
+        log.info('freeboard: TypeError in geting Interval parameters %s:  ', Interval)
+        log.info('freeboard: TypeError in geting Interval parameters %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: KeyError in geting Interval parameters %s:  ', Interval)
+        log.info('freeboard: KeyError in geting Interval parameters %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: NameError in geting Interval parameters %s:  ', Interval)
+        log.info('freeboard: NameError in geting Interval parameters %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: IndexError in geting Interval parameters %s:  ', Interval)
+        log.info('freeboard: IndexError in geting Interval parameters %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: Error in geting  Intervalparameters %s:  ', Interval)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting Interval parameters %s:  ' % str(e))
+
+    return(epochtimes)
+
+
+
 def convert_influxdbcloud_json(key, mytime, value):
 
   try:
@@ -1948,6 +2059,11 @@ def simplejson_query():
 
   log.info("simplejson_query: Interval:%s  ",Interval)
 
+  IntervalMs = req['intervalMs']  
+
+
+  log.info("simplejson_query: IntervalMs:%s  ",IntervalMs)  
+
   queryRange = req['range']
   queryFrom = queryRange['from']  
   queryTo = queryRange['to']
@@ -1964,12 +2080,25 @@ def simplejson_query():
   
   starttime = 0
 
+  """
   epochtimes = getepochtimes(Interval)
   startepoch = epochtimes[0]
   endepoch = epochtimes[1]
   if resolution == "":
     resolution = epochtimes[2]
 
+  """
+
+  resolution = int(IntervalMs) / 1000
+
+  
+  epochtimes = getgrfanatimes(rangeFrom)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  #if resolution == "":
+  #  resolution = epochtimes[2]
+
+  log.info("simplejson_query: startepoch:%s endepoch %s",startepoch,  endepoch)
 
   deviceid = getedeviceid(deviceapikey)
   
