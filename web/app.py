@@ -1803,7 +1803,11 @@ def simplejson_query():
       check_list = isinstance(jacphases, list)
       log.info("freeboard check_list %s", check_list)
 
+      #u'data': {u'acphase': u'["1"]'}, u'refId': u'A', u'type': u'timeseries'}
       if check_list == True:
+        
+
+           
         #go through all elements even though we only need the first one
         for acphase in json.loads(targetdata['acphase']):
           
@@ -1889,8 +1893,17 @@ def simplejson_query():
     log.info("freeboard actypes %s", actypes)
 
     
-    actype = actypes[0]
-    Instance = str( int(acphases[0]) - 1 )
+
+    if len(actypes) == 0:
+      actype = "GEN"
+    else:
+      actype = actypes[0]
+    
+
+    if len(acphases) == 0:
+      Instance = "0"
+    else:
+      Instance = str( int(acphases[0]) - 1 )
 
   log.info("freeboard search_key %s", search_key)
 
