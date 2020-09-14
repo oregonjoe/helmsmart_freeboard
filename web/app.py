@@ -2069,6 +2069,10 @@ def simplejson_query():
   queryTo = queryRange['to']
 
   log.info("simplejson_query: queryFrom:%s queryTo %s",queryFrom,  queryTo)
+
+  log.info("simplejson_query: queryFrom:%s queryTo %s", convert_to_time_ms(queryFrom),  convert_to_time_ms(queryTo))
+
+
   
   Interval = "6hour"
 
