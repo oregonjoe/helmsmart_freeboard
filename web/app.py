@@ -2276,7 +2276,7 @@ def qrafana_acstatus():
   #log.info("freeboad_simplejson_test: %s", request.headers)
   log.info("freeboad_simplejson_testrequest.authorization: %s", request.authorization)
   
-  return jsonify("status":"success")
+  return jsonify({"status":"success"})
    
 
 
