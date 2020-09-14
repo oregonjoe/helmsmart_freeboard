@@ -2000,7 +2000,7 @@ def grafana_dimmer_values_query():
     """    
 
 
-    log.info("freeboard acphases %s", acphases)
+    log.info("freeboard dimmerindexs %s", dimmerindexs)
     log.info("freeboard actypes %s", actypes)
 
     
