@@ -1847,9 +1847,9 @@ def convert_to_time_ms(timestamp):
 
 
 
-@app.route('/freeboad_simplejson_test/search', methods=['POST'])
+@app.route('/grafana_acstatus/search', methods=['POST'])
 @cross_origin()
-def qrafana_acstatus_search():
+def grafana_acstatus_search():
   
   #req = request.get_json()
   req="something"
@@ -1857,12 +1857,14 @@ def qrafana_acstatus_search():
   
   return jsonify(['ac_line_neutral_volts', 'ac_amps', 'ac_watts'])
 
-@app.route('/freeboad_simplejson_test/query', methods=['POST'])
+
+
+@app.route('/grafana_acstatus/query', methods=['POST'])
 @cross_origin()
-def qrafana_acstatus_query():
+def grafana_acstatus_query():
 
   #log.info("simplejson_query.authorization: %s", request.authorization)
-  log.info("simplejson_query.authorization username: %s", request.authorization.username)
+  log.info("grafana_acstatus_query.authorization username: %s", request.authorization.username)
 
 
   #deviceapikey = request.args.get('apikey','')
@@ -1884,7 +1886,7 @@ def qrafana_acstatus_query():
   
   #req = request.get_json()
   req="something"
-  log.info("simplejson_query: req:%s", request.get_json())
+  log.info("grafana_acstatus_query: req:%s", request.get_json())
 
   req = request.get_json()
   targets = req['targets']
@@ -2266,9 +2268,24 @@ def simplejson_tag_values():
 """
 
 
-@app.route('/freeboad_simplejson_test')
+@app.route('/grafana_acstatus')
 @cross_origin()
-def qrafana_acstatus():
+def grafana_acstatus():
+  
+  #req = request.get_json()
+  #deviceapikey = request.args.get('apikey','')
+  #log.info("freeboad_simplejson_test: %s", request)
+  #log.info("freeboad_simplejson_test: %s", request.headers)
+  log.info("grafana_acstatus.authorization: %s", request.authorization)
+  
+  return jsonify({"status":"success"})
+   
+
+
+
+@app.route('/grafana_dimmer_values)
+@cross_origin()
+def grafana_acstatus():
   
   #req = request.get_json()
   #deviceapikey = request.args.get('apikey','')
@@ -2278,8 +2295,6 @@ def qrafana_acstatus():
   
   return jsonify({"status":"success"})
    
-
-
 
   
 
