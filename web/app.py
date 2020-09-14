@@ -1803,9 +1803,18 @@ def simplejson_query():
       check_list = isinstance(jacphases, list)
       log.info("freeboard check_list %s", check_list)
 
-      acphase=targetdata.get('acphase', "3")
-      log.info("freeboard acphase2 %s",acphase)
-      acphases.append(acphase)
+      if check_list == True:
+        #go through all elements even though we only need the first one
+        for acphase in json.loads(targetdata['acphase']):
+          
+          log.info("freeboard acphase2 is a list %s",acphase)
+          acphases.append(acphase)
+          
+      else: 
+
+        acphase=targetdata.get('acphase', "3")
+        log.info("freeboard acphase2 is an object %s",acphase)
+        acphases.append(acphase)
 
     except:
       e = sys.exc_info()[0]
