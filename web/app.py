@@ -843,7 +843,7 @@ def getgrfanatimes(Interval):
                 resolution = 60*60*12
                 startepoch = endepoch - (resolution * 1)
                 oldtime = datetime.datetime.now() - datetime.timedelta(hours=12)
-            elif Interval == "now-1d":
+            elif Interval == "now-24h":
                 resolution = 60*60*24
                 startepoch = endepoch - (resolution * 1)
                 oldtime = datetime.datetime.now() - datetime.timedelta(days=1)
