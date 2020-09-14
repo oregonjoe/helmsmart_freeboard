@@ -1794,12 +1794,16 @@ def simplejson_query():
       #acphases=targetdata["acphase"]
       log.info("freeboard acphase0 %s", targetdata['acphase'])
 
-      #jacphases = json.loads(targetdata['acphase'])
+
+      jacphases = json.loads(targetdata['acphase'])
       #jacphases = json.loads(targetdata)
-      jacphases = json.dumps(targetdata)
+      #jacphases = json.dumps(targetdata)
       log.info("freeboard acphase1 %s", jacphases)
 
-      acphase=jacphases.get('acphase', "3")
+      check_list = isinstance(jacphases, list)
+      log.info("freeboard check_list %s", check_list)
+
+      acphase=targetdata.get('acphase', "3")
       log.info("freeboard acphase2 %s",acphase)
       acphases.append(acphase)
 
