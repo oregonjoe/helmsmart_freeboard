@@ -1849,7 +1849,7 @@ def convert_to_time_ms(timestamp):
 
 @app.route('/freeboad_simplejson_test/search', methods=['POST'])
 @cross_origin()
-def simplejson_search():
+def qrafana_acstatus_search():
   
   #req = request.get_json()
   req="something"
@@ -1859,7 +1859,7 @@ def simplejson_search():
 
 @app.route('/freeboad_simplejson_test/query', methods=['POST'])
 @cross_origin()
-def simplejson_query():
+def qrafana_acstatus_query():
 
   #log.info("simplejson_query.authorization: %s", request.authorization)
   log.info("simplejson_query.authorization username: %s", request.authorization.username)
@@ -2216,7 +2216,7 @@ def simplejson_query():
   
 
 
-
+"""
 @app.route('/freeboad_simplejson_test/annotations', methods=['POST'])
 @cross_origin()
 def simplejson_annotations():
@@ -2263,10 +2263,12 @@ def simplejson_tag_values():
           {'text': '3'}
       ])
 
+"""
+
 
 @app.route('/freeboad_simplejson_test')
 @cross_origin()
-def freeboad_simplejson_test():
+def qrafana_acstatus():
   
   #req = request.get_json()
   #deviceapikey = request.args.get('apikey','')
@@ -2274,23 +2276,8 @@ def freeboad_simplejson_test():
   #log.info("freeboad_simplejson_test: %s", request.headers)
   log.info("freeboad_simplejson_testrequest.authorization: %s", request.authorization)
   
-  return jsonify([
-    {
-      "target":"upper_76", #The field being queried for
-      "datapoints":[
-        [622,1599938657000],  #Metric value as a float , unixtimestamp in milliseconds
-        [365,1599938658000]
-      ]
-    },
-    {
-      "target":"upper_91",
-      "datapoints":[
-        [861,1599938657000],
-        [767,1599938658000]
-      ]
-    }
-  ])
-
+  return jsonify("status":"success")
+   
 
 
 
