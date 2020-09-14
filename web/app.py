@@ -2096,11 +2096,14 @@ def simplejson_query():
   resolution = int(IntervalMs) / 1000
 
   
-  epochtimes = getgrfanatimes(rangeFrom)
-  startepoch = epochtimes[0]
-  endepoch = epochtimes[1]
+  # epochtimes = getgrfanatimes(rangeFrom)
+  #startepoch = epochtimes[0]
+  #endepoch = epochtimes[1]
   #if resolution == "":
   #  resolution = epochtimes[2]
+
+  startepoch =  convert_to_time_ms(queryFrom) / 1000,
+  endepoch = convert_to_time_ms(queryTo) / 1000
 
   log.info("simplejson_query: startepoch:%s endepoch %s",startepoch,  endepoch)
 
