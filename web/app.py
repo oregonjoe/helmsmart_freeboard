@@ -2285,7 +2285,7 @@ def grafana_acstatus():
 
 @app.route('/grafana_dimmer_values')
 @cross_origin()
-def grafana_acstatus():
+def grafana_dimmer_values():
   
   #req = request.get_json()
   #deviceapikey = request.args.get('apikey','')
