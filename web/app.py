@@ -15660,6 +15660,7 @@ def freeboard_dimmer_values():
       dimmer2=[]
       dimmer3=[]
       dimmer4=[]
+      dimmer_adc3=[]
       dimmer_override=[]
       dimmer_switchoverride=[]
       dimmer_photooverride=[]
@@ -15693,14 +15694,23 @@ def freeboard_dimmer_values():
 
         
         if point['dv1'] is not None:
-          dimmer1.append({'epoch':ts, 'value':int(point['dv1'])})
+          if gwtype == "mesh":
+            dimmer1.append({'epoch':ts, 'value':float("{0:.2f}".format(point['dv1'] * 0.1 ) )})
+
+          else:
+            dimmer1.append({'epoch':ts, 'value':int(point['dv1'])})
+            
         else:
           dimmer1.append({'epoch':ts, 'value':'---'})
 
         
         if point['dv2'] is not None:
-          dimmer2.append({'epoch':ts, 'value':int(point['dv2'])})
-          #dimmer_motion.append({'epoch':ts, 'value':((int(point['dv2']) & 0x10) * 6.25)})
+
+          if gwtype == "mesh":
+            dimmer2.append({'epoch':ts, 'value':int(point['dv2'])})
+            dimmer_adc3.append({'epoch':ts, 'value':float("{0:.2f}".format(point['dv2'] * 0.1 ) )})
+          else:
+            dimmer2.append({'epoch':ts, 'value':int(point['dv2'])})
           
         else:
           dimmer2.append({'epoch':ts, 'value':'---'})
@@ -15708,7 +15718,13 @@ def freeboard_dimmer_values():
 
         
         if point['dv3'] is not None:
-          dimmer3.append({'epoch':ts, 'value':int(point['dv3'])})
+          
+          if gwtype == "mesh":
+            dimmer3.append({'epoch':ts, 'value':float("{0:.2f}".format(point['dv3'] * 1.0 ) )})
+
+          else:
+            dimmer3.append({'epoch':ts, 'value':int(point['dv3'])})
+            
         else:
           dimmer3.append({'epoch':ts, 'value':'---'})
 
@@ -15743,7 +15759,7 @@ def freeboard_dimmer_values():
 
       if gwtype == "mesh":
 
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_value':list(reversed(dimmer0)),'dimmer_dio_adc3':list(reversed(dimmer2)),'dimmer_adc':list(reversed(dimmer3)),'dimmer_adc2':list(reversed(dimmer1)),'dimmer_motion':list(reversed(dimmer_motion)),'dimmer_override':list(reversed(dimmer_override)), 'dimmer_switchoverride':list(reversed(dimmer_switchoverride)), 'dimmer_photooverride':list(reversed(dimmer_photooverride)), 'dimmer_status':list(reversed(dimmer_status))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_value':list(reversed(dimmer0)),'dimmer_dio':list(reversed(dimmer2)),'dimmer_adc3':list(reversed(dimmer_adc3)),'dimmer_adc':list(reversed(dimmer3)),'dimmer_adc2':list(reversed(dimmer1)),'dimmer_motion':list(reversed(dimmer_motion)),'dimmer_override':list(reversed(dimmer_override)), 'dimmer_switchoverride':list(reversed(dimmer_switchoverride)), 'dimmer_photooverride':list(reversed(dimmer_photooverride)), 'dimmer_status':list(reversed(dimmer_status))})     
 
       else:
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer0_value':list(reversed(dimmer0)),'dimmer1_value':list(reversed(dimmer1)),'dimmer2_value':list(reversed(dimmer2)),'dimmer3_value':list(reversed(dimmer3)),'dimmer4_value':list(reversed(dimmer4))})     
