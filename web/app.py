@@ -1525,22 +1525,26 @@ def freeboard_editdashboard():
 @app.route('/freeboard_addnewdashboard')
 @cross_origin()
 def freeboard_addnewdashboard():
-  conn = db_pool.getconn()
   
-  userid = request.args.get('userid',1)
-  useremail = request.args.get('useremail',1)
-  prefname = request.args.get('prefname',1)
+  log.info('freeboard_addnewdashboard start:  ')
 
-  defaultjson = '{"version": 1,"allow_edit": true}'
-  
-  log.info('freeboard_addnewdashboard: userid  %s:  ', userid)
-  log.info('freeboard_addnewdashboard: useremail  %s:  ', useremail)
-  log.info('freeboard_addnewdashboard: prefname  %s:  ', prefname)
-  
-  prefuid=hash_string(useremail+prefname)
-  log.info('freeboard_addnewdashboard: prefuid  %s:  ', prefuid)
+  try:  
+    conn = db_pool.getconn()
+    
+    userid = request.args.get('userid',1)
+    useremail = request.args.get('useremail',1)
+    prefname = request.args.get('prefname',1)
 
-  try:
+    defaultjson = '{"version": 1,"allow_edit": true}'
+    
+    log.info('freeboard_addnewdashboard: userid  %s:  ', userid)
+    log.info('freeboard_addnewdashboard: useremail  %s:  ', useremail)
+    log.info('freeboard_addnewdashboard: prefname  %s:  ', prefname)
+    
+    prefuid=hash_string(useremail+prefname)
+    log.info('freeboard_addnewdashboard: prefuid  %s:  ', prefuid)
+
+
     cursor = conn.cursor()
     
     sqlstr = " insert into dashboard_prefs (prefuid, userid, useremail, prefname, jsondata ) Values (%s,%s,%s,%s,%s);"
