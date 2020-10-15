@@ -11772,7 +11772,7 @@ def freeboard_engine_aux():
     
 
     if int(starttime) != 0:
-      epochtimes = getendepochtimes(int(starttime), Interval)
+      epochtimes = getendepochtimes(int(starttime)/1000, Interval)
       
     else:
       epochtimes = getepochtimes(Interval)
