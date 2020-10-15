@@ -806,8 +806,8 @@ def getendepochtimes(starttime, Interval):
         # needs to be greater then 1/1/2010
         if starttime > 1262264399:
             #nowtime = datetime.datetime.now()
-            nowtime = datetime.datetime.utcfromtimestamp(starttime)
-            endepoch =  int(time.time())
+            #nowtime = datetime.datetime.utcfromtimestamp(starttime)
+            #endepoch =  int(time.time())
 
             if Interval== "1min":
                 resolution = 60
