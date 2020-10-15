@@ -811,11 +811,11 @@ def getendepochtimes(starttime, Interval):
                          
             elif Interval == "5min":
                 resolution = 60*5
-                 endepoch = startepoch - (resolution * 1)
+                endepoch = startepoch - (resolution * 1)
                          
             elif Interval== "10min":
                 resolution = 60*10
-                 endepoch = startepoch - (resolution * 1)
+                endepoch = startepoch - (resolution * 1)
                          
             elif Interval == "15min":
                 resolution = 60*15
