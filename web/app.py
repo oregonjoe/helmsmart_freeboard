@@ -675,6 +675,7 @@ def convertunits(value, units):
   else:
       return float("{0:.2f}".format(value * 1.0))
 
+
 def getepochtimes(Interval):
 
     epochtimes=[]
@@ -751,6 +752,119 @@ def getepochtimes(Interval):
                 resolution = 60
                 startepoch = endepoch - (resolution * 1)
                 oldtime = datetime.datetime.now() - datetime.timedelta(minutes=2)
+
+                
+        epochtimes.append(startepoch)
+        epochtimes.append(endepoch)
+        epochtimes.append(resolution)
+
+    except TypeError, e:
+        log.info('freeboard: TypeError in geting Interval parameters %s:  ', Interval)
+        log.info('freeboard: TypeError in geting Interval parameters %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: KeyError in geting Interval parameters %s:  ', Interval)
+        log.info('freeboard: KeyError in geting Interval parameters %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: NameError in geting Interval parameters %s:  ', Interval)
+        log.info('freeboard: NameError in geting Interval parameters %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: IndexError in geting Interval parameters %s:  ', Interval)
+        log.info('freeboard: IndexError in geting Interval parameters %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: Error in geting  Intervalparameters %s:  ', Interval)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting Interval parameters %s:  ' % str(e))
+
+    return(epochtimes)
+
+
+
+
+def getendepochtimes(starttime, Interval):
+
+    epochtimes=[]
+    #starttime = 0
+    endepoch =  int(time.time())
+    startepoch = endepoch - 60
+    resolution = 60
+    
+    try:
+        # if 0 then use current time
+        # needs to be greater then 1/1/2010
+        if starttime > 1262264399:
+            #nowtime = datetime.datetime.now()
+            nowtime = datetime.datetime.utcfromtimestamp(starttime)
+            endepoch =  int(time.time())
+
+            if Interval== "1min":
+                resolution = 60
+                endepoch = startepoch - (resolution * 2)
+                         
+            elif Interval == "2min":
+                resolution = 60*2
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "5min":
+                resolution = 60*5
+                 endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval== "10min":
+                resolution = 60*10
+                 endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "15min":
+                resolution = 60*15
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval== "30min":
+                resolution = 60*30
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval== "1hour":
+                resolution = 60*60
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "4hour":
+                resolution = 60*60*4
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "6hour":
+                resolution = 60*60*6
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "8hour":
+                resolution = 60*60*8
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "12hour":
+                resolution = 60*60*12
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "1day":
+                resolution = 60*60*24
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "2day":
+                resolution = 60*60*24*2
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval== "7day":
+                resolution = 60*60*24*7
+                endepoch = startepoch - (resolution * 1)
+                         
+            elif Interval == "1month":
+                resolution = 60*60*24*30
+                endepoch = startepoch - (resolution * 1)
+                         
+            else:
+                resolution = 60
+                endepoch = startepoch - (resolution * 1)
+                         
 
                 
         epochtimes.append(startepoch)
@@ -1527,6 +1641,8 @@ def freeboard_editdashboard():
 def freeboard_addnewdashboard():
   
   log.info('freeboard_addnewdashboard start:  ')
+  #return jsonify(result="error")
+
 
   try:  
     conn = db_pool.getconn()
@@ -11636,18 +11752,24 @@ def freeboard_engine_aux():
     deviceapikey = request.args.get('apikey','')
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('interval',"5min")
+
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
     units= request.args.get('units',"US")
     mytimezone = request.args.get('timezone',"UTC")
     mode =  request.args.get('mode',"mean")
-
+    starttime = request.args.get('starttime','0')
     
     response = None
     
-    starttime = 0
 
-    epochtimes = getepochtimes(Interval)
+    if starttime != 0:
+      epochtimes = getendepochtimes(starttime, Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
