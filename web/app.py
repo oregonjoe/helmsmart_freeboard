@@ -3744,7 +3744,7 @@ def freeboard_createInfluxDB():
  
     #keys = result.raw.get('series',[])
     keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
     jsondata=[]
     for series in keys:
@@ -11398,7 +11398,7 @@ def freeboard_attitude():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -11952,7 +11952,7 @@ def freeboard_engine_aux():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -14463,7 +14463,7 @@ def freeboard_get_engine_values():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -14722,7 +14722,7 @@ def freeboard_get_rain_gauge():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -14986,7 +14986,7 @@ def freeboard_get_weather_values():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -15259,7 +15259,7 @@ def freeboard_get_weather_minmax_value():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -15526,7 +15526,7 @@ def freeboard_get_dimmer_values():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
@@ -18797,7 +18797,7 @@ def freeboard_ac_status_array():
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
-    log.info("freeboard Get InfluxDB series keys %s", keys)
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
 
 
     #callback = request.args.get('callback')
