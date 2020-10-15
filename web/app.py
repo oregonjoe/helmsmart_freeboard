@@ -680,7 +680,7 @@ def getepochtimes(Interval):
 
 
 
-    log.info('freeboard: NameError in geting getepochtimes Interval %s:  ', Interval)
+    log.info('freeboard:  getepochtimes Interval %s:  ', Interval)
 
     epochtimes=[]
     starttime = 0
@@ -792,8 +792,8 @@ def getepochtimes(Interval):
 def getendepochtimes(starttime, Interval):
 
 
-    log.info('freeboard: NameError in geting getendepochtimes starttime %s:  ', starttime)
-    log.info('freeboard: NameError in geting getendepochtimes Interval %s:  ', Interval)
+    log.info('freeboard:  getendepochtimes starttime %s:  ', starttime)
+    log.info('freeboard:  getendepochtimes Interval %s:  ', Interval)
 
     epochtimes=[]
     #starttime = 0
