@@ -796,10 +796,7 @@ def getendepochtimes(starttime, Interval):
     log.info('freeboard:  getendepochtimes Interval %s:  ', Interval)
 
     epochtimes=[]
-    #starttime = 0
-    endepoch =  int(time.time())
-    startepoch = endepoch - 60
-    resolution = 60
+
     
     try:
         # if 0 then use current time
@@ -807,7 +804,8 @@ def getendepochtimes(starttime, Interval):
         if starttime > 1262264399:
             #nowtime = datetime.datetime.now()
             #nowtime = datetime.datetime.utcfromtimestamp(starttime)
-            #endepoch =  int(time.time())
+            endepoch =  int(time.time())
+            startepoch = starttime
 
             if Interval== "1min":
                 resolution = 60
@@ -873,7 +871,10 @@ def getendepochtimes(starttime, Interval):
                 resolution = 60
                 endepoch = startepoch + (resolution * 1)
                          
-
+        else:
+          endepoch =  int(time.time())
+          startepoch = endepoch - 60
+          resolution = 60
                 
         epochtimes.append(startepoch)
         epochtimes.append(endepoch)
