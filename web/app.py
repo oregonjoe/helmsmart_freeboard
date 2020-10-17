@@ -12454,7 +12454,7 @@ def freeboard_fluidlevels():
     Interval = request.args.get('interval',"5min")
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
-    units= request.args.get('units',"US")
+    units= request.args.get('units',"")
     mytimezone = request.args.get('timezone',"UTC")
     mode = request.args.get('mode',"mean")
     
