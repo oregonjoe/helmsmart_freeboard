@@ -11767,7 +11767,7 @@ def freeboard_engine_aux():
     units= request.args.get('units',"US")
     mytimezone = request.args.get('timezone',"UTC")
     mode =  request.args.get('mode',"mean")
-    starttime = request.args.get('starttime','0')
+    starttime = request.args.get('start','0')
     
     response = None
     
