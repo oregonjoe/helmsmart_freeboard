@@ -11785,6 +11785,8 @@ def freeboard_engine_aux():
       resolution = epochtimes[2]
 
 
+    log.info("freeboard freeboard_engine_aux epochtimes %s %s %s", epochtimes[0], epochtimes[1],  epochtimes[2])
+
     strvalue = ""
     value1 = '---'
     value2 = '---'
