@@ -3569,12 +3569,22 @@ def freeboard_createInfluxDB():
   password = 'Salm0n16'
   database = 'pushsmart-cloud'
 
+  starttime = request.args.get('start','0')
+  
   response = None
+  
 
-  epochtimes = getepochtimes(Interval)
+  if int(starttime) != 0:
+    epochtimes = getendepochtimes(int(starttime), Interval)
+    
+  else:
+    epochtimes = getepochtimes(Interval)
+
+  
   startepoch = epochtimes[0]
   endepoch = epochtimes[1]
-  resolution = epochtimes[2]
+  if resolution == "":
+    resolution = epochtimes[2]
 
   """  
   json_body = [
@@ -3875,12 +3885,22 @@ def freeboard_locationXX():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -4063,12 +4083,22 @@ def freeboard_winddataXX():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -4261,13 +4291,22 @@ def freeboard_environmentalXX():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
-
+    if resolution == "":
+      resolution = epochtimes[2]
 
     deviceid = getedeviceid(deviceapikey)
     
@@ -4446,12 +4485,22 @@ def freeboard_navXX():
     Instance = request.args.get('instance','0')
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -4634,12 +4683,22 @@ def freeboard_batteryXX():
     Instance = request.args.get('instance','0')
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -4821,12 +4880,22 @@ def freeboard_engineXX():
     Instance = request.args.get('instance','0')
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -5066,12 +5135,22 @@ def freeboard_statusXX():
     Instance = request.args.get('instance','0')
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -5309,17 +5388,22 @@ def freeboard_environmental():
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
     
+    starttime = request.args.get('start','0')
+    
     response = None
+    
 
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
-    starttime = 0
-
-    epochtimes = getepochtimes(Interval)
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
-    #resolution = 60
 
 
     strvalue = ""
@@ -5671,17 +5755,22 @@ def freeboard_environmental_calculated():
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
     
+    starttime = request.args.get('start','0')
+    
     response = None
+    
 
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
-    starttime = 0
-
-    epochtimes = getepochtimes(Interval)
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
-    #resolution = 60
 
 
     strvalue = ""
@@ -6116,18 +6205,22 @@ def freeboard_environmental_metar():
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
     
+    starttime = request.args.get('start','0')
+    
     response = None
+    
 
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
-    starttime = 0
-
-    epochtimes = getepochtimes(Interval)
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
-    #resolution = 60
-
 
     strvalue = ""
     value1 = '---'
@@ -6614,17 +6707,22 @@ def helmsmart_environmental_baroncsv():
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
     
+    starttime = request.args.get('start','0')
+    
     response = None
+    
 
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
-    starttime = 0
-
-    epochtimes = getepochtimes(Interval)
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
-    #resolution = 60
 
 
     strvalue = ""
@@ -7119,17 +7217,22 @@ def helmsmart_environmental_nmea0183():
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
     
+    starttime = request.args.get('start','0')
+    
     response = None
+    
 
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
-    starttime = 0
-
-    epochtimes = getepochtimes(Interval)
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
-    #resolution = 60
 
 
     strvalue = ""
@@ -7634,17 +7737,22 @@ def helmsmart_environmental_baroncsv_text():
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
     
+    starttime = request.args.get('start','0')
+    
     response = None
+    
 
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
-    starttime = 0
-
-    epochtimes = getepochtimes(Interval)
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
-    #resolution = 60
 
 
     strvalue = ""
@@ -8146,9 +8254,18 @@ def freeboard_weather():
     humidity=[]
     altitude=[]
       
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
@@ -8440,15 +8557,22 @@ def freeboard_rain_gauge():
     rate=[]
     peak=[]
 
-      
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
-
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
@@ -8716,9 +8840,18 @@ def freeboard_rain_wung():
     rain_hour=[]
     rain_day=[]
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
@@ -8991,9 +9124,18 @@ def freeboard_weather_wung():
     humidity=[]
     altitude=[]
       
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
@@ -9358,9 +9500,18 @@ def freeboard_winddata():
     wind_direction=[]
     wind_gusts=[]
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
@@ -9603,13 +9754,22 @@ def freeboard_winddata_apparent():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
     mytimezone = request.args.get('timezone',"UTC")
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
-
+    if resolution == "":
+      resolution = epochtimes[2]
 
     deviceid = getedeviceid(deviceapikey)
     
@@ -9759,12 +9919,24 @@ def freeboard_environmental2():
     serieskey = request.args.get('datakey','')
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
+
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -9934,12 +10106,24 @@ def freeboard_winddataTrue():
     windtype = request.args.get('type',"true")
     Interval = request.args.get('Interval',"5min")
 
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
+
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -10121,15 +10305,24 @@ def freeboard_location():
     postype = request.args.get('type',"NULL")
     mytimezone = request.args.get('timezone',"UTC")
     
+    starttime = request.args.get('start','0')
+    
     response = None
-    log.info("freeboard_location deviceapikey %s", deviceapikey)
-    starttime = 0
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     lat=[]
@@ -10402,16 +10595,24 @@ def freeboard_location_wind():
     mode  = request.args.get('mode',"median")
     source  = request.args.get('source',"")
 
-        
+    starttime = request.args.get('start','0')
+    
     response = None
-    log.info("freeboard_location_wind deviceapikey %s", deviceapikey)
-    starttime = 0
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     lat=[]
@@ -10695,15 +10896,23 @@ def freeboard_nav():
     mytimezone = request.args.get('timezone',"UTC")
     mode = request.args.get('mode',"mean")
     
+    starttime = request.args.get('start','0')
+    
     response = None
+    
 
-    starttime = 0
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
-    epochtimes = getepochtimes(Interval)
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
 
 
     cog=[]
@@ -10965,15 +11174,24 @@ def freeboard_water_depth():
     mytimezone = request.args.get('timezone',"UTC")
     mode = request.args.get('mode',"mean")
     
+    starttime = request.args.get('start','0')
+    
     response = None
+    
 
-    starttime = 0
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
-    epochtimes = getepochtimes(Interval)
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     depth=[]
@@ -11255,15 +11473,24 @@ def freeboard_attitude():
     mytimezone = request.args.get('timezone',"UTC")
     mode  = request.args.get('mode',"median")
     
+    starttime = request.args.get('start','0')
+    
     response = None
     
-    starttime = 0
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     pitch=[]
@@ -11505,15 +11732,24 @@ def freeboard_battery():
     mytimezone = request.args.get('timezone',"UTC")
     mode  = request.args.get('mode',"median")
     
+    starttime = request.args.get('start','0')
+    
     response = None
     
-    starttime = 0
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     voltage=[]
@@ -12133,15 +12369,24 @@ def freeboard_engine():
     mytimezone = request.args.get('timezone',"UTC")
     mode = request.args.get('mode',"mean")
     
+    starttime = request.args.get('start','0')
+    
     response = None
     
-    starttime = 0
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     strvalue = ""
@@ -12460,15 +12705,23 @@ def freeboard_fluidlevels():
     mytimezone = request.args.get('timezone',"UTC")
     mode = request.args.get('mode',"mean")
     
+    starttime = request.args.get('start','0')
+    
     response = None
     
-    starttime = 0
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
 
 
     strvalue = ""
@@ -12826,15 +13079,23 @@ def freeboard_ac_status():
     mytimezone = request.args.get('timezone',"UTC")
     mode = request.args.get('mode',"mean")
     
+    starttime = request.args.get('start','0')
+    
     response = None
     
-    starttime = 0
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -13135,16 +13396,24 @@ def freeboard_status():
     Instance = request.args.get('instance','0')
     resolution = request.args.get('resolution',"")
     mytimezone = request.args.get('timezone',"UTC")
+    starttime = request.args.get('start','0')
+    
     response = None
+    
+
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
 
     
-    starttime = 0
-
-    epochtimes = getepochtimes(Interval)
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -13498,19 +13767,29 @@ def freeboard_indicator_status():
     Indicator = request.args.get('indicator','0')
     resolution = request.args.get('resolution',"")
     mytimezone = request.args.get('timezone',"UTC")
+    starttime = request.args.get('start','0')
+    
     response = None
+    
+
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
+    startepoch = epochtimes[0]
+    endepoch = epochtimes[1]
+    if resolution == "":
+      resolution = epochtimes[2]
+
+
 
     switchstatus=[]
     mydatetime = datetime.datetime.now()
     myjsondate= mydatetime.strftime("%B %d, %Y %H:%M:%S")      
     
-    starttime = 0
-
-    epochtimes = getepochtimes(Interval)
-    startepoch = epochtimes[0]
-    endepoch = epochtimes[1]
-    if resolution == "":
-      resolution = epochtimes[2]
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -13741,15 +14020,24 @@ def freeboard_indicator_runtime():
     mode =  request.args.get('mode',"mean")
     indicator = request.args.get('indicator',"0")
     
+    starttime = request.args.get('start','0')
+    
     response = None
     
-    starttime = 0
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     strvalue = ""
@@ -14070,13 +14358,24 @@ def freeboard_dimmer_status():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -14316,13 +14615,24 @@ def freeboard_get_engine_values():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -14579,13 +14889,24 @@ def freeboard_get_rain_gauge():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -14839,13 +15160,23 @@ def freeboard_get_weather_values():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -15101,13 +15432,23 @@ def freeboard_get_weather_minmax_value():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
-    #if resolution == "":
-    #  resolution = epochtimes[2]
+    if resolution == "":
+      resolution = epochtimes[2]
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -15417,13 +15758,23 @@ def freeboard_get_dimmer_values():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -15642,13 +15993,23 @@ def freeboard_dimmer_values():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
 
 
     deviceid = getedeviceid(deviceapikey)
@@ -15959,13 +16320,24 @@ def freeboard_switch_bank_status():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
     
-    starttime = 0
+    starttime = request.args.get('start','0')
+    
+    response = None
+    
 
-    epochtimes = getepochtimes(Interval)
+    if int(starttime) != 0:
+      epochtimes = getendepochtimes(int(starttime), Interval)
+      
+    else:
+      epochtimes = getepochtimes(Interval)
+
+    
     startepoch = epochtimes[0]
     endepoch = epochtimes[1]
     if resolution == "":
       resolution = epochtimes[2]
+
+
 
 
     deviceid = getedeviceid(deviceapikey)
