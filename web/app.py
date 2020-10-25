@@ -12923,6 +12923,12 @@ def freeboard_fluidlevels():
       fuel_port=[]
       fuel_strbd=[]
       fuel_center=[]
+      fuel_fwd=[]
+      fuel_aft=[]
+      fuel_day1=[]
+      fuel_day2=[]
+      fuel_day3=[]
+      
       water_port=[]
       water_strbd=[]
       water_center=[]
@@ -12999,7 +13005,24 @@ def freeboard_fluidlevels():
             elif fluidtype == 0 and fluidinstance ==1 and volume != '---':
               fuel_strbd.append({'epoch':ts, 'value':volume})          
             elif fluidtype == 0 and fluidinstance ==2 and volume != '---':
-              fuel_center.append({'epoch':ts, 'value':volume})          
+              fuel_center.append({'epoch':ts, 'value':volume})
+
+            elif fluidtype == 0 and fluidinstance ==3 and volume != '---':
+              fuel_fwd.append({'epoch':ts, 'value':volume})          
+            elif fluidtype == 0 and fluidinstance ==4 and volume != '---':
+              fuel_aft.append({'epoch':ts, 'value':volume})
+
+            elif fluidtype == 0 and fluidinstance ==5 and volume != '---':
+              fuel_day1.append({'epoch':ts, 'value':volume})          
+            elif fluidtype == 0 and fluidinstance ==6 and volume != '---':
+              fuel_day2.append({'epoch':ts, 'value':volume})
+            elif fluidtype == 0 and fluidinstance ==7 and volume != '---':
+              fuel_day3.append({'epoch':ts, 'value':volume})          
+ 
+
+
+
+              
 
             elif fluidtype == 1 and fluidinstance ==0 and volume != '---':
               water_port.append({'epoch':ts, 'value':volume})
@@ -13021,7 +13044,7 @@ def freeboard_fluidlevels():
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','fuel_port':list(reversed(fuel_port)), 'fuel_strbd':list(reversed(fuel_strbd)), 'fuel_center':list(reversed(fuel_center)),'water_port':list(reversed(water_port)), 'water_strbd':list(reversed(water_strbd)), 'water_center':list(reversed(water_center)), 'waste_port':list(reversed(waste_port)), 'waste_strbd':list(reversed(waste_strbd)), 'waste_center':list(reversed(waste_center))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','fuel_port':list(reversed(fuel_port)), 'fuel_strbd':list(reversed(fuel_strbd)), 'fuel_center':list(reversed(fuel_center)),'fuel_fwd':list(reversed(fuel_fwd)),'fuel_aft':list(reversed(fuel_aft)),'fuel_day1':list(reversed(fuel_day1)),'fuel_day2':list(reversed(fuel_day2)),'fuel_day3':list(reversed(fuel_day3)),'water_port':list(reversed(water_port)), 'water_strbd':list(reversed(water_strbd)), 'water_center':list(reversed(water_center)), 'waste_port':list(reversed(waste_port)), 'waste_strbd':list(reversed(waste_strbd)), 'waste_center':list(reversed(waste_center))})     
 
 
     except TypeError, e:
