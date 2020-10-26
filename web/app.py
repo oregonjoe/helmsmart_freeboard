@@ -465,7 +465,7 @@ def convertfbunits(value, units):
 
 
   elif units == 19: #//="19">Liters/hr</option>
-      return float("{0:.2f}".format(value * 0.1 ) )
+      return float("{0:.2f}".format(value * 1.0 ) )
 
 
   #case 20: //="20">Liters</option>
@@ -611,7 +611,7 @@ def convertunits(value, units):
 
 
   elif units == 19: #//="19">Liters/hr</option>
-      return float("{0:.2f}".format(value * 0.1 ) )
+      return float("{0:.2f}".format(value * 1.0 ) )
 
 
   elif units == 20:# //="20">Liters</option>
