@@ -866,6 +866,26 @@ function FreeboardUI()
 		{
 			return true;
 		}
+		
+		try {
+				if(newCols === grid.cols)
+				{
+					return false; 
+				}
+				else
+				{
+					return true;
+				}
+			}
+		catch (e) {
+			console.log(e.toString());
+			return false; 
+			}		
+		
+		
+		
+		
+		
 	}
 
 	function repositionGrid(repositionFunction)

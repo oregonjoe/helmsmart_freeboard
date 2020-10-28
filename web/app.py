@@ -12738,6 +12738,12 @@ def freeboard_fluidlevels():
     fuel_port=[]
     fuel_strbd=[]
     fuel_center=[]
+    fuel_fwd=[]
+    fuel_aft=[]
+    fuel_day1=[]
+    fuel_day2=[]
+    fuel_day3=[]
+    
     water_port=[]
     water_strbd=[]
     water_center=[]
