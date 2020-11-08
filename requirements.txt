@@ -37,4 +37,5 @@ pyonep==0.13.8
 pylibmc==1.5.1
 auth0-python
 meteocalc==1.1.0
+urllib3==1.24
 

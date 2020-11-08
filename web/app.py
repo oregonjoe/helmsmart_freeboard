@@ -7,9 +7,10 @@ import requests
 from requests.exceptions import HTTPError
 #import nmea
 #import urlparse
+
 import urllib
-#from urlparse import urlparse
-from urllib.parse import urlparse
+from urlparse import urlparse
+#from urllib.parse import urlparse
 import md5
 import base64
 import fnmatch
