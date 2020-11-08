@@ -6,7 +6,7 @@ Flask-Cors==2.1.2
 Jinja2==2.7
 MarkupSafe==0.18
 SQLAlchemy==0.8.2
-Werkzeug==0.11.4
+Werkzeug==0.11.15
 boto==2.10.0
 codd==0.2.0
 coverage==3.6
@@ -18,10 +18,10 @@ nose==1.3.0
 psycopg2==2.7.5
 #requests==1.2.3
 git+https://github.com/influxdb/influxdb-python.git
-git+https://github.com/iron-io/iron_cache_python.git
-git+https://github.com/attm2x/m2x-python.git
+#git+https://github.com/iron-io/iron_cache_python.git
+#git+https://github.com/attm2x/m2x-python.git
 webassets==0.8
-wsgiref==0.1.2
+#wsgiref==0.1.2
 xlocal==0.5
 graphiteudp==0.0.2
 socketcache==0.1.0
@@ -30,7 +30,7 @@ rq==0.5.5
 #python-postmark==0.4.1
 APScheduler==2.0.3
 dropbox==2.2.0
-numpy==1.6.2
+#numpy==1.6.2
 geopy==1.9.1
 requests>=2.0
 pyonep==0.13.7

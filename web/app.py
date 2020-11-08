@@ -8,12 +8,12 @@ from requests.exceptions import HTTPError
 #import nmea
 #import urlparse
 import urllib
-from urlparse import urlparse
+#from urlparse import urlparse
 import md5
 import base64
 import fnmatch
 from operator import itemgetter
-import numpy as np
+#import numpy as np
 from geopy.distance import vincenty
 from calendar import timegm
 import datetime
