@@ -12115,7 +12115,7 @@ def freeboard_engine_aux():
                             resolution) 
 
       elif mode == "min":
-        query = ('select  min(throttle_position) AS throttle_position, min(boost_pressure) AS  boost_pressure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(egt_temp) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from, min(trip_fuel_used) AS fuel_used  {} '
+        query = ('select  min(throttle_position) AS throttle_position, min(boost_pressure) AS  boost_pressure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(egt_temp) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from, min(trip_fuel_used) AS fuel_used  from {} '
                          'where {} AND time > {}s and time < {}s '
                          'group by time({}s)') \
                     .format( measurement, serieskeys,
@@ -12123,7 +12123,7 @@ def freeboard_engine_aux():
                             resolution) 
 
       else:        
-        query = ('select  mean(throttle_position) AS throttle_position, mean(boost_pressure) AS  boost_pressure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(egt_temp) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from, mean(trip_fuel_used) AS fuel_used  {} '
+        query = ('select  mean(throttle_position) AS throttle_position, mean(boost_pressure) AS  boost_pressure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(egt_temp) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy, mean(trip_fuel_used) AS fuel_used from {} '
                          'where {} AND time > {}s and time < {}s '
                          'group by time({}s)') \
                     .format( measurement, serieskeys,
