@@ -12009,131 +12009,135 @@ def freeboard_engine_aux():
     
     response = None
     
-
-    if int(starttime) != 0:
-      epochtimes = getendepochtimes(int(starttime), Interval)
-      
-    else:
-      epochtimes = getepochtimes(Interval)
-
-    
-    startepoch = epochtimes[0]
-    endepoch = epochtimes[1]
-    if resolution == "":
-      resolution = epochtimes[2]
-
-
-    log.info("freeboard freeboard_engine_aux epochtimes %s %s %s", epochtimes[0], epochtimes[1],  epochtimes[2])
-
-    strvalue = ""
-    value1 = '---'
-    value2 = '---'
-    value3 = '---'
-    value4 = '---'
-    value5 = '---'
-    value6 = '---'
-    value7 = '---'
-    value8 = '---'
-    value9 = '---'
-
-    boost_pressure=[]
-    coolant_pressure=[]
-    fuel_pressure=[]
-    oil_temp=[]
-    egt_temperature=[]
-    fuel_rate_average=[]
-    instantaneous_fuel_economy=[]
-    #tilt_or_trim=[]
-    throttle_position=[]
-    fuel_used=[]    
-
-    mydatetime = datetime.datetime.now()
-    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
-
-
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
-
-    if deviceid == "":
-        callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
-
-
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
-
-    measurement = "HelmSmart"
-    measurement = 'HS_' + str(deviceid)
-
-
-
-
-    serieskeys=" deviceid='"
-    serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'   OR  sensor='trip_parameters_engine') AND "   
-    serieskeys= serieskeys +  " (instance='" + Instance + "') "
-
-    """
-    serieskeys=" deviceid='"
-    serieskeys= serieskeys + deviceid + "' AND "
-    serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='temperature'  OR  sensor='trip_parameters_engine') AND "
-    if Instance == 1:
-      serieskeys= serieskeys +  " (type='NULL' OR type='Reserved 134')  AND "
-    else:
-      serieskeys= serieskeys +  " (type='NULL' OR type='Reserved 135')  AND "
-      
-    serieskeys= serieskeys +  " (instance='" + Instance + "') "
-    """
-
-
-
-    log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
-
-
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
-
-    if mode == "median":
-      query = ('select  median(throttle_position) AS throttle_position, median(boost_pressure) AS  boost_pressure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(egt_temp) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy  , median(trip_fuel_used) AS fuel_used from {} '
-                       'where {} AND time > {}s and time < {}s '
-                       'group by time({}s)') \
-                  .format( measurement, serieskeys,
-                          startepoch, endepoch,
-                          resolution) 
-
-    elif mode == "max":
-      query = ('select  max(throttle_position) AS throttle_position, max(boost_pressure) AS  boost_pressure, max(coolant_pressure) AS coolant_pressure, max(fuel_pressure) AS fuel_pressure, max(oil_temp) AS oil_temp ,  max(egt_temp) AS egt_temperature , max(fuel_rate_average) AS fuel_rate_average  , max(instantaneous_fuel_economy) AS instantaneous_fuel_economy, max(trip_fuel_used) AS fuel_used  from {} '
-                       'where {} AND time > {}s and time < {}s '
-                       'group by time({}s)') \
-                  .format( measurement, serieskeys,
-                          startepoch, endepoch,
-                          resolution) 
-
-    elif mode == "min":
-      query = ('select  min(throttle_position) AS throttle_position, min(boost_pressure) AS  boost_pressure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(egt_temp) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from, min(trip_fuel_used) AS fuel_used  {} '
-                       'where {} AND time > {}s and time < {}s '
-                       'group by time({}s)') \
-                  .format( measurement, serieskeys,
-                          startepoch, endepoch,
-                          resolution) 
-
-    else:        
-      query = ('select  mean(throttle_position) AS throttle_position, mean(boost_pressure) AS  boost_pressure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(egt_temp) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from, mean(trip_fuel_used) AS fuel_used  {} '
-                       'where {} AND time > {}s and time < {}s '
-                       'group by time({}s)') \
-                  .format( measurement, serieskeys,
-                          startepoch, endepoch,
-                          resolution) 
-   
-
-
-    log.info("freeboard data Query %s", query)
-
     try:
+      
+      if int(starttime) != 0:
+        epochtimes = getendepochtimes(int(starttime), Interval)
+        
+      else:
+        epochtimes = getepochtimes(Interval)
+
+      
+      startepoch = epochtimes[0]
+      endepoch = epochtimes[1]
+      if resolution == "":
+        resolution = epochtimes[2]
+
+
+      log.info("freeboard freeboard_engine_aux epochtimes %s %s %s", epochtimes[0], epochtimes[1],  epochtimes[2])
+
+      strvalue = ""
+      value1 = '---'
+      value2 = '---'
+      value3 = '---'
+      value4 = '---'
+      value5 = '---'
+      value6 = '---'
+      value7 = '---'
+      value8 = '---'
+      value9 = '---'
+
+      boost_pressure=[]
+      coolant_pressure=[]
+      fuel_pressure=[]
+      oil_temp=[]
+      egt_temperature=[]
+      fuel_rate_average=[]
+      instantaneous_fuel_economy=[]
+      #tilt_or_trim=[]
+      throttle_position=[]
+      fuel_used=[]    
+
+      mydatetime = datetime.datetime.now()
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
+
+
+      deviceid = getedeviceid(deviceapikey)
+      
+      log.info("freeboard deviceid %s", deviceid)
+
+      if deviceid == "":
+          callback = request.args.get('callback')
+          return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+      host = 'hilldale-670d9ee3.influxcloud.net' 
+      port = 8086
+      username = 'helmsmart'
+      password = 'Salm0n16'
+      database = 'pushsmart-cloud'
+
+      measurement = "HelmSmart"
+      measurement = 'HS_' + str(deviceid)
+
+
+
+
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + deviceid + "' AND "
+      serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'   OR  sensor='trip_parameters_engine') AND "   
+      serieskeys= serieskeys +  " (instance='" + Instance + "') "
+
+      """
+      serieskeys=" deviceid='"
+      serieskeys= serieskeys + deviceid + "' AND "
+      serieskeys= serieskeys +  " (sensor='engine_parameters_rapid_update' OR sensor='engine_parameters_dynamic'  OR  sensor='temperature'  OR  sensor='trip_parameters_engine') AND "
+      if Instance == 1:
+        serieskeys= serieskeys +  " (type='NULL' OR type='Reserved 134')  AND "
+      else:
+        serieskeys= serieskeys +  " (type='NULL' OR type='Reserved 135')  AND "
+        
+      serieskeys= serieskeys +  " (instance='" + Instance + "') "
+      """
+
+
+
+      log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
+      log.info("freeboard Create InfluxDB %s", database)
+
+
+      dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+      if mode == "median":
+        query = ('select  median(throttle_position) AS throttle_position, median(boost_pressure) AS  boost_pressure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(egt_temp) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy  , median(trip_fuel_used) AS fuel_used from {} '
+                         'where {} AND time > {}s and time < {}s '
+                         'group by time({}s)') \
+                    .format( measurement, serieskeys,
+                            startepoch, endepoch,
+                            resolution) 
+
+      elif mode == "max":
+        query = ('select  max(throttle_position) AS throttle_position, max(boost_pressure) AS  boost_pressure, max(coolant_pressure) AS coolant_pressure, max(fuel_pressure) AS fuel_pressure, max(oil_temp) AS oil_temp ,  max(egt_temp) AS egt_temperature , max(fuel_rate_average) AS fuel_rate_average  , max(instantaneous_fuel_economy) AS instantaneous_fuel_economy, max(trip_fuel_used) AS fuel_used  from {} '
+                         'where {} AND time > {}s and time < {}s '
+                         'group by time({}s)') \
+                    .format( measurement, serieskeys,
+                            startepoch, endepoch,
+                            resolution) 
+
+      elif mode == "min":
+        query = ('select  min(throttle_position) AS throttle_position, min(boost_pressure) AS  boost_pressure, min(coolant_pressure) AS coolant_pressure, min(fuel_pressure) AS fuel_pressure, min(oil_temp) AS oil_temp ,  min(egt_temp) AS egt_temperature , min(fuel_rate_average) AS fuel_rate_average  , min(instantaneous_fuel_economy) AS instantaneous_fuel_economy from, min(trip_fuel_used) AS fuel_used  {} '
+                         'where {} AND time > {}s and time < {}s '
+                         'group by time({}s)') \
+                    .format( measurement, serieskeys,
+                            startepoch, endepoch,
+                            resolution) 
+
+      else:        
+        query = ('select  mean(throttle_position) AS throttle_position, mean(boost_pressure) AS  boost_pressure, mean(coolant_pressure) AS coolant_pressure, mean(fuel_pressure) AS fuel_pressure, mean(oil_temp) AS oil_temp ,  mean(egt_temp) AS egt_temperature , mean(fuel_rate_average) AS fuel_rate_average  , mean(instantaneous_fuel_economy) AS instantaneous_fuel_economy from, mean(trip_fuel_used) AS fuel_used  {} '
+                         'where {} AND time > {}s and time < {}s '
+                         'group by time({}s)') \
+                    .format( measurement, serieskeys,
+                            startepoch, endepoch,
+                            resolution) 
+     
+
+
+      log.info("freeboard data Query %s", query)
+
+
+      
+
+
         response= dbc.query(query)
         
     except TypeError, e:
