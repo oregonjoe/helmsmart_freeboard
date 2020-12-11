@@ -12134,11 +12134,7 @@ def freeboard_engine_aux():
 
       log.info("freeboard data Query %s", query)
 
-
-      
-
-
-        response= dbc.query(query)
+      response= dbc.query(query)
         
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', query)
