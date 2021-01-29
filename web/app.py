@@ -13348,7 +13348,7 @@ def freeboard_ac_status():
           value2 =  convertfbunits(point['amps'],28)
           energy_period = energy_period +(( float(value2)*float(value1)) * 0.001)
         amps.append({'epoch':ts, 'value':value2})
-        amps_rms.append({'epoch':ts, 'value':(( float(value2)) * 0.7071)})
+        #amps_rms.append({'epoch':ts, 'value':(( float(value2)) * 0.7071)})
         energy_caluculated.append({'epoch':ts, 'value':energy_period})
         
         if point['power'] is not None:
