@@ -13305,6 +13305,7 @@ def freeboard_ac_status():
 
       volts=[]
       amps=[]
+      amps_rms=[]
       power=[]
       energy=[]
       status=[]
@@ -13347,6 +13348,7 @@ def freeboard_ac_status():
           value2 =  convertfbunits(point['amps'],28)
           energy_period = energy_period +(( float(value2)*float(value1)) * 0.001)
         amps.append({'epoch':ts, 'value':value2})
+        amps_rms.append({'epoch':ts, 'value':(( float(value2)) * 0.7071)})
         energy_caluculated.append({'epoch':ts, 'value':energy_period})
         
         if point['power'] is not None:
@@ -13368,7 +13370,7 @@ def freeboard_ac_status():
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'volts':value1, 'amps':value2, 'power':value3, 'energy':value4})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','volts':list(reversed(volts)), 'amps':list(reversed(amps)), 'power':list(reversed(power)), 'energy':list(reversed(energy)), 'status':list(reversed(status)), 'energy_interval':list(reversed(energy_caluculated))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','volts':list(reversed(volts)), 'amps':list(reversed(amps)), 'ampsrms':list(reversed(amps_rms)), 'power':list(reversed(power)), 'energy':list(reversed(energy)), 'status':list(reversed(status)), 'energy_interval':list(reversed(energy_caluculated))})     
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
