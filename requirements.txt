@@ -2,7 +2,7 @@
 Flask==1.0
 Flask-Assets==0.8
 Flask-Script==0.6.2
-Flask-Cors==2.1.2
+Flask-Cors==3.0.9
 #Flask-Stormpath==0.4.8
 #Jinja2==2.7
 Jinja2==2.10.1
