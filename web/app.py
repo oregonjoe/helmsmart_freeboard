@@ -14520,7 +14520,7 @@ def freeboard_dimmer_status():
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','dimmer_bank':list(reversed(dimmerstatus))})    
 
-    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
     keys = response.raw.get('series',[])
     #keys = result.keys()
@@ -14546,10 +14546,10 @@ def freeboard_dimmer_status():
        
       points = list(response.get_points())
 
-      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
 
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
