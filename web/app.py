@@ -14449,7 +14449,10 @@ def freeboard_dimmer_status():
 
       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
-    query = ('select  median({}) as dimmer '
+
+
+    if mode == "median":
+      query = ('select  median({}) as dimmer '
                      ' FROM {} '             
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s)') \
@@ -14457,6 +14460,36 @@ def freeboard_dimmer_status():
                         startepoch, endepoch,
                         resolution) 
  
+    elif mode == "max":
+      query = ('select  max({}) as dimmer '
+                     ' FROM {} '             
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format(parameter,  measurement,  serieskeys,
+                        startepoch, endepoch,
+                        resolution) 
+ 
+    elif mode == "min":
+      query = ('select  min({}) as dimmer '
+                     ' FROM {} '             
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format(parameter,  measurement,  serieskeys,
+                        startepoch, endepoch,
+                        resolution) 
+ 
+
+    else:        
+      query = ('select  mean({}) as dimmer '
+                     ' FROM {} '             
+                     'where {} AND time > {}s and time < {}s '
+                     'group by time({}s)') \
+                .format(parameter,  measurement,  serieskeys,
+                        startepoch, endepoch,
+                        resolution) 
+ 
+
+
 
 
     log.info("freeboard freeboard_dimmer_status data Query %s", query)
