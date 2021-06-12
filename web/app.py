@@ -14387,6 +14387,7 @@ def freeboard_dimmer_status():
     Instance = request.args.get('instance','0')
     dimmerIndex = request.args.get('indicator','0')
     resolution = request.args.get('resolution',"")
+    mode =  request.args.get('mode',"mean")
     mytimezone = request.args.get('timezone',"UTC")
     response = None
 
