@@ -309,8 +309,9 @@
 					if(newValue.length)
 					{
 						value = "---";
-						
-						for(i=0; i< newValue.length; i++)
+						//j=0;
+						//for(i=0; i< newValue.length; i++)
+						for(i=newValue.length-1; i>0; i--)
 						{
 							if(newValue[i].value != "---")
 							{
@@ -321,7 +322,8 @@
 						}
 						
 						if (currentSettings.sparkline) {
-							for(i=0; i< newValue.length; i++)
+							//for(i=0; i< newValue.length; i++)
+							for(i=newValue.length-1; i>0; i--)
 							{
 								
 								if(newValue[i].value != "---")
