@@ -370,6 +370,14 @@
 						value: "1hour"
 					},
 					{
+						name: "2 hour",
+						value: "2hour"
+					},
+										{
+						name: "3 hour",
+						value: "3hour"
+					},
+										{
 						name: "4 hour",
 						value: "4hour"
 					},
