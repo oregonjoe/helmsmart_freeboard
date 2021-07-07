@@ -722,10 +722,24 @@ def getepochtimes(Interval):
                 resolution = 60*60
                 startepoch = endepoch - (resolution * 1)
                 oldtime = datetime.datetime.now() - datetime.timedelta(hours=1)
+                
+            elif Interval == "2hour":
+                resolution = 60*60*2
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=2)
+
+                
+            elif Interval == "3hour":
+                resolution = 60*60*3
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=3)                
+                
             elif Interval == "4hour":
                 resolution = 60*60*4
                 startepoch = endepoch - (resolution * 1)
                 oldtime = datetime.datetime.now() - datetime.timedelta(hours=4)
+
+                
             elif Interval == "6hour":
                 resolution = 60*60*6
                 startepoch = endepoch - (resolution * 1)
