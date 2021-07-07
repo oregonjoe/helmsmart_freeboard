@@ -837,6 +837,17 @@ def getendepochtimes(starttime, Interval):
                 resolution = 60*60
                 endepoch = startepoch + (resolution * 1)
                          
+            elif Interval== "2hour":
+                resolution = 60*60*2
+                endepoch = startepoch + (resolution * 1)
+                         
+            elif Interval== "3hour":
+                resolution = 60*60*3
+                endepoch = startepoch + (resolution * 1)
+                         
+
+
+
             elif Interval == "4hour":
                 resolution = 60*60*4
                 endepoch = startepoch + (resolution * 1)
@@ -948,6 +959,11 @@ def getgrfanatimes(Interval):
                 resolution = 60*60
                 startepoch = endepoch - (resolution * 1)
                 oldtime = datetime.datetime.now() - datetime.timedelta(hours=1)
+            elif Interval == "now-2h":
+                resolution = 60*60*2
+                startepoch = endepoch - (resolution * 1)
+                oldtime = datetime.datetime.now() - datetime.timedelta(hours=2)  
+                
             elif Interval == "now-3h":
                 resolution = 60*60*3
                 startepoch = endepoch - (resolution * 1)
