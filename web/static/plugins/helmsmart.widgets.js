@@ -243,7 +243,7 @@
 
 			if(shouldDisplayTitle)
 			{
-				titleElement.html((_.isUndefined(newSettings.title) ? "" : newSettings.title));
+				titleElement.html((_.isUndefined(newSettings.title) ? "": newSettings.title));
 				titleElement.attr("style", null);
 			}
 			else
@@ -254,7 +254,7 @@
 
 			if(shouldDisplayUnits)
 			{
-				unitsElement.html((_.isUndefined(newSettings.units) ? "" : newSettings.units));
+				unitsElement.html((_.isUndefined(newSettings.units) ? "": newSettings.units));
 				unitsElement.attr("style", null);
 			}
 			else
@@ -287,7 +287,7 @@
 				}
 			}
 
-			valueElement.css({"font-size" : valueFontSize + "px"});
+			valueElement.css({"font-size": valueFontSize + "px"});
 
 			updateValueSizing();
         }
@@ -310,8 +310,8 @@
 					{
 						value = "---";
 						//j=0;
-						//for(i=0; i< newValue.length; i++)
-						for(i=newValue.length-1; i>0; i--)
+						for(i=0; i< newValue.length; i++)
+						//for(i=newValue.length-1; i>0; i--)
 						{
 							if(newValue[i].value != "---")
 							{
@@ -322,8 +322,8 @@
 						}
 						
 						if (currentSettings.sparkline) {
-							//for(i=0; i< newValue.length; i++)
-							for(i=newValue.length-1; i>0; i--)
+							for(i=0; i< newValue.length; i++)
+							//for(i=newValue.length-1; i>0; i--)
 							{
 								
 								if(newValue[i].value != "---")
@@ -352,8 +352,8 @@
                 }
                 else {
                     valueElement.text(value);
-					//unitsElement.css({"color" : "blue !important"});
-					//valueElement.css({"color" : "blue !important"});
+					//unitsElement.css({"color": "blue !important"});
+					//valueElement.css({"color": "blue !important"});
                 }
 
 			
@@ -383,7 +383,7 @@
         type_name: "hstext_widget",
         display_name: "HelmSmart Array Text",
 		description: "Text Box - uses HelmSmart Data source to grab selected array span - plots first point in array",
-        "external_scripts" : [
+        "external_scripts": [
             //"plugins/thirdparty/jquery.sparkline.min.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
         ],
@@ -464,7 +464,7 @@
 
         var currentSettings = settings;
 		
-		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0: currentSettings.gaugeFillColor;
 		
 		if(parseInt(fillindex) == 0)
 		{
@@ -513,18 +513,18 @@
 
             gaugeObject = new JustGage({
                 id: thisGaugeID,
-                value: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
-                min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
-                max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
+                value: (_.isUndefined(currentSettings.min_value) ? 0: currentSettings.min_value),
+                min: (_.isUndefined(currentSettings.min_value) ? 0: currentSettings.min_value),
+                max: (_.isUndefined(currentSettings.max_value) ? 0: currentSettings.max_value),
 				relativeGaugeSize: true,
 				
 				//symbol: "NW",
 
 				//gaugeColor: '#F1C232',
-				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
+				gaugeColor: gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11: currentSettings.gaugeBackColor],
 				
 				//levelColors: ['#F1C232',],
-				//levelColors: [gaugeFillColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor],],
+				//levelColors: [gaugeFillColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0: currentSettings.gaugeFillColor],],
 				
 				levelColors: fillcolor,
 				
@@ -573,7 +573,7 @@
 				  bottomlength: 10,
 				  bottomwidth: 8,
 				  //color: '#8e8e93'
-				   color: gaugePointerColors[_.isUndefined(currentSettings.gaugePointerColor) ? 0 : currentSettings.gaugePointerColor],
+				   color: gaugePointerColors[_.isUndefined(currentSettings.gaugePointerColor) ? 0: currentSettings.gaugePointerColor],
 				},
 						
 				
@@ -664,7 +664,7 @@
         type_name: "gauge",
         display_name: "HelmSmart Array Gauge",
 		description: "Gauge - uses HelmSmart Data source to grab selected array span - plots only first point in array",
-        "external_scripts" : [
+        "external_scripts": [
             //"plugins/thirdparty/raphael.2.1.0.min.js",
             //"plugins/thirdparty/justgage.1.0.1.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.4.min.js",
@@ -950,7 +950,7 @@
 
         var currentSettings = settings;
 		
-		var fillindex = _.isUndefined(currentSettings.compassFillColor) ? 0 : currentSettings.compassFillColor;
+		var fillindex = _.isUndefined(currentSettings.compassFillColor) ? 0: currentSettings.compassFillColor;
 		
 		if(parseInt(fillindex) == 0)
 		{
@@ -977,16 +977,16 @@
 
             compassObject = new JustGage({
                 id: thisCompassID,
-                value: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
-                min: (_.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value),
-                max: (_.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value),
+                value: (_.isUndefined(currentSettings.min_value) ? 0: currentSettings.min_value),
+                min: (_.isUndefined(currentSettings.min_value) ? 0: currentSettings.min_value),
+                max: (_.isUndefined(currentSettings.max_value) ? 0: currentSettings.max_value),
 				relativeGaugeSize: true,
 
 				//gaugeColor: '#F1C232',
-				gaugeColor: gaugeColors[_.isUndefined(currentSettings.compassBackColor) ? 11 : currentSettings.compassBackColor],
+				gaugeColor: gaugeColors[_.isUndefined(currentSettings.compassBackColor) ? 11: currentSettings.compassBackColor],
 				
 				//levelColors: ['#F1C232',],
-				//levelColors: [gaugeFillColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor],],
+				//levelColors: [gaugeFillColors[_.isUndefined(currentSettings.gaugeFillColor) ? 0: currentSettings.gaugeFillColor],],
 				
 				levelColors: fillcolor,
 				
@@ -1035,7 +1035,7 @@
 				  bottomlength: 10,
 				  bottomwidth: 8,
 				  //color: '#8e8e93'
-				   color: gaugePointerColors[_.isUndefined(currentSettings.compassPointerColor) ? 0 : currentSettings.compassPointerColor],
+				   color: gaugePointerColors[_.isUndefined(currentSettings.compassPointerColor) ? 0: currentSettings.compassPointerColor],
 				},
 						
 				
@@ -1095,7 +1095,7 @@
         type_name: "compass",
         display_name: "HelmSmart Array Compass",
 		description: "Compass - uses HelmSmart Data source to grab selected array span - plots only first point in array",
-        "external_scripts" : [
+        "external_scripts": [
             //"plugins/thirdparty/raphael.2.1.0.min.js",
             //"plugins/thirdparty/justgage.1.0.1.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.4.min.js",
@@ -1357,7 +1357,7 @@
 
         this.onSettingsChanged = function (newSettings) {
 			currentSettings = newSettings;
-            titleElement.html((_.isUndefined(newSettings.title) ? "" : newSettings.title));
+            titleElement.html((_.isUndefined(newSettings.title) ? "": newSettings.title));
 
 			if(newSettings.include_legend) {
 				addSparklineLegend(sparklineLegend,  newSettings.legend.split(","));
@@ -1448,7 +1448,7 @@
         type_name: "sparkline",
         display_name: "HelmSmart Array Sparkline",
 		description: "Historical Sparkline- uses HelmSmart Data source to grab selected array span - plots all points in array",
-        "external_scripts" : [
+        "external_scripts": [
             //"plugins/thirdparty/jquery.sparkline.min.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
 			//"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
@@ -1584,7 +1584,7 @@
         type_name: "pointer",
         display_name: "HelmSmart Array Pointer",
 		description: "Radial Pointer Gauge - uses HelmSmart Data source to grab selected array span - plots only first point in array",
-        "external_scripts" : [
+        "external_scripts": [
             //"plugins/thirdparty/raphael.2.1.0.min.js"
 						//"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/jquery.sparkline.min.js"
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
@@ -1646,7 +1646,7 @@
         var currentSettings = settings;
 
 		
-		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0: currentSettings.gaugeFillColor;
 		
 
 	
@@ -1695,7 +1695,7 @@
             var gaugeHeight = calculatedHeight;
 
 			
-			fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+			fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0: currentSettings.gaugeFillColor;
 
 			
 			
@@ -1711,7 +1711,7 @@
 			
             rect.attr({
               //  "fill": "#edebeb",
-				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
+				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11: currentSettings.gaugeBackColor],
                 "stroke": "#A6A3A3"
             });
 
@@ -1737,7 +1737,7 @@
             });
 
             // place units and value
-            var units = _.isUndefined(currentSettings.units) ? "" : currentSettings.units;
+            var units = _.isUndefined(currentSettings.units) ? "": currentSettings.units;
 
             valueText = paper.text(width * 3 / 4, height / 2 - 20, "");
             unitsText = paper.text(width * 3 / 4, height / 2 + 20, units);
@@ -1766,7 +1766,7 @@
 			gaugeFill = paper.rect(width / 4 - gaugeWidth / 2, gaugeTop, gaugeWidth, 0);
             gaugeFill.attr({
                // "fill": "#edebeb",
-				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor],
+				"fill":	gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11: currentSettings.gaugeBackColor],
                 "stroke":  "#A6A3A3"
             });
 			
@@ -1783,9 +1783,9 @@
         self.onSettingsChanged = function (newSettings) {
             if (newSettings.units != currentSettings.units || newSettings.min_value != currentSettings.min_value || newSettings.max_value != currentSettings.max_value) {
                 currentSettings = newSettings;
-                var units = _.isUndefined(currentSettings.units) ? "" : currentSettings.units;
-                var min = _.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value;
-                var max = _.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value;
+                var units = _.isUndefined(currentSettings.units) ? "": currentSettings.units;
+                var min = _.isUndefined(currentSettings.min_value) ? 0: currentSettings.min_value;
+                var max = _.isUndefined(currentSettings.max_value) ? 0: currentSettings.max_value;
 
                 unitsText.attr({"text": units});
                 minValueLabel.attr({"text": min});
@@ -1804,7 +1804,7 @@
             if (settingName === "value") {
                 if (!_.isUndefined(gaugeFill) && !_.isUndefined(valueText)) {
 
-                    newValue = _.isUndefined(newValue) ? 0 : newValue;
+                    newValue = _.isUndefined(newValue) ? 0: newValue;
 					
 					var datavalue;
 					
@@ -1832,10 +1832,10 @@
 					
 								var fillVal = calculatedHeight * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
 
-								fillVal = fillVal > calculatedHeight ? calculatedHeight : fillVal;
-								fillVal = fillVal < 0 ? 0 : fillVal;
+								fillVal = fillVal > calculatedHeight ? calculatedHeight: fillVal;
+								fillVal = fillVal < 0 ? 0: fillVal;
 
-								var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+								var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11: currentSettings.gaugeBackColor];
 								
 								if(parseInt(fillindex) == 0)
 									var fillColor = getColor(fillVal / calculatedHeight);
@@ -1877,7 +1877,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "vertical-linear-gauge",
         display_name: "HelmSmart Array Vertical Gauge",
-        "external_scripts" : [
+        "external_scripts": [
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/colormix.2.0.0.min.js"
             //"plugins/thirdparty/raphael.2.1.0-custom.js",
@@ -2065,8 +2065,8 @@
         //var colors = ["#a9d70b", "#f9c802", "#ff0000"];
 
         var currentSettings = settings;
-		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
-		var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+		var fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0: currentSettings.gaugeFillColor;
+		var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11: currentSettings.gaugeBackColor];
         /* get the color for a fill percentage
            these colors match the justGage library for radial guagues */
         function getColor(fillPercent) {
@@ -2103,9 +2103,9 @@
 			
 			var gaugeTop = height * 0.10;
 			
-			fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0 : currentSettings.gaugeFillColor;
+			fillindex = _.isUndefined(currentSettings.gaugeFillColor) ? 0: currentSettings.gaugeFillColor;
 					
-			backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+			backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11: currentSettings.gaugeBackColor];
 
             paper = Raphael(gaugeElement.get()[0], width, height);
             paper.clear();
@@ -2139,7 +2139,7 @@
             });
 
             // place units and value
-            var units = _.isUndefined(currentSettings.units) ? "" : currentSettings.units;
+            var units = _.isUndefined(currentSettings.units) ? "": currentSettings.units;
 
             //valueText = paper.text(width / 2, height * 2 / 3, "");
             //unitsText = paper.text(width / 2, height * 2 / 3 + 20, units);
@@ -2190,9 +2190,9 @@
         self.onSettingsChanged = function (newSettings) {
             if (newSettings.units != currentSettings.units || newSettings.min_value != currentSettings.min_value || newSettings.max_value != currentSettings.max_value) {
                 currentSettings = newSettings;
-                var units = _.isUndefined(currentSettings.units) ? "" : currentSettings.units;
-                var min = _.isUndefined(currentSettings.min_value) ? 0 : currentSettings.min_value;
-                var max = _.isUndefined(currentSettings.max_value) ? 0 : currentSettings.max_value;
+                var units = _.isUndefined(currentSettings.units) ? "": currentSettings.units;
+                var min = _.isUndefined(currentSettings.min_value) ? 0: currentSettings.min_value;
+                var max = _.isUndefined(currentSettings.max_value) ? 0: currentSettings.max_value;
 
                 unitsText.attr({"text": units});
                 minValueLabel.attr({"text": min});
@@ -2211,7 +2211,7 @@
             if (settingName === "value") {
                 if (!_.isUndefined(gaugeFill) && !_.isUndefined(valueText)) {
 
-                    newValue = _.isUndefined(newValue) ? 0 : newValue;
+                    newValue = _.isUndefined(newValue) ? 0: newValue;
 					//var datavalue = newValue[0].value;
 					var datavalue;
 					
@@ -2239,10 +2239,10 @@
 					
 								var fillVal = calculatedWidth * (datavalue - currentSettings.min_value)/(currentSettings.max_value - currentSettings.min_value);
 
-								fillVal = fillVal > calculatedWidth ? calculatedWidth : fillVal;
-								fillVal = fillVal < 0 ? 0 : fillVal;
+								fillVal = fillVal > calculatedWidth ? calculatedWidth: fillVal;
+								fillVal = fillVal < 0 ? 0: fillVal;
 								
-								var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11 : currentSettings.gaugeBackColor];
+								var backfill = gaugeColors[_.isUndefined(currentSettings.gaugeBackColor) ? 11: currentSettings.gaugeBackColor];
 								
 								if(parseInt(fillindex) == 0)
 									var fillColor = getColor(fillVal / calculatedHeight);
@@ -2278,7 +2278,7 @@
     freeboard.loadWidgetPlugin({
         type_name: "horizontal-linear-gauge",
         display_name: "HelmSmart Horizontal Gauge",
-        "external_scripts" : [
+        "external_scripts": [
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/raphael.2.1.0.min.js",
 			"https://helmsmart-freeboard.herokuapp.com/static/plugins/thirdparty/colormix.2.0.0.min.js"
         ],
@@ -2498,7 +2498,7 @@
 					
 				indicatorElement.removeClass("off")
 				indicatorElement.addClass("on")
-                stateElement.text((_.isUndefined(onText) ? (_.isUndefined(currentSettings.on_text) ? "" : currentSettings.on_text) : onText));
+                stateElement.text((_.isUndefined(onText) ? (_.isUndefined(currentSettings.on_text) ? "": currentSettings.on_text): onText));
             }
             else {
 				if(setState == false){
@@ -2507,7 +2507,7 @@
 					
 				indicatorElement.addClass("off")
 				indicatorElement.removeClass("on")
-                stateElement.text((_.isUndefined(offText) ? (_.isUndefined(currentSettings.off_text) ? "" : currentSettings.off_text) : offText));
+                stateElement.text((_.isUndefined(offText) ? (_.isUndefined(currentSettings.off_text) ? "": currentSettings.off_text): offText));
             }
         }
 
@@ -2583,7 +2583,7 @@
 			
 			request = new XMLHttpRequest();
             if (!request) {
-                console.log('Giving up :( Cannot create an XMLHTTP instance');
+                console.log('Giving up:( Cannot create an XMLHTTP instance');
                 return false;
             }
             request.onreadystatechange = this.alertContents;
@@ -2668,7 +2668,7 @@
 
         this.onSettingsChanged = function (newSettings) {
             currentSettings = newSettings;
-            titleElement.html((_.isUndefined(newSettings.title) ? "" : newSettings.title));
+            titleElement.html((_.isUndefined(newSettings.title) ? "": newSettings.title));
             updateState();
         }
 
@@ -3043,7 +3043,7 @@
 		var newpoly = new Array();
 		var mypolyOptions = {
 		   //strokeColor: '#B40B6A',
-		   strokeColor: gaugeColors[_.isUndefined(currentSettings.trailColor) ? 5 : currentSettings.trailColor],
+		   strokeColor: gaugeColors[_.isUndefined(currentSettings.trailColor) ? 5: currentSettings.trailColor],
 		   strokeOpacity: 1.0,
 		   strokeWeight: 5,
 		   visible:true
@@ -3529,7 +3529,7 @@
 
         //map.setMapTypeId('styled_map');
 		//map.setMapTypeId('roadmap');
-		map.setMapTypeId(_.isUndefined(currentSettings.mapstyle) ? 'roadmap' : currentSettings.mapstyle);
+		map.setMapTypeId(_.isUndefined(currentSettings.mapstyle) ? 'roadmap': currentSettings.mapstyle);
 				
 			//}
 
@@ -3572,18 +3572,18 @@
 						  'Wind Speed = 2.4\n' +
 						  'Wind Direction = 4.4';
 						
-						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
-						//markers[i] = new google.maps.Marker({map: map,  title: title, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
+						//markers[i] = new google.maps.Marker({map: map, icon: {labelOrigin: { x: 12, y: -10}}, title: title, label: {text: "label " + i, color: '#222222', fontSize: '12px'}});
+						//markers[i] = new google.maps.Marker({map: map,  title: title, label: {text: "label " + i, color: '#222222', fontSize: '12px'}});
 						
-						//markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title, snippet: "wind dir 230 speed 2.3", label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
+						//markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor: '#222288' , rotation: 30 }, title: title, snippet: "wind dir 230 speed 2.3", label: {text: "label " + i, color: '#222222', fontSize: '12px'}});
 						
-						//markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title, labelContent:contentString, label : {text : "label " + i, color: '#222222', fontSize: '12px'}});
+						//markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor: '#222288' , rotation: 30 }, title: title, labelContent:contentString, label: {text: "label " + i, color: '#222222', fontSize: '12px'}});
 	
-						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor : '#222288' , rotation : 30 }, title: title });
+						markers[i] = new google.maps.Marker({map: map, icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW, scale: 10, strokeColor: '#222288' , rotation: 30 }, title: title });
 			
 						
 						
-						//markers[i] = new google.maps.Marker({map: map, icon : {labelOrigin: { x: 12, y: -10}}, title: title});
+						//markers[i] = new google.maps.Marker({map: map, icon: {labelOrigin: { x: 12, y: -10}}, title: title});
 						
 						//infowindows[i] = new google.maps.InfoWindow({ content: "<span>any html goes here zone=" + i +" </span>" });
 						
@@ -3728,7 +3728,7 @@
 
         this.getHeight = function () {
            return 4;
-			//return _.isUndefined(currentSettings.blocks) ? 4 : currentSettings.blocks;
+			//return _.isUndefined(currentSettings.blocks) ? 4: currentSettings.blocks;
 		    //return currentSettings.blocks;
        
         }
@@ -3958,7 +3958,7 @@
 		description: "Map with historical path from data point array - uses HelmSmart Data source to grab selected span",
         fill_size: true,
 
-		settings : GoogleMapsWidgetSettings,
+		settings: GoogleMapsWidgetSettings,
 		/*
 		
         settings: [
@@ -4122,10 +4122,10 @@
         {
             if(widgetElement && imageURL)
             {
-                var cacheBreakerURL = imageURL + (imageURL.indexOf("?") == -1 ? "?" : "&") + Date.now();
+                var cacheBreakerURL = imageURL + (imageURL.indexOf("?") == -1 ? "?": "&") + Date.now();
 
                 $(widgetElement).css({
-                    "background-image" :  "url(" + cacheBreakerURL + ")"
+                    "background-image":  "url(" + cacheBreakerURL + ")"
                 });
             }
         }
@@ -4133,10 +4133,10 @@
         this.render = function(element)
         {
             $(element).css({
-                width : "100%",
+                width: "100%",
                 height: "100%",
-                "background-size" : "cover",
-                "background-position" : "center"
+                "background-size": "cover",
+                "background-position": "center"
             });
 
             widgetElement = element;
