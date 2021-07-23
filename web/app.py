@@ -16909,18 +16909,36 @@ def freeboard_switch_bank_status():
 def get_dbstat():
 
   deviceapikey = request.args.get('apikey','')
-  Interval = request.args.get('Interval',"5min")
+  Interval = request.args.get('interval',"5min")
   rollup = request.args.get('rollup',"sum")
 
+  resolution = request.args.get('resolution',"")
+  mytimezone = request.args.get('timezone',"UTC")
   response = None
 
-  
-  starttime = 0
 
-  epochtimes = getepochtimes(Interval)
+  mydatetime = datetime.datetime.now()
+  myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
+  
+  starttime = request.args.get('start','0')
+  
+  response = None
+  
+
+  if int(starttime) != 0:
+    epochtimes = getendepochtimes(int(starttime), Interval)
+    
+  else:
+    epochtimes = getepochtimes(Interval)
+
+  
   startepoch = epochtimes[0]
   endepoch = epochtimes[1]
-  resolution = epochtimes[2]
+  if resolution == "":
+    resolution = epochtimes[2]
+
+  
+
 
   useremail = getuseremail(deviceapikey)
     
