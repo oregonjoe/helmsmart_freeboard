@@ -17119,8 +17119,9 @@ def get_dbstat():
           #log.info("get_dbstat deviceid %s - devicename %s", record[0], record[1])    
           if tag['deviceid'] == deviceid:
             #devicename = record[1]
-        
-            strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
+
+            #strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}        
+            strvalue = {'epoch': fields['time'],  'records': fields['records']}
             jsondata.append(strvalue)
 
 
@@ -17135,10 +17136,11 @@ def get_dbstat():
       if stat['value'] != None:
         total = total + float(stat['value'])
 
+    """        
     if len(jsondata) > 0:
       mydatetimestr = str(jsondata[0]['epoch'])
       stat0 = str(jsondata[0]['source']) + ":" + str(jsondata[0]['name']) + " = " +  str(jsondata[0]['value'])
-
+    """        
 
 
     mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
@@ -17149,9 +17151,8 @@ def get_dbstat():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
 
-    #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0})
-
+    #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':})
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'DeviceID':deviceid,'DeviceName':devicename,'total':int(total),'records':jsondata})
 
 
   except TypeError, e:
