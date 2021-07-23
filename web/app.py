@@ -17087,15 +17087,15 @@ def get_dbstat():
 
         if fields['records'] != None:
 
-          devicename = ""
+          #devicename = ""
           #deviceid = tag['deviceid']
-          for record in records:
-            log.info("get_dbstat deviceid %s - devicename %s", record[0], record[1])    
-            if record[0] == deviceid:
-              devicename = record[1]
-          
-              strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
-              jsondata.append(strvalue)
+          #for record in records:
+          #log.info("get_dbstat deviceid %s - devicename %s", record[0], record[1])    
+          if tag['deviceid'] == deviceid:
+            #devicename = record[1]
+        
+            strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
+            jsondata.append(strvalue)
 
 
 
