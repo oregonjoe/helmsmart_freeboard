@@ -17128,7 +17128,7 @@ def get_dbstat():
 
 
 
-    jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+    jsondata = sorted(jsondata,key=itemgetter('epoch'), reverse=True)
 
     total = 0
 
