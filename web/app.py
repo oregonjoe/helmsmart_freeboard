@@ -16904,6 +16904,314 @@ def freeboard_switch_bank_status():
 
   
 
+@app.route('/get_dbstat')
+@cross_origin()
+def get_dbstat():
+
+  deviceapikey = request.args.get('apikey','')
+  Interval = request.args.get('Interval',"5min")
+  rollup = request.args.get('rollup',"sum")
+
+  response = None
+
+  
+  starttime = 0
+
+  epochtimes = getepochtimes(Interval)
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  resolution = epochtimes[2]
+
+  useremail = getuseremail(deviceapikey)
+    
+  log.info("freeboard get_dbstat useremail %s", useremail)
+
+
+
+  deviceid = getedeviceid(deviceapikey)
+  
+  log.info("freeboard get_dbstat deviceid %s", deviceid)
+
+  if deviceid == "":
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+  measurement = "HelmSmart"
+  measurement = 'HS_' + str(deviceid)
+
+
+  devicename = getedevicename(deviceapikey):
+  log.info("freeboard get_dbstat devicename %s", devicename)  
+
+  response = None
+  
+  #measurement = "HelmSmartDB"
+  stat0 = '---'
+  stat1 = '---'
+  stat2 = '---'
+  stat3 = '---'
+  stat4 = '---'
+  stat5 = '---'
+  stat6 = '---'
+  stat7 = '---'
+  stat8 = '---'
+  stat9 = '---'
+  stat10 = '---'
+  stat11 = '---'
+  stat12 = '---'
+  stat13 = '---'
+  stat14 = '---'
+  stat15 = '---'
+  stat16 = '---'
+
+
+  #conn = db_pool.getconn()
+
+  #cursor = conn.cursor()
+  #cursor.execute("select deviceid, devicename from user_devices")
+  #records = cursor.fetchall()
+
+  #db_pool.putconn(conn)   
+
+
+
+  try:
+   
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+
+    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+     
+
+    
+    start = datetime.datetime.fromtimestamp(float(startepoch))
+    
+
+    end = datetime.datetime.fromtimestamp(float(endepoch))
+    resolutionstr = "PT" + str(resolution) + "S"
+
+    #rollup = "mean"
+
+ 
+
+    query = ('select {}(records) AS records FROM {} '
+                     'where time > {}s and time < {}s '
+                     'group by *, time({}s) LIMIT 1') \
+                .format(rollup,  measurement, 
+                        startepoch, endepoch,
+                        resolution) 
+
+    #query =(' select records as records from HelmSmartDB')      
+      
+    
+    log.info("inFlux-cloud Query %s", query)
+    
+
+    try:
+      response= db.query(query)
+    except:
+      e = sys.exc_info()[0]
+      log.info('inFluxDB: Error in geting inFluxDB data %s:  ' % e)
+        
+      return jsonify( message='Error in inFluxDB query 2', status='error')
+      #raise
+
+    
+    #return jsonify(results=response)
+    
+    #response =  shim.read_multi(keys=[SERIES_KEY], start=start, end=end, period=resolutionstr, rollup="mean" )
+    
+    #print 'inFluxDB read :', response.response.successful
+
+    
+    if not response:
+      #print 'inFluxDB Exception1:', response.response.successful, response.response.reason 
+      return jsonify( message='No response to return 1' , status='error')
+
+
+    #if not response.points:
+    #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
+    #  return jsonify( message='No data to return 2', status='error')
+
+    print 'inFluxDB processing data headers:'
+    jsondata=[]
+    jsonkey=[]
+    #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+    #jsonkey.append(strvaluekey)
+    print 'inFluxDB start processing data points:'
+    #log.info("freeboard Get InfluxDB response %s", response)
+
+    keys = response.raw.get('series',[])
+    #log.info("freeboard Get InfluxDB series keys %s", keys)
+
+
+
+
+    strvalue=""
+    
+    for series in keys:
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+      #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+      #log.info("freeboard Get InfluxDB series values %s ", series['values'])
+
+      """        
+      values = series['values']
+      for value in values:
+        log.info("freeboard Get InfluxDB series time %s", value[0])
+        log.info("freeboard Get InfluxDB series mean %s", value[1])
+      """
+
+      tag = series['tags']
+      log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+
+      #mydatetimestr = str(fields['time'])
+      strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
+      jsonkey.append(strvaluekey)        
+
+      log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
+
+      
+      for point in series['values']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
+          
+        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+
+        """                
+        if fields['records'] != None:
+
+          devicename = ""
+          deviceid = tag['deviceid']
+          for record in records:
+            #log.info("get_dbstats deviceid %s - devicename %s", record[0], record[1])    
+            if deviceid == record[0]:
+              devicename = record[1]
+        """                  
+        strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
+        jsondata.append(strvalue)
+
+
+
+
+
+    jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+
+    total = 0
+
+    for stat in jsondata:
+      if stat['value'] != None:
+        total = total + float(stat['value'])
+
+    if len(jsondata) > 0:
+      mydatetimestr = str(jsondata[0]['epoch'])
+      stat0 = str(jsondata[0]['source']) + ":" + str(jsondata[0]['name']) + " = " +  str(jsondata[0]['value'])
+
+    if len(jsondata) > 1:
+      stat1 = str(jsondata[1]['source']) + ":" + str(jsondata[1]['name']) + " = " +  str(jsondata[1]['value'])       
+
+    if len(jsondata) > 2:
+      stat2 = str(jsondata[2]['source']) + ":" + str(jsondata[2]['name']) + " = " +  str(jsondata[2]['value'])       
+
+    if len(jsondata) > 3:
+      stat3 = str(jsondata[3]['source']) + ":" + str(jsondata[3]['name']) + " = " +  str(jsondata[3]['value'])       
+
+    if len(jsondata) > 4:
+      stat4 = str(jsondata[4]['source']) + ":" + str(jsondata[4]['name']) + " = " +  str(jsondata[4]['value'])       
+
+    if len(jsondata) > 5:
+      stat5 = str(jsondata[5]['source']) + ":" + str(jsondata[5]['name']) + " = " +  str(jsondata[5]['value'])       
+
+    if len(jsondata) > 6:
+      stat6 = str(jsondata[6]['source']) + ":" + str(jsondata[6]['name']) + " = " +  str(jsondata[6]['value'])       
+
+    if len(jsondata) > 7:
+      stat7 = str(jsondata[7]['source']) + ":" + str(jsondata[7]['name']) + " = " +  str(jsondata[7]['value'])       
+
+    if len(jsondata) > 8:
+      stat8 = str(jsondata[8]['source']) + ":" + str(jsondata[8]['name']) + " = " +  str(jsondata[8]['value'])       
+
+    if len(jsondata) > 9:
+      stat9 = str(jsondata[9]['source']) + ":" + str(jsondata[9]['name']) + " = " +  str(jsondata[9]['value'])       
+
+    if len(jsondata) > 10:
+      stat10 = str(jsondata[10]['source']) + ":" + str(jsondata[10]['name']) + " = " +  str(jsondata[10]['value'])            
+
+    if len(jsondata) > 11:
+      stat11 = str(jsondata[11]['source']) + ":" + str(jsondata[11]['name']) + " = " +  str(jsondata[11]['value'])       
+
+    if len(jsondata) > 12:
+      stat12 = str(jsondata[12]['source']) + ":" + str(jsondata[12]['name']) + " = " +  str(jsondata[12]['value'])       
+
+    if len(jsondata) > 13:
+      stat13 = str(jsondata[13]['source']) + ":" + str(jsondata[13]['name']) + " = " +  str(jsondata[13]['value'])       
+
+    if len(jsondata) > 14:
+      stat14 = str(jsondata[14]['source']) + ":" + str(jsondata[14]['name']) + " = " +  str(jsondata[14]['value'])       
+
+    if len(jsondata) > 15:
+      stat15 = str(jsondata[15]['source']) + ":" + str(jsondata[15]['name']) + " = " +  str(jsondata[15]['value'])       
+
+    if len(jsondata) > 16:
+      stat16 = str(jsondata[16]['source']) + ":" + str(jsondata[16]['name']) + " = " +  str(jsondata[16]['value'])       
+
+    mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
+
+    #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', stat1,stat2)            
+
+    callback = request.args.get('callback')
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+
+    #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
+
+
+
+  except TypeError, e:
+      log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Type Error in InfluxDB mydata append %s:  ' % str(e))
+          
+  except KeyError, e:
+      log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Key Error in InfluxDB mydata append %s:  ' % str(e))
+
+  except NameError, e:
+      log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Name Error in InfluxDB mydata append %s:  ' % str(e))
+          
+  except IndexError, e:
+      log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+      log.info('get_influxdbcloud_data: Index Error in InfluxDB mydata append %s:  ' % str(e))  
+
+  except ValueError, e:
+    log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('get_influxdbcloud_data: Value Error in InfluxDB  %s:  ' % str(e))
+
+  except AttributeError, e:
+    log.info('get_influxdbcloud_data: Index error in InfluxDB mydata append %s:  ', response)
+    log.info('get_influxdbcloud_data: AttributeError in InfluxDB  %s:  ' % str(e))     
+
+  except InfluxDBClientError, e:
+    log.info('get_influxdbcloud_data: Exception Error in InfluxDB  %s:  ' % str(e))     
+  
+  except:
+    log.info('get_influxdbcloud_data: Error in geting freeboard response %s:  ', strvalue)
+    e = sys.exc_info()[0]
+    log.info('get_influxdbcloud_data: Error in geting freeboard ststs %s:  ' % e)
+    return jsonify( message='error processing data 3' , status='error')        
+
+  callback = request.args.get('callback')
+  return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+  
+
 @app.route('/get_dbstats')
 @cross_origin()
 def get_dbstats():
@@ -17191,6 +17499,8 @@ def get_dbstats():
 
   callback = request.args.get('callback')
   return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
 
 
 @app.route('/get_dbstats_html')
