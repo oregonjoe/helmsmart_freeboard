@@ -16940,7 +16940,7 @@ def get_dbstat():
   measurement = 'HS_' + str(deviceid)
 
 
-  devicename = getedevicename(deviceapikey):
+  devicename = getedevicename(deviceapikey)
   log.info("freeboard get_dbstat devicename %s", devicename)  
 
   response = None
