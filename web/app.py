@@ -17113,53 +17113,7 @@ def get_dbstat():
       mydatetimestr = str(jsondata[0]['epoch'])
       stat0 = str(jsondata[0]['source']) + ":" + str(jsondata[0]['name']) + " = " +  str(jsondata[0]['value'])
 
-    if len(jsondata) > 1:
-      stat1 = str(jsondata[1]['source']) + ":" + str(jsondata[1]['name']) + " = " +  str(jsondata[1]['value'])       
 
-    if len(jsondata) > 2:
-      stat2 = str(jsondata[2]['source']) + ":" + str(jsondata[2]['name']) + " = " +  str(jsondata[2]['value'])       
-
-    if len(jsondata) > 3:
-      stat3 = str(jsondata[3]['source']) + ":" + str(jsondata[3]['name']) + " = " +  str(jsondata[3]['value'])       
-
-    if len(jsondata) > 4:
-      stat4 = str(jsondata[4]['source']) + ":" + str(jsondata[4]['name']) + " = " +  str(jsondata[4]['value'])       
-
-    if len(jsondata) > 5:
-      stat5 = str(jsondata[5]['source']) + ":" + str(jsondata[5]['name']) + " = " +  str(jsondata[5]['value'])       
-
-    if len(jsondata) > 6:
-      stat6 = str(jsondata[6]['source']) + ":" + str(jsondata[6]['name']) + " = " +  str(jsondata[6]['value'])       
-
-    if len(jsondata) > 7:
-      stat7 = str(jsondata[7]['source']) + ":" + str(jsondata[7]['name']) + " = " +  str(jsondata[7]['value'])       
-
-    if len(jsondata) > 8:
-      stat8 = str(jsondata[8]['source']) + ":" + str(jsondata[8]['name']) + " = " +  str(jsondata[8]['value'])       
-
-    if len(jsondata) > 9:
-      stat9 = str(jsondata[9]['source']) + ":" + str(jsondata[9]['name']) + " = " +  str(jsondata[9]['value'])       
-
-    if len(jsondata) > 10:
-      stat10 = str(jsondata[10]['source']) + ":" + str(jsondata[10]['name']) + " = " +  str(jsondata[10]['value'])            
-
-    if len(jsondata) > 11:
-      stat11 = str(jsondata[11]['source']) + ":" + str(jsondata[11]['name']) + " = " +  str(jsondata[11]['value'])       
-
-    if len(jsondata) > 12:
-      stat12 = str(jsondata[12]['source']) + ":" + str(jsondata[12]['name']) + " = " +  str(jsondata[12]['value'])       
-
-    if len(jsondata) > 13:
-      stat13 = str(jsondata[13]['source']) + ":" + str(jsondata[13]['name']) + " = " +  str(jsondata[13]['value'])       
-
-    if len(jsondata) > 14:
-      stat14 = str(jsondata[14]['source']) + ":" + str(jsondata[14]['name']) + " = " +  str(jsondata[14]['value'])       
-
-    if len(jsondata) > 15:
-      stat15 = str(jsondata[15]['source']) + ":" + str(jsondata[15]['name']) + " = " +  str(jsondata[15]['value'])       
-
-    if len(jsondata) > 16:
-      stat16 = str(jsondata[16]['source']) + ":" + str(jsondata[16]['name']) + " = " +  str(jsondata[16]['value'])       
 
     mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
@@ -17170,7 +17124,7 @@ def get_dbstat():
 
 
     #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0,'stat1':stat1,'stat2':stat2,'stat3':stat3,'stat4':stat4,'stat5':stat5,'stat6':stat6,'stat7':stat7,'stat8':stat8,'stat9':stat9,'stat10':stat10,'stat11':stat11,'stat12':stat12,'stat13':stat13,'stat14':stat14,'stat15':stat15,'stat16':stat16})
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':stat0})
 
 
 
