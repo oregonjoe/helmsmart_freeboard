@@ -16945,7 +16945,8 @@ def get_dbstat():
 
   response = None
   
-  #measurement = "HelmSmartDB"
+  measurement = "HelmSmartDB"
+  
   stat0 = '---'
   stat1 = '---'
   stat2 = '---'
@@ -17084,18 +17085,17 @@ def get_dbstat():
           
         log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
 
-        """                
         if fields['records'] != None:
 
           devicename = ""
-          deviceid = tag['deviceid']
+          #deviceid = tag['deviceid']
           for record in records:
-            #log.info("get_dbstats deviceid %s - devicename %s", record[0], record[1])    
-            if deviceid == record[0]:
+            log.info("get_dbstat deviceid %s - devicename %s", record[0], record[1])    
+            if record[0] == deviceid:
               devicename = record[1]
-        """                  
-        strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
-        jsondata.append(strvalue)
+          
+              strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}
+              jsondata.append(strvalue)
 
 
 
