@@ -17133,8 +17133,8 @@ def get_dbstat():
     total = 0
 
     for stat in jsondata:
-      if stat['value'] != None:
-        total = total + float(stat['value'])
+      if stat['records'] != None:
+        total = total + float(stat['records'])
 
     """        
     if len(jsondata) > 0:
