@@ -17142,7 +17142,7 @@ def get_dbstat():
       stat0 = str(jsondata[0]['source']) + ":" + str(jsondata[0]['name']) + " = " +  str(jsondata[0]['value'])
     """        
 
-
+    mydatetimestr = str(jsondata[0]['epoch'])
     mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
 
     #log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', stat1,stat2)            
