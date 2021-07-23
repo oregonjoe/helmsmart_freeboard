@@ -17109,7 +17109,7 @@ def get_dbstat():
         for key, val in zip(series['columns'], point):
           fields[key] = val
           
-        log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+        #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
 
         if fields['records'] != None:
 
@@ -17152,7 +17152,7 @@ def get_dbstat():
 
 
     #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'update':'True','total':int(total),'stat0':})
-    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'DeviceID':deviceid,'DeviceName':devicename,'total':int(total),'records':jsondata})
+    return '{0}({1})'.format(callback, {'date_time':myjsondate, 'Interval':str(Interval),'Resolution':resolution, 'DeviceID':deviceid,'DeviceName':devicename,'total records':int(total),'records':jsondata})
 
 
   except TypeError, e:
