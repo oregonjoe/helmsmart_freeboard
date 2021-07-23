@@ -17016,7 +17016,15 @@ def get_dbstat():
 
     #rollup = "mean"
 
- 
+
+    query = ('select {}(records) AS records FROM {} '
+                     'where time > {}s and time < {}s '
+                     'group by *, time({}s) ') \
+                .format(rollup,  measurement, 
+                        startepoch, endepoch,
+                        resolution) 
+
+    """         
 
     query = ('select {}(records) AS records FROM {} '
                      'where time > {}s and time < {}s '
@@ -17024,7 +17032,7 @@ def get_dbstat():
                 .format(rollup,  measurement, 
                         startepoch, endepoch,
                         resolution) 
-
+    """        
     #query =(' select records as records from HelmSmartDB')      
       
     
