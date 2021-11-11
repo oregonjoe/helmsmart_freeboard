@@ -2518,8 +2518,8 @@
 				if(setState == false){
 					
 					 try {
-						if(indicatorElement.classList.contains('wait')){
-							indicatorElement.removeClass(".wait")}
+						if(indicatorElement.classList.contains('.wait')){
+							indicatorElement.removeClass("wait")}
 						}
 					catch(err) { };
 
