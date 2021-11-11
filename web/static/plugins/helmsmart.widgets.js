@@ -2515,71 +2515,51 @@
 		var request;
 		
 		// send HTTP post to URL to activate switch
-		this.sendValue = function (apikey,  switchid, new_val ) {
+		this.sendValue = function (apikey, widgettype, switchid, new_val ) {
 			    // freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
                 //});
 				
-			if(new_val == false)
+			if( widgettype == "switch")	
 			{
-				switchvalue=0;
-				setState = false;
-				
-			}
-			else
-			{
-				switchvalue=1;
-				setState = true;
-				
-			}
+				if(new_val == false)
+				{
+					switchvalue=0;
+					setState = false;
+					
+				}
+				else
+				{
+					switchvalue=1;
+					setState = true;
+					
+				}
 			
-			/*
-			var switchpgn = "$PCDIN,01F20E,00000000,00,"
-			switchpgn = switchpgn + toHex(switchInstance);
-			
-			pgnvalue = switchStates[3] << 2 | switchStates[2];
-			switchpgn = switchpgn + Number(pgnvalue).toString(16);
-			
-			pgnvalue = switchStates[1] << 2 | switchStates[0];
-			switchpgn = switchpgn + Number(pgnvalue).toString(16);
 
-			pgnvalue = switchStates[7] << 2 | switchStates[6];
-			switchpgn = switchpgn + Number(pgnvalue).toString(16);
-			
-			pgnvalue = switchStates[5] << 2 | switchStates[4];
-			switchpgn = switchpgn + Number(pgnvalue).toString(16);
-			
-			pgnvalue = switchStates[11] << 2 | switchStates[10];
-			switchpgn = switchpgn + Number(pgnvalue).toString(16);
-			
-			pgnvalue = switchStates[9] << 2 | switchStates[8];
-			switchpgn = switchpgn + Number(pgnvalue).toString(16);
-			
-			pgnvalue = switchStates[15] << 2 | switchStates[14];
-			switchpgn = switchpgn + Number(pgnvalue).toString(16);
-			
-			pgnvalue = switchStates[13] << 2 | switchStates[12];
-			switchpgn = switchpgn + Number(pgnvalue).toString(16);
-			
-			switchpgn = switchpgn + "FFFFFF*24"
-*/
-			
-			
-			///var url = "http://www.helmsmart.net/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"	
-			
-			//var url = "https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
-
-			//var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/sendswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8&switch=$PCDIN,01F20E,00000000,00,01010000FFFFFFFF*24"
-			//var url = "https://thingproxy.freeboard.io/fetch/https://pushsmartdata.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
-		   // var url = "https://helmsmart-freeboard.herokuapp.com/setswitchapi?deviceapikey=2c76ae5a6f20125071a988b23cd4a6c8"
-			
 				var url = "https://helmsmart-freeboard.herokuapp.com/setswitchapi";
 				url = url + "?deviceapikey=" + currentSettings.apikey;
 
 				url = url + "&instance=" + switchInstance ;
 				url = url + "&switchid=" + switchid ;
 				url = url + "&switchvalue=" + switchvalue ;
-				
-				
+			}	
+			else if( widgettype == "dimmer")	
+			{
+
+					if(new_val >= 0 && new_val <= 100)
+						dimmervalue=new_val;
+					else
+						dimmervalue=101;
+	
+			
+
+				var url = "https://helmsmart-freeboard.herokuapp.com/setdimmerapi";
+				url = url + "?deviceapikey=" + currentSettings.apikey;
+
+				url = url + "&instance=" + switchInstance ;
+				url = url + "&dimmerid=" + switchid ;
+				url = url + "&dimmervalue=" + dimmervalue ;
+			}	
+			
 			
 			request = new XMLHttpRequest();
             if (!request) {
@@ -2651,10 +2631,34 @@
 						freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
 						});
 					else {
-						this.sendValue(apikey,  switchid, new_val);
+						this.sendValue(apikey, currentSettings.indicatortype, switchid, new_val);
 					}
 				}
 			}
+			else if (currentSettings.indicatortype == "dimmer")
+			{
+				if(gdisableIndicatorClick == false)
+				{
+					var new_val = !isOn
+					var new_val_array = []
+					new_val_array.push(new_val);
+					
+					//this.onCalculatedValueChanged('value', new_val_array);
+					var apikey =  currentSettings.apikey;
+					//var switchinstance = currentSettings.instance;
+					var switchid = currentSettings.switchid;
+					
+					
+					if (_.isUndefined(apikey))
+						freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
+						});
+					else {
+						this.sendValue(apikey, currentSettings.indicatortype, switchid, new_val);
+					}
+				}
+			}
+			
+			
         }
 		
 		
@@ -2862,12 +2866,16 @@
 				{
 					"name": "Switch Bank",
 					"value": "switch"
+				} 
+				{
+					"name": "Dimmer Zone",
+					"value": "dimmer"
 				}, 
 				]
 			},
 			{
 			"name": "indicatormode",
-			"display_name": "Type",
+			"display_name": "Mode",
 			"type": "option",
 			"default_value": "active_low",	
 			"options": [
