@@ -2503,7 +2503,13 @@
 				if(setState == true){
 					
 				 try {	
-					if(indicatorElement.classList.contains('on.wait')){
+				 
+					const tokens = indicatorElement.className.split(' ');
+				 
+					if (tokens.indexOf('wait') !== -1) {
+					 indicatorElement.removeClass("wait")}
+					 
+					if(indicatorElement.classList.contains('wait')){
 						indicatorElement.removeClass("wait")}
 					}
 				catch(err) { };			
@@ -2517,8 +2523,16 @@
             else {
 				if(setState == false){
 					
+					
+					
 					 try {
-						if(indicatorElement.classList.contains('off.wait')){
+						 
+						 const tokens = indicatorElement.className.split(' ');
+						 
+						if (tokens.indexOf('wait') !== -1) {
+						indicatorElement.removeClass("wait")}
+					 
+						if(indicatorElement.classList.contains('wait')){
 							indicatorElement.removeClass("wait")}
 						}
 					catch(err) { };
