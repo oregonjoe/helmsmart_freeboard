@@ -2503,7 +2503,7 @@
 				if(setState == true){
 					
 				 try {	
-					if(indicatorElement.classList.contains('.wait')){
+					if(indicatorElement.classList.contains('on.wait')){
 						indicatorElement.removeClass("wait")}
 					}
 				catch(err) { };			
@@ -2518,7 +2518,7 @@
 				if(setState == false){
 					
 					 try {
-						if(indicatorElement.classList.contains('.wait')){
+						if(indicatorElement.classList.contains('off.wait')){
 							indicatorElement.removeClass("wait")}
 						}
 					catch(err) { };
