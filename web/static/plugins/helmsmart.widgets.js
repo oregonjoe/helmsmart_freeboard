@@ -2493,7 +2493,8 @@
 
             if (isOn) {
 				if(setState == true){
-					indicatorElement.removeClass("wait")
+					if(indicatorElement.classList.contains('wait')){
+						indicatorElement.removeClass("wait")}
 					gdisableIndicatorClick = false;}
 					
 				indicatorElement.removeClass("off")
@@ -2502,7 +2503,8 @@
             }
             else {
 				if(setState == false){
-					indicatorElement.removeClass("wait")
+					if(indicatorElement.classList.contains('wait')){
+						indicatorElement.removeClass("wait")}
 					gdisableIndicatorClick = false;}
 					
 				indicatorElement.addClass("off")
