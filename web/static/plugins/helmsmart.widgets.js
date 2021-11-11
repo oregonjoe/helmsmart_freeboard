@@ -2866,11 +2866,11 @@
 				{
 					"name": "Switch Bank",
 					"value": "switch"
-				} 
+				}, 
 				{
 					"name": "Dimmer Zone",
 					"value": "dimmer"
-				}, 
+				}
 				]
 			},
 			{
