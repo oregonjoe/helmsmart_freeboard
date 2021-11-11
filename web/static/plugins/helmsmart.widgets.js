@@ -2639,7 +2639,8 @@
 			{
 				if(gdisableIndicatorClick == false)
 				{
-					var new_val = !isOn
+					var new_val = currentSettings.threshold
+					//var new_val = !isOn
 					var new_val_array = []
 					new_val_array.push(new_val);
 					
