@@ -2765,7 +2765,7 @@
 							}
 							
 						}
-						if (currentSettings.indicatortype == "dimmer")
+						else if (currentSettings.indicatortype == "dimmer")
 						{
 
 							var threshold = currentSettings.threshold
