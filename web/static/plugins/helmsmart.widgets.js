@@ -2487,14 +2487,27 @@
 				return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase()
 			}
 			
+				 try {
+				 currentWind.speed = position.truewindspeed;
+				 currentWind.direction = position.truewinddir;
+				}
+				catch(err) { };			
+			
+			
+			
 			
         function updateState() {
             //indicatorElement.toggleClass("on", isOn);
 
             if (isOn) {
 				if(setState == true){
+					
+				 try {	
 					if(indicatorElement.classList.contains('wait')){
 						indicatorElement.removeClass("wait")}
+					}
+				catch(err) { };			
+						
 					gdisableIndicatorClick = false;}
 					
 				indicatorElement.removeClass("off")
@@ -2503,8 +2516,14 @@
             }
             else {
 				if(setState == false){
-					if(indicatorElement.classList.contains('wait')){
-						indicatorElement.removeClass("wait")}
+					
+					 try {
+						if(indicatorElement.classList.contains('wait')){
+							indicatorElement.removeClass("wait")}
+						}
+					catch(err) { };
+
+					
 					gdisableIndicatorClick = false;}
 					
 				indicatorElement.addClass("off")
