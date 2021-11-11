@@ -2765,6 +2765,56 @@
 							}
 							
 						}
+						if (currentSettings.indicatortype == "dimmer")
+						{
+
+							var threshold = currentSettings.threshold
+							var switchvalue = switchvalue = "---";
+													
+						
+							for(i=0; i< newValue.length; i++)
+							{
+								if(newValue[i].value != "---")
+								{
+									switchvalue = newValue[i].value;
+									break;
+								}
+							}
+						
+						
+							if (currentSettings.indicatormode == "active_high_EQ")
+							{
+								if(switchvalue == threshold)
+								{
+									
+									isOn = true;
+									updateState();
+								}
+								else
+								{
+									
+									isOn = false;
+									updateState();
+								}
+								
+							}
+							else if (currentSettings.indicatormode == "active_low_EQ")
+							{
+								if(switchvalue == threshold)
+								{
+									
+									isOn = false;
+									updateState();
+								}
+								else 
+								{
+									
+									isOn = true;
+									updateState();
+								}
+								
+							}
+						}
 						else
 						{
 							var switchid=currentSettings.switchid;
@@ -2895,6 +2945,14 @@
 					"name": "Active High - Greater then ",
 					"value": "active_high_GT"
 				}, 
+				{
+					"name": "Active High - equal to ",
+					"value": "active_high_EQ"
+				}, 
+				{
+					"name": "Active Low - equal to ",
+					"value": "active_low_EQ"
+				}
 
 				]
 			},
