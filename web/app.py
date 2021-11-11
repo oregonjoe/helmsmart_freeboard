@@ -19782,6 +19782,85 @@ def setswitchapi():
   
   return jsonify(result="OK", switch=newswitchitem)
 
+@app.route('/setdimmerapi')
+@cross_origin()
+def setdimmerapi():
+  deviceapikey = request.args.get('deviceapikey', '000000000000')
+  switchid = request.args.get('switchid', "0")
+  switchvalue = request.args.get('switchvalue', "3")
+  instance = request.args.get('instance', "0")
+
+
+  deviceid = getedeviceid(deviceapikey)
+    
+  log.info("setdimmerapi deviceid %s", deviceid)
+  #log.info("sendswitchapi switchpgn %s", switchpgn)
+  
+  if deviceid == "":
+    return jsonify(result="Error", switch=switchpgn)
+
+  # Create an client object
+  #cache = IronCache()
+  switchitem=""
+
+
+  try:
+    switchitem = mc.get(deviceid + '_switch_'+str(instance))
+
+    log.info('setdimmerapi - MemCache   deviceid %s payload %s:  ', deviceid, switchitem)
+
+  except NameError, e:
+    log.info('setdimmerapi - MemCache NameError %s:  ' % str(e))
+
+    
+  except:
+    switchitem = ""
+    log.info('setdimmerapi - MemCache error  deviceid %s payload %s:  ', deviceid, switchitem)
+    e = sys.exc_info()[0]
+    log.info('setdimmerapi - MemCache error %s:  ' % e)
+
+
+  newswitchitem=[]      
+  if switchitem != "" and switchitem != "" and switchitem is not None:
+    log.info("setswitchapi - IronCache  key exists %s", switchitem.value)
+    jsondata = json.loads(switchitem.value)
+    for item in jsondata:
+      newswitchitem.append(item)
+    
+  switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
+  newswitchitem.append(switchpgn)
+  log.info("setswitchapi - IronCache  new key  %s",json.dumps(newswitchitem))
+
+   
+  # Put an item
+  #cache.put(cache="001EC0B415BF", key="switch", value="$PCDIN,01F20E,00000000,00,0055000000FFFFFF*23")
+  #cache.put(cache="001EC0B415BF", key="switch", value=switchpgn )
+  #switchpgn = {'instance':instance, 'switchid':switchid, 'switchvalue':switchvalue}
+  log.info("Cache put switch key %s", newswitchitem)
+  log.info("setswitchapi - Cache  put key %s", "switch_"+str(instance))
+  #item=cache.put(cache=deviceid, key="switch_"+str(instance), value=newswitchitem )
+  #log.info("IronCache response key %s", item)
+
+  try:
+    mc.set(deviceid + "switch_"+str(instance) , newswitchitem, time=600)
+    log.info('setswitchapi - MemCache  set deviceid %s payload %s:  ', deviceid, newswitchitem)
+
+  except NameError, e:
+    log.info('setswitchapi - MemCache set NameError %s:  ' % str(e))
+
+    
+  except:
+    newswitchitem = ""
+    log.info('setswitchapi - MemCache set error  deviceid %s payload %s:  ', deviceid, newswitchitem)
+    e = sys.exc_info()[0]
+    log.info('setswitchapi - MemCache set error %s:  ' % e)
+
+
+  
+  return jsonify(result="OK", switch=newswitchitem)
+
+
+
 # set the secret key.  keep this really secret:
 app.secret_key = 'H0Zr27j/3yX R~CDI!jmN]CDI/,?RT'
 
