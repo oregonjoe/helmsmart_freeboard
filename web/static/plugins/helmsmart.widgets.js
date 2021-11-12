@@ -2502,14 +2502,9 @@
 					
 				 try {	
 				 
-					const tokens = indicatorElement.className.split(' ');
-				 
-					if (tokens.indexOf('wait') !== -1) {
-					 indicatorElement.removeClass("wait")}
-					 
-					if(indicatorElement.classList.contains('wait')){
-						indicatorElement.removeClass("wait")}
-					}
+							if(indicatorElement.hasClass('wait')){
+							indicatorElement.removeClass("wait")}
+						}
 				catch(err) {
 
 				console.log("error object toString():");
@@ -2529,12 +2524,9 @@
 					
 					 try {
 						 
-						 const tokens = indicatorElement.className.split(' ');
-						 
-						if (tokens.indexOf('wait') !== -1) {
-						indicatorElement.removeClass("wait")}
+						
 					 
-						if(indicatorElement.classList.contains('wait')){
+						if(indicatorElement.hasClass('wait')){
 							indicatorElement.removeClass("wait")}
 						}
 					catch(err) {
