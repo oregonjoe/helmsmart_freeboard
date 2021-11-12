@@ -2483,15 +2483,13 @@
 		  }, 500);
 		}
 		*/
+		
+		
 			function toHex(d) {
 				return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase()
 			}
 			
-				 try {
-				 currentWind.speed = position.truewindspeed;
-				 currentWind.direction = position.truewinddir;
-				}
-				catch(err) { };			
+		
 			
 			
 			
@@ -2512,8 +2510,12 @@
 					if(indicatorElement.classList.contains('wait')){
 						indicatorElement.removeClass("wait")}
 					}
-				catch(err) { };			
-						
+				catch(err) {
+
+				console.log("error object toString():");
+				console.log("\t" + err.toString());
+				};			
+									
 					gdisableIndicatorClick = false;}
 					
 				indicatorElement.removeClass("off")
@@ -2535,7 +2537,11 @@
 						if(indicatorElement.classList.contains('wait')){
 							indicatorElement.removeClass("wait")}
 						}
-					catch(err) { };
+					catch(err) {
+
+				console.log("error object toString():");
+				console.log("\t" + err.toString());
+				};		
 
 					
 					gdisableIndicatorClick = false;}
