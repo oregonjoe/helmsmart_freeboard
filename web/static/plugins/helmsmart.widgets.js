@@ -2497,21 +2497,23 @@
         function updateState() {
             //indicatorElement.toggleClass("on", isOn);
 
+			
+				try {	
+					if(indicatorElement.hasClass('wait')){
+					indicatorElement.removeClass("wait")}
+				}
+				catch(err) {
+				console.log("error object toString():");
+				console.log("\t" + err.toString());
+				};	
+			
+			
             if (isOn) {
 				if(setState == true){
 					
-				 try {	
-				 
-							if(indicatorElement.hasClass('wait')){
-							indicatorElement.removeClass("wait")}
-						}
-				catch(err) {
-
-				console.log("error object toString():");
-				console.log("\t" + err.toString());
-				};			
+		
 									
-					gdisableIndicatorClick = false;}
+				gdisableIndicatorClick = false;}
 					
 				indicatorElement.removeClass("off")
 				indicatorElement.addClass("on")
@@ -2521,22 +2523,8 @@
 				if(setState == false){
 					
 					
-					
-					 try {
-						 
-						
-					 
-						if(indicatorElement.hasClass('wait')){
-							indicatorElement.removeClass("wait")}
-						}
-					catch(err) {
-
-				console.log("error object toString():");
-				console.log("\t" + err.toString());
-				};		
-
-					
-					gdisableIndicatorClick = false;}
+	
+				gdisableIndicatorClick = false;}
 					
 				indicatorElement.addClass("off")
 				indicatorElement.removeClass("on")
