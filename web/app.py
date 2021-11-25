@@ -12952,14 +12952,14 @@ def freeboard_engine_json():
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
-        value1 = '---'
-        value2 = '---'
-        value3 = '---'
-        value4 = '---'
-        value5 = '---'
-        value6 = '---'
-        value7 = '---'
-        value8 = '---'
+        value1 = ""
+        value2 = ""
+        value3 = ""
+        value4 = ""
+        value5 = ""
+        value6 =""
+        value7 = ""
+        value8 = ""
         
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
