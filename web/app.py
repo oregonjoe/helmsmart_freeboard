@@ -12975,12 +12975,12 @@ def freeboard_engine_json():
           dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
 
-        #values_json.append("'epoch':ts")
+        #values_json.append("'epoch':"str(ts))
           
         if point['speed'] is not None:
           value1 = convertfbunits( point['speed'], convertunittype('rpm', units))
         speed.append({'epoch':ts, 'value':value1})
-        #values_json.append("'rpm':value1")
+        #values_json.append("'rpm':"strvalue1")
         
         if point['engine_temp'] is not None:
           value2 =  convertfbunits(point['engine_temp'], convertunittype('temperature', units))
@@ -13010,7 +13010,9 @@ def freeboard_engine_json():
         if point['total_engine_hours'] is not None:
           value8 = convertfbunits(point['total_engine_hours'], convertunittype('hours', units))
         total_engine_hours.append({'epoch':ts, 'value':value8})
-        #values_json.append('eng_hours':value8)          
+        #values_json.append('eng_hours':value8)
+        
+        values_json.append({'epoch':ts,'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3,'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})    
 
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
