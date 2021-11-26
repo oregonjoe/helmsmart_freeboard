@@ -12975,42 +12975,42 @@ def freeboard_engine_json():
           dtt = mydatetimetz.timetuple()
           ts = int(mktime(dtt)*1000)
 
-          values_json.append({'epoch':ts})
+          values_json.append('epoch':ts)
           
         if point['speed'] is not None:
           value1 = convertfbunits( point['speed'], convertunittype('rpm', units))
         speed.append({'epoch':ts, 'value':value1})
-        values_json.append({'rpm':value1})
+        values_json.append('rpm':value1)
         
         if point['engine_temp'] is not None:
           value2 =  convertfbunits(point['engine_temp'], convertunittype('temperature', units))
         engine_temp.append({'epoch':ts, 'value':value2})
-        values_json.append({'eng_temp':value2})          
+        values_json.append('eng_temp':value2)          
         
         if point['oil_pressure'] is not None:
           value3=  convertfbunits(point['oil_pressure'], convertunittype('pressure', units))
         oil_pressure.append({'epoch':ts, 'value':value3})
-        values_json.append({'oil_pressure':value3})          
+        values_json.append('oil_pressure':value3)          
         
         if point['alternator_potential'] is not None:
           value4 =  convertfbunits(point['alternator_potential'], convertunittype('volts', units))
         alternator_potential.append({'epoch':ts, 'value':value4})
-        values_json.append({'alternator':value4})          
+        values_json.append('alternator':value4)          
         
         if point['fuel_rate'] is not None:
           value6 =  convertfbunits(point['fuel_rate'], convertunittype('flow', units))
         fuel_rate.append({'epoch':ts, 'value':value6})
-        values_json.append({'fuel_rate':value6})         
+        values_json.append('fuel_rate':value6)         
        
         if point['level'] is not None:
           value7=  convertfbunits(point['level'], convertunittype('%', units))
         level.append({'epoch':ts, 'value':value7})
-        values_json.append({'fuel_level':value7})          
+        values_json.append('fuel_level':value7)          
         
         if point['total_engine_hours'] is not None:
           value8 = convertfbunits(point['total_engine_hours'], convertunittype('hours', units))
         total_engine_hours.append({'epoch':ts, 'value':value8})
-        values_json.append({'eng_hours':value8})          
+        values_json.append('eng_hours':value8)          
 
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
