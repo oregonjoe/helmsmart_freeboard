@@ -12735,7 +12735,8 @@ def freeboard_engine_json():
     units= request.args.get('units',"US")
     mytimezone = request.args.get('timezone',"UTC")
     mode = request.args.get('mode',"mean")
-    
+    formattype = request.args.get('format',"freeboard")
+        
     starttime = request.args.get('start','0')
     
     response = None
@@ -13017,8 +13018,12 @@ def freeboard_engine_json():
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'rpm':value1, 'eng_temp':value2, 'oil_pressure':value3, 'alternator':value4, 'tripfuel':value5, 'fuel_rate':value6, 'fuel_level':value7, 'eng_hours':value8})
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','rpm':list(reversed(speed)), 'eng_temp':list(reversed(engine_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator_potential)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(level)), 'eng_hours':list(reversed(total_engine_hours))})     
       #return '{0}({1})'.format({"date_time":myjsondate, "update":"True","rpm":list(reversed(speed)), "eng_temp":list(reversed(engine_temp)), "oil_pressure":list(reversed(oil_pressure)),"alternator":list(reversed(alternator_potential)), "tripfuel":list(reversed(tripfuel)), "fuel_rate":list(reversed(fuel_rate)), "fuel_level":list(reversed(level)), "eng_hours":list(reversed(total_engine_hours))})
-      #return jsonify({'date_time':myjsondate, 'update':'True','rpm':list(reversed(speed)), 'eng_temp':list(reversed(engine_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator_potential)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(level)), 'eng_hours':list(reversed(total_engine_hours))})    
-      return jsonify({'date_time':myjsondate, 'engine_data':list(reversed(values_json))}) 
+
+      if formattype == "json":
+        return jsonify({'date_time':myjsondate, 'engine_data':list(reversed(values_json))}) 
+
+      else:
+        return jsonify({'date_time':myjsondate, 'update':'True','rpm':list(reversed(speed)), 'eng_temp':list(reversed(engine_temp)), 'oil_pressure':list(reversed(oil_pressure)),'alternator':list(reversed(alternator_potential)), 'tripfuel':list(reversed(tripfuel)), 'fuel_rate':list(reversed(fuel_rate)), 'fuel_level':list(reversed(level)), 'eng_hours':list(reversed(total_engine_hours))})    
 
 
 
