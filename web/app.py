@@ -20176,53 +20176,62 @@ def setdimmerapi():
   dimmerpgn = {'instance':instance, 'dimmerid':dimmerid, 'dimmervalue':dimmervalue, 'dimmeroverride':dimmeroverride}
   log.info("setdimmerapi - MemCache  new dimmerpgn %s", dimmerpgn)
 
-  newdimmeritem=[]      
-  if dimmeritem != "" and dimmeritem != None and dimmeritem is not None:
-    log.info("setdimmerMemCache - MemCache  key exists %s", dimmeritem)
-    #jsondata = json.loads(dimmeritem)
-    jsondata = dimmeritem
-    #log.info("setdimmerapi - IronCache  key exists %s", dimmeritem.value)
-    #jsondata = json.loads(dimmeritem.value)
-    for item in jsondata:
-      #do not append old item if it matches the new one
-      # need to checkif both old dimmerid and dimmerinstance match new one
-      # If they match, dont add old one - we do this so we can update if we get a change in dimmeroverride value
-      # Overrides (!=0) are always appended
-      #if item != dimmerpgn:
-      if (int(item['instance']) != int(dimmerpgn['instance'])) or (int(item['dimmerid']) != int(dimmerpgn['dimmerid'])) :
-        
-        # not all items have all keys so we need to rebuild them
-        itemInstance = item.get('instance', '0')
-        itemDimmerid = item.get('dimmerid', '0')
-        itemDimmervalue = item.get('dimmervalue', '0')
-        itemDimmeroverride = item.get('dimmeroverride', '0')
-        
-        newItem = {'instance':itemInstance, 'dimmerid':itemDimmerid, 'dimmervalue':itemDimmervalue, 'dimmeroverride':itemDimmeroverride}
-        
-        newdimmeritem.append(newItem)
-        log.info("setdimmerMemCache - old  keys are different %s", newdimmeritem)
+  newdimmeritem=[]
 
-      # if instance and ID are equal but old override value is 2 (override enabled) and new value is 0 (NULL from Alert)
-      # Keep override active
-      elif (int(item['instance'])  == int(dimmerpgn['instance'])) and (int(item['dimmerid']) == int(dimmerpgn['dimmerid'])):
-        #if we are disable override mode - new value =1 comes from web page api
-        #
-        # Not all ITEMs have a dimmeroverride so we need to check if one exists first
-        # itemDimmeroverride =  item['dimmeroverride']
-        itemDimmeroverride = item.get('dimmeroverride', '0')
-        
-        if int(dimmerpgn['dimmeroverride']) == 1 and int(itemDimmeroverride) >= 2:
-          #dimmerpgn = {'instance':instance, 'dimmerid':dimmerid, 'dimmervalue':dimmervalue, 'dimmeroverride':'0'}
-          dimmerpgn = {'instance':instance, 'dimmerid':dimmerid, 'dimmervalue':dimmervalue, 'dimmeroverride':'1'}
-          log.info("setdimmerMemCache - old  keys are same with new override = 1 and old >=2 %s", dimmerpgn)
+  try:
+    if dimmeritem != "" and dimmeritem != None and dimmeritem is not None:
+      log.info("setdimmerMemCache - MemCache  key exists %s", dimmeritem)
+      #jsondata = json.loads(dimmeritem)
+      jsondata = dimmeritem
+      #log.info("setdimmerapi - IronCache  key exists %s", dimmeritem.value)
+      #jsondata = json.loads(dimmeritem.value)
+      for item in jsondata:
+        #do not append old item if it matches the new one
+        # need to checkif both old dimmerid and dimmerinstance match new one
+        # If they match, dont add old one - we do this so we can update if we get a change in dimmeroverride value
+        # Overrides (!=0) are always appended
+        #if item != dimmerpgn:
+        if (int(item['instance']) != int(dimmerpgn['instance'])) or (int(item['dimmerid']) != int(dimmerpgn['dimmerid'])) :
           
-        #If wee are in override mode  - replace values with override  
-        elif int(dimmerpgn['dimmeroverride'] )  == 0 and int(itemDimmeroverride) >= 2:
-          dimmerpgn['dimmervalue'] = item['dimmervalue'] 
-          dimmerpgn['dimmeroverride'] = itemDimmeroverride
-          log.info("setdimmerMemCache - old  keys are same with new override =0 old >=2 %s", dimmerpgn)
+          # not all items have all keys so we need to rebuild them
+          itemInstance = item.get('instance', '0')
+          itemDimmerid = item.get('dimmerid', '0')
+          itemDimmervalue = item.get('dimmervalue', '0')
+          itemDimmeroverride = item.get('dimmeroverride', '0')
+          
+          newItem = {'instance':itemInstance, 'dimmerid':itemDimmerid, 'dimmervalue':itemDimmervalue, 'dimmeroverride':itemDimmeroverride}
+          
+          newdimmeritem.append(newItem)
+          log.info("setdimmerMemCache - old  keys are different %s", newdimmeritem)
 
+        # if instance and ID are equal but old override value is 2 (override enabled) and new value is 0 (NULL from Alert)
+        # Keep override active
+        elif (int(item['instance'])  == int(dimmerpgn['instance'])) and (int(item['dimmerid']) == int(dimmerpgn['dimmerid'])):
+          #if we are disable override mode - new value =1 comes from web page api
+          #
+          # Not all ITEMs have a dimmeroverride so we need to check if one exists first
+          # itemDimmeroverride =  item['dimmeroverride']
+          itemDimmeroverride = item.get('dimmeroverride', '0')
           
+          if int(dimmerpgn['dimmeroverride']) == 1 and int(itemDimmeroverride) >= 2:
+            #dimmerpgn = {'instance':instance, 'dimmerid':dimmerid, 'dimmervalue':dimmervalue, 'dimmeroverride':'0'}
+            dimmerpgn = {'instance':instance, 'dimmerid':dimmerid, 'dimmervalue':dimmervalue, 'dimmeroverride':'1'}
+            log.info("setdimmerMemCache - old  keys are same with new override = 1 and old >=2 %s", dimmerpgn)
+            
+          #If wee are in override mode  - replace values with override  
+          elif int(dimmerpgn['dimmeroverride'] )  == 0 and int(itemDimmeroverride) >= 2:
+            dimmerpgn['dimmervalue'] = item['dimmervalue'] 
+            dimmerpgn['dimmeroverride'] = itemDimmeroverride
+            log.info("setdimmerMemCache - old  keys are same with new override =0 old >=2 %s", dimmerpgn)
+
+  except:
+    dimmeritem = ""
+    mc.delete(deviceid + '_dimmer')
+    log.info('setdimmerapi - MemCache error  deviceid %s payload %s:  ', deviceid, dimmeritem)
+    e = sys.exc_info()[0]
+    log.info('setdimmerapi - MemCache error %s:  ' % e)
+    return jsonify(result="error in MemCacheKey")
+            
 
           
   #dimmerpgn = {'instance':instance, 'dimmerid':dimmerid, 'dimmervalue':dimmervalue}
