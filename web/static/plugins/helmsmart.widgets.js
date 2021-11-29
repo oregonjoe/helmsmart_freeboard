@@ -2536,7 +2536,7 @@
 		var request;
 		
 		// send HTTP post to URL to activate switch
-		this.sendValue = function (apikey, widgettype, switchid, new_val ) {
+		this.sendValue = function (apikey, widgettype, switchid, switchInstance, new_val ) {
 			    // freeboard.showDialog($("<div align='center'>send switch</div>"), "Status!", "OK", null, function () {
                 //});
 				
@@ -2646,13 +2646,13 @@
 					var apikey =  currentSettings.apikey;
 					//var switchinstance = currentSettings.instance;
 					var switchid = currentSettings.switchid;
-					
+					var switchinstance = currentSettings.switchinstance;
 					
 					if (_.isUndefined(apikey))
 						freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
 						});
 					else {
-						this.sendValue(apikey, currentSettings.indicatortype, switchid, new_val);
+						this.sendValue(apikey, currentSettings.indicatortype, switchid, switchinstance, new_val);
 					}
 				}
 			}
@@ -2669,13 +2669,13 @@
 					var apikey =  currentSettings.apikey;
 					//var switchinstance = currentSettings.instance;
 					var switchid = currentSettings.switchid;
-					
+					var switchinstance = currentSettings.switchinstance;
 					
 					if (_.isUndefined(apikey))
 						freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
 						});
 					else {
-						this.sendValue(apikey, currentSettings.indicatortype, switchid, new_val);
+						this.sendValue(apikey, currentSettings.indicatortype, switchid, switchinstance, new_val);
 					}
 				}
 			}
