@@ -2646,7 +2646,7 @@
 					var apikey =  currentSettings.apikey;
 					//var switchinstance = currentSettings.instance;
 					var switchid = currentSettings.switchid;
-					var switchinstance = currentSettings.switchinstance;
+					var switchinstance = currentSettings.instance;
 					
 					if (_.isUndefined(apikey))
 						freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
@@ -2669,7 +2669,7 @@
 					var apikey =  currentSettings.apikey;
 					//var switchinstance = currentSettings.instance;
 					var switchid = currentSettings.switchid;
-					var switchinstance = currentSettings.switchinstance;
+					var switchinstance = currentSettings.instance;
 					
 					if (_.isUndefined(apikey))
 						freeboard.showDialog($("<div align='center'>apikey undefined</div>"), "Error!", "OK", null, function () {
