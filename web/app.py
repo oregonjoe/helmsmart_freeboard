@@ -9532,7 +9532,7 @@ def freeboard_winddata():
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
-    
+    apiformat  = request.args.get('format',"")
     response = None
 
 
@@ -9762,11 +9762,25 @@ def freeboard_winddata():
       callback = request.args.get('callback')
       myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
 
+
+
+      if apiformat == "json":
+
+        if  windtype =="apparent":
+          response = make_response( jsonify({'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))}), 200)
+        else:
+          response = make_response( jsonify({'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))}), 200)
+        
+        response.headers["Content-Type"] = "application/json; charset=UTF-8"
+        return response
       
-      if  windtype =="apparent":
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))})
-      else:
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))})
+      else:  
+
+      
+        if  windtype =="apparent":
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))})
+        else:
+          return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'windgusts':list(reversed(wind_gusts))})
    
 
       
@@ -9795,7 +9809,7 @@ def freeboard_winddata_apparent():
     Interval = request.args.get('Interval',"5min")
     mytimezone = request.args.get('timezone',"UTC")
     starttime = request.args.get('start','0')
-    
+    apiformat  = request.args.get('format',"")   
     response = None
     
 
@@ -9931,8 +9945,19 @@ def freeboard_winddata_apparent():
       log.info('freeboard: freeboard returning data values wind_speed:%s, wind_direction:%s  ', value1,value2)            
 
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','wind_speed':value1, 'wind_direction':value2,})
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+
+      if apiformat == "json":
+
+        response = make_response( jsonify( {'date_time':myjsondate, 'update':'True','wind_speed':value1, 'wind_direction':value2,}), 200)
+        
+        response.headers["Content-Type"] = "application/json; charset=UTF-8"
+        return response
+      
+      else:  
+
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','wind_speed':value1, 'wind_direction':value2,})
       
 
      
@@ -10145,7 +10170,7 @@ def freeboard_winddataTrue():
     serieskey = request.args.get('datakey','')
     windtype = request.args.get('type',"true")
     Interval = request.args.get('Interval',"5min")
-
+    apiformat  = request.args.get('format',"")
     starttime = request.args.get('start','0')
     
     response = None
@@ -10288,8 +10313,19 @@ def freeboard_winddataTrue():
       mydatetime = datetime.datetime.strptime(mydatetimestr[0], '%Y-%m-%dT%H:%M:%S')
       
       callback = request.args.get('callback')
-      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','truewindspeed':truewindspeed,'appwindspeed':appwindspeed,'truewinddir':truewinddir, 'appwinddir':appwinddir})
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+      if apiformat == "json":
+
+        response = make_response( jsonify({'date_time':myjsondate, 'update':'True','truewindspeed':truewindspeed,'appwindspeed':appwindspeed,'truewinddir':truewinddir, 'appwinddir':appwinddir}), 200)
+        
+        response.headers["Content-Type"] = "application/json; charset=UTF-8"
+        return response
+      
+      else:  
+
+      
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','truewindspeed':truewindspeed,'appwindspeed':appwindspeed,'truewinddir':truewinddir, 'appwinddir':appwinddir})
 
     except TypeError, e:
         log.info('freeboard: Type Error in InfluxDB mydata append %s:  ', response)
@@ -10344,7 +10380,7 @@ def freeboard_location():
     resolution = request.args.get('resolution',"")
     postype = request.args.get('type',"NULL")
     mytimezone = request.args.get('timezone',"UTC")
-    
+    apiformat = request.args.get('format',"")
     starttime = request.args.get('start','0')
     
     response = None
@@ -10598,9 +10634,15 @@ def freeboard_location():
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
 
+      if apiformat == "json":
 
-      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':list(reversed(lat)), 'lng':list(reversed(lng)), 'position':list(reversed(position)), 'siv':list(reversed(siv))})     
+        response = make_response( jsonify({'date_time':myjsondate, 'update':'True','lat':list(reversed(lat)), 'lng':list(reversed(lng)), 'position':list(reversed(position)), 'siv':list(reversed(siv))}), 200)
+        response.headers["Content-Type"] = "application/json; charset=UTF-8"
+        return response
+      
+      else:  
+
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':list(reversed(lat)), 'lng':list(reversed(lng)), 'position':list(reversed(position)), 'siv':list(reversed(siv))})     
         
 
      
@@ -10634,7 +10676,7 @@ def freeboard_location_wind():
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
     source  = request.args.get('source',"")
-
+    apiformat = request.args.get('format',"")
     starttime = request.args.get('start','0')
     
     response = None
@@ -10898,9 +10940,15 @@ def freeboard_location_wind():
       callback = request.args.get('callback')
       myjsondate= mydatetimetz.strftime("%B %d, %Y %H:%M:%S")  
 
+      if apiformat == "json":
 
-      #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','lat':value1, 'lng':value2,})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'position':list(reversed(position)),'truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'location_wind':list(reversed(position_wind))})     
+        response = make_response( jsonify({'date_time':myjsondate, 'update':'True', 'position':list(reversed(position)),'truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'location_wind':list(reversed(position_wind))}), 200)
+        response.headers["Content-Type"] = "application/json; charset=UTF-8"
+        return response
+      
+      else:  
+
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'position':list(reversed(position)),'truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)), 'location_wind':list(reversed(position_wind))})     
         
 
     except NameError, e:
