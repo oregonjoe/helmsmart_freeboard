@@ -5419,7 +5419,7 @@ def freeboard_environmental():
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
     mode  = request.args.get('mode',"median")
-    
+    apiformat = request.args.get('format',"")
     starttime = request.args.get('start','0')
     
     response = None
@@ -5720,7 +5720,11 @@ def freeboard_environmental():
       callback = request.args.get('callback')
       myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
+      if apiformat == 'json':
+        return jsonify('date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea)) 
+
+      else:  
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
 
     except AttributeError, e:
       #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
