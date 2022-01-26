@@ -5724,6 +5724,7 @@ def freeboard_environmental():
         #return jsonify('date_time'=myjsondate, 'update'='True','temperature'=list(reversed(temperature)), 'atmospheric_pressure'=list(reversed(atmospheric_pressure)), 'humidity'=list(reversed(humidity)), 'altitude'=list(reversed(altitude)), 'atmospheric_pressure_sea'=list(reversed(atmospheric_pressure_sea)) )
         #return jsonify('date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)))
         #return jsonify('date_time':myjsondate, 'update':'True')
+        return jsonify(status='json', update=False )
 
 
       
