@@ -5721,8 +5721,12 @@ def freeboard_environmental():
       myjsondatetz = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
       #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':value1, 'baro':value2, 'humidity':value3})
       if apiformat == "json":
-        return jsonify('date_time'=myjsondate, 'update'='True','temperature'=list(reversed(temperature)), 'atmospheric_pressure'=list(reversed(atmospheric_pressure)), 'humidity'=list(reversed(humidity)), 'altitude'=list(reversed(altitude)), 'atmospheric_pressure_sea'=list(reversed(atmospheric_pressure_sea)) )
+        #return jsonify('date_time'=myjsondate, 'update'='True','temperature'=list(reversed(temperature)), 'atmospheric_pressure'=list(reversed(atmospheric_pressure)), 'humidity'=list(reversed(humidity)), 'altitude'=list(reversed(altitude)), 'atmospheric_pressure_sea'=list(reversed(atmospheric_pressure_sea)) )
+        #return jsonify('date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)))
+        return jsonify('date_time':myjsondate, 'update':'True')
 
+
+      
       else:  
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True','temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
 
