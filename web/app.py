@@ -8805,13 +8805,15 @@ def freeboard_rain_gauge():
           value1 = convertfbunits((float(point['accumulation'])),  convertunittype('rain', units))
         accumulation.append({'epoch':ts, 'value':value1})
           
+        # duration is in hours so scale to seconds = 1/(60*60 )        
         if point['duration'] is not None:       
-          value2 = convertfbunits(point['duration'], 37)
+          value2 = convertfbunits((point['duration'] * 0.00277), 37)
         duration.append({'epoch':ts, 'value':value2})
 
+        # duration is in hours so scale to min
         if point['duration'] is not None:       
           #value5 = convertfbunits(point['duration'], 37)
-          value5 = float("{0:.2f}".format(point['duration'] * 0.0166666))  
+          value5 = float("{0:.2f}".format(point['duration'] * 60))  
         duration_min.append({'epoch':ts, 'value':value5})
 
         if point['rate'] is not None: 
