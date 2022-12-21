@@ -8807,7 +8807,7 @@ def freeboard_rain_gauge():
           
         # duration is in hours so scale to seconds = 1/(60*60 )        
         if point['duration'] is not None:       
-          value2 = convertfbunits((point['duration'] * 0.00277), 37)
+          value2 = convertfbunits((point['duration'] * 3600), 37)
         duration.append({'epoch':ts, 'value':value2})
 
         # duration is in hours so scale to min
