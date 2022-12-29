@@ -8992,8 +8992,8 @@ def freeboard_rain_wung():
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
         
 
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','accumulation':list(reversed(accumulation))})     
-
+        #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','accumulation':list(reversed(accumulation))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','accumulation':accumulation}) 
 
     if not response:
         log.info('freeboard: InfluxDB Query has no data ')
@@ -9001,8 +9001,8 @@ def freeboard_rain_wung():
         #return '{0}({1})'.format(callback, {'update':'False', 'status':'missing' })
       
 
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','accumulation':list(reversed(accumulation))})     
-   
+        #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','accumulation':list(reversed(accumulation))})     
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'missing','accumulation':accumulation})    
 
       
 
@@ -9106,8 +9106,8 @@ def freeboard_rain_wung():
 
       
 
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','accumulation':list(reversed(accumulation))})    
-   
+        #return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','accumulation':list(reversed(accumulation))})    
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','accumulation':accumulation})      
 
     except ValueError, e:
       #log.info('freeboard: Index error in InfluxDB mydata append %s:  ', response)
