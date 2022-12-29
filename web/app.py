@@ -9061,7 +9061,7 @@ def freeboard_rain_wung():
 
 
         
-       
+      log.info("freeboard rain_wung accum %s", accumulation)       
 
       callback = request.args.get('callback')
       myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
