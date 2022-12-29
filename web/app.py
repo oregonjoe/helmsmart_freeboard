@@ -8869,7 +8869,7 @@ def freeboard_rain_wung():
     wunstation = request.args.get('wunstation','')
     wunpassword = request.args.get('wunpw','')
     
-    Interval = request.args.get('interval',"5min")
+    Interval = request.args.get('interval',"1hour")
     resolution = request.args.get('resolution',"")
     windtype = request.args.get('type',"true")
     mytimezone = request.args.get('timezone',"UTC")
@@ -8938,8 +8938,7 @@ def freeboard_rain_wung():
         serieskeys = serieskeys.replace("*", ".*")
 
     query = ('select  difference(last(accumulation)) AS accumulation from {} '
-                   'where {} AND time > {}s and time < {}s '
-                   'group by time({}s)  ') \
+                   'where {} AND time > {}s and time < {}s ') \
               .format( measurement, serieskeys,
                       startepoch, endepoch,
                       resolution)
@@ -9056,7 +9055,7 @@ def freeboard_rain_wung():
           ts = int(mktime(dtt)*1000)
 
         if point['accumulation'] is not None:
-
+          # convert mm to inches
           accumulation = float("{0:.2f}".format(point['accumulation'] * 0.0393701))
 
 
@@ -9076,7 +9075,7 @@ def freeboard_rain_wung():
 
  
         if accumulation != '---':        
-          devicedataurl = devicedataurl + "&rainin=" + str(value1)
+          devicedataurl = devicedataurl + "&rainin=" + str(accumulation)
 
         
         devicedataurl = devicedataurl + "&action=updateraw" 
