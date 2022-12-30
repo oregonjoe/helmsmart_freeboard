@@ -9026,7 +9026,7 @@ def freeboard_rain_wung():
     #query = ('select  difference(last(accumulation)) AS accumulation from {} '
     query = ('select  last(accumulation) AS accumulation from {} '
                    'where {} AND time > {}s and time < {}s '
-                     'group by time({}s)  ') \
+                     'group by time({}s order by time DESC)  ') \
               .format( measurement, serieskeys,
                       startepoch, endepoch,
                       resolution)
