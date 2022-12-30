@@ -693,9 +693,9 @@ def getepochdailytimes(mytimezone):
 
         #nowtime = datetime.datetime.now()
         #nowtime = datetime.datetime.now(tzinfo=timezone('UTC'))
-        #tz = pytz.timezone('UTC')
+        tzutc = pytz.timezone('UTC')
         #tz = pytz.timezone(mytimezone)
-        epoch_time = datetime.datetime(1970, 1, 1).astimezone()
+        epoch_time = datetime.datetime(1970, 1, 1).astimezone(tz)
         
         tz = pytz.timezone('US/Pacific')
         nowtime = datetime.datetime.now(tz=tz)
