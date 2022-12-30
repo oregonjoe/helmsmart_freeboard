@@ -9117,8 +9117,12 @@ def freeboard_rain_wung():
 
       log.info('freeboard:  WUNG RAIN points%s:', points)
 
-      minaccum = min([min(x) for x in points])
-      maxaccum = max([max(x) for x in points])
+      for point in points:
+         if point['accumulation'] is not None:
+           rain_day.append(point['accumulation'])
+
+      minaccum = min(rain_day)
+      maxaccum = max(rain_day)
 
       log.info('freeboard:  WUNG RAIN min %s: max%s ', minaccum, maxaccum)
 
