@@ -713,7 +713,7 @@ def getepochdailytimes(mytimezone):
         #mydatetime_utctz = todaytime.replace(tzinfo=timezone('PST'))
         #mydatetime_utctz = todaytime.replace(tz=tz)
         dt = todaytime.astimezone(tz)
-        log.info('freeboard:  getepochdailytimes mywundate3 %s: ', dt.total_seconds())
+        log.info('freeboard:  getepochdailytimes mywundate3 %s: ', dt)
         
         #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
         #dtt = mydatetimetz.timetuple()
