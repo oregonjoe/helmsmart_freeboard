@@ -9022,15 +9022,16 @@ def freeboard_rain_wung():
   
     if serieskeys.find("*") > 0:
         serieskeys = serieskeys.replace("*", ".*")
-
-    query = ('select  difference(last(accumulation)) AS accumulation from {} '
+        
+    #query = ('select  difference(last(accumulation)) AS accumulation from {} '
+    query = ('select  last(accumulation) AS accumulation from {} '
                    'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
               .format( measurement, serieskeys,
                       startepoch, endepoch,
                       resolution)
 
-  
+    #order by time DESC limit 1  
 
     log.info("freeboard freeboard_rain_wung data Query %s", query)
 
