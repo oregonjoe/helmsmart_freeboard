@@ -716,8 +716,8 @@ def getepochdailytimes(mytimezone):
         #mydatetime_utctz = todaytime.replace(tz=tz)
         dt = todaytime.astimezone(tz)
 
-        deltatime = dt - epoch_time
-        log.info('freeboard:  getepochdailytimes mywundate3 %s: %s ', dt, deltatime)
+        #deltatime = dt - epoch_time
+        log.info('freeboard:  getepochdailytimes mywundate3 %s: ', dt)
         
         #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
         #dtt = mydatetimetz.timetuple()
