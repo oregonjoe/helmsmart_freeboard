@@ -9094,7 +9094,7 @@ def freeboard_rain_wung():
  
       points = list(response.get_points())
 
-      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
@@ -9110,12 +9110,16 @@ def freeboard_rain_wung():
         
         if point['time'] is not None:
           mydatetimestr = str(point['time'])
-          #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%SZ')
-          #mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S.%fZ')
-          mydatetime = datetime.datetime.strptime(mydatetimestr[:19]+'Z', '%Y-%m-%dT%H:%M:%SZ')
+   
+          #mydatetime = datetime.datetime.strptime(mydatetimestr[:19]+'Z', '%Y-%m-%dT%H:%M:%SZ')
 
-          mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
-          mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+          #mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+          #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+
+          tz = pytz.timezone(mytimezone)
+          mydatetimetz = datetime.datetime.now(tz=tz)
+
+          
 
           #dtt = mydatetime.timetuple()       
           dtt = mydatetimetz.timetuple()
