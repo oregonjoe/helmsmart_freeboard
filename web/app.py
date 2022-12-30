@@ -699,12 +699,15 @@ def getepochdailytimes(mytimezone):
         nowtime = datetime.datetime.now(tz=tz)
 
         mywundate = nowtime.strftime("%Y-%m-%d %H:%M:%S")
-        log.info('freeboard:  getepochdailytimes mywundate %s: ', mywundate)
+        log.info('freeboard:  getepochdailytimes mywundate1 %s: ', mywundate)
 
          
         endepoch =  int(time.time())
 
         todaytime = nowtime.replace(hour=0, minute=0, second=0, microsecond=0)
+        mywundate = todaytime.strftime("%Y-%m-%d %H:%M:%S")
+        log.info('freeboard:  getepochdailytimes mywundate2 %s: ', mywundate)
+
 
         #mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
         #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
