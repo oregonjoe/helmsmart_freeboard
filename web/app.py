@@ -9028,7 +9028,7 @@ def freeboard_rain_wung():
                    'where {} AND time > {}s and time < {}s '
                      'group by time({}s) order by time DESC  ') \
               .format( measurement, serieskeys,
-                      startepoch, endepoch,
+                      startepoch-10, endepoch,
                       resolution)
 
     #fill(previous) order by time DESC limit 1  
