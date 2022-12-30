@@ -9141,9 +9141,11 @@ def freeboard_rain_wung():
         devicedataurl = " https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=" + wunstation + "&PASSWORD=" + wunpassword + "&dateutc=" + str(mywundate)
 
  
-        if accumulation != '---':        
-          devicedataurl = devicedataurl + "&rainin=" + str(accumulation)
-
+        if accumulation != '---':
+          if Interval == "daily":
+            devicedataurl = devicedataurl + "&dailyrainin=" + str(accumulation)
+          else:
+            devicedataurl = devicedataurl + "&rainin=" + str(accumulation)
         
         devicedataurl = devicedataurl + "&action=updateraw" 
 
