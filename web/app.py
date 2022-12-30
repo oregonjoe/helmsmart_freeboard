@@ -695,6 +695,8 @@ def getepochdailytimes(mytimezone):
         #nowtime = datetime.datetime.now(tzinfo=timezone('UTC'))
         #tz = pytz.timezone('UTC')
         #tz = pytz.timezone(mytimezone)
+        epoch_time = datetime(1970, 1, 1)
+        
         tz = pytz.timezone('US/Pacific')
         nowtime = datetime.datetime.now(tz=tz)
 
@@ -713,7 +715,9 @@ def getepochdailytimes(mytimezone):
         #mydatetime_utctz = todaytime.replace(tzinfo=timezone('PST'))
         #mydatetime_utctz = todaytime.replace(tz=tz)
         dt = todaytime.astimezone(tz)
-        log.info('freeboard:  getepochdailytimes mywundate3 %s: ', dt)
+
+        deltatime = dt - epoch_time
+        log.info('freeboard:  getepochdailytimes mywundate3 %s: %s ', dt, deltatime.total_seconds())
         
         #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
         #dtt = mydatetimetz.timetuple()
