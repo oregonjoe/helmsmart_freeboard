@@ -678,6 +678,67 @@ def convertunits(value, units):
       return float("{0:.2f}".format(value * 1.0))
 
 
+
+def getepochdailytimes(timezone):
+
+
+
+    log.info('freeboard:  getepochdailytimes timezone %s:  ', mytimezone)
+
+    epochtimes=[]
+    starttime = 0
+
+    
+    try:
+
+        #nowtime = datetime.datetime.now()
+        nowtime = datetime.datetime.now(tzinfo=timezone('UTC'))
+        endepoch =  int(time.time())
+
+        todaytime = nowtime.replace(hour=0, minute=0, second=0, microsecond=0)
+
+        #mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+        #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
+        #dtt = mydatetimetz.timetuple()
+        
+        dtt = todaytime.timetuple()
+        ts = int(mktime(dtt)*1000)
+
+        resolution = endepoch - startepoch
+
+        epochtimes.append(startepoch)
+        epochtimes.append(endepoch)
+        epochtimes.append(resolution)
+
+        log.info('freeboard:  getepochdailytimes startepoch %s:  endepoch %s: resolution %s: ', startepoch, endepoch, resolution)
+
+    except TypeError, e:
+        log.info('freeboard: TypeError in geting getepochdailytimes parameters %s:  ', Interval)
+        log.info('freeboard: TypeError in geting getepochdailytimes parameters %s:  ' % str(e))
+            
+    except KeyError, e:
+        log.info('freeboard: KeyError in geting getepochdailytimes parameters %s:  ', Interval)
+        log.info('freeboard: KeyError in geting getepochdailytimes parameters %s:  ' % str(e))
+
+    except NameError, e:
+        log.info('freeboard: NameError in geting getepochdailytimes parameters %s:  ', Interval)
+        log.info('freeboard: NameError in geting getepochdailytimes parameters %s:  ' % str(e))
+            
+    except IndexError, e:
+        log.info('freeboard: IndexError in geting getepochdailytimes parameters %s:  ', Interval)
+        log.info('freeboard: IndexError in geting getepochdailytimes parameters %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: Error in geting  getepochdailytimes %s:  ', Interval)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting getepochdailytimes parameters %s:  ' % str(e))
+
+    return(epochtimes)
+
+
+  
+
 def getepochtimes(Interval):
 
 
@@ -8886,8 +8947,10 @@ def freeboard_rain_wung():
     
     response = None
     
+    if Interval == "daily":
+      epochtimes = getepochdailytimes(mytimezone)
 
-    if int(starttime) != 0:
+    elif int(starttime) != 0:
       epochtimes = getendepochtimes(int(starttime), Interval)
       
     else:
