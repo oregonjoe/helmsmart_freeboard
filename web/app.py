@@ -8949,24 +8949,6 @@ def freeboard_rain_wung():
     starttime = request.args.get('start','0')
       
     response = None
-
-    # timezones from database
-    #https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-    #UCT		                            Link	+00:00+00:00	   UTC	        backward	Link to Etc/UTC
-    #Universal		              Link	              +00:00	              +00:00	                UTC	              backward	Link to Etc/UTC
-    #US	US/Alaska		Link	−09:00	−08:00	AKST	AKDT	backward	Link to America/Anchorage
-    #US	US/Aleutian		Link	−10:00	−09:00	HST	HDT	backward	Link to America/Adak
-    #US	US/Arizona		Link	−07:00	−07:00	MST	backward	Link to America/Phoenix
-    #US	US/Central		Link	−06:00	−05:00	CST	CDT	backward	Link to America/Chicago
-    #US	US/East-Indiana		Link	−05:00	−04:00	EST	EDT	backward	Link to America/Indiana/Indianapolis
-    #US	US/Eastern		Link	−05:00	−04:00	EST	EDT	backward	Link to America/New_York
-    #US	US/Hawaii		Link	−10:00	−10:00	HST	backward	Link to Pacific/Honolulu
-    #US	US/Indiana-Starke		Link	−06:00	−05:00	CST	CDT	backward	Link to America/Indiana/Knox
-    #US	US/Michigan		Link	−05:00	−04:00	EST	EDT	backward	Link to America/Detroit
-    #US	US/Mountain		Link	−07:00	−06:00	MST	MDT	backward	Link to America/Denver
-    #US	US/Pacific		Link	−08:00	−07:00	PST	PDT	backward	Link to America/Los_Angeles
-    #AS	US/Samoa
-
     
     if Interval == "daily":
       epochtimes = getepochdailytimes(mytimezone)
