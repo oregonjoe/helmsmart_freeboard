@@ -713,24 +713,24 @@ def getepochdailytimes(mytimezone):
         log.info('freeboard:  getepochdailytimes startepoch %s:  endepoch %s: resolution %s: ', startepoch, endepoch, resolution)
 
     except TypeError, e:
-        log.info('freeboard: TypeError in geting getepochdailytimes parameters %s:  ', Interval)
+        log.info('freeboard: TypeError in geting getepochdailytimes parameters %s:  ', mytimezone)
         log.info('freeboard: TypeError in geting getepochdailytimes parameters %s:  ' % str(e))
             
     except KeyError, e:
-        log.info('freeboard: KeyError in geting getepochdailytimes parameters %s:  ', Interval)
+        log.info('freeboard: KeyError in geting getepochdailytimes parameters %s:  ', mytimezone)
         log.info('freeboard: KeyError in geting getepochdailytimes parameters %s:  ' % str(e))
 
     except NameError, e:
-        log.info('freeboard: NameError in geting getepochdailytimes parameters %s:  ', Interval)
+        log.info('freeboard: NameError in geting getepochdailytimes parameters %s:  ', mytimezone)
         log.info('freeboard: NameError in geting getepochdailytimes parameters %s:  ' % str(e))
             
     except IndexError, e:
-        log.info('freeboard: IndexError in geting getepochdailytimes parameters %s:  ', Interval)
+        log.info('freeboard: IndexError in geting getepochdailytimes parameters %s:  ', mytimezone)
         log.info('freeboard: IndexError in geting getepochdailytimes parameters %s:  ' % str(e))  
 
 
     except:
-        log.info('freeboard: Error in geting  getepochdailytimes %s:  ', Interval)
+        log.info('freeboard: Error in geting  getepochdailytimes %s:  ', mytimezone)
         e = sys.exc_info()[0]
         log.info('freeboard: Error in geting getepochdailytimes parameters %s:  ' % str(e))
 
