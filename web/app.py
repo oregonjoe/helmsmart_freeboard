@@ -9172,13 +9172,17 @@ def freeboard_rain_wung():
       
       """      
       callback = request.args.get('callback')
-      myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
+
+      mydatetime = datetime.datetime.now()
+      myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")  
+      
+      #myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
 
 
       # Setup Weather Underground Post
       if wunstation != "" and wunpassword != "":
 
-        mywundate = mydatetimetz.strftime("%Y-%m-%d %H:%M:%S")
+        mywundate = mydatetime.strftime("%Y-%m-%d %H:%M:%S")
         
         devicedataurl = " https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=" + wunstation + "&PASSWORD=" + wunpassword + "&dateutc=" + str(mywundate)
 
