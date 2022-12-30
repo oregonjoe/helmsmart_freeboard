@@ -711,13 +711,14 @@ def getepochdailytimes(mytimezone):
         #myepoch = todaytime.utcfromtimestamp(0)
 
         #mydatetime_utctz = todaytime.replace(tzinfo=timezone('PST'))
-        mydatetime_utctz = todaytime.replace(tz=tz)
-        log.info('freeboard:  getepochdailytimes mywundate3 %s: ', mydatetime_utctz)
+        #mydatetime_utctz = todaytime.replace(tz=tz)
+        dt = todaytime.astimezone(tz)
+        log.info('freeboard:  getepochdailytimes mywundate3 %s: ', dt)
         
         #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
         #dtt = mydatetimetz.timetuple()
         
-        dtt = mydatetime_utctz.timetuple()
+        dtt = mydatetime_utctz.todaytime()
         startepoch = int(mktime(dtt))
 
         resolution = endepoch - startepoch
