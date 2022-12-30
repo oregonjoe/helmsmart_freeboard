@@ -679,7 +679,7 @@ def convertunits(value, units):
 
 
 
-def getepochdailytimes(timezone):
+def getepochdailytimes(mytimezone):
 
 
 
