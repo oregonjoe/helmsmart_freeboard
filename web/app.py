@@ -704,7 +704,7 @@ def getepochdailytimes(mytimezone):
         #dtt = mydatetimetz.timetuple()
         
         dtt = todaytime.timetuple()
-        ts = int(mktime(dtt)*1000)
+        startepoch = int(mktime(dtt)*1000)
 
         resolution = endepoch - startepoch
 
