@@ -9024,7 +9024,7 @@ def freeboard_rain_wung():
         serieskeys = serieskeys.replace("*", ".*")
         
     #query = ('select  difference(last(accumulation)) AS accumulation from {} '
-    query = ('select  last(accumulation) AS accumulation from {} '
+    query = ('select  (accumulation) AS accumulation from {} '
                    'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
               .format( measurement, serieskeys,
