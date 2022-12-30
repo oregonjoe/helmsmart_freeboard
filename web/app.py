@@ -9117,6 +9117,8 @@ def freeboard_rain_wung():
 
       log.info('freeboard:  WUNG RAIN points%s:', points)
 
+      log.info('freeboard:  WUNG RAIN point%s:', points[0]['accumulation'])
+
       for point in points:
          if point['accumulation'] is not None:
            rain_day.append(point['accumulation'])
