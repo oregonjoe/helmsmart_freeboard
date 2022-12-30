@@ -9116,7 +9116,7 @@ def freeboard_rain_wung():
           #mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
           #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
 
-          tz = pytz.timezone(mytimezone)
+          tz = pytz.timezone('UTC')
           mydatetimetz = datetime.datetime.now(tz=tz)
 
           
