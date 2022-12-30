@@ -708,13 +708,15 @@ def getepochdailytimes(mytimezone):
         mywundate = todaytime.strftime("%Y-%m-%d %H:%M:%S")
         log.info('freeboard:  getepochdailytimes mywundate2 %s: ', mywundate)
 
-        myepoch = todaytime.utcfromtimestamp(0)
-        log.info('freeboard:  getepochdailytimes mywundate3 %s: ', myepoch)
-        #mydatetime_utctz = mydatetime.replace(tzinfo=timezone('UTC'))
+        #myepoch = todaytime.utcfromtimestamp(0)
+
+        mydatetime_utctz = todaytime.replace(tzinfo=timezone('UTC'))
+        log.info('freeboard:  getepochdailytimes mywundate3 %s: ', mydatetime_utctz)
+        
         #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
         #dtt = mydatetimetz.timetuple()
         
-        dtt = todaytime.timetuple()
+        dtt = mydatetime_utctz.timetuple()
         startepoch = int(mktime(dtt))
 
         resolution = endepoch - startepoch
