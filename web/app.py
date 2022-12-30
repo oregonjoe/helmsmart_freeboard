@@ -9141,7 +9141,7 @@ def freeboard_rain_wung():
 
         if point['accumulation'] is not None:
           # convert mm to inches
-          accumulation = float("{0:.2f}".format(point['accumulation'] * 0.0393701))
+          accumulation = float("{0:.4f}".format(point['accumulation'] * 0.0393701))
 
 
         
