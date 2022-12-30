@@ -9183,7 +9183,7 @@ def freeboard_rain_wung():
         
         try:      
           headers = {'content-type': 'application/json'}
-          response = requests.get(devicedataurl)
+          #response = requests.get(devicedataurl)
 
           if response.ok:
             log.info('freeboard_rain_wung:  WUNG HTTP GET OK %s: ', response.text )
