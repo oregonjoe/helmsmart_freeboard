@@ -697,6 +697,11 @@ def getepochdailytimes(mytimezone):
         #tz = pytz.timezone(mytimezone)
         tz = pytz.timezone('US/Pacific')
         nowtime = datetime.datetime.now(tz=tz)
+
+        mywundate = nowtime.strftime("%Y-%m-%d %H:%M:%S")
+        log.info('freeboard:  getepochdailytimes mywundate %s: ', mywundate)
+
+         
         endepoch =  int(time.time())
 
         todaytime = nowtime.replace(hour=0, minute=0, second=0, microsecond=0)
