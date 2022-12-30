@@ -9012,7 +9012,7 @@ def freeboard_rain_wung():
     serieskeys= serieskeys +  " sensor='rain_gauge'"
 
 
-    #resolution = 60*60
+    resolution = 60*60*4
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
     #log.info("freeboard Create InfluxDB %s", database)
 
@@ -9024,7 +9024,7 @@ def freeboard_rain_wung():
         serieskeys = serieskeys.replace("*", ".*")
         
     #query = ('select  difference(last(accumulation)) AS accumulation from {} '
-    query = ('select  (accumulation) AS accumulation from {} '
+    query = ('select  last(accumulation) AS accumulation from {} '
                    'where {} AND time > {}s and time < {}s '
                      'group by time({}s)  ') \
               .format( measurement, serieskeys,
