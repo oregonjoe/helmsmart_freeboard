@@ -694,7 +694,8 @@ def getepochdailytimes(mytimezone):
         #nowtime = datetime.datetime.now()
         #nowtime = datetime.datetime.now(tzinfo=timezone('UTC'))
         #tz = pytz.timezone('UTC')
-        tz = pytz.timezone(mytimezone)
+        #tz = pytz.timezone(mytimezone)
+        tz = pytz.timezone('US/Pacific')
         nowtime = datetime.datetime.now(tz=tz)
         endepoch =  int(time.time())
 
