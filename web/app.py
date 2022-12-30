@@ -9117,18 +9117,20 @@ def freeboard_rain_wung():
 
       log.info('freeboard:  WUNG RAIN points%s:', points)
 
-      log.info('freeboard:  WUNG RAIN point%s:', points[0]['accumulation'])
-      log.info('freeboard:  WUNG RAIN point%s:', points[len(points)-1]['accumulation'])
+      log.info('freeboard:  WUNG RAIN point max%s:', points[0]['accumulation'])
+      log.info('freeboard:  WUNG RAIN point min %s:', points[len(points)-1]['accumulation'])
       
       for point in points:
          if point['accumulation'] is not None:
            rain_day.append(point['accumulation'])
 
-      minaccum = min(rain_day)
-      maxaccum = max(rain_day)
+      maxaccum = points[0]['accumulation']
+      minaccum = points[len(points)-1]['accumulation']
+      deltaaccum = maxaccum - minaccum
 
-      log.info('freeboard:  WUNG RAIN min %s: max%s ', minaccum, maxaccum)
+      log.info('freeboard:  WUNG RAIN min %s: max %s deltaaccum %s', minaccum, maxaccum, deltaaccum)
 
+      """      
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         value1 = '---'
@@ -9166,8 +9168,9 @@ def freeboard_rain_wung():
 
 
         
-      log.info("freeboard rain_wung accum %s", accumulation)       
-
+      log.info("freeboard rain_wung accum %s", accumulation)
+      
+      """      
       callback = request.args.get('callback')
       myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
 
@@ -9179,7 +9182,8 @@ def freeboard_rain_wung():
         
         devicedataurl = " https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=" + wunstation + "&PASSWORD=" + wunpassword + "&dateutc=" + str(mywundate)
 
- 
+        accumulation = float("{0:.4f}".format(deltaaccum * 39.3701)) 
+        
         if accumulation != '---':
           if Interval == "daily":
             devicedataurl = devicedataurl + "&dailyrainin=" + str(accumulation)
