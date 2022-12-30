@@ -718,7 +718,7 @@ def getepochdailytimes(mytimezone):
         #mydatetimetz = mydatetime_utctz.astimezone(timezone(mytimezone))
         #dtt = mydatetimetz.timetuple()
         
-        dtt = mydatetime_utctz.todaytime()
+        dtt = todaytime.timetuple()
         startepoch = int(mktime(dtt))
 
         resolution = endepoch - startepoch
