@@ -9117,6 +9117,11 @@ def freeboard_rain_wung():
 
       log.info('freeboard:  WUNG RAIN points%s:', points)
 
+      minaccum = min([min(x) for x in points])
+      maxaccum = max([max(x) for x in points])
+
+      log.info('freeboard:  WUNG RAIN min %s: max%s ', minaccum, maxaccum)
+
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
         value1 = '---'
