@@ -9012,7 +9012,7 @@ def freeboard_rain_wung():
     serieskeys= serieskeys +  " sensor='rain_gauge'"
 
 
-    resolution = 60*60*4
+    resolution = 60*60
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
     #log.info("freeboard Create InfluxDB %s", database)
 
@@ -9029,7 +9029,7 @@ def freeboard_rain_wung():
                      'group by time({}s)  ') \
               .format( measurement, serieskeys,
                       startepoch, endepoch,
-                      resolution+10)
+                      resolution)
 
     #order by time DESC limit 1  
 
