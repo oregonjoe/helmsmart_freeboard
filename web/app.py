@@ -8913,6 +8913,7 @@ def freeboard_rain_gauge():
                     
  
       deltaaccum = max(delta_accumulation) - min(delta_accumulation)
+      deltaaccum = float("{0:.2f}".format(deltaaccum))
       #deltaaccum = 0   
        
 
