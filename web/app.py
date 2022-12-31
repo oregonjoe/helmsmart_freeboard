@@ -9130,6 +9130,10 @@ def freeboard_rain_wung():
 
       log.info('freeboard:  WUNG RAIN min %s: max %s deltaaccum %s', minaccum, maxaccum, deltaaccum)
 
+      if deltaaccum < 0:
+        log.info('freeboard:  WUNG RAIN invalid deltaaccum %s',  deltaaccum)
+        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'False', 'status':'invalid','accumulation':deltaaccum})    
+
       """      
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
@@ -9203,7 +9207,7 @@ def freeboard_rain_wung():
         
         try:      
           headers = {'content-type': 'application/json'}
-          #response = requests.get(devicedataurl)
+          response = requests.get(devicedataurl)
 
           if response.ok:
             log.info('freeboard_rain_wung:  WUNG HTTP GET OK %s: ', response.text )
