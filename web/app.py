@@ -9012,7 +9012,7 @@ def freeboard_rain_wung():
     serieskeys= serieskeys +  " sensor='rain_gauge'"
 
 
-    resolution = 60*60
+    resolution = 60*10
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
     #log.info("freeboard Create InfluxDB %s", database)
 
