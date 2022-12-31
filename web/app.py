@@ -8909,8 +8909,8 @@ def freeboard_rain_gauge():
         peak.append({'epoch':ts, 'value':value4})
                     
  
-      deltaaccum = max(accumulation) - min(accumulation)
-        
+      #deltaaccum = max(accumulation) - min(accumulation)
+      deltaaccum = 0   
        
 
       callback = request.args.get('callback')
