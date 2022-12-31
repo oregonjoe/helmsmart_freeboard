@@ -8909,7 +8909,7 @@ def freeboard_rain_gauge():
         peak.append({'epoch':ts, 'value':value4})
                     
  
-
+      deltaaccum = max(accumulation) - min(accumulation)
         
        
 
@@ -8918,7 +8918,7 @@ def freeboard_rain_gauge():
 
       
 
-      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','accumulation':list(reversed(accumulation)), 'duration':list(reversed(duration)), 'duration_minutes':list(reversed(duration_min)), 'rate':list(reversed(rate)), 'peak':list(reversed(peak))})     
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','accumulation':list(reversed(accumulation)), 'duration':list(reversed(duration)), 'duration_minutes':list(reversed(duration_min)), 'rate':list(reversed(rate)), 'peak':list(reversed(peak)), 'delta_accum':deltaaccum})     
    
 
       
