@@ -8850,6 +8850,7 @@ def freeboard_rain_gauge():
       value4 = '---'
 
       accumulation=[]
+      delta_accumulation=[]
       duration=[]
       duration_min=[]
       rate=[]
@@ -8887,7 +8888,9 @@ def freeboard_rain_gauge():
 
         if point['accumulation'] is not None:       
           value1 = convertfbunits((float(point['accumulation'])),  convertunittype('rain', units))
+          delta_accumulation.append(value1)
         accumulation.append({'epoch':ts, 'value':value1})
+
           
         # duration is in hours so scale to seconds = 1/(60*60 )        
         if point['duration'] is not None:       
@@ -8909,8 +8912,8 @@ def freeboard_rain_gauge():
         peak.append({'epoch':ts, 'value':value4})
                     
  
-      #deltaaccum = max(accumulation) - min(accumulation)
-      deltaaccum = 0   
+      deltaaccum = max(delta_accumulation) - min(delta_accumulation)
+      #deltaaccum = 0   
        
 
       callback = request.args.get('callback')
