@@ -9485,7 +9485,7 @@ def freeboard_weather_wung():
 
     #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
 
-
+    callback = request.args.get('callback')
     #keys = response.raw.get('series',[])
     #keys = result.keys()
     #log.info("freeboard Get InfluxDB series keys %s", keys)
@@ -9574,8 +9574,7 @@ def freeboard_weather_wung():
         
        
 
-      callback = request.args.get('callback')
-      myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
+
 
 
       # Setup Weather Underground Post
@@ -9626,6 +9625,10 @@ def freeboard_weather_wung():
 
       #End of  Weather Underground Post
 
+
+      #callback = request.args.get('callback')
+      myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
+      
       
       if  windtype =="apparent":
         return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)),'temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
