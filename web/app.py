@@ -9419,7 +9419,7 @@ def freeboard_weather_wung():
                 .format( measurement, serieskeys,
                         startepoch, endepoch )
 
-    log.info("freeboard data Query %s", query)
+    log.info("freeboard_weather_wung data Query %s", query)
 
     try:
         response= dbc.query(query)
@@ -9505,10 +9505,10 @@ def freeboard_weather_wung():
  
       points = list(response.get_points())
 
-      log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      log.info('freeboard_weather_wung:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
-        log.info('freeboard:  InfluxDB-Cloud point%s:', point)
+        log.info('freeboard_weather_wung:  InfluxDB-Cloud point%s:', point)
         value1 = '---'
         value2 = '---'
         value3 = '---'
