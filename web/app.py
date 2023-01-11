@@ -9595,7 +9595,7 @@ def freeboard_weather_wung():
           if value1 != '---':        
             devicedataurl = devicedataurl + "&windspeedmph=" + str(value1)
             
-          if value2 != '---':
+          if value3 != '---':
             devicedataurl = devicedataurl + "&tempf=" + str(value3)
             
           if value4 != '---':
@@ -9610,24 +9610,26 @@ def freeboard_weather_wung():
 
           log.info("freeboard_weather_wung:  WUNG HTTP GET: %s", devicedataurl)
 
-          
-          try:      
-            headers = {'content-type': 'application/json'}
-            response = requests.get(devicedataurl)
+          # check if we have something to post
+          if value1 != '---' or value2 != '---' or value3 != '---' or value4 != '---'  or value5 != '---' :
+            
+            try:      
+              headers = {'content-type': 'application/json'}
+              response = requests.get(devicedataurl)
 
-            if response.ok:
-              log.info('freeboard_weather_wung:  WUNG HTTP GET OK %s: ', response.text )
-
-
-            else:
-              log.info('freeboard_weather_wung:  WUNG HTTP GET ERROR %s: ', response.text )
+              if response.ok:
+                log.info('freeboard_weather_wung:  WUNG HTTP GET OK %s: ', response.text )
 
 
-          except:
-            e = sys.exc_info()[0]
-            log.info("freeboard_weather_wung:: update_wun_url error: %s" % e)
+              else:
+                log.info('freeboard_weather_wung:  WUNG HTTP GET ERROR %s: ', response.text )
 
-        #End of  Weather Underground Post
+
+            except:
+              e = sys.exc_info()[0]
+              log.info("freeboard_weather_wung:: update_wun_url error: %s" % e)
+
+          #End of  Weather Underground Post
 
 
       #callback = request.args.get('callback')
