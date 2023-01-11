@@ -9615,9 +9615,9 @@ def freeboard_weather_wung():
               log.info('freeboard_weather_wung:  WUNG HTTP GET ERROR %s: ', response.text )
 
 
-        except:
-          e = sys.exc_info()[0]
-          log.info("freeboard_weather_wung:: update_wun_url error: %s" % e)
+          except:
+            e = sys.exc_info()[0]
+            log.info("freeboard_weather_wung:: update_wun_url error: %s" % e)
 
       #End of  Weather Underground Post
 
