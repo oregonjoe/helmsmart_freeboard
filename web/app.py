@@ -9293,7 +9293,9 @@ def freeboard_weather_wung():
     windtype = request.args.get('type',"true")
     mytimezone = request.args.get('timezone',"UTC")
     units= request.args.get('units',"US")
-    mode  = request.args.get('mode',"last")
+    #mode  = request.args.get('mode',"last")
+    mode  = request.args.get('mode',"median")
+
     
     response = None
 
@@ -9571,53 +9573,46 @@ def freeboard_weather_wung():
 
 
 
-        
-       
+        # Setup Weather Underground Post
+        if wunstation != "" and wunpassword != "":
 
-      callback = request.args.get('callback')
-      myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
-
-
-      # Setup Weather Underground Post
-      if wunstation != "" and wunpassword != "":
-
-        mywundate = mydatetimetz.strftime("%Y-%m-%d %H:%M:%S")
-        
-        devicedataurl = " https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=" + wunstation + "&PASSWORD=" + wunpassword + "&dateutc=" + str(mywundate)
-
-        
-        if value2 != '---':
-          devicedataurl = devicedataurl + "&winddir=" + str(value2)
+          mywundate = mydatetimetz.strftime("%Y-%m-%d %H:%M:%S")
           
-        if value1 != '---':        
-          devicedataurl = devicedataurl + "&windspeedmph=" + str(value1)
+          devicedataurl = " https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=" + wunstation + "&PASSWORD=" + wunpassword + "&dateutc=" + str(mywundate)
+
           
-        if value2 != '---':
-          devicedataurl = devicedataurl + "&tempf=" + str(value3)
+          if value2 != '---':
+            devicedataurl = devicedataurl + "&winddir=" + str(value2)
+            
+          if value1 != '---':        
+            devicedataurl = devicedataurl + "&windspeedmph=" + str(value1)
+            
+          if value2 != '---':
+            devicedataurl = devicedataurl + "&tempf=" + str(value3)
+            
+          if value4 != '---':
+            devicedataurl = devicedataurl + "&baromin=" + str(value4)
+            
+          if value5 != '---':
+            devicedataurl = devicedataurl + "&humidity=" + str(value5)
           
-        if value4 != '---':
-          devicedataurl = devicedataurl + "&baromin=" + str(value4)
+          devicedataurl = devicedataurl + "&action=updateraw" 
+
           
-        if value5 != '---':
-          devicedataurl = devicedataurl + "&humidity=" + str(value5)
-        
-        devicedataurl = devicedataurl + "&action=updateraw" 
 
-        
+          log.info("freeboard_weather_wung:  WUNG HTTP GET: %s", devicedataurl)
 
-        log.info("freeboard_weather_wung:  WUNG HTTP GET: %s", devicedataurl)
+          
+          try:      
+            headers = {'content-type': 'application/json'}
+            response = requests.get(devicedataurl)
 
-        
-        try:      
-          headers = {'content-type': 'application/json'}
-          response = requests.get(devicedataurl)
-
-          if response.ok:
-            log.info('freeboard_weather_wung:  WUNG HTTP GET OK %s: ', response.text )
+            if response.ok:
+              log.info('freeboard_weather_wung:  WUNG HTTP GET OK %s: ', response.text )
 
 
-          else:
-            log.info('freeboard_weather_wung:  WUNG HTTP GET ERROR %s: ', response.text )
+            else:
+              log.info('freeboard_weather_wung:  WUNG HTTP GET ERROR %s: ', response.text )
 
 
         except:
@@ -9626,11 +9621,16 @@ def freeboard_weather_wung():
 
       #End of  Weather Underground Post
 
+
+    callback = request.args.get('callback')
+    myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
+
+
       
-      if  windtype =="apparent":
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)),'temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
-      else:
-        return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)),'temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
+    if  windtype =="apparent":
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','apparentwindspeed':list(reversed(wind_speed)), 'apparentwinddirection':list(reversed(wind_direction)),'temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
+    else:
+      return '{0}({1})'.format(callback, {'date_time':myjsondate, 'update':'True', 'status':'success','truewindspeed':list(reversed(wind_speed)), 'truewinddir':list(reversed(wind_direction)),'temperature':list(reversed(temperature)), 'atmospheric_pressure':list(reversed(atmospheric_pressure)), 'humidity':list(reversed(humidity)), 'altitude':list(reversed(altitude)), 'atmospheric_pressure_sea':list(reversed(atmospheric_pressure_sea))})     
    
 
     except ValueError, e:
