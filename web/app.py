@@ -8834,7 +8834,7 @@ def freeboard_rain_gauge():
 
       
 
-    #log.info('freeboard:  InfluxDB-Cloud response  %s:', response)
+    log.info('freeboard_rain_gauge:  InfluxDB-Cloud response  %s:', response)
 
 
     #keys = response.raw.get('series',[])
@@ -8861,7 +8861,7 @@ def freeboard_rain_gauge():
  
       points = list(response.get_points())
 
-      #log.info('freeboard:  InfluxDB-Cloud points%s:', points)
+      log.info('freeboard_rain_gauge:  InfluxDB-Cloud points%s:', points)
 
       for point in points:
         #log.info('freeboard:  InfluxDB-Cloud point%s:', point)
