@@ -9577,53 +9577,53 @@ def freeboard_weather_wung():
 
 
 
-      # Setup Weather Underground Post
-      if wunstation != "" and wunpassword != "":
+        # Setup Weather Underground Post
+        if wunstation != "" and wunpassword != "":
 
-        mywundate = mydatetimetz.strftime("%Y-%m-%d %H:%M:%S")
-        
-        devicedataurl = " https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=" + wunstation + "&PASSWORD=" + wunpassword + "&dateutc=" + str(mywundate)
-
-        
-        if value2 != '---':
-          devicedataurl = devicedataurl + "&winddir=" + str(value2)
+          mywundate = mydatetimetz.strftime("%Y-%m-%d %H:%M:%S")
           
-        if value1 != '---':        
-          devicedataurl = devicedataurl + "&windspeedmph=" + str(value1)
+          devicedataurl = " https://weatherstation.wunderground.com/weatherstation/updateweatherstation.php?ID=" + wunstation + "&PASSWORD=" + wunpassword + "&dateutc=" + str(mywundate)
+
           
-        if value2 != '---':
-          devicedataurl = devicedataurl + "&tempf=" + str(value3)
+          if value2 != '---':
+            devicedataurl = devicedataurl + "&winddir=" + str(value2)
+            
+          if value1 != '---':        
+            devicedataurl = devicedataurl + "&windspeedmph=" + str(value1)
+            
+          if value2 != '---':
+            devicedataurl = devicedataurl + "&tempf=" + str(value3)
+            
+          if value4 != '---':
+            devicedataurl = devicedataurl + "&baromin=" + str(value4)
+            
+          if value5 != '---':
+            devicedataurl = devicedataurl + "&humidity=" + str(value5)
           
-        if value4 != '---':
-          devicedataurl = devicedataurl + "&baromin=" + str(value4)
+          devicedataurl = devicedataurl + "&action=updateraw" 
+
           
-        if value5 != '---':
-          devicedataurl = devicedataurl + "&humidity=" + str(value5)
-        
-        devicedataurl = devicedataurl + "&action=updateraw" 
 
-        
+          log.info("freeboard_weather_wung:  WUNG HTTP GET: %s", devicedataurl)
 
-        log.info("freeboard_weather_wung:  WUNG HTTP GET: %s", devicedataurl)
+          
+          try:      
+            headers = {'content-type': 'application/json'}
+            response = requests.get(devicedataurl)
 
-        
-        try:      
-          headers = {'content-type': 'application/json'}
-          response = requests.get(devicedataurl)
-
-          if response.ok:
-            log.info('freeboard_weather_wung:  WUNG HTTP GET OK %s: ', response.text )
+            if response.ok:
+              log.info('freeboard_weather_wung:  WUNG HTTP GET OK %s: ', response.text )
 
 
-          else:
-            log.info('freeboard_weather_wung:  WUNG HTTP GET ERROR %s: ', response.text )
+            else:
+              log.info('freeboard_weather_wung:  WUNG HTTP GET ERROR %s: ', response.text )
 
 
-        except:
-          e = sys.exc_info()[0]
-          log.info("freeboard_weather_wung:: update_wun_url error: %s" % e)
+          except:
+            e = sys.exc_info()[0]
+            log.info("freeboard_weather_wung:: update_wun_url error: %s" % e)
 
-      #End of  Weather Underground Post
+        #End of  Weather Underground Post
 
 
       #callback = request.args.get('callback')
