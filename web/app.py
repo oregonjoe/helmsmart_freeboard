@@ -9622,8 +9622,8 @@ def freeboard_weather_wung():
       #End of  Weather Underground Post
 
 
-    callback = request.args.get('callback')
-    myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
+      callback = request.args.get('callback')
+      myjsondate = mydatetimetz.strftime("%B %d, %Y %H:%M:%S")
 
 
       
