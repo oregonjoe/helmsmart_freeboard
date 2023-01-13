@@ -8768,7 +8768,8 @@ def freeboard_rain_gauge():
 
     elif mode == "diff":
       
-      query = ('select  difference(last(accumulation)) AS accumulation, difference(last("rainduration")) AS  "duration", difference(last(rate)) AS rate, difference(last(peak)) AS  peak from {} '
+      #query = ('select  difference(last(accumulation)) AS accumulation, difference(last("rainduration")) AS  "duration", difference(last(rate)) AS rate, difference(last(peak)) AS  peak from {} '
+      query = ('select  last(accumulation) AS accumulation, last("rainduration") AS  "duration", last(rate) AS rate, last(peak) AS  peak from {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by time({}s) fill(previous) order by time DESC  ') \
                 .format( measurement, serieskeys,
