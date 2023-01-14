@@ -853,6 +853,10 @@
 					{
 						name: "Min",
 						value: "min"
+					},
+					{
+						name: "Diff",
+						value: "diff"
 					}
 					
 				]
