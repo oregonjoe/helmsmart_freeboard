@@ -1,0 +1,6 @@
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung' --data-urlencode 'apikey=a5069b96637473d7701fa11eb9baad3d' --data-urlencode 'wunstation=KORBROOK78' --data-urlencode 'wunpw=SK5S9I4J' --data-urlencode 'interval=5min' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"
+
+
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung' --data-urlencode 'apikey=2de0e52650dadb31645895f77465ebcc' --data-urlencode 'wunstation=KORBROOK124' --data-urlencode 'wunpw=46iO0QEk' --data-urlencode 'interval=5min' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"
+
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung' --data-urlencode 'apikey=735aaf7afea3e3e3e07c267a93de6347' --data-urlencode 'wunstation=KORBROOK80' --data-urlencode 'wunpw=XeBB4k5P' --data-urlencode 'interval=5min' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"

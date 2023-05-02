@@ -1,0 +1,704 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "AC AMPS P1",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"3": 1
+			},
+			"col": {
+				"0": 0,
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"AC Status\"][\"amps\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "AC AMPS P2",
+			"width": 1,
+			"row": {
+				"3": 11,
+				"5": 11
+			},
+			"col": {
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"GEN PHASE2\"][\"amps\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "AC AMPS P3",
+			"width": 1,
+			"row": {
+				"3": 11,
+				"5": 11
+			},
+			"col": {
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"GEN PHASE3\"][\"amps\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 1",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 1\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 1\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 2",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 2\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 2\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 3",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 3\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 3\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 4",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 4\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 4\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 5",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 5\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 5\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 6",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 6\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 6\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 7",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 7\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 7\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 8",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 8\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 8\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 9",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 9\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 9\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 10",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 10\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 10\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 11",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer 11\"][\"dimmer_value\"]",
+						"series1label": "value",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer 11\"][\"dimmer_adc\"]",
+						"series2label": "amps",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "AC Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "6hour",
+				"resolution": "60",
+				"source": "",
+				"instance": "",
+				"index": "",
+				"type": "GEN",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "AC Status"
+			}
+		},
+		{
+			"name": "GEN PHASE2",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "6hour",
+				"resolution": "60",
+				"source": "",
+				"instance": "1",
+				"index": "",
+				"type": "GEN",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "GEN PHASE2"
+			}
+		},
+		{
+			"name": "GEN PHASE3",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "6hour",
+				"resolution": "60",
+				"source": "",
+				"instance": "2",
+				"index": "",
+				"type": "GEN",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "GEN PHASE2"
+			}
+		},
+		{
+			"name": "Dimmer 1",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "1",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 2",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "2",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 3",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "3",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 4",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "4",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 5",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "5",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 6",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "6",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 7",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "7",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 8",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "8",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 9",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "9",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 10",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "10",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer 11",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "193342ebd31a15e11a62a37934abfd49",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "11",
+				"index": "",
+				"type": "mesh",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		}
+	],
+	"columns": 3
+}

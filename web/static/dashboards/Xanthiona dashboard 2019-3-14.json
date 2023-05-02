@@ -1,0 +1,311 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "AC Live",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 2,
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Volts",
+						"size": "regular",
+						"value": "datasources[\"AC_Status\"][\"volts\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Amps",
+						"size": "regular",
+						"value": "datasources[\"AC_Status\"][\"amps\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "Diesel",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 3,
+				"4": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fuel engine",
+						"size": "regular",
+						"value": "datasources[\"Fluid_Levels\"][\"fuel_port\"]",
+						"animate": true,
+						"units": "%"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fuel heating",
+						"size": "regular",
+						"value": "datasources[\"Fluid_Levels\"][\"fuel_strbd\"]",
+						"animate": true,
+						"units": "%"
+					}
+				}
+			]
+		},
+		{
+			"title": "DC Live",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 1,
+				"4": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Volts",
+						"size": "regular",
+						"value": "datasources[\"DC_Status\"][\"voltage\"]",
+						"sparkline": false,
+						"animate": true,
+						"units": ""
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Amps",
+						"size": "regular",
+						"value": "datasources[\"DC_Status\"][\"current\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "State of Charge",
+						"size": "regular",
+						"value": "datasources[\"DC_Status\"][\"stateofcharge\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "Water",
+			"width": 1,
+			"row": {
+				"3": 7,
+				"4": 7
+			},
+			"col": {
+				"3": 3,
+				"4": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fresh water",
+						"size": "regular",
+						"value": "datasources[\"Fluid_Levels\"][\"water_port\"][0][\"value\"]",
+						"animate": true,
+						"units": "%"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Waste water",
+						"size": "regular",
+						"value": "datasources[\"Fluid_Levels\"][\"waste_port\"]",
+						"animate": true,
+						"units": "%"
+					}
+				}
+			]
+		},
+		{
+			"title": "DC Status 24 hours",
+			"width": 1,
+			"row": {
+				"3": 13,
+				"4": 13
+			},
+			"col": {
+				"3": 1,
+				"4": 2
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "DC Volts",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"DC_Status\"][\"voltage\"]",
+						"series1label": "Volts",
+						"series1color": "0",
+						"series2": "datasources[\"",
+						"series2label": "",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				},
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "spline",
+						"title": "DC Amps",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":-25}",
+						"series1": "datasources[\"DC_Status\"][\"current\"]",
+						"series1label": "Amps",
+						"series1color": "2",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "AC Status 24 hours",
+			"width": 1,
+			"row": {
+				"3": 31,
+				"4": 23,
+				"5": 17
+			},
+			"col": {
+				"3": 1,
+				"4": 2,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "AC Volts",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"AC_Status\"][\"volts\"]",
+						"series1label": "Volts",
+						"series1color": "0",
+						"series2": "datasources[\"",
+						"series2label": "",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				},
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "AC Amps",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"AC_Status\"][\"amps\"]",
+						"series1label": "Amps",
+						"series1color": "2",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "DC_Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_battery",
+				"apikey": "ee73f6035a06835bc1222192b95a08ce",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "60",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median",
+				"name": "DC_Status"
+			}
+		},
+		{
+			"name": "AC_Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "ee73f6035a06835bc1222192b95a08ce",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "60",
+				"instance": "",
+				"index": "",
+				"type": "UTIL",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median",
+				"name": "AC_Status"
+			}
+		},
+		{
+			"name": "Fluid_Levels",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_fluidlevels",
+				"apikey": "ee73f6035a06835bc1222192b95a08ce",
+				"refresh": 60,
+				"span": "1hour",
+				"resolution": "300",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "si",
+				"mode": "median",
+				"name": "Fluid_Levels"
+			}
+		}
+	],
+	"columns": 3
+}

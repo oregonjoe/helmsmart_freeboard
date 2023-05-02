@@ -1,0 +1,621 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "TBL124 Port Fuel Flow",
+			"width": 1,
+			"row": {
+				"1": 1,
+				"2": 1,
+				"3": 1
+			},
+			"col": {
+				"1": 1,
+				"2": 1,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fuel Flow",
+						"size": "regular",
+						"value": "datasources[\"Port Fuel Flow\"][\"instantaneous_fuel_economy\"]",
+						"sparkline": true,
+						"animate": true,
+						"units": "lt/hr"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fuel Used",
+						"size": "regular",
+						"value": "datasources[\"Port Fuel Flow\"][\"fuel_used\"]",
+						"sparkline": false,
+						"animate": true,
+						"units": "liters"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"Port Engine\"][\"rpm\"]",
+						"animate": true,
+						"units": "rpm"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Eng Temp",
+						"size": "regular",
+						"value": "datasources[\"Port Engine\"][\"eng_temp\"]",
+						"animate": true,
+						"units": "C"
+					}
+				}
+			]
+		},
+		{
+			"title": "TBL124 Center Fuel Flow",
+			"width": 1,
+			"row": {
+				"1": 11,
+				"2": 1,
+				"3": 1
+			},
+			"col": {
+				"1": 1,
+				"2": 2,
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fuel Flow",
+						"size": "regular",
+						"value": "datasources[\"Center Fuel Flow\"][\"fuel_rate_average\"]",
+						"animate": true,
+						"units": "ltr/hr"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fuel Used",
+						"size": "regular",
+						"value": "datasources[\"Center Fuel Flow\"][\"fuel_used\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"Center Engine\"][\"rpm\"]",
+						"animate": true,
+						"units": "rpm"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Eng Temp",
+						"size": "regular",
+						"value": "datasources[\"Center Engine\"][\"eng_temp\"]",
+						"animate": true,
+						"units": "C"
+					}
+				}
+			]
+		},
+		{
+			"title": "TBL124 Stbd Fuel Flow",
+			"width": 1,
+			"row": {
+				"1": 21,
+				"2": 11,
+				"3": 1
+			},
+			"col": {
+				"1": 1,
+				"2": 1,
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fuel Flow",
+						"size": "regular",
+						"value": "datasources[\"Starboard Fuel Flow\"][\"fuel_rate_average\"]",
+						"animate": true,
+						"units": "ltr/hr"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Fuel Used",
+						"size": "regular",
+						"value": "datasources[\"Starboard Fuel Flow\"][\"fuel_used\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"Starboard Engine\"][\"rpm\"]",
+						"animate": true,
+						"units": "rpm"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Eng Temp",
+						"size": "regular",
+						"value": "datasources[\"Starboard Engine\"][\"eng_temp\"]",
+						"animate": true,
+						"units": "C"
+					}
+				}
+			]
+		},
+		{
+			"title": "Fuel Flow - 12 hour",
+			"width": 1,
+			"row": {
+				"1": 31,
+				"2": 25,
+				"3": 11
+			},
+			"col": {
+				"1": 1,
+				"2": 1,
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "Engine Fuel Flow",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Port Fuel Flow\"][\"fuel_rate_average\"]",
+						"series1label": "Port",
+						"series1color": "0",
+						"series2": "datasources[\"Center Fuel Flow\"][\"fuel_rate_average\"]",
+						"series2label": "Center",
+						"series2color": "9",
+						"series3": "datasources[\"Starboard Fuel Flow\"][\"fuel_rate_average\"]",
+						"series3label": "Starboard",
+						"series3color": "10"
+					}
+				}
+			]
+		},
+		{
+			"title": "Port",
+			"width": 1,
+			"row": {
+				"1": 41,
+				"2": 11,
+				"3": 21,
+				"5": 19,
+				"7": 19
+			},
+			"col": {
+				"1": 1,
+				"2": 2,
+				"3": 1,
+				"5": 1,
+				"7": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Bow",
+						"size": "regular",
+						"value": "datasources[\"Port Tanks\"][\"fuel_port\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Aft",
+						"size": "regular",
+						"value": "datasources[\"Port Tanks\"][\"fuel_day1\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				}
+			]
+		},
+		{
+			"title": "Center",
+			"width": 1,
+			"row": {
+				"1": 47,
+				"2": 17,
+				"3": 21,
+				"5": 19,
+				"7": 19
+			},
+			"col": {
+				"1": 1,
+				"2": 2,
+				"3": 2,
+				"5": 2,
+				"7": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Day Center",
+						"size": "regular",
+						"value": "datasources[\"Center Tanks\"][\"fuel_center\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Day Port",
+						"size": "regular",
+						"value": "datasources[\"Center Tanks\"][\"fuel_fwd\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Day Stbd",
+						"size": "regular",
+						"value": "datasources[\"Center Tanks\"][\"fuel_aft\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				}
+			]
+		},
+		{
+			"title": "Starboard",
+			"width": 1,
+			"row": {
+				"1": 55,
+				"2": 45,
+				"3": 21,
+				"5": 19,
+				"7": 19,
+				"8": 19
+			},
+			"col": {
+				"1": 1,
+				"2": 1,
+				"3": 3,
+				"5": 3,
+				"7": 3,
+				"8": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Bow",
+						"size": "regular",
+						"value": "datasources[\"Tanks\"][\"fuel_strbd\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Aft",
+						"size": "regular",
+						"value": "datasources[\"Tanks\"][\"fuel_day2\"]",
+						"animate": true,
+						"units": "liters"
+					}
+				}
+			]
+		},
+		{
+			"title": "Bow Tanks",
+			"width": 1,
+			"row": {
+				"1": 61,
+				"2": 35,
+				"3": 29,
+				"5": 21
+			},
+			"col": {
+				"1": 1,
+				"2": 1,
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Port Tanks\"][\"fuel_port\"]",
+						"series1label": "Port",
+						"series1color": "0",
+						"series2": "datasources[\"Tanks\"][\"fuel_strbd\"]",
+						"series2label": "Stbd",
+						"series2color": "1",
+						"series3": "",
+						"series3label": "",
+						"series3color": "9"
+					}
+				}
+			]
+		},
+		{
+			"title": "Aft Tanks",
+			"width": 1,
+			"row": {
+				"3": 39
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Port Tanks\"][\"fuel_day1\"]",
+						"series1label": "Port Aft",
+						"series1color": "0",
+						"series2": "datasources[\"Tanks\"][\"fuel_day2\"]",
+						"series2label": "Stbd Aft",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Day Tanks",
+			"width": 1,
+			"row": {
+				"3": 49
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Center Tanks\"][\"fuel_center\"]",
+						"series1label": "Day 1",
+						"series1color": "0",
+						"series2": "datasources[\"Center Tanks\"][\"fuel_fwd\"]",
+						"series2label": "Day 2",
+						"series2color": "10",
+						"series3": "datasources[\"Center Tanks\"][\"fuel_aft\"]",
+						"series3label": "Day 3",
+						"series3color": "6"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "Port Fuel Flow",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_engine_aux",
+				"apikey": "be97b584371254042e55f585068d95f2",
+				"refresh": 60,
+				"span": "1hour",
+				"resolution": "120",
+				"source": "",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "metric",
+				"mode": "median",
+				"name": "Port Fuel Flow"
+			}
+		},
+		{
+			"name": "Center Fuel Flow",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_engine_aux",
+				"apikey": "c76a3731a78b1db5a75063aa1f0099ea",
+				"refresh": 60,
+				"span": "1hour",
+				"resolution": "120",
+				"source": "",
+				"instance": "2",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "metric",
+				"mode": "median",
+				"name": "Center Fuel Flow"
+			}
+		},
+		{
+			"name": "Starboard Fuel Flow",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_engine_aux",
+				"apikey": "528978d31dcab1964d610240425f3af1",
+				"refresh": 60,
+				"span": "1hour",
+				"resolution": "120",
+				"source": "",
+				"instance": "1",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "metric",
+				"mode": "median",
+				"name": "Starboard Fuel Flow"
+			}
+		},
+		{
+			"name": "Port Engine",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_engine",
+				"apikey": "be97b584371254042e55f585068d95f2",
+				"refresh": 60,
+				"span": "30min",
+				"resolution": "300",
+				"source": "",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "metric",
+				"mode": "median",
+				"name": "Port Engine"
+			}
+		},
+		{
+			"name": "Center Engine",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_engine",
+				"apikey": "c76a3731a78b1db5a75063aa1f0099ea",
+				"refresh": 60,
+				"span": "30min",
+				"resolution": "300",
+				"source": "",
+				"instance": "2",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "metric",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Starboard Engine",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_engine",
+				"apikey": "528978d31dcab1964d610240425f3af1",
+				"refresh": 60,
+				"span": "30min",
+				"resolution": "300",
+				"source": "",
+				"instance": "1",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "metric",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Port Tanks",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_fluidlevels",
+				"apikey": "be97b584371254042e55f585068d95f2",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "metric",
+				"mode": "mean",
+				"name": "Port Tanks"
+			}
+		},
+		{
+			"name": "Tanks",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_fluidlevels",
+				"apikey": "528978d31dcab1964d610240425f3af1",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "metric",
+				"mode": "mean",
+				"name": "Tanks"
+			}
+		},
+		{
+			"name": "Center Tanks",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-ello.herokuapp.com/freeboard_fluidlevels",
+				"apikey": "c76a3731a78b1db5a75063aa1f0099ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"source": "",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "metric",
+				"mode": "median",
+				"name": "Center Tanks"
+			}
+		}
+	],
+	"columns": 3
+}

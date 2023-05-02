@@ -1,0 +1,209 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "google_map",
+					"settings": {
+						"position": "datasources[\"SeaSmart Location\"][\"position\"]",
+						"blocks": 4,
+						"mapstyle": "roadmap",
+						"trailColor": "0"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1
+			},
+			"col": {
+				"2": 2,
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "RPM",
+						"value": "datasources[\"SeaDream Engine \"][\"rpm\"]",
+						"min_value": 0,
+						"max_value": "4000",
+						"gaugeStyle": "full",
+						"dropshadow": true,
+						"blocks": 4,
+						"gaugeBackColor": "1",
+						"gaugeFillColor": "3",
+						"gaugePointerColor": "4"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 11,
+				"3": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "Speed",
+						"value": "datasources[\"SeaDream Navigation\"][\"sog\"]",
+						"units": "knts",
+						"min_value": 0,
+						"max_value": "30",
+						"gaugeStyle": "full",
+						"dropshadow": true,
+						"blocks": 4,
+						"gaugeBackColor": "4",
+						"gaugeFillColor": "3",
+						"gaugePointerColor": "7"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 11,
+				"3": 11
+			},
+			"col": {
+				"2": 2,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Eng OIL",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Engine \"][\"oil_pressure\"]",
+						"animate": true,
+						"units": "psi"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 15,
+				"3": 11
+			},
+			"col": {
+				"2": 2,
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "ALT",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Engine \"][\"alternator\"]",
+						"animate": true,
+						"units": "volts"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"2": 19,
+				"3": 11
+			},
+			"col": {
+				"2": 2,
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Eng Temp",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Engine \"][\"eng_temp\"]",
+						"animate": true,
+						"units": "F"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "SeaDream Engine ",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_engine",
+				"apikey": "397fa82fa820cd741e2cebc059f4d17b",
+				"refresh": 5,
+				"span": "1min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "SeaSmart Location",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_location",
+				"apikey": "397fa82fa820cd741e2cebc059f4d17b",
+				"refresh": 5,
+				"span": "1min",
+				"resolution": "60",
+				"instance": "",
+				"index": "",
+				"type": "DGNSS fix",
+				"units": "US"
+			}
+		},
+		{
+			"name": "SeaDream Navigation",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_nav",
+				"apikey": "397fa82fa820cd741e2cebc059f4d17b",
+				"refresh": 5,
+				"span": "1min",
+				"resolution": "60",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"units": "US"
+			}
+		}
+	],
+	"columns": 3
+}

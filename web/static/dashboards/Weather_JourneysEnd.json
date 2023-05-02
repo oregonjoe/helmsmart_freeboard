@@ -1,0 +1,516 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js"
+	],
+	"panes": [
+		{
+			"title": "Current Location - JourneysEnd",
+			"width": 1,
+			"row": {
+				"2": 5,
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "google_map",
+					"settings": {
+						"lat": "",
+						"lon": "",
+						"blocks": 4,
+						"position": "datasources[\"SeaDream Location\"][\"position\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "Weather",
+			"width": 1,
+			"row": {
+				"2": 5,
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"2": 2,
+				"3": 2,
+				"5": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Air Temp",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Environmental\"][\"temperature\"]",
+						"animate": true,
+						"units": "F"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Baro",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]",
+						"animate": true,
+						"units": "inhg"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Wind Speed",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Wind\"][\"truewindspeed\"]",
+						"animate": true,
+						"units": "knots"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Humidity",
+						"size": "regular",
+						"value": "datasources[\"SeaDream Environmental\"][\"humidity\"]",
+						"animate": true,
+						"units": "%"
+					}
+				}
+			]
+		},
+		{
+			"title": "Wind Dir True",
+			"width": 1,
+			"row": {
+				"2": 15,
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"2": 1,
+				"3": 3,
+				"5": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"gaugePointerColor": "6",
+						"gaugeFillColor": "11",
+						"gaugeBackColor": "10",
+						"blocks": "4",
+						"dropshadow": true,
+						"gaugeStyle": "compass",
+						"max_value": 360,
+						"min_value": 0,
+						"units": "degrees",
+						"value": "datasources[\"SeaDream Wind\"][\"truewinddir\"]",
+						"title": ""
+					}
+				}
+			]
+		},
+		{
+			"title": "Air Temp (24 hour)",
+			"width": 1,
+			"row": {
+				"2": 15,
+				"3": 11
+			},
+			"col": {
+				"2": 2,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"SeaDream Environmental\"][\"temperature\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Wind Speed (24 hours)",
+			"width": 1,
+			"row": {
+				"2": 25,
+				"3": 11
+			},
+			"col": {
+				"2": 1,
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"SeaDream Wind\"][\"truewindspeed\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Baro (24 hours)",
+			"width": 1,
+			"row": {
+				"2": 25,
+				"3": 11
+			},
+			"col": {
+				"2": 2,
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"SeaDream Environmental\"][\"atmospheric_pressure\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Rain Data",
+			"width": 1,
+			"row": {
+				"2": 35,
+				"3": 21
+			},
+			"col": {
+				"2": 1,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Rate",
+						"size": "regular",
+						"value": "datasources[\"Winchuck Rain\"][\"rate\"]",
+						"animate": true,
+						"units": "in/hr"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Accum",
+						"size": "regular",
+						"value": "datasources[\"Winchuck Rain\"][\"delta_accum\"]",
+						"animate": true,
+						"units": "in"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"Winchuck Rain\"][\"duration\"]",
+						"animate": true,
+						"units": "min"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "peak",
+						"size": "regular",
+						"value": "datasources[\"Winchuck Rain\"][\"peak\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "Rain Accummulation",
+			"width": 1,
+			"row": {
+				"2": 35,
+				"3": 21
+			},
+			"col": {
+				"2": 2,
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Winchuck Rain\"][\"accumulation\"]",
+						"series1label": "accumulation",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Rain Rate",
+			"width": 1,
+			"row": {
+				"2": 45,
+				"3": 21
+			},
+			"col": {
+				"2": 1,
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Winchuck Rain\"][\"rate\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Rain Week",
+			"width": 1,
+			"row": {
+				"3": 31
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Rain Week\"][\"accumulation\"]",
+						"series1label": "accumulation",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Deck Light",
+			"width": 1,
+			"row": {
+				"3": 41,
+				"5": 41
+			},
+			"col": {
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Back Deck\"][\"dimmer_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Back Deck\"][\"dimmer_status\"]",
+						"series2label": "Status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "SeaDream Wind",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
+				"apikey": "a2040d102c7aab064b63c8aab29c78f1",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "900",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "SeaDream Wind"
+			}
+		},
+		{
+			"name": "SeaDream Environmental",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
+				"apikey": "a2040d102c7aab064b63c8aab29c78f1",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "SeaDream Environmental"
+			}
+		},
+		{
+			"name": "SeaDream Location",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_location",
+				"apikey": "a2040d102c7aab064b63c8aab29c78f1",
+				"refresh": 15,
+				"span": "12hour",
+				"resolution": "600",
+				"source": "",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Engine Fuel used",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux",
+				"apikey": "a2040d102c7aab064b63c8aab29c78f1",
+				"refresh": 30,
+				"span": "15min",
+				"resolution": "300",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Winchuck Rain",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_rain_gauge",
+				"apikey": "a2040d102c7aab064b63c8aab29c78f1",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "Winchuck Rain"
+			}
+		},
+		{
+			"name": "Back Deck",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "a2040d102c7aab064b63c8aab29c78f1",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"source": "",
+				"instance": "4",
+				"index": "",
+				"type": "mesh",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Rain Week",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_rain_gauge",
+				"apikey": "a2040d102c7aab064b63c8aab29c78f1",
+				"refresh": 60,
+				"span": "7day",
+				"resolution": "86400",
+				"source": "",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		}
+	],
+	"columns": 3
+}

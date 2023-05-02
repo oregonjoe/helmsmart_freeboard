@@ -1,0 +1,433 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+	
+	
+	
+			{
+			"title": "Weather Links",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": "3",
+			"widgets": [
+				{
+					"type": "plugin531a3b2b7df9e78c7300000f",
+					"settings": {
+						"html": "<table width:100%>\n<tr>\n<td width:150px>\n<a href=\"https://freeboard.io/board/rwmn8B\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">KNSD, CA</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/EjOh2B\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">NBC-Boston</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/FVTEKy\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">Winchuck, OR</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/UaiVEa\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">Chetco, OR</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/jInuNy\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">GEMECO, SC</span>\n          </a>\n</td>\n<td width:150px>\n<a href=\"https://freeboard.io/board/AuRuNy\" id=\"ChetcoDigitalBtn\" class=\"helmsmart-button\" style=\"left: 0px; top: 0px\">\n         <span style=\"display:block; width:120px\">BOSTON, MA</span>\n          </a>\n</td>\n\n\n</tr>\n</table>",
+						"height": "1"
+					}
+				}
+			]
+		},
+	
+	
+	
+	
+		{
+			"title": "Dimmer 00 Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_00_RealTime\"][\"dimmer0_value\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 01 Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 11,
+				"5": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_01_RealTime\"][\"dimmer_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_01_RealTime\"][\"dimmer_status\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 02 Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 21,
+				"5": 1,
+				"7": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_02_RealTime\"][\"dimmer_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_02_RealTime\"][\"dimmer_status\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 03 Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 31,
+				"5": 1,
+				"9": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"9": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_03_RealTime\"][\"dimmer_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_03_RealTime\"][\"dimmer_status\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 04 Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 41,
+				"5": 1,
+				"11": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"11": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_04_RealTime\"][\"dimmer_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_04_RealTime\"][\"dimmer_status\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 05 Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 51,
+				"5": 1,
+				"13": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"13": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_05_RealTime\"][\"dimmer_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_05_RealTime\"][\"dimmer_status\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 06 Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 61,
+				"5": 1,
+				"15": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"15": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_06_RealTime\"][\"dimmer_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_06_RealTime\"][\"dimmer_status\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+
+		{
+			"title": "Master Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 161,
+				"7": 1,
+				"19": 1,
+				"23": 1,
+				"25": 1,
+				"27": 1,
+				"35": 1
+			},
+			"col": {
+				"3": 1,
+				"7": 1,
+				"19": 1,
+				"23": 1,
+				"25": 1,
+				"27": 1,
+				"35": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_Week\"][\"dimmer\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "Dimmer_00_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 60,
+				"span": "2day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "0",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_01_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 60,
+				"span": "2day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "1",
+				"index": "0",
+				"type": "mesh",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_02_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 60,
+				"span": "2day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "2",
+				"index": "0",
+				"type": "mesh",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_03_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 60,
+				"span": "2day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "3",
+				"index": "0",
+				"type": "mesh",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_04_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 60,
+				"span": "2day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "4",
+				"index": "0",
+				"type": "mesh",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_05_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 60,
+				"span": "2day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "5",
+				"index": "0",
+				"type": "mesh",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_06_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 60,
+				"span": "2day",
+				"resolution": "1200",
+				"source": "",
+				"instance": "6",
+				"index": "0",
+				"type": "mesh",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		}
+
+	],
+	"columns": 3
+}

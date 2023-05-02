@@ -1,0 +1,368 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Port Engine",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "RPM",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Port\"][\"rpm\"]",
+						"animate": true,
+						"units": "rpm"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Temp",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Port\"][\"eng_temp\"]",
+						"animate": true,
+						"units": "F"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Oil Pressure",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Port\"][\"oil_pressure\"]",
+						"animate": true,
+						"units": "psi"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Alternator",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Port\"][\"alternator\"]",
+						"animate": true,
+						"units": "volts"
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Port Bilge",
+						"value": "datasources[\"Port Status\"][\"status\"]",
+						"on_text": "Temp Alarm Active",
+						"off_text": "Temp Alarm  Off",
+						"apikey": "3a73b00520424908b94f22ac69e6ab58",
+						"indicatortype": "indicator",
+						"indicatormode": "active_low_GT",
+						"threshold": 0,
+						"instance": 0,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Center Engine",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "RPM",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Center\"][\"rpm\"]",
+						"animate": true,
+						"units": "rpm"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Temp",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Center\"][\"eng_temp\"]",
+						"animate": true,
+						"units": "F"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Oil Pressure",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Center\"][\"oil_pressure\"]",
+						"animate": true,
+						"units": "psi"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Alternator",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Center\"][\"alternator\"]",
+						"animate": true,
+						"units": "volts"
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Center Temp Alarm",
+						"value": "datasources[\"Center Status\"][\"status\"]",
+						"on_text": "Temp Alarm Active",
+						"off_text": "Temp Alarm  Off",
+						"apikey": "3a73b00520424908b94f22ac69e6ab58",
+						"indicatortype": "indicator",
+						"indicatormode": "active_low_GT",
+						"threshold": 0,
+						"instance": 0,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Starboard Engine",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "RPM",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Stbd\"][\"rpm\"]",
+						"animate": true,
+						"units": "rpm"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Temp",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Stbd\"][\"eng_temp\"]",
+						"animate": true,
+						"units": "F"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Oil Pressure",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Stbd\"][\"oil_pressure\"]",
+						"animate": true,
+						"units": "psi"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Alternator",
+						"size": "regular",
+						"value": "datasources[\"Engine Live Stbd\"][\"alternator\"]",
+						"animate": true,
+						"units": "volts"
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Stbd Temp Alarm",
+						"value": "datasources[\"Starboard Status\"][\"status\"]",
+						"on_text": "Temp Alarm Active",
+						"off_text": "Temp Alarm  Off",
+						"apikey": "3a73b00520424908b94f22ac69e6ab58",
+						"indicatortype": "indicator",
+						"indicatormode": "active_low_GT",
+						"threshold": 0,
+						"instance": 0,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "RPM - History - Day",
+			"width": 1,
+			"row": {
+				"3": 13
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "RPM",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Engine History\"][\"rpm\"]",
+						"series1label": "Port ",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "Engine Live Port",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_engine",
+				"apikey": "3a73b00520424908b94f22ac69e6ab58",
+				"refresh": 60,
+				"span": "10min",
+				"resolution": "300",
+				"source": "",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Engine Live Center",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_engine",
+				"apikey": "3a73b00520424908b94f22ac69e6ab58",
+				"refresh": 60,
+				"span": "10min",
+				"resolution": "300",
+				"source": "",
+				"instance": "2",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Engine Live Stbd",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_engine",
+				"apikey": "3a73b00520424908b94f22ac69e6ab58",
+				"refresh": 60,
+				"span": "10min",
+				"resolution": "300",
+				"source": "",
+				"instance": "1",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Engine History",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_engine",
+				"apikey": "3a73b00520424908b94f22ac69e6ab58",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"source": "",
+				"instance": "",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Port Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_status",
+				"apikey": "3a73b00520424908b94f22ac69e6ab58",
+				"refresh": 60,
+				"span": "10min",
+				"resolution": "300",
+				"source": "",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Center Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_status",
+				"apikey": "3a73b00520424908b94f22ac69e6ab58",
+				"refresh": 60,
+				"span": "10min",
+				"resolution": "300",
+				"source": "",
+				"instance": "2",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},{
+			"name": "Starboard Status",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_status",
+				"apikey": "3a73b00520424908b94f22ac69e6ab58",
+				"refresh": 60,
+				"span": "10min",
+				"resolution": "300",
+				"source": "",
+				"instance": "1",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		}
+	],
+	"columns": 3
+}

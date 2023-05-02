@@ -1,0 +1,461 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Indicator 0 Current",
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Time",
+						"size": "big",
+						"value": "datasources[\"Indicator0_Current\"][\"runtime\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Cycles",
+						"size": "big",
+						"value": "datasources[\"Indicator0_Current\"][\"cycles\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "Indicator 24 Hour",
+			"width": 1,
+			"row": {
+				"2": 11,
+				"3": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 2
+			},
+			"col_width": 2,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Indicator0 24 Hour\"][\"indicator\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Indicator 1 Current",
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 11
+			},
+			"col": {
+				"2": 2,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Time",
+						"size": "big",
+						"value": "datasources[\"Indicator1_Current\"][\"runtime\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "cycles",
+						"size": "big",
+						"value": "datasources[\"Indicator1_Current\"][\"cycles\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "Indicator 1 24 hour",
+			"width": 1,
+			"row": {
+				"2": 5,
+				"3": 11
+			},
+			"col": {
+				"2": 2,
+				"3": 2
+			},
+			"col_width": 2,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Indicator1 24 Hour\"][\"indicator\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Indicator 2 Current",
+			"width": 1,
+			"row": {
+				"3": 21
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Time",
+						"size": "big",
+						"value": "datasources[\"Indicator2_Current\"][\"runtime\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "cycles",
+						"size": "big",
+						"value": "datasources[\"Indicator2_Current\"][\"cycles\"]",
+						"animate": true
+					}
+				}]
+		},
+		{
+			"title": "INdicator 2 24 Hour",
+			"width": 1,
+			"row": {
+				"3": 21
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 2,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Indicator2 24 Hour\"][\"indicator\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}]
+		}
+	],
+	"datasources": [
+		{
+			"name": "Indicator0_Current",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 30,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "0",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator0 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "0",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator1_Current",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 30,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "1",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator1 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "1",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator2_Current",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 30,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "2",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator2 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "2",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator3_Current",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 30,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "3",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator3 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "3",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator4_Current",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 30,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "4",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator4 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "4",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator5_Current",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 30,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "5",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator5 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "5",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator6_Current",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 30,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "6",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator6 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "6",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator7_Current",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 30,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "7",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Indicator7 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_indicator_runtime",
+				"apikey": "0ab5592b9c41264d9803e4ebc9d3c2ea",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "7",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		}
+	],
+	"columns": 3
+}

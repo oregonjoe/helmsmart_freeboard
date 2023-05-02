@@ -1,0 +1,373 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Solar Volts",
+						"size": "regular",
+						"value": "datasources[\"Solar Live\"][\"voltage\"]",
+						"animate": true,
+						"units": "volts"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Battery",
+						"size": "regular",
+						"value": "datasources[\"BAttery Live\"][\"voltage\"]",
+						"animate": true,
+						"units": "volts"
+					}
+				}
+			]
+		},
+		{
+			"title": "Air Temp",
+			"width": 1,
+			"row": {
+				"3": 7
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "",
+						"size": "regular",
+						"value": "datasources[\"Environmential Live\"][\"temperature\"]",
+						"animate": true,
+						"units": "F"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "AC Volts",
+						"size": "regular",
+						"value": "datasources[\"AC Live\"][\"volts\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "AC Amps",
+						"size": "regular",
+						"value": "datasources[\"AC Live\"][\"amps\"]",
+						"animate": true,
+						"units": "amps"
+					}
+				}
+			]
+		},
+		{
+			"title": "Battery Volts - 24 hours",
+			"width": 1,
+			"row": {
+				"3": 11
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Battery 24 Hour\"][\"voltage\"]",
+						"series1label": "battery volts",
+						"series1color": "0",
+						"series2": "datasources[\"Solar 24 hours\"][\"voltage\"]",
+						"series2label": "solar volts",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "AC Amps - 24 hours",
+			"width": 1,
+			"row": {
+				"3": 31,
+				"5": 17
+			},
+			"col": {
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"AC - 24 hours\"][\"amps\"]",
+						"series1label": "amps",
+						"series1color": "2",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Battery amps - 24 hours",
+			"width": 1,
+			"row": {
+				"3": 21
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Solar 24 hours\"][\"current\"]",
+						"series1label": "Solar",
+						"series1color": "0",
+						"series2": "datasources[\"Battery 24 Hour\"][\"current\"]",
+						"series2label": "Battery",
+						"series2color": "10",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Solar Charge",
+						"size": "regular",
+						"value": "datasources[\"Solar Live\"][\"current\"]",
+						"animate": true,
+						"units": "amps"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Battery Charge",
+						"size": "regular",
+						"value": "datasources[\"BAttery Live\"][\"current\"]",
+						"animate": true,
+						"units": "amps"
+					}
+				}
+			]
+		},
+		{
+			"title": "Humidity",
+			"width": 1,
+			"row": {
+				"3": 7
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "",
+						"size": "regular",
+						"value": "datasources[\"Environmential Live\"][\"humidity\"]",
+						"animate": true,
+						"units": "%"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 7
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": []
+		}
+	],
+	"datasources": [
+		{
+			"name": "Solar Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_battery",
+				"apikey": "85cefeddc1932361eeff0530a869977b",
+				"refresh": 10,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "Solar Live"
+			}
+		},
+		{
+			"name": "BAttery Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_battery",
+				"apikey": "85cefeddc1932361eeff0530a869977b",
+				"refresh": 15,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "1",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Environmential Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
+				"apikey": "85cefeddc1932361eeff0530a869977b",
+				"refresh": 15,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "1",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "AC Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "85cefeddc1932361eeff0530a869977b",
+				"refresh": 15,
+				"span": "5min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Battery 24 Hour",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_battery",
+				"apikey": "85cefeddc1932361eeff0530a869977b",
+				"refresh": 5,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "1",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "Battery 24 Hour"
+			}
+		},
+		{
+			"name": "AC - 24 hours",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "85cefeddc1932361eeff0530a869977b",
+				"refresh": 5,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Solar 24 hours",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_battery",
+				"apikey": "85cefeddc1932361eeff0530a869977b",
+				"refresh": 15,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		}
+	],
+	"columns": 3
+}

@@ -1,0 +1,745 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "Garage Amps",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Garage\"][\"amps\"]",
+						"series1label": "amps",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 11,
+				"5": 11
+			},
+			"col": {
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "Office Amps",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Office\"][\"amps\"]",
+						"series1label": "amps",
+						"series1color": "0",
+						"series2": "datasources[\"Office\"][\"status\"]",
+						"series2label": "online",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"3": 21,
+				"5": 11,
+				"7": 11
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "HotTub Amps",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"HotTub\"][\"amps\"]",
+						"series1label": "ams",
+						"series1color": "0",
+						"series2": "datasources[\"HotTub\"][\"status\"]",
+						"series2label": "online",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer 00 Level - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 31,
+				"7": 21,
+				"9": 21
+			},
+			"col": {
+				"3": 1,
+				"7": 1,
+				"9": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_00_RealTime\"][\"dimmer0_value\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer Garage Outside Flood - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 41,
+				"5": 1,
+				"9": 1,
+				"11": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"9": 1,
+				"11": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_01_RealTime\"][\"dimmer0_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_01_RealTime\"][\"dimmer4_value\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer Garage Inside Front - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 51,
+				"5": 1,
+				"7": 1,
+				"11": 1,
+				"13": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"7": 1,
+				"11": 1,
+				"13": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_02_RealTime\"][\"dimmer0_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_02_RealTime\"][\"dimmer4_value\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer Garage Inside Back - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 61,
+				"5": 1,
+				"9": 1,
+				"13": 1,
+				"15": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"9": 1,
+				"13": 1,
+				"15": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_03_RealTime\"][\"dimmer0_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_03_RealTime\"][\"dimmer4_value\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer Front Porch Flood - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 71,
+				"5": 1,
+				"11": 1,
+				"15": 1,
+				"17": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"11": 1,
+				"15": 1,
+				"17": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_04_RealTime\"][\"dimmer0_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_04_RealTime\"][\"dimmer4_value\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer Deck Patio Triac - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 81,
+				"5": 1,
+				"13": 1,
+				"17": 1,
+				"19": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"13": 1,
+				"17": 1,
+				"19": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_05_RealTime\"][\"dimmer0_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_05_RealTime\"][\"dimmer4_value\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3": "datasources[\"Upper Deck Override [10]\"][\"dimmer0_value\"]",
+						"series3label": "override",
+						"series3color": "10"
+					}
+				}
+			]
+		},
+		{
+			"title": "Lower Deck Spot Dimmer - 1 WEEK",
+			"width": 1,
+			"row": {
+				"3": 91,
+				"5": 1,
+				"15": 1,
+				"19": 1,
+				"21": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"15": 1,
+				"19": 1,
+				"21": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_06_RealTime\"][\"dimmer0_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_06_RealTime\"][\"dimmer4_value\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3": "datasources[\"Lower Deck Spot Override [11]\"][\"dimmer0_value\"]",
+						"series3label": "override",
+						"series3color": "10"
+					}
+				}
+			]
+		},
+		{
+			"title": "Lower Deck Rail Lights - 1 WEEK",
+			"width": 1,
+			"row": {
+				"3": 101,
+				"21": 91,
+				"23": 91
+			},
+			"col": {
+				"3": 1,
+				"21": 1,
+				"23": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"DImmer_09_Realtime\"][\"dimmer0_value\"]",
+						"series1label": "Dimmer",
+						"series1color": "0",
+						"series2": "datasources[\"DImmer_09_Realtime\"][\"dimmer4_value\"]",
+						"series2label": "online",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Hot Tub Deck Rail Lights - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 111,
+				"5": 1,
+				"19": 1,
+				"23": 1,
+				"25": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"19": 1,
+				"23": 1,
+				"25": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_08_RealTime\"][\"dimmer0_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_08_RealTime\"][\"dimmer4_value\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Front Porch Dimmers - 1 Week",
+			"width": 1,
+			"row": {
+				"3": 121,
+				"5": 1,
+				"17": 1,
+				"25": 1,
+				"27": 1
+			},
+			"col": {
+				"3": 1,
+				"5": 1,
+				"17": 1,
+				"25": 1,
+				"27": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Dimmer_07_RealTime\"][\"dimmer0_value\"]",
+						"series1label": "brightness",
+						"series1color": "0",
+						"series2": "datasources[\"Dimmer_07_RealTime\"][\"dimmer4_value\"]",
+						"series2label": "status",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "Dimmer_00_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "0",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_01_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "1",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"name": "Dimmer_01_RealTime",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_02_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "2",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_03_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "3",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_04_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "4",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_05_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "5",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_06_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "6",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_07_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "7",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"name": "Dimmer_07_RealTime",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_08_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "8",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"name": "Dimmer_08_RealTime",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_Week",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_status",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "0",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "HotTub",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "60",
+				"instance": "0",
+				"index": "",
+				"type": "UTIL",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Office",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "12hour",
+				"resolution": "120",
+				"instance": "2",
+				"index": "",
+				"type": "UTIL",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "Office"
+			}
+		},
+		{
+			"name": "DImmer_09_Realtime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "9",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median",
+				"name": "DImmer_09_Realtime"
+			}
+		},
+		{
+			"name": "Upper Deck Override [10]",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "10",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Lower Deck Spot Override [11]",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "11",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Garage",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "29862d6e239c6a766839926a33184ac3",
+				"refresh": 15,
+				"span": "12hour",
+				"resolution": "120",
+				"instance": "1",
+				"index": "",
+				"type": "UTIL",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		}
+	],
+	"columns": 3
+}

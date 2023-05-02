@@ -1,0 +1,20 @@
+XHR
+
+freeboard_location?apikey=7d7f8f332c804086ec604e78…0305011059006715064_1636578596712&_=1636578596720	GET	200	xhr	
+
+freeboard.thirdparty.js:70	2.4 kB	431 ms	XHRfreeboard_winddata?apikey=7d7f8f332c804086ec604e78…0305011059006715064_1636578596712&_=1636578596721	GET	200	xhr	
+
+freeboard.thirdparty.js:70	1.1 kB	423 ms	XHRfreeboard_winddata?apikey=7d7f8f332c804086ec604e78…0305011059006715064_1636578596714&_=1636578596722	GET	200	xhr	
+
+freeboard.thirdparty.js:70	12.6 kB	569 ms	XHRfreeboard_location?apikey=7d7f8f332c804086ec604e78…0305011059006715064_1636578596716&_=1636578596723	GET	200	xhr	
+
+freeboard.thirdparty.js:70	2.4 kB	712 ms	XHRfreeboard_location?apikey=7d7f8f332c804086ec604e78…0305011059006715064_1636578596716&_=1636578596724	GET	200	xhr	freeboard.thirdparty.js:70	2.4 kB	426 ms	
+
+
+5410ECD012C0         |            1 | FOXSTORMCAM_12C0
+
+https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=7d7f8f332c804086ec604e786265b42b&interval=12hour&resolution=600&type=NULL&timezone=UTC&units=US&mode=median&callback=jQuery20305011059006715064_1636578596712&_=1636578596720
+
+https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=7d7f8f332c804086ec604e786265b42b&interval=12hour&resolution=600&type=NULL&timezone=UTC&units=US&mode=median&callback=jQuery20305011059006715064_1636578596712&_=1636578596720
+
+https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=7d7f8f332c804086ec604e786265b42b&interval=12hour&resolution=600&type=NULL&timezone=UTC&units=US&mode=median&callback=jQuery20305011059006715064_1636578596712&_=1636578596720

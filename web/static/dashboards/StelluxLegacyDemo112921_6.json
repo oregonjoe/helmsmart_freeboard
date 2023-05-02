@@ -1,0 +1,920 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "SET MASTER ZONE",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_00_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX - ACTIVE",
+						"off_text": "MAX - INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 0,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "SET MASTER ZONE",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_00_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID - ACTIVE",
+						"off_text": "MID - INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 0,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "SET MASTER ZONE",
+			"width": 1,
+			"row": {
+				"3": 1
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_00_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF - ACTIVE",
+						"off_text": "OFF - INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 0,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 1",
+			"width": 1,
+			"row": {
+				"3": 5
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_01_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 1,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_01_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 1,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_01_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 1,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_01_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 1,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 2",
+			"width": 1,
+			"row": {
+				"3": 5
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_02_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 2,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_02_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 2,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_02_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 2,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_02_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 2,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 3",
+			"width": 1,
+			"row": {
+				"3": 5
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_03_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 3,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_03_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 3,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_03_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 3,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_03_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 3,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 4",
+			"width": 1,
+			"row": {
+				"3": 15
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_04_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 4,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_04_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 4,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_04_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 4,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_04_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 4,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 5",
+			"width": 1,
+			"row": {
+				"3": 15
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_05_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 5,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_05_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 5,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_05_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 5,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_05_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 5,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 6",
+			"width": 1,
+			"row": {
+				"3": 15
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_06_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 6,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_06_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 6,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_06_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 6,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_06_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 6,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 7",
+			"width": 1,
+			"row": {
+				"3": 25
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_07_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 7,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_07_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 7,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_07_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 7,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_07_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 7,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 8",
+			"width": 1,
+			"row": {
+				"3": 25
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_08_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 8,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_08_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 8,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_08_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 8,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_08_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 8,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 9",
+			"width": 1,
+			"row": {
+				"3": 25
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_09_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MAX-ACTIVE",
+						"off_text": "MAX-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 100,
+						"instance": 9,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_09_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "MID-ACTIVE",
+						"off_text": "MID-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 50,
+						"instance": 9,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_09_RealTime\"][\"dimmer0_value\"]",
+						"on_text": "OFF-ACTIVE",
+						"off_text": "OFF-INACTIVE",
+						"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+						"indicatortype": "dimmer",
+						"indicatormode": "active_high_EQ",
+						"threshold": 0,
+						"instance": 9,
+						"switchid": 0
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"value": "datasources[\"Dimmer_09_RealTime\"][\"dimmer4_value\"]",
+						"on_text": "on-line",
+						"off_text": "off-line",
+						"indicatortype": "indicator_value",
+						"indicatormode": "active_high_LT",
+						"threshold": 4,
+						"instance": 9,
+						"switchid": 0
+					}
+				}
+			]
+		},
+		{
+			"title": "Zone 10",
+			"width": 1,
+			"row": {
+				"3": 35
+			},
+			"col": {
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": []
+		},
+		{
+			"title": "Zone 11",
+			"width": 1,
+			"row": {
+				"3": 35
+			},
+			"col": {
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": []
+		},
+		{
+			"title": "Zone 12",
+			"width": 1,
+			"row": {
+				"3": 35
+			},
+			"col": {
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": []
+		}
+	],
+	"datasources": [
+		{
+			"name": "Dimmer_00_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "0",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"name": "Dimmer_00_RealTime",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_01_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "1",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"name": "Dimmer_01_RealTime",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "Dimmer_02_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "2",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"name": "Dimmer_02_RealTime"
+			}
+		},
+		{
+			"name": "Dimmer_03_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "3",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_04_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "4",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_05_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "5",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_06_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "6",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_07_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "7",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_08_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "8",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_09_RealTime",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_values",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "2min",
+				"resolution": "60",
+				"instance": "9",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		},
+		{
+			"name": "Dimmer_Week",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-led-specialists.herokuapp.com/freeboard_dimmer_status",
+				"apikey": "83c38bb2556cb1fc40af07efafdf3dec",
+				"refresh": 30,
+				"span": "7day",
+				"resolution": "3600",
+				"instance": "0",
+				"index": "0",
+				"type": "",
+				"timezone": "US%2FPacific",
+				"units": "US"
+			}
+		}
+	],
+	"columns": 3
+}

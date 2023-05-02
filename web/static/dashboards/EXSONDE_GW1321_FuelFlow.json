@@ -1,0 +1,288 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Amps Phase 1",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"3": 1
+			},
+			"col": {
+				"0": 0,
+				"3": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"UTIL Phase A\"][\"volts\"]",
+						"series1label": "Phase A Volts",
+						"series1color": "0",
+						"series2": "datasources[\"UTIL Phase B\"][\"volts\"]",
+						"series2label": "Phase B Volts",
+						"series2color": "2",
+						"series3": "datasources[\"UTIL Phase C\"][\"volts\"]",
+						"series3label": "Phase C Volts",
+						"series3color": "10"
+					}
+				}
+			]
+		},
+		{
+			"title": "Amps Phase 2",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"3": 11,
+				"5": 11
+			},
+			"col": {
+				"0": 0,
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"UTIL Phase A\"][\"amps\"]",
+						"series1label": "Phase A Amps",
+						"series1color": "0",
+						"series2": "datasources[\"UTIL Phase B\"][\"amps\"]",
+						"series2label": "Phase B amps",
+						"series2color": "2",
+						"series3": "datasources[\"UTIL Phase C\"][\"amps\"]",
+						"series3label": "Phase C amps",
+						"series3color": "10"
+					}
+				}
+			]
+		},
+		{
+			"title": "Amps Phase 3",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"3": 21,
+				"7": 21
+			},
+			"col": {
+				"0": 0,
+				"3": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"UTIL FLOW\"][\"instantaneous_fuel_economy\"]",
+						"series1label": "Flow Util",
+						"series1color": "0",
+						"series2": "datasources[\"GEN FLOW\"][\"instantaneous_fuel_economy\"]",
+						"series2label": "Flow GEN",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Dimmer Value",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"3": 31,
+				"9": 31
+			},
+			"col": {
+				"0": 0,
+				"3": 1,
+				"9": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"UTIL FLOW\"][\"fuel_used\"]",
+						"series1label": "UTIL Fuel Used",
+						"series1color": "0",
+						"series2": "datasources[\"GEN FLOW\"][\"fuel_used\"]",
+						"series2label": "GEN Fuel Used",
+						"series2color": "2",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"width": 1,
+			"row": {
+				"0": 1,
+				"3": 41,
+				"11": 41
+			},
+			"col": {
+				"0": 0,
+				"3": 1,
+				"11": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"title": "Tank Level",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"Tank Level\"][\"fuel_port\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "UTIL Phase A",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "3b8c3abca2a67fc3370534f5b5c7a795",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "0",
+				"index": "",
+				"type": "UTIL",
+				"timezone": "US%2FPacific",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "UTIL Phase B",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "3b8c3abca2a67fc3370534f5b5c7a795",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "1",
+				"index": "",
+				"type": "UTIL",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "UTIL Phase C",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status",
+				"apikey": "3b8c3abca2a67fc3370534f5b5c7a795",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "2",
+				"index": "",
+				"type": "UTIL",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "UTIL FLOW",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux",
+				"apikey": "3b8c3abca2a67fc3370534f5b5c7a795",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "GEN FLOW",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux",
+				"apikey": "3b8c3abca2a67fc3370534f5b5c7a795",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "1",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median",
+				"name": "GEN FLOW"
+			}
+		},
+		{
+			"name": "Tank Level",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_fluidlevels",
+				"apikey": "3b8c3abca2a67fc3370534f5b5c7a795",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "300",
+				"source": "",
+				"instance": "0",
+				"index": "",
+				"type": "",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		}
+	],
+	"columns": 3
+}
