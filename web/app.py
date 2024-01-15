@@ -2342,6 +2342,9 @@ def freeboard_environmental():
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, deviceid, 'freeboard_environmental', freeboard_environmental_index)
+
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
