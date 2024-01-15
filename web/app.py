@@ -58,9 +58,50 @@ logging.basicConfig(level=logging.DEBUG)
 log = logging
 
 
+# *******************************************************************
+# AIP indexes for database
+# ********************************************************************
+freeboard_environmental_index=0
+freeboard_environmental_calculated_index=1
+freeboard_environmental_metar_index=2
+helmsmart_environmental_baroncsv_index=3
+helmsmart_environmental_nmea0183_index=4
+helmsmart_environmental_baroncsv_text_index=5
+freeboard_weather_index=6
+freeboard_rain_gauge_index=7
+freeboard_rain_wung_index=8
+freeboard_weather_wung_index=9
+freeboard_winddata_index=10
+freeboard_winddata_apparent_index=11
+freeboard_environmental2_index=12
+freeboard_winddataTrue_index=13
+freeboard_location_index=14
+freeboard_location_wind_index=15
+freeboard_nav_index=16
+freeboard_water_depth_index=17
+freeboard_attitude_index=18
+freeboard_battery_index=19
+freeboard_engine_aux_index=20
+freeboard_engine_index=21
+freeboard_fluidlevels_index=22
+freeboard_ac_status_index=23
+freeboard_status_index=24
+freeboard_indicator_status_index=25
+freeboard_indicator_runtime_index=26
+freeboard_dimmer_status_index=27
+freeboard_get_engine_values_index=28
+freeboard_get_rain_gauge_index=29
+freeboard_get_weather_values_index=30
+freeboard_get_weather_minmax_value_index=31
+freeboard_get_dimmer_values_index=32
+freeboard_dimmer_values_index=33
+freeboard_switch_bank_status_index=34
+freeboard_ac_status_array_index=35
+setswitchapi_index=100
+setdimmerapi_index=101
 
-
-
+# *******************************************************************
+# ********************************************************************
 
 #from flask import Flask
 from flask import (
@@ -5344,6 +5385,11 @@ def freeboard_rain_gauge():
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, deviceid, 'freeboard_rain_gauge', freeboard_rain_gauge_index)
+
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
