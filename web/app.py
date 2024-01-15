@@ -2175,7 +2175,7 @@ def get_apistat():
     #rollup = "mean"
 
     serieskeys=" deviceid='"
-    serieskeys= serieskeys + deviceid 
+    serieskeys= serieskeys + deviceid + "' "
 
     query = ('select {}(apiindex) AS apiindex FROM {} '
                      'where {} AND time > {}s and time < {}s '
