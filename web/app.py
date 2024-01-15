@@ -2068,7 +2068,7 @@ def get_apistat():
 
   deviceapikey = request.args.get('apikey','')
   Interval = request.args.get('interval',"5min")
-  rollup = request.args.get('rollup',"sum")
+  rollup = request.args.get('mode',"sum")
 
   resolution = request.args.get('resolution',"")
   mytimezone = request.args.get('timezone',"UTC")
@@ -2190,6 +2190,9 @@ def get_apistat():
 
     try:
       response= db.query(query)
+      
+    except InfluxDBClientError as e:
+      log.info('get_apistat: Exception Error in InfluxDB  %s:  ' % str(e))
     except:
       e = sys.exc_info()[0]
       log.info('get_apistat: Error in geting inFluxDB data %s:  ' % e)
