@@ -1995,7 +1995,7 @@ def update_api_log(apikey, deviceid, apifunction, apiindex):
   
     myjsonkeys = { 'deviceid': deviceid, 'apikey':apikey, 'apifunction':apifunction}
     #myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
-    #if debug_all: log.info('freeboard: convert_influxdbcloud_json myjsonkeys %s:  ', myjsonkeys)
+    if debug_all: log.info('update_api_log:  myjsonkeys %s:  ', myjsonkeys)
     
       
     #values = {'records':len(mydataIDBC)}
@@ -2004,11 +2004,11 @@ def update_api_log(apikey, deviceid, apifunction, apiindex):
     #measurement = 'HelmSmartDB'
     measurement = "HelmSmartAPI"
     #measurement = 'HS_' + str(deviceid)
-    #if debug_all: log.info('insert_influxdb_cloud: convert_influxdbcloud_json values %s:  ', values)
+    if debug_all: log.info('update_api_log: values %s:  ', values)
     
     ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}
     #mydataIDBC.append(ifluxjson)
-    #if debug_all: log.info('insert_influxdb_cloud: convert_influxdbcloud_json tagpairs %s:  ', mydataIDBC)
+    if debug_all: log.info('update_api_log:  ifluxjson %s:  ', ifluxjson)
 
 
 
@@ -2047,10 +2047,10 @@ def update_api_log(apikey, deviceid, apifunction, apiindex):
     #e = sys.exc_info()[0]
 
   except AttributeError as e:
-    if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    if debug_all: log.error('update_api_log: AttributeError in InfluxDB-Cloud write %s:  ', ifluxjson)
     #e = sys.exc_info()[0]
 
-    if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ' % str(e))   
+    if debug_all: log.error('update_api_log: AttributeError in InfluxDB-Cloud write %s:  ' % str(e))   
     
     
   except:
