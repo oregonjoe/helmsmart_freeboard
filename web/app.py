@@ -36,6 +36,7 @@ from influxdb.influxdb08 import InfluxDBClient
 
 from influxdb import InfluxDBClient as InfluxDBCloud
 from influxdb.client import InfluxDBClientError
+from influxdb.client import InfluxDBServerError
 
 import logging
 # *******************************************************************
