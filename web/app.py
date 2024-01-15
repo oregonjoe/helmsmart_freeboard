@@ -2010,11 +2010,11 @@ def update_api_log(apikey, deviceid, apifunction, apiindex):
     #mydataIDBC.append(ifluxjson)
     if debug_all: log.info('update_api_log:  ifluxjson %s:  ', ifluxjson)
 
-
-
+    mydataIDBC = []
+    mydataIDBC.append(ifluxjson)
 
     
-    dbc.write_points(ifluxjson, time_precision='ms')
+    dbc.write_points(mydataIDBC, time_precision='ms')
     #shim.write_multi(mydata)
     if debug_all: log.info("update_api_log: write_points influxDB-Cloud! %s", deviceid)
 
