@@ -2229,6 +2229,10 @@ def get_apistat():
     log.info("get_apistat Get InfluxDB series keys %s", keys)
 
 
+    callback = request.args.get('callback')
+    # use the last valid timestamp for the update
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
     return '{0}({1})'.format(callback, {'response':response})
 
 
