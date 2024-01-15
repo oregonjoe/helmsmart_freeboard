@@ -2229,7 +2229,7 @@ def get_apistat():
     log.info("get_apistat Get InfluxDB series keys %s", keys)
 
 
-
+    return '{0}({1})'.format(callback, {'response':response})
 
 
   except AttributeError as e:
