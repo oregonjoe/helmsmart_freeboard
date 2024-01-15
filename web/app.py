@@ -2223,10 +2223,10 @@ def get_apistat():
     #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
     #jsonkey.append(strvaluekey)
     print('get_apistat start processing data points:')
-    #log.info("freeboard Get InfluxDB response %s", response)
+    log.info("get_apistat Get InfluxDB response %s", response)
 
     keys = response.raw.get('series',[])
-    #log.info("freeboard Get InfluxDB series keys %s", keys)
+    log.info("get_apistat Get InfluxDB series keys %s", keys)
 
 
 
