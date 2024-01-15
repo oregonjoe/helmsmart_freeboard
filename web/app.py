@@ -1916,6 +1916,105 @@ def getendepochtimes(starttime, Interval):
 
 ### INFLUX API CALLS #####
 
+def update_api_log(apikey, deviceid, apifunction, apiindex):
+
+
+
+  try:
+
+    #IFDBhost = os.environ.get('IFDBhost')
+    #IFDBport = os.environ.get('IFDBport')
+    #IFDBusername = os.environ.get('IFDBusername')
+    #IFDBpassword = os.environ.get('IFDBpassword')
+    #IFDBdatabase = os.environ.get('IFDBdatabase')
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+    
+
+    #dbc = InfluxDBCloud(IFDBhost, IFDBport, IFDBusername, IFDBpassword, IFDBdatabase,  ssl=True)
+    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+
+    #if debug_all: log.info('Sync:  InfluxDB write %s:  ', mydata)
+    #if debug_all: log.info('Sync:  InfluxDB-Cloud write %s points', len(mydataIDBC))
+    if debug_all: log.info('update_api_log:  InfluxDB-Cloud write device=%s  apiindex = %s', deviceid, apiindex)
+    #db.write_points_with_precision(mydata, time_precision='ms')
+
+
+    #Add count of number of records written to local status
+    #mydataIDBC.append(convert_influxdbcloud_json(record[TIMESTAMP], int(len(mydataIDBC)),   'deviceid:' + record[DEVICE] + '.sensor:helmsmartstat.source:FF.instance:0.type:NULL.parameter:apiindex.HelmSmart'   ) )         
+
+    #Add count of number of records written to global status
+    ts = int(time.time()) * 1000
+    #if debug_all: log.info('insert_influxdb_cloud: convert_influxdbcloud_json ts %s:  ', ts)
+  
+    myjsonkeys = { 'deviceid': deviceid, 'apikey':apikey, 'apifunction':apifunction}
+    #myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
+    #if debug_all: log.info('freeboard: convert_influxdbcloud_json myjsonkeys %s:  ', myjsonkeys)
+    
+      
+    #values = {'records':len(mydataIDBC)}
+    values = {'apiindex':apiindex}
+    #measurement = 'HS_'+str(tag0[1])
+    #measurement = 'HelmSmartDB'
+    measurement = "HelmSmartAPI"
+    #measurement = 'HS_' + str(deviceid)
+    #if debug_all: log.info('insert_influxdb_cloud: convert_influxdbcloud_json values %s:  ', values)
+    
+    ifluxjson ={"measurement":measurement, "time": ts, "tags":myjsonkeys, "fields": values}
+    #mydataIDBC.append(ifluxjson)
+    #if debug_all: log.info('insert_influxdb_cloud: convert_influxdbcloud_json tagpairs %s:  ', mydataIDBC)
+
+
+
+
+    
+    dbc.write_points(ifluxjson, time_precision='ms')
+    #shim.write_multi(mydata)
+    if debug_all: log.info("update_api_log: write_points influxDB-Cloud! %s", deviceid)
+
+    
+  #except influxdb.InfluxDBClientError as e:   
+  except InfluxDBClientError as e:
+
+    if debug_all: log.error('update_api_log: InfluxDBServerError error in InfluxDB-Cloud write %s:  ' % str(e))
+
+  except InfluxDBServerError as e:
+    if debug_all: log.info('update_api_log:  InfluxDB-Cloud write device=%s  points = %s', deviceid, apifunction)
+    if debug_all: log.info('update_api_log: inFlux error in InfluxDBServer-Cloud write %s:  ' % str(e))    
+    if debug_all: log.error('update_api_log: inFlux error in InfluxDBServer-Cloud write %s:  ' % str(e))
+    pass
+    
+  except TypeError as e:
+    if debug_all: log.error('update_api_log: TypeError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.error('update_api_log: TypeError in InfluxDB-Cloud write %s:  ' % str(e))
+    
+  except KeyError as e:
+    if debug_all: log.error('update_api_log: KeyError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.error('update_api_log: KeyError in InfluxDB-Cloud write %s:  ' % str(e))
+
+  except NameError as e:
+    if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    #e = sys.exc_info()[0]
+
+    if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ' % str(e))   
+    
+    
+  except:
+    if debug_all: log.error('update_api_log: Error in InfluxDB-Cloud write %s:  ', ifluxjson)
+    e = sys.exc_info()[0]
+    if debug_all: log.error("Error: %s" % e)
+    
+  if debug_all: log.info("update_api_log - inserted into influxDB-Cloud! %s", deviceid)          
+
+
 
 
 
