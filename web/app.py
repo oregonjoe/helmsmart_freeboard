@@ -2046,6 +2046,10 @@ def update_api_log(apikey, deviceid, apifunction, apiindex):
     if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ', ifluxjson)
     #e = sys.exc_info()[0]
 
+  except AttributeError as e:
+    if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    #e = sys.exc_info()[0]
+
     if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ' % str(e))   
     
     
