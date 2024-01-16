@@ -2064,7 +2064,7 @@ def update_api_log(apikey, userdata, apifunction, apidata):
 
     #if debug_all: log.info('Sync:  InfluxDB write %s:  ', mydata)
     #if debug_all: log.info('Sync:  InfluxDB-Cloud write %s points', len(mydataIDBC))
-    if debug_all: log.info('update_api_log:  InfluxDB-Cloud write device=%s  apiindex = %s', deviceid, apiindex)
+    if debug_all: log.info('update_api_log:  InfluxDB-Cloud write device=%s  apidata = %s', deviceid, apidata)
     #db.write_points_with_precision(mydata, time_precision='ms')
 
 
@@ -2113,30 +2113,30 @@ def update_api_log(apikey, userdata, apifunction, apidata):
     pass
     
   except TypeError as e:
-    if debug_all: log.error('update_api_log: TypeError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    if debug_all: log.error('update_api_log: TypeError in InfluxDB-Cloud write %s:  ', userdata)
     #e = sys.exc_info()[0]
 
     if debug_all: log.error('update_api_log: TypeError in InfluxDB-Cloud write %s:  ' % str(e))
     
   except KeyError as e:
-    if debug_all: log.error('update_api_log: KeyError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    if debug_all: log.error('update_api_log: KeyError in InfluxDB-Cloud write %s:  ', userdata)
     #e = sys.exc_info()[0]
 
     if debug_all: log.error('update_api_log: KeyError in InfluxDB-Cloud write %s:  ' % str(e))
 
   except NameError as e:
-    if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    if debug_all: log.error('update_api_log: NameError in InfluxDB-Cloud write %s:  ', userdata)
     #e = sys.exc_info()[0]
 
   except AttributeError as e:
-    if debug_all: log.error('update_api_log: AttributeError in InfluxDB-Cloud write %s:  ', ifluxjson)
+    if debug_all: log.error('update_api_log: AttributeError in InfluxDB-Cloud write %s:  ', userdata)
     #e = sys.exc_info()[0]
 
     if debug_all: log.error('update_api_log: AttributeError in InfluxDB-Cloud write %s:  ' % str(e))   
     
     
   except:
-    if debug_all: log.error('update_api_log: Error in InfluxDB-Cloud write %s:  ', ifluxjson)
+    if debug_all: log.error('update_api_log: Error in InfluxDB-Cloud write %s:  ', userdata)
     e = sys.exc_info()[0]
     if debug_all: log.error("Error: %s" % e)
     
