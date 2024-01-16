@@ -675,7 +675,7 @@ def getuserinfo(deviceapikey):
     # cursor.close
     db_pool.putconn(conn)                       
 
-    return jsonify(deviceid="", useremail="",devicename="")
+    return json.dumps({'deviceid':"", 'useremail':"", 'devicename':""})
 
 
 def getedeviceid(deviceapikey):
