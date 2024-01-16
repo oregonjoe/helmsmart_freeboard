@@ -69,7 +69,7 @@ helmsmart_environmental_baroncsv_index=1
 helmsmart_environmental_nmea0183_index=1
 helmsmart_environmental_baroncsv_text_index=1
 freeboard_weather_index=1
-freeboard_rain_gauge_index=1
+freeboard_rain_gauge_index=5
 freeboard_rain_wung_index=1
 freeboard_weather_wung_index=1
 freeboard_winddata_index=1
@@ -2267,10 +2267,7 @@ def get_apistat():
 
 
 
-    query = ('select {}(apidata) AS apidata FROM {} '
-                     'where {} AND time > {}s and time < {}s ') \
-                .format(rollup,  measurement,  serieskeys,
-                        startepoch, endepoch)
+    #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
 
     
     
