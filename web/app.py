@@ -639,7 +639,8 @@ def getuserinfo(deviceapikey):
             # cursor.close
             db_pool.putconn(conn) 
             #return ""
-            return json.dumps({'deviceid':"", 'useremail':"", 'devicename':""})
+            #return json.dumps({'deviceid':'', 'useremail':'', 'devicename':''})
+            return {'deviceid':'', 'useremail':'', 'devicename':''}
         
         else:
             deviceid = str(i[0])
@@ -647,8 +648,8 @@ def getuserinfo(deviceapikey):
             devicename = str(i[2])
             db_pool.putconn(conn) 
             #return deviceid
-            return json.dumps({'deviceid':deviceid, 'useremail':useremail,'devicename':devicename})
-
+            #return json.dumps({'deviceid':deviceid, 'useremail':useremail,'devicename':devicename})
+            return {'deviceid':deviceid, 'useremail':useremail,'devicename':devicename}
 
     except TypeError as e:
         log.info('freeboard: TypeError in getuserinfo deviceapikey  %s:  ', deviceapikey)
@@ -675,8 +676,8 @@ def getuserinfo(deviceapikey):
     # cursor.close
     db_pool.putconn(conn)                       
 
-    return json.dumps({'deviceid':"", 'useremail':"", 'devicename':""})
-
+    #return json.dumps({'deviceid':'', 'useremail':"", 'devicename':''})
+    return {'deviceid':'', 'useremail':"", 'devicename':''}
 
 def getedeviceid(deviceapikey):
 
