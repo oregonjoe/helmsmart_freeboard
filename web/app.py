@@ -62,44 +62,44 @@ log = logging
 # *******************************************************************
 # AIP indexes for database
 # ********************************************************************
-freeboard_environmental_index=0
+freeboard_environmental_index=6
 freeboard_environmental_calculated_index=1
-freeboard_environmental_metar_index=2
-helmsmart_environmental_baroncsv_index=3
-helmsmart_environmental_nmea0183_index=4
-helmsmart_environmental_baroncsv_text_index=5
-freeboard_weather_index=6
-freeboard_rain_gauge_index=7
-freeboard_rain_wung_index=8
-freeboard_weather_wung_index=9
-freeboard_winddata_index=10
-freeboard_winddata_apparent_index=11
-freeboard_environmental2_index=12
-freeboard_winddataTrue_index=13
-freeboard_location_index=14
-freeboard_location_wind_index=15
-freeboard_nav_index=16
-freeboard_water_depth_index=17
-freeboard_attitude_index=18
-freeboard_battery_index=19
-freeboard_engine_aux_index=20
-freeboard_engine_index=21
-freeboard_fluidlevels_index=22
-freeboard_ac_status_index=23
-freeboard_status_index=24
-freeboard_indicator_status_index=25
-freeboard_indicator_runtime_index=26
-freeboard_dimmer_status_index=27
-freeboard_get_engine_values_index=28
-freeboard_get_rain_gauge_index=29
-freeboard_get_weather_values_index=30
-freeboard_get_weather_minmax_value_index=31
-freeboard_get_dimmer_values_index=32
-freeboard_dimmer_values_index=33
-freeboard_switch_bank_status_index=34
-freeboard_ac_status_array_index=35
-setswitchapi_index=100
-setdimmerapi_index=101
+freeboard_environmental_metar_index=1
+helmsmart_environmental_baroncsv_index=1
+helmsmart_environmental_nmea0183_index=1
+helmsmart_environmental_baroncsv_text_index=1
+freeboard_weather_index=1
+freeboard_rain_gauge_index=1
+freeboard_rain_wung_index=1
+freeboard_weather_wung_index=1
+freeboard_winddata_index=1
+freeboard_winddata_apparent_index=1
+freeboard_environmental2_index=1
+freeboard_winddataTrue_index=1
+freeboard_location_index=1
+freeboard_location_wind_index=1
+freeboard_nav_index=1
+freeboard_water_depth_index=1
+freeboard_attitude_index=1
+freeboard_battery_index=1
+freeboard_engine_aux_index=1
+freeboard_engine_index=1
+freeboard_fluidlevels_index=1
+freeboard_ac_status_index=1
+freeboard_status_index=1
+freeboard_indicator_status_index=1
+freeboard_indicator_runtime_index=1
+freeboard_dimmer_status_index=1
+freeboard_get_engine_values_index=1
+freeboard_get_rain_gauge_index=5
+freeboard_get_weather_values_index=1
+freeboard_get_weather_minmax_value_index=1
+freeboard_get_dimmer_values_index=1
+freeboard_dimmer_values_index=1
+freeboard_switch_bank_status_index=1
+freeboard_ac_status_array_index=1
+setswitchapi_index=1
+setdimmerapi_index=1
 
 # *******************************************************************
 # ********************************************************************
@@ -608,6 +608,75 @@ def help():
 
 
 ### user functions #####
+def getuserinfo(deviceapikey):
+
+    conn = db_pool.getconn()
+
+    log.info("freeboard getuserinfo data Query %s", deviceapikey)
+    #query = "select deviceid from user_devices where deviceapikey = %s"
+
+    #query = ("select deviceid from user_devices where deviceapikey = '{}' ") \
+    #            .format(deviceapikey )
+
+
+    #log.info("freeboard getedeviceid Query %s", query)
+
+
+    try:
+    # first check db to see if deviceapikey is matched to device id
+
+        cursor = conn.cursor()
+        #cursor.execute(query, (deviceapikey,))
+        #cursor.execute("select deviceid from user_devices where deviceapikey = '%s'" % deviceapikey)
+        #key=('bfeba0c3c5244269b4c8d276872519a6',)
+        cursor.execute("select deviceid, useremail, devicename from user_devices where deviceapikey = %s" , (deviceapikey,))
+        #response= cursor.query(query)
+        i = cursor.fetchone()
+        log.info("freeboard getuserinfo response %s", i)            
+        # see we got any matches
+        if cursor.rowcount == 0:
+        #if not response:
+            # cursor.close
+            db_pool.putconn(conn) 
+            #return ""
+            return jsonify(deviceid="", useremail="",devicename="")
+        
+        else:
+            deviceid = str(i[0])
+            useremail = str(i[1])
+            devicename = str(i[2])
+            db_pool.putconn(conn) 
+            #return deviceid
+            return jsonify(deviceid=deviceid, useremail=useremail,devicename=devicename)
+
+
+    except TypeError as e:
+        log.info('freeboard: TypeError in getuserinfo deviceapikey  %s:  ', deviceapikey)
+        log.info('freeboard: TypeError in getuserinfo   %s:  ' % str(e))
+            
+    except KeyError as e:
+        log.info('freeboard: KeyError in getuserinfo deviceapikey  %s:  ', deviceapikey)
+        log.info('freeboard: KeyError in getuserinfo   %s:  ' % str(e))
+
+    except NameError as e:
+        log.info('freeboard: NameError in getuserinfo deviceapikey  %s:  ', deviceapikey)
+        log.info('freeboard: NameError in getuserinfo   %s:  ' % str(e))
+            
+    except IndexError as e:
+        log.info('freeboard: IndexError in getuserinfo deviceapikey  %s:  ', deviceapikey)
+        log.info('freeboard: IndexError in getuserinfo   %s:  ' % str(e))  
+
+
+    except:
+        log.info('freeboard: Error in geting  deviceid %s:  ', deviceapikey)
+        e = sys.exc_info()[0]
+        log.info('freeboard: Error in geting deviceid  %s:  ' % str(e))
+
+    # cursor.close
+    db_pool.putconn(conn)                       
+
+    return jsonify(deviceid="", useremail="",devicename="")
+
 
 def getedeviceid(deviceapikey):
 
@@ -1958,10 +2027,22 @@ def getendepochtimes(starttime, Interval):
 
 ### INFLUX API CALLS #####
 
-def update_api_log(apikey, deviceid, apifunction, apiindex):
+def update_api_log(apikey, userdata, apifunction, apidata):
 
 
+  #userdata = getuserinfo(deviceapikey)
+  #log.info("freeboard get_apistat userdata %s", userdata)
+  
+  useremail = userdata.get(useremail,"")
+  log.info("freeboard get_apistat useremail %s", useremail)
 
+  deviceid = userdata.get(deviceid,"")
+  log.info("freeboard get_apistat deviceid %s", deviceid)
+
+  devicename = userdata.get(devicename,"")
+  log.info("freeboard get_apistat devicename %s", devicename)
+
+  
   try:
 
     #IFDBhost = os.environ.get('IFDBhost')
@@ -1993,13 +2074,13 @@ def update_api_log(apikey, deviceid, apifunction, apiindex):
     ts = int(time.time()) * 1000
     #if debug_all: log.info('insert_influxdb_cloud: convert_influxdbcloud_json ts %s:  ', ts)
   
-    myjsonkeys = { 'deviceid': deviceid, 'apikey':apikey, 'apifunction':apifunction}
+    myjsonkeys = {'apikey':apikey,  'deviceid': deviceid, 'useremail':useremail , 'devicename':devicename , 'apifunction':apifunction}
     #myjsonkeys = { 'deviceid':tag0[1], 'sensor':tag1[1], 'instance':tag3[1], 'type':tag4[1], 'parameter':tag5[1]}
     if debug_all: log.info('update_api_log:  myjsonkeys %s:  ', myjsonkeys)
     
       
     #values = {'records':len(mydataIDBC)}
-    values = {'apiindex':apiindex}
+    values = {'apidata':apidata}
     #measurement = 'HS_'+str(tag0[1])
     #measurement = 'HelmSmartDB'
     measurement = "HelmSmartAPI"
@@ -2096,15 +2177,14 @@ def get_apistat():
     resolution = epochtimes[2]
 
   
-
-
-  useremail = getuseremail(deviceapikey)
-    
+  userdata = getuserinfo(deviceapikey)
+  log.info("freeboard get_apistat userdata %s", userdata)
+  
+  useremail = userdata.get(useremail,"")
   log.info("freeboard get_apistat useremail %s", useremail)
 
 
-
-  deviceid = getedeviceid(deviceapikey)
+  deviceid = userdata.get(deviceid,"")
   
   log.info("freeboard get_apistat deviceid %s", deviceid)
 
@@ -2116,7 +2196,7 @@ def get_apistat():
   measurement = 'HS_' + str(deviceid)
 
 
-  devicename = getedevicename(deviceapikey)
+  devicename = userdata.get(devicename,"")
   log.info("freeboard get_apistat devicename %s", devicename)  
 
   response = None
@@ -2177,13 +2257,21 @@ def get_apistat():
     serieskeys=" deviceid='"
     serieskeys= serieskeys + deviceid + "' "
 
-    query = ('select {}(apiindex) AS apiindex FROM {} '
+    query = ('select {}(apidata) AS apidata FROM {} '
                      'where {} AND time > {}s and time < {}s '
                      'group by *, time({}s) ') \
                 .format(rollup,  measurement,  serieskeys,
                         startepoch, endepoch,
                         resolution) 
 
+
+
+    query = ('select {}(apidata) AS apidata FROM {} '
+                     'where {} AND time > {}s and time < {}s ') \
+                .format(rollup,  measurement,  serieskeys,
+                        startepoch, endepoch)
+
+    
     
     log.info("get_apistat inFlux-cloud Query %s", query)
     
@@ -2338,16 +2426,19 @@ def freeboard_environmental():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    #deviceid = getedeviceid(deviceapikey)
+    userdata = getuserinfo(deviceapikey)
+    log.info("freeboard freeboard_environmental userdata %s", userdata)
+  
+    deviceid = userdata.get(deviceid,"")
+    log.info("freeboard_environmental deviceid %s", deviceid)
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
     # updates the the HelmSmartAPI to log api calls
-    update_api_log(deviceapikey, deviceid, 'freeboard_environmental', freeboard_environmental_index)
+    update_api_log(deviceapikey, userdata, 'freeboard_environmental', freeboard_environmental_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -5615,9 +5706,13 @@ def freeboard_rain_gauge():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    #deviceid = getedeviceid(deviceapikey)
+    userdata = getuserinfo(deviceapikey)
+    log.info("freeboard freeboard_rain_gauge userdata %s", userdata)
+  
+    deviceid = userdata.get(deviceid,"")
+    log.info("freeboard_rain_gauge deviceid %s", deviceid)
+    #log.info("freeboard deviceid %s", deviceid)
 
     if deviceid == "":
         callback = request.args.get('callback')
@@ -5625,7 +5720,7 @@ def freeboard_rain_gauge():
 
 
     # updates the the HelmSmartAPI to log api calls
-    update_api_log(deviceapikey, deviceid, 'freeboard_rain_gauge', freeboard_rain_gauge_index)
+    update_api_log(deviceapikey, userdata, 'freeboard_rain_gauge', freeboard_rain_gauge_index)
 
 
 
