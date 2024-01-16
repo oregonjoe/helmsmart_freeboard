@@ -2426,11 +2426,11 @@ def freeboard_environmental():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    #deviceid = getedeviceid(deviceapikey)
-    userdata = getuserinfo(deviceapikey)
-    log.info("freeboard freeboard_environmental userdata %s", userdata)
+    deviceid = getedeviceid(deviceapikey)
+    #userdata = getuserinfo(deviceapikey)
+    #log.info("freeboard freeboard_environmental userdata %s", userdata)
   
-    deviceid = userdata.get('deviceid',"")
+    #deviceid = userdata.get('deviceid',"")
     log.info("freeboard_environmental deviceid %s", deviceid)
 
     if deviceid == "":
