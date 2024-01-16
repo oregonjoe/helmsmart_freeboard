@@ -2424,11 +2424,11 @@ def freeboard_environmental():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    deviceid = getedeviceid(deviceapikey)
-    #userdata = getuserinfo(deviceapikey)
-    #log.info("freeboard freeboard_environmental userdata %s", userdata)
+    #deviceid = getedeviceid(deviceapikey)
+    userdata = getuserinfo(deviceapikey)
+    log.info("freeboard freeboard_environmental userdata %s", userdata)
   
-    #deviceid = userdata.get('deviceid',"")
+    deviceid = userdata.get('deviceid',"")
     log.info("freeboard_environmental deviceid %s", deviceid)
 
     if deviceid == "":
@@ -2436,7 +2436,7 @@ def freeboard_environmental():
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
     # updates the the HelmSmartAPI to log api calls
-    #update_api_log(deviceapikey, userdata, 'freeboard_environmental', freeboard_environmental_index)
+    update_api_log(deviceapikey, userdata, 'freeboard_environmental', freeboard_environmental_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
