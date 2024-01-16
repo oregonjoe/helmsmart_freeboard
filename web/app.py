@@ -2033,13 +2033,13 @@ def update_api_log(apikey, userdata, apifunction, apidata):
   #userdata = getuserinfo(deviceapikey)
   #log.info("freeboard get_apistat userdata %s", userdata)
   
-  useremail = userdata.get(useremail,"")
+  useremail = userdata.get('useremail',"")
   log.info("freeboard get_apistat useremail %s", useremail)
 
-  deviceid = userdata.get(deviceid,"")
+  deviceid = userdata.get('deviceid',"")
   log.info("freeboard get_apistat deviceid %s", deviceid)
 
-  devicename = userdata.get(devicename,"")
+  devicename = userdata.get('devicename',"")
   log.info("freeboard get_apistat devicename %s", devicename)
 
   
@@ -2180,11 +2180,11 @@ def get_apistat():
   userdata = getuserinfo(deviceapikey)
   log.info("freeboard get_apistat userdata %s", userdata)
   
-  useremail = userdata.get(useremail,"")
+  useremail = userdata.get('useremail',"")
   log.info("freeboard get_apistat useremail %s", useremail)
 
 
-  deviceid = userdata.get(deviceid,"")
+  deviceid = userdata.get('deviceid',"")
   
   log.info("freeboard get_apistat deviceid %s", deviceid)
 
@@ -2196,7 +2196,7 @@ def get_apistat():
   measurement = 'HS_' + str(deviceid)
 
 
-  devicename = userdata.get(devicename,"")
+  devicename = userdata.get('devicename',"")
   log.info("freeboard get_apistat devicename %s", devicename)  
 
   response = None
@@ -2430,7 +2430,7 @@ def freeboard_environmental():
     userdata = getuserinfo(deviceapikey)
     log.info("freeboard freeboard_environmental userdata %s", userdata)
   
-    deviceid = userdata.get(deviceid,"")
+    deviceid = userdata.get('deviceid',"")
     log.info("freeboard_environmental deviceid %s", deviceid)
 
     if deviceid == "":
@@ -5710,7 +5710,7 @@ def freeboard_rain_gauge():
     userdata = getuserinfo(deviceapikey)
     log.info("freeboard freeboard_rain_gauge userdata %s", userdata)
   
-    deviceid = userdata.get(deviceid,"")
+    deviceid = userdata.get('deviceid',"")
     log.info("freeboard_rain_gauge deviceid %s", deviceid)
     #log.info("freeboard deviceid %s", deviceid)
 
