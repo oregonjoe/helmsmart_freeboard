@@ -38,6 +38,13 @@ from influxdb import InfluxDBClient as InfluxDBCloud
 from influxdb.client import InfluxDBClientError
 from influxdb.client import InfluxDBServerError
 
+
+ifhost = os.environ.get('influxhost')
+ifport = os.environ.get('influxport')
+ifusername = os.environ.get('influxusername')
+ifpassword = os.environ.get('influxpassword')
+ifdatabase = os.environ.get('influxdatabase')
+
 import logging
 # *******************************************************************
 # Debug Output defines
@@ -2052,15 +2059,15 @@ def update_api_log(apikey, userdata, apifunction, apidata):
     #IFDBpassword = os.environ.get('IFDBpassword')
     #IFDBdatabase = os.environ.get('IFDBdatabase')
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
     
 
     #dbc = InfluxDBCloud(IFDBhost, IFDBport, IFDBusername, IFDBpassword, IFDBdatabase,  ssl=True)
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     #if debug_all: log.info('Sync:  InfluxDB write %s:  ', mydata)
     #if debug_all: log.info('Sync:  InfluxDB-Cloud write %s points', len(mydataIDBC))
@@ -2209,14 +2216,14 @@ def get_apistat():
   try:
    
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
 
-    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    db = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
      
 
     
@@ -2557,14 +2564,14 @@ def get_apistat_all():
   try:
    
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
 
-    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    db = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
      
 
     
@@ -2947,11 +2954,11 @@ def freeboard_environmental():
     update_api_log(deviceapikey, userdata, 'freeboard_environmental', freeboard_environmental_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -2991,7 +2998,7 @@ def freeboard_environmental():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
 
@@ -3341,11 +3348,11 @@ def freeboard_environmental_calculated():
     update_api_log(deviceapikey, userdata, 'freeboard_environmental_calculated', freeboard_environmental_calculated_index)
 
     
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -3385,7 +3392,7 @@ def freeboard_environmental_calculated():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
 
@@ -3811,11 +3818,11 @@ def freeboard_environmental_metar():
 
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -3855,7 +3862,7 @@ def freeboard_environmental_metar():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
 
@@ -4332,11 +4339,11 @@ def helmsmart_environmental_baroncsv():
 
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -4376,7 +4383,7 @@ def helmsmart_environmental_baroncsv():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
 
@@ -4854,11 +4861,11 @@ def helmsmart_environmental_nmea0183():
     # updates the the HelmSmartAPI to log api calls
     update_api_log(deviceapikey, userdata, 'helmsmart_environmental_nmea0183', helmsmart_environmental_nmea0183_index)
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -4898,7 +4905,7 @@ def helmsmart_environmental_nmea0183():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
 
@@ -5389,11 +5396,11 @@ def helmsmart_environmental_baroncsv_text():
 
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -5433,7 +5440,7 @@ def helmsmart_environmental_baroncsv_text():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
 
@@ -5904,11 +5911,11 @@ def freeboard_weather():
     update_api_log(deviceapikey, userdata, 'freeboard_weather', freeboard_weather_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -5933,7 +5940,7 @@ def freeboard_weather():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
   
     if serieskeys.find("*") > 0:
@@ -6230,11 +6237,11 @@ def freeboard_rain_gauge():
 
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -6252,7 +6259,7 @@ def freeboard_rain_gauge():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
   
     if serieskeys.find("*") > 0:
@@ -6536,11 +6543,11 @@ def freeboard_rain_wung():
     update_api_log(deviceapikey, userdata, 'freeboard_rain_wung', freeboard_rain_wung_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -6556,7 +6563,7 @@ def freeboard_rain_wung():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
   
     if serieskeys.find("*") > 0:
@@ -6836,11 +6843,11 @@ def freeboard_weather_wung():
     update_api_log(deviceapikey, userdata, 'freeboard_weather_wung', freeboard_weather_wung_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -6865,7 +6872,7 @@ def freeboard_weather_wung():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
   
     if serieskeys.find("*") > 0:
@@ -7230,11 +7237,11 @@ def freeboard_winddata():
     update_api_log(deviceapikey, userdata, 'freeboard_winddata', freeboard_winddata_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -7256,7 +7263,7 @@ def freeboard_winddata():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
   
     if serieskeys.find("*") > 0:
@@ -7548,11 +7555,11 @@ def freeboard_winddata_apparent():
     update_api_log(deviceapikey, userdata, 'freeboard_winddata_apparent', freeboard_winddata_apparent_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
 
@@ -7569,7 +7576,7 @@ def freeboard_winddata_apparent():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
   
 
@@ -7721,11 +7728,11 @@ def freeboard_environmental2():
     update_api_log(deviceapikey, userdata, 'freeboard_environmental2', freeboard_environmental2_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
 
@@ -7746,7 +7753,7 @@ def freeboard_environmental2():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
       
@@ -7913,11 +7920,11 @@ def freeboard_winddataTrue():
     update_api_log(deviceapikey, userdata, 'freeboard_winddataTrue', freeboard_winddataTrue_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
 
@@ -7938,7 +7945,7 @@ def freeboard_winddataTrue():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
       
@@ -8125,11 +8132,11 @@ def freeboard_location():
     update_api_log(deviceapikey, userdata, 'freeboard_location', freeboard_location_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -8145,7 +8152,7 @@ def freeboard_location():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
       
@@ -8434,11 +8441,11 @@ def freeboard_location_wind():
     update_api_log(deviceapikey, userdata, 'freeboard_location_wind', freeboard_location_wind_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -8478,7 +8485,7 @@ def freeboard_location_wind():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
       
@@ -8767,11 +8774,11 @@ def freeboard_nav():
     update_api_log(deviceapikey, userdata, 'freeboard_nav', freeboard_nav_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -8794,7 +8801,7 @@ def freeboard_nav():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
       
@@ -9063,11 +9070,11 @@ def freeboard_water_depth():
     update_api_log(deviceapikey, userdata, 'freeboard_water_depth', freeboard_water_depth_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -9082,7 +9089,7 @@ def freeboard_water_depth():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
     if serieskeys.find("*") > 0:
@@ -9380,11 +9387,11 @@ def freeboard_attitude():
     update_api_log(deviceapikey, userdata, 'freeboard_attitude', freeboard_attitude_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -9399,7 +9406,7 @@ def freeboard_attitude():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     if mode == "median":
       
@@ -9659,11 +9666,11 @@ def freeboard_battery():
     update_api_log(deviceapikey, userdata, 'freeboard_battery', freeboard_battery_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -9678,7 +9685,7 @@ def freeboard_battery():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     if mode == "median":
       
@@ -9965,11 +9972,11 @@ def freeboard_engine_aux():
       update_api_log(deviceapikey, userdata, 'freeboard_engine_aux', freeboard_engine_aux_index)
 
 
-      host = 'hilldale-670d9ee3.influxcloud.net' 
-      port = 8086
-      username = 'helmsmart'
-      password = 'Salm0n16'
-      database = 'pushsmart-cloud'
+      #host = 'hilldale-670d9ee3.influxcloud.net' 
+      #port = 8086
+      #username = 'helmsmart'
+      #password = 'Salm0n16'
+      #database = 'pushsmart-cloud'
 
       measurement = "HelmSmart"
       measurement = 'HS_' + str(deviceid)
@@ -10000,7 +10007,7 @@ def freeboard_engine_aux():
       log.info("freeboard Create InfluxDB %s", database)
 
 
-      dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+      dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
       if mode == "median":
         query = ('select  median(throttle_position) AS throttle_position, median(boost_pressure) AS  boost_pressure, median(coolant_pressure) AS coolant_pressure, median(fuel_pressure) AS fuel_pressure, median(oil_temp) AS oil_temp ,  median(egt_temp) AS egt_temperature , median(fuel_rate_average) AS fuel_rate_average  , median(instantaneous_fuel_economy) AS instantaneous_fuel_economy  , median(trip_fuel_used) AS fuel_used from {} '
@@ -10346,11 +10353,11 @@ def freeboard_engine():
     update_api_log(deviceapikey, userdata, 'freeboard_engine', freeboard_engine_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -10371,7 +10378,7 @@ def freeboard_engine():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     if mode == "median":      
       query = ('select  median(speed) AS speed, median(engine_temp) AS  engine_temp, median(oil_pressure) AS oil_pressure, median(alternator_potential) AS alternator_potential, median(fuel_rate) AS fuel_rate ,  median(level) AS level , max(total_engine_hours) AS total_engine_hours from {} '
@@ -10706,11 +10713,11 @@ def freeboard_fluidlevels():
     update_api_log(deviceapikey, userdata, 'freeboard_fluidlevels', freeboard_fluidlevels_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -10731,7 +10738,7 @@ def freeboard_fluidlevels():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     if mode == "median":      
       query = ('select  median(level) AS level,  median(tank_capacity) AS capacity  from {} '
@@ -11095,11 +11102,11 @@ def freeboard_ac_status():
     update_api_log(deviceapikey, userdata, 'freeboard_ac_status', freeboard_ac_status_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -11128,7 +11135,7 @@ def freeboard_ac_status():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     if mode == "median":
       
@@ -11434,11 +11441,11 @@ def freeboard_status():
     update_api_log(deviceapikey, userdata, 'freeboard_status', freeboard_status_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -11456,7 +11463,7 @@ def freeboard_status():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
       
     query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -11828,11 +11835,11 @@ def freeboard_indicator_status():
     update_api_log(deviceapikey, userdata, 'freeboard_indicator_status', freeboard_indicator_status_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -11850,7 +11857,7 @@ def freeboard_indicator_status():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -12114,11 +12121,11 @@ def freeboard_indicator_runtime():
     update_api_log(deviceapikey, userdata, 'freeboard_indicator_runtime', freeboard_indicator_runtime_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -12150,7 +12157,7 @@ def freeboard_indicator_runtime():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     if mode == "median":
       query = ('select  median(value) AS status, median(runtime_sec) AS  runtime, median(cycles) AS cycles from {} '
@@ -12450,11 +12457,11 @@ def freeboard_dimmer_status():
     update_api_log(deviceapikey, userdata, 'freeboard_dimmer_status', freeboard_dimmer_status_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -12472,7 +12479,7 @@ def freeboard_dimmer_status():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -12754,11 +12761,11 @@ def freeboard_get_engine_values():
     # updates the the HelmSmartAPI to log api calls
     update_api_log(deviceapikey, userdata, 'freeboard_get_engine_values', freeboard_get_engine_values_index)
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -12774,7 +12781,7 @@ def freeboard_get_engine_values():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -13031,11 +13038,11 @@ def freeboard_get_rain_gauge():
     # updates the the HelmSmartAPI to log api calls
     update_api_log(deviceapikey, userdata, 'freeboard_get_rain_gauge', freeboard_get_rain_gauge_index)
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -13051,7 +13058,7 @@ def freeboard_get_rain_gauge():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -13313,11 +13320,11 @@ def freeboard_get_weather_values():
 
     
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -13333,7 +13340,7 @@ def freeboard_get_weather_values():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -13588,11 +13595,11 @@ def freeboard_get_weather_minmax_value():
     # updates the the HelmSmartAPI to log api calls
     update_api_log(deviceapikey, userdata, 'freeboard_get_weather_minmax_value', freeboard_get_weather_minmax_value_index)
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -13630,7 +13637,7 @@ def freeboard_get_weather_minmax_value():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -13917,11 +13924,11 @@ def freeboard_get_dimmer_values():
     # updates the the HelmSmartAPI to log api calls
     update_api_log(deviceapikey, userdata, 'freeboard_get_dimmer_values', freeboard_get_dimmer_values_index)
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -13939,7 +13946,7 @@ def freeboard_get_dimmer_values():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
     #SELECT LAST()...WHERE time > now() - 1h       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -14156,11 +14163,11 @@ def freeboard_dimmer_values():
     update_api_log(deviceapikey, userdata, 'freeboard_dimmer_values', freeboard_dimmer_values_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -14178,7 +14185,7 @@ def freeboard_dimmer_values():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -14501,11 +14508,11 @@ def freeboard_switch_bank_status():
     update_api_log(deviceapikey, userdata, 'freeboard_switch_bank_status', freeboard_switch_bank_status_index)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -14523,7 +14530,7 @@ def freeboard_switch_bank_status():
     #log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
       
     #query = ('select  median(bank0) AS bank0, median(bank1) AS  bank1 FROM {} '
@@ -15066,14 +15073,14 @@ def get_dbstat():
   try:
    
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
 
-    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    db = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
      
 
     
@@ -15348,14 +15355,14 @@ def get_dbstats():
   try:
    
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
 
-    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    db = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
      
 
     
@@ -15647,14 +15654,14 @@ def get_dbstats_html():
   try:
    
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
 
-    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    db = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
      
 
     
@@ -15996,18 +16003,18 @@ def get_influxdbcloud_data():
     #client = Client(API_KEY, API_KEY, API_SECRET)
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
 
 
 
   
     #db = influxdb.InfluxDBClient(host, port, username, password, database)
-    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    db = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
      
     #shim = Shim(host, port, username, password, database)
     
@@ -16272,14 +16279,14 @@ def getgpsseriesbydeviceid():
       API_KEY = '7be1d82569414dceaa82fd93fadd7940'
       API_SECRET = '0447ec319c3148cb98d96bfc96c787e1'
 
-      host = 'hilldale-670d9ee3.influxcloud.net' 
-      port = 8086
-      username = 'helmsmart'
-      password = 'Salm0n16'
-      database = 'pushsmart-cloud'
+      #host = 'hilldale-670d9ee3.influxcloud.net' 
+      #port = 8086
+      #username = 'helmsmart'
+      #password = 'Salm0n16'
+      #database = 'pushsmart-cloud'
 
 
-      db = InfluxDBCloud(host, port, username, password, database,  ssl=True)    
+      db = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)    
 
 
       #rollup = "mean"
@@ -16949,11 +16956,11 @@ def freeboard_tcp(apikey):
       return "invalid deviceid"
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -16970,7 +16977,7 @@ def freeboard_tcp(apikey):
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
 
@@ -17228,11 +17235,11 @@ def freeboard_raw():
       return "invalid deviceid"
 
 
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    #    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #    #database = 'pushsmart-cloud'
     database = 'pushsmart-raw'
 
     
@@ -17251,7 +17258,7 @@ def freeboard_raw():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
 
 
@@ -17567,11 +17574,11 @@ def freeboard_ac_status_array():
 
 
     
-    host = 'hilldale-670d9ee3.influxcloud.net' 
-    port = 8086
-    username = 'helmsmart'
-    password = 'Salm0n16'
-    database = 'pushsmart-cloud'
+    #host = 'hilldale-670d9ee3.influxcloud.net' 
+    #port = 8086
+    #username = 'helmsmart'
+    #password = 'Salm0n16'
+    #database = 'pushsmart-cloud'
 
     measurement = "HelmSmart"
     measurement = 'HS_' + str(deviceid)
@@ -17594,7 +17601,7 @@ def freeboard_ac_status_array():
     log.info("freeboard Create InfluxDB %s", database)
 
 
-    dbc = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+    dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
 
       
     query = ('select  mean(ac_line_neutral_volts) AS volts, mean(ac_amps) AS  amps, mean(ac_watts) AS power, mean(ac_kwatthours) AS energy FROM {} '
