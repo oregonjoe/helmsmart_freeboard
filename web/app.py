@@ -2995,7 +2995,7 @@ def freeboard_environmental():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -3389,7 +3389,7 @@ def freeboard_environmental_calculated():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -3859,7 +3859,7 @@ def freeboard_environmental_metar():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -4380,7 +4380,7 @@ def helmsmart_environmental_baroncsv():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -4902,7 +4902,7 @@ def helmsmart_environmental_nmea0183():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -5437,7 +5437,7 @@ def helmsmart_environmental_baroncsv_text():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -5937,7 +5937,7 @@ def freeboard_weather():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -6256,7 +6256,7 @@ def freeboard_rain_gauge():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -6560,7 +6560,7 @@ def freeboard_rain_wung():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -6869,7 +6869,7 @@ def freeboard_weather_wung():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -7260,7 +7260,7 @@ def freeboard_winddata():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -7573,7 +7573,7 @@ def freeboard_winddata_apparent():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -7750,7 +7750,7 @@ def freeboard_environmental2():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -7942,7 +7942,7 @@ def freeboard_winddataTrue():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -8149,7 +8149,7 @@ def freeboard_location():
  
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -8482,7 +8482,7 @@ def freeboard_location_wind():
  
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -8798,7 +8798,7 @@ def freeboard_nav():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -9086,7 +9086,7 @@ def freeboard_water_depth():
     serieskeys= serieskeys +  " (type='Sea Temperature' OR type='Paddle Wheel' OR type='Correlation Log'  OR type='NULL' ) "
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -9403,7 +9403,7 @@ def freeboard_attitude():
     #serieskeys= serieskeys +  " instance='" + Instance + "' "
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -9682,7 +9682,7 @@ def freeboard_battery():
     serieskeys= serieskeys +  " instance='" + Instance + "' "
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -10004,7 +10004,7 @@ def freeboard_engine_aux():
 
 
       log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-      log.info("freeboard Create InfluxDB %s", database)
+      log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
       dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -10375,7 +10375,7 @@ def freeboard_engine():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -10735,7 +10735,7 @@ def freeboard_fluidlevels():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -11132,7 +11132,7 @@ def freeboard_ac_status():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -11460,7 +11460,7 @@ def freeboard_status():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -11854,7 +11854,7 @@ def freeboard_indicator_status():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -12154,7 +12154,7 @@ def freeboard_indicator_runtime():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -12476,7 +12476,7 @@ def freeboard_dimmer_status():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -12778,7 +12778,7 @@ def freeboard_get_engine_values():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -13055,7 +13055,7 @@ def freeboard_get_rain_gauge():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -13337,7 +13337,7 @@ def freeboard_get_weather_values():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -13634,7 +13634,7 @@ def freeboard_get_weather_minmax_value():
 
       
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -13943,7 +13943,7 @@ def freeboard_get_dimmer_values():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -14182,7 +14182,7 @@ def freeboard_dimmer_values():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -14527,7 +14527,7 @@ def freeboard_switch_bank_status():
 
 
     #log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    #log.info("freeboard Create InfluxDB %s", database)
+    #log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -16974,7 +16974,7 @@ def freeboard_tcp(apikey):
     #serieskeys= serieskeys +  " (type='True') " 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -17255,7 +17255,7 @@ def freeboard_raw():
     #serieskeys= serieskeys +  " (type='True') " 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
@@ -17598,7 +17598,7 @@ def freeboard_ac_status_array():
 
 
     log.info("freeboard Query InfluxDB-Cloud:%s", serieskeys)
-    log.info("freeboard Create InfluxDB %s", database)
+    log.info("freeboard Create InfluxDB %s", ifdatabase)
 
 
     dbc = InfluxDBCloud(ifhost, ifport, ifusername, ifpassword, ifdatabase,  ssl=True)
