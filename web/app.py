@@ -2424,12 +2424,9 @@ def freeboard_environmental():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    #deviceid = getedeviceid(deviceapikey)
     userdata = getuserinfo(deviceapikey)
-    log.info("freeboard freeboard_environmental userdata %s", userdata)
   
     deviceid = userdata.get('deviceid',"")
-    log.info("freeboard_environmental deviceid %s", deviceid)
 
     if deviceid == "":
         callback = request.args.get('callback')
@@ -2821,15 +2818,18 @@ def freeboard_environmental_calculated():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_environmental_calculated', freeboard_environmental_calculated_index)
 
+    
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
     username = 'helmsmart'
@@ -3287,22 +3287,16 @@ def freeboard_environmental_metar():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
-    devicename = getedevicename(deviceapikey)
-    
-    log.info("freeboard devicename %s", devicename)
-
-    if devicename == "":
-        callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'devicename error' })
-
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_environmental_metar', freeboard_environmental_metar_index)
 
 
 
@@ -3807,21 +3801,22 @@ def helmsmart_environmental_baroncsv():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
-    devicename = getedevicename(deviceapikey)
+    devicename = userdata.get('devicename',"")
     
-    log.info("freeboard devicename %s", devicename)
-
     if devicename == "":
         callback = request.args.get('callback')
-        return '{0}({1})'.format(callback, {'update':'False', 'status':'devicename error' })
+        return '{0}({1})'.format(callback, {'update':'False', 'status':'devicename error' })      
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'helmsmart_environmental_baroncsv', helmsmart_environmental_baroncsv_index)
 
 
 
@@ -4332,24 +4327,21 @@ def helmsmart_environmental_nmea0183():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
-    devicename = getedevicename(deviceapikey)
-    
-    log.info("freeboard devicename %s", devicename)
-
+    devicename = userdata.get('devicename',"")
     if devicename == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'devicename error' })
-
-
-
+      
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'helmsmart_environmental_nmea0183', helmsmart_environmental_nmea0183_index)
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -4867,21 +4859,21 @@ def helmsmart_environmental_baroncsv_text():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")        
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
-    devicename = getedevicename(deviceapikey)
-    
-    log.info("freeboard devicename %s", devicename)
-
+    devicename = userdata.get('devicename',"")
     if devicename == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'devicename error' })
+      
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'helmsmart_environmental_baroncsv_text',helmsmart_environmental_baroncsv_text_index)
 
 
 
@@ -6021,13 +6013,16 @@ def freeboard_rain_wung():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_rain_wung', freeboard_rain_wung_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -6318,13 +6313,16 @@ def freeboard_weather_wung():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_weather_wung', freeboard_weather_wung_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -7604,13 +7602,16 @@ def freeboard_location():
 
 
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_location', freeboard_location_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -7910,14 +7911,16 @@ def freeboard_location_wind():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
 
-
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_location_wind', freeboard_location_wind_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -8241,13 +8244,16 @@ def freeboard_nav():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
     
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_nav', freeboard_nav_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -8534,14 +8540,16 @@ def freeboard_water_depth():
     mydatetime = datetime.datetime.now()
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
-    
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_water_depth', freeboard_water_depth_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -8849,13 +8857,16 @@ def freeboard_attitude():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
     
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_attitude', freeboard_attitude_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -9125,13 +9136,16 @@ def freeboard_battery():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
 
     
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_battery', freeboard_battery_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -9428,13 +9442,16 @@ def freeboard_engine_aux():
       myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
 
-      deviceid = getedeviceid(deviceapikey)
-      
-      log.info("freeboard deviceid %s", deviceid)
+      userdata = getuserinfo(deviceapikey)
+    
+      deviceid = userdata.get('deviceid',"")
 
       if deviceid == "":
           callback = request.args.get('callback')
           return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+      # updates the the HelmSmartAPI to log api calls
+      update_api_log(deviceapikey, userdata, 'freeboard_engine_aux', freeboard_engine_aux_index)
 
 
       host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -9806,13 +9823,16 @@ def freeboard_engine():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_engine', freeboard_engine_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -10163,13 +10183,16 @@ def freeboard_fluidlevels():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_fluidlevels', freeboard_fluidlevels_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -10549,14 +10572,16 @@ def freeboard_ac_status():
       resolution = epochtimes[2]
 
 
-
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_ac_status', freeboard_ac_status_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -10886,15 +10911,16 @@ def freeboard_status():
       resolution = epochtimes[2]
 
 
-
-
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_status', freeboard_status_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -11279,13 +11305,16 @@ def freeboard_indicator_status():
     
 
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard freeboard_indicator_status deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_indicator_status', freeboard_indicator_status_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -11562,13 +11591,16 @@ def freeboard_indicator_runtime():
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")      
 
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_indicator_runtime', freeboard_indicator_runtime_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -11895,14 +11927,16 @@ def freeboard_dimmer_status():
 
 
 
-
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard_dimmer_status deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_dimmer_status', freeboard_dimmer_status_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -12199,14 +12233,15 @@ def freeboard_get_engine_values():
       resolution = epochtimes[2]
 
 
-
-
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard freeboard_get_engine_values deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
       return jsonify(result="ERROR")
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_get_engine_values', freeboard_get_engine_values_index)
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -12475,12 +12510,15 @@ def freeboard_get_rain_gauge():
 
 
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard freeboard_get_rain_gauge deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
       return jsonify(result="ERROR")
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_get_rain_gauge', freeboard_get_rain_gauge_index)
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -12752,6 +12790,18 @@ def freeboard_get_weather_values():
     if deviceid == "":
       return jsonify(result="ERROR")
 
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
+
+    if deviceid == "":
+      return jsonify(result="ERROR")
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_get_weather_values', freeboard_get_weather_values_index)
+
+    
+
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
     username = 'helmsmart'
@@ -13017,12 +13067,15 @@ def freeboard_get_weather_minmax_value():
 
 
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard freeboard_get_weather_minmax_value deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
       return jsonify(result="ERROR")
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_get_weather_minmax_value', freeboard_get_weather_minmax_value_index)
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -13343,12 +13396,15 @@ def freeboard_get_dimmer_values():
 
 
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard_get_dimmer_values deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
       return jsonify(result="ERROR")
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_get_dimmer_values', freeboard_get_dimmer_values_index)
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
@@ -13577,14 +13633,16 @@ def freeboard_dimmer_values():
       resolution = epochtimes[2]
 
 
-
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard freeboard_dimmer_values deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_dimmer_values', freeboard_dimmer_values_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -13920,14 +13978,16 @@ def freeboard_switch_bank_status():
 
 
 
-
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard freeboard_bank_status deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
+
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_switch_bank_status', freeboard_switch_bank_status_index)
 
 
     host = 'hilldale-670d9ee3.influxcloud.net' 
@@ -16983,15 +17043,19 @@ def freeboard_ac_status_array():
     resolution = epochtimes[2]
     resolution = 60
 
-    deviceid = getedeviceid(deviceapikey)
-    
-    log.info("freeboard deviceid %s", deviceid)
+    userdata = getuserinfo(deviceapikey)
+  
+    deviceid = userdata.get('deviceid',"")
 
     if deviceid == "":
         callback = request.args.get('callback')
         return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
 
+    # updates the the HelmSmartAPI to log api calls
+    update_api_log(deviceapikey, userdata, 'freeboard_ac_status_array', freeboard_ac_status_array_index)
 
+
+    
     host = 'hilldale-670d9ee3.influxcloud.net' 
     port = 8086
     username = 'helmsmart'
@@ -17247,13 +17311,17 @@ def setswitchapi():
   instance = request.args.get('instance', "0")
 
 
-  deviceid = getedeviceid(deviceapikey)
-    
-  log.info("sendswitchapi deviceid %s", deviceid)
-  #log.info("sendswitchapi switchpgn %s", switchpgn)
-  
+  userdata = getuserinfo(deviceapikey)
+
+  deviceid = userdata.get('deviceid',"")
+
   if deviceid == "":
     return jsonify(result="Error", switch=switchpgn)
+
+  # updates the the HelmSmartAPI to log api calls
+  update_api_log(deviceapikey, userdata, 'setswitchapi', setswitchapi_index)
+
+
 
   # Create an client object
   #cache = IronCache()
@@ -17338,11 +17406,15 @@ def setdimmerapi():
   dimmeroverride = request.args.get('dimmeroverride', "0")
   instance = request.args.get('instance', "0")
 
+  userdata = getuserinfo(deviceapikey)
 
-  deviceid = getedeviceid(deviceapikey)
-    
-  log.info("setdimmerapi deviceid %s", deviceid)
-  #log.info("sendswitchapi dimmerpgn %s", dimmerpgn)
+  deviceid = userdata.get('deviceid',"")
+
+  if deviceid == "":
+    return jsonify(result="Error", switch=dimmerpgn)
+
+  # updates the the HelmSmartAPI to log api calls
+  update_api_log(deviceapikey, userdata, 'setdimmerapi', setdimmerapi_index)
   
   if deviceid == "":
     return jsonify(result="Error", switch=dimmerpgn)
