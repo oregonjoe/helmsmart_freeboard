@@ -2142,11 +2142,347 @@ def update_api_log(apikey, userdata, apifunction, apidata):
     
   if debug_all: log.info("update_api_log - inserted into influxDB-Cloud! %s", deviceid)          
 
-
-
 @app.route('/get_apistat')
 @cross_origin()
 def get_apistat():
+
+  deviceapikey = request.args.get('apikey','')
+  deviceid = request.args.get('deviceid','')
+  useremail = request.args.get('useremail','')
+  devicename = request.args.get('devicename','')
+  Interval = request.args.get('interval',"5min")
+  rollup = request.args.get('mode',"sum")
+
+  resolution = request.args.get('resolution',"")
+  mytimezone = request.args.get('timezone',"UTC")
+  mytimezone = request.args.get('timezone',"UTC")
+  dataformat = request.args.get('format', 'json')
+  response = None
+
+
+  mydatetime = datetime.datetime.now()
+  myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")    
+  
+  starttime = request.args.get('start','0')
+  
+  response = None
+  
+
+  if int(starttime) != 0:
+    epochtimes = getendepochtimes(int(starttime), Interval)
+    
+  else:
+    epochtimes = getepochtimes(Interval)
+
+  
+  startepoch = epochtimes[0]
+  endepoch = epochtimes[1]
+  if resolution == "":
+    resolution = epochtimes[2]
+
+  
+  #userdata = getuserinfo(deviceapikey)
+  #log.info("freeboard get_apistat userdata %s", userdata)
+  
+  #useremail = userdata.get('useremail',"")
+  #log.info("freeboard get_apistat useremail %s", useremail)
+
+
+  #deviceid = userdata.get('deviceid',"")
+  
+  measurement = "HelmSmart"
+  measurement = 'HS_' + str(deviceid)
+
+
+  #devicename = userdata.get('devicename',"")
+  log.info("freeboard get_apistat deviceapikey %s", deviceapikey)
+  log.info("freeboard get_apistat useremail %s", useremail)
+  log.info("freeboard get_apistat deviceid %s", deviceid)
+  log.info("freeboard get_apistat devicename %s", devicename)  
+
+  response = None
+  
+  measurement = "HelmSmartAPI"
+  
+
+
+  try:
+   
+
+    host = 'hilldale-670d9ee3.influxcloud.net' 
+    port = 8086
+    username = 'helmsmart'
+    password = 'Salm0n16'
+    database = 'pushsmart-cloud'
+
+
+    db = InfluxDBCloud(host, port, username, password, database,  ssl=True)
+     
+
+    
+    start = datetime.datetime.fromtimestamp(float(startepoch))
+    
+
+    end = datetime.datetime.fromtimestamp(float(endepoch))
+    resolutionstr = "PT" + str(resolution) + "S"
+
+    #rollup = "mean"
+
+    #serieskeys=" deviceid='"
+    #serieskeys= serieskeys + deviceid + "' "
+    if deviceapikey != "":
+      serieskeys="apikey='"+ deviceapikey + "' "
+      csvFileType = "apikey"
+    elif useremail != "":
+      serieskeys="useremail='"+ useremail + "' "
+      csvFileType = "useremail"
+    elif deviceid != "":
+      serieskeys="deviceid='"+ deviceid + "' "
+      csvFileType = "deviceid"
+    elif devicename != "":
+      serieskeys="devicename='"+ devicename + "' "
+      csvFileType = "devicename"
+    else:
+      return jsonify( message='Error in get_apistat query - no keys specified', status='error')
+
+
+    #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,  serieskeys, startepoch, endepoch, resolution) 
+    #query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,   startepoch, endepoch, resolution) 
+    #query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s, {}s ) ').format(rollup,  measurement,   startepoch, endepoch, resolution, startepoch) 
+    query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s group by *, time({}s, {}s ) ').format(rollup,  measurement, serieskeys,  startepoch, endepoch, resolution, startepoch) 
+
+    #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
+    #query = ('select {}(apidata) AS apidata FROM {} where time > {}s and time < {}s ').format(rollup,  measurement,   startepoch, endepoch)
+    
+    
+    log.info("get_apistat inFlux-cloud Query %s", query)
+    
+
+    try:
+      response= db.query(query)
+      
+    except InfluxDBClientError as e:
+      log.info('get_apistat: Exception Error in InfluxDB  %s:  ' % str(e))
+    except:
+      e = sys.exc_info()[0]
+      log.info('get_apistat: Error in geting inFluxDB data %s:  ' % e)
+        
+      return jsonify( message='Error in inFluxDB query 2', status='error')
+      #raise
+
+    
+    #return jsonify(results=response)
+    
+    #response =  shim.read_multi(keys=[SERIES_KEY], start=start, end=end, period=resolutionstr, rollup="mean" )
+    
+    #print 'inFluxDB read :', response.response.successful
+
+    
+    if not response:
+      #print 'inFluxDB Exception1:', response.response.successful, response.response.reason 
+      return jsonify( message='No response to return 1' , status='error')
+
+
+    #if not response.points:
+    #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
+    #  return jsonify( message='No data to return 2', status='error')
+
+    print('get_apistat processing data headers:')
+    jsondata=[]
+    jsonkey=[]
+    #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
+    #jsonkey.append(strvaluekey)
+    print('get_apistat start processing data points:')
+    log.info("get_apistat Get InfluxDB response %s", response)
+
+    keys = response.raw.get('series',[])
+    log.info("get_apistat Get InfluxDB series keys %s", keys)
+
+
+
+
+
+    strvalue=""
+    
+    for series in keys:
+
+      tag = series['tags']
+      log.info("get_apistat series tags2 %s ", tag)
+
+
+      if deviceapikey == "":
+        deviceapikey=tag.get('deviceapikey', "")
+      if deviceid == "":
+         deviceid=tag.get('deviceid', "")
+      if devicename == "":
+         devicename=tag.get('devicename', "")
+      if useremail == "":
+         useremail=tag.get('useremail', "")
+
+      #mydatetimestr = str(fields['time'])
+      strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
+      jsonkey.append(strvaluekey)        
+
+      #log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
+      # initialize datetime to default
+      mydatetime = datetime.datetime.now()
+      
+      for point in series['values']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
+          
+        #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+
+        if fields['apidata'] != None:
+
+          #devicename = ""
+          #deviceid = tag['deviceid']
+          #for record in records:
+          #log.info("get_dbstat deviceid %s - devicename %s", record[0], record[1])    
+          #if tag['apikey'] == deviceapikey:
+          #devicename = record[1]
+
+          #strvalue = {'epoch': fields['time'], 'source':tag['deviceid'], 'name':devicename, 'value': fields['records']}        
+          #strvalue = {'epoch': fields['time'],  'records': fields['records']}
+          #strvalue = {'epoch': fields['time'],  'value': fields['records']}
+          mydatetimestr = str(fields['time'])
+          #log.info('freeboard_environmental:: mydatetimestr %s:  ' % mydatetimestr)
+          
+          # convert string to datetime opject
+          mydatetime = datetime.datetime.strptime(mydatetimestr, '%Y-%m-%dT%H:%M:%S%z')
+          #log.info('freeboard_environmental:: mydatetime %s:  ' % mydatetime)
+
+          # set timezone of new datetime opbect
+          mydatetimetz = mydatetime.replace(tzinfo=ZoneInfo(mytimezone))
+          #log.info('freeboard_environmental:: mydatetimetz %s:  ' % mydatetimetz)    
+
+          ## This dosnt work for python 3.11 anymore
+          ## throws an OverFlow error
+          ##dtt = mydatetimetz.timetuple()
+          ##ts = int(mktime(dtt)*1000)
+          ## So we need to convert datetime directly to seconds and add in timezone offesets
+
+          # get seconds offset for selected timezone
+          tzoffset = mydatetimetz.utcoffset().total_seconds()
+          #log.info('freeboard_environmental:: tzoffset %s:  ' % tzoffset)           
+
+          # adjust GMT time for slected timezone for display purposes
+          ts = int((mydatetime.timestamp() + tzoffset) * 1000 )
+          #log.info('freeboard_environmental:: ts %s:  ' % ts)
+          
+          #strvalue = {'apitag': tag['apifunction']   , 'epoch': ts,  'value': fields['apidata']}
+          #strvalue = {'apitag': tag['apifunction']   ,  'value': fields['apidata']}
+          strvalue = { 'useremail': tag['useremail'], 'apikey': tag['apikey'], 'deviceid': tag['deviceid'], 'devicename': tag['devicename'], 'apitag': tag['apifunction']   ,  'value': fields['apidata']}
+          jsondata.append(strvalue)
+
+
+
+
+
+    #jsondata = sorted(jsondata,key=itemgetter('value'), reverse=True)
+    #jsondata = sorted(jsondata,key=itemgetter('useremail','deviceid', 'apikey' , 'apitag'), reverse=True)
+    jsondata = sorted(jsondata,key=itemgetter('useremail','deviceid', 'apikey' , 'apitag'))
+    log.info('get_apistat:  jsondata %s:  ', jsondata)
+
+    total = 0
+
+    for stat in jsondata:
+      if stat['value'] != None:
+        total = total + float(stat['value'])
+
+
+    callback = request.args.get('callback')
+    # use the last valid timestamp for the update
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+
+    myfiledate = mydatetime.strftime('%Y%m%d%H%M%S')
+
+    #return '{0}({1})'.format(callback, {'response':response})
+
+    if dataformat == 'json':
+      return '{0}({1})'.format(callback, { 'APIkey':deviceapikey, 'DeviceID':deviceid,'DeviceName':devicename, 'Email':useremail, 'date_time':myjsondate, 'Interval':str(Interval),'Resolution':resolution,'total_api_values':int(total),'api_values':jsondata})
+
+    elif dataformat == 'csv':
+
+
+      #strvalue ='Email:' + useremail + ',APIkey:' + deviceapikey + ', DeviceID:' + deviceid + ', DeviceName:' + devicename + ', date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
+      strvalue ='User Email, APIkey, DeviceID, DeviceName, API tag , API values,  date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
+      
+      #strvalue = strvalue + 'API tag , API values \r\n'
+      
+      list_length = len(jsondata)
+      for i in range(list_length):
+
+        #strvalue = strvalue + jsondata[i]['apitag'] + ', ' + str(jsondata[i]['value']) + ' \r\n'
+        strvalue = strvalue + jsondata[i]['useremail'] + ', ' + str(jsondata[i]['apikey']) + ', ' + jsondata[i]['deviceid'] + ', ' + str(jsondata[i]['devicename']) + ', ' + jsondata[i]['apitag'] + ', ' + str(jsondata[i]['value']) + ' \r\n'
+
+      strvalue = strvalue + 'Total API values = ' + str(total) + ' \r\n'
+
+      response = make_response(strvalue)
+      response.headers['Content-Type'] = 'text/csv'
+      response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPILOG_by_"+ csvFileType + "_" + myfiledate + ".csv"
+      return response
+      
+
+  except AttributeError as e:
+    #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+
+    log.info('get_apistat: AttributeError in get_apistat %s:  ' % str(e))
+    
+  except TypeError as e:
+    log.info('get_apistat:  TypeError in get_apistat point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+    log.info('get_apistat: TypeError in get_apistat %s:  ' % str(e))
+    
+  except ValueError as e:
+    log.info('get_apistat: ValueError in get_apistat point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+
+    log.info('get_apistat: ValueError in get_apistat point%s:  ' % str(e))            
+    
+  except NameError as e:
+    #log.info('inFluxDB_GPS: NameError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
+    #e = sys.exc_info()[0]
+    log.info('get_apistat: NameError in get_apistat %s:  ' % str(e))           
+
+  except IndexError as e:
+    log.info('get_apistat: IndexError in get_apistat point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+    log.info('get_apistat: IndexError in get_apistat %s:  ' % str(e))
+
+  except OverflowError as e:
+    log.info('get_apistat: OverflowError in get_apistat point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+    log.info('get_apistat: OverflowError in get_apistat %s:  ' % str(e))
+
+    
+  #except pyonep.exceptions.JsonRPCRequestException as ex:
+  #    print('JsonRPCRequestException: {0}'.format(ex))
+      
+  #except pyonep.exceptions.JsonRPCResponseException as ex:
+  #    print('JsonRPCResponseException: {0}'.format(ex))
+      
+  #except pyonep.exceptions.OnePlatformException as ex:
+  #    print('OnePlatformException: {0}'.format(ex))
+     
+  except:
+      log.info('get_apistat: Error in  response %s:  ', deviceapikey)
+      e = sys.exc_info()[0]
+      log.info('get_apistat: Error in  apiststs %s:  ' % e)
+      #return jsonify(update=False, status='missing' )
+      callback = request.args.get('callback')
+      return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
+
+
+  #return jsonify(status='error',  update=False )
+  callback = request.args.get('callback')
+  return '{0}({1})'.format(callback, {'update':'true', 'status':'success' })
+
+@app.route('/get_apistat_all')
+@cross_origin()
+def get_apistat_all():
 
   deviceapikey = request.args.get('apikey','')
   Interval = request.args.get('interval',"5min")
@@ -2177,28 +2513,13 @@ def get_apistat():
   if resolution == "":
     resolution = epochtimes[2]
 
-  
-  userdata = getuserinfo(deviceapikey)
-  log.info("freeboard get_apistat userdata %s", userdata)
-  
-  useremail = userdata.get('useremail',"")
-  log.info("freeboard get_apistat useremail %s", useremail)
 
 
-  deviceid = userdata.get('deviceid',"")
-  
-  log.info("freeboard get_apistat deviceid %s", deviceid)
-
-  if deviceid == "":
-      callback = request.args.get('callback')
-      return '{0}({1})'.format(callback, {'update':'False', 'status':'deviceid error' })
-
-  measurement = "HelmSmart"
-  measurement = 'HS_' + str(deviceid)
+  #measurement = "HelmSmart"
+  #measurement = 'HS_' + str(deviceid)
 
 
-  devicename = userdata.get('devicename',"")
-  log.info("freeboard get_apistat devicename %s", devicename)  
+
 
   response = None
   
@@ -2255,23 +2576,18 @@ def get_apistat():
 
     #rollup = "mean"
 
-    serieskeys=" deviceid='"
-    serieskeys= serieskeys + deviceid + "' "
+    #serieskeys=" deviceid='"
+    #serieskeys= serieskeys + deviceid + "' "
 
-    query = ('select {}(apidata) AS apidata FROM {} '
-                     'where {} AND time > {}s and time < {}s '
-                     'group by *, time({}s) ') \
-                .format(rollup,  measurement,  serieskeys,
-                        startepoch, endepoch,
-                        resolution) 
-
-
+    #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,  serieskeys, startepoch, endepoch, resolution) 
+    #query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s) ').format(rollup,  measurement,   startepoch, endepoch, resolution) 
+    query = ('select {}(apidata) AS apidata FROM {} where  time > {}s and time < {}s group by *, time({}s, {}s ) ').format(rollup,  measurement,   startepoch, endepoch, resolution, startepoch) 
 
     #query = ('select {}(apidata) AS apidata FROM {} where {} AND time > {}s and time < {}s ').format(rollup,  measurement,  serieskeys, startepoch, endepoch)
-
+    #query = ('select {}(apidata) AS apidata FROM {} where time > {}s and time < {}s ').format(rollup,  measurement,   startepoch, endepoch)
     
     
-    log.info("get_apistat inFlux-cloud Query %s", query)
+    log.info("get_apistat_all inFlux-cloud Query %s", query)
     
 
     try:
@@ -2303,56 +2619,250 @@ def get_apistat():
     #  #print 'inFluxDB Exception2:', response.response.successful, response.response.reason 
     #  return jsonify( message='No data to return 2', status='error')
 
-    print('get_apistat processing data headers:')
+    print('get_apistat_all processing data headers:')
     jsondata=[]
     jsonkey=[]
     #strvaluekey = {'Series': SERIES_KEY, 'start': start,  'end': end, 'resolution': resolution}
     #jsonkey.append(strvaluekey)
-    print('get_apistat start processing data points:')
-    log.info("get_apistat Get InfluxDB response %s", response)
+    print('get_apistat_all start processing data points:')
+    #log.info("get_apistat_all Get InfluxDB response %s", response)
 
     keys = response.raw.get('series',[])
-    log.info("get_apistat Get InfluxDB series keys %s", keys)
+    #log.info("get_apistat_all Get InfluxDB series keys %s", keys)
 
 
+    strvalue=""
+    
+    for series in keys:
+      #log.info("freeboard Get InfluxDB series key %s", series)
+      #log.info("freeboard Get InfluxDB series tags %s ", series['tags'])
+      #log.info("freeboard Get InfluxDB series columns %s ", series['columns'])
+      #log.info("freeboard Get InfluxDB series values %s ", series['values'])
+
+      """        
+      values = series['values']
+      for value in values:
+        log.info("freeboard Get InfluxDB series time %s", value[0])
+        log.info("freeboard Get InfluxDB series mean %s", value[1])
+      """
+
+      tag = series['tags']
+      #log.info("freeboard Get InfluxDB series tags2 %s ", tag)
+
+      #mydatetimestr = str(fields['time'])
+      strvaluekey = {'Series': series['tags'], 'start': startepoch,  'end': endepoch}
+      jsonkey.append(strvaluekey)        
+
+      #log.info("freeboard Get InfluxDB series tags3 %s ", tag['deviceid'])
+      # initialize datetime to default
+      mydatetime = datetime.datetime.now()
+      
+      for point in series['values']:
+        fields = {}
+        for key, val in zip(series['columns'], point):
+          fields[key] = val
+          
+        #log.info("freeboard Get InfluxDB series points %s , %s", fields['time'], fields['records'])
+
+        if fields['apidata'] != None:
+            strvalue = {'apikey':tag['apikey'],  'deviceid':tag['deviceid'],    'devicename':tag['devicename'],      'useremail':tag['useremail'],    'apifunction':tag['apifunction'], 'value': fields['apidata']}
+            jsondata.append(strvalue)
+
+    #jsondatasorted = sorted(jsondata,key=itemgetter('apikey'), reverse=True)
+    jsondatasorted = sorted(jsondata,key=itemgetter('useremail', 'apikey'), reverse=True)
+    #log.info('get_apistat:  jsondatasorted %s:  ', jsondatasorted)
+    
+    """
+    jsondatagrouped = {}
+    for elem in jsondatasorted:
+      if elem['useremail'] not in jsondatagrouped:
+        jsondatagrouped[elem['useremail']] = []
+      #jsondatagrouped[elem['apikey']].append({'deviceid':elem['deviceid'],'devicename':elem['devicename'], 'useremail':elem['useremail'], 'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
+
+
+    jsondatagrouped = {}
+    for elem in jsondatasorted:
+      if elem['useremail'] not in jsondatagrouped:
+        jsondatagrouped[elem['useremail']] = []
+      #jsondatagrouped[elem['apikey']].append({'deviceid':elem['deviceid'],'devicename':elem['devicename'], 'useremail':elem['useremail'], 'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
+
+    """
+    """
+    jsondatagrouped = {}
+    for elem in jsondatasorted:
+      
+      if elem['useremail'] not in jsondatagrouped:
+        jsondataapikey = {}
+        jsondatagrouped[elem['useremail']] = []
+        
+      #if elem['apikey'] not in jsondataapikey:
+      # jsondataapikey[elem['apikey']]= []
+
+      if elem['apikey'] not in jsondatagrouped[elem['useremail']]:
+        jsondatagrouped[elem['useremail'][elem['apikey']]]= []
+
+        
+      #log.info('get_apistat:  jsondataapikey1 %s:  ', jsondataapikey)                          
+      #jsondataapikey[elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      #log.info('get_apistat:  jsondataapikey2 %s:  ', jsondataapikey) 
+
+      #jsondatagrouped[elem['useremail']].append({'apikey':elem['apikey'], 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
+      #jsondatagrouped[elem['useremail']].append(jsondataapikey[elem['apikey']])    
+      #log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
+
+    #for elem in jsondatagrouped:
+    #  log.info('get_apistat:  jsondatagrouped  elem  %s:  ', elem)
+
+    """
+    #strvalue = strvalue + jsondatagrouped[i]['apifunction'] + ', ' + str(jsondatagrouped[i]['apidata']) + ' \r\n'
+    myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
+    strvalue =""
+    strvalue =' date_time:' + myjsondate+  ', Interval:' + str(Interval) +', Resolution:' + str(resolution)  + ' \r\n'
+    strvalue =strvalue  + 'User email, APIkey, DeviceID, Device Name, APIfunction, APIpayload  \r\n'
+    
+    jsondatagrouped = dict()
+    for elem in jsondatasorted:
+      
+      if elem['useremail'] not in jsondatagrouped:
+        jsondatagrouped[elem['useremail']] = dict()
+        strvalue = strvalue + "\r\n" + elem['useremail'] + ", , ,"
+
+        
+      if elem['apikey'] in jsondatagrouped[elem['useremail']]:
+        #jsondatagrouped[elem['useremail']][ elem['apikey']].append({ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']} )
+
+        #jsonvaluestr = '{ "deviceid":"' + elem['deviceid'] + '","devicename":"' + elem['devicename'] + '",  "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
+        jsonvaluestr = '{ "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
+        #jsondatagrouped[elem['useremail']][ elem['apikey']].append(elem['apifunction'])
+        jsondatagrouped[elem['useremail']][ elem['apikey']].append([jsonvaluestr])
+        strvalue = strvalue + ', ,, , ' +  elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
+                                        
+                        
+      else:
+        jsonvaluestr = '{ "deviceid":"' + elem['deviceid'] + '","devicename":"' + elem['devicename'] + '",  "apifunction":"' +elem['apifunction'] + '","apidata":"'+ str(elem['value'])+ '"}'
+        #log.info('get_apistat:  jsonvaluestr %s:  ', jsonvaluestr)
+        #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads(jsonvaluestr)
+        jsondatagrouped[elem['useremail']][ elem['apikey']]=[jsonvaluestr]
+
+        strvalue = strvalue + '\r\n , ' + elem['apikey'] + ',' +  elem['deviceid'] + ',' + elem['devicename'] + '\r\n'
+        strvalue = strvalue + ', ,, , ' +   elem['apifunction'] + ',' + str(elem['value'])+  '\r\n'
+        #jsondatagrouped[elem['useremail']][ elem['apikey']]=json.loads("{ 'deviceid':elem['deviceid'],'devicename':elem['devicename'],  'apifunction':elem['apifunction'],'apidata':elem['value']}")
+        #jsondatagrouped[elem['useremail']][ elem['apikey']]=[elem['apifunction']]
+
+    
+    log.info('get_apistat:  jsondatagrouped %s:  ', jsondatagrouped)
+    #log.info('get_apistat:  strvalue %s:  ', strvalue)
+    """
+    final_dict = {'researchSubTypeToResolutionCodes': []}
+    for researchSubTypeCode, dic in jsondatagrouped.items():
+        temp_list = [{'resolutionCode': key, 'resolutionSubTypeCodes': val} for key, val in dic.items()]
+        temp_dic = {'researchSubTypeCode': researchSubTypeCode, 'resolutionTypes': temp_list}
+        final_dict['researchSubTypeToResolutionCodes'].append(temp_dic)
+
+    """
+
+    
+    final_dict = {'HelmSmartAPIlogs': []}
+    for apiemail, dic in jsondatagrouped.items():
+        temp_list = [{'apikey': key, 'apivalues': val} for key, val in dic.items()]
+        temp_dic = {'apiemail': apiemail, 'apikeys': temp_list}
+        final_dict['HelmSmartAPIlogs'].append(temp_dic)
+
+        
+    #from pprint import pprint
+    #pprint(final_dict)
+    
+    #log.info('get_apistat:  final_dict %s:  ' , json.dumps( final_dict))
+    #strvalue = ""
+
+    """    
+    for key in jsondatagrouped:
+      log.info('get_apistat:  jsondatasorted email %s: ', key)
+      apivalues = jsondatagrouped[key]
+      apitotals = 0
+      for apitags in apivalues:
+        apitotals = apitotals + int(apitags['apidata'] )
+        log.info('get_apistat:  jsondatasorted apifunction %s: %s ', apitags['apifunction'], apitags['apidata'] )
+
+      log.info('get_apistat:  jsondatasorted deviceid %s:%s:%s ', apitags['apikey'],  apitags['deviceid'],  apitags['devicename'],  )         
+      log.info('get_apistat:  jsondatasorted apitotals %s: ', apitotals)
+
+
+
+ 
+    for key in jsondatagrouped:
+      log.info('get_apistat:  jsondatasorted email %s: ', key)
+      apivalues = jsondatagrouped[key]
+      apitotals = 0
+      for apitags in apivalues:
+        #apitotals = apitotals + int(apitags['apidata'] )
+        #log.info('get_apistat:  jsondatasorted apifunction %s: %s ', apitags['apifunction'], apitags['apidata'] )
+        log.info('get_apistat:  jsondatasorted apitags %s: ', apitags )
+        
+        #for apikeys in apitags:
+        #  log.info('get_apistat:  jsondatasorted json apitags %s: ', apikeys)
+        #log.info('get_apistat:  jsondatasorted deviceid %s:%s:%s ', apitags['apikey'],  apitags['deviceid'],  apitags['devicename'],  )         
+      #log.info('get_apistat:  jsondatasorted apitotals %s: ', apitotals)
+  
+    #list_length = len(jsondatagrouped)
+    #for i in range(list_length):
+
+      #strvalue = strvalue + jsondatagrouped[i]['apifunction'] + ', ' + str(jsondatagrouped[i]['apidata']) + ' \r\n'
+
+    #log.info('get_apistat:  jsondatasorted strvalue%s:  ', strvalue)
+    """
+
+    
     callback = request.args.get('callback')
     # use the last valid timestamp for the update
     myjsondate = mydatetime.strftime("%B %d, %Y %H:%M:%S")
-
-    return '{0}({1})'.format(callback, {'response':response})
-
+    myfiledate = mydatetime.strftime('%Y%m%d%H%M%S')
+    
+    #return '{0}({1})'.format(callback, {'response':jsondatagrouped})
+    response = make_response(strvalue)
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers["Content-Disposition"] = "attachment; filename=HelmSmartAPISummaryLog_"+ myfiledate + ".csv"
+    return response
 
   except AttributeError as e:
     #log.info('inFluxDB_GPS: AttributeError in freeboard_environmental %s:  ', SERIES_KEY1)
     #e = sys.exc_info()[0]
 
-    log.info('get_apistat: AttributeError in freeboard_environmental %s:  ' % str(e))
+    log.info('get_apistat: AttributeError in get_apistat_all %s:  ' % str(e))
     
   except TypeError as e:
-    log.info('get_apistat:  TypeError in freeboard_environmental point %s:  ', deviceapikey)
+    log.info('get_apistat:  TypeError in get_apistat_all point %s:  ', deviceapikey)
     #e = sys.exc_info()[0]
-    log.info('get_apistat: TypeError in freeboard_environmental %s:  ' % str(e))
+    log.info('get_apistat: TypeError in get_apistat_all %s:  ' % str(e))
     
   except ValueError as e:
-    log.info('get_apistat: ValueError in freeboard_environmental point %s:  ', deviceapikey)
+    log.info('get_apistat: ValueError in get_apistat_all point %s:  ', deviceapikey)
     #e = sys.exc_info()[0]
 
-    log.info('get_apistat: ValueError in freeboard_environmental point%s:  ' % str(e))            
+    log.info('get_apistat: ValueError in get_apistat_all point%s:  ' % str(e))            
+
+  except KeyError as e:
+    log.info('get_apistat: KeyError in get_apistat_all point %s:  ', deviceapikey)
+    #e = sys.exc_info()[0]
+
+    log.info('get_apistat: KeyError in get_apistat_all point%s:  ' % str(e))    
     
   except NameError as e:
     #log.info('inFluxDB_GPS: NameError in convert_influxdb_gpsjson %s:  ', SERIES_KEY1)
     #e = sys.exc_info()[0]
-    log.info('get_apistat: NameError in freeboard_environmental %s:  ' % str(e))           
+    log.info('get_apistat: NameError in get_apistat_all %s:  ' % str(e))           
 
   except IndexError as e:
-    log.info('get_apistat: IndexError in freeboard_environmental point %s:  ', deviceapikey)
+    log.info('get_apistat: IndexError in get_apistat_all point %s:  ', deviceapikey)
     #e = sys.exc_info()[0]
-    log.info('get_apistat: IndexError in freeboard_environmental %s:  ' % str(e))
+    log.info('get_apistat: IndexError in get_apistat_all %s:  ' % str(e))
 
   except OverflowError as e:
-    log.info('get_apistat: OverflowError in freeboard_environmental point %s:  ', deviceapikey)
+    log.info('get_apistat: OverflowError in get_apistat_all point %s:  ', deviceapikey)
     #e = sys.exc_info()[0]
-    log.info('get_apistat: OverflowError in freeboard_environmental %s:  ' % str(e))
+    log.info('get_apistat: OverflowError in get_apistat_all %s:  ' % str(e))
 
     
   #except pyonep.exceptions.JsonRPCRequestException as ex:
@@ -2377,7 +2887,8 @@ def get_apistat():
   callback = request.args.get('callback')
   return '{0}({1})'.format(callback, {'update':'False', 'status':'error' })
 
-
+  
+### dashboard functions ####
 
 @app.route('/freeboard_environmental')
 @cross_origin()
