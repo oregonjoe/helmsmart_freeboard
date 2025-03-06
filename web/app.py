@@ -654,10 +654,11 @@ def getuserinfo(deviceapikey):
             useremail = str(i[1])
             devicename = str(i[2])
 
-            #cursor.execute("update user_devices set api_queries = api_queries + 1 where deviceapikey = %s" , (deviceapikey,))
+            cursor.execute("update user_devices set api_queries = api_queries + 1 where deviceapikey = %s" , (deviceapikey,))
+            conn.commit()
             #response= cursor.query(query)
             #i = cursor.fetchone()
-            log.info("freeboard getedeviceid update apiquery response %s", i) 
+            log.info("freeboard getedeviceid update apiquery value") 
             
             db_pool.putconn(conn) 
             #return deviceid
@@ -730,9 +731,9 @@ def getedeviceid(deviceapikey):
             deviceid = str(i[0])
 
             cursor.execute("update user_devices set api_queries = api_queries + 1 where deviceapikey = %s" , (deviceapikey,))
-            #response= cursor.query(query)
-            i = cursor.fetchone()
-            log.info("freeboard getedeviceid updare apiquery response %s", i) 
+            conn.commit()
+            
+            log.info("freeboard getedeviceid updare apiquery value") 
 
             db_pool.putconn(conn)
             
