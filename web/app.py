@@ -654,9 +654,9 @@ def getuserinfo(deviceapikey):
             useremail = str(i[1])
             devicename = str(i[2])
 
-            cursor.execute("update user_devices set api_queries = api_queries + 1 where deviceapikey = %s" , (deviceapikey,))
+            #cursor.execute("update user_devices set api_queries = api_queries + 1 where deviceapikey = %s" , (deviceapikey,))
             #response= cursor.query(query)
-            i = cursor.fetchone()
+            #i = cursor.fetchone()
             log.info("freeboard getedeviceid update apiquery response %s", i) 
             
             db_pool.putconn(conn) 
