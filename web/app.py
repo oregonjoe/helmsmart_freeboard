@@ -688,6 +688,8 @@ def getuserinfo(deviceapikey):
 
 def getedeviceid(deviceapikey):
 
+    deviceid = ""
+
     conn = db_pool.getconn()
 
     log.info("freeboard getedeviceid data Query %s", deviceapikey)
@@ -720,7 +722,14 @@ def getedeviceid(deviceapikey):
         
         else:
             deviceid = str(i[0])
-            db_pool.putconn(conn) 
+
+            cursor.execute("update user_devices set api_queries = api_queries + 1 where deviceapikey = %s" , (deviceapikey,))
+            #response= cursor.query(query)
+            i = cursor.fetchone()
+            log.info("freeboard getedeviceid updare apiquery response %s", i) 
+
+            db_pool.putconn(conn)
+            
             return deviceid 
 
 
