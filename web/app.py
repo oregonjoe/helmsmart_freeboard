@@ -627,7 +627,7 @@ def getuserinfo(deviceapikey):
 
 
     #log.info("freeboard getedeviceid Query %s", query)
-     
+        
 
     try:
     # first check db to see if deviceapikey is matched to device id
