@@ -643,7 +643,7 @@ def getuserinfo(deviceapikey):
         # see we got any matches
         if cursor.rowcount == 0:
         #if not response:
-            # cursor.close
+            log.info("freeboard getuserinfo response rowcount=0")       
             db_pool.putconn(conn) 
             #return ""
             #return json.dumps({'deviceid':'', 'useremail':'', 'devicename':''})
