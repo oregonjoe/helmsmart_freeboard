@@ -1,0 +1,29 @@
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung' --data-urlencode 'apikey=a5069b96637473d7701fa11eb9baad3d' --data-urlencode 'wunstation=KORBROOK78' --data-urlencode 'wunpw=SK5S9I4J' --data-urlencode 'interval=10min' --data-urlencode 'resolution=120' --data-urlencode 'mode=median' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"
+Basic	Every 10 minutes	May 5, 2023 4:40 PM UTC	May 5, 2023 4:50 PM UTC	
+Edit this job
+Delete this job
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung' --data-urlencode 'apikey=735aaf7afea3e3e3e07c267a93de6347' --data-urlencode 'wunstation=KORBROOK80' --data-urlencode 'wunpw=XeBB4k5P' --data-urlencode 'interval=5min' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"
+Basic	Every 10 minutes	May 5, 2023 4:42 PM UTC	May 5, 2023 4:52 PM UTC	
+Edit this job
+Delete this job
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung' --data-urlencode 'apikey=4dd8ad3ef99448d180f71a1309952d96' --data-urlencode 'wunstation=KSCLAKEC9' --data-urlencode 'wunpw=ZrXimU8I' --data-urlencode 'interval=10min' --data-urlencode 'resolution=800' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' --data-urlencode 'mode=median' -H "accept: application/json"
+Basic	Every 10 minutes	May 5, 2023 4:41 PM UTC	May 5, 2023 4:51 PM UTC	
+Edit this job
+Delete this job
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung' --data-urlencode 'apikey=2de0e52650dadb31645895f77465ebcc' --data-urlencode 'wunstation=KORBROOK124' --data-urlencode 'wunpw=46iO0QEk' --data-urlencode 'interval=5min' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"
+Basic	Every 10 minutes	May 5, 2023 4:40 PM UTC	May 5, 2023 4:50 PM UTC	
+Edit this job
+Delete this job
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_rain_wung' --data-urlencode 'apikey=a5069b96637473d7701fa11eb9baad3d' --data-urlencode 'wunstation=KORBROOK78' --data-urlencode 'wunpw=SK5S9I4J' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"
+Basic	Every 10 minutes	May 5, 2023 4:40 PM UTC	May 5, 2023 4:50 PM UTC	
+Edit this job
+Delete this job
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_rain_wung' --data-urlencode 'apikey=a5069b96637473d7701fa11eb9baad3d' --data-urlencode 'wunstation=KORBROOK78' --data-urlencode 'wunpw=SK5S9I4J' --data-urlencode 'interval=daily' --data-urlencode 'timezone=US/Pacific' --data-urlencode 'units=US' -H "accept: application/json"
+Basic	Every 10 minutes	May 5, 2023 4:40 PM UTC	May 5, 2023 4:50 PM UTC	
+Edit this job
+Delete this job
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_weather_wung' --data-urlencode 'apikey=fe5a5c8ce636c4e6ebd89e6175163d55' --data-urlencode 'wunstation=KTXEGYPT1' --data-urlencode 'wunpw=pRzc1O1B' --data-urlencode 'interval=10min' --data-urlencode 'resolution=120' --data-urlencode 'mode=median' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"
+Basic	Every 10 minutes	May 5, 2023 4:41 PM UTC	May 5, 2023 4:51 PM UTC	
+Edit this job
+Delete this job
+$ curl -X GET -G 'https://helmsmart-freeboard.herokuapp.com/freeboard_rain_wung' --data-urlencode 'apikey=fe5a5c8ce636c4e6ebd89e6175163d55' --data-urlencode 'wunstation=KTXEGYPT1' --data-urlencode 'wunpw=pRzc1O1B' --data-urlencode 'timezone=UTC' --data-urlencode 'units=US' -H "accept: application/json"

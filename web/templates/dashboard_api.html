@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+    <head>    
+      <meta content="HelmSmart Live Vessel Monitoring" name="description" />
+      <meta name="google-site-verification" content="mZ0MHsuiy1Z1gHdPB9bnX3TKMhPG-ASKcB0gRVQBxoM" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE" />
+         
+          <style type="text/css">
+          html { height: 100% }      body { height: 100%; margin: 0; padding: 0 }      #map_canvas { height: 100% }
+          .auto-style4 {
+          font-size: xx-large;
+          }
+          .auto-style5 { 
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          font-size: small;
+          text-align: center;
+          }
+
+          .auto-style8 {
+          text-align: center;
+          }
+          .auto-style9 {
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          }
+          .auto-style11 {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: medium;
+          }
+
+          .auto-style12 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	text-align: left;
+}
+.auto-style14 {
+	color: #C626C6;
+}
+.auto-style15 {
+	color: #FAC4FA;
+}
+.auto-style17 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	text-align: center;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+.auto-style18 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: small;
+	text-align: left;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+.auto-style19 {
+	border-width: 0px;
+}
+
+        </style>
+        <title>HelmSmart Freeboard</title>
+
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/persona-buttons.css') }}"/>
+      <script src="https://login.persona.org/include.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    
+
+<script language = "Javascript">
+          
+  
+
+        </script>
+
+
+      </head>
+
+    <!-- <body onload="initialize()"> -->
+    <body  style="color: #FFFFFF; width: 933px; height: 600px; background-color: #336699" >
+      <table cellpadding="2" style="width: 100%">
+        <tr>
+          <td>
+
+            <!-- <img alt="" height="50" src="images/ShipSymbol50W.png" style="float: left" width="50" class="auto-style12"><span class="auto-style13">&nbsp; 
+				login</span></td>
+				<td>-->
+
+            <!--  <button class="btn btn-primary" name="login" id="login">Login</button> -->
+
+            <!--  <button class="btn btn-primary" name="logout" id="logout">Logout</button> -->
+
+
+          </td>
+		  			  <!-- 
+		   <td colspan="3">
+		   <center>
+              {% if session['adminid'] %}
+
+              <a href="#" id="admin" class="persona-button">
+                <span>{{session['adminid']}}: Sign Out</span>
+              </a> 
+			   {% endif %}
+			  </center>
+		   </td>
+-->
+        </tr>
+        <tr>
+          <td class="auto-style8">
+            <span class="auto-style4">
+              <span class="auto-style9">HelmSmart-Freeboard</span>
+            </span>
+            <br>
+              <span class="auto-style11">Cloud-base Vessel Monitoring using Freeboard.io dashboards</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">
+		  <a href="http://www.helmsmart.com/freeboard/index.html">
+		  <img alt="" class="auto-style19" height="200" src="{{ url_for('static', filename='img/SeaDreamBoard200W.jpg' ) }}" width="200"></a>
+		  <a href="https://helmsmart-freeboard.herokuapp.com/dashboards_list">
+		  <img alt="" class="auto-style19" height="200" src="{{ url_for('static', filename='img/freeboard_logo_200HW.jpg' ) }}" width="200"></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">RESTful API for accessing sensor data provided 
+		  by SeaSmart and netGauges gateways</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style18">Sensor data is posted by gateways to the 
+		  HelmSmart temporal database where it is parsed and stored. The 
+		  HelmSmart-Freeboard API allows retreival of sensor data by using a set 
+		  of HTTP GET URLs with specified device API keys and parameters. The 
+		  selected sensor data is returned in JSON format where it can used by 
+		  any requestor including the Freeboard.io dashboard.</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style18">To use the API with the Freeboard.io 
+		  dashboards simply enter the URL with parameters as described below in 
+		  the JSON Datasource. Be sure to enter a update interval and select the 
+		  THINGPROXY option to enable cross-domain access.<span class="auto-style18"> <a href="{{ url_for('static', filename='img/FreeboardDataSourceExample.jpg' ) }}">
+		  EXAMPLE</a></span></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style18">Most APIs take a device key and resolution 
+		  parameter. <br><br>The device key is issued by HelmSmart to link a 
+		  device to a user account. <br>
+		  
+		  <br>Interval is a optional numerical 
+		  time value for which a group of values 
+		  is returned. Interval starts from current time API is called going backwards. 
+		  If no Interval parameter is used, the default is 5 
+		  minutes from the current time. Options are 
+		  [1min,2min,5min,10min,15min,30min,1hour,4hour,6hour,8hour,1hour,1day,2day,7day,1month]<br>
+		  
+		  <br>Resolution is a optional numerical time
+		  value in seconds for which a average is calculated and a single value 
+		  is returned. If a Interval of 10min with a resolution of 60 (sec) is used, 10 data points will be returned.
+		  If no Resolution parameter is used, the default is a single data point based on the interval.<br>
+		  
+		  <br>Some APIs take additional 
+		  optional parameters<br>
+		  
+		  <br>INSTANCE is used to identify multiple 
+		  sensors belonging to the same class - For example Fuel Level or engine 
+		  speed. It is a numerical value from&nbsp; 0 to 255 with 0 common for 
+		  single devices or PORT and 1 for STARBOARD. Not all APIs will have a 
+		  INSTANCE parameter<br>
+		  
+		  <br>UNITS can be used to convert to Metric [IM] 
+		  or US Customary [US] units of measure. If IM is used temperature will 
+		  be in degrees celsius while US will be fahrenheit. The default is US 
+		  if no parameter is specified. Not all APIs will have a UNITS 
+		  parameter. Options are [US, Metric, Scientific, Nautical]<br>
+		  
+		  <br>TIMEZONE converts from GMT (universial) to local time. Options are [UTC, Eastern, Central, Mountain, Pacific, Hawaii]<br>
+		  
+		 <br>Mode can be used to group data point within a span (interval). Default is to average data based on resolution.
+		 If a interval of 1 hour is choosed with resolution of 10 minutes - the average (mean) value for every 10 minutes is trurned.
+		 Options are [Mean, Median, Max, Min]<br> 
+		 
+		  <br>TYPE is used for some APIs to select subsets of data. True Wind Direction vs Apparent Wind Direction for example. Options are dependent on the API type. Not all APIs use a TYPE <br>
+		  
+		  
+		  
+		  </td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style17">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style18"><strong>GPS Location - Lat/Lng in degrees</strong><br>
+		  <br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=[deviceAPIkey]&amp;Interval=[seconds]<br>
+		  <br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_location?apikey=a5069b96637473d7701fa11eb9baad3d</span></a><br class="auto-style14"> 				</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style18"><strong>Wind Data - Speed and direction both 
+		  True North and Apparent</strong><br><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Type=[apparent or true]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_winddata?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style18"><strong>Environmential - Air temperature, 
+		  Barometric pressure, and Humidity<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmential?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Type=[sea or inside or outside]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_environmental?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style18"><strong>Navigation - Speed over Ground, 
+		  Course over Ground, and Heading<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;;Type=[magnetic or true]&amp;Units=[IM  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_nav?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+		        <tr>
+          <td class="auto-style18"><strong>Battery - Volts, 
+		  Amps, and Temperature<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_battery?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+		
+		  <tr>
+          <td class="auto-style18"><strong>Engine - RPM, Water Temperature, 
+		  Oil Pressure, Fuel Rate, Alt Volts, Fuel Level, Boost, Hours<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Instance=[Number]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+		
+		
+			<tr>
+          <td class="auto-style18"><strong>Engine Aux- boost_pressure,coolant_pressure,fuel_pressure,oil_temp,egt_temperature,fuel_rate_average,instantaneous_fuel_economy,tilt_or_trim=<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Instance=[Number]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_engine_aux?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+		
+		        <tr>
+          <td class="auto-style18"><strong>AC Status - AC Volts, Amps, Watts, 
+		  Energy<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Type=[UTIL 
+		  or GEN]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_ac_status?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style12"><strong>Switch Status - Open or closed - 16 switches<br></strong><br>FORMAT: 
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=[deviceAPIkey]&amp;Interval=[seconds]&amp;Resolution=[seconds]&amp;Units=[IM 
+		  or US]<br><br>EXAMPLE:
+		  <a href="https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=a5069b96637473d7701fa11eb9baad3d">
+		  <span class="auto-style15">
+		  https://helmsmart-freeboard.herokuapp.com/freeboard_status?apikey=a5069b96637473d7701fa11eb9baad3d</span></a></td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td class="auto-style5">www.chetcodigital.com&nbsp; www.seasmart.net www.netgauges.net www.digitalmarinegauges.com 				</td>
+        </tr>
+		 <tr>
+          <td class="auto-style5"><center> copyright 2019</center>			</td>
+        </tr>
+		
+
+		
+
+		
+		
+		
+		
+      </table>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+
+
+	  
+	  
+	  
+    </body>
+  </html>
+
+  
