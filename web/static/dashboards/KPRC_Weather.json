@@ -1,0 +1,335 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.widgets.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/helmsmart.datasources.js",
+		"https://helmsmart-freeboard.herokuapp.com/static/plugins/plugin_highcharts_historical.js"
+	],
+	"panes": [
+		{
+			"title": "KPRC WEATHER",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"1": 5,
+				"2": 5,
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"0": 0,
+				"1": 1,
+				"2": 1,
+				"3": 1,
+				"5": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "google_map",
+					"settings": {
+						"lat": "",
+						"lon": "",
+						"blocks": 4,
+						"position": "datasources[\"KPRC Location\"][\"position\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "Weather",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"1": 15,
+				"2": 5,
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"0": 0,
+				"1": 1,
+				"2": 2,
+				"3": 2,
+				"5": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Air Temp",
+						"size": "regular",
+						"value": "datasources[\"KPRC Environmental Live\"][\"temperature\"]",
+						"animate": true,
+						"units": "F"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Baro",
+						"size": "regular",
+						"value": "datasources[\"KPRC Environmental Live\"][\"atmospheric_pressure\"]",
+						"animate": true,
+						"units": "inhg"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Wind Speed",
+						"size": "regular",
+						"value": "datasources[\"KPRC Wind Live\"][\"apparentwindspeed\"]",
+						"animate": true,
+						"units": "knots"
+					}
+				},
+				{
+					"type": "hstext_widget",
+					"settings": {
+						"title": "Humidity",
+						"size": "regular",
+						"value": "datasources[\"KPRC Environmental\"][\"humidity\"]",
+						"animate": true,
+						"units": "%"
+					}
+				}
+			]
+		},
+		{
+			"title": "Wind Dir True",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"1": 25,
+				"2": 15,
+				"3": 1,
+				"5": 5
+			},
+			"col": {
+				"0": 0,
+				"1": 1,
+				"2": 1,
+				"3": 3,
+				"5": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"title": "",
+						"value": "datasources[\"KPRC Wind Live\"][\"apparentwinddirection\"]",
+						"units": "degrees",
+						"min_value": 0,
+						"max_value": 360,
+						"gaugeStyle": "compass",
+						"dropshadow": true,
+						"blocks": "4",
+						"gaugeBackColor": "10",
+						"gaugeFillColor": "11",
+						"gaugePointerColor": "6"
+					}
+				}
+			]
+		},
+		{
+			"title": "Air Temp (24 hour)",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"1": 35,
+				"2": 15,
+				"3": 11
+			},
+			"col": {
+				"0": 0,
+				"1": 1,
+				"2": 2,
+				"3": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"KPRC Environmental\"][\"temperature\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Wind Speed (24 hours)",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"1": 45,
+				"2": 25,
+				"3": 11
+			},
+			"col": {
+				"0": 0,
+				"1": 1,
+				"2": 1,
+				"3": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"KPRC Wind\"][\"apparentwindspeed\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		},
+		{
+			"title": "Baro (24 hours)",
+			"width": 1,
+			"row": {
+				"0": 1,
+				"1": 55,
+				"2": 25,
+				"3": 11
+			},
+			"col": {
+				"0": 0,
+				"1": 1,
+				"2": 2,
+				"3": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"showledgen": false,
+						"blocks": 4,
+						"chartType": "area",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"KPRC Environmental\"][\"atmospheric_pressure\"]",
+						"series1color": "0",
+						"series2color": "0",
+						"series3color": "0"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "KPRC Wind Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
+				"apikey": "ce55cb5279872b99d54cdb9b6282eae3",
+				"refresh": 30,
+				"span": "10min",
+				"resolution": "120",
+				"instance": "",
+				"index": "",
+				"type": "apparent",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median",
+				"name": "KPRC Wind Live"
+			}
+		},
+		{
+			"name": "KPRC Environmental Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
+				"apikey": "ce55cb5279872b99d54cdb9b6282eae3",
+				"refresh": 60,
+				"span": "5Min",
+				"resolution": "300",
+				"instance": "",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "KPRC Location Live",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_location",
+				"apikey": "ce55cb5279872b99d54cdb9b6282eae3",
+				"refresh": 60,
+				"span": "5Min",
+				"resolution": "300",
+				"instance": "",
+				"index": "",
+				"type": "NULL",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "KPRC",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_winddata",
+				"apikey": "ce55cb5279872b99d54cdb9b6282eae3",
+				"refresh": 30,
+				"span": "1day",
+				"resolution": "900",
+				"instance": "",
+				"index": "",
+				"type": "apparent",
+				"timezone": "UTC",
+				"units": "US",
+				"mode": "median"
+			}
+		},
+		{
+			"name": "KPRC Environmental",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_environmental",
+				"apikey": "ce55cb5279872b99d54cdb9b6282eae3",
+				"refresh": 60,
+				"span": "1day",
+				"resolution": "600",
+				"instance": "",
+				"type": "",
+				"units": "US"
+			}
+		},
+		{
+			"name": "KPRC Location",
+			"type": "JSON",
+			"settings": {
+				"url": "https://helmsmart-freeboard.herokuapp.com/freeboard_location",
+				"apikey": "ce55cb5279872b99d54cdb9b6282eae3",
+				"refresh": 15,
+				"span": "12hour",
+				"resolution": "600",
+				"instance": "",
+				"type": "NULL",
+				"units": "US"
+			}
+		}
+	],
+	"columns": 3
+}

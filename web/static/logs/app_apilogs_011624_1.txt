@@ -1,0 +1,673 @@
+
+freeboard_environmental_index=0
+freeboard_environmental_calculated_index=1
+freeboard_environmental_metar_index=2
+helmsmart_environmental_baroncsv_index=3
+helmsmart_environmental_nmea0183_index=4
+helmsmart_environmental_baroncsv_text_index=5
+freeboard_weather_index=6
+freeboard_rain_gauge_index=7
+freeboard_rain_wung_index=8
+freeboard_weather_wung_index=9
+freeboard_winddata_index=10
+freeboard_winddata_apparent_index=11
+freeboard_environmental2_index=12
+freeboard_winddataTrue_index=13
+freeboard_location_index=14
+freeboard_location_wind_index=15
+freeboard_nav_index=16
+freeboard_water_depth_index=17
+freeboard_attitude_index=18
+freeboard_battery_index=19
+freeboard_engine_aux_index=20
+freeboard_engine_index=21
+freeboard_fluidlevels_index=22
+freeboard_ac_status_index=23
+freeboard_status_index=24
+freeboard_indicator_status_index=25
+freeboard_indicator_runtime_index=26
+freeboard_dimmer_status_index=27
+freeboard_get_engine_values_index=28
+freeboard_get_rain_gauge_index=29
+freeboard_get_weather_values_index=30
+freeboard_get_weather_minmax_value_index=31
+freeboard_get_dimmer_values_index=32
+freeboard_dimmer_values_index=33
+freeboard_switch_bank_status_index=34
+freeboard_ac_status_array_index=35
+setswitchapi_index=100
+setdimmerapi_index=101
+
+
+https://helmsmart-freeboard.herokuapp.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&timezone=UTC&units=US&mode=median
+
+https://helmsmart-freeboard.herokuapp.com/get_dbstat?apikey=a5069b96637473d7701fa11eb9baad3d&interval=1hour&timezone=UTC&units=US&mode=median
+
+None({'date_time': 'January 15, 2024 21:04:17', 'Interval': '1hour', 'Resolution': 3600, 'DeviceID': '001EC010AD69', 'DeviceName': 'SSWIFIG2_Winchuck', 'total records': 18525, 'records': [{'epoch': 1705352400000, 'value': 1300}, {'epoch': 1705348800000, 'value': 17225}]})
+
+
+
+https://helmsmart-freeboard.herokuapp.com/get_apistat?apikey=a5069b96637473d7701fa11eb9baad3d&interval=1hour&timezone=UTC&units=US&mode=median
+
+Jan 15 13:00:35 helmsmart-freeboard app/web.1 INFO:root:get_apistat Get InfluxDB response ResultSet(
+
+{'('HelmSmartAPI', 
+
+{
+'apifunction': 'freeboard_rain_gauge', 
+'apikey': '6df777ec3890df47661c721ec3e33b53', 
+'deviceid': '001EC010AD69'})': 
+
+[{'time': '2024-01-15T20:00:00Z', 'apiindex': 7.0}, 
+{'time': '2024-01-15T21:00:00Z', 'apiindex': None}]})
+
+
+
+Jan 15 13:00:35 helmsmart-freeboard app/web.1 INFO:root:get_apistat Get InfluxDB series keys 
+[{'name': 'HelmSmartAPI', 
+'tags': {'apifunction': 'freeboard_rain_gauge', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69'}, 
+'columns': ['time', 'apiindex'], 
+'values': [['2024-01-15T20:00:00Z', 7.0], ['2024-01-15T21:00:00Z', None]]}]
+
+
+Jan 15 13:00:35 helmsmart-freeboard app/web.1 10.1.26.102 - - [15/Jan/2024:21:00:35 +0000] "GET /get_apistat?
+
+
+Jan 15 13:33:14 helmsmart-freeboard app/web.1 INFO:root:
+
+get_apistat Get InfluxDB response ResultSet({'
+('HelmSmartAPI', 
+{'apifunction': 'freeboard_environmental', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69'})':
+ [{'time': '2024-01-15T20:00:00Z', 'apiindex': None}, {'time': '2024-01-15T21:00:00Z', 'apiindex': 0.0}], 
+ 
+ '('HelmSmartAPI', {'apifunction': 'freeboard_rain_gauge', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69'})': 
+ [{'time': '2024-01-15T20:00:00Z', 'apiindex': None}, {'time': '2024-01-15T21:00:00Z', 'apiindex': 7.0}]})
+
+
+https://helmsmart-freeboard.herokuapp.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&timezone=UTC&units=US&mode=count
+
+https://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&timezone=UTC&units=US&mode=count
+
+http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&timezone=UTC&units=US&mode=mean
+
+http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&resolution=3800&timezone=UTC&units=US&mode=count
+
+None({'response': ResultSet({'('HelmSmartAPI', {'apifunction': 'freeboard_environmental', 'apikey': '08000d8626d0f073036c73c4e1135f34', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'useremail': 'joe@chetcodigital.com'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 38}, {'time': '2024-01-16T20:16:40Z', 'apidata': 15}], 
+
+'('HelmSmartAPI', {'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 11}, {'time': '2024-01-16T20:16:40Z', 'apidata': 4}], 
+
+'('HelmSmartAPI', {'apifunction': 'freeboard_environmental', 'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'useremail': 'joe@chetcodigital.com'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 38}, {'time': '2024-01-16T20:16:40Z', 'apidata': 15}], 
+
+'('HelmSmartAPI', {'apifunction': 'freeboard_environmental', 'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'useremail': 'joe@chetcodigital.com'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 38}, {'time': '2024-01-16T20:16:40Z', 'apidata': 15}], 
+
+'('HelmSmartAPI', {'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_environmental', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 3}, {'time': '2024-01-16T20:16:40Z', 'apidata': 0}], 
+
+'('HelmSmartAPI', {'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 19}, {'time': '2024-01-16T20:16:40Z', 'apidata': 8}], 
+
+'('HelmSmartAPI', {'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'Alex.Alecci@hearst.com', 'apifunction': 'freeboard_environmental', 'apikey': '963051f1f3830fc6d667797d2456b21d', 'deviceid': '5410ECD012C0'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 1}, {'time': '2024-01-16T20:16:40Z', 'apidata': 2}], 
+
+'('HelmSmartAPI', {'devicename': 'Fox Weather Nashville_Nunley', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': 'dda559329b243a13ecc4fde88a83da07', 'deviceid': '68271933E7BD'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 38}, {'time': '2024-01-16T20:16:40Z', 'apidata': 15}], 
+
+'('HelmSmartAPI', {'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_environmental', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 6}, {'time': '2024-01-16T20:16:40Z', 'apidata': 2}], 
+
+'('HelmSmartAPI', {'apifunction': 'freeboard_rain_gauge', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 40}, {'time': '2024-01-16T20:16:40Z', 'apidata': 0}], 
+
+'('HelmSmartAPI', {'apifunction': 'freeboard_rain_gauge', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net'})': [{'time': '2024-01-16T19:13:20Z', 'apidata': 3}, {'time': '2024-01-16T20:16:40Z', 'apidata': 1}]})})
+
+http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&resolution=4800&timezone=UTC&units=US&mode=count
+
+SELECT <function>(<field_key>) FROM_clause WHERE <time_range> GROUP BY time(<time_interval>),[tag_key]
+
+I had the same issue, so to build on this I'll add my query. select sum(elapsed) FROM MyTable where time>='2023-10-20T07:00:00Z' GROUP BY time(8h, 7h) This allowed me to group data by 8 hour shifts, starting at 7am 
+
+
+http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count
+
+
+None({'response': ResultSet({'
+('HelmSmartAPI', {'apifunction': 'freeboard_environmental', 'apikey': '08000d8626d0f073036c73c4e1135f34', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'useremail': 'joe@chetcodigital.com'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 160}], 
+
+'('HelmSmartAPI', {'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 45}], 
+
+'('HelmSmartAPI', {'devicename': 'NGWXENET_E955', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'deviceid': '68271933E955'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 160}], 
+
+'('HelmSmartAPI', {'apifunction': 'freeboard_environmental', 'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'useremail': 'joe@chetcodigital.com'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 160}], 
+
+'('HelmSmartAPI', {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_environmental'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 3}], 
+
+'('HelmSmartAPI', {'apifunction': 'freeboard_environmental', 'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 72}], 
+
+'('HelmSmartAPI', {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'Alex.Alecci@hearst.com', 'apifunction': 'freeboard_environmental', 'apikey': '963051f1f3830fc6d667797d2456b21d'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 9}], 
+
+'('HelmSmartAPI', {'devicename': 'Fox Weather Nashville_Nunley', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': 'dda559329b243a13ecc4fde88a83da07', 'deviceid': '68271933E7BD'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 160}], 
+
+'('HelmSmartAPI', {'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_environmental', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 23}], 
+
+'('HelmSmartAPI', {'apifunction': 'freeboard_rain_gauge', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 23}], 
+
+'('HelmSmartAPI', {'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_rain_gauge', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F'})': [{'time': '2024-01-16T19:51:09Z', 'apidata': 4}]})})
+
+ INFO:root:get_apistat Get InfluxDB series keys 
+ [{'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_environmental', 'apikey': '08000d8626d0f073036c73c4e1135f34', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'useremail': 'joe@chetcodigital.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 160]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 45]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'devicename': 'NGWXENET_E955', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'deviceid': '68271933E955'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 160]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_environmental', 'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'useremail': 'joe@chetcodigital.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 160]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_environmental'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 3]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_environmental', 'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 72]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'Alex.Alecci@hearst.com', 'apifunction': 'freeboard_environmental', 'apikey': '963051f1f3830fc6d667797d2456b21d'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 9]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'devicename': 'Fox Weather Nashville_Nunley', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': 'dda559329b243a13ecc4fde88a83da07', 'deviceid': '68271933E7BD'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 160]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_environmental', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 23]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_rain_gauge', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 23]]}, 
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_rain_gauge', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T19:51:09Z', 4]]}]
+ 
+ http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count&format=csv
+ 
+ http://www.helmsmart-weatherstation.com/get_apistat_all?interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count
+ 
+ 
+  http://www.helmsmart-weatherstation.com/get_apistat_all?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count
+ 
+ NFO:root:get_apistat_all Get InfluxDB series keys [
+ 
+ {'name': 'HelmSmartAPI', 'tags': {'apikey': '08000d8626d0f073036c73c4e1135f34', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 211]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 60]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 211]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_environmental', 'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'useremail': 'joe@chetcodigital.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 211]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_environmental', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 60]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'apikey': '7d7f8f332c804086ec604e786265b42b'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 104]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apikey': '9293cb55a9845c86f7f035c256810408', 'deviceid': 'D8803920A6E5', 'devicename': 'SSENETG2_WTVF5_A7FF', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 12]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_environmental', 'apikey': '963051f1f3830fc6d667797d2456b21d', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'Alex.Alecci@hearst.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 13]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apikey': 'dda559329b243a13ecc4fde88a83da07', 'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 211]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_environmental', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 29]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_rain_gauge', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 87]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_rain_gauge', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 4]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'devicename': 'NGWXENET_AFB5', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_winddata', 'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 211]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_winddata', 'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 60]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_winddata'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 110]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apikey': '9293cb55a9845c86f7f035c256810408', 'deviceid': 'D8803920A6E5', 'devicename': 'SSENETG2_WTVF5_A7FF', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_winddata'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 18]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_winddata', 'apikey': '963051f1f3830fc6d667797d2456b21d', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'Alex.Alecci@hearst.com'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 6]]}, 
+ {'name': 'HelmSmartAPI', 'tags': {'apifunction': 'freeboard_winddata', 'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net'}, 'columns': ['time', 'apidata'], 'values': [['2024-01-16T22:30:35Z', 30]]}]
+ 
+ None({'response': 
+ [{'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'apifunction': 'freeboard_environmental', 'value': 30}, 
+ {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'apifunction': 'freeboard_rain_gauge', 'value': 4}, 
+ {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'apifunction': 'freeboard_winddata', 'value': 30}, 
+ {'apikey': 'dda559329b243a13ecc4fde88a83da07', 'apifunction': 'freeboard_environmental', 'value': 209}, 
+ {'apikey': '963051f1f3830fc6d667797d2456b21d', 'apifunction': 'freeboard_environmental', 'value': 12}, 
+ {'apikey': '963051f1f3830fc6d667797d2456b21d', 'apifunction': 'freeboard_winddata', 'value': 6}, 
+ {'apikey': '9293cb55a9845c86f7f035c256810408', 'apifunction': 'freeboard_environmental', 'value': 4}, 
+ {'apikey': '9293cb55a9845c86f7f035c256810408', 'apifunction': 'freeboard_winddata', 'value': 7}, 
+ {'apikey': '7d7f8f332c804086ec604e786265b42b', 'apifunction': 'freeboard_environmental', 'value': 103}, 
+ {'apikey': '7d7f8f332c804086ec604e786265b42b', 'apifunction': 'freeboard_winddata', 'value': 106}, 
+ {'apikey': '6df777ec3890df47661c721ec3e33b53', 'apifunction': 'freeboard_environmental', 'value': 60}, 
+ {'apikey': '6df777ec3890df47661c721ec3e33b53', 'apifunction': 'freeboard_rain_gauge', 'value': 90}, 
+ {'apikey': '6df777ec3890df47661c721ec3e33b53', 'apifunction': 'freeboard_winddata', 'value': 60}, 
+ {'apikey': '5118e9133691efd685cbbfb35feaecf6', 'apifunction': 'freeboard_environmental', 'value': 209}, 
+ {'apikey': '5118e9133691efd685cbbfb35feaecf6', 'apifunction': 'freeboard_winddata', 'value': 209}, 
+ {'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'apifunction': 'freeboard_environmental', 'value': 209}, 
+ {'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'apifunction': 'freeboard_environmental', 'value': 59}, 
+ {'apikey': '08000d8626d0f073036c73c4e1135f34', 'apifunction': 'freeboard_environmental', 'value': 209}]})
+ 
+ 
+ None({'response': 
+ 
+ {'fe5a5c8ce636c4e6ebd89e6175163d55': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 30}, 
+ {'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, 
+ {'apifunction': 'freeboard_winddata', 'apidata': 30}], 
+ 
+ 'dda559329b243a13ecc4fde88a83da07': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 207}], 
+ 
+ '963051f1f3830fc6d667797d2456b21d': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 14}, 
+ {'apifunction': 'freeboard_winddata', 'apidata': 6}], 
+ 
+ '9293cb55a9845c86f7f035c256810408': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 9}, 
+ {'apifunction': 'freeboard_winddata', 'apidata': 15}], 
+ 
+ '7d7f8f332c804086ec604e786265b42b': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 77}, 
+ {'apifunction': 'freeboard_winddata', 'apidata': 65}], 
+ 
+ '6df777ec3890df47661c721ec3e33b53': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 60}, 
+ {'apifunction': 'freeboard_rain_gauge', 'apidata': 77}, 
+ {'apifunction': 'freeboard_winddata', 'apidata': 60}], 
+ 
+ '5118e9133691efd685cbbfb35feaecf6': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 207}, 
+ {'apifunction': 'freeboard_winddata', 'apidata': 207}], 
+ 
+ '4e98fc1c5f897859f894c9389d006a8a': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 207}], 
+ 
+ '1ee7f2beecc89c7329e4636a83d2d6e8': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 60}], 
+ 
+ '08000d8626d0f073036c73c4e1135f34': 
+ [{'apifunction': 'freeboard_environmental', 'apidata': 207}]}})
+ 
+ 
+ 
+ Jan 17 09:03:05 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+ 
+ jsondatagrouped 
+ 
+ {'steve@datavox.net': 
+ [{'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, 
+ {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}], 
+ 
+ 
+ 'joe@chetcodigital.com': 
+ [{'apikey': 'f0a8ca8446013c5c881d00ba32ba7663', 'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 36}, 
+ {'apikey': 'f0a8ca8446013c5c881d00ba32ba7663', 'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 39}, 
+ {'apikey': 'dda559329b243a13ecc4fde88a83da07', 'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 201}, 
+ {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 99}, 
+ {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_winddata', 'apidata': 111}, 
+ {'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'apifunction': 'freeboard_environmental', 'apidata': 200}, 
+ {'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'apifunction': 'freeboard_environmental', 'apidata': 200}, 
+ {'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'apifunction': 'freeboard_environmental', 'apidata': 61}, 
+ {'apikey': '08000d8626d0f073036c73c4e1135f34', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'apifunction': 'freeboard_environmental', 'apidata': 201}], 
+ 
+ 
+ 'helmsmartflask@mockmyid.com': 
+ [{'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_environmental', 'apidata': 5}, 
+ {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_rain_gauge', 'apidata': 3}, 
+ {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_winddata', 'apidata': 6}]}:  
+ 
+ Jan 17 10:21:53 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+ 
+ 
+ jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [
+ {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}]}:  
+Jan 17 10:21:53 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+
+
+jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [{
+'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, 
+{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}]}:  
+Jan 17 10:21:53 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+
+
+jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [{
+'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, 
+{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, 
+{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}]}:  
+Jan 17 10:21:53 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+
+
+jsondataapikey {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 103}]}:  
+Jan 17 10:21:53 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+
+
+jsondataapikey {'f0a8ca8446013c5c881d00ba32ba7663': [
+{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 103}, 
+{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 91}]}: 
+
+ 
+Jan 17 10:21:53 helmsmart-weatherstation app/web.1 INFO:root:get_apistat: KeyError in get_apistat_all point 6df777ec3890df47661c721ec3e33b53:  
+Jan 17 10:21:53 helmsmart-weatherstation app/web.1 INFO:root:get_apistat: KeyError in get_apistat_all point'd
+ 
+  jsondatasorted [
+  {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_environmental', 'value': 30}, 
+  {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_rain_gauge', 'value': 4}, 
+  {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_winddata', 'value': 30}, 
+  {'apikey': 'f0a8ca8446013c5c881d00ba32ba7663', 'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 107}, 
+  {'apikey': 'f0a8ca8446013c5c881d00ba32ba7663', 'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_winddata', 'value': 100}, 
+  {'apikey': 'dda559329b243a13ecc4fde88a83da07', 'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 206}, 
+  {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 90}, 
+  {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_winddata', 'value': 104}, 
+  {'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 206}, 
+  {'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 206}, 
+  {'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 60}, 
+  {'apikey': '08000d8626d0f073036c73c4e1135f34', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 206}, {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_environmental', 'value': 60}, {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_rain_gauge', 'value': 74}, {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_winddata', 'value': 60}]:  
+ 
+ 
+ Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+ 
+ jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}]}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondatagrouped {'steve@datavox.net': []}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}]}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondatagrouped {'steve@datavox.net': []}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}]}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondatagrouped {'steve@datavox.net': []}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondataapikey {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 107}]}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondatagrouped {'steve@datavox.net': [], 'joe@chetcodigital.com': []}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondataapikey {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 107}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}]}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat:  
+jsondatagrouped {'steve@datavox.net': [], 'joe@chetcodigital.com': []}:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat: KeyError in get_apistat_all point 6df777ec3890df47661c721ec3e33b53:  
+Jan 17 10:49:12 helmsmart-weatherstation app/web.1 INFO:root:get_apistat: KeyError in get_apistat_all point'dda559329b243a13ecc4fde88a83da07':  
+ 
+  jsondatasorted [
+  
+  {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_environmental', 'value': 30}, 
+  {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_rain_gauge', 'value': 4}, 
+  {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_winddata', 'value': 30}, 
+  {'apikey': 'f0a8ca8446013c5c881d00ba32ba7663', 'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 110}, 
+  {'apikey': 'f0a8ca8446013c5c881d00ba32ba7663', 'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_winddata', 'value': 101}, 
+  {'apikey': 'dda559329b243a13ecc4fde88a83da07', 'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 208}, 
+  {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 88}, 
+  {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_winddata', 'value': 103}, 
+  {'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 208}, 
+  {'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 208}, 
+  {'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 60}, 
+  {'apikey': '08000d8626d0f073036c73c4e1135f34', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 208}, 
+  {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_environmental', 'value': 60}, 
+  {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_rain_gauge', 'value': 74}, 
+  {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_winddata', 'value': 60}]: 
+  
+jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}]}:  
+jsondatagrouped {'steve@datavox.net': []}:  
+jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}]}:  
+jsondatagrouped {'steve@datavox.net': []}:  
+jsondataapikey {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}]}:  
+jsondatagrouped {'steve@datavox.net': []}:  
+jsondataapikey {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}]}:  
+jsondatagrouped {'steve@datavox.net': [], 'joe@chetcodigital.com': []}:  
+jsondataapikey {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 101}]}:  
+jsondatagrouped {'steve@datavox.net': [], 'joe@chetcodigital.com': []}:  
+  
+  
+jsondataapikey1 {'fe5a5c8ce636c4e6ebd89e6175163d55': []}:  
+jsondataapikey2 {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}]}:  
+jsondatagrouped {'steve@datavox.net': []}:  
+
+jsondataapikey1 {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}]}:  
+jsondataapikey2 {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}]}:  
+jsondatagrouped {'steve@datavox.net': []}:  
+
+jsondataapikey1 {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}]}:  
+jsondataapikey2 {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}]}:  
+jsondatagrouped {'steve@datavox.net': []}:  
+
+jsondataapikey1 {'f0a8ca8446013c5c881d00ba32ba7663': []}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 111}]}:  
+jsondatagrouped {'steve@datavox.net': [], 'joe@chetcodigital.com': []}:  
+
+jsondataapikey1 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 111}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 111}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 101}]}:  
+jsondatagrouped {'steve@datavox.net': [], 'joe@chetcodigital.com': []}:  
+
+jsondataapikey1 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 111}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 101}]}:  
+
+KeyError in get_apistat_all point 6df777ec3890df47661c721ec3e33b53:  
+KeyError in get_apistat_all point'dda559329b243a13ecc4fde88a83da07':    
+  
+jsondataapikey2 {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}]}:  
+jsondataapikey2 {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}]}:  
+jsondataapikey2 {'fe5a5c8ce636c4e6ebd89e6175163d55': [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}], 'dda559329b243a13ecc4fde88a83da07': [{'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 210}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}], 'dda559329b243a13ecc4fde88a83da07': [{'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 210}], '7d7f8f332c804086ec604e786265b42b': [{'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 88}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}], 'dda559329b243a13ecc4fde88a83da07': [{'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 210}], '7d7f8f332c804086ec604e786265b42b': [{'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 88}, {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_winddata', 'apidata': 89}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}], 'dda559329b243a13ecc4fde88a83da07': [{'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 210}], '7d7f8f332c804086ec604e786265b42b': [{'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 88}, {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_winddata', 'apidata': 89}], '5118e9133691efd685cbbfb35feaecf6': [{'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'apifunction': 'freeboard_environmental', 'apidata': 211}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}], 'dda559329b243a13ecc4fde88a83da07': [{'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 210}], '7d7f8f332c804086ec604e786265b42b': [{'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 88}, {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_winddata', 'apidata': 89}], '5118e9133691efd685cbbfb35feaecf6': [{'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'apifunction': 'freeboard_environmental', 'apidata': 211}], '4e98fc1c5f897859f894c9389d006a8a': [{'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'apifunction': 'freeboard_environmental', 'apidata': 211}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}], 'dda559329b243a13ecc4fde88a83da07': [{'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 210}], '7d7f8f332c804086ec604e786265b42b': [{'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 88}, {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_winddata', 'apidata': 89}], '5118e9133691efd685cbbfb35feaecf6': [{'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'apifunction': 'freeboard_environmental', 'apidata': 211}], '4e98fc1c5f897859f894c9389d006a8a': [{'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'apifunction': 'freeboard_environmental', 'apidata': 211}], '1ee7f2beecc89c7329e4636a83d2d6e8': [{'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'apifunction': 'freeboard_environmental', 'apidata': 59}]}:  
+jsondataapikey2 {'f0a8ca8446013c5c881d00ba32ba7663': [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 110}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 100}], 'dda559329b243a13ecc4fde88a83da07': [{'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 210}], '7d7f8f332c804086ec604e786265b42b': [{'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 88}, {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_winddata', 'apidata': 89}], '5118e9133691efd685cbbfb35feaecf6': [{'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'apifunction': 'freeboard_environmental', 'apidata': 211}], '4e98fc1c5f897859f894c9389d006a8a': [{'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'apifunction': 'freeboard_environmental', 'apidata': 211}], '1ee7f2beecc89c7329e4636a83d2d6e8': [{'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'apifunction': 'freeboard_environmental', 'apidata': 59}], '08000d8626d0f073036c73c4e1135f34': [{'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'apifunction': 'freeboard_environmental', 'apidata': 211}]}:  
+jsondataapikey2 {'6df777ec3890df47661c721ec3e33b53': [{'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_environmental', 'apidata': 60}]}:  
+jsondataapikey2 {'6df777ec3890df47661c721ec3e33b53': [{'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_environmental', 'apidata': 60}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_rain_gauge', 'apidata': 76}]}:  
+jsondataapikey2 {'6df777ec3890df47661c721ec3e33b53': [{'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_environmental', 'apidata': 60}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_rain_gauge', 'apidata': 76}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_winddata', 'apidata': 60}]}:    
+  
+  
+ {'steve@datavox.net': 
+ [[{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, 
+ {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, 
+ {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}], 
+ [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, 
+ {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, 
+ {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}], 
+ [{'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_environmental', 'apidata': 30}, 
+ {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_rain_gauge', 'apidata': 4}, 
+ {'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'apifunction': 'freeboard_winddata', 'apidata': 30}]], 
+ 
+ 'joe@chetcodigital.com': [[{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 111}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 101}], [{'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_environmental', 'apidata': 111}, {'deviceid': '801F12886B8A', 'devicename': 'NGWXENET_6B8A', 'apifunction': 'freeboard_winddata', 'apidata': 101}], [{'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apifunction': 'freeboard_environmental', 'apidata': 209}], [{'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 84}, {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_winddata', 'apidata': 89}], [{'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_environmental', 'apidata': 84}, {'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apifunction': 'freeboard_winddata', 'apidata': 89}], [{'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'apifunction': 'freeboard_environmental', 'apidata': 209}], [{'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'apifunction': 'freeboard_environmental', 'apidata': 209}], [{'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'apifunction': 'freeboard_environmental', 'apidata': 60}], [{'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'apifunction': 'freeboard_environmental', 'apidata': 209}]], 
+ 
+ 'helmsmartflask@mockmyid.com': [[{'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_environmental', 'apidata': 60}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_rain_gauge', 'apidata': 77}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_winddata', 'apidata': 60}], [{'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_environmental', 'apidata': 60}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_rain_gauge', 'apidata': 77}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_winddata', 'apidata': 60}], [{'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_environmental', 'apidata': 60}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_rain_gauge', 'apidata': 77}, {'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'apifunction': 'freeboard_winddata', 'apidata': 60}]]}})  
+ 
+ 
+ None({'response': 
+ {'steve@datavox.net': 
+ {'fe5a5c8ce636c4e6ebd89e6175163d55': ['608A1078634F', '608A1078634F', '608A1078634F']}, 
+ 
+ 'joe@chetcodigital.com': 
+ {'dda559329b243a13ecc4fde88a83da07': ['68271933E7BD'], 
+ '7d7f8f332c804086ec604e786265b42b': ['5410ECD012C0', '5410ECD012C0'], 
+ '5118e9133691efd685cbbfb35feaecf6': ['68271935AFB5'], 
+ '4e98fc1c5f897859f894c9389d006a8a': ['68271933E955'], 
+ '1ee7f2beecc89c7329e4636a83d2d6e8': ['68271935AD1B'], 
+ '08000d8626d0f073036c73c4e1135f34': ['68271935A765']}, 
+ 
+ 'helmsmartflask@mockmyid.com': 
+ {'6df777ec3890df47661c721ec3e33b53': ['001EC010AD69', '001EC010AD69', '001EC010AD69']}, 
+ 
+ 'Alex.Alecci@hearst.com': 
+ {'963051f1f3830fc6d667797d2456b21d': ['5410ECD012C0', '5410ECD012C0']}}})
+ 
+ 
+ 
+None({'response': 
+{'steve@datavox.net': 
+{'fe5a5c8ce636c4e6ebd89e6175163d55': 
+['{ "deviceid":"608A1078634F","devicename":"SeaSmartWXENET_DATAVOX", "apifunction":"freeboard_environmental","apidata":"30"}', 
+['{ "deviceid":"608A1078634F","devicename":"SeaSmartWXENET_DATAVOX", "apifunction":"freeboard_rain_gauge","apidata":"4"}'], 
+['{ "deviceid":"608A1078634F","devicename":"SeaSmartWXENET_DATAVOX", "apifunction":"freeboard_winddata","apidata":"30"}']]}, 
+
+'joe@chetcodigital.com': 
+{'dda559329b243a13ecc4fde88a83da07': 
+['{ "deviceid":"68271933E7BD","devicename":"Fox Weather Nashville_Nunley", "apifunction":"freeboard_environmental","apidata":"201"}'], 
+
+'7d7f8f332c804086ec604e786265b42b': 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_environmental","apidata":"76"}', 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_winddata","apidata":"68"}']], 
+'5118e9133691efd685cbbfb35feaecf6': 
+['{ "deviceid":"68271935AFB5","devicename":"NGWXENET_AFB5", "apifunction":"freeboard_environmental","apidata":"202"}'], 
+'4e98fc1c5f897859f894c9389d006a8a': 
+['{ "deviceid":"68271933E955","devicename":"NGWXENET_E955", "apifunction":"freeboard_environmental","apidata":"201"}'], 
+'1ee7f2beecc89c7329e4636a83d2d6e8': 
+['{ "deviceid":"68271935AD1B","devicename":"NGWXENET_AD1B", "apifunction":"freeboard_environmental","apidata":"60"}'], 
+'08000d8626d0f073036c73c4e1135f34': 
+['{ "deviceid":"68271935A765","devicename":"Fox Weather Miami", "apifunction":"freeboard_environmental","apidata":"202"}']}, 
+
+'helmsmartflask@mockmyid.com': 
+{'6df777ec3890df47661c721ec3e33b53': 
+['{ "deviceid":"001EC010AD69","devicename":"SSWIFIG2_Winchuck", "apifunction":"freeboard_environmental","apidata":"19"}', 
+['{ "deviceid":"001EC010AD69","devicename":"SSWIFIG2_Winchuck", "apifunction":"freeboard_rain_gauge","apidata":"20"}'], 
+['{ "deviceid":"001EC010AD69","devicename":"SSWIFIG2_Winchuck", "apifunction":"freeboard_winddata","apidata":"19"}']]}, 
+
+'Alex.Alecci@hearst.com': 
+{'963051f1f3830fc6d667797d2456b21d': 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_environmental","apidata":"13"}', 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_winddata","apidata":"6"}']]}}})
+
+
+
+None({'response': {
+
+'steve@datavox.net': 
+{'fe5a5c8ce636c4e6ebd89e6175163d55': 
+['{ "deviceid":"608A1078634F","devicename":"SeaSmartWXENET_DATAVOX", "apifunction":"freeboard_environmental","apidata":"30"}', 
+['{ "deviceid":"608A1078634F","devicename":"SeaSmartWXENET_DATAVOX", "apifunction":"freeboard_rain_gauge","apidata":"4"}'], 
+['{ "deviceid":"608A1078634F","devicename":"SeaSmartWXENET_DATAVOX", "apifunction":"freeboard_winddata","apidata":"30"}']]}, 
+
+'joe@chetcodigital.com': 
+{'dda559329b243a13ecc4fde88a83da07': 
+['{ "deviceid":"68271933E7BD","devicename":"Fox Weather Nashville_Nunley", "apifunction":"freeboard_environmental","apidata":"211"}'], 
+
+'7d7f8f332c804086ec604e786265b42b': 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_environmental","apidata":"78"}', 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_winddata","apidata":"68"}']], 
+
+'5118e9133691efd685cbbfb35feaecf6': ['{ "deviceid":"68271935AFB5","devicename":"NGWXENET_AFB5", "apifunction":"freeboard_environmental","apidata":"211"}'], 
+
+'4e98fc1c5f897859f894c9389d006a8a': ['{ "deviceid":"68271933E955","devicename":"NGWXENET_E955", "apifunction":"freeboard_environmental","apidata":"211"}'], 
+
+'1ee7f2beecc89c7329e4636a83d2d6e8': ['{ "deviceid":"68271935AD1B","devicename":"NGWXENET_AD1B", "apifunction":"freeboard_environmental","apidata":"60"}'], 
+
+'08000d8626d0f073036c73c4e1135f34': ['{ "deviceid":"68271935A765","devicename":"Fox Weather Miami", "apifunction":"freeboard_environmental","apidata":"211"}']}, 
+
+'helmsmartflask@mockmyid.com': 
+{'6df777ec3890df47661c721ec3e33b53': 
+['{ "deviceid":"001EC010AD69","devicename":"SSWIFIG2_Winchuck", "apifunction":"freeboard_environmental","apidata":"6"}', 
+['{ "deviceid":"001EC010AD69","devicename":"SSWIFIG2_Winchuck", "apifunction":"freeboard_rain_gauge","apidata":"7"}'], 
+['{ "deviceid":"001EC010AD69","devicename":"SSWIFIG2_Winchuck", "apifunction":"freeboard_winddata","apidata":"6"}']]}, 
+
+'Alex.Alecci@hearst.com': 
+{'963051f1f3830fc6d667797d2456b21d': 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_environmental","apidata":"13"}', 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_winddata","apidata":"5"}']]}}})
+
+
+
+None({'response': {
+'steve@datavox.net': 
+{'fe5a5c8ce636c4e6ebd89e6175163d55': 
+['{ "deviceid":"608A1078634F","devicename":"SeaSmartWXENET_DATAVOX", "apifunction":"freeboard_environmental","apidata":"30"}', 
+['{ "apifunction":"freeboard_rain_gauge","apidata":"4"}'], 
+['{ "apifunction":"freeboard_winddata","apidata":"30"}']]}, 
+
+'joe@chetcodigital.com': {'dda559329b243a13ecc4fde88a83da07': 
+['{ "deviceid":"68271933E7BD","devicename":"Fox Weather Nashville_Nunley", "apifunction":"freeboard_environmental","apidata":"208"}'], 
+
+'7d7f8f332c804086ec604e786265b42b': ['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_environmental","apidata":"74"}', 
+['{ "apifunction":"freeboard_winddata","apidata":"67"}']], 
+
+'5118e9133691efd685cbbfb35feaecf6': 
+['{ "deviceid":"68271935AFB5","devicename":"NGWXENET_AFB5", "apifunction":"freeboard_environmental","apidata":"208"}'], 
+
+'4e98fc1c5f897859f894c9389d006a8a': 
+['{ "deviceid":"68271933E955","devicename":"NGWXENET_E955", "apifunction":"freeboard_environmental","apidata":"208"}'], 
+
+'1ee7f2beecc89c7329e4636a83d2d6e8': 
+['{ "deviceid":"68271935AD1B","devicename":"NGWXENET_AD1B", "apifunction":"freeboard_environmental","apidata":"60"}'], 
+
+'08000d8626d0f073036c73c4e1135f34': 
+['{ "deviceid":"68271935A765","devicename":"Fox Weather Miami", "apifunction":"freeboard_environmental","apidata":"208"}']}, 
+
+'Alex.Alecci@hearst.com': {'963051f1f3830fc6d667797d2456b21d': 
+['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0", "apifunction":"freeboard_environmental","apidata":"13"}', 
+['{ "apifunction":"freeboard_winddata","apidata":"6"}']]}}})
+
+final_dict {'HelmSmartAPIlogs': 
+
+[{'apiemail': 'steve@datavox.net', 
+'apikeys': [{'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 
+'apivalues': ['{ "deviceid":"608A1078634F","devicename":"SeaSmartWXENET_DATAVOX",  "apifunction":"freeboard_environmental","apidata":"30"}', ['{ "apifunction":"freeboard_rain_gauge","apidata":"4"}'], ['{ "apifunction":"freeboard_winddata","apidata":"30"}']]}]}, 
+
+{'apiemail': 'joe@chetcodigital.com', 
+
+'apikeys': 
+[{'apikey': 'dda559329b243a13ecc4fde88a83da07', 
+'apivalues': ['{ "deviceid":"68271933E7BD","devicename":"Fox Weather Nashville_Nunley",  "apifunction":"freeboard_environmental","apidata":"189"}']}, 
+{'apikey': '7d7f8f332c804086ec604e786265b42b', 
+'apivalues': ['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0",  "apifunction":"freeboard_environmental","apidata":"75"}', ['{ "apifunction":"freeboard_winddata","apidata":"63"}']]}, 
+{'apikey': '5118e9133691efd685cbbfb35feaecf6', 
+'apivalues': ['{ "deviceid":"68271935AFB5","devicename":"NGWXENET_AFB5",  "apifunction":"freeboard_environmental","apidata":"189"}']}, 
+{'apikey': '4e98fc1c5f897859f894c9389d006a8a', 
+'apivalues': ['{ "deviceid":"68271933E955","devicename":"NGWXENET_E955",  "apifunction":"freeboard_environmental","apidata":"189"}']}, 
+{'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 
+'apivalues': ['{ "deviceid":"68271935AD1B","devicename":"NGWXENET_AD1B",  "apifunction":"freeboard_environmental","apidata":"63"}', ['{ "apifunction":"freeboard_winddata","apidata":"2"}']]}, 
+{'apikey': '08000d8626d0f073036c73c4e1135f34', 
+'apivalues': ['{ "deviceid":"68271935A765","devicename":"Fox Weather Miami",  "apifunction":"freeboard_environmental","apidata":"189"}']}]}, 
+
+{'apiemail': 'Alex.Alecci@hearst.com', 
+'apikeys': 
+[{'apikey': '963051f1f3830fc6d667797d2456b21d', 
+'apivalues': ['{ "deviceid":"5410ECD012C0","devicename":"FOXSTORMCAM_12C0",  "apifunction":"freeboard_environmental","apidata":"14"}', ['{ "apifunction":"freeboard_winddata","apidata":"6"}']]}]}]}:  
+
+
+
+
+
+final_dict 
+{"HelmSmartAPIlogs": 
+[{"apiemail": "steve@datavox.net", 
+"apikeys": 
+[{"apikey": "fe5a5c8ce636c4e6ebd89e6175163d55", "apivalues": ["{ \"deviceid\":\"608A1078634F\",\"devicename\":\"SeaSmartWXENET_DATAVOX\",  \"apifunction\":\"freeboard_environmental\",\"apidata\":\"30\"}", ["{ \"apifunction\":\"freeboard_rain_gauge\",\"apidata\":\"4\"}"], ["{ \"apifunction\":\"freeboard_winddata\",\"apidata\":\"30\"}"]]}]}, 
+
+{"apiemail": "joe@chetcodigital.com", 
+"apikeys": 
+[{"apikey": "dda559329b243a13ecc4fde88a83da07", "apivalues": ["{ \"deviceid\":\"68271933E7BD\",\"devicename\":\"Fox Weather Nashville_Nunley\",  \"apifunction\":\"freeboard_environmental\",\"apidata\":\"214\"}"]}, 
+{"apikey": "7d7f8f332c804086ec604e786265b42b", "apivalues": ["{ \"deviceid\":\"5410ECD012C0\",\"devicename\":\"FOXSTORMCAM_12C0\",  \"apifunction\":\"freeboard_environmental\",\"apidata\":\"81\"}", ["{ \"apifunction\":\"freeboard_winddata\",\"apidata\":\"64\"}"]]}, 
+{"apikey": "5118e9133691efd685cbbfb35feaecf6", "apivalues": ["{ \"deviceid\":\"68271935AFB5\",\"devicename\":\"NGWXENET_AFB5\",  \"apifunction\":\"freeboard_environmental\",\"apidata\":\"214\"}"]}, 
+{"apikey": "4e98fc1c5f897859f894c9389d006a8a", "apivalues": ["{ \"deviceid\":\"68271933E955\",\"devicename\":\"NGWXENET_E955\",  \"apifunction\":\"freeboard_environmental\",\"apidata\":\"214\"}"]}, 
+{"apikey": "1ee7f2beecc89c7329e4636a83d2d6e8", "apivalues": ["{ \"deviceid\":\"68271935AD1B\",\"devicename\":\"NGWXENET_AD1B\",  \"apifunction\":\"freeboard_environmental\",\"apidata\":\"63\"}", ["{ \"apifunction\":\"freeboard_winddata\",\"apidata\":\"2\"}"]]}, 
+{"apikey": "08000d8626d0f073036c73c4e1135f34", "apivalues": ["{ \"deviceid\":\"68271935A765\",\"devicename\":\"Fox Weather Miami\",  \"apifunction\":\"freeboard_environmental\",\"apidata\":\"214\"}"]}]}, 
+
+{"apiemail": "Alex.Alecci@hearst.com", 
+"apikeys": 
+[{"apikey": "963051f1f3830fc6d667797d2456b21d", "apivalues": ["{ \"deviceid\":\"5410ECD012C0\",\"devicename\":\"FOXSTORMCAM_12C0\",  \"apifunction\":\"freeboard_environmental\",\"apidata\":\"13\"}", ["{ \"apifunction\":\"freeboard_winddata\",\"apidata\":\"6\"}"]]}]}]}:  
+
+
+
+
+
+jsondatasorted [{'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_environmental', 'value': 30}, {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_rain_gauge', 'value': 4}, {'apikey': 'fe5a5c8ce636c4e6ebd89e6175163d55', 'deviceid': '608A1078634F', 'devicename': 'SeaSmartWXENET_DATAVOX', 'useremail': 'steve@datavox.net', 'apifunction': 'freeboard_winddata', 'value': 30}, {'apikey': 'dda559329b243a13ecc4fde88a83da07', 'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 219}, {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 80}, {'apikey': '7d7f8f332c804086ec604e786265b42b', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_winddata', 'value': 64}, {'apikey': '5118e9133691efd685cbbfb35feaecf6', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 219}, {'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 220}, {'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 60}, {'apikey': '08000d8626d0f073036c73c4e1135f34', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'useremail': 'joe@chetcodigital.com', 'apifunction': 'freeboard_environmental', 'value': 219}, {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_environmental', 'value': 6}, {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_rain_gauge', 'value': 10}, {'apikey': '6df777ec3890df47661c721ec3e33b53', 'deviceid': '001EC010AD69', 'devicename': 'SSWIFIG2_Winchuck', 'useremail': 'helmsmartflask@mockmyid.com', 'apifunction': 'freeboard_winddata', 'value': 6}, {'apikey': '963051f1f3830fc6d667797d2456b21d', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'Alex.Alecci@hearst.com', 'apifunction': 'freeboard_environmental', 'value': 12}, {'apikey': '963051f1f3830fc6d667797d2456b21d', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'useremail': 'Alex.Alecci@hearst.com', 'apifunction': 'freeboard_winddata', 'value': 6}]:  
+
+http://www.helmsmart-weatherstation.com/get_apistat_all?apikey=6df777ec3890df47661c721ec3e33b53&interval=6hour&resolution=21600&timezone=UTC&units=US&mode=count
+http://www.helmsmart-weatherstation.com/get_apistat_all?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count
+
+ http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?deviceid=001EC010AD69&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?useremail=joe@chetcodigital.com&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?devicename=SSWIFIG2_Winchuck=1hour&resolution=3600&timezone=UTC&units=US&mode=count&format=csv
+ 
+ 
+ http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count
+ http://www.helmsmart-weatherstation.com/get_apistat?deviceid=001EC010AD69&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count
+ http://www.helmsmart-weatherstation.com/get_apistat?useremail=joe@chetcodigital.com&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count
+ http://www.helmsmart-weatherstation.com/get_apistat?devicename=SSWIFIG2_Winchuck&interval=1hour&resolution=3600&timezone=UTC&units=US&mode=count
+ 
+None(
+
+{'APIkey': '', 'DeviceID': '68271935A765', 'DeviceName': 'Fox Weather Miami', 'Email': 'joe@chetcodigital.com', 'date_time': 'January 18, 2024 19:22:39', 'Interval': '1hour', 'Resolution': '3600', 'total_api_values': 1048, 'api_values': 
+
+[{'apikey': '7d7f8f332c804086ec604e786265b42b', 'useremail': 'joe@chetcodigital.com', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apitag': 'freeboard_environmental', 'value': 106}, 
+{'apikey': '7d7f8f332c804086ec604e786265b42b', 'useremail': 'joe@chetcodigital.com', 'deviceid': '5410ECD012C0', 'devicename': 'FOXSTORMCAM_12C0', 'apitag': 'freeboard_winddata', 'value': 79}, 
+{'apikey': 'dda559329b243a13ecc4fde88a83da07', 'useremail': 'joe@chetcodigital.com', 'deviceid': '68271933E7BD', 'devicename': 'Fox Weather Nashville_Nunley', 'apitag': 'freeboard_environmental', 'value': 212}, 
+{'apikey': '4e98fc1c5f897859f894c9389d006a8a', 'useremail': 'joe@chetcodigital.com', 'deviceid': '68271933E955', 'devicename': 'NGWXENET_E955', 'apitag': 'freeboard_environmental', 'value': 212}, 
+{'apikey': '08000d8626d0f073036c73c4e1135f34', 'useremail': 'joe@chetcodigital.com', 'deviceid': '68271935A765', 'devicename': 'Fox Weather Miami', 'apitag': 'freeboard_environmental', 'value': 212}, 
+{'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'useremail': 'joe@chetcodigital.com', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'apitag': 'freeboard_environmental', 'value': 7}, 
+{'apikey': '1ee7f2beecc89c7329e4636a83d2d6e8', 'useremail': 'joe@chetcodigital.com', 'deviceid': '68271935AD1B', 'devicename': 'NGWXENET_AD1B', 'apitag': 'freeboard_winddata', 'value': 8}, 
+{'apikey': '5118e9133691efd685cbbfb35feaecf6', 'useremail': 'joe@chetcodigital.com', 'deviceid': '68271935AFB5', 'devicename': 'NGWXENET_AFB5', 'apitag': 'freeboard_environmental', 'value': 212}]})
+
+
+ http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1hour&timezone=UTC&units=US&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?deviceid=001EC010AD69&interval=1hour&&timezone=UTC&units=US&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?useremail=joe@chetcodigital.com&interval=1hour&&timezone=UTC&units=US&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?devicename=SSWIFIG2_Winchuck=1hour&timezone=UTC&units=US&mode=count&format=csv
+
+ http://www.helmsmart-weatherstation.com/get_apistat?apikey=6df777ec3890df47661c721ec3e33b53&interval=1day&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?deviceid=001EC010AD69&interval=1day&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?useremail=joe@chetcodigital.com&interval=1day&mode=count&format=csv
+ http://www.helmsmart-weatherstation.com/get_apistat?devicename=SSWIFIG2_Winchuck=1day&mode=count&format=csv
+ 
+  http://www.helmsmart-weatherstation.com/get_apistat?useremail=dev@mareste.net&interval=1day&mode=count&format=csv
+  
+  http://www.helmsmart-weatherstation.com/get_apistat_all?apikey=6df777ec3890df47661c721ec3e33b53&interval=6hour&resolution=21600&timezone=UTC&units=US&mode=count
+  
+  http://www.helmsmart-weatherstation.com/get_apistat_all?interval=1hour&mode=count
+  
+  
+  
